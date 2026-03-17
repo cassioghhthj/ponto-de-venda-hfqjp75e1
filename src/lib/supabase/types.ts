@@ -192,12 +192,58 @@ export type Database = {
           },
         ]
       }
+      movimentacoes_estoque: {
+        Row: {
+          data: string
+          id: string
+          motivo: string
+          produto_id: string
+          quantidade: number
+          tipo: string
+          user_id: string
+        }
+        Insert: {
+          data?: string
+          id?: string
+          motivo: string
+          produto_id: string
+          quantidade: number
+          tipo: string
+          user_id: string
+        }
+        Update: {
+          data?: string
+          id?: string
+          motivo?: string
+          produto_id?: string
+          quantidade?: number
+          tipo?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'movimentacoes_estoque_produto_id_fkey'
+            columns: ['produto_id']
+            isOneToOne: false
+            referencedRelation: 'produtos'
+            referencedColumns: ['id']
+          },
+          {
+            foreignKeyName: 'movimentacoes_estoque_user_id_fkey'
+            columns: ['user_id']
+            isOneToOne: false
+            referencedRelation: 'users'
+            referencedColumns: ['id']
+          },
+        ]
+      }
       produtos: {
         Row: {
           categoria: string | null
           codigo: string | null
           descricao: string | null
           estoque: number | null
+          estoque_minimo: number
           id: string
           imagem_url: string | null
           nome: string
@@ -208,6 +254,7 @@ export type Database = {
           codigo?: string | null
           descricao?: string | null
           estoque?: number | null
+          estoque_minimo?: number
           id?: string
           imagem_url?: string | null
           nome: string
@@ -218,6 +265,7 @@ export type Database = {
           codigo?: string | null
           descricao?: string | null
           estoque?: number | null
+          estoque_minimo?: number
           id?: string
           imagem_url?: string | null
           nome?: string
@@ -469,6 +517,14 @@ export const Constants = {
 //   valor: numeric (not null)
 //   descricao: text (not null)
 //   data: timestamp with time zone (not null, default: now())
+// Table: movimentacoes_estoque
+//   id: uuid (not null, default: gen_random_uuid())
+//   produto_id: uuid (not null)
+//   tipo: text (not null)
+//   quantidade: integer (not null)
+//   motivo: text (not null)
+//   data: timestamp with time zone (not null, default: now())
+//   user_id: uuid (not null)
 // Table: produtos
 //   id: uuid (not null, default: gen_random_uuid())
 //   codigo: text (nullable)
@@ -478,6 +534,7 @@ export const Constants = {
 //   estoque: integer (nullable, default: 0)
 //   imagem_url: text (nullable)
 //   categoria: text (nullable)
+//   estoque_minimo: integer (not null, default: 0)
 // Table: users
 //   id: uuid (not null)
 //   email: text (nullable)
@@ -509,6 +566,11 @@ export const Constants = {
 //   FOREIGN KEY movimentacoes_caixa_caixa_id_fkey: FOREIGN KEY (caixa_id) REFERENCES caixa(id) ON DELETE CASCADE
 //   PRIMARY KEY movimentacoes_caixa_pkey: PRIMARY KEY (id)
 //   CHECK movimentacoes_caixa_tipo_check: CHECK ((tipo = ANY (ARRAY['entrada'::text, 'saida'::text])))
+// Table: movimentacoes_estoque
+//   PRIMARY KEY movimentacoes_estoque_pkey: PRIMARY KEY (id)
+//   FOREIGN KEY movimentacoes_estoque_produto_id_fkey: FOREIGN KEY (produto_id) REFERENCES produtos(id) ON DELETE CASCADE
+//   CHECK movimentacoes_estoque_tipo_check: CHECK ((tipo = ANY (ARRAY['entrada'::text, 'saida'::text])))
+//   FOREIGN KEY movimentacoes_estoque_user_id_fkey: FOREIGN KEY (user_id) REFERENCES users(id)
 // Table: produtos
 //   PRIMARY KEY produtos_pkey: PRIMARY KEY (id)
 // Table: users
@@ -539,6 +601,10 @@ export const Constants = {
 //   Policy "auth_all_movimentacoes_caixa" (ALL, PERMISSIVE) roles={authenticated}
 //     USING: true
 //     WITH CHECK: true
+// Table: movimentacoes_estoque
+//   Policy "auth_all_movimentacoes_estoque" (ALL, PERMISSIVE) roles={authenticated}
+//     USING: true
+//     WITH CHECK: true
 // Table: produtos
 //   Policy "auth_all_produtos" (ALL, PERMISSIVE) roles={authenticated}
 //     USING: true
@@ -559,10 +625,22 @@ export const Constants = {
 //    LANGUAGE plpgsql
 //    SECURITY DEFINER
 //   AS $function$
+//   DECLARE
+//       v_user_id UUID;
 //   BEGIN
-//     UPDATE public.produtos
-//     SET estoque = estoque - qty
-//     WHERE id = p_id;
+//       -- Decrementa o estoque
+//       UPDATE public.produtos
+//       SET estoque = estoque - qty
+//       WHERE id = p_id;
+//
+//       -- Obtém o ID do usuário autenticado atual
+//       v_user_id := auth.uid();
+//
+//       -- Se houver um usuário logado (o que é esperado via app), registra o histórico da venda
+//       IF v_user_id IS NOT NULL THEN
+//           INSERT INTO public.movimentacoes_estoque (produto_id, tipo, quantidade, motivo, user_id)
+//           VALUES (p_id, 'saida', qty, 'venda', v_user_id);
+//       END IF;
 //   END;
 //   $function$
 //

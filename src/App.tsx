@@ -8,6 +8,7 @@ import ContasReceber from './pages/ContasReceber'
 import ContasPagar from './pages/ContasPagar'
 import CaixaPage from './pages/Caixa'
 import Estoque from './pages/Estoque'
+import Clientes from './pages/Clientes'
 import NotFound from './pages/NotFound'
 import Layout from './components/Layout'
 import Login from './pages/Login'
@@ -30,6 +31,7 @@ const App = () => (
                 <Route path="/" element={<Index />} />
                 <Route path="/caixa" element={<CaixaPage />} />
                 <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/clientes" element={<Clientes />} />
                 <Route path="/contas-receber" element={<ContasReceber />} />
                 <Route path="/contas-pagar" element={<ContasPagar />} />
                 <Route path="/estoque" element={<Estoque />} />

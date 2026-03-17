@@ -32,3 +32,25 @@ export interface MovimentacaoEstoque {
   produto?: { nome: string }
   user?: { nome: string }
 }
+
+export interface Cliente {
+  id: string
+  nome: string
+  email: string | null
+  telefone: string | null
+  cpf: string | null
+  endereco: string | null
+  data_cadastro: string
+}
+
+export interface SaleRecord {
+  id: string
+  data: string
+  total: number
+  metodo_pagamento: string
+  items: {
+    nome: string
+    quantidade: number
+    preco_unitario: number
+  }[]
+}

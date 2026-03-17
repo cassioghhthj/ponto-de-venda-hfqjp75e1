@@ -19178,6 +19178,20 @@ var DollarSign = createLucideIcon("dollar-sign", [["line", {
 	d: "M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6",
 	key: "1b0p4s"
 }]]);
+var History = createLucideIcon("history", [
+	["path", {
+		d: "M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8",
+		key: "1357e3"
+	}],
+	["path", {
+		d: "M3 3v5h5",
+		key: "1xhq8a"
+	}],
+	["path", {
+		d: "M12 7v5l4 2",
+		key: "1fdv2h"
+	}]
+]);
 var LayoutDashboard = createLucideIcon("layout-dashboard", [
 	["rect", {
 		width: "7",
@@ -19466,6 +19480,35 @@ var TrendingUp = createLucideIcon("trending-up", [["path", {
 	d: "m22 7-8.5 8.5-5-5L2 17",
 	key: "1t1m79"
 }]]);
+var User = createLucideIcon("user", [["path", {
+	d: "M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2",
+	key: "975kel"
+}], ["circle", {
+	cx: "12",
+	cy: "7",
+	r: "4",
+	key: "17ys0d"
+}]]);
+var Users = createLucideIcon("users", [
+	["path", {
+		d: "M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2",
+		key: "1yyitq"
+	}],
+	["path", {
+		d: "M16 3.128a4 4 0 0 1 0 7.744",
+		key: "16gr8j"
+	}],
+	["path", {
+		d: "M22 21v-2a4 4 0 0 0-3-3.87",
+		key: "kshegd"
+	}],
+	["circle", {
+		cx: "9",
+		cy: "7",
+		r: "4",
+		key: "nufk8"
+	}]
+]);
 var Wallet = createLucideIcon("wallet", [["path", {
 	d: "M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1",
 	key: "18etb6"
@@ -69462,6 +69505,723 @@ function Estoque() {
 	});
 }
 //#endregion
+//#region src/components/clientes/ClienteFormModal.tsx
+function ClienteFormModal({ open, onClose, cliente, onSuccess }) {
+	const [form, setForm] = (0, import_react.useState)({
+		nome: "",
+		email: "",
+		telefone: "",
+		cpf: "",
+		endereco: ""
+	});
+	const [loading, setLoading] = (0, import_react.useState)(false);
+	(0, import_react.useEffect)(() => {
+		if (cliente && open) setForm({
+			nome: cliente.nome,
+			email: cliente.email || "",
+			telefone: cliente.telefone || "",
+			cpf: cliente.cpf || "",
+			endereco: cliente.endereco || ""
+		});
+		else if (open) setForm({
+			nome: "",
+			email: "",
+			telefone: "",
+			cpf: "",
+			endereco: ""
+		});
+	}, [cliente, open]);
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		setLoading(true);
+		const dataToSave = {
+			nome: form.nome,
+			email: form.email || null,
+			telefone: form.telefone || null,
+			cpf: form.cpf || null,
+			endereco: form.endereco || null
+		};
+		if (cliente) {
+			const { error } = await supabase.from("clientes").update(dataToSave).eq("id", cliente.id);
+			if (error) toast$1({
+				title: "Erro",
+				description: "Não foi possível atualizar.",
+				variant: "destructive"
+			});
+			else {
+				toast$1({
+					title: "Sucesso",
+					description: "Cliente atualizado com sucesso."
+				});
+				onSuccess();
+				onClose();
+			}
+		} else {
+			const { error } = await supabase.from("clientes").insert(dataToSave);
+			if (error) toast$1({
+				title: "Erro",
+				description: "Não foi possível cadastrar.",
+				variant: "destructive"
+			});
+			else {
+				toast$1({
+					title: "Sucesso",
+					description: "Cliente cadastrado com sucesso."
+				});
+				onSuccess();
+				onClose();
+			}
+		}
+		setLoading(false);
+	};
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Dialog, {
+		"data-uid": "src/components/clientes/ClienteFormModal.tsx:77:5",
+		"data-prohibitions": "[editContent]",
+		open,
+		onOpenChange: (o) => !o && onClose(),
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogContent, {
+			"data-uid": "src/components/clientes/ClienteFormModal.tsx:78:7",
+			"data-prohibitions": "[editContent]",
+			className: "sm:max-w-[425px]",
+			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogHeader, {
+				"data-uid": "src/components/clientes/ClienteFormModal.tsx:79:9",
+				"data-prohibitions": "[editContent]",
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogTitle, {
+					"data-uid": "src/components/clientes/ClienteFormModal.tsx:80:11",
+					"data-prohibitions": "[editContent]",
+					children: cliente ? "Editar Cliente" : "Novo Cliente"
+				})
+			}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("form", {
+				"data-uid": "src/components/clientes/ClienteFormModal.tsx:82:9",
+				"data-prohibitions": "[editContent]",
+				onSubmit: handleSubmit,
+				className: "space-y-4 py-4",
+				children: [
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						"data-uid": "src/components/clientes/ClienteFormModal.tsx:83:11",
+						"data-prohibitions": "[]",
+						className: "space-y-2",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$1, {
+							"data-uid": "src/components/clientes/ClienteFormModal.tsx:84:13",
+							"data-prohibitions": "[]",
+							children: "Nome *"
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
+							"data-uid": "src/components/clientes/ClienteFormModal.tsx:85:13",
+							"data-prohibitions": "[editContent]",
+							required: true,
+							value: form.nome,
+							onChange: (e) => setForm({
+								...form,
+								nome: e.target.value
+							}),
+							placeholder: "Nome completo"
+						})]
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						"data-uid": "src/components/clientes/ClienteFormModal.tsx:92:11",
+						"data-prohibitions": "[]",
+						className: "grid grid-cols-2 gap-4",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							"data-uid": "src/components/clientes/ClienteFormModal.tsx:93:13",
+							"data-prohibitions": "[]",
+							className: "space-y-2",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$1, {
+								"data-uid": "src/components/clientes/ClienteFormModal.tsx:94:15",
+								"data-prohibitions": "[]",
+								children: "CPF"
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
+								"data-uid": "src/components/clientes/ClienteFormModal.tsx:95:15",
+								"data-prohibitions": "[editContent]",
+								value: form.cpf,
+								onChange: (e) => setForm({
+									...form,
+									cpf: e.target.value
+								}),
+								placeholder: "000.000.000-00"
+							})]
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							"data-uid": "src/components/clientes/ClienteFormModal.tsx:101:13",
+							"data-prohibitions": "[]",
+							className: "space-y-2",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$1, {
+								"data-uid": "src/components/clientes/ClienteFormModal.tsx:102:15",
+								"data-prohibitions": "[]",
+								children: "Telefone"
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
+								"data-uid": "src/components/clientes/ClienteFormModal.tsx:103:15",
+								"data-prohibitions": "[editContent]",
+								value: form.telefone,
+								onChange: (e) => setForm({
+									...form,
+									telefone: e.target.value
+								}),
+								placeholder: "(00) 00000-0000"
+							})]
+						})]
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						"data-uid": "src/components/clientes/ClienteFormModal.tsx:110:11",
+						"data-prohibitions": "[]",
+						className: "space-y-2",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$1, {
+							"data-uid": "src/components/clientes/ClienteFormModal.tsx:111:13",
+							"data-prohibitions": "[]",
+							children: "Email"
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
+							"data-uid": "src/components/clientes/ClienteFormModal.tsx:112:13",
+							"data-prohibitions": "[editContent]",
+							type: "email",
+							value: form.email,
+							onChange: (e) => setForm({
+								...form,
+								email: e.target.value
+							}),
+							placeholder: "email@exemplo.com"
+						})]
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						"data-uid": "src/components/clientes/ClienteFormModal.tsx:119:11",
+						"data-prohibitions": "[]",
+						className: "space-y-2",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$1, {
+							"data-uid": "src/components/clientes/ClienteFormModal.tsx:120:13",
+							"data-prohibitions": "[]",
+							children: "Endereço"
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
+							"data-uid": "src/components/clientes/ClienteFormModal.tsx:121:13",
+							"data-prohibitions": "[editContent]",
+							value: form.endereco,
+							onChange: (e) => setForm({
+								...form,
+								endereco: e.target.value
+							}),
+							placeholder: "Rua, Número, Bairro"
+						})]
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogFooter, {
+						"data-uid": "src/components/clientes/ClienteFormModal.tsx:127:11",
+						"data-prohibitions": "[editContent]",
+						className: "pt-4",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
+							"data-uid": "src/components/clientes/ClienteFormModal.tsx:128:13",
+							"data-prohibitions": "[]",
+							type: "button",
+							variant: "outline",
+							onClick: onClose,
+							children: "Cancelar"
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button, {
+							"data-uid": "src/components/clientes/ClienteFormModal.tsx:131:13",
+							"data-prohibitions": "[editContent]",
+							type: "submit",
+							disabled: loading,
+							children: [loading ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(LoaderCircle, {
+								"data-uid": "src/components/clientes/ClienteFormModal.tsx:132:26",
+								"data-prohibitions": "[editContent]",
+								className: "h-4 w-4 animate-spin mr-2"
+							}) : null, "Salvar"]
+						})]
+					})
+				]
+			})]
+		})
+	});
+}
+//#endregion
+//#region src/components/ui/sheet.tsx
+var Sheet = Root$2;
+var SheetPortal = Portal$1;
+var SheetOverlay = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Overlay, {
+	"data-uid": "src/components/ui/sheet.tsx:21:3",
+	"data-prohibitions": "[editContent]",
+	className: cn$1("fixed inset-0 z-50 bg-black/80  data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0", className),
+	...props,
+	ref
+}));
+SheetOverlay.displayName = Overlay.displayName;
+var sheetVariants = cva("fixed z-50 gap-4 bg-background p-6 shadow-lg transition ease-in-out data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:duration-300 data-[state=open]:duration-500", {
+	variants: { side: {
+		top: "inset-x-0 top-0 border-b data-[state=closed]:slide-out-to-top data-[state=open]:slide-in-from-top",
+		bottom: "inset-x-0 bottom-0 border-t data-[state=closed]:slide-out-to-bottom data-[state=open]:slide-in-from-bottom",
+		left: "inset-y-0 left-0 h-full w-3/4 border-r data-[state=closed]:slide-out-to-left data-[state=open]:slide-in-from-left sm:max-w-sm",
+		right: "inset-y-0 right-0 h-full w-3/4  border-l data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right sm:max-w-sm"
+	} },
+	defaultVariants: { side: "right" }
+});
+var SheetContent = import_react.forwardRef(({ side = "right", className, children, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(SheetPortal, {
+	"data-uid": "src/components/ui/sheet.tsx:60:3",
+	"data-prohibitions": "[editContent]",
+	children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SheetOverlay, {
+		"data-uid": "src/components/ui/sheet.tsx:61:5",
+		"data-prohibitions": "[editContent]"
+	}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Content, {
+		"data-uid": "src/components/ui/sheet.tsx:62:5",
+		"data-prohibitions": "[editContent]",
+		ref,
+		className: cn$1(sheetVariants({ side }), className),
+		...props,
+		children: [children, /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Close, {
+			"data-uid": "src/components/ui/sheet.tsx:64:7",
+			"data-prohibitions": "[]",
+			className: "absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-secondary",
+			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(X, {
+				"data-uid": "src/components/ui/sheet.tsx:65:9",
+				"data-prohibitions": "[editContent]",
+				className: "h-4 w-4"
+			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+				"data-uid": "src/components/ui/sheet.tsx:66:9",
+				"data-prohibitions": "[]",
+				className: "sr-only",
+				children: "Close"
+			})]
+		})]
+	})]
+}));
+SheetContent.displayName = Content.displayName;
+var SheetHeader = ({ className, ...props }) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+	"data-uid": "src/components/ui/sheet.tsx:74:3",
+	"data-prohibitions": "[editContent]",
+	className: cn$1("flex flex-col space-y-2 text-center sm:text-left", className),
+	...props
+});
+SheetHeader.displayName = "SheetHeader";
+var SheetFooter = ({ className, ...props }) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+	"data-uid": "src/components/ui/sheet.tsx:79:3",
+	"data-prohibitions": "[editContent]",
+	className: cn$1("flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2", className),
+	...props
+});
+SheetFooter.displayName = "SheetFooter";
+var SheetTitle = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Title, {
+	"data-uid": "src/components/ui/sheet.tsx:90:3",
+	"data-prohibitions": "[editContent]",
+	ref,
+	className: cn$1("text-lg font-semibold text-foreground", className),
+	...props
+}));
+SheetTitle.displayName = Title.displayName;
+var SheetDescription = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Description, {
+	"data-uid": "src/components/ui/sheet.tsx:102:3",
+	"data-prohibitions": "[editContent]",
+	ref,
+	className: cn$1("text-sm text-muted-foreground", className),
+	...props
+}));
+SheetDescription.displayName = Description.displayName;
+//#endregion
+//#region src/components/clientes/ClienteHistorySheet.tsx
+function ClienteHistorySheet({ cliente, open, onClose }) {
+	const [vendas, setVendas] = (0, import_react.useState)([]);
+	const [loading, setLoading] = (0, import_react.useState)(true);
+	(0, import_react.useEffect)(() => {
+		if (!cliente || !open) return;
+		setLoading(true);
+		const fetchVendas = async () => {
+			const { data } = await supabase.from("vendas").select("*, itens_venda(quantidade, preco_unitario, produto:produtos(nome))").eq("cliente_id", cliente.id).order("data", { ascending: false });
+			setVendas(data || []);
+			setLoading(false);
+		};
+		fetchVendas();
+	}, [cliente, open]);
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Sheet, {
+		"data-uid": "src/components/clientes/ClienteHistorySheet.tsx:41:5",
+		"data-prohibitions": "[editContent]",
+		open,
+		onOpenChange: (o) => !o && onClose(),
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(SheetContent, {
+			"data-uid": "src/components/clientes/ClienteHistorySheet.tsx:42:7",
+			"data-prohibitions": "[editContent]",
+			className: "w-full sm:max-w-xl overflow-y-auto bg-slate-50/50",
+			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(SheetHeader, {
+				"data-uid": "src/components/clientes/ClienteHistorySheet.tsx:43:9",
+				"data-prohibitions": "[editContent]",
+				className: "mb-6",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(SheetTitle, {
+					"data-uid": "src/components/clientes/ClienteHistorySheet.tsx:44:11",
+					"data-prohibitions": "[]",
+					className: "flex items-center gap-2 text-2xl",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ShoppingBag, {
+						"data-uid": "src/components/clientes/ClienteHistorySheet.tsx:45:13",
+						"data-prohibitions": "[editContent]",
+						className: "h-6 w-6 text-primary"
+					}), "Histórico de Compras"]
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(SheetDescription, {
+					"data-uid": "src/components/clientes/ClienteHistorySheet.tsx:48:11",
+					"data-prohibitions": "[editContent]",
+					children: [
+						"Exibindo transações do cliente",
+						" ",
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("strong", {
+							"data-uid": "src/components/clientes/ClienteHistorySheet.tsx:50:13",
+							"data-prohibitions": "[editContent]",
+							className: "text-slate-800",
+							children: cliente?.nome
+						}),
+						"."
+					]
+				})]
+			}), loading ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+				"data-uid": "src/components/clientes/ClienteHistorySheet.tsx:55:11",
+				"data-prohibitions": "[]",
+				className: "flex items-center justify-center h-40",
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(LoaderCircle, {
+					"data-uid": "src/components/clientes/ClienteHistorySheet.tsx:56:13",
+					"data-prohibitions": "[editContent]",
+					className: "h-8 w-8 animate-spin text-primary"
+				})
+			}) : vendas.length === 0 ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+				"data-uid": "src/components/clientes/ClienteHistorySheet.tsx:59:11",
+				"data-prohibitions": "[]",
+				className: "text-center py-10 text-muted-foreground bg-white rounded-lg border border-dashed border-slate-300 shadow-sm",
+				children: "Nenhuma compra registrada para este cliente."
+			}) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+				"data-uid": "src/components/clientes/ClienteHistorySheet.tsx:63:11",
+				"data-prohibitions": "[editContent]",
+				className: "space-y-4",
+				children: vendas.map((venda) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					"data-uid": "src/components/clientes/ClienteHistorySheet.tsx:65:15",
+					"data-prohibitions": "[editContent]",
+					className: "border rounded-xl p-5 shadow-sm space-y-4 bg-white",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						"data-uid": "src/components/clientes/ClienteHistorySheet.tsx:66:17",
+						"data-prohibitions": "[editContent]",
+						className: "flex justify-between items-start border-b border-slate-100 pb-3",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							"data-uid": "src/components/clientes/ClienteHistorySheet.tsx:67:19",
+							"data-prohibitions": "[editContent]",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
+								"data-uid": "src/components/clientes/ClienteHistorySheet.tsx:68:21",
+								"data-prohibitions": "[editContent]",
+								className: "font-mono text-xs text-muted-foreground mb-1",
+								children: ["ID: ", venda.id.split("-")[0]]
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+								"data-uid": "src/components/clientes/ClienteHistorySheet.tsx:71:21",
+								"data-prohibitions": "[editContent]",
+								className: "font-semibold text-sm",
+								children: new Date(venda.data).toLocaleString("pt-BR")
+							})]
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							"data-uid": "src/components/clientes/ClienteHistorySheet.tsx:75:19",
+							"data-prohibitions": "[editContent]",
+							className: "text-right",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+								"data-uid": "src/components/clientes/ClienteHistorySheet.tsx:76:21",
+								"data-prohibitions": "[editContent]",
+								className: "font-bold text-lg text-primary",
+								children: formatCurrency(venda.total)
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Badge, {
+								"data-uid": "src/components/clientes/ClienteHistorySheet.tsx:77:21",
+								"data-prohibitions": "[editContent]",
+								variant: "secondary",
+								className: "mt-1 font-medium bg-slate-100",
+								children: venda.metodo_pagamento
+							})]
+						})]
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						"data-uid": "src/components/clientes/ClienteHistorySheet.tsx:82:17",
+						"data-prohibitions": "[editContent]",
+						className: "space-y-2",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+							"data-uid": "src/components/clientes/ClienteHistorySheet.tsx:83:19",
+							"data-prohibitions": "[]",
+							className: "text-[11px] font-bold uppercase text-slate-400 tracking-wider",
+							children: "Itens Comprados"
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("ul", {
+							"data-uid": "src/components/clientes/ClienteHistorySheet.tsx:86:19",
+							"data-prohibitions": "[editContent]",
+							className: "text-sm space-y-1.5",
+							children: venda.itens_venda.map((item, idx) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("li", {
+								"data-uid": "src/components/clientes/ClienteHistorySheet.tsx:88:23",
+								"data-prohibitions": "[editContent]",
+								className: "flex justify-between items-center text-slate-700",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+									"data-uid": "src/components/clientes/ClienteHistorySheet.tsx:89:25",
+									"data-prohibitions": "[editContent]",
+									className: "truncate pr-2",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+										"data-uid": "src/components/clientes/ClienteHistorySheet.tsx:90:27",
+										"data-prohibitions": "[]",
+										className: "text-muted-foreground mr-1",
+										children: "-"
+									}), item.produto?.nome || "Produto Indisponível"]
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+									"data-uid": "src/components/clientes/ClienteHistorySheet.tsx:93:25",
+									"data-prohibitions": "[editContent]",
+									className: "shrink-0 font-medium",
+									children: [
+										item.quantidade,
+										"x ",
+										formatCurrency(item.preco_unitario)
+									]
+								})]
+							}, idx))
+						})]
+					})]
+				}, venda.id))
+			})]
+		})
+	});
+}
+//#endregion
+//#region src/pages/Clientes.tsx
+function Clientes() {
+	const [clientes, setClientes] = (0, import_react.useState)([]);
+	const [search, setSearch] = (0, import_react.useState)("");
+	const [loading, setLoading] = (0, import_react.useState)(true);
+	const [formOpen, setFormOpen] = (0, import_react.useState)(false);
+	const [editingCliente, setEditingCliente] = (0, import_react.useState)(null);
+	const [historyOpen, setHistoryOpen] = (0, import_react.useState)(false);
+	const [historyCliente, setHistoryCliente] = (0, import_react.useState)(null);
+	const fetchClientes = async () => {
+		setLoading(true);
+		const { data } = await supabase.from("clientes").select("*").order("nome");
+		setClientes(data || []);
+		setLoading(false);
+	};
+	(0, import_react.useEffect)(() => {
+		fetchClientes();
+	}, []);
+	const handleDelete = async (id) => {
+		if (!confirm("Tem certeza que deseja excluir este cliente?")) return;
+		const { error } = await supabase.from("clientes").delete().eq("id", id);
+		if (error) toast$1({
+			title: "Erro",
+			description: "Não foi possível excluir.",
+			variant: "destructive"
+		});
+		else {
+			toast$1({
+				title: "Sucesso",
+				description: "Cliente excluído com sucesso."
+			});
+			fetchClientes();
+		}
+	};
+	const filtered = clientes.filter((c) => c.nome.toLowerCase().includes(search.toLowerCase()) || c.cpf?.includes(search) || c.telefone?.includes(search));
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+		"data-uid": "src/pages/Clientes.tsx:61:5",
+		"data-prohibitions": "[editContent]",
+		className: "space-y-6 animate-fade-in max-w-6xl mx-auto h-full flex flex-col",
+		children: [
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				"data-uid": "src/pages/Clientes.tsx:62:7",
+				"data-prohibitions": "[]",
+				className: "flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 shrink-0",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("h2", {
+					"data-uid": "src/pages/Clientes.tsx:63:9",
+					"data-prohibitions": "[]",
+					className: "text-2xl font-bold tracking-tight flex items-center gap-2",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Users, {
+						"data-uid": "src/pages/Clientes.tsx:64:11",
+						"data-prohibitions": "[editContent]",
+						className: "h-6 w-6 text-primary"
+					}), " Gestão de Clientes"]
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					"data-uid": "src/pages/Clientes.tsx:66:9",
+					"data-prohibitions": "[]",
+					className: "flex items-center gap-4 w-full sm:w-auto",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						"data-uid": "src/pages/Clientes.tsx:67:11",
+						"data-prohibitions": "[]",
+						className: "relative flex-1 sm:w-64",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Search, {
+							"data-uid": "src/pages/Clientes.tsx:68:13",
+							"data-prohibitions": "[editContent]",
+							className: "absolute left-2.5 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground"
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
+							"data-uid": "src/pages/Clientes.tsx:69:13",
+							"data-prohibitions": "[editContent]",
+							placeholder: "Buscar por nome ou CPF...",
+							className: "pl-8",
+							value: search,
+							onChange: (e) => setSearch(e.target.value)
+						})]
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button, {
+						"data-uid": "src/pages/Clientes.tsx:76:11",
+						"data-prohibitions": "[]",
+						onClick: () => {
+							setEditingCliente(null);
+							setFormOpen(true);
+						},
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Plus, {
+							"data-uid": "src/pages/Clientes.tsx:82:13",
+							"data-prohibitions": "[editContent]",
+							className: "h-4 w-4 mr-2"
+						}), " Novo"]
+					})]
+				})]
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Card, {
+				"data-uid": "src/pages/Clientes.tsx:87:7",
+				"data-prohibitions": "[editContent]",
+				className: "shadow-sm border-slate-200 flex-1 flex flex-col min-h-0",
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardContent, {
+					"data-uid": "src/pages/Clientes.tsx:88:9",
+					"data-prohibitions": "[editContent]",
+					className: "p-0 flex-1 overflow-auto",
+					children: loading ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+						"data-uid": "src/pages/Clientes.tsx:90:13",
+						"data-prohibitions": "[]",
+						className: "flex h-40 items-center justify-center",
+						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(LoaderCircle, {
+							"data-uid": "src/pages/Clientes.tsx:91:15",
+							"data-prohibitions": "[editContent]",
+							className: "h-8 w-8 animate-spin text-primary"
+						})
+					}) : /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Table, {
+						"data-uid": "src/pages/Clientes.tsx:94:13",
+						"data-prohibitions": "[editContent]",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHeader, {
+							"data-uid": "src/pages/Clientes.tsx:95:15",
+							"data-prohibitions": "[]",
+							className: "sticky top-0 bg-white z-10 shadow-sm",
+							children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TableRow, {
+								"data-uid": "src/pages/Clientes.tsx:96:17",
+								"data-prohibitions": "[]",
+								children: [
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
+										"data-uid": "src/pages/Clientes.tsx:97:19",
+										"data-prohibitions": "[]",
+										children: "Nome"
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
+										"data-uid": "src/pages/Clientes.tsx:98:19",
+										"data-prohibitions": "[]",
+										children: "CPF"
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
+										"data-uid": "src/pages/Clientes.tsx:99:19",
+										"data-prohibitions": "[]",
+										children: "Telefone"
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
+										"data-uid": "src/pages/Clientes.tsx:100:19",
+										"data-prohibitions": "[]",
+										children: "Email"
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
+										"data-uid": "src/pages/Clientes.tsx:101:19",
+										"data-prohibitions": "[]",
+										className: "text-right",
+										children: "Ações"
+									})
+								]
+							})
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TableBody, {
+							"data-uid": "src/pages/Clientes.tsx:104:15",
+							"data-prohibitions": "[editContent]",
+							children: [filtered.map((cliente) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TableRow, {
+								"data-uid": "src/pages/Clientes.tsx:106:19",
+								"data-prohibitions": "[editContent]",
+								children: [
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
+										"data-uid": "src/pages/Clientes.tsx:107:21",
+										"data-prohibitions": "[editContent]",
+										className: "font-medium",
+										children: cliente.nome
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
+										"data-uid": "src/pages/Clientes.tsx:108:21",
+										"data-prohibitions": "[editContent]",
+										children: cliente.cpf || "-"
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
+										"data-uid": "src/pages/Clientes.tsx:109:21",
+										"data-prohibitions": "[editContent]",
+										children: cliente.telefone || "-"
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
+										"data-uid": "src/pages/Clientes.tsx:110:21",
+										"data-prohibitions": "[editContent]",
+										className: "text-muted-foreground",
+										children: cliente.email || "-"
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TableCell, {
+										"data-uid": "src/pages/Clientes.tsx:111:21",
+										"data-prohibitions": "[]",
+										className: "text-right space-x-1",
+										children: [
+											/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
+												"data-uid": "src/pages/Clientes.tsx:112:23",
+												"data-prohibitions": "[]",
+												variant: "ghost",
+												size: "icon",
+												title: "Ver Histórico",
+												onClick: () => {
+													setHistoryCliente(cliente);
+													setHistoryOpen(true);
+												},
+												children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(History, {
+													"data-uid": "src/pages/Clientes.tsx:121:25",
+													"data-prohibitions": "[editContent]",
+													className: "h-4 w-4 text-blue-600"
+												})
+											}),
+											/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
+												"data-uid": "src/pages/Clientes.tsx:123:23",
+												"data-prohibitions": "[]",
+												variant: "ghost",
+												size: "icon",
+												title: "Editar",
+												onClick: () => {
+													setEditingCliente(cliente);
+													setFormOpen(true);
+												},
+												children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SquarePen, {
+													"data-uid": "src/pages/Clientes.tsx:132:25",
+													"data-prohibitions": "[editContent]",
+													className: "h-4 w-4 text-slate-500"
+												})
+											}),
+											/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
+												"data-uid": "src/pages/Clientes.tsx:134:23",
+												"data-prohibitions": "[]",
+												variant: "ghost",
+												size: "icon",
+												title: "Excluir",
+												onClick: () => handleDelete(cliente.id),
+												children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Trash2, {
+													"data-uid": "src/pages/Clientes.tsx:140:25",
+													"data-prohibitions": "[editContent]",
+													className: "h-4 w-4 text-red-500"
+												})
+											})
+										]
+									})
+								]
+							}, cliente.id)), filtered.length === 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableRow, {
+								"data-uid": "src/pages/Clientes.tsx:146:19",
+								"data-prohibitions": "[]",
+								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
+									"data-uid": "src/pages/Clientes.tsx:147:21",
+									"data-prohibitions": "[]",
+									colSpan: 5,
+									className: "text-center py-8 text-muted-foreground",
+									children: "Nenhum cliente encontrado."
+								})
+							})]
+						})]
+					})
+				})
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ClienteFormModal, {
+				"data-uid": "src/pages/Clientes.tsx:158:7",
+				"data-prohibitions": "[editContent]",
+				open: formOpen,
+				onClose: () => setFormOpen(false),
+				cliente: editingCliente,
+				onSuccess: fetchClientes
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ClienteHistorySheet, {
+				"data-uid": "src/pages/Clientes.tsx:165:7",
+				"data-prohibitions": "[editContent]",
+				open: historyOpen,
+				onClose: () => setHistoryOpen(false),
+				cliente: historyCliente
+			})
+		]
+	});
+}
+//#endregion
 //#region src/pages/NotFound.tsx
 var NotFound = () => {
 	const location = useLocation();
@@ -69522,6 +70282,11 @@ function AppSidebar() {
 			label: "Dashboard"
 		},
 		{
+			to: "/clientes",
+			icon: Users,
+			label: "Clientes"
+		},
+		{
 			to: "/contas-receber",
 			icon: ReceiptText,
 			label: "Contas a Receber"
@@ -69543,67 +70308,67 @@ function AppSidebar() {
 		}
 	];
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-		"data-uid": "src/components/Sidebar.tsx:32:5",
+		"data-uid": "src/components/Sidebar.tsx:34:5",
 		"data-prohibitions": "[editContent]",
 		className: "w-64 bg-[#1E293B] text-slate-300 flex flex-col shrink-0 h-full",
 		children: [
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				"data-uid": "src/components/Sidebar.tsx:33:7",
+				"data-uid": "src/components/Sidebar.tsx:35:7",
 				"data-prohibitions": "[]",
 				className: "h-16 flex items-center px-6 border-b border-slate-700 bg-slate-900",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Store, {
-					"data-uid": "src/components/Sidebar.tsx:34:9",
+					"data-uid": "src/components/Sidebar.tsx:36:9",
 					"data-prohibitions": "[editContent]",
 					className: "h-6 w-6 text-primary mr-3"
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-					"data-uid": "src/components/Sidebar.tsx:35:9",
+					"data-uid": "src/components/Sidebar.tsx:37:9",
 					"data-prohibitions": "[]",
 					className: "font-bold text-white text-lg tracking-wider",
 					children: "NEXUS PDV"
 				})]
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("nav", {
-				"data-uid": "src/components/Sidebar.tsx:38:7",
+				"data-uid": "src/components/Sidebar.tsx:40:7",
 				"data-prohibitions": "[editContent]",
 				className: "flex-1 py-6 px-3 space-y-1",
 				children: links.map((link) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Link, {
-					"data-uid": "src/components/Sidebar.tsx:40:11",
+					"data-uid": "src/components/Sidebar.tsx:42:11",
 					"data-prohibitions": "[editContent]",
 					to: link.to,
 					className: cn$1("flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-colors", location.pathname === link.to ? "bg-primary text-white shadow-md" : "hover:bg-slate-800 hover:text-white"),
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(link.icon, {
-						"data-uid": "src/components/Sidebar.tsx:50:13",
+						"data-uid": "src/components/Sidebar.tsx:52:13",
 						"data-prohibitions": "[editContent]",
 						className: "h-5 w-5"
 					}), link.label]
 				}, link.label))
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				"data-uid": "src/components/Sidebar.tsx:56:7",
+				"data-uid": "src/components/Sidebar.tsx:58:7",
 				"data-prohibitions": "[editContent]",
 				className: "p-4 border-t border-slate-700 m-3 rounded-lg bg-slate-800/50",
 				children: [
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-						"data-uid": "src/components/Sidebar.tsx:57:9",
+						"data-uid": "src/components/Sidebar.tsx:59:9",
 						"data-prohibitions": "[]",
 						className: "text-xs font-semibold text-slate-400 mb-1",
 						children: "Operador Caixa"
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-						"data-uid": "src/components/Sidebar.tsx:58:9",
+						"data-uid": "src/components/Sidebar.tsx:60:9",
 						"data-prohibitions": "[editContent]",
 						className: "text-sm font-bold text-white mb-4 truncate",
 						title: user?.email || "",
 						children: user?.email || "Usuário"
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button, {
-						"data-uid": "src/components/Sidebar.tsx:61:9",
+						"data-uid": "src/components/Sidebar.tsx:63:9",
 						"data-prohibitions": "[]",
 						variant: "destructive",
 						className: "w-full text-xs h-9 bg-red-500/20 text-red-400 hover:bg-red-500 hover:text-white border-0",
 						onClick: signOut,
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(LogOut, {
-							"data-uid": "src/components/Sidebar.tsx:66:11",
+							"data-uid": "src/components/Sidebar.tsx:68:11",
 							"data-prohibitions": "[editContent]",
 							className: "h-4 w-4 mr-2"
 						}), " Encerrar Sessão"]
@@ -70375,6 +71140,289 @@ var ScrollBar = import_react.forwardRef(({ className, orientation = "vertical", 
 }));
 ScrollBar.displayName = ScrollAreaScrollbar.displayName;
 //#endregion
+//#region src/components/pdv/ReceiptView.tsx
+function ReceiptView({ receipt, change, onNewSale }) {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [
+		/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogHeader, {
+			"data-uid": "src/components/pdv/ReceiptView.tsx:16:7",
+			"data-prohibitions": "[]",
+			className: "text-center sm:text-center",
+			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+				"data-uid": "src/components/pdv/ReceiptView.tsx:17:9",
+				"data-prohibitions": "[]",
+				className: "mx-auto w-12 h-12 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mb-4",
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CircleCheck, {
+					"data-uid": "src/components/pdv/ReceiptView.tsx:18:11",
+					"data-prohibitions": "[editContent]",
+					className: "w-8 h-8"
+				})
+			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogTitle, {
+				"data-uid": "src/components/pdv/ReceiptView.tsx:20:9",
+				"data-prohibitions": "[]",
+				className: "text-2xl font-bold text-center",
+				children: "Venda Concluída!"
+			})]
+		}),
+		/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+			"data-uid": "src/components/pdv/ReceiptView.tsx:23:7",
+			"data-prohibitions": "[editContent]",
+			className: "bg-slate-50 p-6 rounded-lg border text-sm space-y-4 font-mono mt-2 shadow-inner",
+			children: [
+				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					"data-uid": "src/components/pdv/ReceiptView.tsx:24:9",
+					"data-prohibitions": "[editContent]",
+					className: "text-center border-b border-dashed pb-4 mb-4 border-slate-300",
+					children: [
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
+							"data-uid": "src/components/pdv/ReceiptView.tsx:25:11",
+							"data-prohibitions": "[]",
+							className: "font-bold text-lg mb-1",
+							children: "RECIBO DE VENDA"
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
+							"data-uid": "src/components/pdv/ReceiptView.tsx:26:11",
+							"data-prohibitions": "[editContent]",
+							className: "text-slate-500 text-xs truncate",
+							children: ["ID: ", receipt.id]
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+							"data-uid": "src/components/pdv/ReceiptView.tsx:27:11",
+							"data-prohibitions": "[editContent]",
+							className: "text-slate-500 text-xs",
+							children: new Date(receipt.data).toLocaleString("pt-BR")
+						})
+					]
+				}),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+					"data-uid": "src/components/pdv/ReceiptView.tsx:30:9",
+					"data-prohibitions": "[editContent]",
+					className: "space-y-3 mb-4 max-h-[40vh] overflow-y-auto pr-2",
+					children: receipt.items.map((item, idx) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						"data-uid": "src/components/pdv/ReceiptView.tsx:32:13",
+						"data-prohibitions": "[editContent]",
+						className: "flex justify-between",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							"data-uid": "src/components/pdv/ReceiptView.tsx:33:15",
+							"data-prohibitions": "[editContent]",
+							className: "flex-1 pr-4",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+								"data-uid": "src/components/pdv/ReceiptView.tsx:34:17",
+								"data-prohibitions": "[editContent]",
+								className: "block font-semibold line-clamp-1",
+								children: item.nome
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+								"data-uid": "src/components/pdv/ReceiptView.tsx:35:17",
+								"data-prohibitions": "[editContent]",
+								className: "text-xs text-slate-500",
+								children: [
+									item.quantidade,
+									"x ",
+									formatCurrency(item.preco_unitario)
+								]
+							})]
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+							"data-uid": "src/components/pdv/ReceiptView.tsx:39:15",
+							"data-prohibitions": "[editContent]",
+							className: "font-medium",
+							children: formatCurrency(item.quantidade * item.preco_unitario)
+						})]
+					}, idx))
+				}),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					"data-uid": "src/components/pdv/ReceiptView.tsx:46:9",
+					"data-prohibitions": "[editContent]",
+					className: "border-t border-dashed pt-4 mb-2 border-slate-300",
+					children: [
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							"data-uid": "src/components/pdv/ReceiptView.tsx:47:11",
+							"data-prohibitions": "[editContent]",
+							className: "flex justify-between font-bold text-xl mb-2",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+								"data-uid": "src/components/pdv/ReceiptView.tsx:48:13",
+								"data-prohibitions": "[]",
+								children: "TOTAL"
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+								"data-uid": "src/components/pdv/ReceiptView.tsx:49:13",
+								"data-prohibitions": "[editContent]",
+								children: formatCurrency(receipt.total)
+							})]
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							"data-uid": "src/components/pdv/ReceiptView.tsx:51:11",
+							"data-prohibitions": "[editContent]",
+							className: "flex justify-between text-slate-600 text-base",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+								"data-uid": "src/components/pdv/ReceiptView.tsx:52:13",
+								"data-prohibitions": "[]",
+								children: "Método"
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+								"data-uid": "src/components/pdv/ReceiptView.tsx:53:13",
+								"data-prohibitions": "[editContent]",
+								className: "font-semibold",
+								children: receipt.metodo_pagamento
+							})]
+						}),
+						receipt.metodo_pagamento === "Dinheiro" && change > 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							"data-uid": "src/components/pdv/ReceiptView.tsx:56:13",
+							"data-prohibitions": "[editContent]",
+							className: "flex justify-between text-emerald-600 font-medium mt-1",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+								"data-uid": "src/components/pdv/ReceiptView.tsx:57:15",
+								"data-prohibitions": "[]",
+								children: "Troco"
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+								"data-uid": "src/components/pdv/ReceiptView.tsx:58:15",
+								"data-prohibitions": "[editContent]",
+								children: formatCurrency(change)
+							})]
+						})
+					]
+				})
+			]
+		}),
+		/* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogFooter, {
+			"data-uid": "src/components/pdv/ReceiptView.tsx:64:7",
+			"data-prohibitions": "[]",
+			className: "mt-4 sm:justify-center",
+			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
+				"data-uid": "src/components/pdv/ReceiptView.tsx:65:9",
+				"data-prohibitions": "[]",
+				className: "w-full h-12 text-lg font-bold",
+				onClick: onNewSale,
+				children: "Nova Venda"
+			})
+		})
+	] });
+}
+//#endregion
+//#region src/components/pdv/CustomerSelect.tsx
+function CustomerSelect({ onSelect }) {
+	const [clientes, setClientes] = (0, import_react.useState)([]);
+	const [search, setSearch] = (0, import_react.useState)("");
+	const [open, setOpen] = (0, import_react.useState)(false);
+	const [selected, setSelected] = (0, import_react.useState)(null);
+	(0, import_react.useEffect)(() => {
+		supabase.from("clientes").select("*").order("nome").then(({ data }) => setClientes(data || []));
+	}, []);
+	const handleSelect = (c) => {
+		setSelected(c);
+		onSelect(c);
+		setOpen(false);
+		setSearch("");
+	};
+	const filtered = clientes.filter((c) => c.nome.toLowerCase().includes(search.toLowerCase()) || c.cpf?.includes(search));
+	if (selected) return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+		"data-uid": "src/components/pdv/CustomerSelect.tsx:40:7",
+		"data-prohibitions": "[editContent]",
+		className: "space-y-2",
+		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$1, {
+			"data-uid": "src/components/pdv/CustomerSelect.tsx:41:9",
+			"data-prohibitions": "[]",
+			className: "text-muted-foreground uppercase text-xs font-bold tracking-wider",
+			children: "Cliente Associado"
+		}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+			"data-uid": "src/components/pdv/CustomerSelect.tsx:44:9",
+			"data-prohibitions": "[editContent]",
+			className: "flex items-center justify-between p-3 border rounded-lg bg-slate-50 border-slate-200",
+			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				"data-uid": "src/components/pdv/CustomerSelect.tsx:45:11",
+				"data-prohibitions": "[editContent]",
+				className: "flex items-center gap-3",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+					"data-uid": "src/components/pdv/CustomerSelect.tsx:46:13",
+					"data-prohibitions": "[]",
+					className: "bg-primary/10 p-1.5 rounded-md",
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(User, {
+						"data-uid": "src/components/pdv/CustomerSelect.tsx:47:15",
+						"data-prohibitions": "[editContent]",
+						className: "h-4 w-4 text-primary"
+					})
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+					"data-uid": "src/components/pdv/CustomerSelect.tsx:49:13",
+					"data-prohibitions": "[editContent]",
+					className: "font-semibold text-slate-700",
+					children: selected.nome
+				})]
+			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
+				"data-uid": "src/components/pdv/CustomerSelect.tsx:51:11",
+				"data-prohibitions": "[]",
+				variant: "ghost",
+				size: "sm",
+				className: "h-8 w-8 p-0 rounded-full hover:bg-slate-200",
+				onClick: () => handleSelect(null),
+				title: "Remover Cliente",
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(X, {
+					"data-uid": "src/components/pdv/CustomerSelect.tsx:58:13",
+					"data-prohibitions": "[editContent]",
+					className: "h-4 w-4"
+				})
+			})]
+		})]
+	});
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+		"data-uid": "src/components/pdv/CustomerSelect.tsx:66:5",
+		"data-prohibitions": "[editContent]",
+		className: "space-y-2 relative",
+		children: [
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$1, {
+				"data-uid": "src/components/pdv/CustomerSelect.tsx:67:7",
+				"data-prohibitions": "[]",
+				className: "text-muted-foreground uppercase text-xs font-bold tracking-wider",
+				children: "Vincular Cliente (Opcional)"
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				"data-uid": "src/components/pdv/CustomerSelect.tsx:70:7",
+				"data-prohibitions": "[]",
+				className: "relative",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Search, {
+					"data-uid": "src/components/pdv/CustomerSelect.tsx:71:9",
+					"data-prohibitions": "[editContent]",
+					className: "absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground"
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
+					"data-uid": "src/components/pdv/CustomerSelect.tsx:72:9",
+					"data-prohibitions": "[editContent]",
+					placeholder: "Buscar cliente por nome ou CPF...",
+					className: "pl-9 bg-white shadow-sm",
+					value: search,
+					onChange: (e) => {
+						setSearch(e.target.value);
+						setOpen(true);
+					},
+					onFocus: () => setOpen(true),
+					onBlur: () => setTimeout(() => setOpen(false), 200)
+				})]
+			}),
+			open && search && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+				"data-uid": "src/components/pdv/CustomerSelect.tsx:85:9",
+				"data-prohibitions": "[editContent]",
+				className: "absolute top-full left-0 mt-1 w-full bg-white border border-slate-200 rounded-lg shadow-xl z-50 max-h-48 overflow-y-auto",
+				children: filtered.length === 0 ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+					"data-uid": "src/components/pdv/CustomerSelect.tsx:87:13",
+					"data-prohibitions": "[]",
+					className: "p-3 text-sm text-muted-foreground text-center",
+					children: "Nenhum cliente encontrado."
+				}) : filtered.map((c) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					"data-uid": "src/components/pdv/CustomerSelect.tsx:92:15",
+					"data-prohibitions": "[editContent]",
+					className: "p-3 hover:bg-slate-50 cursor-pointer border-b last:border-0 border-slate-100 flex flex-col",
+					onMouseDown: () => handleSelect(c),
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+						"data-uid": "src/components/pdv/CustomerSelect.tsx:97:17",
+						"data-prohibitions": "[editContent]",
+						className: "font-medium text-sm text-slate-800",
+						children: c.nome
+					}), c.cpf && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+						"data-uid": "src/components/pdv/CustomerSelect.tsx:98:27",
+						"data-prohibitions": "[editContent]",
+						className: "text-xs text-muted-foreground",
+						children: ["CPF: ", c.cpf]
+					})]
+				}, c.id))
+			})
+		]
+	});
+}
+//#endregion
 //#region src/components/pdv/CheckoutModal.tsx
 function CheckoutModal({ open, onOpenChange }) {
 	const { items, total, clearCart } = useCart();
@@ -70383,11 +71431,13 @@ function CheckoutModal({ open, onOpenChange }) {
 	const [amountReceived, setAmountReceived] = (0, import_react.useState)("");
 	const [isSubmitting, setIsSubmitting] = (0, import_react.useState)(false);
 	const [receipt, setReceipt] = (0, import_react.useState)(null);
+	const [selectedCustomer, setSelectedCustomer] = (0, import_react.useState)(null);
 	(0, import_react.useEffect)(() => {
 		if (open) {
 			setMethod(null);
 			setAmountReceived("");
 			setReceipt(null);
+			setSelectedCustomer(null);
 		}
 	}, [open]);
 	const handleOpenChange = (newOpen) => {
@@ -70400,6 +71450,7 @@ function CheckoutModal({ open, onOpenChange }) {
 		try {
 			const { data: venda, error: vendaError } = await supabase.from("vendas").insert({
 				user_id: user.id,
+				cliente_id: selectedCustomer?.id || null,
 				total,
 				metodo_pagamento: method,
 				status: "Concluído"
@@ -70417,6 +71468,7 @@ function CheckoutModal({ open, onOpenChange }) {
 			dataVencimento.setDate(dataVencimento.getDate() + 30);
 			const { error: contasError } = await supabase.from("contas_receber").insert({
 				venda_id: venda.id,
+				cliente_id: selectedCustomer?.id || null,
 				valor: total,
 				data_vencimento: dataVencimento.toISOString(),
 				status: "pendente"
@@ -70428,7 +71480,7 @@ function CheckoutModal({ open, onOpenChange }) {
 			});
 			toast$1({
 				title: "Venda realizada com sucesso!",
-				description: `Pagamento de ${formatCurrency(total)} via ${method} registrado.`,
+				description: `Pagamento via ${method} registrado.`,
 				className: "bg-emerald-50 border-emerald-200 text-emerald-900"
 			});
 			setReceipt({
@@ -70443,10 +71495,9 @@ function CheckoutModal({ open, onOpenChange }) {
 				}))
 			});
 		} catch (error) {
-			console.error(error);
 			toast$1({
-				title: "Erro ao processar",
-				description: "Não foi possível salvar a venda no banco de dados. Tente novamente.",
+				title: "Erro",
+				description: "Falha ao salvar a venda.",
 				variant: "destructive"
 			});
 		} finally {
@@ -70456,309 +71507,175 @@ function CheckoutModal({ open, onOpenChange }) {
 	const numericReceived = parseFloat(amountReceived.replace(",", ".")) || 0;
 	const change = numericReceived > total ? numericReceived - total : 0;
 	if (receipt) return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Dialog, {
-		"data-uid": "src/components/pdv/CheckoutModal.tsx:138:7",
-		"data-prohibitions": "[editContent]",
+		"data-uid": "src/components/pdv/CheckoutModal.tsx:120:7",
+		"data-prohibitions": "[]",
 		open,
 		onOpenChange: handleOpenChange,
-		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogContent, {
-			"data-uid": "src/components/pdv/CheckoutModal.tsx:139:9",
-			"data-prohibitions": "[editContent]",
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogContent, {
+			"data-uid": "src/components/pdv/CheckoutModal.tsx:121:9",
+			"data-prohibitions": "[]",
 			className: "max-w-md sm:rounded-2xl",
-			children: [
-				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogHeader, {
-					"data-uid": "src/components/pdv/CheckoutModal.tsx:140:11",
-					"data-prohibitions": "[]",
-					className: "text-center sm:text-center",
-					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-						"data-uid": "src/components/pdv/CheckoutModal.tsx:141:13",
-						"data-prohibitions": "[]",
-						className: "mx-auto w-12 h-12 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mb-4",
-						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CircleCheck, {
-							"data-uid": "src/components/pdv/CheckoutModal.tsx:142:15",
-							"data-prohibitions": "[editContent]",
-							className: "w-8 h-8"
-						})
-					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogTitle, {
-						"data-uid": "src/components/pdv/CheckoutModal.tsx:144:13",
-						"data-prohibitions": "[]",
-						className: "text-2xl font-bold text-center",
-						children: "Venda Concluída!"
-					})]
-				}),
-				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					"data-uid": "src/components/pdv/CheckoutModal.tsx:147:11",
-					"data-prohibitions": "[editContent]",
-					className: "bg-slate-50 p-6 rounded-lg border text-sm space-y-4 font-mono mt-2 shadow-inner",
-					children: [
-						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							"data-uid": "src/components/pdv/CheckoutModal.tsx:148:13",
-							"data-prohibitions": "[editContent]",
-							className: "text-center border-b border-dashed pb-4 mb-4 border-slate-300",
-							children: [
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
-									"data-uid": "src/components/pdv/CheckoutModal.tsx:149:15",
-									"data-prohibitions": "[]",
-									className: "font-bold text-lg mb-1",
-									children: "RECIBO DE VENDA"
-								}),
-								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
-									"data-uid": "src/components/pdv/CheckoutModal.tsx:150:15",
-									"data-prohibitions": "[editContent]",
-									className: "text-slate-500 text-xs truncate",
-									children: ["ID: ", receipt.id]
-								}),
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-									"data-uid": "src/components/pdv/CheckoutModal.tsx:151:15",
-									"data-prohibitions": "[editContent]",
-									className: "text-slate-500 text-xs",
-									children: new Date(receipt.data).toLocaleString("pt-BR")
-								})
-							]
-						}),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-							"data-uid": "src/components/pdv/CheckoutModal.tsx:156:13",
-							"data-prohibitions": "[editContent]",
-							className: "space-y-3 mb-4 max-h-[40vh] overflow-y-auto pr-2",
-							children: receipt.items.map((item, idx) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								"data-uid": "src/components/pdv/CheckoutModal.tsx:158:17",
-								"data-prohibitions": "[editContent]",
-								className: "flex justify-between",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-									"data-uid": "src/components/pdv/CheckoutModal.tsx:159:19",
-									"data-prohibitions": "[editContent]",
-									className: "flex-1 pr-4",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-										"data-uid": "src/components/pdv/CheckoutModal.tsx:160:21",
-										"data-prohibitions": "[editContent]",
-										className: "block font-semibold line-clamp-1",
-										children: item.nome
-									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-										"data-uid": "src/components/pdv/CheckoutModal.tsx:161:21",
-										"data-prohibitions": "[editContent]",
-										className: "text-xs text-slate-500",
-										children: [
-											item.quantidade,
-											"x ",
-											formatCurrency(item.preco_unitario)
-										]
-									})]
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									"data-uid": "src/components/pdv/CheckoutModal.tsx:165:19",
-									"data-prohibitions": "[editContent]",
-									className: "font-medium",
-									children: formatCurrency(item.quantidade * item.preco_unitario)
-								})]
-							}, idx))
-						}),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							"data-uid": "src/components/pdv/CheckoutModal.tsx:172:13",
-							"data-prohibitions": "[editContent]",
-							className: "border-t border-dashed pt-4 mb-2 border-slate-300",
-							children: [
-								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-									"data-uid": "src/components/pdv/CheckoutModal.tsx:173:15",
-									"data-prohibitions": "[editContent]",
-									className: "flex justify-between font-bold text-xl mb-2",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-										"data-uid": "src/components/pdv/CheckoutModal.tsx:174:17",
-										"data-prohibitions": "[]",
-										children: "TOTAL"
-									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-										"data-uid": "src/components/pdv/CheckoutModal.tsx:175:17",
-										"data-prohibitions": "[editContent]",
-										children: formatCurrency(receipt.total)
-									})]
-								}),
-								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-									"data-uid": "src/components/pdv/CheckoutModal.tsx:177:15",
-									"data-prohibitions": "[editContent]",
-									className: "flex justify-between text-slate-600 text-base",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-										"data-uid": "src/components/pdv/CheckoutModal.tsx:178:17",
-										"data-prohibitions": "[]",
-										children: "Método"
-									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-										"data-uid": "src/components/pdv/CheckoutModal.tsx:179:17",
-										"data-prohibitions": "[editContent]",
-										className: "font-semibold",
-										children: receipt.metodo_pagamento
-									})]
-								}),
-								receipt.metodo_pagamento === "Dinheiro" && change > 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-									"data-uid": "src/components/pdv/CheckoutModal.tsx:182:17",
-									"data-prohibitions": "[editContent]",
-									className: "flex justify-between text-emerald-600 font-medium mt-1",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-										"data-uid": "src/components/pdv/CheckoutModal.tsx:183:19",
-										"data-prohibitions": "[]",
-										children: "Troco"
-									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-										"data-uid": "src/components/pdv/CheckoutModal.tsx:184:19",
-										"data-prohibitions": "[editContent]",
-										children: formatCurrency(change)
-									})]
-								})
-							]
-						})
-					]
-				}),
-				/* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogFooter, {
-					"data-uid": "src/components/pdv/CheckoutModal.tsx:190:11",
-					"data-prohibitions": "[]",
-					className: "mt-4 sm:justify-center",
-					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
-						"data-uid": "src/components/pdv/CheckoutModal.tsx:191:13",
-						"data-prohibitions": "[]",
-						className: "w-full h-12 text-lg font-bold",
-						onClick: () => handleOpenChange(false),
-						children: "Nova Venda"
-					})
-				})
-			]
+			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ReceiptView, {
+				"data-uid": "src/components/pdv/CheckoutModal.tsx:122:11",
+				"data-prohibitions": "[editContent]",
+				receipt,
+				change,
+				onNewSale: () => handleOpenChange(false)
+			})
 		})
 	});
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Dialog, {
-		"data-uid": "src/components/pdv/CheckoutModal.tsx:204:5",
+		"data-uid": "src/components/pdv/CheckoutModal.tsx:133:5",
 		"data-prohibitions": "[editContent]",
 		open,
 		onOpenChange: handleOpenChange,
 		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogContent, {
-			"data-uid": "src/components/pdv/CheckoutModal.tsx:205:7",
+			"data-uid": "src/components/pdv/CheckoutModal.tsx:134:7",
 			"data-prohibitions": "[editContent]",
-			className: "max-w-2xl sm:rounded-2xl",
+			className: "max-w-3xl sm:rounded-2xl",
 			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogHeader, {
-				"data-uid": "src/components/pdv/CheckoutModal.tsx:206:9",
+				"data-uid": "src/components/pdv/CheckoutModal.tsx:135:9",
 				"data-prohibitions": "[]",
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogTitle, {
-					"data-uid": "src/components/pdv/CheckoutModal.tsx:207:11",
+					"data-uid": "src/components/pdv/CheckoutModal.tsx:136:11",
 					"data-prohibitions": "[]",
 					className: "text-2xl font-bold",
 					children: "Finalizar Venda"
 				})
 			}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				"data-uid": "src/components/pdv/CheckoutModal.tsx:210:9",
+				"data-uid": "src/components/pdv/CheckoutModal.tsx:139:9",
 				"data-prohibitions": "[editContent]",
-				className: "grid grid-cols-2 gap-6 py-4",
+				className: "grid grid-cols-1 md:grid-cols-2 gap-8 py-2",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					"data-uid": "src/components/pdv/CheckoutModal.tsx:211:11",
+					"data-uid": "src/components/pdv/CheckoutModal.tsx:140:11",
 					"data-prohibitions": "[editContent]",
-					className: "space-y-4",
-					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", {
-						"data-uid": "src/components/pdv/CheckoutModal.tsx:212:13",
-						"data-prohibitions": "[]",
-						className: "text-sm font-semibold text-muted-foreground uppercase tracking-wider",
-						children: "Forma de Pagamento"
-					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-						"data-uid": "src/components/pdv/CheckoutModal.tsx:215:13",
+					className: "space-y-8",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CustomerSelect, {
+						"data-uid": "src/components/pdv/CheckoutModal.tsx:141:13",
 						"data-prohibitions": "[editContent]",
-						className: "grid grid-cols-2 gap-3",
-						children: [
-							{
-								id: "Dinheiro",
-								icon: Banknote
-							},
-							{
-								id: "Débito",
-								icon: CreditCard
-							},
-							{
-								id: "Crédito",
-								icon: CreditCard
-							},
-							{
-								id: "PIX",
-								icon: QrCode
-							}
-						].map((m) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button, {
-							"data-uid": "src/components/pdv/CheckoutModal.tsx:222:17",
+						onSelect: setSelectedCustomer
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						"data-uid": "src/components/pdv/CheckoutModal.tsx:143:13",
+						"data-prohibitions": "[editContent]",
+						className: "space-y-4",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", {
+							"data-uid": "src/components/pdv/CheckoutModal.tsx:144:15",
+							"data-prohibitions": "[]",
+							className: "text-xs font-bold text-muted-foreground uppercase tracking-wider",
+							children: "Forma de Pagamento"
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+							"data-uid": "src/components/pdv/CheckoutModal.tsx:147:15",
 							"data-prohibitions": "[editContent]",
-							variant: method === m.id ? "default" : "outline",
-							className: `h-24 flex flex-col gap-2 ${method === m.id ? "ring-2 ring-primary ring-offset-2" : ""}`,
-							onClick: () => setMethod(m.id),
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(m.icon, {
-								"data-uid": "src/components/pdv/CheckoutModal.tsx:228:19",
+							className: "grid grid-cols-2 gap-3",
+							children: [
+								{
+									id: "Dinheiro",
+									icon: Banknote
+								},
+								{
+									id: "Débito",
+									icon: CreditCard
+								},
+								{
+									id: "Crédito",
+									icon: CreditCard
+								},
+								{
+									id: "PIX",
+									icon: QrCode
+								}
+							].map((m) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button, {
+								"data-uid": "src/components/pdv/CheckoutModal.tsx:154:19",
 								"data-prohibitions": "[editContent]",
-								className: "h-8 w-8"
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-								"data-uid": "src/components/pdv/CheckoutModal.tsx:229:19",
-								"data-prohibitions": "[editContent]",
-								children: m.id
-							})]
-						}, m.id))
+								variant: method === m.id ? "default" : "outline",
+								className: `h-20 flex flex-col gap-2 ${method === m.id ? "ring-2 ring-primary ring-offset-2" : ""}`,
+								onClick: () => setMethod(m.id),
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(m.icon, {
+									"data-uid": "src/components/pdv/CheckoutModal.tsx:160:21",
+									"data-prohibitions": "[editContent]",
+									className: "h-6 w-6"
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+									"data-uid": "src/components/pdv/CheckoutModal.tsx:161:21",
+									"data-prohibitions": "[editContent]",
+									children: m.id
+								})]
+							}, m.id))
+						})]
 					})]
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					"data-uid": "src/components/pdv/CheckoutModal.tsx:235:11",
+					"data-uid": "src/components/pdv/CheckoutModal.tsx:168:11",
 					"data-prohibitions": "[editContent]",
-					className: "bg-slate-50 p-6 rounded-xl border flex flex-col justify-between",
+					className: "bg-slate-50 p-6 rounded-xl border border-slate-200 flex flex-col justify-between shadow-sm",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						"data-uid": "src/components/pdv/CheckoutModal.tsx:236:13",
+						"data-uid": "src/components/pdv/CheckoutModal.tsx:169:13",
 						"data-prohibitions": "[editContent]",
 						className: "space-y-4",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							"data-uid": "src/components/pdv/CheckoutModal.tsx:237:15",
+							"data-uid": "src/components/pdv/CheckoutModal.tsx:170:15",
 							"data-prohibitions": "[editContent]",
 							className: "flex justify-between items-center text-lg",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-								"data-uid": "src/components/pdv/CheckoutModal.tsx:238:17",
+								"data-uid": "src/components/pdv/CheckoutModal.tsx:171:17",
 								"data-prohibitions": "[]",
-								className: "text-muted-foreground",
+								className: "text-muted-foreground font-medium",
 								children: "Total a Pagar"
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-								"data-uid": "src/components/pdv/CheckoutModal.tsx:239:17",
+								"data-uid": "src/components/pdv/CheckoutModal.tsx:172:17",
 								"data-prohibitions": "[editContent]",
-								className: "font-bold text-2xl",
+								className: "font-bold text-3xl text-slate-900",
 								children: formatCurrency(total)
 							})]
 						}), method === "Dinheiro" && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							"data-uid": "src/components/pdv/CheckoutModal.tsx:243:17",
+							"data-uid": "src/components/pdv/CheckoutModal.tsx:176:17",
 							"data-prohibitions": "[editContent]",
-							className: "space-y-4 pt-4 border-t border-slate-200 animate-in fade-in slide-in-from-top-2",
+							className: "space-y-4 pt-6 border-t border-slate-200 animate-in fade-in slide-in-from-top-2",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								"data-uid": "src/components/pdv/CheckoutModal.tsx:244:19",
+								"data-uid": "src/components/pdv/CheckoutModal.tsx:177:19",
 								"data-prohibitions": "[]",
 								className: "space-y-2",
 								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$1, {
-									"data-uid": "src/components/pdv/CheckoutModal.tsx:245:21",
+									"data-uid": "src/components/pdv/CheckoutModal.tsx:178:21",
 									"data-prohibitions": "[]",
 									htmlFor: "received",
+									className: "text-slate-600 font-medium",
 									children: "Valor Recebido"
 								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
-									"data-uid": "src/components/pdv/CheckoutModal.tsx:246:21",
+									"data-uid": "src/components/pdv/CheckoutModal.tsx:181:21",
 									"data-prohibitions": "[editContent]",
 									id: "received",
 									type: "number",
 									placeholder: "0.00",
-									className: "text-lg h-12",
+									className: "text-xl h-14 font-semibold text-slate-900 bg-white",
 									value: amountReceived,
 									onChange: (e) => setAmountReceived(e.target.value),
 									autoFocus: true
 								})]
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								"data-uid": "src/components/pdv/CheckoutModal.tsx:256:19",
+								"data-uid": "src/components/pdv/CheckoutModal.tsx:191:19",
 								"data-prohibitions": "[editContent]",
-								className: "flex justify-between items-center text-lg text-emerald-600 font-medium",
+								className: "flex justify-between items-center text-lg text-emerald-600 font-bold bg-emerald-50 p-3 rounded-lg border border-emerald-100",
 								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									"data-uid": "src/components/pdv/CheckoutModal.tsx:257:21",
+									"data-uid": "src/components/pdv/CheckoutModal.tsx:192:21",
 									"data-prohibitions": "[]",
 									children: "Troco"
 								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									"data-uid": "src/components/pdv/CheckoutModal.tsx:258:21",
+									"data-uid": "src/components/pdv/CheckoutModal.tsx:193:21",
 									"data-prohibitions": "[editContent]",
 									children: formatCurrency(change)
 								})]
 							})]
 						})]
-					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
-						"data-uid": "src/components/pdv/CheckoutModal.tsx:264:13",
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button, {
+						"data-uid": "src/components/pdv/CheckoutModal.tsx:199:13",
 						"data-prohibitions": "[editContent]",
-						className: "w-full h-14 text-lg font-bold mt-6",
+						className: "w-full h-14 text-lg font-bold mt-8 shadow-sm",
 						disabled: !method || method === "Dinheiro" && numericReceived < total || isSubmitting,
 						onClick: handleConfirm,
-						children: isSubmitting ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(LoaderCircle, {
-							"data-uid": "src/components/pdv/CheckoutModal.tsx:271:31",
+						children: [isSubmitting ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(LoaderCircle, {
+							"data-uid": "src/components/pdv/CheckoutModal.tsx:206:31",
 							"data-prohibitions": "[editContent]",
-							className: "h-5 w-5 animate-spin"
-						}) : "Confirmar Pagamento"
+							className: "h-5 w-5 animate-spin mr-2"
+						}) : null, isSubmitting ? "Processando..." : "Confirmar Pagamento"]
 					})]
 				})]
 			})]
@@ -71189,109 +72106,118 @@ function ProtectedRoute() {
 //#endregion
 //#region src/App.tsx
 var App = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(BrowserRouter, {
-	"data-uid": "src/App.tsx:19:3",
+	"data-uid": "src/App.tsx:20:3",
 	"data-prohibitions": "[]",
 	future: {
 		v7_startTransition: false,
 		v7_relativeSplatPath: false
 	},
 	children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AuthProvider, {
-		"data-uid": "src/App.tsx:20:5",
+		"data-uid": "src/App.tsx:21:5",
 		"data-prohibitions": "[]",
 		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CartProvider, {
-			"data-uid": "src/App.tsx:21:7",
+			"data-uid": "src/App.tsx:22:7",
 			"data-prohibitions": "[]",
 			children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TooltipProvider, {
-				"data-uid": "src/App.tsx:22:9",
+				"data-uid": "src/App.tsx:23:9",
 				"data-prohibitions": "[]",
 				children: [
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Toaster$2, {
-						"data-uid": "src/App.tsx:23:11",
-						"data-prohibitions": "[editContent]"
-					}),
-					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Toaster, {
 						"data-uid": "src/App.tsx:24:11",
 						"data-prohibitions": "[editContent]"
 					}),
-					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Routes, {
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Toaster, {
 						"data-uid": "src/App.tsx:25:11",
+						"data-prohibitions": "[editContent]"
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Routes, {
+						"data-uid": "src/App.tsx:26:11",
 						"data-prohibitions": "[]",
 						children: [
 							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Route, {
-								"data-uid": "src/App.tsx:26:13",
+								"data-uid": "src/App.tsx:27:13",
 								"data-prohibitions": "[editContent]",
 								path: "/login",
 								element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Login, {
-									"data-uid": "src/App.tsx:26:43",
+									"data-uid": "src/App.tsx:27:43",
 									"data-prohibitions": "[editContent]"
 								})
 							}),
 							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Route, {
-								"data-uid": "src/App.tsx:28:13",
+								"data-uid": "src/App.tsx:29:13",
 								"data-prohibitions": "[]",
 								element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ProtectedRoute, {
-									"data-uid": "src/App.tsx:28:29",
+									"data-uid": "src/App.tsx:29:29",
 									"data-prohibitions": "[editContent]"
 								}),
 								children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Route, {
-									"data-uid": "src/App.tsx:29:15",
+									"data-uid": "src/App.tsx:30:15",
 									"data-prohibitions": "[]",
 									element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Layout, {
-										"data-uid": "src/App.tsx:29:31",
+										"data-uid": "src/App.tsx:30:31",
 										"data-prohibitions": "[editContent]"
 									}),
 									children: [
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Route, {
-											"data-uid": "src/App.tsx:30:17",
+											"data-uid": "src/App.tsx:31:17",
 											"data-prohibitions": "[editContent]",
 											path: "/",
 											element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Index, {
-												"data-uid": "src/App.tsx:30:42",
-												"data-prohibitions": "[editContent]"
-											})
-										}),
-										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Route, {
-											"data-uid": "src/App.tsx:31:17",
-											"data-prohibitions": "[editContent]",
-											path: "/caixa",
-											element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CaixaPage, {
-												"data-uid": "src/App.tsx:31:47",
+												"data-uid": "src/App.tsx:31:42",
 												"data-prohibitions": "[editContent]"
 											})
 										}),
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Route, {
 											"data-uid": "src/App.tsx:32:17",
 											"data-prohibitions": "[editContent]",
-											path: "/dashboard",
-											element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Dashboard, {
-												"data-uid": "src/App.tsx:32:51",
+											path: "/caixa",
+											element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CaixaPage, {
+												"data-uid": "src/App.tsx:32:47",
 												"data-prohibitions": "[editContent]"
 											})
 										}),
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Route, {
 											"data-uid": "src/App.tsx:33:17",
 											"data-prohibitions": "[editContent]",
-											path: "/contas-receber",
-											element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ContasReceber, {
-												"data-uid": "src/App.tsx:33:56",
+											path: "/dashboard",
+											element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Dashboard, {
+												"data-uid": "src/App.tsx:33:51",
 												"data-prohibitions": "[editContent]"
 											})
 										}),
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Route, {
 											"data-uid": "src/App.tsx:34:17",
 											"data-prohibitions": "[editContent]",
-											path: "/contas-pagar",
-											element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ContasPagar, {
-												"data-uid": "src/App.tsx:34:54",
+											path: "/clientes",
+											element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Clientes, {
+												"data-uid": "src/App.tsx:34:50",
 												"data-prohibitions": "[editContent]"
 											})
 										}),
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Route, {
 											"data-uid": "src/App.tsx:35:17",
 											"data-prohibitions": "[editContent]",
+											path: "/contas-receber",
+											element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ContasReceber, {
+												"data-uid": "src/App.tsx:35:56",
+												"data-prohibitions": "[editContent]"
+											})
+										}),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Route, {
+											"data-uid": "src/App.tsx:36:17",
+											"data-prohibitions": "[editContent]",
+											path: "/contas-pagar",
+											element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ContasPagar, {
+												"data-uid": "src/App.tsx:36:54",
+												"data-prohibitions": "[editContent]"
+											})
+										}),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Route, {
+											"data-uid": "src/App.tsx:37:17",
+											"data-prohibitions": "[editContent]",
 											path: "/estoque",
 											element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Estoque, {
-												"data-uid": "src/App.tsx:35:49",
+												"data-uid": "src/App.tsx:37:49",
 												"data-prohibitions": "[editContent]"
 											})
 										})
@@ -71299,11 +72225,11 @@ var App = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(BrowserRouter, {
 								})
 							}),
 							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Route, {
-								"data-uid": "src/App.tsx:39:13",
+								"data-uid": "src/App.tsx:41:13",
 								"data-prohibitions": "[editContent]",
 								path: "*",
 								element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(NotFound, {
-									"data-uid": "src/App.tsx:39:38",
+									"data-uid": "src/App.tsx:41:38",
 									"data-prohibitions": "[editContent]"
 								})
 							})
@@ -71322,4 +72248,4 @@ var App = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(BrowserRouter, {
 }));
 //#endregion
 
-//# sourceMappingURL=index-BUdiJXG3.js.map
+//# sourceMappingURL=index-BKaVoUdN.js.map

@@ -9,6 +9,7 @@ import {
   ReceiptText,
   CreditCard,
   Calculator,
+  Users,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { useAuth } from '@/hooks/use-auth'
@@ -22,6 +23,7 @@ export function AppSidebar() {
     { to: '/', icon: ShoppingCart, label: 'Vendas (PDV)' },
     { to: '/caixa', icon: Calculator, label: 'Fluxo de Caixa' },
     { to: '/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
+    { to: '/clientes', icon: Users, label: 'Clientes' },
     { to: '/contas-receber', icon: ReceiptText, label: 'Contas a Receber' },
     { to: '/contas-pagar', icon: CreditCard, label: 'Contas a Pagar' },
     { to: '/estoque', icon: Package, label: 'Controle de Estoque' },
