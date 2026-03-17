@@ -21,7 +21,7 @@ export function ChartAccounts({ data }: Props) {
   const isEmpty = data.every((d) => d.a_receber === 0 && d.a_pagar === 0)
 
   return (
-    <Card className="shadow-sm border-slate-200">
+    <Card className="shadow-sm border-border bg-card">
       <CardHeader>
         <CardTitle className="text-lg">Comparativo de Contas (Pendentes)</CardTitle>
       </CardHeader>
@@ -34,12 +34,12 @@ export function ChartAccounts({ data }: Props) {
           <ChartContainer config={config} className="h-[250px] w-full">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={data} margin={{ top: 20, right: 10, left: -20, bottom: 0 }}>
-                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#E2E8F0" />
+                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="hsl(var(--border))" />
                 <XAxis dataKey="name" axisLine={false} tickLine={false} hide />
                 <YAxis
                   axisLine={false}
                   tickLine={false}
-                  tick={{ fill: '#64748B', fontSize: 12 }}
+                  tick={{ fill: 'hsl(var(--muted-foreground))', fontSize: 12 }}
                   tickFormatter={(val) => `R$ ${val}`}
                 />
                 <ChartTooltip

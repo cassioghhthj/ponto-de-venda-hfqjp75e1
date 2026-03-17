@@ -17,7 +17,7 @@ const config = {
 
 export function ChartTopProducts({ data }: Props) {
   return (
-    <Card className="shadow-sm border-slate-200 flex flex-col">
+    <Card className="shadow-sm border-border flex flex-col bg-card">
       <CardHeader>
         <CardTitle className="text-lg">Produtos Mais Vendidos</CardTitle>
       </CardHeader>
@@ -34,14 +34,18 @@ export function ChartTopProducts({ data }: Props) {
                 layout="vertical"
                 margin={{ top: 0, right: 10, left: 10, bottom: 0 }}
               >
-                <CartesianGrid strokeDasharray="3 3" horizontal={false} stroke="#E2E8F0" />
+                <CartesianGrid
+                  strokeDasharray="3 3"
+                  horizontal={false}
+                  stroke="hsl(var(--border))"
+                />
                 <XAxis type="number" hide />
                 <YAxis
                   dataKey="name"
                   type="category"
                   axisLine={false}
                   tickLine={false}
-                  tick={{ fill: '#475569', fontSize: 12 }}
+                  tick={{ fill: 'hsl(var(--foreground))', fontSize: 12 }}
                   width={120}
                 />
                 <ChartTooltip content={<ChartTooltipContent />} />

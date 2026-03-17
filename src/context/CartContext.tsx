@@ -23,14 +23,26 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const addItem = (product: Product) => {
     setItems((prev) => {
       const existing = prev.find((item) => item.id === product.id)
+      const currentQty = existing ? existing.quantity : 0
+
+      if (currentQty >= (product.estoque || 0)) {
+        toast({
+          title: 'Estoque insuficiente',
+          description: `Não há mais unidades de ${product.nome} disponíveis.`,
+          variant: 'destructive',
+        })
+        return prev
+      }
+
       if (existing) {
+        toast({ title: 'Item adicionado', description: `${product.nome} adicionado ao carrinho.` })
         return prev.map((item) =>
           item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item,
         )
       }
+      toast({ title: 'Item adicionado', description: `${product.nome} adicionado ao carrinho.` })
       return [...prev, { ...product, quantity: 1 }]
     })
-    toast({ title: 'Item adicionado', description: `${product.nome} foi adicionado ao carrinho.` })
   }
 
   const removeItem = (productId: string) => {
@@ -41,7 +53,17 @@ export function CartProvider({ children }: { children: ReactNode }) {
     setItems((prev) =>
       prev.map((item) => {
         if (item.id === productId) {
-          const newQuantity = Math.max(1, item.quantity + delta)
+          const newQuantity = item.quantity + delta
+          if (newQuantity < 1) return item
+
+          if (newQuantity > (item.estoque || 0)) {
+            toast({
+              title: 'Estoque insuficiente',
+              description: 'Quantidade máxima atingida para este produto.',
+              variant: 'destructive',
+            })
+            return item
+          }
           return { ...item, quantity: newQuantity }
         }
         return item

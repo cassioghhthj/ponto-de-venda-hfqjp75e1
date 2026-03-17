@@ -3,7 +3,6 @@ import {
   LayoutDashboard,
   ShoppingCart,
   Package,
-  Settings,
   Store,
   LogOut,
   ReceiptText,
@@ -21,22 +20,21 @@ export function AppSidebar() {
   const { signOut, user } = useAuth()
 
   const links = [
-    { to: '/', icon: ShoppingCart, label: 'Vendas (PDV)' },
-    { to: '/caixa', icon: Calculator, label: 'Fluxo de Caixa' },
     { to: '/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
+    { to: '/', icon: ShoppingCart, label: 'Vendas (PDV)' },
+    { to: '/estoque', icon: Package, label: 'Produtos e Estoque' },
     { to: '/clientes', icon: Users, label: 'Clientes' },
     { to: '/contas-receber', icon: ReceiptText, label: 'Contas a Receber' },
     { to: '/contas-pagar', icon: CreditCard, label: 'Contas a Pagar' },
-    { to: '/estoque', icon: Package, label: 'Controle de Estoque' },
+    { to: '/caixa', icon: Calculator, label: 'Caixa' },
     { to: '/relatorios', icon: PieChart, label: 'Relatórios' },
-    { to: '#', icon: Settings, label: 'Configurações' },
   ]
 
   return (
-    <div className="w-64 bg-[#1E293B] text-slate-300 flex flex-col shrink-0 h-full">
-      <div className="h-16 flex items-center px-6 border-b border-slate-700 bg-slate-900">
+    <div className="w-64 bg-sidebar border-r border-sidebar-border text-sidebar-foreground flex flex-col shrink-0 h-full">
+      <div className="h-16 flex items-center px-6 border-b border-sidebar-border bg-sidebar">
         <Store className="h-6 w-6 text-primary mr-3" />
-        <span className="font-bold text-white text-lg tracking-wider">NEXUS PDV</span>
+        <span className="font-bold text-lg tracking-wider">NEXUS PDV</span>
       </div>
 
       <nav className="flex-1 py-6 px-3 space-y-1 overflow-y-auto">
@@ -47,8 +45,8 @@ export function AppSidebar() {
             className={cn(
               'flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-colors',
               location.pathname === link.to
-                ? 'bg-primary text-white shadow-md'
-                : 'hover:bg-slate-800 hover:text-white',
+                ? 'bg-sidebar-primary text-sidebar-primary-foreground shadow-sm'
+                : 'hover:bg-sidebar-accent hover:text-sidebar-accent-foreground text-sidebar-foreground/80',
             )}
           >
             <link.icon className="h-5 w-5" />
@@ -57,14 +55,14 @@ export function AppSidebar() {
         ))}
       </nav>
 
-      <div className="p-4 border-t border-slate-700 m-3 rounded-lg bg-slate-800/50 shrink-0">
-        <div className="text-xs font-semibold text-slate-400 mb-1">Operador Caixa</div>
-        <div className="text-sm font-bold text-white mb-4 truncate" title={user?.email || ''}>
+      <div className="p-4 border-t border-sidebar-border m-3 rounded-lg bg-sidebar-accent/50 shrink-0">
+        <div className="text-xs font-semibold text-sidebar-foreground/60 mb-1">Operador Caixa</div>
+        <div className="text-sm font-bold mb-4 truncate" title={user?.email || ''}>
           {user?.email || 'Usuário'}
         </div>
         <Button
           variant="destructive"
-          className="w-full text-xs h-9 bg-red-500/20 text-red-400 hover:bg-red-500 hover:text-white border-0"
+          className="w-full text-xs h-9 bg-destructive/10 text-destructive hover:bg-destructive hover:text-destructive-foreground border-0"
           onClick={signOut}
         >
           <LogOut className="h-4 w-4 mr-2" /> Encerrar Sessão

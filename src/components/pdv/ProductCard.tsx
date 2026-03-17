@@ -1,43 +1,50 @@
-import { Product } from '@/types'
 import { Card, CardContent } from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Plus } from 'lucide-react'
 import { formatCurrency } from '@/lib/format'
+import { Product } from '@/types'
 import { useCart } from '@/context/CartContext'
 
-interface ProductCardProps {
-  product: Product
-}
-
-export function ProductCard({ product }: ProductCardProps) {
+export function ProductCard({ product }: { product: Product }) {
   const { addItem } = useCart()
 
   return (
-    <Card
-      className="group overflow-hidden hover:shadow-md transition-all duration-200 hover:scale-[1.02] cursor-pointer bg-white"
-      onClick={() => addItem(product)}
-    >
-      <div className="aspect-square bg-muted p-4 flex items-center justify-center relative">
+    <Card className="overflow-hidden flex flex-col hover:border-primary/50 transition-colors bg-card group relative">
+      <div className="aspect-square bg-muted/30 p-4 flex items-center justify-center relative">
         <img
-          src={product.imagem_url}
+          src={
+            product.imagem_url ||
+            `https://img.usecurling.com/p/200/200?q=${encodeURIComponent(product.nome)}`
+          }
           alt={product.nome}
-          className="object-contain w-full h-full mix-blend-multiply drop-shadow-sm group-hover:scale-105 transition-transform"
+          className="object-contain h-full w-full mix-blend-multiply dark:mix-blend-normal group-hover:scale-105 transition-transform duration-300"
         />
-        <div className="absolute top-2 right-2 bg-white/90 backdrop-blur-sm text-xs px-2 py-1 rounded font-medium shadow-sm">
-          {product.estoque} un
-        </div>
+        {product.estoque <= 0 && (
+          <div className="absolute inset-0 bg-background/80 backdrop-blur-[2px] flex items-center justify-center z-10">
+            <Badge variant="destructive" className="text-sm px-3 py-1">
+              Esgotado
+            </Badge>
+          </div>
+        )}
       </div>
-      <CardContent className="p-4">
-        <div className="text-xs text-muted-foreground mb-1 font-mono">{product.codigo}</div>
-        <h3 className="font-semibold text-sm leading-tight line-clamp-2 h-10 mb-2">
-          {product.nome}
-        </h3>
-        <div className="flex items-center justify-between mt-auto">
-          <span className="font-bold text-lg text-primary">{formatCurrency(product.preco)}</span>
+      <CardContent className="p-4 flex-1 flex flex-col justify-between">
+        <div>
+          <div className="text-xs text-muted-foreground mb-1">
+            {product.categoria || 'Sem categoria'}
+          </div>
+          <h3 className="font-semibold line-clamp-2 text-sm leading-tight mb-2 text-foreground">
+            {product.nome}
+          </h3>
+        </div>
+        <div className="flex items-center justify-between mt-2">
+          <span className="font-bold text-primary">{formatCurrency(product.preco)}</span>
           <Button
             size="icon"
             variant="secondary"
-            className="h-8 w-8 rounded-full group-hover:bg-primary group-hover:text-primary-foreground transition-colors"
+            className="h-8 w-8 rounded-full"
+            onClick={() => addItem(product)}
+            disabled={product.estoque <= 0}
           >
             <Plus className="h-4 w-4" />
           </Button>

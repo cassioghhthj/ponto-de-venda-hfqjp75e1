@@ -45,15 +45,19 @@ export default function CaixaAberto({ caixa, movements, sales, onFechar, onNovaM
   const [form, setForm] = useState({ tipo: 'entrada', valor: '', descricao: '' })
 
   const totals = useMemo(() => {
-    const v = sales.reduce((acc, s) => acc + Number(s.total), 0)
+    // Only cash sales matter for drawer balance physically
+    const vDinheiro = sales
+      .filter((s) => s.metodo_pagamento === 'Dinheiro')
+      .reduce((acc, s) => acc + Number(s.total), 0)
+    const vTotal = sales.reduce((acc, s) => acc + Number(s.total), 0)
     const e = movements
       .filter((m) => m.tipo === 'entrada')
       .reduce((acc, m) => acc + Number(m.valor), 0)
     const s = movements
       .filter((m) => m.tipo === 'saida')
       .reduce((acc, m) => acc + Number(m.valor), 0)
-    const atual = Number(caixa.saldo_inicial) + v + e - s
-    return { vendas: v, entradas: e, saidas: s, atual }
+    const atual = Number(caixa.saldo_inicial) + vDinheiro + e - s
+    return { vendasTotal: vTotal, vendasDinheiro: vDinheiro, entradas: e, saidas: s, atual }
   }, [caixa, movements, sales])
 
   const handleMov = async () => {
@@ -66,49 +70,57 @@ export default function CaixaAberto({ caixa, movements, sales, onFechar, onNovaM
   return (
     <div className="space-y-6">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <Card className="border-slate-200">
+        <Card className="border-border">
           <CardHeader className="pb-2 flex flex-row items-center justify-between">
-            <CardTitle className="text-sm font-medium text-slate-500">Saldo Inicial</CardTitle>
-            <Wallet className="h-4 w-4 text-slate-400" />
+            <CardTitle className="text-sm font-medium text-muted-foreground">
+              Saldo Inicial
+            </CardTitle>
+            <Wallet className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{formatCurrency(Number(caixa.saldo_inicial))}</div>
+            <div className="text-2xl font-bold text-foreground">
+              {formatCurrency(Number(caixa.saldo_inicial))}
+            </div>
           </CardContent>
         </Card>
-        <Card className="border-blue-100 bg-blue-50/30">
+        <Card className="border-blue-200 dark:border-blue-900 bg-blue-50/30 dark:bg-blue-950/20">
           <CardHeader className="pb-2 flex flex-row items-center justify-between">
-            <CardTitle className="text-sm font-medium text-blue-700">Vendas (Sessão)</CardTitle>
+            <CardTitle className="text-sm font-medium text-blue-700 dark:text-blue-400">
+              Vendas (Sessão)
+            </CardTitle>
             <TrendingUp className="h-4 w-4 text-blue-500" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-blue-900">{formatCurrency(totals.vendas)}</div>
+            <div className="text-2xl font-bold text-blue-900 dark:text-blue-300">
+              {formatCurrency(totals.vendasTotal)}
+            </div>
           </CardContent>
         </Card>
-        <Card className="border-slate-200">
+        <Card className="border-border">
           <CardHeader className="pb-2 flex flex-row items-center justify-between">
-            <CardTitle className="text-sm font-medium text-slate-500">
+            <CardTitle className="text-sm font-medium text-muted-foreground">
               Movimentações Manuais
             </CardTitle>
             <ArrowDownRight className="h-4 w-4 text-orange-500" />
           </CardHeader>
           <CardContent>
-            <div className="text-sm text-emerald-600 font-medium">
+            <div className="text-sm text-emerald-600 dark:text-emerald-400 font-medium">
               +{formatCurrency(totals.entradas)} (Entradas)
             </div>
-            <div className="text-sm text-red-600 font-medium">
+            <div className="text-sm text-destructive font-medium">
               -{formatCurrency(totals.saidas)} (Saídas)
             </div>
           </CardContent>
         </Card>
-        <Card className="border-emerald-200 bg-emerald-50 shadow-sm">
+        <Card className="border-emerald-200 dark:border-emerald-900 bg-emerald-50 dark:bg-emerald-950/30 shadow-sm">
           <CardHeader className="pb-2 flex flex-row items-center justify-between">
-            <CardTitle className="text-sm font-bold text-emerald-800">
+            <CardTitle className="text-sm font-bold text-emerald-800 dark:text-emerald-400">
               Saldo Atual (Gaveta)
             </CardTitle>
             <CheckSquare className="h-4 w-4 text-emerald-600" />
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-black text-emerald-900">
+            <div className="text-3xl font-black text-emerald-900 dark:text-emerald-300">
               {formatCurrency(totals.atual)}
             </div>
           </CardContent>
@@ -116,7 +128,7 @@ export default function CaixaAberto({ caixa, movements, sales, onFechar, onNovaM
       </div>
 
       <div className="flex flex-col sm:flex-row gap-4">
-        <Button onClick={() => setMovOpen(true)} variant="outline" className="bg-white">
+        <Button onClick={() => setMovOpen(true)} variant="outline">
           <Plus className="mr-2 h-4 w-4" /> Nova Movimentação
         </Button>
         <Button onClick={() => setCloseOpen(true)} variant="destructive">
@@ -129,9 +141,12 @@ export default function CaixaAberto({ caixa, movements, sales, onFechar, onNovaM
           <TabsTrigger value="vendas">Vendas ({sales.length})</TabsTrigger>
           <TabsTrigger value="movimentacoes">Movimentações ({movements.length})</TabsTrigger>
         </TabsList>
-        <TabsContent value="vendas" className="mt-4 border rounded-lg bg-card overflow-hidden">
+        <TabsContent
+          value="vendas"
+          className="mt-4 border border-border rounded-lg bg-card overflow-hidden"
+        >
           <Table>
-            <TableHeader>
+            <TableHeader className="bg-muted/50">
               <TableRow>
                 <TableHead>Hora</TableHead>
                 <TableHead>ID Venda</TableHead>
@@ -164,10 +179,10 @@ export default function CaixaAberto({ caixa, movements, sales, onFechar, onNovaM
         </TabsContent>
         <TabsContent
           value="movimentacoes"
-          className="mt-4 border rounded-lg bg-card overflow-hidden"
+          className="mt-4 border border-border rounded-lg bg-card overflow-hidden"
         >
           <Table>
-            <TableHeader>
+            <TableHeader className="bg-muted/50">
               <TableRow>
                 <TableHead>Hora</TableHead>
                 <TableHead>Tipo</TableHead>
@@ -184,7 +199,7 @@ export default function CaixaAberto({ caixa, movements, sales, onFechar, onNovaM
                       variant={m.tipo === 'entrada' ? 'default' : 'destructive'}
                       className={
                         m.tipo === 'entrada'
-                          ? 'bg-emerald-100 text-emerald-800 hover:bg-emerald-200'
+                          ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-300 hover:bg-emerald-200'
                           : ''
                       }
                     >
@@ -262,9 +277,9 @@ export default function CaixaAberto({ caixa, movements, sales, onFechar, onNovaM
             <DialogTitle>Confirmar Fechamento de Caixa</DialogTitle>
           </DialogHeader>
           <div className="py-6 text-center space-y-2">
-            <p className="text-slate-500">O saldo atual calculado para gaveta é de:</p>
-            <p className="text-4xl font-bold text-emerald-700">{formatCurrency(totals.atual)}</p>
-            <p className="text-sm text-slate-400 mt-4">
+            <p className="text-muted-foreground">O saldo atual calculado para gaveta é de:</p>
+            <p className="text-4xl font-bold text-emerald-600">{formatCurrency(totals.atual)}</p>
+            <p className="text-sm text-muted-foreground mt-4">
               Confira se os valores físicos em gaveta batem com o saldo acima antes de confirmar o
               fechamento.
             </p>

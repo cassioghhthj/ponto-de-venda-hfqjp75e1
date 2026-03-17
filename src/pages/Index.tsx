@@ -21,7 +21,10 @@ export default function Index() {
     fetchProducts()
   }, [])
 
-  const categories = ['Todos', ...Array.from(new Set(products.map((p) => p.categoria)))]
+  const categories = [
+    'Todos',
+    ...Array.from(new Set(products.map((p) => p.categoria).filter(Boolean))),
+  ]
 
   const filteredProducts = products.filter((p) => {
     const matchesSearch =
@@ -37,7 +40,7 @@ export default function Index() {
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
           <Input
             placeholder="Buscar por nome ou código..."
-            className="pl-10 h-12 text-base shadow-sm border-slate-200"
+            className="pl-10 h-12 text-base shadow-sm border-border bg-background"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             autoFocus
@@ -49,7 +52,7 @@ export default function Index() {
           className="w-full sm:w-auto overflow-x-auto"
           onValueChange={setCategory}
         >
-          <TabsList className="h-12 p-1 bg-slate-100/80 border">
+          <TabsList className="h-12 p-1 bg-muted/50 border border-border">
             {categories.map((cat) => (
               <TabsTrigger
                 key={cat}

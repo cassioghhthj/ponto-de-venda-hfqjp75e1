@@ -11,16 +11,16 @@ export function CartSidebar() {
   const [isCheckoutOpen, setCheckoutOpen] = useState(false)
 
   return (
-    <div className="w-80 bg-white border-l shadow-xl flex flex-col h-full shrink-0 z-20">
-      <div className="p-4 border-b bg-slate-50 flex items-center justify-between">
-        <h2 className="font-bold flex items-center gap-2 text-lg">
+    <div className="w-80 bg-background border-l border-border shadow-xl flex flex-col h-full shrink-0 z-20">
+      <div className="p-4 border-b border-border bg-muted/30 flex items-center justify-between">
+        <h2 className="font-bold flex items-center gap-2 text-lg text-foreground">
           <ShoppingCart className="h-5 w-5 text-primary" /> Carrinho
         </h2>
         <Button
           variant="ghost"
           size="sm"
           onClick={clearCart}
-          className="text-red-500 text-xs h-8 hover:text-red-600 hover:bg-red-50"
+          className="text-destructive text-xs h-8 hover:text-destructive hover:bg-destructive/10"
         >
           Limpar
         </Button>
@@ -34,16 +34,19 @@ export function CartSidebar() {
         ) : (
           <div className="space-y-4">
             {items.map((item) => (
-              <div key={item.id} className="flex gap-3 border-b pb-4 last:border-0">
-                <div className="h-16 w-16 bg-slate-100 rounded-md p-1.5 shrink-0 flex items-center justify-center border">
+              <div key={item.id} className="flex gap-3 border-b border-border pb-4 last:border-0">
+                <div className="h-16 w-16 bg-muted/50 rounded-md p-1.5 shrink-0 flex items-center justify-center border border-border">
                   <img
-                    src={item.imagem_url}
+                    src={
+                      item.imagem_url ||
+                      `https://img.usecurling.com/p/100/100?q=${encodeURIComponent(item.nome)}`
+                    }
                     alt={item.nome}
-                    className="h-full w-full object-contain mix-blend-multiply"
+                    className="h-full w-full object-contain mix-blend-multiply dark:mix-blend-normal"
                   />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <h4 className="text-sm font-semibold line-clamp-2 leading-tight mb-1">
+                  <h4 className="text-sm font-semibold line-clamp-2 leading-tight mb-1 text-foreground">
                     {item.nome}
                   </h4>
                   <div className="text-primary font-bold text-sm mb-2">
@@ -58,7 +61,9 @@ export function CartSidebar() {
                     >
                       <Minus className="h-3 w-3" />
                     </Button>
-                    <span className="text-sm w-6 text-center font-semibold">{item.quantity}</span>
+                    <span className="text-sm w-6 text-center font-semibold text-foreground">
+                      {item.quantity}
+                    </span>
                     <Button
                       size="icon"
                       variant="outline"
@@ -70,7 +75,7 @@ export function CartSidebar() {
                     <Button
                       size="icon"
                       variant="ghost"
-                      className="h-7 w-7 ml-auto text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-full"
+                      className="h-7 w-7 ml-auto text-muted-foreground hover:text-destructive hover:bg-destructive/10 rounded-full"
                       onClick={() => removeItem(item.id)}
                     >
                       <Trash2 className="h-4 w-4" />
@@ -82,13 +87,13 @@ export function CartSidebar() {
           </div>
         )}
       </ScrollArea>
-      <div className="p-5 bg-slate-50 border-t space-y-4 shadow-[0_-4px_10px_rgba(0,0,0,0.02)]">
-        <div className="flex justify-between text-sm text-slate-500">
+      <div className="p-5 bg-card border-t border-border space-y-4 shadow-[0_-4px_10px_rgba(0,0,0,0.02)] dark:shadow-none">
+        <div className="flex justify-between text-sm text-muted-foreground">
           <span>Subtotal</span>
-          <span className="font-medium text-slate-700">{formatCurrency(subtotal)}</span>
+          <span className="font-medium text-foreground">{formatCurrency(subtotal)}</span>
         </div>
         <div className="flex justify-between text-xl font-bold items-center">
-          <span>Total</span>
+          <span className="text-foreground">Total</span>
           <span className="text-primary text-2xl">{formatCurrency(total)}</span>
         </div>
         <Button

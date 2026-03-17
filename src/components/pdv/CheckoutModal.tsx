@@ -3,7 +3,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/u
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { Banknote, CreditCard, QrCode, Loader2 } from 'lucide-react'
+import { Banknote, CreditCard, QrCode, CalendarClock, Loader2 } from 'lucide-react'
 import { useCart } from '@/context/CartContext'
 import { formatCurrency } from '@/lib/format'
 import { toast } from '@/hooks/use-toast'
@@ -18,7 +18,7 @@ interface CheckoutModalProps {
   onOpenChange: (open: boolean) => void
 }
 
-type PaymentMethod = 'Dinheiro' | 'Débito' | 'Crédito' | 'PIX' | null
+type PaymentMethod = 'Dinheiro' | 'Débito' | 'Crédito' | 'PIX' | 'A Prazo' | null
 
 export function CheckoutModal({ open, onOpenChange }: CheckoutModalProps) {
   const { items, total, clearCart } = useCart()
@@ -45,6 +45,24 @@ export function CheckoutModal({ open, onOpenChange }: CheckoutModalProps) {
 
   const handleConfirm = async () => {
     if (!method || !user) return
+    if (method === 'A Prazo' && !selectedCustomer) {
+      toast({
+        title: 'Atenção',
+        description: 'Para vendas A Prazo, é obrigatório selecionar um cliente.',
+        variant: 'destructive',
+      })
+      return
+    }
+    const numericReceived = parseFloat(amountReceived.replace(',', '.')) || 0
+    if (method === 'Dinheiro' && numericReceived < total) {
+      toast({
+        title: 'Atenção',
+        description: 'Valor recebido insuficiente.',
+        variant: 'destructive',
+      })
+      return
+    }
+
     setIsSubmitting(true)
 
     try {
@@ -75,12 +93,15 @@ export function CheckoutModal({ open, onOpenChange }: CheckoutModalProps) {
       const dataVencimento = new Date()
       dataVencimento.setDate(dataVencimento.getDate() + 30)
 
+      const isPending = method === 'A Prazo'
+
       const { error: contasError } = await (supabase as any).from('contas_receber').insert({
         venda_id: venda.id,
         cliente_id: selectedCustomer?.id || null,
         valor: total,
-        data_vencimento: dataVencimento.toISOString(),
-        status: 'pendente',
+        data_vencimento: isPending ? dataVencimento.toISOString() : new Date().toISOString(),
+        status: isPending ? 'pendente' : 'pago',
+        data_pagamento: isPending ? null : new Date().toISOString(),
       })
       if (contasError) throw contasError
 
@@ -90,8 +111,7 @@ export function CheckoutModal({ open, onOpenChange }: CheckoutModalProps) {
 
       toast({
         title: 'Venda realizada com sucesso!',
-        description: `Pagamento via ${method} registrado.`,
-        className: 'bg-emerald-50 border-emerald-200 text-emerald-900',
+        description: `Pagamento registrado.`,
       })
 
       const receiptData: SaleRecord = {
@@ -105,10 +125,8 @@ export function CheckoutModal({ open, onOpenChange }: CheckoutModalProps) {
           preco_unitario: i.preco,
         })),
       }
-
       setReceipt(receiptData)
 
-      // Send WhatsApp Receipt if customer has a phone number
       if (selectedCustomer?.telefone) {
         supabase.functions
           .invoke('send-whatsapp-receipt', {
@@ -117,8 +135,16 @@ export function CheckoutModal({ open, onOpenChange }: CheckoutModalProps) {
           .then(({ error }) => {
             if (error) {
               console.error('Failed to send WhatsApp receipt:', error)
+              toast({
+                title: 'Aviso',
+                description: 'Venda concluída, mas falha ao enviar recibo por WhatsApp.',
+                variant: 'destructive',
+              })
             } else {
-              console.log('WhatsApp receipt processing triggered')
+              toast({
+                title: 'Recibo Enviado',
+                description: 'Recibo enviado via WhatsApp com sucesso.',
+              })
             }
           })
       }
@@ -135,7 +161,7 @@ export function CheckoutModal({ open, onOpenChange }: CheckoutModalProps) {
   if (receipt) {
     return (
       <Dialog open={open} onOpenChange={handleOpenChange}>
-        <DialogContent className="max-w-md sm:rounded-2xl">
+        <DialogContent className="max-w-md sm:rounded-2xl bg-card">
           <ReceiptView
             receipt={receipt}
             change={change}
@@ -148,15 +174,13 @@ export function CheckoutModal({ open, onOpenChange }: CheckoutModalProps) {
 
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
-      <DialogContent className="max-w-3xl sm:rounded-2xl">
+      <DialogContent className="max-w-3xl sm:rounded-2xl bg-card">
         <DialogHeader>
           <DialogTitle className="text-2xl font-bold">Finalizar Venda</DialogTitle>
         </DialogHeader>
-
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 py-2">
           <div className="space-y-8">
             <CustomerSelect onSelect={setSelectedCustomer} />
-
             <div className="space-y-4">
               <h4 className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
                 Forma de Pagamento
@@ -167,6 +191,7 @@ export function CheckoutModal({ open, onOpenChange }: CheckoutModalProps) {
                   { id: 'Débito', icon: CreditCard },
                   { id: 'Crédito', icon: CreditCard },
                   { id: 'PIX', icon: QrCode },
+                  { id: 'A Prazo', icon: CalendarClock },
                 ].map((m) => (
                   <Button
                     key={m.id}
@@ -181,38 +206,35 @@ export function CheckoutModal({ open, onOpenChange }: CheckoutModalProps) {
               </div>
             </div>
           </div>
-
-          <div className="bg-slate-50 p-6 rounded-xl border border-slate-200 flex flex-col justify-between shadow-sm">
+          <div className="bg-muted/50 p-6 rounded-xl border border-border flex flex-col justify-between shadow-sm">
             <div className="space-y-4">
               <div className="flex justify-between items-center text-lg">
                 <span className="text-muted-foreground font-medium">Total a Pagar</span>
-                <span className="font-bold text-3xl text-slate-900">{formatCurrency(total)}</span>
+                <span className="font-bold text-3xl text-foreground">{formatCurrency(total)}</span>
               </div>
-
               {method === 'Dinheiro' && (
-                <div className="space-y-4 pt-6 border-t border-slate-200 animate-in fade-in slide-in-from-top-2">
+                <div className="space-y-4 pt-6 border-t border-border animate-in fade-in slide-in-from-top-2">
                   <div className="space-y-2">
-                    <Label htmlFor="received" className="text-slate-600 font-medium">
+                    <Label htmlFor="received" className="text-foreground font-medium">
                       Valor Recebido
                     </Label>
                     <Input
                       id="received"
                       type="number"
                       placeholder="0.00"
-                      className="text-xl h-14 font-semibold text-slate-900 bg-white"
+                      className="text-xl h-14 font-semibold text-foreground bg-background"
                       value={amountReceived}
                       onChange={(e) => setAmountReceived(e.target.value)}
                       autoFocus
                     />
                   </div>
-                  <div className="flex justify-between items-center text-lg text-emerald-600 font-bold bg-emerald-50 p-3 rounded-lg border border-emerald-100">
+                  <div className="flex justify-between items-center text-lg text-emerald-600 dark:text-emerald-400 font-bold bg-emerald-50 dark:bg-emerald-950/30 p-3 rounded-lg border border-emerald-100 dark:border-emerald-900">
                     <span>Troco</span>
                     <span>{formatCurrency(change)}</span>
                   </div>
                 </div>
               )}
             </div>
-
             <Button
               className="w-full h-14 text-lg font-bold mt-8 shadow-sm"
               disabled={
@@ -220,7 +242,7 @@ export function CheckoutModal({ open, onOpenChange }: CheckoutModalProps) {
               }
               onClick={handleConfirm}
             >
-              {isSubmitting ? <Loader2 className="h-5 w-5 animate-spin mr-2" /> : null}
+              {isSubmitting && <Loader2 className="h-5 w-5 animate-spin mr-2" />}
               {isSubmitting ? 'Processando...' : 'Confirmar Pagamento'}
             </Button>
           </div>

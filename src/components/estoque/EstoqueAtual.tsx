@@ -30,7 +30,9 @@ import {
   DialogFooter,
 } from '@/components/ui/dialog'
 import { toast } from '@/hooks/use-toast'
-import { Loader2, PenBox } from 'lucide-react'
+import { Loader2, PenBox, Plus, Edit } from 'lucide-react'
+import { ProdutoFormModal } from './ProdutoFormModal'
+import { formatCurrency } from '@/lib/format'
 
 export default function EstoqueAtual() {
   const { user } = useAuth()
@@ -40,7 +42,10 @@ export default function EstoqueAtual() {
 
   const [adjustProduct, setAdjustProduct] = useState<Product | null>(null)
   const [submitting, setSubmitting] = useState(false)
-  const [form, setForm] = useState({ quantidade: '', tipo: '', motivo: '' })
+  const [form, setForm] = useState({ quantidade: '', tipo: 'entrada', motivo: 'ajuste' })
+
+  const [formOpen, setFormOpen] = useState(false)
+  const [editingProduct, setEditingProduct] = useState<Product | null>(null)
 
   const fetchProducts = async () => {
     setLoading(true)
@@ -65,16 +70,13 @@ export default function EstoqueAtual() {
     e.preventDefault()
     if (!adjustProduct || !user) return
     setSubmitting(true)
-
     const qty = parseInt(form.quantidade)
     const newEstoque =
       form.tipo === 'entrada' ? adjustProduct.estoque + qty : adjustProduct.estoque - qty
-
     const { error: err1 } = await supabase
       .from('produtos')
       .update({ estoque: newEstoque })
       .eq('id', adjustProduct.id)
-
     const { error: err2 } = await supabase.from('movimentacoes_estoque').insert({
       produto_id: adjustProduct.id,
       tipo: form.tipo,
@@ -82,38 +84,30 @@ export default function EstoqueAtual() {
       motivo: form.motivo,
       user_id: user.id,
     })
-
     setSubmitting(false)
-
-    if (err1 || err2) {
+    if (err1 || err2)
       toast({
         title: 'Erro',
         description: 'Erro ao registrar ajuste de estoque.',
         variant: 'destructive',
       })
-    } else {
+    else {
       toast({ title: 'Sucesso', description: 'Estoque ajustado com sucesso!' })
       setAdjustProduct(null)
       fetchProducts()
     }
   }
 
-  const openAdjustDialog = (product: Product) => {
-    setAdjustProduct(product)
-    setForm({ quantidade: '', tipo: 'entrada', motivo: 'ajuste' })
-  }
-
-  if (loading) {
+  if (loading)
     return (
       <div className="flex h-40 items-center justify-center">
         <Loader2 className="h-8 w-8 animate-spin text-primary" />
       </div>
     )
-  }
 
   return (
     <div className="space-y-4">
-      <div className="flex items-center gap-4 mb-4">
+      <div className="flex items-center justify-between mb-4 gap-4">
         <div className="w-64">
           <Select value={categoryFilter} onValueChange={setCategoryFilter}>
             <SelectTrigger>
@@ -128,44 +122,81 @@ export default function EstoqueAtual() {
             </SelectContent>
           </Select>
         </div>
+        <Button
+          onClick={() => {
+            setEditingProduct(null)
+            setFormOpen(true)
+          }}
+        >
+          <Plus className="h-4 w-4 mr-2" /> Novo Produto
+        </Button>
       </div>
 
-      <Card className="shadow-sm border-slate-200">
+      <Card className="shadow-sm border-border bg-card">
         <CardContent className="p-0">
           <Table>
-            <TableHeader className="bg-slate-50">
+            <TableHeader className="bg-muted/50">
               <TableRow>
+                <TableHead>Código</TableHead>
                 <TableHead>Nome</TableHead>
                 <TableHead>Categoria</TableHead>
+                <TableHead>Preço</TableHead>
                 <TableHead className="text-center">Estoque Atual</TableHead>
-                <TableHead className="text-center">Estoque Mínimo</TableHead>
+                <TableHead className="text-center">Est. Mínimo</TableHead>
                 <TableHead className="text-right">Ações</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {filteredProducts.map((p) => (
                 <TableRow key={p.id}>
+                  <TableCell className="font-mono text-xs">{p.codigo || '-'}</TableCell>
                   <TableCell className="font-medium">{p.nome}</TableCell>
-                  <TableCell>{p.categoria}</TableCell>
+                  <TableCell>{p.categoria || '-'}</TableCell>
+                  <TableCell>{formatCurrency(p.preco)}</TableCell>
                   <TableCell className="text-center">
                     {p.estoque <= p.estoque_minimo ? (
                       <Badge variant="destructive" className="px-2">
                         {p.estoque}
                       </Badge>
                     ) : (
-                      <span className="font-semibold text-slate-700">{p.estoque}</span>
+                      <span className="font-semibold text-foreground">{p.estoque}</span>
                     )}
                   </TableCell>
                   <TableCell className="text-center text-muted-foreground">
                     {p.estoque_minimo}
                   </TableCell>
-                  <TableCell className="text-right">
-                    <Button size="sm" variant="outline" onClick={() => openAdjustDialog(p)}>
+                  <TableCell className="text-right space-x-2">
+                    <Button
+                      size="icon"
+                      variant="ghost"
+                      title="Editar Produto"
+                      onClick={() => {
+                        setEditingProduct(p)
+                        setFormOpen(true)
+                      }}
+                    >
+                      <Edit className="h-4 w-4 text-muted-foreground" />
+                    </Button>
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      onClick={() => {
+                        setAdjustProduct(p)
+                        setForm({ quantidade: '', tipo: 'entrada', motivo: 'ajuste' })
+                      }}
+                    >
                       <PenBox className="h-4 w-4 mr-2" /> Ajustar
                     </Button>
                   </TableCell>
                 </TableRow>
               ))}
+              {filteredProducts.length === 0 && (
+                <TableRow>
+                  <TableCell colSpan={7} className="text-center py-8 text-muted-foreground">
+                    Nenhum produto encontrado.
+                  </TableCell>
+                </TableRow>
+              )}
             </TableBody>
           </Table>
         </CardContent>
@@ -178,10 +209,9 @@ export default function EstoqueAtual() {
           </DialogHeader>
           {adjustProduct && (
             <form onSubmit={handleAdjust} className="space-y-4 py-4">
-              <div className="text-sm font-medium mb-4 pb-2 border-b">
+              <div className="text-sm font-medium mb-4 pb-2 border-b border-border">
                 Produto: {adjustProduct.nome}
               </div>
-
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label>Tipo de Ajuste</Label>
@@ -210,7 +240,6 @@ export default function EstoqueAtual() {
                   />
                 </div>
               </div>
-
               <div className="space-y-2">
                 <Label>Motivo</Label>
                 <Select
@@ -228,7 +257,6 @@ export default function EstoqueAtual() {
                   </SelectContent>
                 </Select>
               </div>
-
               <DialogFooter className="pt-4">
                 <Button type="button" variant="outline" onClick={() => setAdjustProduct(null)}>
                   Cancelar
@@ -242,6 +270,12 @@ export default function EstoqueAtual() {
           )}
         </DialogContent>
       </Dialog>
+      <ProdutoFormModal
+        open={formOpen}
+        onClose={() => setFormOpen(false)}
+        product={editingProduct}
+        onSuccess={fetchProducts}
+      />
     </div>
   )
 }

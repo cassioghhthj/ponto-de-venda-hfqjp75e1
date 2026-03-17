@@ -12,13 +12,13 @@ interface Props {
 }
 
 const config = {
-  entradas: { label: 'Entradas', color: 'hsl(var(--emerald-500))' },
+  entradas: { label: 'Entradas', color: 'hsl(var(--chart-2))' },
   saidas: { label: 'Saídas', color: 'hsl(var(--destructive))' },
 } satisfies ChartConfig
 
 export function ChartCashFlow({ data }: Props) {
   return (
-    <Card className="shadow-sm border-slate-200">
+    <Card className="shadow-sm border-border bg-card">
       <CardHeader>
         <CardTitle className="text-lg">Fluxo de Caixa (Entradas vs Saídas)</CardTitle>
       </CardHeader>
@@ -41,15 +41,19 @@ export function ChartCashFlow({ data }: Props) {
                     <stop offset="95%" stopColor="var(--color-saidas)" stopOpacity={0} />
                   </linearGradient>
                 </defs>
-                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#E2E8F0" />
+                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="hsl(var(--border))" />
                 <XAxis
                   dataKey="data"
                   axisLine={false}
                   tickLine={false}
-                  tick={{ fill: '#64748B', fontSize: 12 }}
+                  tick={{ fill: 'hsl(var(--muted-foreground))', fontSize: 12 }}
                   dy={10}
                 />
-                <YAxis axisLine={false} tickLine={false} tick={{ fill: '#64748B', fontSize: 12 }} />
+                <YAxis
+                  axisLine={false}
+                  tickLine={false}
+                  tick={{ fill: 'hsl(var(--muted-foreground))', fontSize: 12 }}
+                />
                 <ChartTooltip content={<ChartTooltipContent />} />
                 <Area
                   type="monotone"

@@ -18,7 +18,7 @@ const config = {
 
 export function ChartCategories({ data }: Props) {
   return (
-    <Card className="shadow-sm border-slate-200 flex flex-col">
+    <Card className="shadow-sm border-border flex flex-col bg-card">
       <CardHeader>
         <CardTitle className="text-lg">Receita por Categoria</CardTitle>
       </CardHeader>

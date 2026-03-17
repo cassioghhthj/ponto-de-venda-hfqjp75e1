@@ -16,17 +16,17 @@ interface Props {
 
 export function TableCriticalStock({ data }: Props) {
   return (
-    <Card className="shadow-sm border-red-200">
-      <CardHeader className="bg-red-50/50 border-b border-red-100 pb-4">
-        <CardTitle className="text-lg flex items-center text-red-900">
+    <Card className="shadow-sm border-red-200 dark:border-red-900">
+      <CardHeader className="bg-red-50/50 dark:bg-red-950/20 border-b border-red-100 dark:border-red-900/50 pb-4">
+        <CardTitle className="text-lg flex items-center text-red-900 dark:text-red-400">
           <AlertTriangle className="h-5 w-5 mr-2 text-red-600" />
           Alerta de Estoque Crítico (Em Tempo Real)
         </CardTitle>
       </CardHeader>
-      <CardContent className="p-0">
+      <CardContent className="p-0 bg-card">
         <Table>
           <TableHeader>
-            <TableRow className="bg-slate-50/50">
+            <TableRow className="bg-muted/30">
               <TableHead>Produto</TableHead>
               <TableHead>Categoria</TableHead>
               <TableHead className="text-right">Estoque Mínimo</TableHead>
@@ -42,9 +42,14 @@ export function TableCriticalStock({ data }: Props) {
                 <TableCell className="text-right text-muted-foreground">
                   {item.estoque_minimo}
                 </TableCell>
-                <TableCell className="text-right font-bold text-red-600">{item.estoque}</TableCell>
+                <TableCell className="text-right font-bold text-red-600 dark:text-red-400">
+                  {item.estoque}
+                </TableCell>
                 <TableCell className="text-center">
-                  <Badge variant="destructive" className="bg-red-100 text-red-800 hover:bg-red-200">
+                  <Badge
+                    variant="destructive"
+                    className="bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-300 hover:bg-red-200"
+                  >
                     Crítico
                   </Badge>
                 </TableCell>

@@ -15995,7 +15995,7 @@ function useLocation() {
 	return import_react.useContext(LocationContext).location;
 }
 var navigateEffectWarning = `You should call navigate() in a React.useEffect(), not when your component is first rendered.`;
-function useIsomorphicLayoutEffect$1(cb) {
+function useIsomorphicLayoutEffect$2(cb) {
 	if (!import_react.useContext(NavigationContext).static) import_react.useLayoutEffect(cb);
 }
 function useNavigate() {
@@ -16010,7 +16010,7 @@ function useNavigateUnstable() {
 	let { pathname: locationPathname } = useLocation();
 	let routePathnamesJson = JSON.stringify(getResolveToMatches(matches));
 	let activeRef = import_react.useRef(false);
-	useIsomorphicLayoutEffect$1(() => {
+	useIsomorphicLayoutEffect$2(() => {
 		activeRef.current = true;
 	});
 	return import_react.useCallback((to, options = {}) => {
@@ -16330,7 +16330,7 @@ function useNavigateStable() {
 	let { router } = useDataRouterContext("useNavigate");
 	let id = useCurrentRouteId("useNavigate");
 	let activeRef = import_react.useRef(false);
-	useIsomorphicLayoutEffect$1(() => {
+	useIsomorphicLayoutEffect$2(() => {
 		activeRef.current = true;
 	});
 	return import_react.useCallback(async (to, options = {}) => {
@@ -17020,7 +17020,7 @@ var NavLink = import_react.forwardRef(function NavLinkWithRef({ "aria-current": 
 	}, typeof children === "function" ? children(renderProps) : children);
 });
 NavLink.displayName = "NavLink";
-var Form = import_react.forwardRef(({ discover = "render", fetcherKey, navigate, reloadDocument, replace: replace2, state, method = defaultMethod, action, onSubmit, relative, preventScrollReset, viewTransition, unstable_defaultShouldRevalidate, ...props }, forwardedRef) => {
+var Form$1 = import_react.forwardRef(({ discover = "render", fetcherKey, navigate, reloadDocument, replace: replace2, state, method = defaultMethod, action, onSubmit, relative, preventScrollReset, viewTransition, unstable_defaultShouldRevalidate, ...props }, forwardedRef) => {
 	let { unstable_useTransitions } = import_react.useContext(NavigationContext);
 	let submit = useSubmit();
 	let formAction = useFormAction(action, { relative });
@@ -17055,7 +17055,7 @@ var Form = import_react.forwardRef(({ discover = "render", fetcherKey, navigate,
 		"data-discover": !isAbsolute && discover === "render" ? "true" : void 0
 	});
 });
-Form.displayName = "Form";
+Form$1.displayName = "Form";
 function ScrollRestoration({ getKey, storageKey, ...props }) {
 	let remixContext = import_react.useContext(FrameworkContext);
 	let { basename } = import_react.useContext(NavigationContext);
@@ -18284,7 +18284,7 @@ function useControllableState({ prop, defaultProp, onChange = () => {}, caller }
 	}
 	return [value, import_react.useCallback((nextValue) => {
 		if (isControlled) {
-			const value2 = isFunction$21(nextValue) ? nextValue(prop) : nextValue;
+			const value2 = isFunction$22(nextValue) ? nextValue(prop) : nextValue;
 			if (value2 !== prop) onChangeRef.current?.(value2);
 		} else setUncontrolledProp(nextValue);
 	}, [
@@ -18313,7 +18313,7 @@ function useUncontrolledState({ defaultProp, onChange }) {
 		onChangeRef
 	];
 }
-function isFunction$21(value) {
+function isFunction$22(value) {
 	return typeof value === "function";
 }
 //#endregion
@@ -18808,7 +18808,7 @@ function getAnnounceTextContent(container) {
 	const textContent = [];
 	Array.from(container.childNodes).forEach((node) => {
 		if (node.nodeType === node.TEXT_NODE && node.textContent) textContent.push(node.textContent);
-		if (isHTMLElement$1(node)) {
+		if (isHTMLElement$2(node)) {
 			const isHidden = node.ariaHidden || node.hidden || node.style.display === "none";
 			const isExcluded = node.dataset.radixToastAnnounceExclude === "";
 			if (!isHidden) if (isExcluded) {
@@ -18849,7 +18849,7 @@ function useNextFrame(callback = () => {}) {
 		};
 	}, [fn]);
 }
-function isHTMLElement$1(node) {
+function isHTMLElement$2(node) {
 	return node.nodeType === node.ELEMENT_NODE;
 }
 function getTabbableCandidates$1(container) {
@@ -18879,17 +18879,17 @@ var Action = ToastAction$1;
 var Close$1 = ToastClose$1;
 //#endregion
 //#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/clsx@2.1.1/node_modules/clsx/dist/clsx.mjs
-function r(e) {
+function r$1(e) {
 	var t, f, n = "";
 	if ("string" == typeof e || "number" == typeof e) n += e;
 	else if ("object" == typeof e) if (Array.isArray(e)) {
 		var o = e.length;
-		for (t = 0; t < o; t++) e[t] && (f = r(e[t])) && (n && (n += " "), n += f);
+		for (t = 0; t < o; t++) e[t] && (f = r$1(e[t])) && (n && (n += " "), n += f);
 	} else for (f in e) e[f] && (n && (n += " "), n += f);
 	return n;
 }
 function clsx() {
-	for (var e, t, f = 0, n = "", o = arguments.length; f < o; f++) (e = arguments[f]) && (t = r(e)) && (n && (n += " "), n += t);
+	for (var e, t, f = 0, n = "", o = arguments.length; f < o; f++) (e = arguments[f]) && (t = r$1(e)) && (n && (n += " "), n += t);
 	return n;
 }
 //#endregion
@@ -19133,6 +19133,34 @@ var Calculator = createLucideIcon("calculator", [
 		key: "lrp35t"
 	}]
 ]);
+var CalendarClock = createLucideIcon("calendar-clock", [
+	["path", {
+		d: "M16 14v2.2l1.6 1",
+		key: "fo4ql5"
+	}],
+	["path", {
+		d: "M16 2v4",
+		key: "4m81vk"
+	}],
+	["path", {
+		d: "M21 7.5V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h3.5",
+		key: "1osxxc"
+	}],
+	["path", {
+		d: "M3 10h5",
+		key: "r794hk"
+	}],
+	["path", {
+		d: "M8 2v4",
+		key: "1cmpym"
+	}],
+	["circle", {
+		cx: "16",
+		cy: "16",
+		r: "6",
+		key: "qoo3c4"
+	}]
+]);
 var Calendar$1 = createLucideIcon("calendar", [
 	["path", {
 		d: "M8 2v4",
@@ -19305,6 +19333,10 @@ var Minus = createLucideIcon("minus", [["path", {
 	d: "M5 12h14",
 	key: "1ays0h"
 }]]);
+var Moon = createLucideIcon("moon", [["path", {
+	d: "M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401",
+	key: "kfwtm"
+}]]);
 var Package = createLucideIcon("package", [
 	["path", {
 		d: "M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z",
@@ -19433,15 +19465,6 @@ var Search = createLucideIcon("search", [["path", {
 	r: "8",
 	key: "4ej97u"
 }]]);
-var Settings = createLucideIcon("settings", [["path", {
-	d: "M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915",
-	key: "1i5ecw"
-}], ["circle", {
-	cx: "12",
-	cy: "12",
-	r: "3",
-	key: "1v7zrd"
-}]]);
 var ShoppingBag = createLucideIcon("shopping-bag", [
 	["path", {
 		d: "M16 10a4 4 0 0 1-8 0",
@@ -19500,6 +19523,46 @@ var Store = createLucideIcon("store", [
 	["path", {
 		d: "M4 10.95V19a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8.05",
 		key: "wn3emo"
+	}]
+]);
+var Sun = createLucideIcon("sun", [
+	["circle", {
+		cx: "12",
+		cy: "12",
+		r: "4",
+		key: "4exip2"
+	}],
+	["path", {
+		d: "M12 2v2",
+		key: "tus03m"
+	}],
+	["path", {
+		d: "M12 20v2",
+		key: "1lh1kg"
+	}],
+	["path", {
+		d: "m4.93 4.93 1.41 1.41",
+		key: "149t6j"
+	}],
+	["path", {
+		d: "m17.66 17.66 1.41 1.41",
+		key: "ptbguv"
+	}],
+	["path", {
+		d: "M2 12h2",
+		key: "1t8f8n"
+	}],
+	["path", {
+		d: "M20 12h2",
+		key: "1q8mjw"
+	}],
+	["path", {
+		d: "m6.34 17.66-1.41 1.41",
+		key: "1m8zz5"
+	}],
+	["path", {
+		d: "m19.07 4.93-1.41 1.41",
+		key: "1shlcs"
 	}]
 ]);
 var Trash2 = createLucideIcon("trash-2", [
@@ -22815,7 +22878,7 @@ function isElement(value) {
 	if (!hasWindow()) return false;
 	return value instanceof Element || value instanceof getWindow(value).Element;
 }
-function isHTMLElement(value) {
+function isHTMLElement$1(value) {
 	if (!hasWindow()) return false;
 	return value instanceof HTMLElement || value instanceof getWindow(value).HTMLElement;
 }
@@ -22850,7 +22913,7 @@ function isContainingBlock(elementOrCss) {
 }
 function getContainingBlock(element) {
 	let currentNode = getParentNode(element);
-	while (isHTMLElement(currentNode) && !isLastTraversableNode(currentNode)) {
+	while (isHTMLElement$1(currentNode) && !isLastTraversableNode(currentNode)) {
 		if (isContainingBlock(currentNode)) return currentNode;
 		else if (isTopLayer(currentNode)) return null;
 		currentNode = getParentNode(currentNode);
@@ -22885,7 +22948,7 @@ function getParentNode(node) {
 function getNearestOverflowAncestor(node) {
 	const parentNode = getParentNode(node);
 	if (isLastTraversableNode(parentNode)) return node.ownerDocument ? node.ownerDocument.body : node.body;
-	if (isHTMLElement(parentNode) && isOverflowElement(parentNode)) return parentNode;
+	if (isHTMLElement$1(parentNode) && isOverflowElement(parentNode)) return parentNode;
 	return getNearestOverflowAncestor(parentNode);
 }
 function getOverflowAncestors(node, list, traverseIframes) {
@@ -22909,7 +22972,7 @@ function getCssDimensions(element) {
 	const css = getComputedStyle$1(element);
 	let width = parseFloat(css.width) || 0;
 	let height = parseFloat(css.height) || 0;
-	const hasOffset = isHTMLElement(element);
+	const hasOffset = isHTMLElement$1(element);
 	const offsetWidth = hasOffset ? element.offsetWidth : width;
 	const offsetHeight = hasOffset ? element.offsetHeight : height;
 	const shouldFallback = round(width) !== offsetWidth || round(height) !== offsetHeight;
@@ -22928,7 +22991,7 @@ function unwrapElement(element) {
 }
 function getScale(element) {
 	const domElement = unwrapElement(element);
-	if (!isHTMLElement(domElement)) return createCoords(1);
+	if (!isHTMLElement$1(domElement)) return createCoords(1);
 	const rect = domElement.getBoundingClientRect();
 	const { width, height, $ } = getCssDimensions(domElement);
 	let x = ($ ? round(rect.width) : rect.width) / width;
@@ -23020,7 +23083,7 @@ function convertOffsetParentRelativeRectToViewportRelativeRect(_ref) {
 	};
 	let scale = createCoords(1);
 	const offsets = createCoords(0);
-	const isOffsetParentAnElement = isHTMLElement(offsetParent);
+	const isOffsetParentAnElement = isHTMLElement$1(offsetParent);
 	if (isOffsetParentAnElement || !isOffsetParentAnElement && !isFixed) {
 		if (getNodeName(offsetParent) !== "body" || isOverflowElement(documentElement)) scroll = getNodeScroll(offsetParent);
 		if (isOffsetParentAnElement) {
@@ -23095,7 +23158,7 @@ function getInnerBoundingClientRect(element, strategy) {
 	const clientRect = getBoundingClientRect(element, true, strategy === "fixed");
 	const top = clientRect.top + element.clientTop;
 	const left = clientRect.left + element.clientLeft;
-	const scale = isHTMLElement(element) ? getScale(element) : createCoords(1);
+	const scale = isHTMLElement$1(element) ? getScale(element) : createCoords(1);
 	return {
 		width: element.clientWidth * scale.x,
 		height: element.clientHeight * scale.y,
@@ -23172,7 +23235,7 @@ function getDimensions(element) {
 	};
 }
 function getRectRelativeToOffsetParent(element, offsetParent, strategy) {
-	const isOffsetParentAnElement = isHTMLElement(offsetParent);
+	const isOffsetParentAnElement = isHTMLElement$1(offsetParent);
 	const documentElement = getDocumentElement(offsetParent);
 	const isFixed = strategy === "fixed";
 	const rect = getBoundingClientRect(element, true, isFixed, offsetParent);
@@ -23205,7 +23268,7 @@ function isStaticPositioned(element) {
 	return getComputedStyle$1(element).position === "static";
 }
 function getTrueOffsetParent(element, polyfill) {
-	if (!isHTMLElement(element) || getComputedStyle$1(element).position === "fixed") return null;
+	if (!isHTMLElement$1(element) || getComputedStyle$1(element).position === "fixed") return null;
 	if (polyfill) return polyfill(element);
 	let rawOffsetParent = element.offsetParent;
 	if (getDocumentElement(element) === rawOffsetParent) rawOffsetParent = rawOffsetParent.ownerDocument.body;
@@ -23214,7 +23277,7 @@ function getTrueOffsetParent(element, polyfill) {
 function getOffsetParent(element, polyfill) {
 	const win = getWindow(element);
 	if (isTopLayer(element)) return win;
-	if (!isHTMLElement(element)) {
+	if (!isHTMLElement$1(element)) {
 		let svgOffsetParent = getParentNode(element);
 		while (svgOffsetParent && !isLastTraversableNode(svgOffsetParent)) {
 			if (isElement(svgOffsetParent) && !isStaticPositioned(svgOffsetParent)) return svgOffsetParent;
@@ -23435,7 +23498,7 @@ var computePosition = (reference, floating, options) => {
 //#endregion
 //#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/@floating-ui+react-dom@2.1.8_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/@floating-ui/react-dom/dist/floating-ui.react-dom.mjs
 var index = typeof document !== "undefined" ? import_react.useLayoutEffect : function noop() {};
-function deepEqual$1(a, b) {
+function deepEqual$2(a, b) {
 	if (a === b) return true;
 	if (typeof a !== typeof b) return false;
 	if (typeof a === "function" && a.toString() === b.toString()) return true;
@@ -23446,7 +23509,7 @@ function deepEqual$1(a, b) {
 		if (Array.isArray(a)) {
 			length = a.length;
 			if (length !== b.length) return false;
-			for (i = length; i-- !== 0;) if (!deepEqual$1(a[i], b[i])) return false;
+			for (i = length; i-- !== 0;) if (!deepEqual$2(a[i], b[i])) return false;
 			return true;
 		}
 		keys = Object.keys(a);
@@ -23456,7 +23519,7 @@ function deepEqual$1(a, b) {
 		for (i = length; i-- !== 0;) {
 			const key = keys[i];
 			if (key === "_owner" && a.$$typeof) continue;
-			if (!deepEqual$1(a[key], b[key])) return false;
+			if (!deepEqual$2(a[key], b[key])) return false;
 		}
 		return true;
 	}
@@ -23493,7 +23556,7 @@ function useFloating(options) {
 		isPositioned: false
 	});
 	const [latestMiddleware, setLatestMiddleware] = import_react.useState(middleware);
-	if (!deepEqual$1(latestMiddleware, middleware)) setLatestMiddleware(middleware);
+	if (!deepEqual$2(latestMiddleware, middleware)) setLatestMiddleware(middleware);
 	const [_reference, _setReference] = import_react.useState(null);
 	const [_floating, _setFloating] = import_react.useState(null);
 	const setReference = import_react.useCallback((node) => {
@@ -23530,7 +23593,7 @@ function useFloating(options) {
 				...data,
 				isPositioned: openRef.current !== false
 			};
-			if (isMountedRef.current && !deepEqual$1(dataRef.current, fullData)) {
+			if (isMountedRef.current && !deepEqual$2(dataRef.current, fullData)) {
 				dataRef.current = fullData;
 				import_react_dom.flushSync(() => {
 					setData(fullData);
@@ -24533,6 +24596,44 @@ var TooltipContent = import_react.forwardRef(({ className, sideOffset = 4, ...pr
 }));
 TooltipContent.displayName = Content2$2.displayName;
 //#endregion
+//#region src/components/ThemeProvider.tsx
+var ThemeProviderContext = (0, import_react.createContext)({
+	theme: "system",
+	setTheme: () => null
+});
+function ThemeProvider({ children, defaultTheme = "system", storageKey = "vite-ui-theme", ...props }) {
+	const [theme, setTheme] = (0, import_react.useState)(() => localStorage.getItem(storageKey) || defaultTheme);
+	(0, import_react.useEffect)(() => {
+		const root = window.document.documentElement;
+		root.classList.remove("light", "dark");
+		if (theme === "system") {
+			const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+			root.classList.add(systemTheme);
+			return;
+		}
+		root.classList.add(theme);
+	}, [theme]);
+	const value = {
+		theme,
+		setTheme: (theme) => {
+			localStorage.setItem(storageKey, theme);
+			setTheme(theme);
+		}
+	};
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ThemeProviderContext.Provider, {
+		"data-uid": "src/components/ThemeProvider.tsx:59:5",
+		"data-prohibitions": "[editContent]",
+		...props,
+		value,
+		children
+	});
+}
+var useTheme = () => {
+	const context = (0, import_react.useContext)(ThemeProviderContext);
+	if (context === void 0) throw new Error("useTheme must be used within a ThemeProvider");
+	return context;
+};
+//#endregion
 //#region src/components/ui/input.tsx
 var Input = import_react.forwardRef(({ className, type, ...props }, ref) => {
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
@@ -24948,6 +25049,25 @@ var CardFooter = import_react.forwardRef(({ className, ...props }, ref) => /* @_
 }));
 CardFooter.displayName = "CardFooter";
 //#endregion
+//#region src/components/ui/badge.tsx
+var badgeVariants = cva("inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2", {
+	variants: { variant: {
+		default: "border-transparent bg-primary text-primary-foreground hover:bg-primary/80",
+		secondary: "border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80",
+		destructive: "border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80",
+		outline: "text-foreground"
+	} },
+	defaultVariants: { variant: "default" }
+});
+function Badge({ className, variant, ...props }) {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+		"data-uid": "src/components/ui/badge.tsx:30:10",
+		"data-prohibitions": "[editContent]",
+		className: cn$1(badgeVariants({ variant }), className),
+		...props
+	});
+}
+//#endregion
 //#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/@radix-ui+react-slot@1.2.4_@types+react@19.2.14_react@19.2.4/node_modules/@radix-ui/react-slot/dist/index.mjs
 var REACT_LAZY_TYPE = Symbol.for("react.lazy");
 var use = import_react[" use ".trim().toString()];
@@ -25095,18 +25215,33 @@ function CartProvider({ children }) {
 	const [discount, setDiscount] = (0, import_react.useState)(0);
 	const addItem = (product) => {
 		setItems((prev) => {
-			if (prev.find((item) => item.id === product.id)) return prev.map((item) => item.id === product.id ? {
-				...item,
-				quantity: item.quantity + 1
-			} : item);
+			const existing = prev.find((item) => item.id === product.id);
+			if ((existing ? existing.quantity : 0) >= (product.estoque || 0)) {
+				toast$1({
+					title: "Estoque insuficiente",
+					description: `Não há mais unidades de ${product.nome} disponíveis.`,
+					variant: "destructive"
+				});
+				return prev;
+			}
+			if (existing) {
+				toast$1({
+					title: "Item adicionado",
+					description: `${product.nome} adicionado ao carrinho.`
+				});
+				return prev.map((item) => item.id === product.id ? {
+					...item,
+					quantity: item.quantity + 1
+				} : item);
+			}
+			toast$1({
+				title: "Item adicionado",
+				description: `${product.nome} adicionado ao carrinho.`
+			});
 			return [...prev, {
 				...product,
 				quantity: 1
 			}];
-		});
-		toast$1({
-			title: "Item adicionado",
-			description: `${product.nome} foi adicionado ao carrinho.`
 		});
 	};
 	const removeItem = (productId) => {
@@ -25115,7 +25250,16 @@ function CartProvider({ children }) {
 	const updateQuantity = (productId, delta) => {
 		setItems((prev) => prev.map((item) => {
 			if (item.id === productId) {
-				const newQuantity = Math.max(1, item.quantity + delta);
+				const newQuantity = item.quantity + delta;
+				if (newQuantity < 1) return item;
+				if (newQuantity > (item.estoque || 0)) {
+					toast$1({
+						title: "Estoque insuficiente",
+						description: "Quantidade máxima atingida para este produto.",
+						variant: "destructive"
+					});
+					return item;
+				}
 				return {
 					...item,
 					quantity: newQuantity
@@ -25158,66 +25302,73 @@ function useCart() {
 function ProductCard({ product }) {
 	const { addItem } = useCart();
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Card, {
-		"data-uid": "src/components/pdv/ProductCard.tsx:16:5",
+		"data-uid": "src/components/pdv/ProductCard.tsx:13:5",
 		"data-prohibitions": "[editContent]",
-		className: "group overflow-hidden hover:shadow-md transition-all duration-200 hover:scale-[1.02] cursor-pointer bg-white",
-		onClick: () => addItem(product),
+		className: "overflow-hidden flex flex-col hover:border-primary/50 transition-colors bg-card group relative",
 		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-			"data-uid": "src/components/pdv/ProductCard.tsx:20:7",
+			"data-uid": "src/components/pdv/ProductCard.tsx:14:7",
 			"data-prohibitions": "[editContent]",
-			className: "aspect-square bg-muted p-4 flex items-center justify-center relative",
+			className: "aspect-square bg-muted/30 p-4 flex items-center justify-center relative",
 			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
-				"data-uid": "src/components/pdv/ProductCard.tsx:21:9",
+				"data-uid": "src/components/pdv/ProductCard.tsx:15:9",
 				"data-prohibitions": "[editContent]",
-				src: product.imagem_url,
+				src: product.imagem_url || `https://img.usecurling.com/p/200/200?q=${encodeURIComponent(product.nome)}`,
 				alt: product.nome,
-				className: "object-contain w-full h-full mix-blend-multiply drop-shadow-sm group-hover:scale-105 transition-transform"
-			}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				"data-uid": "src/components/pdv/ProductCard.tsx:26:9",
-				"data-prohibitions": "[editContent]",
-				className: "absolute top-2 right-2 bg-white/90 backdrop-blur-sm text-xs px-2 py-1 rounded font-medium shadow-sm",
-				children: [product.estoque, " un"]
+				className: "object-contain h-full w-full mix-blend-multiply dark:mix-blend-normal group-hover:scale-105 transition-transform duration-300"
+			}), product.estoque <= 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+				"data-uid": "src/components/pdv/ProductCard.tsx:24:11",
+				"data-prohibitions": "[]",
+				className: "absolute inset-0 bg-background/80 backdrop-blur-[2px] flex items-center justify-center z-10",
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Badge, {
+					"data-uid": "src/components/pdv/ProductCard.tsx:25:13",
+					"data-prohibitions": "[]",
+					variant: "destructive",
+					className: "text-sm px-3 py-1",
+					children: "Esgotado"
+				})
 			})]
 		}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardContent, {
-			"data-uid": "src/components/pdv/ProductCard.tsx:30:7",
+			"data-uid": "src/components/pdv/ProductCard.tsx:31:7",
 			"data-prohibitions": "[editContent]",
-			className: "p-4",
-			children: [
-				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-					"data-uid": "src/components/pdv/ProductCard.tsx:31:9",
+			className: "p-4 flex-1 flex flex-col justify-between",
+			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				"data-uid": "src/components/pdv/ProductCard.tsx:32:9",
+				"data-prohibitions": "[editContent]",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+					"data-uid": "src/components/pdv/ProductCard.tsx:33:11",
 					"data-prohibitions": "[editContent]",
-					className: "text-xs text-muted-foreground mb-1 font-mono",
-					children: product.codigo
-				}),
-				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
-					"data-uid": "src/components/pdv/ProductCard.tsx:32:9",
+					className: "text-xs text-muted-foreground mb-1",
+					children: product.categoria || "Sem categoria"
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
+					"data-uid": "src/components/pdv/ProductCard.tsx:36:11",
 					"data-prohibitions": "[editContent]",
-					className: "font-semibold text-sm leading-tight line-clamp-2 h-10 mb-2",
+					className: "font-semibold line-clamp-2 text-sm leading-tight mb-2 text-foreground",
 					children: product.nome
-				}),
-				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					"data-uid": "src/components/pdv/ProductCard.tsx:35:9",
+				})]
+			}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				"data-uid": "src/components/pdv/ProductCard.tsx:40:9",
+				"data-prohibitions": "[editContent]",
+				className: "flex items-center justify-between mt-2",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+					"data-uid": "src/components/pdv/ProductCard.tsx:41:11",
 					"data-prohibitions": "[editContent]",
-					className: "flex items-center justify-between mt-auto",
-					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-						"data-uid": "src/components/pdv/ProductCard.tsx:36:11",
+					className: "font-bold text-primary",
+					children: formatCurrency(product.preco)
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
+					"data-uid": "src/components/pdv/ProductCard.tsx:42:11",
+					"data-prohibitions": "[]",
+					size: "icon",
+					variant: "secondary",
+					className: "h-8 w-8 rounded-full",
+					onClick: () => addItem(product),
+					disabled: product.estoque <= 0,
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Plus, {
+						"data-uid": "src/components/pdv/ProductCard.tsx:49:13",
 						"data-prohibitions": "[editContent]",
-						className: "font-bold text-lg text-primary",
-						children: formatCurrency(product.preco)
-					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
-						"data-uid": "src/components/pdv/ProductCard.tsx:37:11",
-						"data-prohibitions": "[]",
-						size: "icon",
-						variant: "secondary",
-						className: "h-8 w-8 rounded-full group-hover:bg-primary group-hover:text-primary-foreground transition-colors",
-						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Plus, {
-							"data-uid": "src/components/pdv/ProductCard.tsx:42:13",
-							"data-prohibitions": "[editContent]",
-							className: "h-4 w-4"
-						})
-					})]
-				})
-			]
+						className: "h-4 w-4"
+					})
+				})]
+			})]
 		})]
 	});
 }
@@ -30507,7 +30658,7 @@ var resolveFetch$2 = (customFetch) => {
 * @returns True if value is a plain object
 * @source https://github.com/sindresorhus/is-plain-obj
 */
-var isPlainObject$1 = (value) => {
+var isPlainObject$3 = (value) => {
 	if (typeof value !== "object" || value === null) return false;
 	const prototype = Object.getPrototypeOf(value);
 	return (prototype === null || prototype === Object.prototype || Object.getPrototypeOf(prototype) === null) && !(Symbol.toStringTag in value) && !(Symbol.iterator in value);
@@ -30654,7 +30805,7 @@ var _getRequestParams$1 = (method, options, parameters, body) => {
 		headers: (options === null || options === void 0 ? void 0 : options.headers) || {}
 	};
 	if (method === "GET" || method === "HEAD" || !body) return _objectSpread2$1(_objectSpread2$1({}, params), parameters);
-	if (isPlainObject$1(body)) {
+	if (isPlainObject$3(body)) {
 		params.headers = _objectSpread2$1({ "Content-Type": "application/json" }, options === null || options === void 0 ? void 0 : options.headers);
 		params.body = JSON.stringify(body);
 	} else params.body = body;
@@ -30710,7 +30861,7 @@ function createFetchApi(namespace = "storage") {
 		}
 	};
 }
-var { get: get$6, post, put, head, remove } = createFetchApi("storage");
+var { get: get$7, post, put, head, remove } = createFetchApi("storage");
 var vectorsApi = createFetchApi("vectors");
 /**
 * @ignore
@@ -31373,7 +31524,7 @@ var StorageFileApi = class extends BaseApiClient {
 		const transformationQuery = this.transformOptsToQueryString((options === null || options === void 0 ? void 0 : options.transform) || {});
 		const queryString = transformationQuery ? `?${transformationQuery}` : "";
 		const _path = this._getFinalPath(path);
-		const downloadFn = () => get$6(this.fetch, `${this.url}/${renderPath}/${_path}${queryString}`, {
+		const downloadFn = () => get$7(this.fetch, `${this.url}/${renderPath}/${_path}${queryString}`, {
 			headers: this.headers,
 			noResolveJson: true
 		}, parameters);
@@ -31406,7 +31557,7 @@ var StorageFileApi = class extends BaseApiClient {
 		var _this10 = this;
 		const _path = _this10._getFinalPath(path);
 		return _this10.handleOperation(async () => {
-			return recursiveToCamel(await get$6(_this10.fetch, `${_this10.url}/object/info/${_path}`, { headers: _this10.headers }));
+			return recursiveToCamel(await get$7(_this10.fetch, `${_this10.url}/object/info/${_path}`, { headers: _this10.headers }));
 		});
 	}
 	/**
@@ -31707,8 +31858,8 @@ var StorageFileApi = class extends BaseApiClient {
 		return params.join("&");
 	}
 };
-var version$2 = "2.99.2";
-var DEFAULT_HEADERS$1 = { "X-Client-Info": `storage-js/${version$2}` };
+var version$3 = "2.99.2";
+var DEFAULT_HEADERS$1 = { "X-Client-Info": `storage-js/${version$3}` };
 var StorageBucketApi = class extends BaseApiClient {
 	constructor(url, headers = {}, fetch$1, opts) {
 		const baseUrl = new URL(url);
@@ -31755,7 +31906,7 @@ var StorageBucketApi = class extends BaseApiClient {
 		var _this = this;
 		return _this.handleOperation(async () => {
 			const queryString = _this.listBucketOptionsToQueryString(options);
-			return await get$6(_this.fetch, `${_this.url}/bucket${queryString}`, { headers: _this.headers });
+			return await get$7(_this.fetch, `${_this.url}/bucket${queryString}`, { headers: _this.headers });
 		});
 	}
 	/**
@@ -31794,7 +31945,7 @@ var StorageBucketApi = class extends BaseApiClient {
 	async getBucket(id) {
 		var _this2 = this;
 		return _this2.handleOperation(async () => {
-			return await get$6(_this2.fetch, `${_this2.url}/bucket/${id}`, { headers: _this2.headers });
+			return await get$7(_this2.fetch, `${_this2.url}/bucket/${id}`, { headers: _this2.headers });
 		});
 	}
 	/**
@@ -32091,7 +32242,7 @@ var StorageAnalyticsClient = class extends BaseApiClient {
 			if (options === null || options === void 0 ? void 0 : options.search) queryParams.set("search", options.search);
 			const queryString = queryParams.toString();
 			const url = queryString ? `${_this2.url}/bucket?${queryString}` : `${_this2.url}/bucket`;
-			return await get$6(_this2.fetch, url, { headers: _this2.headers });
+			return await get$7(_this2.fetch, url, { headers: _this2.headers });
 		});
 	}
 	/**
@@ -33031,7 +33182,7 @@ var StorageClient = class extends StorageBucketApi {
 };
 //#endregion
 //#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/@supabase+auth-js@2.99.2/node_modules/@supabase/auth-js/dist/module/lib/version.js
-var version$1 = "2.99.2";
+var version$2 = "2.99.2";
 //#endregion
 //#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/@supabase+auth-js@2.99.2/node_modules/@supabase/auth-js/dist/module/lib/constants.js
 /** Current session will be checked for refresh at this interval. */
@@ -33039,7 +33190,7 @@ var AUTO_REFRESH_TICK_DURATION_MS = 30 * 1e3;
 var EXPIRY_MARGIN_MS = 3 * AUTO_REFRESH_TICK_DURATION_MS;
 var GOTRUE_URL = "http://localhost:9999";
 var STORAGE_KEY = "supabase.auth.token";
-var DEFAULT_HEADERS = { "X-Client-Info": `gotrue-js/${version$1}` };
+var DEFAULT_HEADERS = { "X-Client-Info": `gotrue-js/${version$2}` };
 var API_VERSION_HEADER_NAME = "X-Supabase-Api-Version";
 var API_VERSIONS = { "2024-01-01": {
 	timestamp: Date.parse("2024-01-01T00:00:00.0Z"),
@@ -35738,7 +35889,7 @@ var GoTrueClient = class GoTrueClient {
 		return result;
 	}
 	_logPrefix() {
-		return `GoTrueClient@${this.storageKey}:${this.instanceID} (${version$1}) ${(/* @__PURE__ */ new Date()).toISOString()}`;
+		return `GoTrueClient@${this.storageKey}:${this.instanceID} (${version$2}) ${(/* @__PURE__ */ new Date()).toISOString()}`;
 	}
 	_debug(...args) {
 		if (this.logDebugMessages) this.logger(this._logPrefix(), ...args);
@@ -38357,13 +38508,13 @@ GoTrueClient.nextInstanceID = {};
 var AuthClient = GoTrueClient;
 //#endregion
 //#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/@supabase+supabase-js@2.99.2/node_modules/@supabase/supabase-js/dist/index.mjs
-var version = "2.99.2";
+var version$1 = "2.99.2";
 var JS_ENV = "";
 if (typeof Deno !== "undefined") JS_ENV = "deno";
 else if (typeof document !== "undefined") JS_ENV = "web";
 else if (typeof navigator !== "undefined" && navigator.product === "ReactNative") JS_ENV = "react-native";
 else JS_ENV = "node";
-var DEFAULT_GLOBAL_OPTIONS = { headers: { "X-Client-Info": `supabase-js-${JS_ENV}/${version}` } };
+var DEFAULT_GLOBAL_OPTIONS = { headers: { "X-Client-Info": `supabase-js-${JS_ENV}/${version$1}` } };
 var DEFAULT_DB_OPTIONS = { schema: "public" };
 var DEFAULT_AUTH_OPTIONS = {
 	autoRefreshToken: true,
@@ -38903,49 +39054,49 @@ function Index() {
 		};
 		fetchProducts();
 	}, []);
-	const categories = ["Todos", ...Array.from(new Set(products.map((p) => p.categoria)))];
+	const categories = ["Todos", ...Array.from(new Set(products.map((p) => p.categoria).filter(Boolean)))];
 	const filteredProducts = products.filter((p) => {
 		const matchesSearch = p.nome.toLowerCase().includes(search.toLowerCase()) || p.codigo?.includes(search);
 		const matchesCategory = category === "Todos" || p.categoria === category;
 		return matchesSearch && matchesCategory && p.estoque > 0;
 	});
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-		"data-uid": "src/pages/Index.tsx:34:5",
+		"data-uid": "src/pages/Index.tsx:37:5",
 		"data-prohibitions": "[editContent]",
 		className: "h-full flex flex-col animate-fade-in",
 		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-			"data-uid": "src/pages/Index.tsx:35:7",
+			"data-uid": "src/pages/Index.tsx:38:7",
 			"data-prohibitions": "[editContent]",
 			className: "flex flex-col sm:flex-row gap-4 justify-between items-center mb-6",
 			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				"data-uid": "src/pages/Index.tsx:36:9",
+				"data-uid": "src/pages/Index.tsx:39:9",
 				"data-prohibitions": "[]",
 				className: "relative w-full sm:max-w-sm",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Search, {
-					"data-uid": "src/pages/Index.tsx:37:11",
+					"data-uid": "src/pages/Index.tsx:40:11",
 					"data-prohibitions": "[editContent]",
 					className: "absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground"
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
-					"data-uid": "src/pages/Index.tsx:38:11",
+					"data-uid": "src/pages/Index.tsx:41:11",
 					"data-prohibitions": "[editContent]",
 					placeholder: "Buscar por nome ou código...",
-					className: "pl-10 h-12 text-base shadow-sm border-slate-200",
+					className: "pl-10 h-12 text-base shadow-sm border-border bg-background",
 					value: search,
 					onChange: (e) => setSearch(e.target.value),
 					autoFocus: true
 				})]
 			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Tabs, {
-				"data-uid": "src/pages/Index.tsx:47:9",
+				"data-uid": "src/pages/Index.tsx:50:9",
 				"data-prohibitions": "[editContent]",
 				defaultValue: "Todos",
 				className: "w-full sm:w-auto overflow-x-auto",
 				onValueChange: setCategory,
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TabsList, {
-					"data-uid": "src/pages/Index.tsx:52:11",
+					"data-uid": "src/pages/Index.tsx:55:11",
 					"data-prohibitions": "[editContent]",
-					className: "h-12 p-1 bg-slate-100/80 border",
+					className: "h-12 p-1 bg-muted/50 border border-border",
 					children: categories.map((cat) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TabsTrigger, {
-						"data-uid": "src/pages/Index.tsx:54:15",
+						"data-uid": "src/pages/Index.tsx:57:15",
 						"data-prohibitions": "[editContent]",
 						value: cat,
 						className: "px-6 py-2 rounded-md font-medium capitalize",
@@ -38954,28 +39105,28 @@ function Index() {
 				})
 			})]
 		}), loading ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-			"data-uid": "src/pages/Index.tsx:67:9",
+			"data-uid": "src/pages/Index.tsx:70:9",
 			"data-prohibitions": "[]",
 			className: "flex-1 flex items-center justify-center",
 			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(LoaderCircle, {
-				"data-uid": "src/pages/Index.tsx:68:11",
+				"data-uid": "src/pages/Index.tsx:71:11",
 				"data-prohibitions": "[editContent]",
 				className: "h-8 w-8 animate-spin text-primary"
 			})
 		}) : /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-			"data-uid": "src/pages/Index.tsx:71:9",
+			"data-uid": "src/pages/Index.tsx:74:9",
 			"data-prohibitions": "[editContent]",
 			className: "grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 overflow-y-auto pb-4",
 			children: [filteredProducts.map((product) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ProductCard, {
-				"data-uid": "src/pages/Index.tsx:73:13",
+				"data-uid": "src/pages/Index.tsx:76:13",
 				"data-prohibitions": "[editContent]",
 				product
 			}, product.id)), filteredProducts.length === 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-				"data-uid": "src/pages/Index.tsx:76:13",
+				"data-uid": "src/pages/Index.tsx:79:13",
 				"data-prohibitions": "[]",
 				className: "col-span-full py-20 text-center text-muted-foreground",
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-					"data-uid": "src/pages/Index.tsx:77:15",
+					"data-uid": "src/pages/Index.tsx:80:15",
 					"data-prohibitions": "[]",
 					className: "text-lg font-medium",
 					children: "Nenhum produto disponível encontrado."
@@ -38984,52 +39135,6 @@ function Index() {
 		})]
 	});
 }
-//#endregion
-//#region src/data/mock.ts
-var mockChartDataLine = [
-	{
-		time: "08:00",
-		sales: 120
-	},
-	{
-		time: "10:00",
-		sales: 300
-	},
-	{
-		time: "12:00",
-		sales: 450
-	},
-	{
-		time: "14:00",
-		sales: 380
-	},
-	{
-		time: "16:00",
-		sales: 520
-	},
-	{
-		time: "18:00",
-		sales: 600
-	}
-];
-var mockChartDataBar = [
-	{
-		category: "Bebidas",
-		value: 850
-	},
-	{
-		category: "Alimentos",
-		value: 620
-	},
-	{
-		category: "Limpeza",
-		value: 340
-	},
-	{
-		category: "Doces",
-		value: 210
-	}
-];
 //#endregion
 //#region src/components/ui/table.tsx
 var Table = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
@@ -39101,25 +39206,6 @@ var TableCaption = import_react.forwardRef(({ className, ...props }, ref) => /* 
 	...props
 }));
 TableCaption.displayName = "TableCaption";
-//#endregion
-//#region src/components/ui/badge.tsx
-var badgeVariants = cva("inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2", {
-	variants: { variant: {
-		default: "border-transparent bg-primary text-primary-foreground hover:bg-primary/80",
-		secondary: "border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80",
-		destructive: "border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80",
-		outline: "text-foreground"
-	} },
-	defaultVariants: { variant: "default" }
-});
-function Badge({ className, variant, ...props }) {
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-		"data-uid": "src/components/ui/badge.tsx:30:10",
-		"data-prohibitions": "[editContent]",
-		className: cn$1(badgeVariants({ variant }), className),
-		...props
-	});
-}
 //#endregion
 //#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/lodash@4.17.23/node_modules/lodash/isArray.js
 var require_isArray = /* @__PURE__ */ __commonJSMin(((exports, module) => {
@@ -42160,23 +42246,23 @@ var triangle_default = { draw(context, size) {
 //#endregion
 //#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/d3-shape@3.2.0/node_modules/d3-shape/src/symbol/wye.js
 var c = -.5;
-var s = sqrt$1(3) / 2;
+var s$2 = sqrt$1(3) / 2;
 var k = 1 / sqrt$1(12);
-var a = (k / 2 + 1) * 3;
+var a$1 = (k / 2 + 1) * 3;
 var wye_default = { draw(context, size) {
-	const r = sqrt$1(size / a);
+	const r = sqrt$1(size / a$1);
 	const x0 = r / 2, y0 = r * k;
 	const x1 = x0, y1 = r * k + r;
 	const x2 = -x1, y2 = y1;
 	context.moveTo(x0, y0);
 	context.lineTo(x1, y1);
 	context.lineTo(x2, y2);
-	context.lineTo(c * x0 - s * y0, s * x0 + c * y0);
-	context.lineTo(c * x1 - s * y1, s * x1 + c * y1);
-	context.lineTo(c * x2 - s * y2, s * x2 + c * y2);
-	context.lineTo(c * x0 + s * y0, c * y0 - s * x0);
-	context.lineTo(c * x1 + s * y1, c * y1 - s * x1);
-	context.lineTo(c * x2 + s * y2, c * y2 - s * x2);
+	context.lineTo(c * x0 - s$2 * y0, s$2 * x0 + c * y0);
+	context.lineTo(c * x1 - s$2 * y1, s$2 * x1 + c * y1);
+	context.lineTo(c * x2 - s$2 * y2, s$2 * x2 + c * y2);
+	context.lineTo(c * x0 + s$2 * y0, c * y0 - s$2 * x0);
+	context.lineTo(c * x1 + s$2 * y1, c * y1 - s$2 * x1);
+	context.lineTo(c * x2 + s$2 * y2, c * y2 - s$2 * x2);
 	context.closePath();
 } };
 //#endregion
@@ -47293,7 +47379,7 @@ function zero$1() {
 }
 //#endregion
 //#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/d3-array@3.2.4/node_modules/d3-array/src/number.js
-function number$2(x) {
+function number$4(x) {
 	return x === null ? NaN : +x;
 }
 function* numbers(values, valueof) {
@@ -47309,7 +47395,7 @@ function* numbers(values, valueof) {
 var ascendingBisect = bisector(ascending);
 var bisectRight = ascendingBisect.right;
 ascendingBisect.left;
-bisector(number$2).center;
+bisector(number$4).center;
 //#endregion
 //#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/internmap@2.0.3/node_modules/internmap/src/index.js
 var InternMap = class extends Map {
@@ -47493,7 +47579,7 @@ function quantile$1(values, p, valueof) {
 	var n, i = (n - 1) * p, i0 = Math.floor(i), value0 = max$3(quickselect(values, i0).subarray(0, i0 + 1));
 	return value0 + (min$2(values.subarray(i0 + 1)) - value0) * (i - i0);
 }
-function quantileSorted(values, p, valueof = number$2) {
+function quantileSorted(values, p, valueof = number$4) {
 	if (!(n = values.length) || isNaN(p = +p)) return;
 	if (p <= 0 || n < 2) return +valueof(values[0], 0, values);
 	if (p >= 1) return +valueof(values[n - 1], n - 1, values);
@@ -47642,7 +47728,7 @@ function define_default(constructor, factory, prototype) {
 	constructor.prototype = factory.prototype = prototype;
 	prototype.constructor = constructor;
 }
-function extend(parent, definition) {
+function extend$1(parent, definition) {
 	var prototype = Object.create(parent.prototype);
 	for (var key in definition) prototype[key] = definition[key];
 	return prototype;
@@ -47856,7 +47942,7 @@ function Rgb(r, g, b, opacity) {
 	this.b = +b;
 	this.opacity = +opacity;
 }
-define_default(Rgb, rgb, extend(Color, {
+define_default(Rgb, rgb, extend$1(Color, {
 	brighter(k) {
 		k = k == null ? brighter : Math.pow(brighter, k);
 		return new Rgb(this.r * k, this.g * k, this.b * k, this.opacity);
@@ -47931,7 +48017,7 @@ function Hsl(h, s, l, opacity) {
 	this.l = +l;
 	this.opacity = +opacity;
 }
-define_default(Hsl, hsl, extend(Color, {
+define_default(Hsl, hsl, extend$1(Color, {
 	brighter(k) {
 		k = k == null ? brighter : Math.pow(brighter, k);
 		return new Hsl(this.h, this.s, this.l * k, this.opacity);
@@ -48179,7 +48265,7 @@ function constants(x) {
 }
 //#endregion
 //#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/d3-scale@4.0.2/node_modules/d3-scale/src/number.js
-function number$1(x) {
+function number$3(x) {
 	return +x;
 }
 //#endregion
@@ -48242,7 +48328,7 @@ function transformer$2() {
 		return clamp(untransform((input || (input = piecewise(range, domain.map(transform), number_default)))(y)));
 	};
 	scale.domain = function(_) {
-		return arguments.length ? (domain = Array.from(_, number$1), rescale()) : domain.slice();
+		return arguments.length ? (domain = Array.from(_, number$3), rescale()) : domain.slice();
 	};
 	scale.range = function(_) {
 		return arguments.length ? (range = Array.from(_), rescale()) : range.slice();
@@ -48604,7 +48690,7 @@ function identity$2(domain) {
 	}
 	scale.invert = scale;
 	scale.domain = scale.range = function(_) {
-		return arguments.length ? (domain = Array.from(_, number$1), scale) : domain.slice();
+		return arguments.length ? (domain = Array.from(_, number$3), scale) : domain.slice();
 	};
 	scale.unknown = function(_) {
 		return arguments.length ? (unknown = _, scale) : unknown;
@@ -48612,7 +48698,7 @@ function identity$2(domain) {
 	scale.copy = function() {
 		return identity$2(domain).unknown(unknown);
 	};
-	domain = arguments.length ? Array.from(domain, number$1) : [0, 1];
+	domain = arguments.length ? Array.from(domain, number$3) : [0, 1];
 	return linearish(scale);
 }
 //#endregion
@@ -48814,7 +48900,7 @@ function radial() {
 		return arguments.length ? (squared.domain(_), scale) : squared.domain();
 	};
 	scale.range = function(_) {
-		return arguments.length ? (squared.range((range = Array.from(_, number$1)).map(square)), scale) : range.slice();
+		return arguments.length ? (squared.range((range = Array.from(_, number$3)).map(square)), scale) : range.slice();
 	};
 	scale.rangeRound = function(_) {
 		return scale.range(_).round(true);
@@ -49935,10 +50021,10 @@ function defaultLocale(definition) {
 }
 //#endregion
 //#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/d3-scale@4.0.2/node_modules/d3-scale/src/time.js
-function date(t) {
+function date$2(t) {
 	return new Date(t);
 }
-function number(t) {
+function number$2(t) {
 	return t instanceof Date ? +t : +/* @__PURE__ */ new Date(+t);
 }
 function calendar(ticks, tickInterval, year, month, week, day, hour, minute, second, format) {
@@ -49951,7 +50037,7 @@ function calendar(ticks, tickInterval, year, month, week, day, hour, minute, sec
 		return new Date(invert(y));
 	};
 	scale.domain = function(_) {
-		return arguments.length ? domain(Array.from(_, number)) : domain().map(date);
+		return arguments.length ? domain(Array.from(_, number$2)) : domain().map(date$2);
 	};
 	scale.ticks = function(interval) {
 		var d = domain();
@@ -49970,7 +50056,7 @@ function calendar(ticks, tickInterval, year, month, week, day, hour, minute, sec
 	};
 	return scale;
 }
-function time() {
+function time$2() {
 	return initRange.apply(calendar(timeTicks, timeTickInterval, timeYear, timeMonth, timeSunday, timeDay, timeHour, timeMinute, second, timeFormat).domain([new Date(2e3, 0, 1), new Date(2e3, 0, 2)]), arguments);
 }
 //#endregion
@@ -50179,7 +50265,7 @@ var d3_scale_exports = /* @__PURE__ */ __exportAll({
 	scaleSqrt: () => sqrt,
 	scaleSymlog: () => symlog,
 	scaleThreshold: () => threshold,
-	scaleTime: () => time,
+	scaleTime: () => time$2,
 	scaleUtc: () => utcTime,
 	tickFormat: () => tickFormat
 });
@@ -55166,7 +55252,7 @@ function createIsEqual({ circular, comparator, createState, equals, strict }) {
 /**
 * Whether the items passed are deeply-equal in value.
 */
-var deepEqual = createCustomEqual();
+var deepEqual$1 = createCustomEqual();
 createCustomEqual({ strict: true });
 createCustomEqual({ circular: true });
 createCustomEqual({
@@ -56031,7 +56117,7 @@ var Animate = /* @__PURE__ */ function(_PureComponent) {
 					}
 					return;
 				}
-				if (deepEqual(prevProps.to, to) && prevProps.canBegin && prevProps.isActive) return;
+				if (deepEqual$1(prevProps.to, to) && prevProps.canBegin && prevProps.isActive) return;
 				var isTriggered = !prevProps.canBegin || !prevProps.isActive;
 				if (this.manager) this.manager.stop();
 				if (this.stopJSAnimation) this.stopJSAnimation();
@@ -65462,63 +65548,97 @@ function Dashboard() {
 	const [transactions, setTransactions] = (0, import_react.useState)([]);
 	const [totalSales, setTotalSales] = (0, import_react.useState)(0);
 	const [loading, setLoading] = (0, import_react.useState)(true);
+	const [chartDataLine, setChartDataLine] = (0, import_react.useState)([]);
+	const [chartDataBar, setChartDataBar] = (0, import_react.useState)([]);
 	(0, import_react.useEffect)(() => {
 		const fetchDashboardData = async () => {
-			const { data } = await supabase.from("vendas").select("*").order("data", { ascending: false }).limit(10);
-			if (data) {
-				setTransactions(data);
-				setTotalSales(data.reduce((acc, curr) => acc + Number(curr.total), 0));
+			const { data: sales } = await supabase.from("vendas").select("*").order("data", { ascending: false }).limit(10);
+			if (sales) {
+				setTransactions(sales);
+				setTotalSales(sales.reduce((acc, curr) => acc + Number(curr.total), 0));
+			}
+			const today = /* @__PURE__ */ new Date();
+			today.setHours(0, 0, 0, 0);
+			const { data: todaySales } = await supabase.from("vendas").select("data, total").gte("data", today.toISOString());
+			if (todaySales) {
+				const hourlyMap = /* @__PURE__ */ new Map();
+				todaySales.forEach((s) => {
+					const d = new Date(s.data);
+					const hour = `${String(d.getHours()).padStart(2, "0")}:00`;
+					hourlyMap.set(hour, (hourlyMap.get(hour) || 0) + Number(s.total));
+				});
+				const lineData = Array.from(hourlyMap.entries()).map(([time, sales]) => ({
+					time,
+					sales
+				})).sort((a, b) => a.time.localeCompare(b.time));
+				setChartDataLine(lineData.length > 0 ? lineData : [{
+					time: "00:00",
+					sales: 0
+				}]);
+			}
+			const { data: itens } = await supabase.from("itens_venda").select("quantidade, preco_unitario, produto:produtos(categoria)");
+			if (itens) {
+				const catMap = /* @__PURE__ */ new Map();
+				itens.forEach((i) => {
+					const cat = i.produto?.categoria || "Sem categoria";
+					const val = Number(i.quantidade) * Number(i.preco_unitario);
+					catMap.set(cat, (catMap.get(cat) || 0) + val);
+				});
+				setChartDataBar(Array.from(catMap.entries()).map(([category, value]) => ({
+					category,
+					value
+				})).sort((a, b) => b.value - a.value).slice(0, 5));
 			}
 			setLoading(false);
 		};
 		fetchDashboardData();
 	}, []);
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-		"data-uid": "src/pages/Dashboard.tsx:64:5",
+		"data-uid": "src/pages/Dashboard.tsx:108:5",
 		"data-prohibitions": "[editContent]",
 		className: "space-y-6 animate-fade-in max-w-6xl mx-auto",
 		children: [
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				"data-uid": "src/pages/Dashboard.tsx:65:7",
+				"data-uid": "src/pages/Dashboard.tsx:109:7",
 				"data-prohibitions": "[editContent]",
 				className: "grid grid-cols-1 md:grid-cols-3 gap-6",
 				children: [
 					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Card, {
-						"data-uid": "src/pages/Dashboard.tsx:66:9",
+						"data-uid": "src/pages/Dashboard.tsx:110:9",
 						"data-prohibitions": "[editContent]",
-						className: "shadow-sm border-slate-200",
+						className: "shadow-sm",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardHeader, {
-							"data-uid": "src/pages/Dashboard.tsx:67:11",
+							"data-uid": "src/pages/Dashboard.tsx:111:11",
 							"data-prohibitions": "[]",
 							className: "flex flex-row items-center justify-between pb-2",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardTitle, {
-								"data-uid": "src/pages/Dashboard.tsx:68:13",
+								"data-uid": "src/pages/Dashboard.tsx:112:13",
 								"data-prohibitions": "[]",
 								className: "text-sm font-medium text-muted-foreground",
 								children: "Vendas Recentes"
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Banknote, {
-								"data-uid": "src/pages/Dashboard.tsx:71:13",
+								"data-uid": "src/pages/Dashboard.tsx:115:13",
 								"data-prohibitions": "[editContent]",
 								className: "h-4 w-4 text-primary"
 							})]
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardContent, {
-							"data-uid": "src/pages/Dashboard.tsx:73:11",
+							"data-uid": "src/pages/Dashboard.tsx:117:11",
 							"data-prohibitions": "[editContent]",
 							children: loading ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(LoaderCircle, {
-								"data-uid": "src/pages/Dashboard.tsx:75:15",
+								"data-uid": "src/pages/Dashboard.tsx:119:15",
 								"data-prohibitions": "[editContent]",
 								className: "h-6 w-6 animate-spin text-muted-foreground"
 							}) : /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-								"data-uid": "src/pages/Dashboard.tsx:78:17",
+								"data-uid": "src/pages/Dashboard.tsx:122:17",
 								"data-prohibitions": "[editContent]",
 								className: "text-3xl font-bold",
 								children: formatCurrency(totalSales)
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
-								"data-uid": "src/pages/Dashboard.tsx:79:17",
+								"data-uid": "src/pages/Dashboard.tsx:123:17",
 								"data-prohibitions": "[]",
-								className: "text-xs text-emerald-600 font-medium mt-1 flex items-center",
+								className: "text-xs text-emerald-600 dark:text-emerald-400 font-medium mt-1 flex items-center",
 								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TrendingUp, {
-									"data-uid": "src/pages/Dashboard.tsx:80:19",
+									"data-uid": "src/pages/Dashboard.tsx:124:19",
 									"data-prohibitions": "[editContent]",
 									className: "h-3 w-3 mr-1"
 								}), " Nas últimas 10 transações"]
@@ -65526,28 +65646,28 @@ function Dashboard() {
 						})]
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Card, {
-						"data-uid": "src/pages/Dashboard.tsx:86:9",
+						"data-uid": "src/pages/Dashboard.tsx:130:9",
 						"data-prohibitions": "[editContent]",
-						className: "shadow-sm border-slate-200",
+						className: "shadow-sm",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardHeader, {
-							"data-uid": "src/pages/Dashboard.tsx:87:11",
+							"data-uid": "src/pages/Dashboard.tsx:131:11",
 							"data-prohibitions": "[]",
 							className: "flex flex-row items-center justify-between pb-2",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardTitle, {
-								"data-uid": "src/pages/Dashboard.tsx:88:13",
+								"data-uid": "src/pages/Dashboard.tsx:132:13",
 								"data-prohibitions": "[]",
 								className: "text-sm font-medium text-muted-foreground",
 								children: "Ticket Médio (Aprox)"
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TrendingUp, {
-								"data-uid": "src/pages/Dashboard.tsx:91:13",
+								"data-uid": "src/pages/Dashboard.tsx:135:13",
 								"data-prohibitions": "[editContent]",
 								className: "h-4 w-4 text-primary"
 							})]
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardContent, {
-							"data-uid": "src/pages/Dashboard.tsx:93:11",
+							"data-uid": "src/pages/Dashboard.tsx:137:11",
 							"data-prohibitions": "[editContent]",
 							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-								"data-uid": "src/pages/Dashboard.tsx:94:13",
+								"data-uid": "src/pages/Dashboard.tsx:138:13",
 								"data-prohibitions": "[editContent]",
 								className: "text-3xl font-bold",
 								children: transactions.length > 0 ? formatCurrency(totalSales / transactions.length) : formatCurrency(0)
@@ -65555,28 +65675,28 @@ function Dashboard() {
 						})]
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Card, {
-						"data-uid": "src/pages/Dashboard.tsx:101:9",
+						"data-uid": "src/pages/Dashboard.tsx:145:9",
 						"data-prohibitions": "[editContent]",
-						className: "shadow-sm border-slate-200",
+						className: "shadow-sm",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardHeader, {
-							"data-uid": "src/pages/Dashboard.tsx:102:11",
+							"data-uid": "src/pages/Dashboard.tsx:146:11",
 							"data-prohibitions": "[]",
 							className: "flex flex-row items-center justify-between pb-2",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardTitle, {
-								"data-uid": "src/pages/Dashboard.tsx:103:13",
+								"data-uid": "src/pages/Dashboard.tsx:147:13",
 								"data-prohibitions": "[]",
 								className: "text-sm font-medium text-muted-foreground",
 								children: "Transações"
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ShoppingBag, {
-								"data-uid": "src/pages/Dashboard.tsx:104:13",
+								"data-uid": "src/pages/Dashboard.tsx:148:13",
 								"data-prohibitions": "[editContent]",
 								className: "h-4 w-4 text-primary"
 							})]
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardContent, {
-							"data-uid": "src/pages/Dashboard.tsx:106:11",
+							"data-uid": "src/pages/Dashboard.tsx:150:11",
 							"data-prohibitions": "[editContent]",
 							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-								"data-uid": "src/pages/Dashboard.tsx:107:13",
+								"data-uid": "src/pages/Dashboard.tsx:151:13",
 								"data-prohibitions": "[editContent]",
 								className: "text-3xl font-bold",
 								children: transactions.length
@@ -65586,38 +65706,38 @@ function Dashboard() {
 				]
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				"data-uid": "src/pages/Dashboard.tsx:112:7",
+				"data-uid": "src/pages/Dashboard.tsx:156:7",
 				"data-prohibitions": "[]",
 				className: "grid grid-cols-1 lg:grid-cols-2 gap-6",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Card, {
-					"data-uid": "src/pages/Dashboard.tsx:113:9",
+					"data-uid": "src/pages/Dashboard.tsx:157:9",
 					"data-prohibitions": "[]",
-					className: "shadow-sm border-slate-200",
+					className: "shadow-sm",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardHeader, {
-						"data-uid": "src/pages/Dashboard.tsx:114:11",
+						"data-uid": "src/pages/Dashboard.tsx:158:11",
 						"data-prohibitions": "[]",
 						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardTitle, {
-							"data-uid": "src/pages/Dashboard.tsx:115:13",
+							"data-uid": "src/pages/Dashboard.tsx:159:13",
 							"data-prohibitions": "[]",
-							children: "Vendas por Hora"
+							children: "Vendas por Hora (Hoje)"
 						})
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardContent, {
-						"data-uid": "src/pages/Dashboard.tsx:117:11",
+						"data-uid": "src/pages/Dashboard.tsx:161:11",
 						"data-prohibitions": "[]",
 						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChartContainer, {
-							"data-uid": "src/pages/Dashboard.tsx:118:13",
+							"data-uid": "src/pages/Dashboard.tsx:162:13",
 							"data-prohibitions": "[]",
 							config: chartConfigLine,
 							className: "h-[300px] w-full",
 							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ResponsiveContainer, {
-								"data-uid": "src/pages/Dashboard.tsx:119:15",
+								"data-uid": "src/pages/Dashboard.tsx:163:15",
 								"data-prohibitions": "[]",
 								width: "100%",
 								height: "100%",
 								children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(AreaChart, {
-									"data-uid": "src/pages/Dashboard.tsx:120:17",
+									"data-uid": "src/pages/Dashboard.tsx:164:17",
 									"data-prohibitions": "[]",
-									data: mockChartDataLine,
+									data: chartDataLine,
 									margin: {
 										top: 10,
 										right: 10,
@@ -65626,10 +65746,10 @@ function Dashboard() {
 									},
 									children: [
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("defs", {
-											"data-uid": "src/pages/Dashboard.tsx:124:19",
+											"data-uid": "src/pages/Dashboard.tsx:168:19",
 											"data-prohibitions": "[]",
 											children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("linearGradient", {
-												"data-uid": "src/pages/Dashboard.tsx:125:21",
+												"data-uid": "src/pages/Dashboard.tsx:169:21",
 												"data-prohibitions": "[]",
 												id: "colorSales",
 												x1: "0",
@@ -65637,13 +65757,13 @@ function Dashboard() {
 												x2: "0",
 												y2: "1",
 												children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("stop", {
-													"data-uid": "src/pages/Dashboard.tsx:126:23",
+													"data-uid": "src/pages/Dashboard.tsx:170:23",
 													"data-prohibitions": "[editContent]",
 													offset: "5%",
 													stopColor: "var(--color-sales)",
 													stopOpacity: .3
 												}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("stop", {
-													"data-uid": "src/pages/Dashboard.tsx:127:23",
+													"data-uid": "src/pages/Dashboard.tsx:171:23",
 													"data-prohibitions": "[editContent]",
 													offset: "95%",
 													stopColor: "var(--color-sales)",
@@ -65652,44 +65772,44 @@ function Dashboard() {
 											})
 										}),
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CartesianGrid, {
-											"data-uid": "src/pages/Dashboard.tsx:130:19",
+											"data-uid": "src/pages/Dashboard.tsx:174:19",
 											"data-prohibitions": "[editContent]",
 											strokeDasharray: "3 3",
 											vertical: false,
-											stroke: "#E2E8F0"
+											stroke: "hsl(var(--border))"
 										}),
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(XAxis, {
-											"data-uid": "src/pages/Dashboard.tsx:131:19",
+											"data-uid": "src/pages/Dashboard.tsx:179:19",
 											"data-prohibitions": "[editContent]",
 											dataKey: "time",
 											axisLine: false,
 											tickLine: false,
 											tick: {
-												fill: "#64748B",
+												fill: "hsl(var(--muted-foreground))",
 												fontSize: 12
 											},
 											dy: 10
 										}),
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(YAxis, {
-											"data-uid": "src/pages/Dashboard.tsx:138:19",
+											"data-uid": "src/pages/Dashboard.tsx:186:19",
 											"data-prohibitions": "[editContent]",
 											axisLine: false,
 											tickLine: false,
 											tick: {
-												fill: "#64748B",
+												fill: "hsl(var(--muted-foreground))",
 												fontSize: 12
 											}
 										}),
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChartTooltip, {
-											"data-uid": "src/pages/Dashboard.tsx:143:19",
+											"data-uid": "src/pages/Dashboard.tsx:191:19",
 											"data-prohibitions": "[editContent]",
 											content: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChartTooltipContent, {
-												"data-uid": "src/pages/Dashboard.tsx:143:42",
+												"data-uid": "src/pages/Dashboard.tsx:191:42",
 												"data-prohibitions": "[editContent]"
 											})
 										}),
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Area, {
-											"data-uid": "src/pages/Dashboard.tsx:144:19",
+											"data-uid": "src/pages/Dashboard.tsx:192:19",
 											"data-prohibitions": "[editContent]",
 											type: "monotone",
 											dataKey: "sales",
@@ -65704,34 +65824,34 @@ function Dashboard() {
 						})
 					})]
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Card, {
-					"data-uid": "src/pages/Dashboard.tsx:158:9",
+					"data-uid": "src/pages/Dashboard.tsx:206:9",
 					"data-prohibitions": "[]",
-					className: "shadow-sm border-slate-200",
+					className: "shadow-sm",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardHeader, {
-						"data-uid": "src/pages/Dashboard.tsx:159:11",
+						"data-uid": "src/pages/Dashboard.tsx:207:11",
 						"data-prohibitions": "[]",
 						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardTitle, {
-							"data-uid": "src/pages/Dashboard.tsx:160:13",
+							"data-uid": "src/pages/Dashboard.tsx:208:13",
 							"data-prohibitions": "[]",
 							children: "Vendas por Categoria"
 						})
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardContent, {
-						"data-uid": "src/pages/Dashboard.tsx:162:11",
+						"data-uid": "src/pages/Dashboard.tsx:210:11",
 						"data-prohibitions": "[]",
 						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChartContainer, {
-							"data-uid": "src/pages/Dashboard.tsx:163:13",
+							"data-uid": "src/pages/Dashboard.tsx:211:13",
 							"data-prohibitions": "[]",
 							config: chartConfigBar,
 							className: "h-[300px] w-full",
 							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ResponsiveContainer, {
-								"data-uid": "src/pages/Dashboard.tsx:164:15",
+								"data-uid": "src/pages/Dashboard.tsx:212:15",
 								"data-prohibitions": "[]",
 								width: "100%",
 								height: "100%",
 								children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(BarChart, {
-									"data-uid": "src/pages/Dashboard.tsx:165:17",
+									"data-uid": "src/pages/Dashboard.tsx:213:17",
 									"data-prohibitions": "[]",
-									data: mockChartDataBar,
+									data: chartDataBar,
 									margin: {
 										top: 10,
 										right: 10,
@@ -65741,47 +65861,47 @@ function Dashboard() {
 									layout: "vertical",
 									children: [
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CartesianGrid, {
-											"data-uid": "src/pages/Dashboard.tsx:170:19",
+											"data-uid": "src/pages/Dashboard.tsx:218:19",
 											"data-prohibitions": "[editContent]",
 											strokeDasharray: "3 3",
 											horizontal: false,
-											stroke: "#E2E8F0"
+											stroke: "hsl(var(--border))"
 										}),
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(XAxis, {
-											"data-uid": "src/pages/Dashboard.tsx:171:19",
+											"data-uid": "src/pages/Dashboard.tsx:223:19",
 											"data-prohibitions": "[editContent]",
 											type: "number",
 											axisLine: false,
 											tickLine: false,
 											tick: {
-												fill: "#64748B",
+												fill: "hsl(var(--muted-foreground))",
 												fontSize: 12
 											}
 										}),
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(YAxis, {
-											"data-uid": "src/pages/Dashboard.tsx:177:19",
+											"data-uid": "src/pages/Dashboard.tsx:229:19",
 											"data-prohibitions": "[editContent]",
 											dataKey: "category",
 											type: "category",
 											axisLine: false,
 											tickLine: false,
 											tick: {
-												fill: "#475569",
+												fill: "hsl(var(--foreground))",
 												fontSize: 12,
 												fontWeight: 500
 											},
-											width: 80
+											width: 100
 										}),
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChartTooltip, {
-											"data-uid": "src/pages/Dashboard.tsx:185:19",
+											"data-uid": "src/pages/Dashboard.tsx:237:19",
 											"data-prohibitions": "[editContent]",
 											content: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChartTooltipContent, {
-												"data-uid": "src/pages/Dashboard.tsx:185:42",
+												"data-uid": "src/pages/Dashboard.tsx:237:42",
 												"data-prohibitions": "[editContent]"
 											})
 										}),
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Bar, {
-											"data-uid": "src/pages/Dashboard.tsx:186:19",
+											"data-uid": "src/pages/Dashboard.tsx:238:19",
 											"data-prohibitions": "[editContent]",
 											dataKey: "value",
 											fill: "var(--color-value)",
@@ -65801,53 +65921,53 @@ function Dashboard() {
 				})]
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Card, {
-				"data-uid": "src/pages/Dashboard.tsx:199:7",
+				"data-uid": "src/pages/Dashboard.tsx:251:7",
 				"data-prohibitions": "[editContent]",
-				className: "shadow-sm border-slate-200",
+				className: "shadow-sm",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardHeader, {
-					"data-uid": "src/pages/Dashboard.tsx:200:9",
+					"data-uid": "src/pages/Dashboard.tsx:252:9",
 					"data-prohibitions": "[]",
 					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardTitle, {
-						"data-uid": "src/pages/Dashboard.tsx:201:11",
+						"data-uid": "src/pages/Dashboard.tsx:253:11",
 						"data-prohibitions": "[]",
 						children: "Últimas Transações Registradas"
 					})
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardContent, {
-					"data-uid": "src/pages/Dashboard.tsx:203:9",
+					"data-uid": "src/pages/Dashboard.tsx:255:9",
 					"data-prohibitions": "[editContent]",
 					children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Table, {
-						"data-uid": "src/pages/Dashboard.tsx:204:11",
+						"data-uid": "src/pages/Dashboard.tsx:256:11",
 						"data-prohibitions": "[editContent]",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHeader, {
-							"data-uid": "src/pages/Dashboard.tsx:205:13",
+							"data-uid": "src/pages/Dashboard.tsx:257:13",
 							"data-prohibitions": "[]",
 							children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TableRow, {
-								"data-uid": "src/pages/Dashboard.tsx:206:15",
+								"data-uid": "src/pages/Dashboard.tsx:258:15",
 								"data-prohibitions": "[]",
-								className: "bg-slate-50/50",
+								className: "bg-muted/50",
 								children: [
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
-										"data-uid": "src/pages/Dashboard.tsx:207:17",
+										"data-uid": "src/pages/Dashboard.tsx:259:17",
 										"data-prohibitions": "[]",
 										children: "ID"
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
-										"data-uid": "src/pages/Dashboard.tsx:208:17",
+										"data-uid": "src/pages/Dashboard.tsx:260:17",
 										"data-prohibitions": "[]",
 										children: "Data/Hora"
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
-										"data-uid": "src/pages/Dashboard.tsx:209:17",
+										"data-uid": "src/pages/Dashboard.tsx:261:17",
 										"data-prohibitions": "[]",
 										children: "Método"
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
-										"data-uid": "src/pages/Dashboard.tsx:210:17",
+										"data-uid": "src/pages/Dashboard.tsx:262:17",
 										"data-prohibitions": "[]",
 										children: "Status"
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
-										"data-uid": "src/pages/Dashboard.tsx:211:17",
+										"data-uid": "src/pages/Dashboard.tsx:263:17",
 										"data-prohibitions": "[]",
 										className: "text-right",
 										children: "Valor"
@@ -65855,52 +65975,52 @@ function Dashboard() {
 								]
 							})
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TableBody, {
-							"data-uid": "src/pages/Dashboard.tsx:214:13",
+							"data-uid": "src/pages/Dashboard.tsx:266:13",
 							"data-prohibitions": "[editContent]",
 							children: [transactions.map((trx) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TableRow, {
-								"data-uid": "src/pages/Dashboard.tsx:216:17",
+								"data-uid": "src/pages/Dashboard.tsx:268:17",
 								"data-prohibitions": "[editContent]",
 								children: [
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-										"data-uid": "src/pages/Dashboard.tsx:217:19",
+										"data-uid": "src/pages/Dashboard.tsx:269:19",
 										"data-prohibitions": "[editContent]",
 										className: "font-medium font-mono text-xs",
 										children: trx.id.split("-")[0]
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-										"data-uid": "src/pages/Dashboard.tsx:220:19",
+										"data-uid": "src/pages/Dashboard.tsx:272:19",
 										"data-prohibitions": "[editContent]",
 										className: "text-muted-foreground",
 										children: new Date(trx.data).toLocaleString("pt-BR")
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-										"data-uid": "src/pages/Dashboard.tsx:223:19",
+										"data-uid": "src/pages/Dashboard.tsx:275:19",
 										"data-prohibitions": "[editContent]",
 										children: trx.metodo_pagamento
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-										"data-uid": "src/pages/Dashboard.tsx:224:19",
+										"data-uid": "src/pages/Dashboard.tsx:276:19",
 										"data-prohibitions": "[editContent]",
 										children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Badge, {
-											"data-uid": "src/pages/Dashboard.tsx:225:21",
+											"data-uid": "src/pages/Dashboard.tsx:277:21",
 											"data-prohibitions": "[editContent]",
 											variant: trx.status === "Concluído" ? "default" : "destructive",
-											className: trx.status === "Concluído" ? "bg-emerald-100 text-emerald-800 hover:bg-emerald-200 border-emerald-200" : "",
+											className: trx.status === "Concluído" ? "bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-300 hover:bg-emerald-200 border-0" : "",
 											children: trx.status
 										})
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-										"data-uid": "src/pages/Dashboard.tsx:236:19",
+										"data-uid": "src/pages/Dashboard.tsx:288:19",
 										"data-prohibitions": "[editContent]",
 										className: "text-right font-semibold",
 										children: formatCurrency(trx.total)
 									})
 								]
 							}, trx.id)), transactions.length === 0 && !loading && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableRow, {
-								"data-uid": "src/pages/Dashboard.tsx:242:17",
+								"data-uid": "src/pages/Dashboard.tsx:294:17",
 								"data-prohibitions": "[]",
 								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-									"data-uid": "src/pages/Dashboard.tsx:243:19",
+									"data-uid": "src/pages/Dashboard.tsx:295:19",
 									"data-prohibitions": "[]",
 									colSpan: 5,
 									className: "text-center py-6 text-muted-foreground",
@@ -66198,7 +66318,7 @@ function useCallbackRef(initialValue, callback) {
 }
 //#endregion
 //#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/use-callback-ref@1.3.3_@types+react@19.2.14_react@19.2.4/node_modules/use-callback-ref/dist/es2015/useMergeRef.js
-var useIsomorphicLayoutEffect = typeof window !== "undefined" ? import_react.useLayoutEffect : import_react.useEffect;
+var useIsomorphicLayoutEffect$1 = typeof window !== "undefined" ? import_react.useLayoutEffect : import_react.useEffect;
 var currentValues = /* @__PURE__ */ new WeakMap();
 /**
 * Merges two or more refs together providing a single interface to set their value
@@ -66220,7 +66340,7 @@ function useMergeRefs(refs, defaultValue) {
 			return assignRef(ref, newValue);
 		});
 	});
-	useIsomorphicLayoutEffect(function() {
+	useIsomorphicLayoutEffect$1(function() {
 		var oldValue = currentValues.get(callbackRef);
 		if (oldValue) {
 			var prevRefs_1 = new Set(oldValue);
@@ -66483,7 +66603,7 @@ var zeroGap = {
 	right: 0,
 	gap: 0
 };
-var parse = function(x) {
+var parse$2 = function(x) {
 	return parseInt(x || "", 10) || 0;
 };
 var getOffset = function(gapMode) {
@@ -66492,9 +66612,9 @@ var getOffset = function(gapMode) {
 	var top = cs[gapMode === "padding" ? "paddingTop" : "marginTop"];
 	var right = cs[gapMode === "padding" ? "paddingRight" : "marginRight"];
 	return [
-		parse(left),
-		parse(top),
-		parse(right)
+		parse$2(left),
+		parse$2(top),
+		parse$2(right)
 	];
 };
 var getGapWidth = function(gapMode) {
@@ -67345,7 +67465,7 @@ function ContasReceber() {
 		const { data, error } = await supabase.from("contas_receber").select("*, venda:vendas(data)").order("data_vencimento", { ascending: true });
 		if (error) toast$1({
 			title: "Erro",
-			description: "Erro ao carregar contas a receber.",
+			description: "Erro ao carregar contas.",
 			variant: "destructive"
 		});
 		else setContas(data || []);
@@ -67386,167 +67506,162 @@ function ContasReceber() {
 	const totalAReceber = contas.filter((c) => c.status === "pendente").reduce((acc, curr) => acc + Number(curr.valor), 0);
 	const totalRecebido = contas.filter((c) => c.status === "pago").reduce((acc, curr) => acc + Number(curr.valor), 0);
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-		"data-uid": "src/pages/ContasReceber.tsx:112:5",
+		"data-uid": "src/pages/ContasReceber.tsx:98:5",
 		"data-prohibitions": "[editContent]",
 		className: "space-y-6 animate-fade-in max-w-6xl mx-auto h-full flex flex-col",
 		children: [
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				"data-uid": "src/pages/ContasReceber.tsx:113:7",
+				"data-uid": "src/pages/ContasReceber.tsx:99:7",
 				"data-prohibitions": "[editContent]",
 				className: "grid grid-cols-1 md:grid-cols-2 gap-6 shrink-0",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Card, {
-					"data-uid": "src/pages/ContasReceber.tsx:114:9",
+					"data-uid": "src/pages/ContasReceber.tsx:100:9",
 					"data-prohibitions": "[editContent]",
-					className: "shadow-sm border-slate-200",
+					className: "shadow-sm border-orange-200 dark:border-orange-900 bg-orange-50/30 dark:bg-orange-950/20",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardHeader, {
-						"data-uid": "src/pages/ContasReceber.tsx:115:11",
+						"data-uid": "src/pages/ContasReceber.tsx:101:11",
 						"data-prohibitions": "[]",
 						className: "flex flex-row items-center justify-between pb-2",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardTitle, {
-							"data-uid": "src/pages/ContasReceber.tsx:116:13",
+							"data-uid": "src/pages/ContasReceber.tsx:102:13",
 							"data-prohibitions": "[]",
-							className: "text-sm font-medium text-muted-foreground",
+							className: "text-sm font-medium text-orange-800 dark:text-orange-400",
 							children: "Total a Receber"
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DollarSign, {
-							"data-uid": "src/pages/ContasReceber.tsx:119:13",
+							"data-uid": "src/pages/ContasReceber.tsx:105:13",
 							"data-prohibitions": "[editContent]",
 							className: "h-4 w-4 text-orange-500"
 						})]
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardContent, {
-						"data-uid": "src/pages/ContasReceber.tsx:121:11",
+						"data-uid": "src/pages/ContasReceber.tsx:107:11",
 						"data-prohibitions": "[editContent]",
 						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-							"data-uid": "src/pages/ContasReceber.tsx:122:13",
+							"data-uid": "src/pages/ContasReceber.tsx:108:13",
 							"data-prohibitions": "[editContent]",
-							className: "text-3xl font-bold text-slate-900",
+							className: "text-3xl font-bold text-orange-900 dark:text-orange-300",
 							children: formatCurrency(totalAReceber)
 						})
 					})]
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Card, {
-					"data-uid": "src/pages/ContasReceber.tsx:125:9",
+					"data-uid": "src/pages/ContasReceber.tsx:113:9",
 					"data-prohibitions": "[editContent]",
-					className: "shadow-sm border-slate-200",
+					className: "shadow-sm border-emerald-200 dark:border-emerald-900 bg-emerald-50/30 dark:bg-emerald-950/20",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardHeader, {
-						"data-uid": "src/pages/ContasReceber.tsx:126:11",
+						"data-uid": "src/pages/ContasReceber.tsx:114:11",
 						"data-prohibitions": "[]",
 						className: "flex flex-row items-center justify-between pb-2",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardTitle, {
-							"data-uid": "src/pages/ContasReceber.tsx:127:13",
+							"data-uid": "src/pages/ContasReceber.tsx:115:13",
 							"data-prohibitions": "[]",
-							className: "text-sm font-medium text-muted-foreground",
+							className: "text-sm font-medium text-emerald-800 dark:text-emerald-400",
 							children: "Total Recebido"
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Wallet, {
-							"data-uid": "src/pages/ContasReceber.tsx:130:13",
+							"data-uid": "src/pages/ContasReceber.tsx:118:13",
 							"data-prohibitions": "[editContent]",
 							className: "h-4 w-4 text-emerald-500"
 						})]
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardContent, {
-						"data-uid": "src/pages/ContasReceber.tsx:132:11",
+						"data-uid": "src/pages/ContasReceber.tsx:120:11",
 						"data-prohibitions": "[editContent]",
 						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-							"data-uid": "src/pages/ContasReceber.tsx:133:13",
+							"data-uid": "src/pages/ContasReceber.tsx:121:13",
 							"data-prohibitions": "[editContent]",
-							className: "text-3xl font-bold text-slate-900",
+							className: "text-3xl font-bold text-emerald-900 dark:text-emerald-300",
 							children: formatCurrency(totalRecebido)
 						})
 					})]
 				})]
 			}),
-			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				"data-uid": "src/pages/ContasReceber.tsx:138:7",
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+				"data-uid": "src/pages/ContasReceber.tsx:128:7",
 				"data-prohibitions": "[]",
 				className: "flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 shrink-0",
-				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
-					"data-uid": "src/pages/ContasReceber.tsx:139:9",
-					"data-prohibitions": "[]",
-					className: "text-2xl font-bold tracking-tight",
-					children: "Contas a Receber"
-				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Tabs, {
-					"data-uid": "src/pages/ContasReceber.tsx:140:9",
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Tabs, {
+					"data-uid": "src/pages/ContasReceber.tsx:129:9",
 					"data-prohibitions": "[]",
 					value: filter,
 					onValueChange: setFilter,
 					children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TabsList, {
-						"data-uid": "src/pages/ContasReceber.tsx:141:11",
+						"data-uid": "src/pages/ContasReceber.tsx:130:11",
 						"data-prohibitions": "[]",
 						children: [
 							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TabsTrigger, {
-								"data-uid": "src/pages/ContasReceber.tsx:142:13",
+								"data-uid": "src/pages/ContasReceber.tsx:131:13",
 								"data-prohibitions": "[]",
 								value: "Todos",
 								children: "Todos"
 							}),
 							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TabsTrigger, {
-								"data-uid": "src/pages/ContasReceber.tsx:143:13",
+								"data-uid": "src/pages/ContasReceber.tsx:132:13",
 								"data-prohibitions": "[]",
 								value: "Pendentes",
 								children: "Pendentes"
 							}),
 							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TabsTrigger, {
-								"data-uid": "src/pages/ContasReceber.tsx:144:13",
+								"data-uid": "src/pages/ContasReceber.tsx:133:13",
 								"data-prohibitions": "[]",
 								value: "Pagos",
 								children: "Pagos"
 							})
 						]
 					})
-				})]
+				})
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Card, {
-				"data-uid": "src/pages/ContasReceber.tsx:149:7",
+				"data-uid": "src/pages/ContasReceber.tsx:138:7",
 				"data-prohibitions": "[editContent]",
-				className: "shadow-sm border-slate-200 flex-1 flex flex-col min-h-0",
+				className: "shadow-sm border-border flex-1 flex flex-col min-h-0 bg-card",
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardContent, {
-					"data-uid": "src/pages/ContasReceber.tsx:150:9",
+					"data-uid": "src/pages/ContasReceber.tsx:139:9",
 					"data-prohibitions": "[editContent]",
 					className: "p-0 flex-1 overflow-auto",
 					children: loading ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-						"data-uid": "src/pages/ContasReceber.tsx:152:13",
+						"data-uid": "src/pages/ContasReceber.tsx:141:13",
 						"data-prohibitions": "[]",
 						className: "flex h-40 items-center justify-center",
 						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(LoaderCircle, {
-							"data-uid": "src/pages/ContasReceber.tsx:153:15",
+							"data-uid": "src/pages/ContasReceber.tsx:142:15",
 							"data-prohibitions": "[editContent]",
 							className: "h-8 w-8 animate-spin text-primary"
 						})
 					}) : /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Table, {
-						"data-uid": "src/pages/ContasReceber.tsx:156:13",
+						"data-uid": "src/pages/ContasReceber.tsx:145:13",
 						"data-prohibitions": "[editContent]",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHeader, {
-							"data-uid": "src/pages/ContasReceber.tsx:157:15",
+							"data-uid": "src/pages/ContasReceber.tsx:146:15",
 							"data-prohibitions": "[]",
-							className: "sticky top-0 bg-white z-10 shadow-sm",
+							className: "sticky top-0 bg-muted/80 z-10 backdrop-blur-md",
 							children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TableRow, {
-								"data-uid": "src/pages/ContasReceber.tsx:158:17",
+								"data-uid": "src/pages/ContasReceber.tsx:147:17",
 								"data-prohibitions": "[]",
 								children: [
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
-										"data-uid": "src/pages/ContasReceber.tsx:159:19",
+										"data-uid": "src/pages/ContasReceber.tsx:148:19",
 										"data-prohibitions": "[]",
 										children: "ID Venda"
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
-										"data-uid": "src/pages/ContasReceber.tsx:160:19",
+										"data-uid": "src/pages/ContasReceber.tsx:149:19",
 										"data-prohibitions": "[]",
 										children: "Data Venda"
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
-										"data-uid": "src/pages/ContasReceber.tsx:161:19",
+										"data-uid": "src/pages/ContasReceber.tsx:150:19",
 										"data-prohibitions": "[]",
 										children: "Vencimento"
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
-										"data-uid": "src/pages/ContasReceber.tsx:162:19",
+										"data-uid": "src/pages/ContasReceber.tsx:151:19",
 										"data-prohibitions": "[]",
 										children: "Valor"
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
-										"data-uid": "src/pages/ContasReceber.tsx:163:19",
+										"data-uid": "src/pages/ContasReceber.tsx:152:19",
 										"data-prohibitions": "[]",
 										children: "Status"
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
-										"data-uid": "src/pages/ContasReceber.tsx:164:19",
+										"data-uid": "src/pages/ContasReceber.tsx:153:19",
 										"data-prohibitions": "[]",
 										className: "text-right",
 										children: "Ação"
@@ -67554,51 +67669,51 @@ function ContasReceber() {
 								]
 							})
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TableBody, {
-							"data-uid": "src/pages/ContasReceber.tsx:167:15",
+							"data-uid": "src/pages/ContasReceber.tsx:156:15",
 							"data-prohibitions": "[editContent]",
 							children: [filteredContas.map((conta) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TableRow, {
-								"data-uid": "src/pages/ContasReceber.tsx:169:19",
+								"data-uid": "src/pages/ContasReceber.tsx:158:19",
 								"data-prohibitions": "[editContent]",
 								children: [
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-										"data-uid": "src/pages/ContasReceber.tsx:170:21",
+										"data-uid": "src/pages/ContasReceber.tsx:159:21",
 										"data-prohibitions": "[editContent]",
 										className: "font-mono text-xs",
 										children: conta.venda_id.split("-")[0]
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-										"data-uid": "src/pages/ContasReceber.tsx:173:21",
+										"data-uid": "src/pages/ContasReceber.tsx:162:21",
 										"data-prohibitions": "[editContent]",
 										children: conta.venda?.data ? new Date(conta.venda.data).toLocaleDateString("pt-BR") : "-"
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-										"data-uid": "src/pages/ContasReceber.tsx:178:21",
+										"data-uid": "src/pages/ContasReceber.tsx:167:21",
 										"data-prohibitions": "[editContent]",
 										children: new Date(conta.data_vencimento).toLocaleDateString("pt-BR")
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-										"data-uid": "src/pages/ContasReceber.tsx:181:21",
+										"data-uid": "src/pages/ContasReceber.tsx:170:21",
 										"data-prohibitions": "[editContent]",
 										className: "font-medium",
 										children: formatCurrency(conta.valor)
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-										"data-uid": "src/pages/ContasReceber.tsx:182:21",
+										"data-uid": "src/pages/ContasReceber.tsx:171:21",
 										"data-prohibitions": "[editContent]",
 										children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Badge, {
-											"data-uid": "src/pages/ContasReceber.tsx:183:23",
+											"data-uid": "src/pages/ContasReceber.tsx:172:23",
 											"data-prohibitions": "[editContent]",
 											variant: conta.status === "pago" ? "default" : "secondary",
-											className: conta.status === "pago" ? "bg-emerald-100 text-emerald-800 hover:bg-emerald-200 border-0" : "bg-orange-100 text-orange-800 hover:bg-orange-200 border-0",
+											className: conta.status === "pago" ? "bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-300 border-0" : "bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-300 border-0",
 											children: conta.status === "pago" ? "Pago" : "Pendente"
 										})
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-										"data-uid": "src/pages/ContasReceber.tsx:194:21",
+										"data-uid": "src/pages/ContasReceber.tsx:183:21",
 										"data-prohibitions": "[editContent]",
 										className: "text-right",
 										children: conta.status === "pendente" && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
-											"data-uid": "src/pages/ContasReceber.tsx:196:25",
+											"data-uid": "src/pages/ContasReceber.tsx:185:25",
 											"data-prohibitions": "[]",
 											size: "sm",
 											variant: "outline",
@@ -67611,10 +67726,10 @@ function ContasReceber() {
 									})
 								]
 							}, conta.id)), filteredContas.length === 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableRow, {
-								"data-uid": "src/pages/ContasReceber.tsx:211:19",
+								"data-uid": "src/pages/ContasReceber.tsx:200:19",
 								"data-prohibitions": "[]",
 								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-									"data-uid": "src/pages/ContasReceber.tsx:212:21",
+									"data-uid": "src/pages/ContasReceber.tsx:201:21",
 									"data-prohibitions": "[]",
 									colSpan: 6,
 									className: "text-center py-8 text-muted-foreground",
@@ -67626,40 +67741,40 @@ function ContasReceber() {
 				})
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Dialog, {
-				"data-uid": "src/pages/ContasReceber.tsx:223:7",
+				"data-uid": "src/pages/ContasReceber.tsx:212:7",
 				"data-prohibitions": "[editContent]",
 				open: !!payingConta,
 				onOpenChange: (open) => !open && setPayingConta(null),
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogContent, {
-					"data-uid": "src/pages/ContasReceber.tsx:224:9",
+					"data-uid": "src/pages/ContasReceber.tsx:213:9",
 					"data-prohibitions": "[editContent]",
 					className: "sm:max-w-[425px]",
 					children: [
 						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogHeader, {
-							"data-uid": "src/pages/ContasReceber.tsx:225:11",
+							"data-uid": "src/pages/ContasReceber.tsx:214:11",
 							"data-prohibitions": "[]",
 							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogTitle, {
-								"data-uid": "src/pages/ContasReceber.tsx:226:13",
+								"data-uid": "src/pages/ContasReceber.tsx:215:13",
 								"data-prohibitions": "[]",
 								children: "Registrar Pagamento"
 							})
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-							"data-uid": "src/pages/ContasReceber.tsx:228:11",
+							"data-uid": "src/pages/ContasReceber.tsx:217:11",
 							"data-prohibitions": "[]",
 							className: "grid gap-4 py-4",
 							children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								"data-uid": "src/pages/ContasReceber.tsx:229:13",
+								"data-uid": "src/pages/ContasReceber.tsx:218:13",
 								"data-prohibitions": "[]",
 								className: "grid grid-cols-4 items-center gap-4",
 								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$1, {
-									"data-uid": "src/pages/ContasReceber.tsx:230:15",
+									"data-uid": "src/pages/ContasReceber.tsx:219:15",
 									"data-prohibitions": "[]",
 									htmlFor: "data",
 									className: "text-right",
 									children: "Data"
 								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
-									"data-uid": "src/pages/ContasReceber.tsx:233:15",
+									"data-uid": "src/pages/ContasReceber.tsx:222:15",
 									"data-prohibitions": "[editContent]",
 									id: "data",
 									type: "date",
@@ -67670,25 +67785,25 @@ function ContasReceber() {
 							})
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogFooter, {
-							"data-uid": "src/pages/ContasReceber.tsx:242:11",
+							"data-uid": "src/pages/ContasReceber.tsx:231:11",
 							"data-prohibitions": "[editContent]",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
-								"data-uid": "src/pages/ContasReceber.tsx:243:13",
+								"data-uid": "src/pages/ContasReceber.tsx:232:13",
 								"data-prohibitions": "[]",
 								variant: "outline",
 								onClick: () => setPayingConta(null),
 								disabled: submitting,
 								children: "Cancelar"
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button$1, {
-								"data-uid": "src/pages/ContasReceber.tsx:246:13",
+								"data-uid": "src/pages/ContasReceber.tsx:235:13",
 								"data-prohibitions": "[editContent]",
 								onClick: handlePay,
 								disabled: submitting,
-								children: [submitting ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(LoaderCircle, {
-									"data-uid": "src/pages/ContasReceber.tsx:247:29",
+								children: [submitting && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(LoaderCircle, {
+									"data-uid": "src/pages/ContasReceber.tsx:236:30",
 									"data-prohibitions": "[editContent]",
 									className: "h-4 w-4 animate-spin mr-2"
-								}) : null, "Confirmar"]
+								}), " Confirmar"]
 							})]
 						})
 					]
@@ -67698,21 +67813,5848 @@ function ContasReceber() {
 	});
 }
 //#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-hook-form@7.71.2_react@19.2.4/node_modules/react-hook-form/dist/index.esm.mjs
+var isCheckBoxInput = (element) => element.type === "checkbox";
+var isDateObject = (value) => value instanceof Date;
+var isNullOrUndefined = (value) => value == null;
+var isObjectType = (value) => typeof value === "object";
+var isObject$1 = (value) => !isNullOrUndefined(value) && !Array.isArray(value) && isObjectType(value) && !isDateObject(value);
+var getEventValue = (event) => isObject$1(event) && event.target ? isCheckBoxInput(event.target) ? event.target.checked : event.target.value : event;
+var getNodeParentName = (name) => name.substring(0, name.search(/\.\d+(\.|$)/)) || name;
+var isNameInFieldArray = (names, name) => names.has(getNodeParentName(name));
+var isPlainObject$1 = (tempObject) => {
+	const prototypeCopy = tempObject.constructor && tempObject.constructor.prototype;
+	return isObject$1(prototypeCopy) && prototypeCopy.hasOwnProperty("isPrototypeOf");
+};
+var isWeb = typeof window !== "undefined" && typeof window.HTMLElement !== "undefined" && typeof document !== "undefined";
+function cloneObject(data) {
+	if (data instanceof Date) return new Date(data);
+	const isFileListInstance = typeof FileList !== "undefined" && data instanceof FileList;
+	if (isWeb && (data instanceof Blob || isFileListInstance)) return data;
+	const isArray = Array.isArray(data);
+	if (!isArray && !(isObject$1(data) && isPlainObject$1(data))) return data;
+	const copy = isArray ? [] : Object.create(Object.getPrototypeOf(data));
+	for (const key in data) if (Object.prototype.hasOwnProperty.call(data, key)) copy[key] = cloneObject(data[key]);
+	return copy;
+}
+var isKey = (value) => /^\w*$/.test(value);
+var isUndefined = (val) => val === void 0;
+var compact = (value) => Array.isArray(value) ? value.filter(Boolean) : [];
+var stringToPath = (input) => compact(input.replace(/["|']|\]/g, "").split(/\.|\[/));
+var get = (object, path, defaultValue) => {
+	if (!path || !isObject$1(object)) return defaultValue;
+	const result = (isKey(path) ? [path] : stringToPath(path)).reduce((result, key) => isNullOrUndefined(result) ? result : result[key], object);
+	return isUndefined(result) || result === object ? isUndefined(object[path]) ? defaultValue : object[path] : result;
+};
+var isBoolean = (value) => typeof value === "boolean";
+var isFunction = (value) => typeof value === "function";
+var set = (object, path, value) => {
+	let index = -1;
+	const tempPath = isKey(path) ? [path] : stringToPath(path);
+	const length = tempPath.length;
+	const lastIndex = length - 1;
+	while (++index < length) {
+		const key = tempPath[index];
+		let newValue = value;
+		if (index !== lastIndex) {
+			const objValue = object[key];
+			newValue = isObject$1(objValue) || Array.isArray(objValue) ? objValue : !isNaN(+tempPath[index + 1]) ? [] : {};
+		}
+		if (key === "__proto__" || key === "constructor" || key === "prototype") return;
+		object[key] = newValue;
+		object = object[key];
+	}
+};
+var EVENTS = {
+	BLUR: "blur",
+	FOCUS_OUT: "focusout",
+	CHANGE: "change"
+};
+var VALIDATION_MODE = {
+	onBlur: "onBlur",
+	onChange: "onChange",
+	onSubmit: "onSubmit",
+	onTouched: "onTouched",
+	all: "all"
+};
+var INPUT_VALIDATION_RULES = {
+	max: "max",
+	min: "min",
+	maxLength: "maxLength",
+	minLength: "minLength",
+	pattern: "pattern",
+	required: "required",
+	validate: "validate"
+};
+/**
+* Separate context for `control` to prevent unnecessary rerenders.
+* Internal hooks that only need control use this instead of full form context.
+*/
+var HookFormControlContext = import_react.createContext(null);
+HookFormControlContext.displayName = "HookFormControlContext";
+/**
+* @internal Internal hook to access only control from context.
+*/
+var useFormControlContext = () => import_react.useContext(HookFormControlContext);
+var getProxyFormState = (formState, control, localProxyFormState, isRoot = true) => {
+	const result = { defaultValues: control._defaultValues };
+	for (const key in formState) Object.defineProperty(result, key, { get: () => {
+		const _key = key;
+		if (control._proxyFormState[_key] !== VALIDATION_MODE.all) control._proxyFormState[_key] = !isRoot || VALIDATION_MODE.all;
+		localProxyFormState && (localProxyFormState[_key] = true);
+		return formState[_key];
+	} });
+	return result;
+};
+var useIsomorphicLayoutEffect = typeof window !== "undefined" ? import_react.useLayoutEffect : import_react.useEffect;
+/**
+* This custom hook allows you to subscribe to each form state, and isolate the re-render at the custom hook level. It has its scope in terms of form state subscription, so it would not affect other useFormState and useForm. Using this hook can reduce the re-render impact on large and complex form application.
+*
+* @remarks
+* [API](https://react-hook-form.com/docs/useformstate) • [Demo](https://codesandbox.io/s/useformstate-75xly)
+*
+* @param props - include options on specify fields to subscribe. {@link UseFormStateReturn}
+*
+* @example
+* ```tsx
+* function App() {
+*   const { register, handleSubmit, control } = useForm({
+*     defaultValues: {
+*     firstName: "firstName"
+*   }});
+*   const { dirtyFields } = useFormState({
+*     control
+*   });
+*   const onSubmit = (data) => console.log(data);
+*
+*   return (
+*     <form onSubmit={handleSubmit(onSubmit)}>
+*       <input {...register("firstName")} placeholder="First Name" />
+*       {dirtyFields.firstName && <p>Field is dirty.</p>}
+*       <input type="submit" />
+*     </form>
+*   );
+* }
+* ```
+*/
+function useFormState(props) {
+	const formControl = useFormControlContext();
+	const { control = formControl, disabled, name, exact } = props || {};
+	const [formState, updateFormState] = import_react.useState(control._formState);
+	const _localProxyFormState = import_react.useRef({
+		isDirty: false,
+		isLoading: false,
+		dirtyFields: false,
+		touchedFields: false,
+		validatingFields: false,
+		isValidating: false,
+		isValid: false,
+		errors: false
+	});
+	useIsomorphicLayoutEffect(() => control._subscribe({
+		name,
+		formState: _localProxyFormState.current,
+		exact,
+		callback: (formState) => {
+			!disabled && updateFormState({
+				...control._formState,
+				...formState
+			});
+		}
+	}), [
+		name,
+		disabled,
+		exact
+	]);
+	import_react.useEffect(() => {
+		_localProxyFormState.current.isValid && control._setValid(true);
+	}, [control]);
+	return import_react.useMemo(() => getProxyFormState(formState, control, _localProxyFormState.current, false), [formState, control]);
+}
+var isString = (value) => typeof value === "string";
+var generateWatchOutput = (names, _names, formValues, isGlobal, defaultValue) => {
+	if (isString(names)) {
+		isGlobal && _names.watch.add(names);
+		return get(formValues, names, defaultValue);
+	}
+	if (Array.isArray(names)) return names.map((fieldName) => (isGlobal && _names.watch.add(fieldName), get(formValues, fieldName)));
+	isGlobal && (_names.watchAll = true);
+	return formValues;
+};
+var isPrimitive = (value) => isNullOrUndefined(value) || !isObjectType(value);
+function deepEqual(object1, object2, _internal_visited = /* @__PURE__ */ new WeakSet()) {
+	if (isPrimitive(object1) || isPrimitive(object2)) return Object.is(object1, object2);
+	if (isDateObject(object1) && isDateObject(object2)) return Object.is(object1.getTime(), object2.getTime());
+	const keys1 = Object.keys(object1);
+	const keys2 = Object.keys(object2);
+	if (keys1.length !== keys2.length) return false;
+	if (_internal_visited.has(object1) || _internal_visited.has(object2)) return true;
+	_internal_visited.add(object1);
+	_internal_visited.add(object2);
+	for (const key of keys1) {
+		const val1 = object1[key];
+		if (!keys2.includes(key)) return false;
+		if (key !== "ref") {
+			const val2 = object2[key];
+			if (isDateObject(val1) && isDateObject(val2) || isObject$1(val1) && isObject$1(val2) || Array.isArray(val1) && Array.isArray(val2) ? !deepEqual(val1, val2, _internal_visited) : !Object.is(val1, val2)) return false;
+		}
+	}
+	return true;
+}
+/**
+* Custom hook to subscribe to field change and isolate re-rendering at the component level.
+*
+* @remarks
+*
+* [API](https://react-hook-form.com/docs/usewatch) • [Demo](https://codesandbox.io/s/react-hook-form-v7-ts-usewatch-h9i5e)
+*
+* @example
+* ```tsx
+* const { control } = useForm();
+* const values = useWatch({
+*   name: "fieldName"
+*   control,
+* })
+* ```
+*/
+function useWatch(props) {
+	const formControl = useFormControlContext();
+	const { control = formControl, name, defaultValue, disabled, exact, compute } = props || {};
+	const _defaultValue = import_react.useRef(defaultValue);
+	const _compute = import_react.useRef(compute);
+	const _computeFormValues = import_react.useRef(void 0);
+	const _prevControl = import_react.useRef(control);
+	const _prevName = import_react.useRef(name);
+	_compute.current = compute;
+	const [value, updateValue] = import_react.useState(() => {
+		const defaultValue = control._getWatch(name, _defaultValue.current);
+		return _compute.current ? _compute.current(defaultValue) : defaultValue;
+	});
+	const getCurrentOutput = import_react.useCallback((values) => {
+		const formValues = generateWatchOutput(name, control._names, values || control._formValues, false, _defaultValue.current);
+		return _compute.current ? _compute.current(formValues) : formValues;
+	}, [
+		control._formValues,
+		control._names,
+		name
+	]);
+	const refreshValue = import_react.useCallback((values) => {
+		if (!disabled) {
+			const formValues = generateWatchOutput(name, control._names, values || control._formValues, false, _defaultValue.current);
+			if (_compute.current) {
+				const computedFormValues = _compute.current(formValues);
+				if (!deepEqual(computedFormValues, _computeFormValues.current)) {
+					updateValue(computedFormValues);
+					_computeFormValues.current = computedFormValues;
+				}
+			} else updateValue(formValues);
+		}
+	}, [
+		control._formValues,
+		control._names,
+		disabled,
+		name
+	]);
+	useIsomorphicLayoutEffect(() => {
+		if (_prevControl.current !== control || !deepEqual(_prevName.current, name)) {
+			_prevControl.current = control;
+			_prevName.current = name;
+			refreshValue();
+		}
+		return control._subscribe({
+			name,
+			formState: { values: true },
+			exact,
+			callback: (formState) => {
+				refreshValue(formState.values);
+			}
+		});
+	}, [
+		control,
+		exact,
+		name,
+		refreshValue
+	]);
+	import_react.useEffect(() => control._removeUnmounted());
+	const controlChanged = _prevControl.current !== control;
+	const prevName = _prevName.current;
+	const computedOutput = import_react.useMemo(() => {
+		if (disabled) return null;
+		const nameChanged = !controlChanged && !deepEqual(prevName, name);
+		return controlChanged || nameChanged ? getCurrentOutput() : null;
+	}, [
+		disabled,
+		controlChanged,
+		name,
+		prevName,
+		getCurrentOutput
+	]);
+	return computedOutput !== null ? computedOutput : value;
+}
+/**
+* Custom hook to work with controlled component, this function provide you with both form and field level state. Re-render is isolated at the hook level.
+*
+* @remarks
+* [API](https://react-hook-form.com/docs/usecontroller) • [Demo](https://codesandbox.io/s/usecontroller-0o8px)
+*
+* @param props - the path name to the form field value, and validation rules.
+*
+* @returns field properties, field and form state. {@link UseControllerReturn}
+*
+* @example
+* ```tsx
+* function Input(props) {
+*   const { field, fieldState, formState } = useController(props);
+*   return (
+*     <div>
+*       <input {...field} placeholder={props.name} />
+*       <p>{fieldState.isTouched && "Touched"}</p>
+*       <p>{formState.isSubmitted ? "submitted" : ""}</p>
+*     </div>
+*   );
+* }
+* ```
+*/
+function useController(props) {
+	const formControl = useFormControlContext();
+	const { name, disabled, control = formControl, shouldUnregister, defaultValue, exact = true } = props;
+	const isArrayField = isNameInFieldArray(control._names.array, name);
+	const value = useWatch({
+		control,
+		name,
+		defaultValue: import_react.useMemo(() => get(control._formValues, name, get(control._defaultValues, name, defaultValue)), [
+			control,
+			name,
+			defaultValue
+		]),
+		exact
+	});
+	const formState = useFormState({
+		control,
+		name,
+		exact
+	});
+	const _props = import_react.useRef(props);
+	const _previousNameRef = import_react.useRef(void 0);
+	const _registerProps = import_react.useRef(control.register(name, {
+		...props.rules,
+		value,
+		...isBoolean(props.disabled) ? { disabled: props.disabled } : {}
+	}));
+	_props.current = props;
+	const fieldState = import_react.useMemo(() => Object.defineProperties({}, {
+		invalid: {
+			enumerable: true,
+			get: () => !!get(formState.errors, name)
+		},
+		isDirty: {
+			enumerable: true,
+			get: () => !!get(formState.dirtyFields, name)
+		},
+		isTouched: {
+			enumerable: true,
+			get: () => !!get(formState.touchedFields, name)
+		},
+		isValidating: {
+			enumerable: true,
+			get: () => !!get(formState.validatingFields, name)
+		},
+		error: {
+			enumerable: true,
+			get: () => get(formState.errors, name)
+		}
+	}), [formState, name]);
+	const onChange = import_react.useCallback((event) => _registerProps.current.onChange({
+		target: {
+			value: getEventValue(event),
+			name
+		},
+		type: EVENTS.CHANGE
+	}), [name]);
+	const onBlur = import_react.useCallback(() => _registerProps.current.onBlur({
+		target: {
+			value: get(control._formValues, name),
+			name
+		},
+		type: EVENTS.BLUR
+	}), [name, control._formValues]);
+	const ref = import_react.useCallback((elm) => {
+		const field = get(control._fields, name);
+		if (field && field._f && elm) field._f.ref = {
+			focus: () => isFunction(elm.focus) && elm.focus(),
+			select: () => isFunction(elm.select) && elm.select(),
+			setCustomValidity: (message) => isFunction(elm.setCustomValidity) && elm.setCustomValidity(message),
+			reportValidity: () => isFunction(elm.reportValidity) && elm.reportValidity()
+		};
+	}, [control._fields, name]);
+	const field = import_react.useMemo(() => ({
+		name,
+		value,
+		...isBoolean(disabled) || formState.disabled ? { disabled: formState.disabled || disabled } : {},
+		onChange,
+		onBlur,
+		ref
+	}), [
+		name,
+		disabled,
+		formState.disabled,
+		onChange,
+		onBlur,
+		ref,
+		value
+	]);
+	import_react.useEffect(() => {
+		const _shouldUnregisterField = control._options.shouldUnregister || shouldUnregister;
+		const previousName = _previousNameRef.current;
+		if (previousName && previousName !== name && !isArrayField) control.unregister(previousName);
+		control.register(name, {
+			..._props.current.rules,
+			...isBoolean(_props.current.disabled) ? { disabled: _props.current.disabled } : {}
+		});
+		const updateMounted = (name, value) => {
+			const field = get(control._fields, name);
+			if (field && field._f) field._f.mount = value;
+		};
+		updateMounted(name, true);
+		if (_shouldUnregisterField) {
+			const value = cloneObject(get(control._options.defaultValues, name, _props.current.defaultValue));
+			set(control._defaultValues, name, value);
+			if (isUndefined(get(control._formValues, name))) set(control._formValues, name, value);
+		}
+		!isArrayField && control.register(name);
+		_previousNameRef.current = name;
+		return () => {
+			(isArrayField ? _shouldUnregisterField && !control._state.action : _shouldUnregisterField) ? control.unregister(name) : updateMounted(name, false);
+		};
+	}, [
+		name,
+		control,
+		isArrayField,
+		shouldUnregister
+	]);
+	import_react.useEffect(() => {
+		control._setDisabledField({
+			disabled,
+			name
+		});
+	}, [
+		disabled,
+		name,
+		control
+	]);
+	return import_react.useMemo(() => ({
+		field,
+		formState,
+		fieldState
+	}), [
+		field,
+		formState,
+		fieldState
+	]);
+}
+/**
+* Component based on `useController` hook to work with controlled component.
+*
+* @remarks
+* [API](https://react-hook-form.com/docs/usecontroller/controller) • [Demo](https://codesandbox.io/s/react-hook-form-v6-controller-ts-jwyzw) • [Video](https://www.youtube.com/watch?v=N2UNk_UCVyA)
+*
+* @param props - the path name to the form field value, and validation rules.
+*
+* @returns provide field handler functions, field and form state.
+*
+* @example
+* ```tsx
+* function App() {
+*   const { control } = useForm<FormValues>({
+*     defaultValues: {
+*       test: ""
+*     }
+*   });
+*
+*   return (
+*     <form>
+*       <Controller
+*         control={control}
+*         name="test"
+*         render={({ field: { onChange, onBlur, value, ref }, formState, fieldState }) => (
+*           <>
+*             <input
+*               onChange={onChange} // send value to hook form
+*               onBlur={onBlur} // notify when input is touched
+*               value={value} // return updated value
+*               ref={ref} // set ref for focus management
+*             />
+*             <p>{formState.isSubmitted ? "submitted" : ""}</p>
+*             <p>{fieldState.isTouched ? "touched" : ""}</p>
+*           </>
+*         )}
+*       />
+*     </form>
+*   );
+* }
+* ```
+*/
+var Controller = (props) => props.render(useController(props));
+var HookFormContext = import_react.createContext(null);
+HookFormContext.displayName = "HookFormContext";
+/**
+* This custom hook allows you to access the form context. useFormContext is intended to be used in deeply nested structures, where it would become inconvenient to pass the context as a prop. To be used with {@link FormProvider}.
+*
+* @remarks
+* [API](https://react-hook-form.com/docs/useformcontext) • [Demo](https://codesandbox.io/s/react-hook-form-v7-form-context-ytudi)
+*
+* @returns return all useForm methods
+*
+* @example
+* ```tsx
+* function App() {
+*   const methods = useForm();
+*   const onSubmit = data => console.log(data);
+*
+*   return (
+*     <FormProvider {...methods} >
+*       <form onSubmit={methods.handleSubmit(onSubmit)}>
+*         <NestedInput />
+*         <input type="submit" />
+*       </form>
+*     </FormProvider>
+*   );
+* }
+*
+*  function NestedInput() {
+*   const { register } = useFormContext(); // retrieve all hook methods
+*   return <input {...register("test")} />;
+* }
+* ```
+*/
+var useFormContext = () => import_react.useContext(HookFormContext);
+/**
+* A provider component that propagates the `useForm` methods to all children components via [React Context](https://react.dev/reference/react/useContext) API. To be used with {@link useFormContext}.
+*
+* @remarks
+* [API](https://react-hook-form.com/docs/useformcontext) • [Demo](https://codesandbox.io/s/react-hook-form-v7-form-context-ytudi)
+*
+* @param props - all useForm methods
+*
+* @example
+* ```tsx
+* function App() {
+*   const methods = useForm();
+*   const onSubmit = data => console.log(data);
+*
+*   return (
+*     <FormProvider {...methods} >
+*       <form onSubmit={methods.handleSubmit(onSubmit)}>
+*         <NestedInput />
+*         <input type="submit" />
+*       </form>
+*     </FormProvider>
+*   );
+* }
+*
+*  function NestedInput() {
+*   const { register } = useFormContext(); // retrieve all hook methods
+*   return <input {...register("test")} />;
+* }
+* ```
+*/
+var FormProvider = (props) => {
+	const { children, watch, getValues, getFieldState, setError, clearErrors, setValue, trigger, formState, resetField, reset, handleSubmit, unregister, control, register, setFocus, subscribe } = props;
+	return import_react.createElement(HookFormContext.Provider, { value: import_react.useMemo(() => ({
+		watch,
+		getValues,
+		getFieldState,
+		setError,
+		clearErrors,
+		setValue,
+		trigger,
+		formState,
+		resetField,
+		reset,
+		handleSubmit,
+		unregister,
+		control,
+		register,
+		setFocus,
+		subscribe
+	}), [
+		clearErrors,
+		control,
+		formState,
+		getFieldState,
+		getValues,
+		handleSubmit,
+		register,
+		reset,
+		resetField,
+		setError,
+		setFocus,
+		setValue,
+		subscribe,
+		trigger,
+		unregister,
+		watch
+	]) }, import_react.createElement(HookFormControlContext.Provider, { value: control }, children));
+};
+var appendErrors = (name, validateAllFieldCriteria, errors, type, message) => validateAllFieldCriteria ? {
+	...errors[name],
+	types: {
+		...errors[name] && errors[name].types ? errors[name].types : {},
+		[type]: message || true
+	}
+} : {};
+var convertToArrayPayload = (value) => Array.isArray(value) ? value : [value];
+var createSubject = () => {
+	let _observers = [];
+	const next = (value) => {
+		for (const observer of _observers) observer.next && observer.next(value);
+	};
+	const subscribe = (observer) => {
+		_observers.push(observer);
+		return { unsubscribe: () => {
+			_observers = _observers.filter((o) => o !== observer);
+		} };
+	};
+	const unsubscribe = () => {
+		_observers = [];
+	};
+	return {
+		get observers() {
+			return _observers;
+		},
+		next,
+		subscribe,
+		unsubscribe
+	};
+};
+function extractFormValues(fieldsState, formValues) {
+	const values = {};
+	for (const key in fieldsState) if (fieldsState.hasOwnProperty(key)) {
+		const fieldState = fieldsState[key];
+		const fieldValue = formValues[key];
+		if (fieldState && isObject$1(fieldState) && fieldValue) {
+			const nestedFieldsState = extractFormValues(fieldState, fieldValue);
+			if (isObject$1(nestedFieldsState)) values[key] = nestedFieldsState;
+		} else if (fieldsState[key]) values[key] = fieldValue;
+	}
+	return values;
+}
+var isEmptyObject = (value) => isObject$1(value) && !Object.keys(value).length;
+var isFileInput = (element) => element.type === "file";
+var isHTMLElement = (value) => {
+	if (!isWeb) return false;
+	const owner = value ? value.ownerDocument : 0;
+	return value instanceof (owner && owner.defaultView ? owner.defaultView.HTMLElement : HTMLElement);
+};
+var isMultipleSelect = (element) => element.type === `select-multiple`;
+var isRadioInput = (element) => element.type === "radio";
+var isRadioOrCheckbox = (ref) => isRadioInput(ref) || isCheckBoxInput(ref);
+var live = (ref) => isHTMLElement(ref) && ref.isConnected;
+function baseGet(object, updatePath) {
+	const length = updatePath.slice(0, -1).length;
+	let index = 0;
+	while (index < length) object = isUndefined(object) ? index++ : object[updatePath[index++]];
+	return object;
+}
+function isEmptyArray(obj) {
+	for (const key in obj) if (obj.hasOwnProperty(key) && !isUndefined(obj[key])) return false;
+	return true;
+}
+function unset(object, path) {
+	const paths = Array.isArray(path) ? path : isKey(path) ? [path] : stringToPath(path);
+	const childObject = paths.length === 1 ? object : baseGet(object, paths);
+	const index = paths.length - 1;
+	const key = paths[index];
+	if (childObject) delete childObject[key];
+	if (index !== 0 && (isObject$1(childObject) && isEmptyObject(childObject) || Array.isArray(childObject) && isEmptyArray(childObject))) unset(object, paths.slice(0, -1));
+	return object;
+}
+var objectHasFunction = (data) => {
+	for (const key in data) if (isFunction(data[key])) return true;
+	return false;
+};
+function isTraversable(value) {
+	return Array.isArray(value) || isObject$1(value) && !objectHasFunction(value);
+}
+function markFieldsDirty(data, fields = {}) {
+	for (const key in data) {
+		const value = data[key];
+		if (isTraversable(value)) {
+			fields[key] = Array.isArray(value) ? [] : {};
+			markFieldsDirty(value, fields[key]);
+		} else if (!isUndefined(value)) fields[key] = true;
+	}
+	return fields;
+}
+function getDirtyFields(data, formValues, dirtyFieldsFromValues) {
+	if (!dirtyFieldsFromValues) dirtyFieldsFromValues = markFieldsDirty(formValues);
+	for (const key in data) {
+		const value = data[key];
+		if (isTraversable(value)) if (isUndefined(formValues) || isPrimitive(dirtyFieldsFromValues[key])) dirtyFieldsFromValues[key] = markFieldsDirty(value, Array.isArray(value) ? [] : {});
+		else getDirtyFields(value, isNullOrUndefined(formValues) ? {} : formValues[key], dirtyFieldsFromValues[key]);
+		else {
+			const formValue = formValues[key];
+			dirtyFieldsFromValues[key] = !deepEqual(value, formValue);
+		}
+	}
+	return dirtyFieldsFromValues;
+}
+var defaultResult = {
+	value: false,
+	isValid: false
+};
+var validResult = {
+	value: true,
+	isValid: true
+};
+var getCheckboxValue = (options) => {
+	if (Array.isArray(options)) {
+		if (options.length > 1) {
+			const values = options.filter((option) => option && option.checked && !option.disabled).map((option) => option.value);
+			return {
+				value: values,
+				isValid: !!values.length
+			};
+		}
+		return options[0].checked && !options[0].disabled ? options[0].attributes && !isUndefined(options[0].attributes.value) ? isUndefined(options[0].value) || options[0].value === "" ? validResult : {
+			value: options[0].value,
+			isValid: true
+		} : validResult : defaultResult;
+	}
+	return defaultResult;
+};
+var getFieldValueAs = (value, { valueAsNumber, valueAsDate, setValueAs }) => isUndefined(value) ? value : valueAsNumber ? value === "" ? NaN : value ? +value : value : valueAsDate && isString(value) ? new Date(value) : setValueAs ? setValueAs(value) : value;
+var defaultReturn = {
+	isValid: false,
+	value: null
+};
+var getRadioValue = (options) => Array.isArray(options) ? options.reduce((previous, option) => option && option.checked && !option.disabled ? {
+	isValid: true,
+	value: option.value
+} : previous, defaultReturn) : defaultReturn;
+function getFieldValue(_f) {
+	const ref = _f.ref;
+	if (isFileInput(ref)) return ref.files;
+	if (isRadioInput(ref)) return getRadioValue(_f.refs).value;
+	if (isMultipleSelect(ref)) return [...ref.selectedOptions].map(({ value }) => value);
+	if (isCheckBoxInput(ref)) return getCheckboxValue(_f.refs).value;
+	return getFieldValueAs(isUndefined(ref.value) ? _f.ref.value : ref.value, _f);
+}
+var getResolverOptions = (fieldsNames, _fields, criteriaMode, shouldUseNativeValidation) => {
+	const fields = {};
+	for (const name of fieldsNames) {
+		const field = get(_fields, name);
+		field && set(fields, name, field._f);
+	}
+	return {
+		criteriaMode,
+		names: [...fieldsNames],
+		fields,
+		shouldUseNativeValidation
+	};
+};
+var isRegex = (value) => value instanceof RegExp;
+var getRuleValue = (rule) => isUndefined(rule) ? rule : isRegex(rule) ? rule.source : isObject$1(rule) ? isRegex(rule.value) ? rule.value.source : rule.value : rule;
+var getValidationModes = (mode) => ({
+	isOnSubmit: !mode || mode === VALIDATION_MODE.onSubmit,
+	isOnBlur: mode === VALIDATION_MODE.onBlur,
+	isOnChange: mode === VALIDATION_MODE.onChange,
+	isOnAll: mode === VALIDATION_MODE.all,
+	isOnTouch: mode === VALIDATION_MODE.onTouched
+});
+var ASYNC_FUNCTION = "AsyncFunction";
+var hasPromiseValidation = (fieldReference) => !!fieldReference && !!fieldReference.validate && !!(isFunction(fieldReference.validate) && fieldReference.validate.constructor.name === ASYNC_FUNCTION || isObject$1(fieldReference.validate) && Object.values(fieldReference.validate).find((validateFunction) => validateFunction.constructor.name === ASYNC_FUNCTION));
+var hasValidation = (options) => options.mount && (options.required || options.min || options.max || options.maxLength || options.minLength || options.pattern || options.validate);
+var isWatched = (name, _names, isBlurEvent) => !isBlurEvent && (_names.watchAll || _names.watch.has(name) || [..._names.watch].some((watchName) => name.startsWith(watchName) && /^\.\w+/.test(name.slice(watchName.length))));
+var iterateFieldsByAction = (fields, action, fieldsNames, abortEarly) => {
+	for (const key of fieldsNames || Object.keys(fields)) {
+		const field = get(fields, key);
+		if (field) {
+			const { _f, ...currentField } = field;
+			if (_f) {
+				if (_f.refs && _f.refs[0] && action(_f.refs[0], key) && !abortEarly) return true;
+				else if (_f.ref && action(_f.ref, _f.name) && !abortEarly) return true;
+				else if (iterateFieldsByAction(currentField, action)) break;
+			} else if (isObject$1(currentField)) {
+				if (iterateFieldsByAction(currentField, action)) break;
+			}
+		}
+	}
+};
+function schemaErrorLookup(errors, _fields, name) {
+	const error = get(errors, name);
+	if (error || isKey(name)) return {
+		error,
+		name
+	};
+	const names = name.split(".");
+	while (names.length) {
+		const fieldName = names.join(".");
+		const field = get(_fields, fieldName);
+		const foundError = get(errors, fieldName);
+		if (field && !Array.isArray(field) && name !== fieldName) return { name };
+		if (foundError && foundError.type) return {
+			name: fieldName,
+			error: foundError
+		};
+		if (foundError && foundError.root && foundError.root.type) return {
+			name: `${fieldName}.root`,
+			error: foundError.root
+		};
+		names.pop();
+	}
+	return { name };
+}
+var shouldRenderFormState = (formStateData, _proxyFormState, updateFormState, isRoot) => {
+	updateFormState(formStateData);
+	const { name, ...formState } = formStateData;
+	return isEmptyObject(formState) || Object.keys(formState).length >= Object.keys(_proxyFormState).length || Object.keys(formState).find((key) => _proxyFormState[key] === (!isRoot || VALIDATION_MODE.all));
+};
+var shouldSubscribeByName = (name, signalName, exact) => !name || !signalName || name === signalName || convertToArrayPayload(name).some((currentName) => currentName && (exact ? currentName === signalName : currentName.startsWith(signalName) || signalName.startsWith(currentName)));
+var skipValidation = (isBlurEvent, isTouched, isSubmitted, reValidateMode, mode) => {
+	if (mode.isOnAll) return false;
+	else if (!isSubmitted && mode.isOnTouch) return !(isTouched || isBlurEvent);
+	else if (isSubmitted ? reValidateMode.isOnBlur : mode.isOnBlur) return !isBlurEvent;
+	else if (isSubmitted ? reValidateMode.isOnChange : mode.isOnChange) return isBlurEvent;
+	return true;
+};
+var unsetEmptyArray = (ref, name) => !compact(get(ref, name)).length && unset(ref, name);
+var updateFieldArrayRootError = (errors, error, name) => {
+	const fieldArrayErrors = convertToArrayPayload(get(errors, name));
+	set(fieldArrayErrors, "root", error[name]);
+	set(errors, name, fieldArrayErrors);
+	return errors;
+};
+function getValidateError(result, ref, type = "validate") {
+	if (isString(result) || Array.isArray(result) && result.every(isString) || isBoolean(result) && !result) return {
+		type,
+		message: isString(result) ? result : "",
+		ref
+	};
+}
+var getValueAndMessage = (validationData) => isObject$1(validationData) && !isRegex(validationData) ? validationData : {
+	value: validationData,
+	message: ""
+};
+var validateField = async (field, disabledFieldNames, formValues, validateAllFieldCriteria, shouldUseNativeValidation, isFieldArray) => {
+	const { ref, refs, required, maxLength, minLength, min, max, pattern, validate, name, valueAsNumber, mount } = field._f;
+	const inputValue = get(formValues, name);
+	if (!mount || disabledFieldNames.has(name)) return {};
+	const inputRef = refs ? refs[0] : ref;
+	const setCustomValidity = (message) => {
+		if (shouldUseNativeValidation && inputRef.reportValidity) {
+			inputRef.setCustomValidity(isBoolean(message) ? "" : message || "");
+			inputRef.reportValidity();
+		}
+	};
+	const error = {};
+	const isRadio = isRadioInput(ref);
+	const isCheckBox = isCheckBoxInput(ref);
+	const isRadioOrCheckbox = isRadio || isCheckBox;
+	const isEmpty = (valueAsNumber || isFileInput(ref)) && isUndefined(ref.value) && isUndefined(inputValue) || isHTMLElement(ref) && ref.value === "" || inputValue === "" || Array.isArray(inputValue) && !inputValue.length;
+	const appendErrorsCurry = appendErrors.bind(null, name, validateAllFieldCriteria, error);
+	const getMinMaxMessage = (exceedMax, maxLengthMessage, minLengthMessage, maxType = INPUT_VALIDATION_RULES.maxLength, minType = INPUT_VALIDATION_RULES.minLength) => {
+		const message = exceedMax ? maxLengthMessage : minLengthMessage;
+		error[name] = {
+			type: exceedMax ? maxType : minType,
+			message,
+			ref,
+			...appendErrorsCurry(exceedMax ? maxType : minType, message)
+		};
+	};
+	if (isFieldArray ? !Array.isArray(inputValue) || !inputValue.length : required && (!isRadioOrCheckbox && (isEmpty || isNullOrUndefined(inputValue)) || isBoolean(inputValue) && !inputValue || isCheckBox && !getCheckboxValue(refs).isValid || isRadio && !getRadioValue(refs).isValid)) {
+		const { value, message } = isString(required) ? {
+			value: !!required,
+			message: required
+		} : getValueAndMessage(required);
+		if (value) {
+			error[name] = {
+				type: INPUT_VALIDATION_RULES.required,
+				message,
+				ref: inputRef,
+				...appendErrorsCurry(INPUT_VALIDATION_RULES.required, message)
+			};
+			if (!validateAllFieldCriteria) {
+				setCustomValidity(message);
+				return error;
+			}
+		}
+	}
+	if (!isEmpty && (!isNullOrUndefined(min) || !isNullOrUndefined(max))) {
+		let exceedMax;
+		let exceedMin;
+		const maxOutput = getValueAndMessage(max);
+		const minOutput = getValueAndMessage(min);
+		if (!isNullOrUndefined(inputValue) && !isNaN(inputValue)) {
+			const valueNumber = ref.valueAsNumber || (inputValue ? +inputValue : inputValue);
+			if (!isNullOrUndefined(maxOutput.value)) exceedMax = valueNumber > maxOutput.value;
+			if (!isNullOrUndefined(minOutput.value)) exceedMin = valueNumber < minOutput.value;
+		} else {
+			const valueDate = ref.valueAsDate || new Date(inputValue);
+			const convertTimeToDate = (time) => /* @__PURE__ */ new Date((/* @__PURE__ */ new Date()).toDateString() + " " + time);
+			const isTime = ref.type == "time";
+			const isWeek = ref.type == "week";
+			if (isString(maxOutput.value) && inputValue) exceedMax = isTime ? convertTimeToDate(inputValue) > convertTimeToDate(maxOutput.value) : isWeek ? inputValue > maxOutput.value : valueDate > new Date(maxOutput.value);
+			if (isString(minOutput.value) && inputValue) exceedMin = isTime ? convertTimeToDate(inputValue) < convertTimeToDate(minOutput.value) : isWeek ? inputValue < minOutput.value : valueDate < new Date(minOutput.value);
+		}
+		if (exceedMax || exceedMin) {
+			getMinMaxMessage(!!exceedMax, maxOutput.message, minOutput.message, INPUT_VALIDATION_RULES.max, INPUT_VALIDATION_RULES.min);
+			if (!validateAllFieldCriteria) {
+				setCustomValidity(error[name].message);
+				return error;
+			}
+		}
+	}
+	if ((maxLength || minLength) && !isEmpty && (isString(inputValue) || isFieldArray && Array.isArray(inputValue))) {
+		const maxLengthOutput = getValueAndMessage(maxLength);
+		const minLengthOutput = getValueAndMessage(minLength);
+		const exceedMax = !isNullOrUndefined(maxLengthOutput.value) && inputValue.length > +maxLengthOutput.value;
+		const exceedMin = !isNullOrUndefined(minLengthOutput.value) && inputValue.length < +minLengthOutput.value;
+		if (exceedMax || exceedMin) {
+			getMinMaxMessage(exceedMax, maxLengthOutput.message, minLengthOutput.message);
+			if (!validateAllFieldCriteria) {
+				setCustomValidity(error[name].message);
+				return error;
+			}
+		}
+	}
+	if (pattern && !isEmpty && isString(inputValue)) {
+		const { value: patternValue, message } = getValueAndMessage(pattern);
+		if (isRegex(patternValue) && !inputValue.match(patternValue)) {
+			error[name] = {
+				type: INPUT_VALIDATION_RULES.pattern,
+				message,
+				ref,
+				...appendErrorsCurry(INPUT_VALIDATION_RULES.pattern, message)
+			};
+			if (!validateAllFieldCriteria) {
+				setCustomValidity(message);
+				return error;
+			}
+		}
+	}
+	if (validate) {
+		if (isFunction(validate)) {
+			const validateError = getValidateError(await validate(inputValue, formValues), inputRef);
+			if (validateError) {
+				error[name] = {
+					...validateError,
+					...appendErrorsCurry(INPUT_VALIDATION_RULES.validate, validateError.message)
+				};
+				if (!validateAllFieldCriteria) {
+					setCustomValidity(validateError.message);
+					return error;
+				}
+			}
+		} else if (isObject$1(validate)) {
+			let validationResult = {};
+			for (const key in validate) {
+				if (!isEmptyObject(validationResult) && !validateAllFieldCriteria) break;
+				const validateError = getValidateError(await validate[key](inputValue, formValues), inputRef, key);
+				if (validateError) {
+					validationResult = {
+						...validateError,
+						...appendErrorsCurry(key, validateError.message)
+					};
+					setCustomValidity(validateError.message);
+					if (validateAllFieldCriteria) error[name] = validationResult;
+				}
+			}
+			if (!isEmptyObject(validationResult)) {
+				error[name] = {
+					ref: inputRef,
+					...validationResult
+				};
+				if (!validateAllFieldCriteria) return error;
+			}
+		}
+	}
+	setCustomValidity(true);
+	return error;
+};
+var defaultOptions$1 = {
+	mode: VALIDATION_MODE.onSubmit,
+	reValidateMode: VALIDATION_MODE.onChange,
+	shouldFocusError: true
+};
+function createFormControl(props = {}) {
+	let _options = {
+		...defaultOptions$1,
+		...props
+	};
+	let _formState = {
+		submitCount: 0,
+		isDirty: false,
+		isReady: false,
+		isLoading: isFunction(_options.defaultValues),
+		isValidating: false,
+		isSubmitted: false,
+		isSubmitting: false,
+		isSubmitSuccessful: false,
+		isValid: false,
+		touchedFields: {},
+		dirtyFields: {},
+		validatingFields: {},
+		errors: _options.errors || {},
+		disabled: _options.disabled || false
+	};
+	let _fields = {};
+	let _defaultValues = isObject$1(_options.defaultValues) || isObject$1(_options.values) ? cloneObject(_options.defaultValues || _options.values) || {} : {};
+	let _formValues = _options.shouldUnregister ? {} : cloneObject(_defaultValues);
+	let _state = {
+		action: false,
+		mount: false,
+		watch: false,
+		keepIsValid: false
+	};
+	let _names = {
+		mount: /* @__PURE__ */ new Set(),
+		disabled: /* @__PURE__ */ new Set(),
+		unMount: /* @__PURE__ */ new Set(),
+		array: /* @__PURE__ */ new Set(),
+		watch: /* @__PURE__ */ new Set()
+	};
+	let delayErrorCallback;
+	let timer = 0;
+	const defaultProxyFormState = {
+		isDirty: false,
+		dirtyFields: false,
+		validatingFields: false,
+		touchedFields: false,
+		isValidating: false,
+		isValid: false,
+		errors: false
+	};
+	const _proxyFormState = { ...defaultProxyFormState };
+	let _proxySubscribeFormState = { ..._proxyFormState };
+	const _subjects = {
+		array: createSubject(),
+		state: createSubject()
+	};
+	const shouldDisplayAllAssociatedErrors = _options.criteriaMode === VALIDATION_MODE.all;
+	const debounce = (callback) => (wait) => {
+		clearTimeout(timer);
+		timer = setTimeout(callback, wait);
+	};
+	const _setValid = async (shouldUpdateValid) => {
+		if (_state.keepIsValid) return;
+		if (!_options.disabled && (_proxyFormState.isValid || _proxySubscribeFormState.isValid || shouldUpdateValid)) {
+			let isValid;
+			if (_options.resolver) {
+				isValid = isEmptyObject((await _runSchema()).errors);
+				_updateIsValidating();
+			} else isValid = await executeBuiltInValidation(_fields, true);
+			if (isValid !== _formState.isValid) _subjects.state.next({ isValid });
+		}
+	};
+	const _updateIsValidating = (names, isValidating) => {
+		if (!_options.disabled && (_proxyFormState.isValidating || _proxyFormState.validatingFields || _proxySubscribeFormState.isValidating || _proxySubscribeFormState.validatingFields)) {
+			(names || Array.from(_names.mount)).forEach((name) => {
+				if (name) isValidating ? set(_formState.validatingFields, name, isValidating) : unset(_formState.validatingFields, name);
+			});
+			_subjects.state.next({
+				validatingFields: _formState.validatingFields,
+				isValidating: !isEmptyObject(_formState.validatingFields)
+			});
+		}
+	};
+	const _setFieldArray = (name, values = [], method, args, shouldSetValues = true, shouldUpdateFieldsAndState = true) => {
+		if (args && method && !_options.disabled) {
+			_state.action = true;
+			if (shouldUpdateFieldsAndState && Array.isArray(get(_fields, name))) {
+				const fieldValues = method(get(_fields, name), args.argA, args.argB);
+				shouldSetValues && set(_fields, name, fieldValues);
+			}
+			if (shouldUpdateFieldsAndState && Array.isArray(get(_formState.errors, name))) {
+				const errors = method(get(_formState.errors, name), args.argA, args.argB);
+				shouldSetValues && set(_formState.errors, name, errors);
+				unsetEmptyArray(_formState.errors, name);
+			}
+			if ((_proxyFormState.touchedFields || _proxySubscribeFormState.touchedFields) && shouldUpdateFieldsAndState && Array.isArray(get(_formState.touchedFields, name))) {
+				const touchedFields = method(get(_formState.touchedFields, name), args.argA, args.argB);
+				shouldSetValues && set(_formState.touchedFields, name, touchedFields);
+			}
+			if (_proxyFormState.dirtyFields || _proxySubscribeFormState.dirtyFields) _formState.dirtyFields = getDirtyFields(_defaultValues, _formValues);
+			_subjects.state.next({
+				name,
+				isDirty: _getDirty(name, values),
+				dirtyFields: _formState.dirtyFields,
+				errors: _formState.errors,
+				isValid: _formState.isValid
+			});
+		} else set(_formValues, name, values);
+	};
+	const updateErrors = (name, error) => {
+		set(_formState.errors, name, error);
+		_subjects.state.next({ errors: _formState.errors });
+	};
+	const _setErrors = (errors) => {
+		_formState.errors = errors;
+		_subjects.state.next({
+			errors: _formState.errors,
+			isValid: false
+		});
+	};
+	const updateValidAndValue = (name, shouldSkipSetValueAs, value, ref) => {
+		const field = get(_fields, name);
+		if (field) {
+			const defaultValue = get(_formValues, name, isUndefined(value) ? get(_defaultValues, name) : value);
+			isUndefined(defaultValue) || ref && ref.defaultChecked || shouldSkipSetValueAs ? set(_formValues, name, shouldSkipSetValueAs ? defaultValue : getFieldValue(field._f)) : setFieldValue(name, defaultValue);
+			_state.mount && !_state.action && _setValid();
+		}
+	};
+	const updateTouchAndDirty = (name, fieldValue, isBlurEvent, shouldDirty, shouldRender) => {
+		let shouldUpdateField = false;
+		let isPreviousDirty = false;
+		const output = { name };
+		if (!_options.disabled) {
+			if (!isBlurEvent || shouldDirty) {
+				if (_proxyFormState.isDirty || _proxySubscribeFormState.isDirty) {
+					isPreviousDirty = _formState.isDirty;
+					_formState.isDirty = output.isDirty = _getDirty();
+					shouldUpdateField = isPreviousDirty !== output.isDirty;
+				}
+				const isCurrentFieldPristine = deepEqual(get(_defaultValues, name), fieldValue);
+				isPreviousDirty = !!get(_formState.dirtyFields, name);
+				isCurrentFieldPristine ? unset(_formState.dirtyFields, name) : set(_formState.dirtyFields, name, true);
+				output.dirtyFields = _formState.dirtyFields;
+				shouldUpdateField = shouldUpdateField || (_proxyFormState.dirtyFields || _proxySubscribeFormState.dirtyFields) && isPreviousDirty !== !isCurrentFieldPristine;
+			}
+			if (isBlurEvent) {
+				const isPreviousFieldTouched = get(_formState.touchedFields, name);
+				if (!isPreviousFieldTouched) {
+					set(_formState.touchedFields, name, isBlurEvent);
+					output.touchedFields = _formState.touchedFields;
+					shouldUpdateField = shouldUpdateField || (_proxyFormState.touchedFields || _proxySubscribeFormState.touchedFields) && isPreviousFieldTouched !== isBlurEvent;
+				}
+			}
+			shouldUpdateField && shouldRender && _subjects.state.next(output);
+		}
+		return shouldUpdateField ? output : {};
+	};
+	const shouldRenderByError = (name, isValid, error, fieldState) => {
+		const previousFieldError = get(_formState.errors, name);
+		const shouldUpdateValid = (_proxyFormState.isValid || _proxySubscribeFormState.isValid) && isBoolean(isValid) && _formState.isValid !== isValid;
+		if (_options.delayError && error) {
+			delayErrorCallback = debounce(() => updateErrors(name, error));
+			delayErrorCallback(_options.delayError);
+		} else {
+			clearTimeout(timer);
+			delayErrorCallback = null;
+			error ? set(_formState.errors, name, error) : unset(_formState.errors, name);
+		}
+		if ((error ? !deepEqual(previousFieldError, error) : previousFieldError) || !isEmptyObject(fieldState) || shouldUpdateValid) {
+			const updatedFormState = {
+				...fieldState,
+				...shouldUpdateValid && isBoolean(isValid) ? { isValid } : {},
+				errors: _formState.errors,
+				name
+			};
+			_formState = {
+				..._formState,
+				...updatedFormState
+			};
+			_subjects.state.next(updatedFormState);
+		}
+	};
+	const _runSchema = async (name) => {
+		_updateIsValidating(name, true);
+		return await _options.resolver(_formValues, _options.context, getResolverOptions(name || _names.mount, _fields, _options.criteriaMode, _options.shouldUseNativeValidation));
+	};
+	const executeSchemaAndUpdateState = async (names) => {
+		const { errors } = await _runSchema(names);
+		_updateIsValidating(names);
+		if (names) for (const name of names) {
+			const error = get(errors, name);
+			error ? set(_formState.errors, name, error) : unset(_formState.errors, name);
+		}
+		else _formState.errors = errors;
+		return errors;
+	};
+	const executeBuiltInValidation = async (fields, shouldOnlyCheckValid, context = { valid: true }) => {
+		for (const name in fields) {
+			const field = fields[name];
+			if (field) {
+				const { _f, ...fieldValue } = field;
+				if (_f) {
+					const isFieldArrayRoot = _names.array.has(_f.name);
+					const isPromiseFunction = field._f && hasPromiseValidation(field._f);
+					if (isPromiseFunction && _proxyFormState.validatingFields) _updateIsValidating([_f.name], true);
+					const fieldError = await validateField(field, _names.disabled, _formValues, shouldDisplayAllAssociatedErrors, _options.shouldUseNativeValidation && !shouldOnlyCheckValid, isFieldArrayRoot);
+					if (isPromiseFunction && _proxyFormState.validatingFields) _updateIsValidating([_f.name]);
+					if (fieldError[_f.name]) {
+						context.valid = false;
+						if (shouldOnlyCheckValid || props.shouldUseNativeValidation) break;
+					}
+					!shouldOnlyCheckValid && (get(fieldError, _f.name) ? isFieldArrayRoot ? updateFieldArrayRootError(_formState.errors, fieldError, _f.name) : set(_formState.errors, _f.name, fieldError[_f.name]) : unset(_formState.errors, _f.name));
+				}
+				!isEmptyObject(fieldValue) && await executeBuiltInValidation(fieldValue, shouldOnlyCheckValid, context);
+			}
+		}
+		return context.valid;
+	};
+	const _removeUnmounted = () => {
+		for (const name of _names.unMount) {
+			const field = get(_fields, name);
+			field && (field._f.refs ? field._f.refs.every((ref) => !live(ref)) : !live(field._f.ref)) && unregister(name);
+		}
+		_names.unMount = /* @__PURE__ */ new Set();
+	};
+	const _getDirty = (name, data) => !_options.disabled && (name && data && set(_formValues, name, data), !deepEqual(getValues(), _defaultValues));
+	const _getWatch = (names, defaultValue, isGlobal) => generateWatchOutput(names, _names, { ..._state.mount ? _formValues : isUndefined(defaultValue) ? _defaultValues : isString(names) ? { [names]: defaultValue } : defaultValue }, isGlobal, defaultValue);
+	const _getFieldArray = (name) => compact(get(_state.mount ? _formValues : _defaultValues, name, _options.shouldUnregister ? get(_defaultValues, name, []) : []));
+	const setFieldValue = (name, value, options = {}) => {
+		const field = get(_fields, name);
+		let fieldValue = value;
+		if (field) {
+			const fieldReference = field._f;
+			if (fieldReference) {
+				!fieldReference.disabled && set(_formValues, name, getFieldValueAs(value, fieldReference));
+				fieldValue = isHTMLElement(fieldReference.ref) && isNullOrUndefined(value) ? "" : value;
+				if (isMultipleSelect(fieldReference.ref)) [...fieldReference.ref.options].forEach((optionRef) => optionRef.selected = fieldValue.includes(optionRef.value));
+				else if (fieldReference.refs) if (isCheckBoxInput(fieldReference.ref)) fieldReference.refs.forEach((checkboxRef) => {
+					if (!checkboxRef.defaultChecked || !checkboxRef.disabled) if (Array.isArray(fieldValue)) checkboxRef.checked = !!fieldValue.find((data) => data === checkboxRef.value);
+					else checkboxRef.checked = fieldValue === checkboxRef.value || !!fieldValue;
+				});
+				else fieldReference.refs.forEach((radioRef) => radioRef.checked = radioRef.value === fieldValue);
+				else if (isFileInput(fieldReference.ref)) fieldReference.ref.value = "";
+				else {
+					fieldReference.ref.value = fieldValue;
+					if (!fieldReference.ref.type) _subjects.state.next({
+						name,
+						values: cloneObject(_formValues)
+					});
+				}
+			}
+		}
+		(options.shouldDirty || options.shouldTouch) && updateTouchAndDirty(name, fieldValue, options.shouldTouch, options.shouldDirty, true);
+		options.shouldValidate && trigger(name);
+	};
+	const setValues = (name, value, options) => {
+		for (const fieldKey in value) {
+			if (!value.hasOwnProperty(fieldKey)) return;
+			const fieldValue = value[fieldKey];
+			const fieldName = name + "." + fieldKey;
+			const field = get(_fields, fieldName);
+			(_names.array.has(name) || isObject$1(fieldValue) || field && !field._f) && !isDateObject(fieldValue) ? setValues(fieldName, fieldValue, options) : setFieldValue(fieldName, fieldValue, options);
+		}
+	};
+	const setValue = (name, value, options = {}) => {
+		const field = get(_fields, name);
+		const isFieldArray = _names.array.has(name);
+		const cloneValue = cloneObject(value);
+		set(_formValues, name, cloneValue);
+		if (isFieldArray) {
+			_subjects.array.next({
+				name,
+				values: cloneObject(_formValues)
+			});
+			if ((_proxyFormState.isDirty || _proxyFormState.dirtyFields || _proxySubscribeFormState.isDirty || _proxySubscribeFormState.dirtyFields) && options.shouldDirty) _subjects.state.next({
+				name,
+				dirtyFields: getDirtyFields(_defaultValues, _formValues),
+				isDirty: _getDirty(name, cloneValue)
+			});
+		} else field && !field._f && !isNullOrUndefined(cloneValue) ? setValues(name, cloneValue, options) : setFieldValue(name, cloneValue, options);
+		if (isWatched(name, _names)) _subjects.state.next({
+			..._formState,
+			name,
+			values: cloneObject(_formValues)
+		});
+		else _subjects.state.next({
+			name: _state.mount ? name : void 0,
+			values: cloneObject(_formValues)
+		});
+	};
+	const onChange = async (event) => {
+		_state.mount = true;
+		const target = event.target;
+		let name = target.name;
+		let isFieldValueUpdated = true;
+		const field = get(_fields, name);
+		const _updateIsFieldValueUpdated = (fieldValue) => {
+			isFieldValueUpdated = Number.isNaN(fieldValue) || isDateObject(fieldValue) && isNaN(fieldValue.getTime()) || deepEqual(fieldValue, get(_formValues, name, fieldValue));
+		};
+		const validationModeBeforeSubmit = getValidationModes(_options.mode);
+		const validationModeAfterSubmit = getValidationModes(_options.reValidateMode);
+		if (field) {
+			let error;
+			let isValid;
+			const fieldValue = target.type ? getFieldValue(field._f) : getEventValue(event);
+			const isBlurEvent = event.type === EVENTS.BLUR || event.type === EVENTS.FOCUS_OUT;
+			const shouldSkipValidation = !hasValidation(field._f) && !_options.resolver && !get(_formState.errors, name) && !field._f.deps || skipValidation(isBlurEvent, get(_formState.touchedFields, name), _formState.isSubmitted, validationModeAfterSubmit, validationModeBeforeSubmit);
+			const watched = isWatched(name, _names, isBlurEvent);
+			set(_formValues, name, fieldValue);
+			if (isBlurEvent) {
+				if (!target || !target.readOnly) {
+					field._f.onBlur && field._f.onBlur(event);
+					delayErrorCallback && delayErrorCallback(0);
+				}
+			} else if (field._f.onChange) field._f.onChange(event);
+			const fieldState = updateTouchAndDirty(name, fieldValue, isBlurEvent);
+			const shouldRender = !isEmptyObject(fieldState) || watched;
+			!isBlurEvent && _subjects.state.next({
+				name,
+				type: event.type,
+				values: cloneObject(_formValues)
+			});
+			if (shouldSkipValidation) {
+				if (_proxyFormState.isValid || _proxySubscribeFormState.isValid) {
+					if (_options.mode === "onBlur") {
+						if (isBlurEvent) _setValid();
+					} else if (!isBlurEvent) _setValid();
+				}
+				return shouldRender && _subjects.state.next({
+					name,
+					...watched ? {} : fieldState
+				});
+			}
+			!isBlurEvent && watched && _subjects.state.next({ ..._formState });
+			if (_options.resolver) {
+				const { errors } = await _runSchema([name]);
+				_updateIsValidating([name]);
+				_updateIsFieldValueUpdated(fieldValue);
+				if (isFieldValueUpdated) {
+					const previousErrorLookupResult = schemaErrorLookup(_formState.errors, _fields, name);
+					const errorLookupResult = schemaErrorLookup(errors, _fields, previousErrorLookupResult.name || name);
+					error = errorLookupResult.error;
+					name = errorLookupResult.name;
+					isValid = isEmptyObject(errors);
+				}
+			} else {
+				_updateIsValidating([name], true);
+				error = (await validateField(field, _names.disabled, _formValues, shouldDisplayAllAssociatedErrors, _options.shouldUseNativeValidation))[name];
+				_updateIsValidating([name]);
+				_updateIsFieldValueUpdated(fieldValue);
+				if (isFieldValueUpdated) {
+					if (error) isValid = false;
+					else if (_proxyFormState.isValid || _proxySubscribeFormState.isValid) isValid = await executeBuiltInValidation(_fields, true);
+				}
+			}
+			if (isFieldValueUpdated) {
+				field._f.deps && (!Array.isArray(field._f.deps) || field._f.deps.length > 0) && trigger(field._f.deps);
+				shouldRenderByError(name, isValid, error, fieldState);
+			}
+		}
+	};
+	const _focusInput = (ref, key) => {
+		if (get(_formState.errors, key) && ref.focus) {
+			ref.focus();
+			return 1;
+		}
+	};
+	const trigger = async (name, options = {}) => {
+		let isValid;
+		let validationResult;
+		const fieldNames = convertToArrayPayload(name);
+		if (_options.resolver) {
+			const errors = await executeSchemaAndUpdateState(isUndefined(name) ? name : fieldNames);
+			isValid = isEmptyObject(errors);
+			validationResult = name ? !fieldNames.some((name) => get(errors, name)) : isValid;
+		} else if (name) {
+			validationResult = (await Promise.all(fieldNames.map(async (fieldName) => {
+				const field = get(_fields, fieldName);
+				return await executeBuiltInValidation(field && field._f ? { [fieldName]: field } : field);
+			}))).every(Boolean);
+			!(!validationResult && !_formState.isValid) && _setValid();
+		} else validationResult = isValid = await executeBuiltInValidation(_fields);
+		_subjects.state.next({
+			...!isString(name) || (_proxyFormState.isValid || _proxySubscribeFormState.isValid) && isValid !== _formState.isValid ? {} : { name },
+			..._options.resolver || !name ? { isValid } : {},
+			errors: _formState.errors
+		});
+		options.shouldFocus && !validationResult && iterateFieldsByAction(_fields, _focusInput, name ? fieldNames : _names.mount);
+		return validationResult;
+	};
+	const getValues = (fieldNames, config) => {
+		let values = { ..._state.mount ? _formValues : _defaultValues };
+		if (config) values = extractFormValues(config.dirtyFields ? _formState.dirtyFields : _formState.touchedFields, values);
+		return isUndefined(fieldNames) ? values : isString(fieldNames) ? get(values, fieldNames) : fieldNames.map((name) => get(values, name));
+	};
+	const getFieldState = (name, formState) => ({
+		invalid: !!get((formState || _formState).errors, name),
+		isDirty: !!get((formState || _formState).dirtyFields, name),
+		error: get((formState || _formState).errors, name),
+		isValidating: !!get(_formState.validatingFields, name),
+		isTouched: !!get((formState || _formState).touchedFields, name)
+	});
+	const clearErrors = (name) => {
+		const names = name ? convertToArrayPayload(name) : void 0;
+		names === null || names === void 0 || names.forEach((inputName) => unset(_formState.errors, inputName));
+		if (names) names.forEach((inputName) => {
+			_subjects.state.next({
+				name: inputName,
+				errors: _formState.errors
+			});
+		});
+		else _subjects.state.next({ errors: {} });
+	};
+	const setError = (name, error, options) => {
+		const ref = (get(_fields, name, { _f: {} })._f || {}).ref;
+		const { ref: currentRef, message, type, ...restOfErrorTree } = get(_formState.errors, name) || {};
+		set(_formState.errors, name, {
+			...restOfErrorTree,
+			...error,
+			ref
+		});
+		_subjects.state.next({
+			name,
+			errors: _formState.errors,
+			isValid: false
+		});
+		options && options.shouldFocus && ref && ref.focus && ref.focus();
+	};
+	const watch = (name, defaultValue) => isFunction(name) ? _subjects.state.subscribe({ next: (payload) => "values" in payload && name(_getWatch(void 0, defaultValue), payload) }) : _getWatch(name, defaultValue, true);
+	const _subscribe = (props) => _subjects.state.subscribe({ next: (formState) => {
+		if (shouldSubscribeByName(props.name, formState.name, props.exact) && shouldRenderFormState(formState, props.formState || _proxyFormState, _setFormState, props.reRenderRoot)) props.callback({
+			values: { ..._formValues },
+			..._formState,
+			...formState,
+			defaultValues: _defaultValues
+		});
+	} }).unsubscribe;
+	const subscribe = (props) => {
+		_state.mount = true;
+		_proxySubscribeFormState = {
+			..._proxySubscribeFormState,
+			...props.formState
+		};
+		return _subscribe({
+			...props,
+			formState: {
+				...defaultProxyFormState,
+				...props.formState
+			}
+		});
+	};
+	const unregister = (name, options = {}) => {
+		for (const fieldName of name ? convertToArrayPayload(name) : _names.mount) {
+			_names.mount.delete(fieldName);
+			_names.array.delete(fieldName);
+			if (!options.keepValue) {
+				unset(_fields, fieldName);
+				unset(_formValues, fieldName);
+			}
+			!options.keepError && unset(_formState.errors, fieldName);
+			!options.keepDirty && unset(_formState.dirtyFields, fieldName);
+			!options.keepTouched && unset(_formState.touchedFields, fieldName);
+			!options.keepIsValidating && unset(_formState.validatingFields, fieldName);
+			!_options.shouldUnregister && !options.keepDefaultValue && unset(_defaultValues, fieldName);
+		}
+		_subjects.state.next({ values: cloneObject(_formValues) });
+		_subjects.state.next({
+			..._formState,
+			...!options.keepDirty ? {} : { isDirty: _getDirty() }
+		});
+		!options.keepIsValid && _setValid();
+	};
+	const _setDisabledField = ({ disabled, name }) => {
+		if (isBoolean(disabled) && _state.mount || !!disabled || _names.disabled.has(name)) {
+			const disabledStateChanged = _names.disabled.has(name) !== !!disabled;
+			disabled ? _names.disabled.add(name) : _names.disabled.delete(name);
+			disabledStateChanged && _state.mount && !_state.action && _setValid();
+		}
+	};
+	const register = (name, options = {}) => {
+		let field = get(_fields, name);
+		const disabledIsDefined = isBoolean(options.disabled) || isBoolean(_options.disabled);
+		set(_fields, name, {
+			...field || {},
+			_f: {
+				...field && field._f ? field._f : { ref: { name } },
+				name,
+				mount: true,
+				...options
+			}
+		});
+		_names.mount.add(name);
+		if (field) _setDisabledField({
+			disabled: isBoolean(options.disabled) ? options.disabled : _options.disabled,
+			name
+		});
+		else updateValidAndValue(name, true, options.value);
+		return {
+			...disabledIsDefined ? { disabled: options.disabled || _options.disabled } : {},
+			..._options.progressive ? {
+				required: !!options.required,
+				min: getRuleValue(options.min),
+				max: getRuleValue(options.max),
+				minLength: getRuleValue(options.minLength),
+				maxLength: getRuleValue(options.maxLength),
+				pattern: getRuleValue(options.pattern)
+			} : {},
+			name,
+			onChange,
+			onBlur: onChange,
+			ref: (ref) => {
+				if (ref) {
+					register(name, options);
+					field = get(_fields, name);
+					const fieldRef = isUndefined(ref.value) ? ref.querySelectorAll ? ref.querySelectorAll("input,select,textarea")[0] || ref : ref : ref;
+					const radioOrCheckbox = isRadioOrCheckbox(fieldRef);
+					const refs = field._f.refs || [];
+					if (radioOrCheckbox ? refs.find((option) => option === fieldRef) : fieldRef === field._f.ref) return;
+					set(_fields, name, { _f: {
+						...field._f,
+						...radioOrCheckbox ? {
+							refs: [
+								...refs.filter(live),
+								fieldRef,
+								...Array.isArray(get(_defaultValues, name)) ? [{}] : []
+							],
+							ref: {
+								type: fieldRef.type,
+								name
+							}
+						} : { ref: fieldRef }
+					} });
+					updateValidAndValue(name, false, void 0, fieldRef);
+				} else {
+					field = get(_fields, name, {});
+					if (field._f) field._f.mount = false;
+					(_options.shouldUnregister || options.shouldUnregister) && !(isNameInFieldArray(_names.array, name) && _state.action) && _names.unMount.add(name);
+				}
+			}
+		};
+	};
+	const _focusError = () => _options.shouldFocusError && iterateFieldsByAction(_fields, _focusInput, _names.mount);
+	const _disableForm = (disabled) => {
+		if (isBoolean(disabled)) {
+			_subjects.state.next({ disabled });
+			iterateFieldsByAction(_fields, (ref, name) => {
+				const currentField = get(_fields, name);
+				if (currentField) {
+					ref.disabled = currentField._f.disabled || disabled;
+					if (Array.isArray(currentField._f.refs)) currentField._f.refs.forEach((inputRef) => {
+						inputRef.disabled = currentField._f.disabled || disabled;
+					});
+				}
+			}, 0, false);
+		}
+	};
+	const handleSubmit = (onValid, onInvalid) => async (e) => {
+		let onValidError = void 0;
+		if (e) {
+			e.preventDefault && e.preventDefault();
+			e.persist && e.persist();
+		}
+		let fieldValues = cloneObject(_formValues);
+		_subjects.state.next({ isSubmitting: true });
+		if (_options.resolver) {
+			const { errors, values } = await _runSchema();
+			_updateIsValidating();
+			_formState.errors = errors;
+			fieldValues = cloneObject(values);
+		} else await executeBuiltInValidation(_fields);
+		if (_names.disabled.size) for (const name of _names.disabled) unset(fieldValues, name);
+		unset(_formState.errors, "root");
+		if (isEmptyObject(_formState.errors)) {
+			_subjects.state.next({ errors: {} });
+			try {
+				await onValid(fieldValues, e);
+			} catch (error) {
+				onValidError = error;
+			}
+		} else {
+			if (onInvalid) await onInvalid({ ..._formState.errors }, e);
+			_focusError();
+			setTimeout(_focusError);
+		}
+		_subjects.state.next({
+			isSubmitted: true,
+			isSubmitting: false,
+			isSubmitSuccessful: isEmptyObject(_formState.errors) && !onValidError,
+			submitCount: _formState.submitCount + 1,
+			errors: _formState.errors
+		});
+		if (onValidError) throw onValidError;
+	};
+	const resetField = (name, options = {}) => {
+		if (get(_fields, name)) {
+			if (isUndefined(options.defaultValue)) setValue(name, cloneObject(get(_defaultValues, name)));
+			else {
+				setValue(name, options.defaultValue);
+				set(_defaultValues, name, cloneObject(options.defaultValue));
+			}
+			if (!options.keepTouched) unset(_formState.touchedFields, name);
+			if (!options.keepDirty) {
+				unset(_formState.dirtyFields, name);
+				_formState.isDirty = options.defaultValue ? _getDirty(name, cloneObject(get(_defaultValues, name))) : _getDirty();
+			}
+			if (!options.keepError) {
+				unset(_formState.errors, name);
+				_proxyFormState.isValid && _setValid();
+			}
+			_subjects.state.next({ ..._formState });
+		}
+	};
+	const _reset = (formValues, keepStateOptions = {}) => {
+		const updatedValues = formValues ? cloneObject(formValues) : _defaultValues;
+		const cloneUpdatedValues = cloneObject(updatedValues);
+		const isEmptyResetValues = isEmptyObject(formValues);
+		const values = isEmptyResetValues ? _defaultValues : cloneUpdatedValues;
+		if (!keepStateOptions.keepDefaultValues) _defaultValues = updatedValues;
+		if (!keepStateOptions.keepValues) {
+			if (keepStateOptions.keepDirtyValues) {
+				const fieldsToCheck = new Set([..._names.mount, ...Object.keys(getDirtyFields(_defaultValues, _formValues))]);
+				for (const fieldName of Array.from(fieldsToCheck)) {
+					const isDirty = get(_formState.dirtyFields, fieldName);
+					const existingValue = get(_formValues, fieldName);
+					const newValue = get(values, fieldName);
+					if (isDirty && !isUndefined(existingValue)) set(values, fieldName, existingValue);
+					else if (!isDirty && !isUndefined(newValue)) setValue(fieldName, newValue);
+				}
+			} else {
+				if (isWeb && isUndefined(formValues)) for (const name of _names.mount) {
+					const field = get(_fields, name);
+					if (field && field._f) {
+						const fieldReference = Array.isArray(field._f.refs) ? field._f.refs[0] : field._f.ref;
+						if (isHTMLElement(fieldReference)) {
+							const form = fieldReference.closest("form");
+							if (form) {
+								form.reset();
+								break;
+							}
+						}
+					}
+				}
+				if (keepStateOptions.keepFieldsRef) for (const fieldName of _names.mount) setValue(fieldName, get(values, fieldName));
+				else _fields = {};
+			}
+			_formValues = _options.shouldUnregister ? keepStateOptions.keepDefaultValues ? cloneObject(_defaultValues) : {} : cloneObject(values);
+			_subjects.array.next({ values: { ...values } });
+			_subjects.state.next({ values: { ...values } });
+		}
+		_names = {
+			mount: keepStateOptions.keepDirtyValues ? _names.mount : /* @__PURE__ */ new Set(),
+			unMount: /* @__PURE__ */ new Set(),
+			array: /* @__PURE__ */ new Set(),
+			disabled: /* @__PURE__ */ new Set(),
+			watch: /* @__PURE__ */ new Set(),
+			watchAll: false,
+			focus: ""
+		};
+		_state.mount = !_proxyFormState.isValid || !!keepStateOptions.keepIsValid || !!keepStateOptions.keepDirtyValues || !_options.shouldUnregister && !isEmptyObject(values);
+		_state.watch = !!_options.shouldUnregister;
+		_state.keepIsValid = !!keepStateOptions.keepIsValid;
+		_state.action = false;
+		if (!keepStateOptions.keepErrors) _formState.errors = {};
+		_subjects.state.next({
+			submitCount: keepStateOptions.keepSubmitCount ? _formState.submitCount : 0,
+			isDirty: isEmptyResetValues ? false : keepStateOptions.keepDirty ? _formState.isDirty : !!(keepStateOptions.keepDefaultValues && !deepEqual(formValues, _defaultValues)),
+			isSubmitted: keepStateOptions.keepIsSubmitted ? _formState.isSubmitted : false,
+			dirtyFields: isEmptyResetValues ? {} : keepStateOptions.keepDirtyValues ? keepStateOptions.keepDefaultValues && _formValues ? getDirtyFields(_defaultValues, _formValues) : _formState.dirtyFields : keepStateOptions.keepDefaultValues && formValues ? getDirtyFields(_defaultValues, formValues) : keepStateOptions.keepDirty ? _formState.dirtyFields : {},
+			touchedFields: keepStateOptions.keepTouched ? _formState.touchedFields : {},
+			errors: keepStateOptions.keepErrors ? _formState.errors : {},
+			isSubmitSuccessful: keepStateOptions.keepIsSubmitSuccessful ? _formState.isSubmitSuccessful : false,
+			isSubmitting: false,
+			defaultValues: _defaultValues
+		});
+	};
+	const reset = (formValues, keepStateOptions) => _reset(isFunction(formValues) ? formValues(_formValues) : formValues, {
+		..._options.resetOptions,
+		...keepStateOptions
+	});
+	const setFocus = (name, options = {}) => {
+		const field = get(_fields, name);
+		const fieldReference = field && field._f;
+		if (fieldReference) {
+			const fieldRef = fieldReference.refs ? fieldReference.refs[0] : fieldReference.ref;
+			if (fieldRef.focus) setTimeout(() => {
+				fieldRef.focus();
+				options.shouldSelect && isFunction(fieldRef.select) && fieldRef.select();
+			});
+		}
+	};
+	const _setFormState = (updatedFormState) => {
+		_formState = {
+			..._formState,
+			...updatedFormState
+		};
+	};
+	const _resetDefaultValues = () => isFunction(_options.defaultValues) && _options.defaultValues().then((values) => {
+		reset(values, _options.resetOptions);
+		_subjects.state.next({ isLoading: false });
+	});
+	const methods = {
+		control: {
+			register,
+			unregister,
+			getFieldState,
+			handleSubmit,
+			setError,
+			_subscribe,
+			_runSchema,
+			_updateIsValidating,
+			_focusError,
+			_getWatch,
+			_getDirty,
+			_setValid,
+			_setFieldArray,
+			_setDisabledField,
+			_setErrors,
+			_getFieldArray,
+			_reset,
+			_resetDefaultValues,
+			_removeUnmounted,
+			_disableForm,
+			_subjects,
+			_proxyFormState,
+			get _fields() {
+				return _fields;
+			},
+			get _formValues() {
+				return _formValues;
+			},
+			get _state() {
+				return _state;
+			},
+			set _state(value) {
+				_state = value;
+			},
+			get _defaultValues() {
+				return _defaultValues;
+			},
+			get _names() {
+				return _names;
+			},
+			set _names(value) {
+				_names = value;
+			},
+			get _formState() {
+				return _formState;
+			},
+			get _options() {
+				return _options;
+			},
+			set _options(value) {
+				_options = {
+					..._options,
+					...value
+				};
+			}
+		},
+		subscribe,
+		trigger,
+		register,
+		handleSubmit,
+		watch,
+		setValue,
+		getValues,
+		reset,
+		resetField,
+		clearErrors,
+		unregister,
+		setError,
+		setFocus,
+		getFieldState
+	};
+	return {
+		...methods,
+		formControl: methods
+	};
+}
+/**
+* Custom hook to manage the entire form.
+*
+* @remarks
+* [API](https://react-hook-form.com/docs/useform) • [Demo](https://codesandbox.io/s/react-hook-form-get-started-ts-5ksmm) • [Video](https://www.youtube.com/watch?v=RkXv4AXXC_4)
+*
+* @param props - form configuration and validation parameters.
+*
+* @returns methods - individual functions to manage the form state. {@link UseFormReturn}
+*
+* @example
+* ```tsx
+* function App() {
+*   const { register, handleSubmit, watch, formState: { errors } } = useForm();
+*   const onSubmit = data => console.log(data);
+*
+*   console.log(watch("example"));
+*
+*   return (
+*     <form onSubmit={handleSubmit(onSubmit)}>
+*       <input defaultValue="test" {...register("example")} />
+*       <input {...register("exampleRequired", { required: true })} />
+*       {errors.exampleRequired && <span>This field is required</span>}
+*       <button>Submit</button>
+*     </form>
+*   );
+* }
+* ```
+*/
+function useForm(props = {}) {
+	const _formControl = import_react.useRef(void 0);
+	const _values = import_react.useRef(void 0);
+	const [formState, updateFormState] = import_react.useState({
+		isDirty: false,
+		isValidating: false,
+		isLoading: isFunction(props.defaultValues),
+		isSubmitted: false,
+		isSubmitting: false,
+		isSubmitSuccessful: false,
+		isValid: false,
+		submitCount: 0,
+		dirtyFields: {},
+		touchedFields: {},
+		validatingFields: {},
+		errors: props.errors || {},
+		disabled: props.disabled || false,
+		isReady: false,
+		defaultValues: isFunction(props.defaultValues) ? void 0 : props.defaultValues
+	});
+	if (!_formControl.current) if (props.formControl) {
+		_formControl.current = {
+			...props.formControl,
+			formState
+		};
+		if (props.defaultValues && !isFunction(props.defaultValues)) props.formControl.reset(props.defaultValues, props.resetOptions);
+	} else {
+		const { formControl, ...rest } = createFormControl(props);
+		_formControl.current = {
+			...rest,
+			formState
+		};
+	}
+	const control = _formControl.current.control;
+	control._options = props;
+	useIsomorphicLayoutEffect(() => {
+		const sub = control._subscribe({
+			formState: control._proxyFormState,
+			callback: () => updateFormState({ ...control._formState }),
+			reRenderRoot: true
+		});
+		updateFormState((data) => ({
+			...data,
+			isReady: true
+		}));
+		control._formState.isReady = true;
+		return sub;
+	}, [control]);
+	import_react.useEffect(() => control._disableForm(props.disabled), [control, props.disabled]);
+	import_react.useEffect(() => {
+		if (props.mode) control._options.mode = props.mode;
+		if (props.reValidateMode) control._options.reValidateMode = props.reValidateMode;
+	}, [
+		control,
+		props.mode,
+		props.reValidateMode
+	]);
+	import_react.useEffect(() => {
+		if (props.errors) {
+			control._setErrors(props.errors);
+			control._focusError();
+		}
+	}, [control, props.errors]);
+	import_react.useEffect(() => {
+		props.shouldUnregister && control._subjects.state.next({ values: control._getWatch() });
+	}, [control, props.shouldUnregister]);
+	import_react.useEffect(() => {
+		if (control._proxyFormState.isDirty) {
+			const isDirty = control._getDirty();
+			if (isDirty !== formState.isDirty) control._subjects.state.next({ isDirty });
+		}
+	}, [control, formState.isDirty]);
+	import_react.useEffect(() => {
+		var _a;
+		if (props.values && !deepEqual(props.values, _values.current)) {
+			control._reset(props.values, {
+				keepFieldsRef: true,
+				...control._options.resetOptions
+			});
+			if (!((_a = control._options.resetOptions) === null || _a === void 0 ? void 0 : _a.keepIsValid)) control._setValid();
+			_values.current = props.values;
+			updateFormState((state) => ({ ...state }));
+		} else control._resetDefaultValues();
+	}, [control, props.values]);
+	import_react.useEffect(() => {
+		if (!control._state.mount) {
+			control._setValid();
+			control._state.mount = true;
+		}
+		if (control._state.watch) {
+			control._state.watch = false;
+			control._subjects.state.next({ ...control._formState });
+		}
+		control._removeUnmounted();
+	});
+	_formControl.current.formState = import_react.useMemo(() => getProxyFormState(formState, control), [control, formState]);
+	return _formControl.current;
+}
+//#endregion
+//#region src/components/ui/form.tsx
+var Form = FormProvider;
+var FormFieldContext = import_react.createContext({});
+var FormField = ({ ...props }) => {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormFieldContext.Provider, {
+		"data-uid": "src/components/ui/form.tsx:35:5",
+		"data-prohibitions": "[]",
+		value: { name: props.name },
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Controller, {
+			"data-uid": "src/components/ui/form.tsx:36:7",
+			"data-prohibitions": "[editContent]",
+			...props
+		})
+	});
+};
+var useFormField = () => {
+	const fieldContext = import_react.useContext(FormFieldContext);
+	const itemContext = import_react.useContext(FormItemContext);
+	const { getFieldState, formState } = useFormContext();
+	const fieldState = getFieldState(fieldContext.name, formState);
+	if (!fieldContext) throw new Error("useFormField should be used within <FormField>");
+	const { id } = itemContext;
+	return {
+		id,
+		name: fieldContext.name,
+		formItemId: `${id}-form-item`,
+		formDescriptionId: `${id}-form-item-description`,
+		formMessageId: `${id}-form-item-message`,
+		...fieldState
+	};
+};
+var FormItemContext = import_react.createContext({});
+var FormItem = import_react.forwardRef(({ className, ...props }, ref) => {
+	const id = import_react.useId();
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormItemContext.Provider, {
+		"data-uid": "src/components/ui/form.tsx:75:7",
+		"data-prohibitions": "[editContent]",
+		value: { id },
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+			"data-uid": "src/components/ui/form.tsx:76:9",
+			"data-prohibitions": "[editContent]",
+			ref,
+			className: cn$1("space-y-2", className),
+			...props
+		})
+	});
+});
+FormItem.displayName = "FormItem";
+var FormLabel = import_react.forwardRef(({ className, ...props }, ref) => {
+	const { error, formItemId } = useFormField();
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$1, {
+		"data-uid": "src/components/ui/form.tsx:90:5",
+		"data-prohibitions": "[editContent]",
+		ref,
+		className: cn$1(error && "text-destructive", className),
+		htmlFor: formItemId,
+		...props
+	});
+});
+FormLabel.displayName = "FormLabel";
+var FormControl = import_react.forwardRef(({ ...props }, ref) => {
+	const { error, formItemId, formDescriptionId, formMessageId } = useFormField();
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Slot$3, {
+		"data-uid": "src/components/ui/form.tsx:107:5",
+		"data-prohibitions": "[editContent]",
+		ref,
+		id: formItemId,
+		"aria-describedby": !error ? `${formDescriptionId}` : `${formDescriptionId} ${formMessageId}`,
+		"aria-invalid": !!error,
+		...props
+	});
+});
+FormControl.displayName = "FormControl";
+var FormDescription = import_react.forwardRef(({ className, ...props }, ref) => {
+	const { formDescriptionId } = useFormField();
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+		"data-uid": "src/components/ui/form.tsx:125:5",
+		"data-prohibitions": "[editContent]",
+		ref,
+		id: formDescriptionId,
+		className: cn$1("text-sm text-muted-foreground", className),
+		...props
+	});
+});
+FormDescription.displayName = "FormDescription";
+var FormMessage = import_react.forwardRef(({ className, children, ...props }, ref) => {
+	const { error, formMessageId } = useFormField();
+	const body = error ? String(error?.message ?? "") : children;
+	if (!body) return null;
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+		"data-uid": "src/components/ui/form.tsx:147:5",
+		"data-prohibitions": "[editContent]",
+		ref,
+		id: formMessageId,
+		className: cn$1("text-sm font-medium text-destructive", className),
+		...props,
+		children: body
+	});
+});
+FormMessage.displayName = "FormMessage";
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/@hookform+resolvers@5.2.2_react-hook-form@7.71.2_react@19.2.4_/node_modules/@hookform/resolvers/dist/resolvers.mjs
+var r = (t, r, o) => {
+	if (t && "reportValidity" in t) {
+		const s = get(o, r);
+		t.setCustomValidity(s && s.message || ""), t.reportValidity();
+	}
+}, o = (e, t) => {
+	for (const o in t.fields) {
+		const s = t.fields[o];
+		s && s.ref && "reportValidity" in s.ref ? r(s.ref, o, e) : s && s.refs && s.refs.forEach((t) => r(t, o, e));
+	}
+}, s$1 = (r, s) => {
+	s.shouldUseNativeValidation && o(r, s);
+	const n = {};
+	for (const o in r) {
+		const f = get(s.fields, o), c = Object.assign(r[o] || {}, { ref: f && f.ref });
+		if (i$1(s.names || Object.keys(r), o)) {
+			const r = Object.assign({}, get(n, o));
+			set(r, "root", c), set(n, o, r);
+		} else set(n, o, c);
+	}
+	return n;
+}, i$1 = (e, t) => {
+	const r = n(t);
+	return e.some((e) => n(e).match(`^${r}\\.\\d+`));
+};
+function n(e) {
+	return e.replace(/\]|\[/g, "");
+}
+Object.freeze({ status: "aborted" });
+function $constructor(name, initializer, params) {
+	function init(inst, def) {
+		if (!inst._zod) Object.defineProperty(inst, "_zod", {
+			value: {
+				def,
+				constr: _,
+				traits: /* @__PURE__ */ new Set()
+			},
+			enumerable: false
+		});
+		if (inst._zod.traits.has(name)) return;
+		inst._zod.traits.add(name);
+		initializer(inst, def);
+		const proto = _.prototype;
+		const keys = Object.keys(proto);
+		for (let i = 0; i < keys.length; i++) {
+			const k = keys[i];
+			if (!(k in inst)) inst[k] = proto[k].bind(inst);
+		}
+	}
+	const Parent = params?.Parent ?? Object;
+	class Definition extends Parent {}
+	Object.defineProperty(Definition, "name", { value: name });
+	function _(def) {
+		var _a;
+		const inst = params?.Parent ? new Definition() : this;
+		init(inst, def);
+		(_a = inst._zod).deferred ?? (_a.deferred = []);
+		for (const fn of inst._zod.deferred) fn();
+		return inst;
+	}
+	Object.defineProperty(_, "init", { value: init });
+	Object.defineProperty(_, Symbol.hasInstance, { value: (inst) => {
+		if (params?.Parent && inst instanceof params.Parent) return true;
+		return inst?._zod?.traits?.has(name);
+	} });
+	Object.defineProperty(_, "name", { value: name });
+	return _;
+}
+var $ZodAsyncError = class extends Error {
+	constructor() {
+		super(`Encountered Promise during synchronous parse. Use .parseAsync() instead.`);
+	}
+};
+var $ZodEncodeError = class extends Error {
+	constructor(name) {
+		super(`Encountered unidirectional transform during encode: ${name}`);
+		this.name = "ZodEncodeError";
+	}
+};
+var globalConfig = {};
+function config$4(newConfig) {
+	if (newConfig) Object.assign(globalConfig, newConfig);
+	return globalConfig;
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/zod@4.3.6/node_modules/zod/v4/core/util.js
+function getEnumValues(entries) {
+	const numericValues = Object.values(entries).filter((v) => typeof v === "number");
+	return Object.entries(entries).filter(([k, _]) => numericValues.indexOf(+k) === -1).map(([_, v]) => v);
+}
+function jsonStringifyReplacer(_, value) {
+	if (typeof value === "bigint") return value.toString();
+	return value;
+}
+function cached(getter) {
+	return { get value() {
+		{
+			const value = getter();
+			Object.defineProperty(this, "value", { value });
+			return value;
+		}
+		throw new Error("cached value already set");
+	} };
+}
+function nullish(input) {
+	return input === null || input === void 0;
+}
+function cleanRegex(source) {
+	const start = source.startsWith("^") ? 1 : 0;
+	const end = source.endsWith("$") ? source.length - 1 : source.length;
+	return source.slice(start, end);
+}
+function floatSafeRemainder(val, step) {
+	const valDecCount = (val.toString().split(".")[1] || "").length;
+	const stepString = step.toString();
+	let stepDecCount = (stepString.split(".")[1] || "").length;
+	if (stepDecCount === 0 && /\d?e-\d?/.test(stepString)) {
+		const match = stepString.match(/\d?e-(\d?)/);
+		if (match?.[1]) stepDecCount = Number.parseInt(match[1]);
+	}
+	const decCount = valDecCount > stepDecCount ? valDecCount : stepDecCount;
+	return Number.parseInt(val.toFixed(decCount).replace(".", "")) % Number.parseInt(step.toFixed(decCount).replace(".", "")) / 10 ** decCount;
+}
+var EVALUATING = Symbol("evaluating");
+function defineLazy(object, key, getter) {
+	let value = void 0;
+	Object.defineProperty(object, key, {
+		get() {
+			if (value === EVALUATING) return;
+			if (value === void 0) {
+				value = EVALUATING;
+				value = getter();
+			}
+			return value;
+		},
+		set(v) {
+			Object.defineProperty(object, key, { value: v });
+		},
+		configurable: true
+	});
+}
+function assignProp(target, prop, value) {
+	Object.defineProperty(target, prop, {
+		value,
+		writable: true,
+		enumerable: true,
+		configurable: true
+	});
+}
+function mergeDefs(...defs) {
+	const mergedDescriptors = {};
+	for (const def of defs) {
+		const descriptors = Object.getOwnPropertyDescriptors(def);
+		Object.assign(mergedDescriptors, descriptors);
+	}
+	return Object.defineProperties({}, mergedDescriptors);
+}
+function esc(str) {
+	return JSON.stringify(str);
+}
+function slugify(input) {
+	return input.toLowerCase().trim().replace(/[^\w\s-]/g, "").replace(/[\s_-]+/g, "-").replace(/^-+|-+$/g, "");
+}
+var captureStackTrace = "captureStackTrace" in Error ? Error.captureStackTrace : (..._args) => {};
+function isObject(data) {
+	return typeof data === "object" && data !== null && !Array.isArray(data);
+}
+var allowsEval = cached(() => {
+	if (typeof navigator !== "undefined" && navigator?.userAgent?.includes("Cloudflare")) return false;
+	try {
+		new Function("");
+		return true;
+	} catch (_) {
+		return false;
+	}
+});
+function isPlainObject(o) {
+	if (isObject(o) === false) return false;
+	const ctor = o.constructor;
+	if (ctor === void 0) return true;
+	if (typeof ctor !== "function") return true;
+	const prot = ctor.prototype;
+	if (isObject(prot) === false) return false;
+	if (Object.prototype.hasOwnProperty.call(prot, "isPrototypeOf") === false) return false;
+	return true;
+}
+function shallowClone(o) {
+	if (isPlainObject(o)) return { ...o };
+	if (Array.isArray(o)) return [...o];
+	return o;
+}
+var propertyKeyTypes = new Set([
+	"string",
+	"number",
+	"symbol"
+]);
+function escapeRegex(str) {
+	return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+function clone(inst, def, params) {
+	const cl = new inst._zod.constr(def ?? inst._zod.def);
+	if (!def || params?.parent) cl._zod.parent = inst;
+	return cl;
+}
+function normalizeParams(_params) {
+	const params = _params;
+	if (!params) return {};
+	if (typeof params === "string") return { error: () => params };
+	if (params?.message !== void 0) {
+		if (params?.error !== void 0) throw new Error("Cannot specify both `message` and `error` params");
+		params.error = params.message;
+	}
+	delete params.message;
+	if (typeof params.error === "string") return {
+		...params,
+		error: () => params.error
+	};
+	return params;
+}
+function optionalKeys(shape) {
+	return Object.keys(shape).filter((k) => {
+		return shape[k]._zod.optin === "optional" && shape[k]._zod.optout === "optional";
+	});
+}
+var NUMBER_FORMAT_RANGES = {
+	safeint: [Number.MIN_SAFE_INTEGER, Number.MAX_SAFE_INTEGER],
+	int32: [-2147483648, 2147483647],
+	uint32: [0, 4294967295],
+	float32: [-34028234663852886e22, 34028234663852886e22],
+	float64: [-Number.MAX_VALUE, Number.MAX_VALUE]
+};
+function pick(schema, mask) {
+	const currDef = schema._zod.def;
+	const checks = currDef.checks;
+	if (checks && checks.length > 0) throw new Error(".pick() cannot be used on object schemas containing refinements");
+	return clone(schema, mergeDefs(schema._zod.def, {
+		get shape() {
+			const newShape = {};
+			for (const key in mask) {
+				if (!(key in currDef.shape)) throw new Error(`Unrecognized key: "${key}"`);
+				if (!mask[key]) continue;
+				newShape[key] = currDef.shape[key];
+			}
+			assignProp(this, "shape", newShape);
+			return newShape;
+		},
+		checks: []
+	}));
+}
+function omit(schema, mask) {
+	const currDef = schema._zod.def;
+	const checks = currDef.checks;
+	if (checks && checks.length > 0) throw new Error(".omit() cannot be used on object schemas containing refinements");
+	return clone(schema, mergeDefs(schema._zod.def, {
+		get shape() {
+			const newShape = { ...schema._zod.def.shape };
+			for (const key in mask) {
+				if (!(key in currDef.shape)) throw new Error(`Unrecognized key: "${key}"`);
+				if (!mask[key]) continue;
+				delete newShape[key];
+			}
+			assignProp(this, "shape", newShape);
+			return newShape;
+		},
+		checks: []
+	}));
+}
+function extend(schema, shape) {
+	if (!isPlainObject(shape)) throw new Error("Invalid input to extend: expected a plain object");
+	const checks = schema._zod.def.checks;
+	if (checks && checks.length > 0) {
+		const existingShape = schema._zod.def.shape;
+		for (const key in shape) if (Object.getOwnPropertyDescriptor(existingShape, key) !== void 0) throw new Error("Cannot overwrite keys on object schemas containing refinements. Use `.safeExtend()` instead.");
+	}
+	return clone(schema, mergeDefs(schema._zod.def, { get shape() {
+		const _shape = {
+			...schema._zod.def.shape,
+			...shape
+		};
+		assignProp(this, "shape", _shape);
+		return _shape;
+	} }));
+}
+function safeExtend(schema, shape) {
+	if (!isPlainObject(shape)) throw new Error("Invalid input to safeExtend: expected a plain object");
+	return clone(schema, mergeDefs(schema._zod.def, { get shape() {
+		const _shape = {
+			...schema._zod.def.shape,
+			...shape
+		};
+		assignProp(this, "shape", _shape);
+		return _shape;
+	} }));
+}
+function merge(a, b) {
+	return clone(a, mergeDefs(a._zod.def, {
+		get shape() {
+			const _shape = {
+				...a._zod.def.shape,
+				...b._zod.def.shape
+			};
+			assignProp(this, "shape", _shape);
+			return _shape;
+		},
+		get catchall() {
+			return b._zod.def.catchall;
+		},
+		checks: []
+	}));
+}
+function partial(Class, schema, mask) {
+	const checks = schema._zod.def.checks;
+	if (checks && checks.length > 0) throw new Error(".partial() cannot be used on object schemas containing refinements");
+	return clone(schema, mergeDefs(schema._zod.def, {
+		get shape() {
+			const oldShape = schema._zod.def.shape;
+			const shape = { ...oldShape };
+			if (mask) for (const key in mask) {
+				if (!(key in oldShape)) throw new Error(`Unrecognized key: "${key}"`);
+				if (!mask[key]) continue;
+				shape[key] = Class ? new Class({
+					type: "optional",
+					innerType: oldShape[key]
+				}) : oldShape[key];
+			}
+			else for (const key in oldShape) shape[key] = Class ? new Class({
+				type: "optional",
+				innerType: oldShape[key]
+			}) : oldShape[key];
+			assignProp(this, "shape", shape);
+			return shape;
+		},
+		checks: []
+	}));
+}
+function required(Class, schema, mask) {
+	return clone(schema, mergeDefs(schema._zod.def, { get shape() {
+		const oldShape = schema._zod.def.shape;
+		const shape = { ...oldShape };
+		if (mask) for (const key in mask) {
+			if (!(key in shape)) throw new Error(`Unrecognized key: "${key}"`);
+			if (!mask[key]) continue;
+			shape[key] = new Class({
+				type: "nonoptional",
+				innerType: oldShape[key]
+			});
+		}
+		else for (const key in oldShape) shape[key] = new Class({
+			type: "nonoptional",
+			innerType: oldShape[key]
+		});
+		assignProp(this, "shape", shape);
+		return shape;
+	} }));
+}
+function aborted(x, startIndex = 0) {
+	if (x.aborted === true) return true;
+	for (let i = startIndex; i < x.issues.length; i++) if (x.issues[i]?.continue !== true) return true;
+	return false;
+}
+function prefixIssues(path, issues) {
+	return issues.map((iss) => {
+		var _a;
+		(_a = iss).path ?? (_a.path = []);
+		iss.path.unshift(path);
+		return iss;
+	});
+}
+function unwrapMessage(message) {
+	return typeof message === "string" ? message : message?.message;
+}
+function finalizeIssue(iss, ctx, config) {
+	const full = {
+		...iss,
+		path: iss.path ?? []
+	};
+	if (!iss.message) full.message = unwrapMessage(iss.inst?._zod.def?.error?.(iss)) ?? unwrapMessage(ctx?.error?.(iss)) ?? unwrapMessage(config.customError?.(iss)) ?? unwrapMessage(config.localeError?.(iss)) ?? "Invalid input";
+	delete full.inst;
+	delete full.continue;
+	if (!ctx?.reportInput) delete full.input;
+	return full;
+}
+function getLengthableOrigin(input) {
+	if (Array.isArray(input)) return "array";
+	if (typeof input === "string") return "string";
+	return "unknown";
+}
+function issue(...args) {
+	const [iss, input, inst] = args;
+	if (typeof iss === "string") return {
+		message: iss,
+		code: "custom",
+		input,
+		inst
+	};
+	return { ...iss };
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/zod@4.3.6/node_modules/zod/v4/core/errors.js
+var initializer$1 = (inst, def) => {
+	inst.name = "$ZodError";
+	Object.defineProperty(inst, "_zod", {
+		value: inst._zod,
+		enumerable: false
+	});
+	Object.defineProperty(inst, "issues", {
+		value: def,
+		enumerable: false
+	});
+	inst.message = JSON.stringify(def, jsonStringifyReplacer, 2);
+	Object.defineProperty(inst, "toString", {
+		value: () => inst.message,
+		enumerable: false
+	});
+};
+var $ZodError = $constructor("$ZodError", initializer$1);
+var $ZodRealError = $constructor("$ZodError", initializer$1, { Parent: Error });
+function flattenError(error, mapper = (issue) => issue.message) {
+	const fieldErrors = {};
+	const formErrors = [];
+	for (const sub of error.issues) if (sub.path.length > 0) {
+		fieldErrors[sub.path[0]] = fieldErrors[sub.path[0]] || [];
+		fieldErrors[sub.path[0]].push(mapper(sub));
+	} else formErrors.push(mapper(sub));
+	return {
+		formErrors,
+		fieldErrors
+	};
+}
+function formatError(error, mapper = (issue) => issue.message) {
+	const fieldErrors = { _errors: [] };
+	const processError = (error) => {
+		for (const issue of error.issues) if (issue.code === "invalid_union" && issue.errors.length) issue.errors.map((issues) => processError({ issues }));
+		else if (issue.code === "invalid_key") processError({ issues: issue.issues });
+		else if (issue.code === "invalid_element") processError({ issues: issue.issues });
+		else if (issue.path.length === 0) fieldErrors._errors.push(mapper(issue));
+		else {
+			let curr = fieldErrors;
+			let i = 0;
+			while (i < issue.path.length) {
+				const el = issue.path[i];
+				if (!(i === issue.path.length - 1)) curr[el] = curr[el] || { _errors: [] };
+				else {
+					curr[el] = curr[el] || { _errors: [] };
+					curr[el]._errors.push(mapper(issue));
+				}
+				curr = curr[el];
+				i++;
+			}
+		}
+	};
+	processError(error);
+	return fieldErrors;
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/zod@4.3.6/node_modules/zod/v4/core/parse.js
+var _parse = (_Err) => (schema, value, _ctx, _params) => {
+	const ctx = _ctx ? Object.assign(_ctx, { async: false }) : { async: false };
+	const result = schema._zod.run({
+		value,
+		issues: []
+	}, ctx);
+	if (result instanceof Promise) throw new $ZodAsyncError();
+	if (result.issues.length) {
+		const e = new (_params?.Err ?? _Err)(result.issues.map((iss) => finalizeIssue(iss, ctx, config$4())));
+		captureStackTrace(e, _params?.callee);
+		throw e;
+	}
+	return result.value;
+};
+var parse$1 = /* @__PURE__ */ _parse($ZodRealError);
+var _parseAsync = (_Err) => async (schema, value, _ctx, params) => {
+	const ctx = _ctx ? Object.assign(_ctx, { async: true }) : { async: true };
+	let result = schema._zod.run({
+		value,
+		issues: []
+	}, ctx);
+	if (result instanceof Promise) result = await result;
+	if (result.issues.length) {
+		const e = new (params?.Err ?? _Err)(result.issues.map((iss) => finalizeIssue(iss, ctx, config$4())));
+		captureStackTrace(e, params?.callee);
+		throw e;
+	}
+	return result.value;
+};
+var parseAsync$1 = /* @__PURE__ */ _parseAsync($ZodRealError);
+var _safeParse = (_Err) => (schema, value, _ctx) => {
+	const ctx = _ctx ? {
+		..._ctx,
+		async: false
+	} : { async: false };
+	const result = schema._zod.run({
+		value,
+		issues: []
+	}, ctx);
+	if (result instanceof Promise) throw new $ZodAsyncError();
+	return result.issues.length ? {
+		success: false,
+		error: new (_Err ?? $ZodError)(result.issues.map((iss) => finalizeIssue(iss, ctx, config$4())))
+	} : {
+		success: true,
+		data: result.value
+	};
+};
+var safeParse$1 = /* @__PURE__ */ _safeParse($ZodRealError);
+var _safeParseAsync = (_Err) => async (schema, value, _ctx) => {
+	const ctx = _ctx ? Object.assign(_ctx, { async: true }) : { async: true };
+	let result = schema._zod.run({
+		value,
+		issues: []
+	}, ctx);
+	if (result instanceof Promise) result = await result;
+	return result.issues.length ? {
+		success: false,
+		error: new _Err(result.issues.map((iss) => finalizeIssue(iss, ctx, config$4())))
+	} : {
+		success: true,
+		data: result.value
+	};
+};
+var safeParseAsync$1 = /* @__PURE__ */ _safeParseAsync($ZodRealError);
+var _encode = (_Err) => (schema, value, _ctx) => {
+	const ctx = _ctx ? Object.assign(_ctx, { direction: "backward" }) : { direction: "backward" };
+	return _parse(_Err)(schema, value, ctx);
+};
+var _decode = (_Err) => (schema, value, _ctx) => {
+	return _parse(_Err)(schema, value, _ctx);
+};
+var _encodeAsync = (_Err) => async (schema, value, _ctx) => {
+	const ctx = _ctx ? Object.assign(_ctx, { direction: "backward" }) : { direction: "backward" };
+	return _parseAsync(_Err)(schema, value, ctx);
+};
+var _decodeAsync = (_Err) => async (schema, value, _ctx) => {
+	return _parseAsync(_Err)(schema, value, _ctx);
+};
+var _safeEncode = (_Err) => (schema, value, _ctx) => {
+	const ctx = _ctx ? Object.assign(_ctx, { direction: "backward" }) : { direction: "backward" };
+	return _safeParse(_Err)(schema, value, ctx);
+};
+var _safeDecode = (_Err) => (schema, value, _ctx) => {
+	return _safeParse(_Err)(schema, value, _ctx);
+};
+var _safeEncodeAsync = (_Err) => async (schema, value, _ctx) => {
+	const ctx = _ctx ? Object.assign(_ctx, { direction: "backward" }) : { direction: "backward" };
+	return _safeParseAsync(_Err)(schema, value, ctx);
+};
+var _safeDecodeAsync = (_Err) => async (schema, value, _ctx) => {
+	return _safeParseAsync(_Err)(schema, value, _ctx);
+};
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/zod@4.3.6/node_modules/zod/v4/core/regexes.js
+var cuid = /^[cC][^\s-]{8,}$/;
+var cuid2 = /^[0-9a-z]+$/;
+var ulid = /^[0-9A-HJKMNP-TV-Za-hjkmnp-tv-z]{26}$/;
+var xid = /^[0-9a-vA-V]{20}$/;
+var ksuid = /^[A-Za-z0-9]{27}$/;
+var nanoid = /^[a-zA-Z0-9_-]{21}$/;
+/** ISO 8601-1 duration regex. Does not support the 8601-2 extensions like negative durations or fractional/negative components. */
+var duration$1 = /^P(?:(\d+W)|(?!.*W)(?=\d|T\d)(\d+Y)?(\d+M)?(\d+D)?(T(?=\d)(\d+H)?(\d+M)?(\d+([.,]\d+)?S)?)?)$/;
+/** A regex for any UUID-like identifier: 8-4-4-4-12 hex pattern */
+var guid = /^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})$/;
+/** Returns a regex for validating an RFC 9562/4122 UUID.
+*
+* @param version Optionally specify a version 1-8. If no version is specified, all versions are supported. */
+var uuid = (version) => {
+	if (!version) return /^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$/;
+	return new RegExp(`^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-${version}[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12})$`);
+};
+/** Practical email validation */
+var email = /^(?!\.)(?!.*\.\.)([A-Za-z0-9_'+\-\.]*)[A-Za-z0-9_+-]@([A-Za-z0-9][A-Za-z0-9\-]*\.)+[A-Za-z]{2,}$/;
+var _emoji$1 = `^(\\p{Extended_Pictographic}|\\p{Emoji_Component})+$`;
+function emoji() {
+	return new RegExp(_emoji$1, "u");
+}
+var ipv4 = /^(?:(?:25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\.){3}(?:25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])$/;
+var ipv6 = /^(([0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:))$/;
+var cidrv4 = /^((25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\.){3}(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\/([0-9]|[1-2][0-9]|3[0-2])$/;
+var cidrv6 = /^(([0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}|::|([0-9a-fA-F]{1,4})?::([0-9a-fA-F]{1,4}:?){0,6})\/(12[0-8]|1[01][0-9]|[1-9]?[0-9])$/;
+var base64 = /^$|^(?:[0-9a-zA-Z+/]{4})*(?:(?:[0-9a-zA-Z+/]{2}==)|(?:[0-9a-zA-Z+/]{3}=))?$/;
+var base64url = /^[A-Za-z0-9_-]*$/;
+var e164 = /^\+[1-9]\d{6,14}$/;
+var dateSource = `(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))`;
+var date$1 = /* @__PURE__ */ new RegExp(`^${dateSource}$`);
+function timeSource(args) {
+	const hhmm = `(?:[01]\\d|2[0-3]):[0-5]\\d`;
+	return typeof args.precision === "number" ? args.precision === -1 ? `${hhmm}` : args.precision === 0 ? `${hhmm}:[0-5]\\d` : `${hhmm}:[0-5]\\d\\.\\d{${args.precision}}` : `${hhmm}(?::[0-5]\\d(?:\\.\\d+)?)?`;
+}
+function time$1(args) {
+	return new RegExp(`^${timeSource(args)}$`);
+}
+function datetime$1(args) {
+	const time = timeSource({ precision: args.precision });
+	const opts = ["Z"];
+	if (args.local) opts.push("");
+	if (args.offset) opts.push(`([+-](?:[01]\\d|2[0-3]):[0-5]\\d)`);
+	const timeRegex = `${time}(?:${opts.join("|")})`;
+	return new RegExp(`^${dateSource}T(?:${timeRegex})$`);
+}
+var string$1 = (params) => {
+	const regex = params ? `[\\s\\S]{${params?.minimum ?? 0},${params?.maximum ?? ""}}` : `[\\s\\S]*`;
+	return new RegExp(`^${regex}$`);
+};
+var integer = /^-?\d+$/;
+var number$1 = /^-?\d+(?:\.\d+)?$/;
+var lowercase = /^[^A-Z]*$/;
+var uppercase = /^[^a-z]*$/;
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/zod@4.3.6/node_modules/zod/v4/core/checks.js
+var $ZodCheck = /* @__PURE__ */ $constructor("$ZodCheck", (inst, def) => {
+	var _a;
+	inst._zod ?? (inst._zod = {});
+	inst._zod.def = def;
+	(_a = inst._zod).onattach ?? (_a.onattach = []);
+});
+var numericOriginMap = {
+	number: "number",
+	bigint: "bigint",
+	object: "date"
+};
+var $ZodCheckLessThan = /* @__PURE__ */ $constructor("$ZodCheckLessThan", (inst, def) => {
+	$ZodCheck.init(inst, def);
+	const origin = numericOriginMap[typeof def.value];
+	inst._zod.onattach.push((inst) => {
+		const bag = inst._zod.bag;
+		const curr = (def.inclusive ? bag.maximum : bag.exclusiveMaximum) ?? Number.POSITIVE_INFINITY;
+		if (def.value < curr) if (def.inclusive) bag.maximum = def.value;
+		else bag.exclusiveMaximum = def.value;
+	});
+	inst._zod.check = (payload) => {
+		if (def.inclusive ? payload.value <= def.value : payload.value < def.value) return;
+		payload.issues.push({
+			origin,
+			code: "too_big",
+			maximum: typeof def.value === "object" ? def.value.getTime() : def.value,
+			input: payload.value,
+			inclusive: def.inclusive,
+			inst,
+			continue: !def.abort
+		});
+	};
+});
+var $ZodCheckGreaterThan = /* @__PURE__ */ $constructor("$ZodCheckGreaterThan", (inst, def) => {
+	$ZodCheck.init(inst, def);
+	const origin = numericOriginMap[typeof def.value];
+	inst._zod.onattach.push((inst) => {
+		const bag = inst._zod.bag;
+		const curr = (def.inclusive ? bag.minimum : bag.exclusiveMinimum) ?? Number.NEGATIVE_INFINITY;
+		if (def.value > curr) if (def.inclusive) bag.minimum = def.value;
+		else bag.exclusiveMinimum = def.value;
+	});
+	inst._zod.check = (payload) => {
+		if (def.inclusive ? payload.value >= def.value : payload.value > def.value) return;
+		payload.issues.push({
+			origin,
+			code: "too_small",
+			minimum: typeof def.value === "object" ? def.value.getTime() : def.value,
+			input: payload.value,
+			inclusive: def.inclusive,
+			inst,
+			continue: !def.abort
+		});
+	};
+});
+var $ZodCheckMultipleOf = /* @__PURE__ */ $constructor("$ZodCheckMultipleOf", (inst, def) => {
+	$ZodCheck.init(inst, def);
+	inst._zod.onattach.push((inst) => {
+		var _a;
+		(_a = inst._zod.bag).multipleOf ?? (_a.multipleOf = def.value);
+	});
+	inst._zod.check = (payload) => {
+		if (typeof payload.value !== typeof def.value) throw new Error("Cannot mix number and bigint in multiple_of check.");
+		if (typeof payload.value === "bigint" ? payload.value % def.value === BigInt(0) : floatSafeRemainder(payload.value, def.value) === 0) return;
+		payload.issues.push({
+			origin: typeof payload.value,
+			code: "not_multiple_of",
+			divisor: def.value,
+			input: payload.value,
+			inst,
+			continue: !def.abort
+		});
+	};
+});
+var $ZodCheckNumberFormat = /* @__PURE__ */ $constructor("$ZodCheckNumberFormat", (inst, def) => {
+	$ZodCheck.init(inst, def);
+	def.format = def.format || "float64";
+	const isInt = def.format?.includes("int");
+	const origin = isInt ? "int" : "number";
+	const [minimum, maximum] = NUMBER_FORMAT_RANGES[def.format];
+	inst._zod.onattach.push((inst) => {
+		const bag = inst._zod.bag;
+		bag.format = def.format;
+		bag.minimum = minimum;
+		bag.maximum = maximum;
+		if (isInt) bag.pattern = integer;
+	});
+	inst._zod.check = (payload) => {
+		const input = payload.value;
+		if (isInt) {
+			if (!Number.isInteger(input)) {
+				payload.issues.push({
+					expected: origin,
+					format: def.format,
+					code: "invalid_type",
+					continue: false,
+					input,
+					inst
+				});
+				return;
+			}
+			if (!Number.isSafeInteger(input)) {
+				if (input > 0) payload.issues.push({
+					input,
+					code: "too_big",
+					maximum: Number.MAX_SAFE_INTEGER,
+					note: "Integers must be within the safe integer range.",
+					inst,
+					origin,
+					inclusive: true,
+					continue: !def.abort
+				});
+				else payload.issues.push({
+					input,
+					code: "too_small",
+					minimum: Number.MIN_SAFE_INTEGER,
+					note: "Integers must be within the safe integer range.",
+					inst,
+					origin,
+					inclusive: true,
+					continue: !def.abort
+				});
+				return;
+			}
+		}
+		if (input < minimum) payload.issues.push({
+			origin: "number",
+			input,
+			code: "too_small",
+			minimum,
+			inclusive: true,
+			inst,
+			continue: !def.abort
+		});
+		if (input > maximum) payload.issues.push({
+			origin: "number",
+			input,
+			code: "too_big",
+			maximum,
+			inclusive: true,
+			inst,
+			continue: !def.abort
+		});
+	};
+});
+var $ZodCheckMaxLength = /* @__PURE__ */ $constructor("$ZodCheckMaxLength", (inst, def) => {
+	var _a;
+	$ZodCheck.init(inst, def);
+	(_a = inst._zod.def).when ?? (_a.when = (payload) => {
+		const val = payload.value;
+		return !nullish(val) && val.length !== void 0;
+	});
+	inst._zod.onattach.push((inst) => {
+		const curr = inst._zod.bag.maximum ?? Number.POSITIVE_INFINITY;
+		if (def.maximum < curr) inst._zod.bag.maximum = def.maximum;
+	});
+	inst._zod.check = (payload) => {
+		const input = payload.value;
+		if (input.length <= def.maximum) return;
+		const origin = getLengthableOrigin(input);
+		payload.issues.push({
+			origin,
+			code: "too_big",
+			maximum: def.maximum,
+			inclusive: true,
+			input,
+			inst,
+			continue: !def.abort
+		});
+	};
+});
+var $ZodCheckMinLength = /* @__PURE__ */ $constructor("$ZodCheckMinLength", (inst, def) => {
+	var _a;
+	$ZodCheck.init(inst, def);
+	(_a = inst._zod.def).when ?? (_a.when = (payload) => {
+		const val = payload.value;
+		return !nullish(val) && val.length !== void 0;
+	});
+	inst._zod.onattach.push((inst) => {
+		const curr = inst._zod.bag.minimum ?? Number.NEGATIVE_INFINITY;
+		if (def.minimum > curr) inst._zod.bag.minimum = def.minimum;
+	});
+	inst._zod.check = (payload) => {
+		const input = payload.value;
+		if (input.length >= def.minimum) return;
+		const origin = getLengthableOrigin(input);
+		payload.issues.push({
+			origin,
+			code: "too_small",
+			minimum: def.minimum,
+			inclusive: true,
+			input,
+			inst,
+			continue: !def.abort
+		});
+	};
+});
+var $ZodCheckLengthEquals = /* @__PURE__ */ $constructor("$ZodCheckLengthEquals", (inst, def) => {
+	var _a;
+	$ZodCheck.init(inst, def);
+	(_a = inst._zod.def).when ?? (_a.when = (payload) => {
+		const val = payload.value;
+		return !nullish(val) && val.length !== void 0;
+	});
+	inst._zod.onattach.push((inst) => {
+		const bag = inst._zod.bag;
+		bag.minimum = def.length;
+		bag.maximum = def.length;
+		bag.length = def.length;
+	});
+	inst._zod.check = (payload) => {
+		const input = payload.value;
+		const length = input.length;
+		if (length === def.length) return;
+		const origin = getLengthableOrigin(input);
+		const tooBig = length > def.length;
+		payload.issues.push({
+			origin,
+			...tooBig ? {
+				code: "too_big",
+				maximum: def.length
+			} : {
+				code: "too_small",
+				minimum: def.length
+			},
+			inclusive: true,
+			exact: true,
+			input: payload.value,
+			inst,
+			continue: !def.abort
+		});
+	};
+});
+var $ZodCheckStringFormat = /* @__PURE__ */ $constructor("$ZodCheckStringFormat", (inst, def) => {
+	var _a, _b;
+	$ZodCheck.init(inst, def);
+	inst._zod.onattach.push((inst) => {
+		const bag = inst._zod.bag;
+		bag.format = def.format;
+		if (def.pattern) {
+			bag.patterns ?? (bag.patterns = /* @__PURE__ */ new Set());
+			bag.patterns.add(def.pattern);
+		}
+	});
+	if (def.pattern) (_a = inst._zod).check ?? (_a.check = (payload) => {
+		def.pattern.lastIndex = 0;
+		if (def.pattern.test(payload.value)) return;
+		payload.issues.push({
+			origin: "string",
+			code: "invalid_format",
+			format: def.format,
+			input: payload.value,
+			...def.pattern ? { pattern: def.pattern.toString() } : {},
+			inst,
+			continue: !def.abort
+		});
+	});
+	else (_b = inst._zod).check ?? (_b.check = () => {});
+});
+var $ZodCheckRegex = /* @__PURE__ */ $constructor("$ZodCheckRegex", (inst, def) => {
+	$ZodCheckStringFormat.init(inst, def);
+	inst._zod.check = (payload) => {
+		def.pattern.lastIndex = 0;
+		if (def.pattern.test(payload.value)) return;
+		payload.issues.push({
+			origin: "string",
+			code: "invalid_format",
+			format: "regex",
+			input: payload.value,
+			pattern: def.pattern.toString(),
+			inst,
+			continue: !def.abort
+		});
+	};
+});
+var $ZodCheckLowerCase = /* @__PURE__ */ $constructor("$ZodCheckLowerCase", (inst, def) => {
+	def.pattern ?? (def.pattern = lowercase);
+	$ZodCheckStringFormat.init(inst, def);
+});
+var $ZodCheckUpperCase = /* @__PURE__ */ $constructor("$ZodCheckUpperCase", (inst, def) => {
+	def.pattern ?? (def.pattern = uppercase);
+	$ZodCheckStringFormat.init(inst, def);
+});
+var $ZodCheckIncludes = /* @__PURE__ */ $constructor("$ZodCheckIncludes", (inst, def) => {
+	$ZodCheck.init(inst, def);
+	const escapedRegex = escapeRegex(def.includes);
+	const pattern = new RegExp(typeof def.position === "number" ? `^.{${def.position}}${escapedRegex}` : escapedRegex);
+	def.pattern = pattern;
+	inst._zod.onattach.push((inst) => {
+		const bag = inst._zod.bag;
+		bag.patterns ?? (bag.patterns = /* @__PURE__ */ new Set());
+		bag.patterns.add(pattern);
+	});
+	inst._zod.check = (payload) => {
+		if (payload.value.includes(def.includes, def.position)) return;
+		payload.issues.push({
+			origin: "string",
+			code: "invalid_format",
+			format: "includes",
+			includes: def.includes,
+			input: payload.value,
+			inst,
+			continue: !def.abort
+		});
+	};
+});
+var $ZodCheckStartsWith = /* @__PURE__ */ $constructor("$ZodCheckStartsWith", (inst, def) => {
+	$ZodCheck.init(inst, def);
+	const pattern = new RegExp(`^${escapeRegex(def.prefix)}.*`);
+	def.pattern ?? (def.pattern = pattern);
+	inst._zod.onattach.push((inst) => {
+		const bag = inst._zod.bag;
+		bag.patterns ?? (bag.patterns = /* @__PURE__ */ new Set());
+		bag.patterns.add(pattern);
+	});
+	inst._zod.check = (payload) => {
+		if (payload.value.startsWith(def.prefix)) return;
+		payload.issues.push({
+			origin: "string",
+			code: "invalid_format",
+			format: "starts_with",
+			prefix: def.prefix,
+			input: payload.value,
+			inst,
+			continue: !def.abort
+		});
+	};
+});
+var $ZodCheckEndsWith = /* @__PURE__ */ $constructor("$ZodCheckEndsWith", (inst, def) => {
+	$ZodCheck.init(inst, def);
+	const pattern = new RegExp(`.*${escapeRegex(def.suffix)}$`);
+	def.pattern ?? (def.pattern = pattern);
+	inst._zod.onattach.push((inst) => {
+		const bag = inst._zod.bag;
+		bag.patterns ?? (bag.patterns = /* @__PURE__ */ new Set());
+		bag.patterns.add(pattern);
+	});
+	inst._zod.check = (payload) => {
+		if (payload.value.endsWith(def.suffix)) return;
+		payload.issues.push({
+			origin: "string",
+			code: "invalid_format",
+			format: "ends_with",
+			suffix: def.suffix,
+			input: payload.value,
+			inst,
+			continue: !def.abort
+		});
+	};
+});
+var $ZodCheckOverwrite = /* @__PURE__ */ $constructor("$ZodCheckOverwrite", (inst, def) => {
+	$ZodCheck.init(inst, def);
+	inst._zod.check = (payload) => {
+		payload.value = def.tx(payload.value);
+	};
+});
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/zod@4.3.6/node_modules/zod/v4/core/doc.js
+var Doc = class {
+	constructor(args = []) {
+		this.content = [];
+		this.indent = 0;
+		if (this) this.args = args;
+	}
+	indented(fn) {
+		this.indent += 1;
+		fn(this);
+		this.indent -= 1;
+	}
+	write(arg) {
+		if (typeof arg === "function") {
+			arg(this, { execution: "sync" });
+			arg(this, { execution: "async" });
+			return;
+		}
+		const lines = arg.split("\n").filter((x) => x);
+		const minIndent = Math.min(...lines.map((x) => x.length - x.trimStart().length));
+		const dedented = lines.map((x) => x.slice(minIndent)).map((x) => " ".repeat(this.indent * 2) + x);
+		for (const line of dedented) this.content.push(line);
+	}
+	compile() {
+		const F = Function;
+		const args = this?.args;
+		const lines = [...(this?.content ?? [``]).map((x) => `  ${x}`)];
+		return new F(...args, lines.join("\n"));
+	}
+};
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/zod@4.3.6/node_modules/zod/v4/core/versions.js
+var version = {
+	major: 4,
+	minor: 3,
+	patch: 6
+};
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/zod@4.3.6/node_modules/zod/v4/core/schemas.js
+var $ZodType = /* @__PURE__ */ $constructor("$ZodType", (inst, def) => {
+	var _a;
+	inst ?? (inst = {});
+	inst._zod.def = def;
+	inst._zod.bag = inst._zod.bag || {};
+	inst._zod.version = version;
+	const checks = [...inst._zod.def.checks ?? []];
+	if (inst._zod.traits.has("$ZodCheck")) checks.unshift(inst);
+	for (const ch of checks) for (const fn of ch._zod.onattach) fn(inst);
+	if (checks.length === 0) {
+		(_a = inst._zod).deferred ?? (_a.deferred = []);
+		inst._zod.deferred?.push(() => {
+			inst._zod.run = inst._zod.parse;
+		});
+	} else {
+		const runChecks = (payload, checks, ctx) => {
+			let isAborted = aborted(payload);
+			let asyncResult;
+			for (const ch of checks) {
+				if (ch._zod.def.when) {
+					if (!ch._zod.def.when(payload)) continue;
+				} else if (isAborted) continue;
+				const currLen = payload.issues.length;
+				const _ = ch._zod.check(payload);
+				if (_ instanceof Promise && ctx?.async === false) throw new $ZodAsyncError();
+				if (asyncResult || _ instanceof Promise) asyncResult = (asyncResult ?? Promise.resolve()).then(async () => {
+					await _;
+					if (payload.issues.length === currLen) return;
+					if (!isAborted) isAborted = aborted(payload, currLen);
+				});
+				else {
+					if (payload.issues.length === currLen) continue;
+					if (!isAborted) isAborted = aborted(payload, currLen);
+				}
+			}
+			if (asyncResult) return asyncResult.then(() => {
+				return payload;
+			});
+			return payload;
+		};
+		const handleCanaryResult = (canary, payload, ctx) => {
+			if (aborted(canary)) {
+				canary.aborted = true;
+				return canary;
+			}
+			const checkResult = runChecks(payload, checks, ctx);
+			if (checkResult instanceof Promise) {
+				if (ctx.async === false) throw new $ZodAsyncError();
+				return checkResult.then((checkResult) => inst._zod.parse(checkResult, ctx));
+			}
+			return inst._zod.parse(checkResult, ctx);
+		};
+		inst._zod.run = (payload, ctx) => {
+			if (ctx.skipChecks) return inst._zod.parse(payload, ctx);
+			if (ctx.direction === "backward") {
+				const canary = inst._zod.parse({
+					value: payload.value,
+					issues: []
+				}, {
+					...ctx,
+					skipChecks: true
+				});
+				if (canary instanceof Promise) return canary.then((canary) => {
+					return handleCanaryResult(canary, payload, ctx);
+				});
+				return handleCanaryResult(canary, payload, ctx);
+			}
+			const result = inst._zod.parse(payload, ctx);
+			if (result instanceof Promise) {
+				if (ctx.async === false) throw new $ZodAsyncError();
+				return result.then((result) => runChecks(result, checks, ctx));
+			}
+			return runChecks(result, checks, ctx);
+		};
+	}
+	defineLazy(inst, "~standard", () => ({
+		validate: (value) => {
+			try {
+				const r = safeParse$1(inst, value);
+				return r.success ? { value: r.data } : { issues: r.error?.issues };
+			} catch (_) {
+				return safeParseAsync$1(inst, value).then((r) => r.success ? { value: r.data } : { issues: r.error?.issues });
+			}
+		},
+		vendor: "zod",
+		version: 1
+	}));
+});
+var $ZodString = /* @__PURE__ */ $constructor("$ZodString", (inst, def) => {
+	$ZodType.init(inst, def);
+	inst._zod.pattern = [...inst?._zod.bag?.patterns ?? []].pop() ?? string$1(inst._zod.bag);
+	inst._zod.parse = (payload, _) => {
+		if (def.coerce) try {
+			payload.value = String(payload.value);
+		} catch (_) {}
+		if (typeof payload.value === "string") return payload;
+		payload.issues.push({
+			expected: "string",
+			code: "invalid_type",
+			input: payload.value,
+			inst
+		});
+		return payload;
+	};
+});
+var $ZodStringFormat = /* @__PURE__ */ $constructor("$ZodStringFormat", (inst, def) => {
+	$ZodCheckStringFormat.init(inst, def);
+	$ZodString.init(inst, def);
+});
+var $ZodGUID = /* @__PURE__ */ $constructor("$ZodGUID", (inst, def) => {
+	def.pattern ?? (def.pattern = guid);
+	$ZodStringFormat.init(inst, def);
+});
+var $ZodUUID = /* @__PURE__ */ $constructor("$ZodUUID", (inst, def) => {
+	if (def.version) {
+		const v = {
+			v1: 1,
+			v2: 2,
+			v3: 3,
+			v4: 4,
+			v5: 5,
+			v6: 6,
+			v7: 7,
+			v8: 8
+		}[def.version];
+		if (v === void 0) throw new Error(`Invalid UUID version: "${def.version}"`);
+		def.pattern ?? (def.pattern = uuid(v));
+	} else def.pattern ?? (def.pattern = uuid());
+	$ZodStringFormat.init(inst, def);
+});
+var $ZodEmail = /* @__PURE__ */ $constructor("$ZodEmail", (inst, def) => {
+	def.pattern ?? (def.pattern = email);
+	$ZodStringFormat.init(inst, def);
+});
+var $ZodURL = /* @__PURE__ */ $constructor("$ZodURL", (inst, def) => {
+	$ZodStringFormat.init(inst, def);
+	inst._zod.check = (payload) => {
+		try {
+			const trimmed = payload.value.trim();
+			const url = new URL(trimmed);
+			if (def.hostname) {
+				def.hostname.lastIndex = 0;
+				if (!def.hostname.test(url.hostname)) payload.issues.push({
+					code: "invalid_format",
+					format: "url",
+					note: "Invalid hostname",
+					pattern: def.hostname.source,
+					input: payload.value,
+					inst,
+					continue: !def.abort
+				});
+			}
+			if (def.protocol) {
+				def.protocol.lastIndex = 0;
+				if (!def.protocol.test(url.protocol.endsWith(":") ? url.protocol.slice(0, -1) : url.protocol)) payload.issues.push({
+					code: "invalid_format",
+					format: "url",
+					note: "Invalid protocol",
+					pattern: def.protocol.source,
+					input: payload.value,
+					inst,
+					continue: !def.abort
+				});
+			}
+			if (def.normalize) payload.value = url.href;
+			else payload.value = trimmed;
+			return;
+		} catch (_) {
+			payload.issues.push({
+				code: "invalid_format",
+				format: "url",
+				input: payload.value,
+				inst,
+				continue: !def.abort
+			});
+		}
+	};
+});
+var $ZodEmoji = /* @__PURE__ */ $constructor("$ZodEmoji", (inst, def) => {
+	def.pattern ?? (def.pattern = emoji());
+	$ZodStringFormat.init(inst, def);
+});
+var $ZodNanoID = /* @__PURE__ */ $constructor("$ZodNanoID", (inst, def) => {
+	def.pattern ?? (def.pattern = nanoid);
+	$ZodStringFormat.init(inst, def);
+});
+var $ZodCUID = /* @__PURE__ */ $constructor("$ZodCUID", (inst, def) => {
+	def.pattern ?? (def.pattern = cuid);
+	$ZodStringFormat.init(inst, def);
+});
+var $ZodCUID2 = /* @__PURE__ */ $constructor("$ZodCUID2", (inst, def) => {
+	def.pattern ?? (def.pattern = cuid2);
+	$ZodStringFormat.init(inst, def);
+});
+var $ZodULID = /* @__PURE__ */ $constructor("$ZodULID", (inst, def) => {
+	def.pattern ?? (def.pattern = ulid);
+	$ZodStringFormat.init(inst, def);
+});
+var $ZodXID = /* @__PURE__ */ $constructor("$ZodXID", (inst, def) => {
+	def.pattern ?? (def.pattern = xid);
+	$ZodStringFormat.init(inst, def);
+});
+var $ZodKSUID = /* @__PURE__ */ $constructor("$ZodKSUID", (inst, def) => {
+	def.pattern ?? (def.pattern = ksuid);
+	$ZodStringFormat.init(inst, def);
+});
+var $ZodISODateTime = /* @__PURE__ */ $constructor("$ZodISODateTime", (inst, def) => {
+	def.pattern ?? (def.pattern = datetime$1(def));
+	$ZodStringFormat.init(inst, def);
+});
+var $ZodISODate = /* @__PURE__ */ $constructor("$ZodISODate", (inst, def) => {
+	def.pattern ?? (def.pattern = date$1);
+	$ZodStringFormat.init(inst, def);
+});
+var $ZodISOTime = /* @__PURE__ */ $constructor("$ZodISOTime", (inst, def) => {
+	def.pattern ?? (def.pattern = time$1(def));
+	$ZodStringFormat.init(inst, def);
+});
+var $ZodISODuration = /* @__PURE__ */ $constructor("$ZodISODuration", (inst, def) => {
+	def.pattern ?? (def.pattern = duration$1);
+	$ZodStringFormat.init(inst, def);
+});
+var $ZodIPv4 = /* @__PURE__ */ $constructor("$ZodIPv4", (inst, def) => {
+	def.pattern ?? (def.pattern = ipv4);
+	$ZodStringFormat.init(inst, def);
+	inst._zod.bag.format = `ipv4`;
+});
+var $ZodIPv6 = /* @__PURE__ */ $constructor("$ZodIPv6", (inst, def) => {
+	def.pattern ?? (def.pattern = ipv6);
+	$ZodStringFormat.init(inst, def);
+	inst._zod.bag.format = `ipv6`;
+	inst._zod.check = (payload) => {
+		try {
+			new URL(`http://[${payload.value}]`);
+		} catch {
+			payload.issues.push({
+				code: "invalid_format",
+				format: "ipv6",
+				input: payload.value,
+				inst,
+				continue: !def.abort
+			});
+		}
+	};
+});
+var $ZodCIDRv4 = /* @__PURE__ */ $constructor("$ZodCIDRv4", (inst, def) => {
+	def.pattern ?? (def.pattern = cidrv4);
+	$ZodStringFormat.init(inst, def);
+});
+var $ZodCIDRv6 = /* @__PURE__ */ $constructor("$ZodCIDRv6", (inst, def) => {
+	def.pattern ?? (def.pattern = cidrv6);
+	$ZodStringFormat.init(inst, def);
+	inst._zod.check = (payload) => {
+		const parts = payload.value.split("/");
+		try {
+			if (parts.length !== 2) throw new Error();
+			const [address, prefix] = parts;
+			if (!prefix) throw new Error();
+			const prefixNum = Number(prefix);
+			if (`${prefixNum}` !== prefix) throw new Error();
+			if (prefixNum < 0 || prefixNum > 128) throw new Error();
+			new URL(`http://[${address}]`);
+		} catch {
+			payload.issues.push({
+				code: "invalid_format",
+				format: "cidrv6",
+				input: payload.value,
+				inst,
+				continue: !def.abort
+			});
+		}
+	};
+});
+function isValidBase64(data) {
+	if (data === "") return true;
+	if (data.length % 4 !== 0) return false;
+	try {
+		atob(data);
+		return true;
+	} catch {
+		return false;
+	}
+}
+var $ZodBase64 = /* @__PURE__ */ $constructor("$ZodBase64", (inst, def) => {
+	def.pattern ?? (def.pattern = base64);
+	$ZodStringFormat.init(inst, def);
+	inst._zod.bag.contentEncoding = "base64";
+	inst._zod.check = (payload) => {
+		if (isValidBase64(payload.value)) return;
+		payload.issues.push({
+			code: "invalid_format",
+			format: "base64",
+			input: payload.value,
+			inst,
+			continue: !def.abort
+		});
+	};
+});
+function isValidBase64URL(data) {
+	if (!base64url.test(data)) return false;
+	const base64 = data.replace(/[-_]/g, (c) => c === "-" ? "+" : "/");
+	return isValidBase64(base64.padEnd(Math.ceil(base64.length / 4) * 4, "="));
+}
+var $ZodBase64URL = /* @__PURE__ */ $constructor("$ZodBase64URL", (inst, def) => {
+	def.pattern ?? (def.pattern = base64url);
+	$ZodStringFormat.init(inst, def);
+	inst._zod.bag.contentEncoding = "base64url";
+	inst._zod.check = (payload) => {
+		if (isValidBase64URL(payload.value)) return;
+		payload.issues.push({
+			code: "invalid_format",
+			format: "base64url",
+			input: payload.value,
+			inst,
+			continue: !def.abort
+		});
+	};
+});
+var $ZodE164 = /* @__PURE__ */ $constructor("$ZodE164", (inst, def) => {
+	def.pattern ?? (def.pattern = e164);
+	$ZodStringFormat.init(inst, def);
+});
+function isValidJWT(token, algorithm = null) {
+	try {
+		const tokensParts = token.split(".");
+		if (tokensParts.length !== 3) return false;
+		const [header] = tokensParts;
+		if (!header) return false;
+		const parsedHeader = JSON.parse(atob(header));
+		if ("typ" in parsedHeader && parsedHeader?.typ !== "JWT") return false;
+		if (!parsedHeader.alg) return false;
+		if (algorithm && (!("alg" in parsedHeader) || parsedHeader.alg !== algorithm)) return false;
+		return true;
+	} catch {
+		return false;
+	}
+}
+var $ZodJWT = /* @__PURE__ */ $constructor("$ZodJWT", (inst, def) => {
+	$ZodStringFormat.init(inst, def);
+	inst._zod.check = (payload) => {
+		if (isValidJWT(payload.value, def.alg)) return;
+		payload.issues.push({
+			code: "invalid_format",
+			format: "jwt",
+			input: payload.value,
+			inst,
+			continue: !def.abort
+		});
+	};
+});
+var $ZodNumber = /* @__PURE__ */ $constructor("$ZodNumber", (inst, def) => {
+	$ZodType.init(inst, def);
+	inst._zod.pattern = inst._zod.bag.pattern ?? number$1;
+	inst._zod.parse = (payload, _ctx) => {
+		if (def.coerce) try {
+			payload.value = Number(payload.value);
+		} catch (_) {}
+		const input = payload.value;
+		if (typeof input === "number" && !Number.isNaN(input) && Number.isFinite(input)) return payload;
+		const received = typeof input === "number" ? Number.isNaN(input) ? "NaN" : !Number.isFinite(input) ? "Infinity" : void 0 : void 0;
+		payload.issues.push({
+			expected: "number",
+			code: "invalid_type",
+			input,
+			inst,
+			...received ? { received } : {}
+		});
+		return payload;
+	};
+});
+var $ZodNumberFormat = /* @__PURE__ */ $constructor("$ZodNumberFormat", (inst, def) => {
+	$ZodCheckNumberFormat.init(inst, def);
+	$ZodNumber.init(inst, def);
+});
+var $ZodUnknown = /* @__PURE__ */ $constructor("$ZodUnknown", (inst, def) => {
+	$ZodType.init(inst, def);
+	inst._zod.parse = (payload) => payload;
+});
+var $ZodNever = /* @__PURE__ */ $constructor("$ZodNever", (inst, def) => {
+	$ZodType.init(inst, def);
+	inst._zod.parse = (payload, _ctx) => {
+		payload.issues.push({
+			expected: "never",
+			code: "invalid_type",
+			input: payload.value,
+			inst
+		});
+		return payload;
+	};
+});
+function handleArrayResult(result, final, index) {
+	if (result.issues.length) final.issues.push(...prefixIssues(index, result.issues));
+	final.value[index] = result.value;
+}
+var $ZodArray = /* @__PURE__ */ $constructor("$ZodArray", (inst, def) => {
+	$ZodType.init(inst, def);
+	inst._zod.parse = (payload, ctx) => {
+		const input = payload.value;
+		if (!Array.isArray(input)) {
+			payload.issues.push({
+				expected: "array",
+				code: "invalid_type",
+				input,
+				inst
+			});
+			return payload;
+		}
+		payload.value = Array(input.length);
+		const proms = [];
+		for (let i = 0; i < input.length; i++) {
+			const item = input[i];
+			const result = def.element._zod.run({
+				value: item,
+				issues: []
+			}, ctx);
+			if (result instanceof Promise) proms.push(result.then((result) => handleArrayResult(result, payload, i)));
+			else handleArrayResult(result, payload, i);
+		}
+		if (proms.length) return Promise.all(proms).then(() => payload);
+		return payload;
+	};
+});
+function handlePropertyResult(result, final, key, input, isOptionalOut) {
+	if (result.issues.length) {
+		if (isOptionalOut && !(key in input)) return;
+		final.issues.push(...prefixIssues(key, result.issues));
+	}
+	if (result.value === void 0) {
+		if (key in input) final.value[key] = void 0;
+	} else final.value[key] = result.value;
+}
+function normalizeDef(def) {
+	const keys = Object.keys(def.shape);
+	for (const k of keys) if (!def.shape?.[k]?._zod?.traits?.has("$ZodType")) throw new Error(`Invalid element at key "${k}": expected a Zod schema`);
+	const okeys = optionalKeys(def.shape);
+	return {
+		...def,
+		keys,
+		keySet: new Set(keys),
+		numKeys: keys.length,
+		optionalKeys: new Set(okeys)
+	};
+}
+function handleCatchall(proms, input, payload, ctx, def, inst) {
+	const unrecognized = [];
+	const keySet = def.keySet;
+	const _catchall = def.catchall._zod;
+	const t = _catchall.def.type;
+	const isOptionalOut = _catchall.optout === "optional";
+	for (const key in input) {
+		if (keySet.has(key)) continue;
+		if (t === "never") {
+			unrecognized.push(key);
+			continue;
+		}
+		const r = _catchall.run({
+			value: input[key],
+			issues: []
+		}, ctx);
+		if (r instanceof Promise) proms.push(r.then((r) => handlePropertyResult(r, payload, key, input, isOptionalOut)));
+		else handlePropertyResult(r, payload, key, input, isOptionalOut);
+	}
+	if (unrecognized.length) payload.issues.push({
+		code: "unrecognized_keys",
+		keys: unrecognized,
+		input,
+		inst
+	});
+	if (!proms.length) return payload;
+	return Promise.all(proms).then(() => {
+		return payload;
+	});
+}
+var $ZodObject = /* @__PURE__ */ $constructor("$ZodObject", (inst, def) => {
+	$ZodType.init(inst, def);
+	if (!Object.getOwnPropertyDescriptor(def, "shape")?.get) {
+		const sh = def.shape;
+		Object.defineProperty(def, "shape", { get: () => {
+			const newSh = { ...sh };
+			Object.defineProperty(def, "shape", { value: newSh });
+			return newSh;
+		} });
+	}
+	const _normalized = cached(() => normalizeDef(def));
+	defineLazy(inst._zod, "propValues", () => {
+		const shape = def.shape;
+		const propValues = {};
+		for (const key in shape) {
+			const field = shape[key]._zod;
+			if (field.values) {
+				propValues[key] ?? (propValues[key] = /* @__PURE__ */ new Set());
+				for (const v of field.values) propValues[key].add(v);
+			}
+		}
+		return propValues;
+	});
+	const isObject$7 = isObject;
+	const catchall = def.catchall;
+	let value;
+	inst._zod.parse = (payload, ctx) => {
+		value ?? (value = _normalized.value);
+		const input = payload.value;
+		if (!isObject$7(input)) {
+			payload.issues.push({
+				expected: "object",
+				code: "invalid_type",
+				input,
+				inst
+			});
+			return payload;
+		}
+		payload.value = {};
+		const proms = [];
+		const shape = value.shape;
+		for (const key of value.keys) {
+			const el = shape[key];
+			const isOptionalOut = el._zod.optout === "optional";
+			const r = el._zod.run({
+				value: input[key],
+				issues: []
+			}, ctx);
+			if (r instanceof Promise) proms.push(r.then((r) => handlePropertyResult(r, payload, key, input, isOptionalOut)));
+			else handlePropertyResult(r, payload, key, input, isOptionalOut);
+		}
+		if (!catchall) return proms.length ? Promise.all(proms).then(() => payload) : payload;
+		return handleCatchall(proms, input, payload, ctx, _normalized.value, inst);
+	};
+});
+var $ZodObjectJIT = /* @__PURE__ */ $constructor("$ZodObjectJIT", (inst, def) => {
+	$ZodObject.init(inst, def);
+	const superParse = inst._zod.parse;
+	const _normalized = cached(() => normalizeDef(def));
+	const generateFastpass = (shape) => {
+		const doc = new Doc([
+			"shape",
+			"payload",
+			"ctx"
+		]);
+		const normalized = _normalized.value;
+		const parseStr = (key) => {
+			const k = esc(key);
+			return `shape[${k}]._zod.run({ value: input[${k}], issues: [] }, ctx)`;
+		};
+		doc.write(`const input = payload.value;`);
+		const ids = Object.create(null);
+		let counter = 0;
+		for (const key of normalized.keys) ids[key] = `key_${counter++}`;
+		doc.write(`const newResult = {};`);
+		for (const key of normalized.keys) {
+			const id = ids[key];
+			const k = esc(key);
+			const isOptionalOut = shape[key]?._zod?.optout === "optional";
+			doc.write(`const ${id} = ${parseStr(key)};`);
+			if (isOptionalOut) doc.write(`
+        if (${id}.issues.length) {
+          if (${k} in input) {
+            payload.issues = payload.issues.concat(${id}.issues.map(iss => ({
+              ...iss,
+              path: iss.path ? [${k}, ...iss.path] : [${k}]
+            })));
+          }
+        }
+        
+        if (${id}.value === undefined) {
+          if (${k} in input) {
+            newResult[${k}] = undefined;
+          }
+        } else {
+          newResult[${k}] = ${id}.value;
+        }
+        
+      `);
+			else doc.write(`
+        if (${id}.issues.length) {
+          payload.issues = payload.issues.concat(${id}.issues.map(iss => ({
+            ...iss,
+            path: iss.path ? [${k}, ...iss.path] : [${k}]
+          })));
+        }
+        
+        if (${id}.value === undefined) {
+          if (${k} in input) {
+            newResult[${k}] = undefined;
+          }
+        } else {
+          newResult[${k}] = ${id}.value;
+        }
+        
+      `);
+		}
+		doc.write(`payload.value = newResult;`);
+		doc.write(`return payload;`);
+		const fn = doc.compile();
+		return (payload, ctx) => fn(shape, payload, ctx);
+	};
+	let fastpass;
+	const isObject$6 = isObject;
+	const jit = !globalConfig.jitless;
+	const fastEnabled = jit && allowsEval.value;
+	const catchall = def.catchall;
+	let value;
+	inst._zod.parse = (payload, ctx) => {
+		value ?? (value = _normalized.value);
+		const input = payload.value;
+		if (!isObject$6(input)) {
+			payload.issues.push({
+				expected: "object",
+				code: "invalid_type",
+				input,
+				inst
+			});
+			return payload;
+		}
+		if (jit && fastEnabled && ctx?.async === false && ctx.jitless !== true) {
+			if (!fastpass) fastpass = generateFastpass(def.shape);
+			payload = fastpass(payload, ctx);
+			if (!catchall) return payload;
+			return handleCatchall([], input, payload, ctx, value, inst);
+		}
+		return superParse(payload, ctx);
+	};
+});
+function handleUnionResults(results, final, inst, ctx) {
+	for (const result of results) if (result.issues.length === 0) {
+		final.value = result.value;
+		return final;
+	}
+	const nonaborted = results.filter((r) => !aborted(r));
+	if (nonaborted.length === 1) {
+		final.value = nonaborted[0].value;
+		return nonaborted[0];
+	}
+	final.issues.push({
+		code: "invalid_union",
+		input: final.value,
+		inst,
+		errors: results.map((result) => result.issues.map((iss) => finalizeIssue(iss, ctx, config$4())))
+	});
+	return final;
+}
+var $ZodUnion = /* @__PURE__ */ $constructor("$ZodUnion", (inst, def) => {
+	$ZodType.init(inst, def);
+	defineLazy(inst._zod, "optin", () => def.options.some((o) => o._zod.optin === "optional") ? "optional" : void 0);
+	defineLazy(inst._zod, "optout", () => def.options.some((o) => o._zod.optout === "optional") ? "optional" : void 0);
+	defineLazy(inst._zod, "values", () => {
+		if (def.options.every((o) => o._zod.values)) return new Set(def.options.flatMap((option) => Array.from(option._zod.values)));
+	});
+	defineLazy(inst._zod, "pattern", () => {
+		if (def.options.every((o) => o._zod.pattern)) {
+			const patterns = def.options.map((o) => o._zod.pattern);
+			return new RegExp(`^(${patterns.map((p) => cleanRegex(p.source)).join("|")})$`);
+		}
+	});
+	const single = def.options.length === 1;
+	const first = def.options[0]._zod.run;
+	inst._zod.parse = (payload, ctx) => {
+		if (single) return first(payload, ctx);
+		let async = false;
+		const results = [];
+		for (const option of def.options) {
+			const result = option._zod.run({
+				value: payload.value,
+				issues: []
+			}, ctx);
+			if (result instanceof Promise) {
+				results.push(result);
+				async = true;
+			} else {
+				if (result.issues.length === 0) return result;
+				results.push(result);
+			}
+		}
+		if (!async) return handleUnionResults(results, payload, inst, ctx);
+		return Promise.all(results).then((results) => {
+			return handleUnionResults(results, payload, inst, ctx);
+		});
+	};
+});
+var $ZodIntersection = /* @__PURE__ */ $constructor("$ZodIntersection", (inst, def) => {
+	$ZodType.init(inst, def);
+	inst._zod.parse = (payload, ctx) => {
+		const input = payload.value;
+		const left = def.left._zod.run({
+			value: input,
+			issues: []
+		}, ctx);
+		const right = def.right._zod.run({
+			value: input,
+			issues: []
+		}, ctx);
+		if (left instanceof Promise || right instanceof Promise) return Promise.all([left, right]).then(([left, right]) => {
+			return handleIntersectionResults(payload, left, right);
+		});
+		return handleIntersectionResults(payload, left, right);
+	};
+});
+function mergeValues(a, b) {
+	if (a === b) return {
+		valid: true,
+		data: a
+	};
+	if (a instanceof Date && b instanceof Date && +a === +b) return {
+		valid: true,
+		data: a
+	};
+	if (isPlainObject(a) && isPlainObject(b)) {
+		const bKeys = Object.keys(b);
+		const sharedKeys = Object.keys(a).filter((key) => bKeys.indexOf(key) !== -1);
+		const newObj = {
+			...a,
+			...b
+		};
+		for (const key of sharedKeys) {
+			const sharedValue = mergeValues(a[key], b[key]);
+			if (!sharedValue.valid) return {
+				valid: false,
+				mergeErrorPath: [key, ...sharedValue.mergeErrorPath]
+			};
+			newObj[key] = sharedValue.data;
+		}
+		return {
+			valid: true,
+			data: newObj
+		};
+	}
+	if (Array.isArray(a) && Array.isArray(b)) {
+		if (a.length !== b.length) return {
+			valid: false,
+			mergeErrorPath: []
+		};
+		const newArray = [];
+		for (let index = 0; index < a.length; index++) {
+			const itemA = a[index];
+			const itemB = b[index];
+			const sharedValue = mergeValues(itemA, itemB);
+			if (!sharedValue.valid) return {
+				valid: false,
+				mergeErrorPath: [index, ...sharedValue.mergeErrorPath]
+			};
+			newArray.push(sharedValue.data);
+		}
+		return {
+			valid: true,
+			data: newArray
+		};
+	}
+	return {
+		valid: false,
+		mergeErrorPath: []
+	};
+}
+function handleIntersectionResults(result, left, right) {
+	const unrecKeys = /* @__PURE__ */ new Map();
+	let unrecIssue;
+	for (const iss of left.issues) if (iss.code === "unrecognized_keys") {
+		unrecIssue ?? (unrecIssue = iss);
+		for (const k of iss.keys) {
+			if (!unrecKeys.has(k)) unrecKeys.set(k, {});
+			unrecKeys.get(k).l = true;
+		}
+	} else result.issues.push(iss);
+	for (const iss of right.issues) if (iss.code === "unrecognized_keys") for (const k of iss.keys) {
+		if (!unrecKeys.has(k)) unrecKeys.set(k, {});
+		unrecKeys.get(k).r = true;
+	}
+	else result.issues.push(iss);
+	const bothKeys = [...unrecKeys].filter(([, f]) => f.l && f.r).map(([k]) => k);
+	if (bothKeys.length && unrecIssue) result.issues.push({
+		...unrecIssue,
+		keys: bothKeys
+	});
+	if (aborted(result)) return result;
+	const merged = mergeValues(left.value, right.value);
+	if (!merged.valid) throw new Error(`Unmergable intersection. Error path: ${JSON.stringify(merged.mergeErrorPath)}`);
+	result.value = merged.data;
+	return result;
+}
+var $ZodEnum = /* @__PURE__ */ $constructor("$ZodEnum", (inst, def) => {
+	$ZodType.init(inst, def);
+	const values = getEnumValues(def.entries);
+	const valuesSet = new Set(values);
+	inst._zod.values = valuesSet;
+	inst._zod.pattern = new RegExp(`^(${values.filter((k) => propertyKeyTypes.has(typeof k)).map((o) => typeof o === "string" ? escapeRegex(o) : o.toString()).join("|")})$`);
+	inst._zod.parse = (payload, _ctx) => {
+		const input = payload.value;
+		if (valuesSet.has(input)) return payload;
+		payload.issues.push({
+			code: "invalid_value",
+			values,
+			input,
+			inst
+		});
+		return payload;
+	};
+});
+var $ZodLiteral = /* @__PURE__ */ $constructor("$ZodLiteral", (inst, def) => {
+	$ZodType.init(inst, def);
+	if (def.values.length === 0) throw new Error("Cannot create literal schema with no valid values");
+	const values = new Set(def.values);
+	inst._zod.values = values;
+	inst._zod.pattern = new RegExp(`^(${def.values.map((o) => typeof o === "string" ? escapeRegex(o) : o ? escapeRegex(o.toString()) : String(o)).join("|")})$`);
+	inst._zod.parse = (payload, _ctx) => {
+		const input = payload.value;
+		if (values.has(input)) return payload;
+		payload.issues.push({
+			code: "invalid_value",
+			values: def.values,
+			input,
+			inst
+		});
+		return payload;
+	};
+});
+var $ZodTransform = /* @__PURE__ */ $constructor("$ZodTransform", (inst, def) => {
+	$ZodType.init(inst, def);
+	inst._zod.parse = (payload, ctx) => {
+		if (ctx.direction === "backward") throw new $ZodEncodeError(inst.constructor.name);
+		const _out = def.transform(payload.value, payload);
+		if (ctx.async) return (_out instanceof Promise ? _out : Promise.resolve(_out)).then((output) => {
+			payload.value = output;
+			return payload;
+		});
+		if (_out instanceof Promise) throw new $ZodAsyncError();
+		payload.value = _out;
+		return payload;
+	};
+});
+function handleOptionalResult(result, input) {
+	if (result.issues.length && input === void 0) return {
+		issues: [],
+		value: void 0
+	};
+	return result;
+}
+var $ZodOptional = /* @__PURE__ */ $constructor("$ZodOptional", (inst, def) => {
+	$ZodType.init(inst, def);
+	inst._zod.optin = "optional";
+	inst._zod.optout = "optional";
+	defineLazy(inst._zod, "values", () => {
+		return def.innerType._zod.values ? new Set([...def.innerType._zod.values, void 0]) : void 0;
+	});
+	defineLazy(inst._zod, "pattern", () => {
+		const pattern = def.innerType._zod.pattern;
+		return pattern ? new RegExp(`^(${cleanRegex(pattern.source)})?$`) : void 0;
+	});
+	inst._zod.parse = (payload, ctx) => {
+		if (def.innerType._zod.optin === "optional") {
+			const result = def.innerType._zod.run(payload, ctx);
+			if (result instanceof Promise) return result.then((r) => handleOptionalResult(r, payload.value));
+			return handleOptionalResult(result, payload.value);
+		}
+		if (payload.value === void 0) return payload;
+		return def.innerType._zod.run(payload, ctx);
+	};
+});
+var $ZodExactOptional = /* @__PURE__ */ $constructor("$ZodExactOptional", (inst, def) => {
+	$ZodOptional.init(inst, def);
+	defineLazy(inst._zod, "values", () => def.innerType._zod.values);
+	defineLazy(inst._zod, "pattern", () => def.innerType._zod.pattern);
+	inst._zod.parse = (payload, ctx) => {
+		return def.innerType._zod.run(payload, ctx);
+	};
+});
+var $ZodNullable = /* @__PURE__ */ $constructor("$ZodNullable", (inst, def) => {
+	$ZodType.init(inst, def);
+	defineLazy(inst._zod, "optin", () => def.innerType._zod.optin);
+	defineLazy(inst._zod, "optout", () => def.innerType._zod.optout);
+	defineLazy(inst._zod, "pattern", () => {
+		const pattern = def.innerType._zod.pattern;
+		return pattern ? new RegExp(`^(${cleanRegex(pattern.source)}|null)$`) : void 0;
+	});
+	defineLazy(inst._zod, "values", () => {
+		return def.innerType._zod.values ? new Set([...def.innerType._zod.values, null]) : void 0;
+	});
+	inst._zod.parse = (payload, ctx) => {
+		if (payload.value === null) return payload;
+		return def.innerType._zod.run(payload, ctx);
+	};
+});
+var $ZodDefault = /* @__PURE__ */ $constructor("$ZodDefault", (inst, def) => {
+	$ZodType.init(inst, def);
+	inst._zod.optin = "optional";
+	defineLazy(inst._zod, "values", () => def.innerType._zod.values);
+	inst._zod.parse = (payload, ctx) => {
+		if (ctx.direction === "backward") return def.innerType._zod.run(payload, ctx);
+		if (payload.value === void 0) {
+			payload.value = def.defaultValue;
+			/**
+			* $ZodDefault returns the default value immediately in forward direction.
+			* It doesn't pass the default value into the validator ("prefault"). There's no reason to pass the default value through validation. The validity of the default is enforced by TypeScript statically. Otherwise, it's the responsibility of the user to ensure the default is valid. In the case of pipes with divergent in/out types, you can specify the default on the `in` schema of your ZodPipe to set a "prefault" for the pipe.   */
+			return payload;
+		}
+		const result = def.innerType._zod.run(payload, ctx);
+		if (result instanceof Promise) return result.then((result) => handleDefaultResult(result, def));
+		return handleDefaultResult(result, def);
+	};
+});
+function handleDefaultResult(payload, def) {
+	if (payload.value === void 0) payload.value = def.defaultValue;
+	return payload;
+}
+var $ZodPrefault = /* @__PURE__ */ $constructor("$ZodPrefault", (inst, def) => {
+	$ZodType.init(inst, def);
+	inst._zod.optin = "optional";
+	defineLazy(inst._zod, "values", () => def.innerType._zod.values);
+	inst._zod.parse = (payload, ctx) => {
+		if (ctx.direction === "backward") return def.innerType._zod.run(payload, ctx);
+		if (payload.value === void 0) payload.value = def.defaultValue;
+		return def.innerType._zod.run(payload, ctx);
+	};
+});
+var $ZodNonOptional = /* @__PURE__ */ $constructor("$ZodNonOptional", (inst, def) => {
+	$ZodType.init(inst, def);
+	defineLazy(inst._zod, "values", () => {
+		const v = def.innerType._zod.values;
+		return v ? new Set([...v].filter((x) => x !== void 0)) : void 0;
+	});
+	inst._zod.parse = (payload, ctx) => {
+		const result = def.innerType._zod.run(payload, ctx);
+		if (result instanceof Promise) return result.then((result) => handleNonOptionalResult(result, inst));
+		return handleNonOptionalResult(result, inst);
+	};
+});
+function handleNonOptionalResult(payload, inst) {
+	if (!payload.issues.length && payload.value === void 0) payload.issues.push({
+		code: "invalid_type",
+		expected: "nonoptional",
+		input: payload.value,
+		inst
+	});
+	return payload;
+}
+var $ZodCatch = /* @__PURE__ */ $constructor("$ZodCatch", (inst, def) => {
+	$ZodType.init(inst, def);
+	defineLazy(inst._zod, "optin", () => def.innerType._zod.optin);
+	defineLazy(inst._zod, "optout", () => def.innerType._zod.optout);
+	defineLazy(inst._zod, "values", () => def.innerType._zod.values);
+	inst._zod.parse = (payload, ctx) => {
+		if (ctx.direction === "backward") return def.innerType._zod.run(payload, ctx);
+		const result = def.innerType._zod.run(payload, ctx);
+		if (result instanceof Promise) return result.then((result) => {
+			payload.value = result.value;
+			if (result.issues.length) {
+				payload.value = def.catchValue({
+					...payload,
+					error: { issues: result.issues.map((iss) => finalizeIssue(iss, ctx, config$4())) },
+					input: payload.value
+				});
+				payload.issues = [];
+			}
+			return payload;
+		});
+		payload.value = result.value;
+		if (result.issues.length) {
+			payload.value = def.catchValue({
+				...payload,
+				error: { issues: result.issues.map((iss) => finalizeIssue(iss, ctx, config$4())) },
+				input: payload.value
+			});
+			payload.issues = [];
+		}
+		return payload;
+	};
+});
+var $ZodPipe = /* @__PURE__ */ $constructor("$ZodPipe", (inst, def) => {
+	$ZodType.init(inst, def);
+	defineLazy(inst._zod, "values", () => def.in._zod.values);
+	defineLazy(inst._zod, "optin", () => def.in._zod.optin);
+	defineLazy(inst._zod, "optout", () => def.out._zod.optout);
+	defineLazy(inst._zod, "propValues", () => def.in._zod.propValues);
+	inst._zod.parse = (payload, ctx) => {
+		if (ctx.direction === "backward") {
+			const right = def.out._zod.run(payload, ctx);
+			if (right instanceof Promise) return right.then((right) => handlePipeResult(right, def.in, ctx));
+			return handlePipeResult(right, def.in, ctx);
+		}
+		const left = def.in._zod.run(payload, ctx);
+		if (left instanceof Promise) return left.then((left) => handlePipeResult(left, def.out, ctx));
+		return handlePipeResult(left, def.out, ctx);
+	};
+});
+function handlePipeResult(left, next, ctx) {
+	if (left.issues.length) {
+		left.aborted = true;
+		return left;
+	}
+	return next._zod.run({
+		value: left.value,
+		issues: left.issues
+	}, ctx);
+}
+var $ZodReadonly = /* @__PURE__ */ $constructor("$ZodReadonly", (inst, def) => {
+	$ZodType.init(inst, def);
+	defineLazy(inst._zod, "propValues", () => def.innerType._zod.propValues);
+	defineLazy(inst._zod, "values", () => def.innerType._zod.values);
+	defineLazy(inst._zod, "optin", () => def.innerType?._zod?.optin);
+	defineLazy(inst._zod, "optout", () => def.innerType?._zod?.optout);
+	inst._zod.parse = (payload, ctx) => {
+		if (ctx.direction === "backward") return def.innerType._zod.run(payload, ctx);
+		const result = def.innerType._zod.run(payload, ctx);
+		if (result instanceof Promise) return result.then(handleReadonlyResult);
+		return handleReadonlyResult(result);
+	};
+});
+function handleReadonlyResult(payload) {
+	payload.value = Object.freeze(payload.value);
+	return payload;
+}
+var $ZodCustom = /* @__PURE__ */ $constructor("$ZodCustom", (inst, def) => {
+	$ZodCheck.init(inst, def);
+	$ZodType.init(inst, def);
+	inst._zod.parse = (payload, _) => {
+		return payload;
+	};
+	inst._zod.check = (payload) => {
+		const input = payload.value;
+		const r = def.fn(input);
+		if (r instanceof Promise) return r.then((r) => handleRefineResult(r, payload, input, inst));
+		handleRefineResult(r, payload, input, inst);
+	};
+});
+function handleRefineResult(result, payload, input, inst) {
+	if (!result) {
+		const _iss = {
+			code: "custom",
+			input,
+			inst,
+			path: [...inst._zod.def.path ?? []],
+			continue: !inst._zod.def.abort
+		};
+		if (inst._zod.def.params) _iss.params = inst._zod.def.params;
+		payload.issues.push(issue(_iss));
+	}
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/zod@4.3.6/node_modules/zod/v4/core/registries.js
+var _a;
+var $ZodRegistry = class {
+	constructor() {
+		this._map = /* @__PURE__ */ new WeakMap();
+		this._idmap = /* @__PURE__ */ new Map();
+	}
+	add(schema, ..._meta) {
+		const meta = _meta[0];
+		this._map.set(schema, meta);
+		if (meta && typeof meta === "object" && "id" in meta) this._idmap.set(meta.id, schema);
+		return this;
+	}
+	clear() {
+		this._map = /* @__PURE__ */ new WeakMap();
+		this._idmap = /* @__PURE__ */ new Map();
+		return this;
+	}
+	remove(schema) {
+		const meta = this._map.get(schema);
+		if (meta && typeof meta === "object" && "id" in meta) this._idmap.delete(meta.id);
+		this._map.delete(schema);
+		return this;
+	}
+	get(schema) {
+		const p = schema._zod.parent;
+		if (p) {
+			const pm = { ...this.get(p) ?? {} };
+			delete pm.id;
+			const f = {
+				...pm,
+				...this._map.get(schema)
+			};
+			return Object.keys(f).length ? f : void 0;
+		}
+		return this._map.get(schema);
+	}
+	has(schema) {
+		return this._map.has(schema);
+	}
+};
+function registry() {
+	return new $ZodRegistry();
+}
+(_a = globalThis).__zod_globalRegistry ?? (_a.__zod_globalRegistry = registry());
+var globalRegistry = globalThis.__zod_globalRegistry;
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/zod@4.3.6/node_modules/zod/v4/core/api.js
+/* @__NO_SIDE_EFFECTS__ */
+function _string(Class, params) {
+	return new Class({
+		type: "string",
+		...normalizeParams(params)
+	});
+}
+/* @__NO_SIDE_EFFECTS__ */
+function _email(Class, params) {
+	return new Class({
+		type: "string",
+		format: "email",
+		check: "string_format",
+		abort: false,
+		...normalizeParams(params)
+	});
+}
+/* @__NO_SIDE_EFFECTS__ */
+function _guid(Class, params) {
+	return new Class({
+		type: "string",
+		format: "guid",
+		check: "string_format",
+		abort: false,
+		...normalizeParams(params)
+	});
+}
+/* @__NO_SIDE_EFFECTS__ */
+function _uuid(Class, params) {
+	return new Class({
+		type: "string",
+		format: "uuid",
+		check: "string_format",
+		abort: false,
+		...normalizeParams(params)
+	});
+}
+/* @__NO_SIDE_EFFECTS__ */
+function _uuidv4(Class, params) {
+	return new Class({
+		type: "string",
+		format: "uuid",
+		check: "string_format",
+		abort: false,
+		version: "v4",
+		...normalizeParams(params)
+	});
+}
+/* @__NO_SIDE_EFFECTS__ */
+function _uuidv6(Class, params) {
+	return new Class({
+		type: "string",
+		format: "uuid",
+		check: "string_format",
+		abort: false,
+		version: "v6",
+		...normalizeParams(params)
+	});
+}
+/* @__NO_SIDE_EFFECTS__ */
+function _uuidv7(Class, params) {
+	return new Class({
+		type: "string",
+		format: "uuid",
+		check: "string_format",
+		abort: false,
+		version: "v7",
+		...normalizeParams(params)
+	});
+}
+/* @__NO_SIDE_EFFECTS__ */
+function _url(Class, params) {
+	return new Class({
+		type: "string",
+		format: "url",
+		check: "string_format",
+		abort: false,
+		...normalizeParams(params)
+	});
+}
+/* @__NO_SIDE_EFFECTS__ */
+function _emoji(Class, params) {
+	return new Class({
+		type: "string",
+		format: "emoji",
+		check: "string_format",
+		abort: false,
+		...normalizeParams(params)
+	});
+}
+/* @__NO_SIDE_EFFECTS__ */
+function _nanoid(Class, params) {
+	return new Class({
+		type: "string",
+		format: "nanoid",
+		check: "string_format",
+		abort: false,
+		...normalizeParams(params)
+	});
+}
+/* @__NO_SIDE_EFFECTS__ */
+function _cuid(Class, params) {
+	return new Class({
+		type: "string",
+		format: "cuid",
+		check: "string_format",
+		abort: false,
+		...normalizeParams(params)
+	});
+}
+/* @__NO_SIDE_EFFECTS__ */
+function _cuid2(Class, params) {
+	return new Class({
+		type: "string",
+		format: "cuid2",
+		check: "string_format",
+		abort: false,
+		...normalizeParams(params)
+	});
+}
+/* @__NO_SIDE_EFFECTS__ */
+function _ulid(Class, params) {
+	return new Class({
+		type: "string",
+		format: "ulid",
+		check: "string_format",
+		abort: false,
+		...normalizeParams(params)
+	});
+}
+/* @__NO_SIDE_EFFECTS__ */
+function _xid(Class, params) {
+	return new Class({
+		type: "string",
+		format: "xid",
+		check: "string_format",
+		abort: false,
+		...normalizeParams(params)
+	});
+}
+/* @__NO_SIDE_EFFECTS__ */
+function _ksuid(Class, params) {
+	return new Class({
+		type: "string",
+		format: "ksuid",
+		check: "string_format",
+		abort: false,
+		...normalizeParams(params)
+	});
+}
+/* @__NO_SIDE_EFFECTS__ */
+function _ipv4(Class, params) {
+	return new Class({
+		type: "string",
+		format: "ipv4",
+		check: "string_format",
+		abort: false,
+		...normalizeParams(params)
+	});
+}
+/* @__NO_SIDE_EFFECTS__ */
+function _ipv6(Class, params) {
+	return new Class({
+		type: "string",
+		format: "ipv6",
+		check: "string_format",
+		abort: false,
+		...normalizeParams(params)
+	});
+}
+/* @__NO_SIDE_EFFECTS__ */
+function _cidrv4(Class, params) {
+	return new Class({
+		type: "string",
+		format: "cidrv4",
+		check: "string_format",
+		abort: false,
+		...normalizeParams(params)
+	});
+}
+/* @__NO_SIDE_EFFECTS__ */
+function _cidrv6(Class, params) {
+	return new Class({
+		type: "string",
+		format: "cidrv6",
+		check: "string_format",
+		abort: false,
+		...normalizeParams(params)
+	});
+}
+/* @__NO_SIDE_EFFECTS__ */
+function _base64(Class, params) {
+	return new Class({
+		type: "string",
+		format: "base64",
+		check: "string_format",
+		abort: false,
+		...normalizeParams(params)
+	});
+}
+/* @__NO_SIDE_EFFECTS__ */
+function _base64url(Class, params) {
+	return new Class({
+		type: "string",
+		format: "base64url",
+		check: "string_format",
+		abort: false,
+		...normalizeParams(params)
+	});
+}
+/* @__NO_SIDE_EFFECTS__ */
+function _e164(Class, params) {
+	return new Class({
+		type: "string",
+		format: "e164",
+		check: "string_format",
+		abort: false,
+		...normalizeParams(params)
+	});
+}
+/* @__NO_SIDE_EFFECTS__ */
+function _jwt(Class, params) {
+	return new Class({
+		type: "string",
+		format: "jwt",
+		check: "string_format",
+		abort: false,
+		...normalizeParams(params)
+	});
+}
+/* @__NO_SIDE_EFFECTS__ */
+function _isoDateTime(Class, params) {
+	return new Class({
+		type: "string",
+		format: "datetime",
+		check: "string_format",
+		offset: false,
+		local: false,
+		precision: null,
+		...normalizeParams(params)
+	});
+}
+/* @__NO_SIDE_EFFECTS__ */
+function _isoDate(Class, params) {
+	return new Class({
+		type: "string",
+		format: "date",
+		check: "string_format",
+		...normalizeParams(params)
+	});
+}
+/* @__NO_SIDE_EFFECTS__ */
+function _isoTime(Class, params) {
+	return new Class({
+		type: "string",
+		format: "time",
+		check: "string_format",
+		precision: null,
+		...normalizeParams(params)
+	});
+}
+/* @__NO_SIDE_EFFECTS__ */
+function _isoDuration(Class, params) {
+	return new Class({
+		type: "string",
+		format: "duration",
+		check: "string_format",
+		...normalizeParams(params)
+	});
+}
+/* @__NO_SIDE_EFFECTS__ */
+function _coercedNumber(Class, params) {
+	return new Class({
+		type: "number",
+		coerce: true,
+		checks: [],
+		...normalizeParams(params)
+	});
+}
+/* @__NO_SIDE_EFFECTS__ */
+function _int(Class, params) {
+	return new Class({
+		type: "number",
+		check: "number_format",
+		abort: false,
+		format: "safeint",
+		...normalizeParams(params)
+	});
+}
+/* @__NO_SIDE_EFFECTS__ */
+function _unknown(Class) {
+	return new Class({ type: "unknown" });
+}
+/* @__NO_SIDE_EFFECTS__ */
+function _never(Class, params) {
+	return new Class({
+		type: "never",
+		...normalizeParams(params)
+	});
+}
+/* @__NO_SIDE_EFFECTS__ */
+function _lt(value, params) {
+	return new $ZodCheckLessThan({
+		check: "less_than",
+		...normalizeParams(params),
+		value,
+		inclusive: false
+	});
+}
+/* @__NO_SIDE_EFFECTS__ */
+function _lte(value, params) {
+	return new $ZodCheckLessThan({
+		check: "less_than",
+		...normalizeParams(params),
+		value,
+		inclusive: true
+	});
+}
+/* @__NO_SIDE_EFFECTS__ */
+function _gt(value, params) {
+	return new $ZodCheckGreaterThan({
+		check: "greater_than",
+		...normalizeParams(params),
+		value,
+		inclusive: false
+	});
+}
+/* @__NO_SIDE_EFFECTS__ */
+function _gte(value, params) {
+	return new $ZodCheckGreaterThan({
+		check: "greater_than",
+		...normalizeParams(params),
+		value,
+		inclusive: true
+	});
+}
+/* @__NO_SIDE_EFFECTS__ */
+function _multipleOf(value, params) {
+	return new $ZodCheckMultipleOf({
+		check: "multiple_of",
+		...normalizeParams(params),
+		value
+	});
+}
+/* @__NO_SIDE_EFFECTS__ */
+function _maxLength(maximum, params) {
+	return new $ZodCheckMaxLength({
+		check: "max_length",
+		...normalizeParams(params),
+		maximum
+	});
+}
+/* @__NO_SIDE_EFFECTS__ */
+function _minLength(minimum, params) {
+	return new $ZodCheckMinLength({
+		check: "min_length",
+		...normalizeParams(params),
+		minimum
+	});
+}
+/* @__NO_SIDE_EFFECTS__ */
+function _length(length, params) {
+	return new $ZodCheckLengthEquals({
+		check: "length_equals",
+		...normalizeParams(params),
+		length
+	});
+}
+/* @__NO_SIDE_EFFECTS__ */
+function _regex(pattern, params) {
+	return new $ZodCheckRegex({
+		check: "string_format",
+		format: "regex",
+		...normalizeParams(params),
+		pattern
+	});
+}
+/* @__NO_SIDE_EFFECTS__ */
+function _lowercase(params) {
+	return new $ZodCheckLowerCase({
+		check: "string_format",
+		format: "lowercase",
+		...normalizeParams(params)
+	});
+}
+/* @__NO_SIDE_EFFECTS__ */
+function _uppercase(params) {
+	return new $ZodCheckUpperCase({
+		check: "string_format",
+		format: "uppercase",
+		...normalizeParams(params)
+	});
+}
+/* @__NO_SIDE_EFFECTS__ */
+function _includes(includes, params) {
+	return new $ZodCheckIncludes({
+		check: "string_format",
+		format: "includes",
+		...normalizeParams(params),
+		includes
+	});
+}
+/* @__NO_SIDE_EFFECTS__ */
+function _startsWith(prefix, params) {
+	return new $ZodCheckStartsWith({
+		check: "string_format",
+		format: "starts_with",
+		...normalizeParams(params),
+		prefix
+	});
+}
+/* @__NO_SIDE_EFFECTS__ */
+function _endsWith(suffix, params) {
+	return new $ZodCheckEndsWith({
+		check: "string_format",
+		format: "ends_with",
+		...normalizeParams(params),
+		suffix
+	});
+}
+/* @__NO_SIDE_EFFECTS__ */
+function _overwrite(tx) {
+	return new $ZodCheckOverwrite({
+		check: "overwrite",
+		tx
+	});
+}
+/* @__NO_SIDE_EFFECTS__ */
+function _normalize(form) {
+	return /* @__PURE__ */ _overwrite((input) => input.normalize(form));
+}
+/* @__NO_SIDE_EFFECTS__ */
+function _trim() {
+	return /* @__PURE__ */ _overwrite((input) => input.trim());
+}
+/* @__NO_SIDE_EFFECTS__ */
+function _toLowerCase() {
+	return /* @__PURE__ */ _overwrite((input) => input.toLowerCase());
+}
+/* @__NO_SIDE_EFFECTS__ */
+function _toUpperCase() {
+	return /* @__PURE__ */ _overwrite((input) => input.toUpperCase());
+}
+/* @__NO_SIDE_EFFECTS__ */
+function _slugify() {
+	return /* @__PURE__ */ _overwrite((input) => slugify(input));
+}
+/* @__NO_SIDE_EFFECTS__ */
+function _array(Class, element, params) {
+	return new Class({
+		type: "array",
+		element,
+		...normalizeParams(params)
+	});
+}
+/* @__NO_SIDE_EFFECTS__ */
+function _refine(Class, fn, _params) {
+	return new Class({
+		type: "custom",
+		check: "custom",
+		fn,
+		...normalizeParams(_params)
+	});
+}
+/* @__NO_SIDE_EFFECTS__ */
+function _superRefine(fn) {
+	const ch = /* @__PURE__ */ _check((payload) => {
+		payload.addIssue = (issue$2) => {
+			if (typeof issue$2 === "string") payload.issues.push(issue(issue$2, payload.value, ch._zod.def));
+			else {
+				const _issue = issue$2;
+				if (_issue.fatal) _issue.continue = false;
+				_issue.code ?? (_issue.code = "custom");
+				_issue.input ?? (_issue.input = payload.value);
+				_issue.inst ?? (_issue.inst = ch);
+				_issue.continue ?? (_issue.continue = !ch._zod.def.abort);
+				payload.issues.push(issue(_issue));
+			}
+		};
+		return fn(payload.value, payload);
+	});
+	return ch;
+}
+/* @__NO_SIDE_EFFECTS__ */
+function _check(fn, params) {
+	const ch = new $ZodCheck({
+		check: "custom",
+		...normalizeParams(params)
+	});
+	ch._zod.check = fn;
+	return ch;
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/zod@4.3.6/node_modules/zod/v4/core/to-json-schema.js
+function initializeContext(params) {
+	let target = params?.target ?? "draft-2020-12";
+	if (target === "draft-4") target = "draft-04";
+	if (target === "draft-7") target = "draft-07";
+	return {
+		processors: params.processors ?? {},
+		metadataRegistry: params?.metadata ?? globalRegistry,
+		target,
+		unrepresentable: params?.unrepresentable ?? "throw",
+		override: params?.override ?? (() => {}),
+		io: params?.io ?? "output",
+		counter: 0,
+		seen: /* @__PURE__ */ new Map(),
+		cycles: params?.cycles ?? "ref",
+		reused: params?.reused ?? "inline",
+		external: params?.external ?? void 0
+	};
+}
+function process$1(schema, ctx, _params = {
+	path: [],
+	schemaPath: []
+}) {
+	var _a;
+	const def = schema._zod.def;
+	const seen = ctx.seen.get(schema);
+	if (seen) {
+		seen.count++;
+		if (_params.schemaPath.includes(schema)) seen.cycle = _params.path;
+		return seen.schema;
+	}
+	const result = {
+		schema: {},
+		count: 1,
+		cycle: void 0,
+		path: _params.path
+	};
+	ctx.seen.set(schema, result);
+	const overrideSchema = schema._zod.toJSONSchema?.();
+	if (overrideSchema) result.schema = overrideSchema;
+	else {
+		const params = {
+			..._params,
+			schemaPath: [..._params.schemaPath, schema],
+			path: _params.path
+		};
+		if (schema._zod.processJSONSchema) schema._zod.processJSONSchema(ctx, result.schema, params);
+		else {
+			const _json = result.schema;
+			const processor = ctx.processors[def.type];
+			if (!processor) throw new Error(`[toJSONSchema]: Non-representable type encountered: ${def.type}`);
+			processor(schema, ctx, _json, params);
+		}
+		const parent = schema._zod.parent;
+		if (parent) {
+			if (!result.ref) result.ref = parent;
+			process$1(parent, ctx, params);
+			ctx.seen.get(parent).isParent = true;
+		}
+	}
+	const meta = ctx.metadataRegistry.get(schema);
+	if (meta) Object.assign(result.schema, meta);
+	if (ctx.io === "input" && isTransforming(schema)) {
+		delete result.schema.examples;
+		delete result.schema.default;
+	}
+	if (ctx.io === "input" && result.schema._prefault) (_a = result.schema).default ?? (_a.default = result.schema._prefault);
+	delete result.schema._prefault;
+	return ctx.seen.get(schema).schema;
+}
+function extractDefs(ctx, schema) {
+	const root = ctx.seen.get(schema);
+	if (!root) throw new Error("Unprocessed schema. This is a bug in Zod.");
+	const idToSchema = /* @__PURE__ */ new Map();
+	for (const entry of ctx.seen.entries()) {
+		const id = ctx.metadataRegistry.get(entry[0])?.id;
+		if (id) {
+			const existing = idToSchema.get(id);
+			if (existing && existing !== entry[0]) throw new Error(`Duplicate schema id "${id}" detected during JSON Schema conversion. Two different schemas cannot share the same id when converted together.`);
+			idToSchema.set(id, entry[0]);
+		}
+	}
+	const makeURI = (entry) => {
+		const defsSegment = ctx.target === "draft-2020-12" ? "$defs" : "definitions";
+		if (ctx.external) {
+			const externalId = ctx.external.registry.get(entry[0])?.id;
+			const uriGenerator = ctx.external.uri ?? ((id) => id);
+			if (externalId) return { ref: uriGenerator(externalId) };
+			const id = entry[1].defId ?? entry[1].schema.id ?? `schema${ctx.counter++}`;
+			entry[1].defId = id;
+			return {
+				defId: id,
+				ref: `${uriGenerator("__shared")}#/${defsSegment}/${id}`
+			};
+		}
+		if (entry[1] === root) return { ref: "#" };
+		const defUriPrefix = `#/${defsSegment}/`;
+		const defId = entry[1].schema.id ?? `__schema${ctx.counter++}`;
+		return {
+			defId,
+			ref: defUriPrefix + defId
+		};
+	};
+	const extractToDef = (entry) => {
+		if (entry[1].schema.$ref) return;
+		const seen = entry[1];
+		const { ref, defId } = makeURI(entry);
+		seen.def = { ...seen.schema };
+		if (defId) seen.defId = defId;
+		const schema = seen.schema;
+		for (const key in schema) delete schema[key];
+		schema.$ref = ref;
+	};
+	if (ctx.cycles === "throw") for (const entry of ctx.seen.entries()) {
+		const seen = entry[1];
+		if (seen.cycle) throw new Error(`Cycle detected: #/${seen.cycle?.join("/")}/<root>
+
+Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.`);
+	}
+	for (const entry of ctx.seen.entries()) {
+		const seen = entry[1];
+		if (schema === entry[0]) {
+			extractToDef(entry);
+			continue;
+		}
+		if (ctx.external) {
+			const ext = ctx.external.registry.get(entry[0])?.id;
+			if (schema !== entry[0] && ext) {
+				extractToDef(entry);
+				continue;
+			}
+		}
+		if (ctx.metadataRegistry.get(entry[0])?.id) {
+			extractToDef(entry);
+			continue;
+		}
+		if (seen.cycle) {
+			extractToDef(entry);
+			continue;
+		}
+		if (seen.count > 1) {
+			if (ctx.reused === "ref") {
+				extractToDef(entry);
+				continue;
+			}
+		}
+	}
+}
+function finalize(ctx, schema) {
+	const root = ctx.seen.get(schema);
+	if (!root) throw new Error("Unprocessed schema. This is a bug in Zod.");
+	const flattenRef = (zodSchema) => {
+		const seen = ctx.seen.get(zodSchema);
+		if (seen.ref === null) return;
+		const schema = seen.def ?? seen.schema;
+		const _cached = { ...schema };
+		const ref = seen.ref;
+		seen.ref = null;
+		if (ref) {
+			flattenRef(ref);
+			const refSeen = ctx.seen.get(ref);
+			const refSchema = refSeen.schema;
+			if (refSchema.$ref && (ctx.target === "draft-07" || ctx.target === "draft-04" || ctx.target === "openapi-3.0")) {
+				schema.allOf = schema.allOf ?? [];
+				schema.allOf.push(refSchema);
+			} else Object.assign(schema, refSchema);
+			Object.assign(schema, _cached);
+			if (zodSchema._zod.parent === ref) for (const key in schema) {
+				if (key === "$ref" || key === "allOf") continue;
+				if (!(key in _cached)) delete schema[key];
+			}
+			if (refSchema.$ref && refSeen.def) for (const key in schema) {
+				if (key === "$ref" || key === "allOf") continue;
+				if (key in refSeen.def && JSON.stringify(schema[key]) === JSON.stringify(refSeen.def[key])) delete schema[key];
+			}
+		}
+		const parent = zodSchema._zod.parent;
+		if (parent && parent !== ref) {
+			flattenRef(parent);
+			const parentSeen = ctx.seen.get(parent);
+			if (parentSeen?.schema.$ref) {
+				schema.$ref = parentSeen.schema.$ref;
+				if (parentSeen.def) for (const key in schema) {
+					if (key === "$ref" || key === "allOf") continue;
+					if (key in parentSeen.def && JSON.stringify(schema[key]) === JSON.stringify(parentSeen.def[key])) delete schema[key];
+				}
+			}
+		}
+		ctx.override({
+			zodSchema,
+			jsonSchema: schema,
+			path: seen.path ?? []
+		});
+	};
+	for (const entry of [...ctx.seen.entries()].reverse()) flattenRef(entry[0]);
+	const result = {};
+	if (ctx.target === "draft-2020-12") result.$schema = "https://json-schema.org/draft/2020-12/schema";
+	else if (ctx.target === "draft-07") result.$schema = "http://json-schema.org/draft-07/schema#";
+	else if (ctx.target === "draft-04") result.$schema = "http://json-schema.org/draft-04/schema#";
+	else if (ctx.target === "openapi-3.0") {}
+	if (ctx.external?.uri) {
+		const id = ctx.external.registry.get(schema)?.id;
+		if (!id) throw new Error("Schema is missing an `id` property");
+		result.$id = ctx.external.uri(id);
+	}
+	Object.assign(result, root.def ?? root.schema);
+	const defs = ctx.external?.defs ?? {};
+	for (const entry of ctx.seen.entries()) {
+		const seen = entry[1];
+		if (seen.def && seen.defId) defs[seen.defId] = seen.def;
+	}
+	if (ctx.external) {} else if (Object.keys(defs).length > 0) if (ctx.target === "draft-2020-12") result.$defs = defs;
+	else result.definitions = defs;
+	try {
+		const finalized = JSON.parse(JSON.stringify(result));
+		Object.defineProperty(finalized, "~standard", {
+			value: {
+				...schema["~standard"],
+				jsonSchema: {
+					input: createStandardJSONSchemaMethod(schema, "input", ctx.processors),
+					output: createStandardJSONSchemaMethod(schema, "output", ctx.processors)
+				}
+			},
+			enumerable: false,
+			writable: false
+		});
+		return finalized;
+	} catch (_err) {
+		throw new Error("Error converting schema to JSON.");
+	}
+}
+function isTransforming(_schema, _ctx) {
+	const ctx = _ctx ?? { seen: /* @__PURE__ */ new Set() };
+	if (ctx.seen.has(_schema)) return false;
+	ctx.seen.add(_schema);
+	const def = _schema._zod.def;
+	if (def.type === "transform") return true;
+	if (def.type === "array") return isTransforming(def.element, ctx);
+	if (def.type === "set") return isTransforming(def.valueType, ctx);
+	if (def.type === "lazy") return isTransforming(def.getter(), ctx);
+	if (def.type === "promise" || def.type === "optional" || def.type === "nonoptional" || def.type === "nullable" || def.type === "readonly" || def.type === "default" || def.type === "prefault") return isTransforming(def.innerType, ctx);
+	if (def.type === "intersection") return isTransforming(def.left, ctx) || isTransforming(def.right, ctx);
+	if (def.type === "record" || def.type === "map") return isTransforming(def.keyType, ctx) || isTransforming(def.valueType, ctx);
+	if (def.type === "pipe") return isTransforming(def.in, ctx) || isTransforming(def.out, ctx);
+	if (def.type === "object") {
+		for (const key in def.shape) if (isTransforming(def.shape[key], ctx)) return true;
+		return false;
+	}
+	if (def.type === "union") {
+		for (const option of def.options) if (isTransforming(option, ctx)) return true;
+		return false;
+	}
+	if (def.type === "tuple") {
+		for (const item of def.items) if (isTransforming(item, ctx)) return true;
+		if (def.rest && isTransforming(def.rest, ctx)) return true;
+		return false;
+	}
+	return false;
+}
+/**
+* Creates a toJSONSchema method for a schema instance.
+* This encapsulates the logic of initializing context, processing, extracting defs, and finalizing.
+*/
+var createToJSONSchemaMethod = (schema, processors = {}) => (params) => {
+	const ctx = initializeContext({
+		...params,
+		processors
+	});
+	process$1(schema, ctx);
+	extractDefs(ctx, schema);
+	return finalize(ctx, schema);
+};
+var createStandardJSONSchemaMethod = (schema, io, processors = {}) => (params) => {
+	const { libraryOptions, target } = params ?? {};
+	const ctx = initializeContext({
+		...libraryOptions ?? {},
+		target,
+		io,
+		processors
+	});
+	process$1(schema, ctx);
+	extractDefs(ctx, schema);
+	return finalize(ctx, schema);
+};
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/zod@4.3.6/node_modules/zod/v4/core/json-schema-processors.js
+var formatMap = {
+	guid: "uuid",
+	url: "uri",
+	datetime: "date-time",
+	json_string: "json-string",
+	regex: ""
+};
+var stringProcessor = (schema, ctx, _json, _params) => {
+	const json = _json;
+	json.type = "string";
+	const { minimum, maximum, format, patterns, contentEncoding } = schema._zod.bag;
+	if (typeof minimum === "number") json.minLength = minimum;
+	if (typeof maximum === "number") json.maxLength = maximum;
+	if (format) {
+		json.format = formatMap[format] ?? format;
+		if (json.format === "") delete json.format;
+		if (format === "time") delete json.format;
+	}
+	if (contentEncoding) json.contentEncoding = contentEncoding;
+	if (patterns && patterns.size > 0) {
+		const regexes = [...patterns];
+		if (regexes.length === 1) json.pattern = regexes[0].source;
+		else if (regexes.length > 1) json.allOf = [...regexes.map((regex) => ({
+			...ctx.target === "draft-07" || ctx.target === "draft-04" || ctx.target === "openapi-3.0" ? { type: "string" } : {},
+			pattern: regex.source
+		}))];
+	}
+};
+var numberProcessor = (schema, ctx, _json, _params) => {
+	const json = _json;
+	const { minimum, maximum, format, multipleOf, exclusiveMaximum, exclusiveMinimum } = schema._zod.bag;
+	if (typeof format === "string" && format.includes("int")) json.type = "integer";
+	else json.type = "number";
+	if (typeof exclusiveMinimum === "number") if (ctx.target === "draft-04" || ctx.target === "openapi-3.0") {
+		json.minimum = exclusiveMinimum;
+		json.exclusiveMinimum = true;
+	} else json.exclusiveMinimum = exclusiveMinimum;
+	if (typeof minimum === "number") {
+		json.minimum = minimum;
+		if (typeof exclusiveMinimum === "number" && ctx.target !== "draft-04") if (exclusiveMinimum >= minimum) delete json.minimum;
+		else delete json.exclusiveMinimum;
+	}
+	if (typeof exclusiveMaximum === "number") if (ctx.target === "draft-04" || ctx.target === "openapi-3.0") {
+		json.maximum = exclusiveMaximum;
+		json.exclusiveMaximum = true;
+	} else json.exclusiveMaximum = exclusiveMaximum;
+	if (typeof maximum === "number") {
+		json.maximum = maximum;
+		if (typeof exclusiveMaximum === "number" && ctx.target !== "draft-04") if (exclusiveMaximum <= maximum) delete json.maximum;
+		else delete json.exclusiveMaximum;
+	}
+	if (typeof multipleOf === "number") json.multipleOf = multipleOf;
+};
+var neverProcessor = (_schema, _ctx, json, _params) => {
+	json.not = {};
+};
+var unknownProcessor = (_schema, _ctx, _json, _params) => {};
+var enumProcessor = (schema, _ctx, json, _params) => {
+	const def = schema._zod.def;
+	const values = getEnumValues(def.entries);
+	if (values.every((v) => typeof v === "number")) json.type = "number";
+	if (values.every((v) => typeof v === "string")) json.type = "string";
+	json.enum = values;
+};
+var literalProcessor = (schema, ctx, json, _params) => {
+	const def = schema._zod.def;
+	const vals = [];
+	for (const val of def.values) if (val === void 0) {
+		if (ctx.unrepresentable === "throw") throw new Error("Literal `undefined` cannot be represented in JSON Schema");
+	} else if (typeof val === "bigint") if (ctx.unrepresentable === "throw") throw new Error("BigInt literals cannot be represented in JSON Schema");
+	else vals.push(Number(val));
+	else vals.push(val);
+	if (vals.length === 0) {} else if (vals.length === 1) {
+		const val = vals[0];
+		json.type = val === null ? "null" : typeof val;
+		if (ctx.target === "draft-04" || ctx.target === "openapi-3.0") json.enum = [val];
+		else json.const = val;
+	} else {
+		if (vals.every((v) => typeof v === "number")) json.type = "number";
+		if (vals.every((v) => typeof v === "string")) json.type = "string";
+		if (vals.every((v) => typeof v === "boolean")) json.type = "boolean";
+		if (vals.every((v) => v === null)) json.type = "null";
+		json.enum = vals;
+	}
+};
+var customProcessor = (_schema, ctx, _json, _params) => {
+	if (ctx.unrepresentable === "throw") throw new Error("Custom types cannot be represented in JSON Schema");
+};
+var transformProcessor = (_schema, ctx, _json, _params) => {
+	if (ctx.unrepresentable === "throw") throw new Error("Transforms cannot be represented in JSON Schema");
+};
+var arrayProcessor = (schema, ctx, _json, params) => {
+	const json = _json;
+	const def = schema._zod.def;
+	const { minimum, maximum } = schema._zod.bag;
+	if (typeof minimum === "number") json.minItems = minimum;
+	if (typeof maximum === "number") json.maxItems = maximum;
+	json.type = "array";
+	json.items = process$1(def.element, ctx, {
+		...params,
+		path: [...params.path, "items"]
+	});
+};
+var objectProcessor = (schema, ctx, _json, params) => {
+	const json = _json;
+	const def = schema._zod.def;
+	json.type = "object";
+	json.properties = {};
+	const shape = def.shape;
+	for (const key in shape) json.properties[key] = process$1(shape[key], ctx, {
+		...params,
+		path: [
+			...params.path,
+			"properties",
+			key
+		]
+	});
+	const allKeys = new Set(Object.keys(shape));
+	const requiredKeys = new Set([...allKeys].filter((key) => {
+		const v = def.shape[key]._zod;
+		if (ctx.io === "input") return v.optin === void 0;
+		else return v.optout === void 0;
+	}));
+	if (requiredKeys.size > 0) json.required = Array.from(requiredKeys);
+	if (def.catchall?._zod.def.type === "never") json.additionalProperties = false;
+	else if (!def.catchall) {
+		if (ctx.io === "output") json.additionalProperties = false;
+	} else if (def.catchall) json.additionalProperties = process$1(def.catchall, ctx, {
+		...params,
+		path: [...params.path, "additionalProperties"]
+	});
+};
+var unionProcessor = (schema, ctx, json, params) => {
+	const def = schema._zod.def;
+	const isExclusive = def.inclusive === false;
+	const options = def.options.map((x, i) => process$1(x, ctx, {
+		...params,
+		path: [
+			...params.path,
+			isExclusive ? "oneOf" : "anyOf",
+			i
+		]
+	}));
+	if (isExclusive) json.oneOf = options;
+	else json.anyOf = options;
+};
+var intersectionProcessor = (schema, ctx, json, params) => {
+	const def = schema._zod.def;
+	const a = process$1(def.left, ctx, {
+		...params,
+		path: [
+			...params.path,
+			"allOf",
+			0
+		]
+	});
+	const b = process$1(def.right, ctx, {
+		...params,
+		path: [
+			...params.path,
+			"allOf",
+			1
+		]
+	});
+	const isSimpleIntersection = (val) => "allOf" in val && Object.keys(val).length === 1;
+	json.allOf = [...isSimpleIntersection(a) ? a.allOf : [a], ...isSimpleIntersection(b) ? b.allOf : [b]];
+};
+var nullableProcessor = (schema, ctx, json, params) => {
+	const def = schema._zod.def;
+	const inner = process$1(def.innerType, ctx, params);
+	const seen = ctx.seen.get(schema);
+	if (ctx.target === "openapi-3.0") {
+		seen.ref = def.innerType;
+		json.nullable = true;
+	} else json.anyOf = [inner, { type: "null" }];
+};
+var nonoptionalProcessor = (schema, ctx, _json, params) => {
+	const def = schema._zod.def;
+	process$1(def.innerType, ctx, params);
+	const seen = ctx.seen.get(schema);
+	seen.ref = def.innerType;
+};
+var defaultProcessor = (schema, ctx, json, params) => {
+	const def = schema._zod.def;
+	process$1(def.innerType, ctx, params);
+	const seen = ctx.seen.get(schema);
+	seen.ref = def.innerType;
+	json.default = JSON.parse(JSON.stringify(def.defaultValue));
+};
+var prefaultProcessor = (schema, ctx, json, params) => {
+	const def = schema._zod.def;
+	process$1(def.innerType, ctx, params);
+	const seen = ctx.seen.get(schema);
+	seen.ref = def.innerType;
+	if (ctx.io === "input") json._prefault = JSON.parse(JSON.stringify(def.defaultValue));
+};
+var catchProcessor = (schema, ctx, json, params) => {
+	const def = schema._zod.def;
+	process$1(def.innerType, ctx, params);
+	const seen = ctx.seen.get(schema);
+	seen.ref = def.innerType;
+	let catchValue;
+	try {
+		catchValue = def.catchValue(void 0);
+	} catch {
+		throw new Error("Dynamic catch values are not supported in JSON Schema");
+	}
+	json.default = catchValue;
+};
+var pipeProcessor = (schema, ctx, _json, params) => {
+	const def = schema._zod.def;
+	const innerType = ctx.io === "input" ? def.in._zod.def.type === "transform" ? def.out : def.in : def.out;
+	process$1(innerType, ctx, params);
+	const seen = ctx.seen.get(schema);
+	seen.ref = innerType;
+};
+var readonlyProcessor = (schema, ctx, json, params) => {
+	const def = schema._zod.def;
+	process$1(def.innerType, ctx, params);
+	const seen = ctx.seen.get(schema);
+	seen.ref = def.innerType;
+	json.readOnly = true;
+};
+var optionalProcessor = (schema, ctx, _json, params) => {
+	const def = schema._zod.def;
+	process$1(def.innerType, ctx, params);
+	const seen = ctx.seen.get(schema);
+	seen.ref = def.innerType;
+};
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/@hookform+resolvers@5.2.2_react-hook-form@7.71.2_react@19.2.4_/node_modules/@hookform/resolvers/zod/dist/zod.mjs
+function t(r, e) {
+	try {
+		var o = r();
+	} catch (r) {
+		return e(r);
+	}
+	return o && o.then ? o.then(void 0, e) : o;
+}
+function s(r, e) {
+	for (var n = {}; r.length;) {
+		var t = r[0], s = t.code, i = t.message, a = t.path.join(".");
+		if (!n[a]) if ("unionErrors" in t) {
+			var u = t.unionErrors[0].errors[0];
+			n[a] = {
+				message: u.message,
+				type: u.code
+			};
+		} else n[a] = {
+			message: i,
+			type: s
+		};
+		if ("unionErrors" in t && t.unionErrors.forEach(function(e) {
+			return e.errors.forEach(function(e) {
+				return r.push(e);
+			});
+		}), e) {
+			var c = n[a].types, f = c && c[t.code];
+			n[a] = appendErrors(a, e, n, s, f ? [].concat(f, t.message) : t.message);
+		}
+		r.shift();
+	}
+	return n;
+}
+function i(r, e) {
+	for (var n = {}; r.length;) {
+		var t = r[0], s = t.code, i = t.message, a = t.path.join(".");
+		if (!n[a]) if ("invalid_union" === t.code && t.errors.length > 0) {
+			var u = t.errors[0][0];
+			n[a] = {
+				message: u.message,
+				type: u.code
+			};
+		} else n[a] = {
+			message: i,
+			type: s
+		};
+		if ("invalid_union" === t.code && t.errors.forEach(function(e) {
+			return e.forEach(function(e) {
+				return r.push(e);
+			});
+		}), e) {
+			var c = n[a].types, f = c && c[t.code];
+			n[a] = appendErrors(a, e, n, s, f ? [].concat(f, t.message) : t.message);
+		}
+		r.shift();
+	}
+	return n;
+}
+function a(o$1, a, u) {
+	if (void 0 === u && (u = {}), function(r) {
+		return "_def" in r && "object" == typeof r._def && "typeName" in r._def;
+	}(o$1)) return function(n, i, c) {
+		try {
+			return Promise.resolve(t(function() {
+				return Promise.resolve(o$1["sync" === u.mode ? "parse" : "parseAsync"](n, a)).then(function(e) {
+					return c.shouldUseNativeValidation && o({}, c), {
+						errors: {},
+						values: u.raw ? Object.assign({}, n) : e
+					};
+				});
+			}, function(r) {
+				if (function(r) {
+					return Array.isArray(null == r ? void 0 : r.issues);
+				}(r)) return {
+					values: {},
+					errors: s$1(s(r.errors, !c.shouldUseNativeValidation && "all" === c.criteriaMode), c)
+				};
+				throw r;
+			}));
+		} catch (r) {
+			return Promise.reject(r);
+		}
+	};
+	if (function(r) {
+		return "_zod" in r && "object" == typeof r._zod;
+	}(o$1)) return function(s, c, f) {
+		try {
+			return Promise.resolve(t(function() {
+				return Promise.resolve(("sync" === u.mode ? parse$1 : parseAsync$1)(o$1, s, a)).then(function(e) {
+					return f.shouldUseNativeValidation && o({}, f), {
+						errors: {},
+						values: u.raw ? Object.assign({}, s) : e
+					};
+				});
+			}, function(r) {
+				if (function(r) {
+					return r instanceof $ZodError;
+				}(r)) return {
+					values: {},
+					errors: s$1(i(r.issues, !f.shouldUseNativeValidation && "all" === f.criteriaMode), f)
+				};
+				throw r;
+			}));
+		} catch (r) {
+			return Promise.reject(r);
+		}
+	};
+	throw new Error("Invalid input: not a Zod schema");
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/zod@4.3.6/node_modules/zod/v4/classic/iso.js
+var ZodISODateTime = /* @__PURE__ */ $constructor("ZodISODateTime", (inst, def) => {
+	$ZodISODateTime.init(inst, def);
+	ZodStringFormat.init(inst, def);
+});
+function datetime(params) {
+	return /* @__PURE__ */ _isoDateTime(ZodISODateTime, params);
+}
+var ZodISODate = /* @__PURE__ */ $constructor("ZodISODate", (inst, def) => {
+	$ZodISODate.init(inst, def);
+	ZodStringFormat.init(inst, def);
+});
+function date(params) {
+	return /* @__PURE__ */ _isoDate(ZodISODate, params);
+}
+var ZodISOTime = /* @__PURE__ */ $constructor("ZodISOTime", (inst, def) => {
+	$ZodISOTime.init(inst, def);
+	ZodStringFormat.init(inst, def);
+});
+function time(params) {
+	return /* @__PURE__ */ _isoTime(ZodISOTime, params);
+}
+var ZodISODuration = /* @__PURE__ */ $constructor("ZodISODuration", (inst, def) => {
+	$ZodISODuration.init(inst, def);
+	ZodStringFormat.init(inst, def);
+});
+function duration(params) {
+	return /* @__PURE__ */ _isoDuration(ZodISODuration, params);
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/zod@4.3.6/node_modules/zod/v4/classic/errors.js
+var initializer = (inst, issues) => {
+	$ZodError.init(inst, issues);
+	inst.name = "ZodError";
+	Object.defineProperties(inst, {
+		format: { value: (mapper) => formatError(inst, mapper) },
+		flatten: { value: (mapper) => flattenError(inst, mapper) },
+		addIssue: { value: (issue) => {
+			inst.issues.push(issue);
+			inst.message = JSON.stringify(inst.issues, jsonStringifyReplacer, 2);
+		} },
+		addIssues: { value: (issues) => {
+			inst.issues.push(...issues);
+			inst.message = JSON.stringify(inst.issues, jsonStringifyReplacer, 2);
+		} },
+		isEmpty: { get() {
+			return inst.issues.length === 0;
+		} }
+	});
+};
+$constructor("ZodError", initializer);
+var ZodRealError = $constructor("ZodError", initializer, { Parent: Error });
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/zod@4.3.6/node_modules/zod/v4/classic/parse.js
+var parse = /* @__PURE__ */ _parse(ZodRealError);
+var parseAsync = /* @__PURE__ */ _parseAsync(ZodRealError);
+var safeParse = /* @__PURE__ */ _safeParse(ZodRealError);
+var safeParseAsync = /* @__PURE__ */ _safeParseAsync(ZodRealError);
+var encode = /* @__PURE__ */ _encode(ZodRealError);
+var decode = /* @__PURE__ */ _decode(ZodRealError);
+var encodeAsync = /* @__PURE__ */ _encodeAsync(ZodRealError);
+var decodeAsync = /* @__PURE__ */ _decodeAsync(ZodRealError);
+var safeEncode = /* @__PURE__ */ _safeEncode(ZodRealError);
+var safeDecode = /* @__PURE__ */ _safeDecode(ZodRealError);
+var safeEncodeAsync = /* @__PURE__ */ _safeEncodeAsync(ZodRealError);
+var safeDecodeAsync = /* @__PURE__ */ _safeDecodeAsync(ZodRealError);
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/zod@4.3.6/node_modules/zod/v4/classic/schemas.js
+var ZodType = /* @__PURE__ */ $constructor("ZodType", (inst, def) => {
+	$ZodType.init(inst, def);
+	Object.assign(inst["~standard"], { jsonSchema: {
+		input: createStandardJSONSchemaMethod(inst, "input"),
+		output: createStandardJSONSchemaMethod(inst, "output")
+	} });
+	inst.toJSONSchema = createToJSONSchemaMethod(inst, {});
+	inst.def = def;
+	inst.type = def.type;
+	Object.defineProperty(inst, "_def", { value: def });
+	inst.check = (...checks) => {
+		return inst.clone(mergeDefs(def, { checks: [...def.checks ?? [], ...checks.map((ch) => typeof ch === "function" ? { _zod: {
+			check: ch,
+			def: { check: "custom" },
+			onattach: []
+		} } : ch)] }), { parent: true });
+	};
+	inst.with = inst.check;
+	inst.clone = (def, params) => clone(inst, def, params);
+	inst.brand = () => inst;
+	inst.register = ((reg, meta) => {
+		reg.add(inst, meta);
+		return inst;
+	});
+	inst.parse = (data, params) => parse(inst, data, params, { callee: inst.parse });
+	inst.safeParse = (data, params) => safeParse(inst, data, params);
+	inst.parseAsync = async (data, params) => parseAsync(inst, data, params, { callee: inst.parseAsync });
+	inst.safeParseAsync = async (data, params) => safeParseAsync(inst, data, params);
+	inst.spa = inst.safeParseAsync;
+	inst.encode = (data, params) => encode(inst, data, params);
+	inst.decode = (data, params) => decode(inst, data, params);
+	inst.encodeAsync = async (data, params) => encodeAsync(inst, data, params);
+	inst.decodeAsync = async (data, params) => decodeAsync(inst, data, params);
+	inst.safeEncode = (data, params) => safeEncode(inst, data, params);
+	inst.safeDecode = (data, params) => safeDecode(inst, data, params);
+	inst.safeEncodeAsync = async (data, params) => safeEncodeAsync(inst, data, params);
+	inst.safeDecodeAsync = async (data, params) => safeDecodeAsync(inst, data, params);
+	inst.refine = (check, params) => inst.check(refine(check, params));
+	inst.superRefine = (refinement) => inst.check(superRefine(refinement));
+	inst.overwrite = (fn) => inst.check(/* @__PURE__ */ _overwrite(fn));
+	inst.optional = () => optional(inst);
+	inst.exactOptional = () => exactOptional(inst);
+	inst.nullable = () => nullable(inst);
+	inst.nullish = () => optional(nullable(inst));
+	inst.nonoptional = (params) => nonoptional(inst, params);
+	inst.array = () => array(inst);
+	inst.or = (arg) => union([inst, arg]);
+	inst.and = (arg) => intersection(inst, arg);
+	inst.transform = (tx) => pipe(inst, transform(tx));
+	inst.default = (def) => _default(inst, def);
+	inst.prefault = (def) => prefault(inst, def);
+	inst.catch = (params) => _catch(inst, params);
+	inst.pipe = (target) => pipe(inst, target);
+	inst.readonly = () => readonly(inst);
+	inst.describe = (description) => {
+		const cl = inst.clone();
+		globalRegistry.add(cl, { description });
+		return cl;
+	};
+	Object.defineProperty(inst, "description", {
+		get() {
+			return globalRegistry.get(inst)?.description;
+		},
+		configurable: true
+	});
+	inst.meta = (...args) => {
+		if (args.length === 0) return globalRegistry.get(inst);
+		const cl = inst.clone();
+		globalRegistry.add(cl, args[0]);
+		return cl;
+	};
+	inst.isOptional = () => inst.safeParse(void 0).success;
+	inst.isNullable = () => inst.safeParse(null).success;
+	inst.apply = (fn) => fn(inst);
+	return inst;
+});
+/** @internal */
+var _ZodString = /* @__PURE__ */ $constructor("_ZodString", (inst, def) => {
+	$ZodString.init(inst, def);
+	ZodType.init(inst, def);
+	inst._zod.processJSONSchema = (ctx, json, params) => stringProcessor(inst, ctx, json, params);
+	const bag = inst._zod.bag;
+	inst.format = bag.format ?? null;
+	inst.minLength = bag.minimum ?? null;
+	inst.maxLength = bag.maximum ?? null;
+	inst.regex = (...args) => inst.check(/* @__PURE__ */ _regex(...args));
+	inst.includes = (...args) => inst.check(/* @__PURE__ */ _includes(...args));
+	inst.startsWith = (...args) => inst.check(/* @__PURE__ */ _startsWith(...args));
+	inst.endsWith = (...args) => inst.check(/* @__PURE__ */ _endsWith(...args));
+	inst.min = (...args) => inst.check(/* @__PURE__ */ _minLength(...args));
+	inst.max = (...args) => inst.check(/* @__PURE__ */ _maxLength(...args));
+	inst.length = (...args) => inst.check(/* @__PURE__ */ _length(...args));
+	inst.nonempty = (...args) => inst.check(/* @__PURE__ */ _minLength(1, ...args));
+	inst.lowercase = (params) => inst.check(/* @__PURE__ */ _lowercase(params));
+	inst.uppercase = (params) => inst.check(/* @__PURE__ */ _uppercase(params));
+	inst.trim = () => inst.check(/* @__PURE__ */ _trim());
+	inst.normalize = (...args) => inst.check(/* @__PURE__ */ _normalize(...args));
+	inst.toLowerCase = () => inst.check(/* @__PURE__ */ _toLowerCase());
+	inst.toUpperCase = () => inst.check(/* @__PURE__ */ _toUpperCase());
+	inst.slugify = () => inst.check(/* @__PURE__ */ _slugify());
+});
+var ZodString = /* @__PURE__ */ $constructor("ZodString", (inst, def) => {
+	$ZodString.init(inst, def);
+	_ZodString.init(inst, def);
+	inst.email = (params) => inst.check(/* @__PURE__ */ _email(ZodEmail, params));
+	inst.url = (params) => inst.check(/* @__PURE__ */ _url(ZodURL, params));
+	inst.jwt = (params) => inst.check(/* @__PURE__ */ _jwt(ZodJWT, params));
+	inst.emoji = (params) => inst.check(/* @__PURE__ */ _emoji(ZodEmoji, params));
+	inst.guid = (params) => inst.check(/* @__PURE__ */ _guid(ZodGUID, params));
+	inst.uuid = (params) => inst.check(/* @__PURE__ */ _uuid(ZodUUID, params));
+	inst.uuidv4 = (params) => inst.check(/* @__PURE__ */ _uuidv4(ZodUUID, params));
+	inst.uuidv6 = (params) => inst.check(/* @__PURE__ */ _uuidv6(ZodUUID, params));
+	inst.uuidv7 = (params) => inst.check(/* @__PURE__ */ _uuidv7(ZodUUID, params));
+	inst.nanoid = (params) => inst.check(/* @__PURE__ */ _nanoid(ZodNanoID, params));
+	inst.guid = (params) => inst.check(/* @__PURE__ */ _guid(ZodGUID, params));
+	inst.cuid = (params) => inst.check(/* @__PURE__ */ _cuid(ZodCUID, params));
+	inst.cuid2 = (params) => inst.check(/* @__PURE__ */ _cuid2(ZodCUID2, params));
+	inst.ulid = (params) => inst.check(/* @__PURE__ */ _ulid(ZodULID, params));
+	inst.base64 = (params) => inst.check(/* @__PURE__ */ _base64(ZodBase64, params));
+	inst.base64url = (params) => inst.check(/* @__PURE__ */ _base64url(ZodBase64URL, params));
+	inst.xid = (params) => inst.check(/* @__PURE__ */ _xid(ZodXID, params));
+	inst.ksuid = (params) => inst.check(/* @__PURE__ */ _ksuid(ZodKSUID, params));
+	inst.ipv4 = (params) => inst.check(/* @__PURE__ */ _ipv4(ZodIPv4, params));
+	inst.ipv6 = (params) => inst.check(/* @__PURE__ */ _ipv6(ZodIPv6, params));
+	inst.cidrv4 = (params) => inst.check(/* @__PURE__ */ _cidrv4(ZodCIDRv4, params));
+	inst.cidrv6 = (params) => inst.check(/* @__PURE__ */ _cidrv6(ZodCIDRv6, params));
+	inst.e164 = (params) => inst.check(/* @__PURE__ */ _e164(ZodE164, params));
+	inst.datetime = (params) => inst.check(datetime(params));
+	inst.date = (params) => inst.check(date(params));
+	inst.time = (params) => inst.check(time(params));
+	inst.duration = (params) => inst.check(duration(params));
+});
+function string(params) {
+	return /* @__PURE__ */ _string(ZodString, params);
+}
+var ZodStringFormat = /* @__PURE__ */ $constructor("ZodStringFormat", (inst, def) => {
+	$ZodStringFormat.init(inst, def);
+	_ZodString.init(inst, def);
+});
+var ZodEmail = /* @__PURE__ */ $constructor("ZodEmail", (inst, def) => {
+	$ZodEmail.init(inst, def);
+	ZodStringFormat.init(inst, def);
+});
+var ZodGUID = /* @__PURE__ */ $constructor("ZodGUID", (inst, def) => {
+	$ZodGUID.init(inst, def);
+	ZodStringFormat.init(inst, def);
+});
+var ZodUUID = /* @__PURE__ */ $constructor("ZodUUID", (inst, def) => {
+	$ZodUUID.init(inst, def);
+	ZodStringFormat.init(inst, def);
+});
+var ZodURL = /* @__PURE__ */ $constructor("ZodURL", (inst, def) => {
+	$ZodURL.init(inst, def);
+	ZodStringFormat.init(inst, def);
+});
+var ZodEmoji = /* @__PURE__ */ $constructor("ZodEmoji", (inst, def) => {
+	$ZodEmoji.init(inst, def);
+	ZodStringFormat.init(inst, def);
+});
+var ZodNanoID = /* @__PURE__ */ $constructor("ZodNanoID", (inst, def) => {
+	$ZodNanoID.init(inst, def);
+	ZodStringFormat.init(inst, def);
+});
+var ZodCUID = /* @__PURE__ */ $constructor("ZodCUID", (inst, def) => {
+	$ZodCUID.init(inst, def);
+	ZodStringFormat.init(inst, def);
+});
+var ZodCUID2 = /* @__PURE__ */ $constructor("ZodCUID2", (inst, def) => {
+	$ZodCUID2.init(inst, def);
+	ZodStringFormat.init(inst, def);
+});
+var ZodULID = /* @__PURE__ */ $constructor("ZodULID", (inst, def) => {
+	$ZodULID.init(inst, def);
+	ZodStringFormat.init(inst, def);
+});
+var ZodXID = /* @__PURE__ */ $constructor("ZodXID", (inst, def) => {
+	$ZodXID.init(inst, def);
+	ZodStringFormat.init(inst, def);
+});
+var ZodKSUID = /* @__PURE__ */ $constructor("ZodKSUID", (inst, def) => {
+	$ZodKSUID.init(inst, def);
+	ZodStringFormat.init(inst, def);
+});
+var ZodIPv4 = /* @__PURE__ */ $constructor("ZodIPv4", (inst, def) => {
+	$ZodIPv4.init(inst, def);
+	ZodStringFormat.init(inst, def);
+});
+var ZodIPv6 = /* @__PURE__ */ $constructor("ZodIPv6", (inst, def) => {
+	$ZodIPv6.init(inst, def);
+	ZodStringFormat.init(inst, def);
+});
+var ZodCIDRv4 = /* @__PURE__ */ $constructor("ZodCIDRv4", (inst, def) => {
+	$ZodCIDRv4.init(inst, def);
+	ZodStringFormat.init(inst, def);
+});
+var ZodCIDRv6 = /* @__PURE__ */ $constructor("ZodCIDRv6", (inst, def) => {
+	$ZodCIDRv6.init(inst, def);
+	ZodStringFormat.init(inst, def);
+});
+var ZodBase64 = /* @__PURE__ */ $constructor("ZodBase64", (inst, def) => {
+	$ZodBase64.init(inst, def);
+	ZodStringFormat.init(inst, def);
+});
+var ZodBase64URL = /* @__PURE__ */ $constructor("ZodBase64URL", (inst, def) => {
+	$ZodBase64URL.init(inst, def);
+	ZodStringFormat.init(inst, def);
+});
+var ZodE164 = /* @__PURE__ */ $constructor("ZodE164", (inst, def) => {
+	$ZodE164.init(inst, def);
+	ZodStringFormat.init(inst, def);
+});
+var ZodJWT = /* @__PURE__ */ $constructor("ZodJWT", (inst, def) => {
+	$ZodJWT.init(inst, def);
+	ZodStringFormat.init(inst, def);
+});
+var ZodNumber = /* @__PURE__ */ $constructor("ZodNumber", (inst, def) => {
+	$ZodNumber.init(inst, def);
+	ZodType.init(inst, def);
+	inst._zod.processJSONSchema = (ctx, json, params) => numberProcessor(inst, ctx, json, params);
+	inst.gt = (value, params) => inst.check(/* @__PURE__ */ _gt(value, params));
+	inst.gte = (value, params) => inst.check(/* @__PURE__ */ _gte(value, params));
+	inst.min = (value, params) => inst.check(/* @__PURE__ */ _gte(value, params));
+	inst.lt = (value, params) => inst.check(/* @__PURE__ */ _lt(value, params));
+	inst.lte = (value, params) => inst.check(/* @__PURE__ */ _lte(value, params));
+	inst.max = (value, params) => inst.check(/* @__PURE__ */ _lte(value, params));
+	inst.int = (params) => inst.check(int(params));
+	inst.safe = (params) => inst.check(int(params));
+	inst.positive = (params) => inst.check(/* @__PURE__ */ _gt(0, params));
+	inst.nonnegative = (params) => inst.check(/* @__PURE__ */ _gte(0, params));
+	inst.negative = (params) => inst.check(/* @__PURE__ */ _lt(0, params));
+	inst.nonpositive = (params) => inst.check(/* @__PURE__ */ _lte(0, params));
+	inst.multipleOf = (value, params) => inst.check(/* @__PURE__ */ _multipleOf(value, params));
+	inst.step = (value, params) => inst.check(/* @__PURE__ */ _multipleOf(value, params));
+	inst.finite = () => inst;
+	const bag = inst._zod.bag;
+	inst.minValue = Math.max(bag.minimum ?? Number.NEGATIVE_INFINITY, bag.exclusiveMinimum ?? Number.NEGATIVE_INFINITY) ?? null;
+	inst.maxValue = Math.min(bag.maximum ?? Number.POSITIVE_INFINITY, bag.exclusiveMaximum ?? Number.POSITIVE_INFINITY) ?? null;
+	inst.isInt = (bag.format ?? "").includes("int") || Number.isSafeInteger(bag.multipleOf ?? .5);
+	inst.isFinite = true;
+	inst.format = bag.format ?? null;
+});
+var ZodNumberFormat = /* @__PURE__ */ $constructor("ZodNumberFormat", (inst, def) => {
+	$ZodNumberFormat.init(inst, def);
+	ZodNumber.init(inst, def);
+});
+function int(params) {
+	return /* @__PURE__ */ _int(ZodNumberFormat, params);
+}
+var ZodUnknown = /* @__PURE__ */ $constructor("ZodUnknown", (inst, def) => {
+	$ZodUnknown.init(inst, def);
+	ZodType.init(inst, def);
+	inst._zod.processJSONSchema = (ctx, json, params) => unknownProcessor(inst, ctx, json, params);
+});
+function unknown() {
+	return /* @__PURE__ */ _unknown(ZodUnknown);
+}
+var ZodNever = /* @__PURE__ */ $constructor("ZodNever", (inst, def) => {
+	$ZodNever.init(inst, def);
+	ZodType.init(inst, def);
+	inst._zod.processJSONSchema = (ctx, json, params) => neverProcessor(inst, ctx, json, params);
+});
+function never(params) {
+	return /* @__PURE__ */ _never(ZodNever, params);
+}
+var ZodArray = /* @__PURE__ */ $constructor("ZodArray", (inst, def) => {
+	$ZodArray.init(inst, def);
+	ZodType.init(inst, def);
+	inst._zod.processJSONSchema = (ctx, json, params) => arrayProcessor(inst, ctx, json, params);
+	inst.element = def.element;
+	inst.min = (minLength, params) => inst.check(/* @__PURE__ */ _minLength(minLength, params));
+	inst.nonempty = (params) => inst.check(/* @__PURE__ */ _minLength(1, params));
+	inst.max = (maxLength, params) => inst.check(/* @__PURE__ */ _maxLength(maxLength, params));
+	inst.length = (len, params) => inst.check(/* @__PURE__ */ _length(len, params));
+	inst.unwrap = () => inst.element;
+});
+function array(element, params) {
+	return /* @__PURE__ */ _array(ZodArray, element, params);
+}
+var ZodObject = /* @__PURE__ */ $constructor("ZodObject", (inst, def) => {
+	$ZodObjectJIT.init(inst, def);
+	ZodType.init(inst, def);
+	inst._zod.processJSONSchema = (ctx, json, params) => objectProcessor(inst, ctx, json, params);
+	defineLazy(inst, "shape", () => {
+		return def.shape;
+	});
+	inst.keyof = () => _enum(Object.keys(inst._zod.def.shape));
+	inst.catchall = (catchall) => inst.clone({
+		...inst._zod.def,
+		catchall
+	});
+	inst.passthrough = () => inst.clone({
+		...inst._zod.def,
+		catchall: unknown()
+	});
+	inst.loose = () => inst.clone({
+		...inst._zod.def,
+		catchall: unknown()
+	});
+	inst.strict = () => inst.clone({
+		...inst._zod.def,
+		catchall: never()
+	});
+	inst.strip = () => inst.clone({
+		...inst._zod.def,
+		catchall: void 0
+	});
+	inst.extend = (incoming) => {
+		return extend(inst, incoming);
+	};
+	inst.safeExtend = (incoming) => {
+		return safeExtend(inst, incoming);
+	};
+	inst.merge = (other) => merge(inst, other);
+	inst.pick = (mask) => pick(inst, mask);
+	inst.omit = (mask) => omit(inst, mask);
+	inst.partial = (...args) => partial(ZodOptional, inst, args[0]);
+	inst.required = (...args) => required(ZodNonOptional, inst, args[0]);
+});
+function object(shape, params) {
+	return new ZodObject({
+		type: "object",
+		shape: shape ?? {},
+		...normalizeParams(params)
+	});
+}
+var ZodUnion = /* @__PURE__ */ $constructor("ZodUnion", (inst, def) => {
+	$ZodUnion.init(inst, def);
+	ZodType.init(inst, def);
+	inst._zod.processJSONSchema = (ctx, json, params) => unionProcessor(inst, ctx, json, params);
+	inst.options = def.options;
+});
+function union(options, params) {
+	return new ZodUnion({
+		type: "union",
+		options,
+		...normalizeParams(params)
+	});
+}
+var ZodIntersection = /* @__PURE__ */ $constructor("ZodIntersection", (inst, def) => {
+	$ZodIntersection.init(inst, def);
+	ZodType.init(inst, def);
+	inst._zod.processJSONSchema = (ctx, json, params) => intersectionProcessor(inst, ctx, json, params);
+});
+function intersection(left, right) {
+	return new ZodIntersection({
+		type: "intersection",
+		left,
+		right
+	});
+}
+var ZodEnum = /* @__PURE__ */ $constructor("ZodEnum", (inst, def) => {
+	$ZodEnum.init(inst, def);
+	ZodType.init(inst, def);
+	inst._zod.processJSONSchema = (ctx, json, params) => enumProcessor(inst, ctx, json, params);
+	inst.enum = def.entries;
+	inst.options = Object.values(def.entries);
+	const keys = new Set(Object.keys(def.entries));
+	inst.extract = (values, params) => {
+		const newEntries = {};
+		for (const value of values) if (keys.has(value)) newEntries[value] = def.entries[value];
+		else throw new Error(`Key ${value} not found in enum`);
+		return new ZodEnum({
+			...def,
+			checks: [],
+			...normalizeParams(params),
+			entries: newEntries
+		});
+	};
+	inst.exclude = (values, params) => {
+		const newEntries = { ...def.entries };
+		for (const value of values) if (keys.has(value)) delete newEntries[value];
+		else throw new Error(`Key ${value} not found in enum`);
+		return new ZodEnum({
+			...def,
+			checks: [],
+			...normalizeParams(params),
+			entries: newEntries
+		});
+	};
+});
+function _enum(values, params) {
+	return new ZodEnum({
+		type: "enum",
+		entries: Array.isArray(values) ? Object.fromEntries(values.map((v) => [v, v])) : values,
+		...normalizeParams(params)
+	});
+}
+var ZodLiteral = /* @__PURE__ */ $constructor("ZodLiteral", (inst, def) => {
+	$ZodLiteral.init(inst, def);
+	ZodType.init(inst, def);
+	inst._zod.processJSONSchema = (ctx, json, params) => literalProcessor(inst, ctx, json, params);
+	inst.values = new Set(def.values);
+	Object.defineProperty(inst, "value", { get() {
+		if (def.values.length > 1) throw new Error("This schema contains multiple valid literal values. Use `.values` instead.");
+		return def.values[0];
+	} });
+});
+function literal(value, params) {
+	return new ZodLiteral({
+		type: "literal",
+		values: Array.isArray(value) ? value : [value],
+		...normalizeParams(params)
+	});
+}
+var ZodTransform = /* @__PURE__ */ $constructor("ZodTransform", (inst, def) => {
+	$ZodTransform.init(inst, def);
+	ZodType.init(inst, def);
+	inst._zod.processJSONSchema = (ctx, json, params) => transformProcessor(inst, ctx, json, params);
+	inst._zod.parse = (payload, _ctx) => {
+		if (_ctx.direction === "backward") throw new $ZodEncodeError(inst.constructor.name);
+		payload.addIssue = (issue$1) => {
+			if (typeof issue$1 === "string") payload.issues.push(issue(issue$1, payload.value, def));
+			else {
+				const _issue = issue$1;
+				if (_issue.fatal) _issue.continue = false;
+				_issue.code ?? (_issue.code = "custom");
+				_issue.input ?? (_issue.input = payload.value);
+				_issue.inst ?? (_issue.inst = inst);
+				payload.issues.push(issue(_issue));
+			}
+		};
+		const output = def.transform(payload.value, payload);
+		if (output instanceof Promise) return output.then((output) => {
+			payload.value = output;
+			return payload;
+		});
+		payload.value = output;
+		return payload;
+	};
+});
+function transform(fn) {
+	return new ZodTransform({
+		type: "transform",
+		transform: fn
+	});
+}
+var ZodOptional = /* @__PURE__ */ $constructor("ZodOptional", (inst, def) => {
+	$ZodOptional.init(inst, def);
+	ZodType.init(inst, def);
+	inst._zod.processJSONSchema = (ctx, json, params) => optionalProcessor(inst, ctx, json, params);
+	inst.unwrap = () => inst._zod.def.innerType;
+});
+function optional(innerType) {
+	return new ZodOptional({
+		type: "optional",
+		innerType
+	});
+}
+var ZodExactOptional = /* @__PURE__ */ $constructor("ZodExactOptional", (inst, def) => {
+	$ZodExactOptional.init(inst, def);
+	ZodType.init(inst, def);
+	inst._zod.processJSONSchema = (ctx, json, params) => optionalProcessor(inst, ctx, json, params);
+	inst.unwrap = () => inst._zod.def.innerType;
+});
+function exactOptional(innerType) {
+	return new ZodExactOptional({
+		type: "optional",
+		innerType
+	});
+}
+var ZodNullable = /* @__PURE__ */ $constructor("ZodNullable", (inst, def) => {
+	$ZodNullable.init(inst, def);
+	ZodType.init(inst, def);
+	inst._zod.processJSONSchema = (ctx, json, params) => nullableProcessor(inst, ctx, json, params);
+	inst.unwrap = () => inst._zod.def.innerType;
+});
+function nullable(innerType) {
+	return new ZodNullable({
+		type: "nullable",
+		innerType
+	});
+}
+var ZodDefault = /* @__PURE__ */ $constructor("ZodDefault", (inst, def) => {
+	$ZodDefault.init(inst, def);
+	ZodType.init(inst, def);
+	inst._zod.processJSONSchema = (ctx, json, params) => defaultProcessor(inst, ctx, json, params);
+	inst.unwrap = () => inst._zod.def.innerType;
+	inst.removeDefault = inst.unwrap;
+});
+function _default(innerType, defaultValue) {
+	return new ZodDefault({
+		type: "default",
+		innerType,
+		get defaultValue() {
+			return typeof defaultValue === "function" ? defaultValue() : shallowClone(defaultValue);
+		}
+	});
+}
+var ZodPrefault = /* @__PURE__ */ $constructor("ZodPrefault", (inst, def) => {
+	$ZodPrefault.init(inst, def);
+	ZodType.init(inst, def);
+	inst._zod.processJSONSchema = (ctx, json, params) => prefaultProcessor(inst, ctx, json, params);
+	inst.unwrap = () => inst._zod.def.innerType;
+});
+function prefault(innerType, defaultValue) {
+	return new ZodPrefault({
+		type: "prefault",
+		innerType,
+		get defaultValue() {
+			return typeof defaultValue === "function" ? defaultValue() : shallowClone(defaultValue);
+		}
+	});
+}
+var ZodNonOptional = /* @__PURE__ */ $constructor("ZodNonOptional", (inst, def) => {
+	$ZodNonOptional.init(inst, def);
+	ZodType.init(inst, def);
+	inst._zod.processJSONSchema = (ctx, json, params) => nonoptionalProcessor(inst, ctx, json, params);
+	inst.unwrap = () => inst._zod.def.innerType;
+});
+function nonoptional(innerType, params) {
+	return new ZodNonOptional({
+		type: "nonoptional",
+		innerType,
+		...normalizeParams(params)
+	});
+}
+var ZodCatch = /* @__PURE__ */ $constructor("ZodCatch", (inst, def) => {
+	$ZodCatch.init(inst, def);
+	ZodType.init(inst, def);
+	inst._zod.processJSONSchema = (ctx, json, params) => catchProcessor(inst, ctx, json, params);
+	inst.unwrap = () => inst._zod.def.innerType;
+	inst.removeCatch = inst.unwrap;
+});
+function _catch(innerType, catchValue) {
+	return new ZodCatch({
+		type: "catch",
+		innerType,
+		catchValue: typeof catchValue === "function" ? catchValue : () => catchValue
+	});
+}
+var ZodPipe = /* @__PURE__ */ $constructor("ZodPipe", (inst, def) => {
+	$ZodPipe.init(inst, def);
+	ZodType.init(inst, def);
+	inst._zod.processJSONSchema = (ctx, json, params) => pipeProcessor(inst, ctx, json, params);
+	inst.in = def.in;
+	inst.out = def.out;
+});
+function pipe(in_, out) {
+	return new ZodPipe({
+		type: "pipe",
+		in: in_,
+		out
+	});
+}
+var ZodReadonly = /* @__PURE__ */ $constructor("ZodReadonly", (inst, def) => {
+	$ZodReadonly.init(inst, def);
+	ZodType.init(inst, def);
+	inst._zod.processJSONSchema = (ctx, json, params) => readonlyProcessor(inst, ctx, json, params);
+	inst.unwrap = () => inst._zod.def.innerType;
+});
+function readonly(innerType) {
+	return new ZodReadonly({
+		type: "readonly",
+		innerType
+	});
+}
+var ZodCustom = /* @__PURE__ */ $constructor("ZodCustom", (inst, def) => {
+	$ZodCustom.init(inst, def);
+	ZodType.init(inst, def);
+	inst._zod.processJSONSchema = (ctx, json, params) => customProcessor(inst, ctx, json, params);
+});
+function refine(fn, _params = {}) {
+	return /* @__PURE__ */ _refine(ZodCustom, fn, _params);
+}
+function superRefine(fn) {
+	return /* @__PURE__ */ _superRefine(fn);
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/zod@4.3.6/node_modules/zod/v4/classic/coerce.js
+function number(params) {
+	return /* @__PURE__ */ _coercedNumber(ZodNumber, params);
+}
+//#endregion
 //#region src/pages/ContasPagar.tsx
+var despesaSchema = object({
+	descricao: string().min(2, "Descrição obrigatória"),
+	valor: number().min(.01, "Valor deve ser maior que zero"),
+	data_vencimento: string().min(1, "Data é obrigatória"),
+	categoria: string().optional(),
+	fornecedor: string().optional()
+});
 function ContasPagar() {
 	const [contas, setContas] = (0, import_react.useState)([]);
 	const [loading, setLoading] = (0, import_react.useState)(true);
 	const [filter, setFilter] = (0, import_react.useState)("Todos");
 	const [searchCategoria, setSearchCategoria] = (0, import_react.useState)("");
 	const [isModalOpen, setIsModalOpen] = (0, import_react.useState)(false);
-	const [submitting, setSubmitting] = (0, import_react.useState)(false);
 	const [payingId, setPayingId] = (0, import_react.useState)(null);
-	const [form, setForm] = (0, import_react.useState)({
-		descricao: "",
-		valor: "",
-		data_vencimento: (/* @__PURE__ */ new Date()).toISOString().split("T")[0],
-		categoria: "",
-		fornecedor: ""
+	const form = useForm({
+		resolver: a(despesaSchema),
+		defaultValues: {
+			descricao: "",
+			valor: 0,
+			data_vencimento: (/* @__PURE__ */ new Date()).toISOString().split("T")[0],
+			categoria: "",
+			fornecedor: ""
+		}
 	});
 	const fetchContas = async () => {
 		setLoading(true);
@@ -67743,23 +73685,20 @@ function ContasPagar() {
 		else {
 			toast$1({
 				title: "Sucesso",
-				description: "Pagamento registrado com sucesso!"
+				description: "Pagamento registrado!"
 			});
 			fetchContas();
 		}
 	};
-	const handleAdd = async (e) => {
-		e.preventDefault();
-		setSubmitting(true);
+	const onSubmit = async (data) => {
 		const { error } = await supabase.from("contas_pagar").insert({
-			descricao: form.descricao,
-			valor: parseFloat(form.valor),
-			data_vencimento: new Date(form.data_vencimento).toISOString(),
-			categoria: form.categoria || null,
-			fornecedor: form.fornecedor || null,
+			descricao: data.descricao,
+			valor: data.valor,
+			data_vencimento: new Date(data.data_vencimento).toISOString(),
+			categoria: data.categoria || null,
+			fornecedor: data.fornecedor || null,
 			status: "pendente"
 		});
-		setSubmitting(false);
 		if (error) toast$1({
 			title: "Erro",
 			description: "Erro ao adicionar despesa.",
@@ -67771,13 +73710,7 @@ function ContasPagar() {
 				description: "Despesa adicionada com sucesso!"
 			});
 			setIsModalOpen(false);
-			setForm({
-				descricao: "",
-				valor: "",
-				data_vencimento: (/* @__PURE__ */ new Date()).toISOString().split("T")[0],
-				categoria: "",
-				fornecedor: ""
-			});
+			form.reset();
 			fetchContas();
 		}
 	};
@@ -67788,104 +73721,105 @@ function ContasPagar() {
 	});
 	const totalAPagar = contas.filter((c) => c.status === "pendente").reduce((acc, curr) => acc + Number(curr.valor), 0);
 	const totalPago = contas.filter((c) => c.status === "pago").reduce((acc, curr) => acc + Number(curr.valor), 0);
+	const isSubmitting = form.formState.isSubmitting;
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-		"data-uid": "src/pages/ContasPagar.tsx:133:5",
+		"data-uid": "src/pages/ContasPagar.tsx:146:5",
 		"data-prohibitions": "[editContent]",
 		className: "space-y-6 animate-fade-in max-w-6xl mx-auto h-full flex flex-col",
 		children: [
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				"data-uid": "src/pages/ContasPagar.tsx:134:7",
+				"data-uid": "src/pages/ContasPagar.tsx:147:7",
 				"data-prohibitions": "[editContent]",
 				className: "grid grid-cols-1 md:grid-cols-2 gap-6 shrink-0",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Card, {
-					"data-uid": "src/pages/ContasPagar.tsx:135:9",
+					"data-uid": "src/pages/ContasPagar.tsx:148:9",
 					"data-prohibitions": "[editContent]",
-					className: "shadow-sm border-red-100 bg-red-50/30",
+					className: "shadow-sm border-red-200 dark:border-red-900 bg-red-50/30 dark:bg-red-950/20",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardHeader, {
-						"data-uid": "src/pages/ContasPagar.tsx:136:11",
+						"data-uid": "src/pages/ContasPagar.tsx:149:11",
 						"data-prohibitions": "[]",
 						className: "flex flex-row items-center justify-between pb-2",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardTitle, {
-							"data-uid": "src/pages/ContasPagar.tsx:137:13",
+							"data-uid": "src/pages/ContasPagar.tsx:150:13",
 							"data-prohibitions": "[]",
-							className: "text-sm font-medium text-red-800",
+							className: "text-sm font-medium text-red-800 dark:text-red-400",
 							children: "Total a Pagar"
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DollarSign, {
-							"data-uid": "src/pages/ContasPagar.tsx:138:13",
+							"data-uid": "src/pages/ContasPagar.tsx:153:13",
 							"data-prohibitions": "[editContent]",
 							className: "h-4 w-4 text-red-500"
 						})]
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardContent, {
-						"data-uid": "src/pages/ContasPagar.tsx:140:11",
+						"data-uid": "src/pages/ContasPagar.tsx:155:11",
 						"data-prohibitions": "[editContent]",
 						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-							"data-uid": "src/pages/ContasPagar.tsx:141:13",
+							"data-uid": "src/pages/ContasPagar.tsx:156:13",
 							"data-prohibitions": "[editContent]",
-							className: "text-3xl font-bold text-red-900",
+							className: "text-3xl font-bold text-red-900 dark:text-red-300",
 							children: formatCurrency(totalAPagar)
 						})
 					})]
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Card, {
-					"data-uid": "src/pages/ContasPagar.tsx:144:9",
+					"data-uid": "src/pages/ContasPagar.tsx:161:9",
 					"data-prohibitions": "[editContent]",
-					className: "shadow-sm border-emerald-100 bg-emerald-50/30",
+					className: "shadow-sm border-emerald-200 dark:border-emerald-900 bg-emerald-50/30 dark:bg-emerald-950/20",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardHeader, {
-						"data-uid": "src/pages/ContasPagar.tsx:145:11",
+						"data-uid": "src/pages/ContasPagar.tsx:162:11",
 						"data-prohibitions": "[]",
 						className: "flex flex-row items-center justify-between pb-2",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardTitle, {
-							"data-uid": "src/pages/ContasPagar.tsx:146:13",
+							"data-uid": "src/pages/ContasPagar.tsx:163:13",
 							"data-prohibitions": "[]",
-							className: "text-sm font-medium text-emerald-800",
+							className: "text-sm font-medium text-emerald-800 dark:text-emerald-400",
 							children: "Total Pago"
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Wallet, {
-							"data-uid": "src/pages/ContasPagar.tsx:147:13",
+							"data-uid": "src/pages/ContasPagar.tsx:166:13",
 							"data-prohibitions": "[editContent]",
 							className: "h-4 w-4 text-emerald-500"
 						})]
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardContent, {
-						"data-uid": "src/pages/ContasPagar.tsx:149:11",
+						"data-uid": "src/pages/ContasPagar.tsx:168:11",
 						"data-prohibitions": "[editContent]",
 						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-							"data-uid": "src/pages/ContasPagar.tsx:150:13",
+							"data-uid": "src/pages/ContasPagar.tsx:169:13",
 							"data-prohibitions": "[editContent]",
-							className: "text-3xl font-bold text-emerald-900",
+							className: "text-3xl font-bold text-emerald-900 dark:text-emerald-300",
 							children: formatCurrency(totalPago)
 						})
 					})]
 				})]
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				"data-uid": "src/pages/ContasPagar.tsx:155:7",
+				"data-uid": "src/pages/ContasPagar.tsx:176:7",
 				"data-prohibitions": "[]",
 				className: "flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 shrink-0",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					"data-uid": "src/pages/ContasPagar.tsx:156:9",
+					"data-uid": "src/pages/ContasPagar.tsx:177:9",
 					"data-prohibitions": "[]",
 					className: "flex items-center gap-4",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Tabs, {
-						"data-uid": "src/pages/ContasPagar.tsx:157:11",
+						"data-uid": "src/pages/ContasPagar.tsx:178:11",
 						"data-prohibitions": "[]",
 						value: filter,
 						onValueChange: setFilter,
 						children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TabsList, {
-							"data-uid": "src/pages/ContasPagar.tsx:158:13",
+							"data-uid": "src/pages/ContasPagar.tsx:179:13",
 							"data-prohibitions": "[]",
 							children: [
 								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TabsTrigger, {
-									"data-uid": "src/pages/ContasPagar.tsx:159:15",
+									"data-uid": "src/pages/ContasPagar.tsx:180:15",
 									"data-prohibitions": "[]",
 									value: "Todos",
 									children: "Todos"
 								}),
 								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TabsTrigger, {
-									"data-uid": "src/pages/ContasPagar.tsx:160:15",
+									"data-uid": "src/pages/ContasPagar.tsx:181:15",
 									"data-prohibitions": "[]",
 									value: "Pendentes",
 									children: "Pendentes"
 								}),
 								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TabsTrigger, {
-									"data-uid": "src/pages/ContasPagar.tsx:161:15",
+									"data-uid": "src/pages/ContasPagar.tsx:182:15",
 									"data-prohibitions": "[]",
 									value: "Pagos",
 									children: "Pagos"
@@ -67893,93 +73827,93 @@ function ContasPagar() {
 							]
 						})
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						"data-uid": "src/pages/ContasPagar.tsx:164:11",
+						"data-uid": "src/pages/ContasPagar.tsx:185:11",
 						"data-prohibitions": "[]",
 						className: "relative w-48",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Search, {
-							"data-uid": "src/pages/ContasPagar.tsx:165:13",
+							"data-uid": "src/pages/ContasPagar.tsx:186:13",
 							"data-prohibitions": "[editContent]",
 							className: "absolute left-2.5 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground"
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
-							"data-uid": "src/pages/ContasPagar.tsx:166:13",
+							"data-uid": "src/pages/ContasPagar.tsx:187:13",
 							"data-prohibitions": "[editContent]",
 							placeholder: "Filtrar categoria",
-							className: "pl-8 h-9",
+							className: "pl-8 h-9 bg-background",
 							value: searchCategoria,
 							onChange: (e) => setSearchCategoria(e.target.value)
 						})]
 					})]
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button$1, {
-					"data-uid": "src/pages/ContasPagar.tsx:174:9",
+					"data-uid": "src/pages/ContasPagar.tsx:195:9",
 					"data-prohibitions": "[]",
 					onClick: () => setIsModalOpen(true),
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Plus, {
-						"data-uid": "src/pages/ContasPagar.tsx:175:11",
+						"data-uid": "src/pages/ContasPagar.tsx:196:11",
 						"data-prohibitions": "[editContent]",
 						className: "h-4 w-4 mr-2"
 					}), " Nova Despesa"]
 				})]
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Card, {
-				"data-uid": "src/pages/ContasPagar.tsx:179:7",
+				"data-uid": "src/pages/ContasPagar.tsx:200:7",
 				"data-prohibitions": "[editContent]",
-				className: "shadow-sm border-slate-200 flex-1 flex flex-col min-h-0",
+				className: "shadow-sm border-border flex-1 flex flex-col min-h-0 bg-card",
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardContent, {
-					"data-uid": "src/pages/ContasPagar.tsx:180:9",
+					"data-uid": "src/pages/ContasPagar.tsx:201:9",
 					"data-prohibitions": "[editContent]",
 					className: "p-0 flex-1 overflow-auto",
 					children: loading ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-						"data-uid": "src/pages/ContasPagar.tsx:182:13",
+						"data-uid": "src/pages/ContasPagar.tsx:203:13",
 						"data-prohibitions": "[]",
 						className: "flex h-40 items-center justify-center",
 						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(LoaderCircle, {
-							"data-uid": "src/pages/ContasPagar.tsx:183:15",
+							"data-uid": "src/pages/ContasPagar.tsx:204:15",
 							"data-prohibitions": "[editContent]",
 							className: "h-8 w-8 animate-spin text-primary"
 						})
 					}) : /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Table, {
-						"data-uid": "src/pages/ContasPagar.tsx:186:13",
+						"data-uid": "src/pages/ContasPagar.tsx:207:13",
 						"data-prohibitions": "[editContent]",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHeader, {
-							"data-uid": "src/pages/ContasPagar.tsx:187:15",
+							"data-uid": "src/pages/ContasPagar.tsx:208:15",
 							"data-prohibitions": "[]",
-							className: "sticky top-0 bg-white z-10 shadow-sm",
+							className: "sticky top-0 bg-muted/80 z-10 backdrop-blur-md",
 							children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TableRow, {
-								"data-uid": "src/pages/ContasPagar.tsx:188:17",
+								"data-uid": "src/pages/ContasPagar.tsx:209:17",
 								"data-prohibitions": "[]",
 								children: [
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
-										"data-uid": "src/pages/ContasPagar.tsx:189:19",
+										"data-uid": "src/pages/ContasPagar.tsx:210:19",
 										"data-prohibitions": "[]",
 										children: "Descrição"
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
-										"data-uid": "src/pages/ContasPagar.tsx:190:19",
+										"data-uid": "src/pages/ContasPagar.tsx:211:19",
 										"data-prohibitions": "[]",
 										children: "Fornecedor"
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
-										"data-uid": "src/pages/ContasPagar.tsx:191:19",
+										"data-uid": "src/pages/ContasPagar.tsx:212:19",
 										"data-prohibitions": "[]",
 										children: "Vencimento"
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
-										"data-uid": "src/pages/ContasPagar.tsx:192:19",
+										"data-uid": "src/pages/ContasPagar.tsx:213:19",
 										"data-prohibitions": "[]",
 										children: "Categoria"
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
-										"data-uid": "src/pages/ContasPagar.tsx:193:19",
+										"data-uid": "src/pages/ContasPagar.tsx:214:19",
 										"data-prohibitions": "[]",
 										children: "Valor"
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
-										"data-uid": "src/pages/ContasPagar.tsx:194:19",
+										"data-uid": "src/pages/ContasPagar.tsx:215:19",
 										"data-prohibitions": "[]",
 										children: "Status"
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
-										"data-uid": "src/pages/ContasPagar.tsx:195:19",
+										"data-uid": "src/pages/ContasPagar.tsx:216:19",
 										"data-prohibitions": "[]",
 										className: "text-right",
 										children: "Ação"
@@ -67987,63 +73921,63 @@ function ContasPagar() {
 								]
 							})
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TableBody, {
-							"data-uid": "src/pages/ContasPagar.tsx:198:15",
+							"data-uid": "src/pages/ContasPagar.tsx:219:15",
 							"data-prohibitions": "[editContent]",
 							children: [filteredContas.map((conta) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TableRow, {
-								"data-uid": "src/pages/ContasPagar.tsx:200:19",
+								"data-uid": "src/pages/ContasPagar.tsx:221:19",
 								"data-prohibitions": "[editContent]",
 								children: [
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-										"data-uid": "src/pages/ContasPagar.tsx:201:21",
+										"data-uid": "src/pages/ContasPagar.tsx:222:21",
 										"data-prohibitions": "[editContent]",
 										className: "font-medium",
 										children: conta.descricao
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-										"data-uid": "src/pages/ContasPagar.tsx:202:21",
+										"data-uid": "src/pages/ContasPagar.tsx:223:21",
 										"data-prohibitions": "[editContent]",
 										children: conta.fornecedor || "-"
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-										"data-uid": "src/pages/ContasPagar.tsx:203:21",
+										"data-uid": "src/pages/ContasPagar.tsx:224:21",
 										"data-prohibitions": "[editContent]",
 										children: new Date(conta.data_vencimento).toLocaleDateString("pt-BR")
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-										"data-uid": "src/pages/ContasPagar.tsx:206:21",
+										"data-uid": "src/pages/ContasPagar.tsx:227:21",
 										"data-prohibitions": "[editContent]",
 										children: conta.categoria || "-"
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-										"data-uid": "src/pages/ContasPagar.tsx:207:21",
+										"data-uid": "src/pages/ContasPagar.tsx:228:21",
 										"data-prohibitions": "[editContent]",
 										className: "font-semibold",
 										children: formatCurrency(conta.valor)
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-										"data-uid": "src/pages/ContasPagar.tsx:208:21",
+										"data-uid": "src/pages/ContasPagar.tsx:229:21",
 										"data-prohibitions": "[editContent]",
 										children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Badge, {
-											"data-uid": "src/pages/ContasPagar.tsx:209:23",
+											"data-uid": "src/pages/ContasPagar.tsx:230:23",
 											"data-prohibitions": "[editContent]",
 											variant: conta.status === "pago" ? "default" : "secondary",
-											className: conta.status === "pago" ? "bg-emerald-100 text-emerald-800" : "bg-red-100 text-red-800",
+											className: conta.status === "pago" ? "bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-300" : "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300",
 											children: conta.status === "pago" ? "Pago" : "Pendente"
 										})
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-										"data-uid": "src/pages/ContasPagar.tsx:220:21",
+										"data-uid": "src/pages/ContasPagar.tsx:241:21",
 										"data-prohibitions": "[editContent]",
 										className: "text-right",
 										children: conta.status === "pendente" && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
-											"data-uid": "src/pages/ContasPagar.tsx:222:25",
+											"data-uid": "src/pages/ContasPagar.tsx:243:25",
 											"data-prohibitions": "[editContent]",
 											size: "sm",
 											variant: "outline",
 											onClick: () => handlePay(conta.id),
 											disabled: payingId === conta.id,
 											children: payingId === conta.id ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(LoaderCircle, {
-												"data-uid": "src/pages/ContasPagar.tsx:229:29",
+												"data-uid": "src/pages/ContasPagar.tsx:250:29",
 												"data-prohibitions": "[editContent]",
 												className: "h-4 w-4 animate-spin"
 											}) : "Pagar"
@@ -68051,10 +73985,10 @@ function ContasPagar() {
 									})
 								]
 							}, conta.id)), filteredContas.length === 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableRow, {
-								"data-uid": "src/pages/ContasPagar.tsx:239:19",
+								"data-uid": "src/pages/ContasPagar.tsx:260:19",
 								"data-prohibitions": "[]",
 								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-									"data-uid": "src/pages/ContasPagar.tsx:240:21",
+									"data-uid": "src/pages/ContasPagar.tsx:261:21",
 									"data-prohibitions": "[]",
 									colSpan: 7,
 									className: "text-center py-8 text-muted-foreground",
@@ -68066,158 +74000,221 @@ function ContasPagar() {
 				})
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Dialog, {
-				"data-uid": "src/pages/ContasPagar.tsx:251:7",
+				"data-uid": "src/pages/ContasPagar.tsx:272:7",
 				"data-prohibitions": "[editContent]",
 				open: isModalOpen,
 				onOpenChange: setIsModalOpen,
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogContent, {
-					"data-uid": "src/pages/ContasPagar.tsx:252:9",
+					"data-uid": "src/pages/ContasPagar.tsx:273:9",
 					"data-prohibitions": "[editContent]",
-					className: "sm:max-w-[425px]",
+					className: "sm:max-w-[425px] bg-card",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogHeader, {
-						"data-uid": "src/pages/ContasPagar.tsx:253:11",
+						"data-uid": "src/pages/ContasPagar.tsx:274:11",
 						"data-prohibitions": "[]",
 						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogTitle, {
-							"data-uid": "src/pages/ContasPagar.tsx:254:13",
+							"data-uid": "src/pages/ContasPagar.tsx:275:13",
 							"data-prohibitions": "[]",
 							children: "Adicionar Nova Despesa"
 						})
-					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("form", {
-						"data-uid": "src/pages/ContasPagar.tsx:256:11",
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Form, {
+						"data-uid": "src/pages/ContasPagar.tsx:277:11",
 						"data-prohibitions": "[editContent]",
-						onSubmit: handleAdd,
-						className: "space-y-4 py-4",
-						children: [
-							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								"data-uid": "src/pages/ContasPagar.tsx:257:13",
-								"data-prohibitions": "[]",
-								className: "space-y-2",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$1, {
-									"data-uid": "src/pages/ContasPagar.tsx:258:15",
-									"data-prohibitions": "[]",
-									children: "Descrição *"
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
-									"data-uid": "src/pages/ContasPagar.tsx:259:15",
+						...form,
+						children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("form", {
+							"data-uid": "src/pages/ContasPagar.tsx:278:13",
+							"data-prohibitions": "[editContent]",
+							onSubmit: form.handleSubmit(onSubmit),
+							className: "space-y-4 py-4",
+							children: [
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormField, {
+									"data-uid": "src/pages/ContasPagar.tsx:279:15",
 									"data-prohibitions": "[editContent]",
-									required: true,
-									value: form.descricao,
-									onChange: (e) => setForm({
-										...form,
-										descricao: e.target.value
+									control: form.control,
+									name: "descricao",
+									render: ({ field }) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(FormItem, {
+										"data-uid": "src/pages/ContasPagar.tsx:283:19",
+										"data-prohibitions": "[]",
+										children: [
+											/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormLabel, {
+												"data-uid": "src/pages/ContasPagar.tsx:284:21",
+												"data-prohibitions": "[]",
+												children: "Descrição *"
+											}),
+											/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormControl, {
+												"data-uid": "src/pages/ContasPagar.tsx:285:21",
+												"data-prohibitions": "[]",
+												children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
+													"data-uid": "src/pages/ContasPagar.tsx:286:23",
+													"data-prohibitions": "[editContent]",
+													...field
+												})
+											}),
+											/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormMessage, {
+												"data-uid": "src/pages/ContasPagar.tsx:288:21",
+												"data-prohibitions": "[editContent]"
+											})
+										]
 									})
-								})]
-							}),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								"data-uid": "src/pages/ContasPagar.tsx:265:13",
-								"data-prohibitions": "[]",
-								className: "grid grid-cols-2 gap-4",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-									"data-uid": "src/pages/ContasPagar.tsx:266:15",
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									"data-uid": "src/pages/ContasPagar.tsx:292:15",
 									"data-prohibitions": "[]",
-									className: "space-y-2",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$1, {
-										"data-uid": "src/pages/ContasPagar.tsx:267:17",
-										"data-prohibitions": "[]",
-										children: "Valor *"
-									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
-										"data-uid": "src/pages/ContasPagar.tsx:268:17",
+									className: "grid grid-cols-2 gap-4",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormField, {
+										"data-uid": "src/pages/ContasPagar.tsx:293:17",
 										"data-prohibitions": "[editContent]",
-										type: "number",
-										step: "0.01",
-										required: true,
-										value: form.valor,
-										onChange: (e) => setForm({
-											...form,
-											valor: e.target.value
+										control: form.control,
+										name: "valor",
+										render: ({ field }) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(FormItem, {
+											"data-uid": "src/pages/ContasPagar.tsx:297:21",
+											"data-prohibitions": "[]",
+											children: [
+												/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormLabel, {
+													"data-uid": "src/pages/ContasPagar.tsx:298:23",
+													"data-prohibitions": "[]",
+													children: "Valor *"
+												}),
+												/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormControl, {
+													"data-uid": "src/pages/ContasPagar.tsx:299:23",
+													"data-prohibitions": "[]",
+													children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
+														"data-uid": "src/pages/ContasPagar.tsx:300:25",
+														"data-prohibitions": "[editContent]",
+														type: "number",
+														step: "0.01",
+														...field
+													})
+												}),
+												/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormMessage, {
+													"data-uid": "src/pages/ContasPagar.tsx:302:23",
+													"data-prohibitions": "[editContent]"
+												})
+											]
+										})
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormField, {
+										"data-uid": "src/pages/ContasPagar.tsx:306:17",
+										"data-prohibitions": "[editContent]",
+										control: form.control,
+										name: "data_vencimento",
+										render: ({ field }) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(FormItem, {
+											"data-uid": "src/pages/ContasPagar.tsx:310:21",
+											"data-prohibitions": "[]",
+											children: [
+												/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormLabel, {
+													"data-uid": "src/pages/ContasPagar.tsx:311:23",
+													"data-prohibitions": "[]",
+													children: "Vencimento *"
+												}),
+												/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormControl, {
+													"data-uid": "src/pages/ContasPagar.tsx:312:23",
+													"data-prohibitions": "[]",
+													children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
+														"data-uid": "src/pages/ContasPagar.tsx:313:25",
+														"data-prohibitions": "[editContent]",
+														type: "date",
+														...field
+													})
+												}),
+												/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormMessage, {
+													"data-uid": "src/pages/ContasPagar.tsx:315:23",
+													"data-prohibitions": "[editContent]"
+												})
+											]
 										})
 									})]
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-									"data-uid": "src/pages/ContasPagar.tsx:276:15",
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									"data-uid": "src/pages/ContasPagar.tsx:320:15",
 									"data-prohibitions": "[]",
-									className: "space-y-2",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$1, {
-										"data-uid": "src/pages/ContasPagar.tsx:277:17",
-										"data-prohibitions": "[]",
-										children: "Vencimento *"
-									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
-										"data-uid": "src/pages/ContasPagar.tsx:278:17",
+									className: "grid grid-cols-2 gap-4",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormField, {
+										"data-uid": "src/pages/ContasPagar.tsx:321:17",
 										"data-prohibitions": "[editContent]",
-										type: "date",
-										required: true,
-										value: form.data_vencimento,
-										onChange: (e) => setForm({
-											...form,
-											data_vencimento: e.target.value
+										control: form.control,
+										name: "categoria",
+										render: ({ field }) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(FormItem, {
+											"data-uid": "src/pages/ContasPagar.tsx:325:21",
+											"data-prohibitions": "[]",
+											children: [
+												/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormLabel, {
+													"data-uid": "src/pages/ContasPagar.tsx:326:23",
+													"data-prohibitions": "[]",
+													children: "Categoria"
+												}),
+												/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormControl, {
+													"data-uid": "src/pages/ContasPagar.tsx:327:23",
+													"data-prohibitions": "[]",
+													children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
+														"data-uid": "src/pages/ContasPagar.tsx:328:25",
+														"data-prohibitions": "[editContent]",
+														placeholder: "Ex: Energia",
+														...field
+													})
+												}),
+												/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormMessage, {
+													"data-uid": "src/pages/ContasPagar.tsx:330:23",
+													"data-prohibitions": "[editContent]"
+												})
+											]
+										})
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormField, {
+										"data-uid": "src/pages/ContasPagar.tsx:334:17",
+										"data-prohibitions": "[editContent]",
+										control: form.control,
+										name: "fornecedor",
+										render: ({ field }) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(FormItem, {
+											"data-uid": "src/pages/ContasPagar.tsx:338:21",
+											"data-prohibitions": "[]",
+											children: [
+												/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormLabel, {
+													"data-uid": "src/pages/ContasPagar.tsx:339:23",
+													"data-prohibitions": "[]",
+													children: "Fornecedor"
+												}),
+												/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormControl, {
+													"data-uid": "src/pages/ContasPagar.tsx:340:23",
+													"data-prohibitions": "[]",
+													children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
+														"data-uid": "src/pages/ContasPagar.tsx:341:25",
+														"data-prohibitions": "[editContent]",
+														placeholder: "Ex: Enel",
+														...field
+													})
+												}),
+												/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormMessage, {
+													"data-uid": "src/pages/ContasPagar.tsx:343:23",
+													"data-prohibitions": "[editContent]"
+												})
+											]
 										})
 									})]
-								})]
-							}),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								"data-uid": "src/pages/ContasPagar.tsx:286:13",
-								"data-prohibitions": "[]",
-								className: "grid grid-cols-2 gap-4",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-									"data-uid": "src/pages/ContasPagar.tsx:287:15",
-									"data-prohibitions": "[]",
-									className: "space-y-2",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$1, {
-										"data-uid": "src/pages/ContasPagar.tsx:288:17",
-										"data-prohibitions": "[]",
-										children: "Categoria"
-									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
-										"data-uid": "src/pages/ContasPagar.tsx:289:17",
-										"data-prohibitions": "[editContent]",
-										placeholder: "Ex: Energia",
-										value: form.categoria,
-										onChange: (e) => setForm({
-											...form,
-											categoria: e.target.value
-										})
-									})]
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-									"data-uid": "src/pages/ContasPagar.tsx:295:15",
-									"data-prohibitions": "[]",
-									className: "space-y-2",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$1, {
-										"data-uid": "src/pages/ContasPagar.tsx:296:17",
-										"data-prohibitions": "[]",
-										children: "Fornecedor"
-									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
-										"data-uid": "src/pages/ContasPagar.tsx:297:17",
-										"data-prohibitions": "[editContent]",
-										placeholder: "Ex: Enel",
-										value: form.fornecedor,
-										onChange: (e) => setForm({
-											...form,
-											fornecedor: e.target.value
-										})
-									})]
-								})]
-							}),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogFooter, {
-								"data-uid": "src/pages/ContasPagar.tsx:304:13",
-								"data-prohibitions": "[editContent]",
-								className: "pt-4",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
-									"data-uid": "src/pages/ContasPagar.tsx:305:15",
-									"data-prohibitions": "[]",
-									type: "button",
-									variant: "outline",
-									onClick: () => setIsModalOpen(false),
-									children: "Cancelar"
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button$1, {
-									"data-uid": "src/pages/ContasPagar.tsx:308:15",
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogFooter, {
+									"data-uid": "src/pages/ContasPagar.tsx:348:15",
 									"data-prohibitions": "[editContent]",
-									type: "submit",
-									disabled: submitting,
-									children: [submitting ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(LoaderCircle, {
-										"data-uid": "src/pages/ContasPagar.tsx:309:31",
+									className: "pt-4",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
+										"data-uid": "src/pages/ContasPagar.tsx:349:17",
+										"data-prohibitions": "[]",
+										type: "button",
+										variant: "outline",
+										onClick: () => setIsModalOpen(false),
+										disabled: isSubmitting,
+										children: "Cancelar"
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button$1, {
+										"data-uid": "src/pages/ContasPagar.tsx:357:17",
 										"data-prohibitions": "[editContent]",
-										className: "h-4 w-4 animate-spin mr-2"
-									}) : null, " Salvar"]
-								})]
-							})
-						]
+										type: "submit",
+										disabled: isSubmitting,
+										children: [isSubmitting && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(LoaderCircle, {
+											"data-uid": "src/pages/ContasPagar.tsx:358:36",
+											"data-prohibitions": "[editContent]",
+											className: "h-4 w-4 animate-spin mr-2"
+										}), " Salvar"]
+									})]
+								})
+							]
+						})
 					})]
 				})
 			})
@@ -69383,14 +75380,16 @@ function CaixaAberto({ caixa, movements, sales, onFechar, onNovaMov }) {
 		descricao: ""
 	});
 	const totals = (0, import_react.useMemo)(() => {
-		const v = sales.reduce((acc, s) => acc + Number(s.total), 0);
+		const vDinheiro = sales.filter((s) => s.metodo_pagamento === "Dinheiro").reduce((acc, s) => acc + Number(s.total), 0);
+		const vTotal = sales.reduce((acc, s) => acc + Number(s.total), 0);
 		const e = movements.filter((m) => m.tipo === "entrada").reduce((acc, m) => acc + Number(m.valor), 0);
 		const s = movements.filter((m) => m.tipo === "saida").reduce((acc, m) => acc + Number(m.valor), 0);
 		return {
-			vendas: v,
+			vendasTotal: vTotal,
+			vendasDinheiro: vDinheiro,
 			entradas: e,
 			saidas: s,
-			atual: Number(caixa.saldo_inicial) + v + e - s
+			atual: Number(caixa.saldo_inicial) + vDinheiro + e - s
 		};
 	}, [
 		caixa,
@@ -69408,107 +75407,107 @@ function CaixaAberto({ caixa, movements, sales, onFechar, onNovaMov }) {
 		});
 	};
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-		"data-uid": "src/components/caixa/CaixaAberto.tsx:67:5",
+		"data-uid": "src/components/caixa/CaixaAberto.tsx:71:5",
 		"data-prohibitions": "[editContent]",
 		className: "space-y-6",
 		children: [
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				"data-uid": "src/components/caixa/CaixaAberto.tsx:68:7",
+				"data-uid": "src/components/caixa/CaixaAberto.tsx:72:7",
 				"data-prohibitions": "[editContent]",
 				className: "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4",
 				children: [
 					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Card, {
-						"data-uid": "src/components/caixa/CaixaAberto.tsx:69:9",
+						"data-uid": "src/components/caixa/CaixaAberto.tsx:73:9",
 						"data-prohibitions": "[editContent]",
-						className: "border-slate-200",
+						className: "border-border",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardHeader, {
-							"data-uid": "src/components/caixa/CaixaAberto.tsx:70:11",
+							"data-uid": "src/components/caixa/CaixaAberto.tsx:74:11",
 							"data-prohibitions": "[]",
 							className: "pb-2 flex flex-row items-center justify-between",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardTitle, {
-								"data-uid": "src/components/caixa/CaixaAberto.tsx:71:13",
+								"data-uid": "src/components/caixa/CaixaAberto.tsx:75:13",
 								"data-prohibitions": "[]",
-								className: "text-sm font-medium text-slate-500",
+								className: "text-sm font-medium text-muted-foreground",
 								children: "Saldo Inicial"
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Wallet, {
-								"data-uid": "src/components/caixa/CaixaAberto.tsx:72:13",
+								"data-uid": "src/components/caixa/CaixaAberto.tsx:78:13",
 								"data-prohibitions": "[editContent]",
-								className: "h-4 w-4 text-slate-400"
+								className: "h-4 w-4 text-muted-foreground"
 							})]
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardContent, {
-							"data-uid": "src/components/caixa/CaixaAberto.tsx:74:11",
+							"data-uid": "src/components/caixa/CaixaAberto.tsx:80:11",
 							"data-prohibitions": "[editContent]",
 							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-								"data-uid": "src/components/caixa/CaixaAberto.tsx:75:13",
+								"data-uid": "src/components/caixa/CaixaAberto.tsx:81:13",
 								"data-prohibitions": "[editContent]",
-								className: "text-2xl font-bold",
+								className: "text-2xl font-bold text-foreground",
 								children: formatCurrency(Number(caixa.saldo_inicial))
 							})
 						})]
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Card, {
-						"data-uid": "src/components/caixa/CaixaAberto.tsx:78:9",
+						"data-uid": "src/components/caixa/CaixaAberto.tsx:86:9",
 						"data-prohibitions": "[editContent]",
-						className: "border-blue-100 bg-blue-50/30",
+						className: "border-blue-200 dark:border-blue-900 bg-blue-50/30 dark:bg-blue-950/20",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardHeader, {
-							"data-uid": "src/components/caixa/CaixaAberto.tsx:79:11",
+							"data-uid": "src/components/caixa/CaixaAberto.tsx:87:11",
 							"data-prohibitions": "[]",
 							className: "pb-2 flex flex-row items-center justify-between",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardTitle, {
-								"data-uid": "src/components/caixa/CaixaAberto.tsx:80:13",
+								"data-uid": "src/components/caixa/CaixaAberto.tsx:88:13",
 								"data-prohibitions": "[]",
-								className: "text-sm font-medium text-blue-700",
+								className: "text-sm font-medium text-blue-700 dark:text-blue-400",
 								children: "Vendas (Sessão)"
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TrendingUp, {
-								"data-uid": "src/components/caixa/CaixaAberto.tsx:81:13",
+								"data-uid": "src/components/caixa/CaixaAberto.tsx:91:13",
 								"data-prohibitions": "[editContent]",
 								className: "h-4 w-4 text-blue-500"
 							})]
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardContent, {
-							"data-uid": "src/components/caixa/CaixaAberto.tsx:83:11",
+							"data-uid": "src/components/caixa/CaixaAberto.tsx:93:11",
 							"data-prohibitions": "[editContent]",
 							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-								"data-uid": "src/components/caixa/CaixaAberto.tsx:84:13",
+								"data-uid": "src/components/caixa/CaixaAberto.tsx:94:13",
 								"data-prohibitions": "[editContent]",
-								className: "text-2xl font-bold text-blue-900",
-								children: formatCurrency(totals.vendas)
+								className: "text-2xl font-bold text-blue-900 dark:text-blue-300",
+								children: formatCurrency(totals.vendasTotal)
 							})
 						})]
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Card, {
-						"data-uid": "src/components/caixa/CaixaAberto.tsx:87:9",
+						"data-uid": "src/components/caixa/CaixaAberto.tsx:99:9",
 						"data-prohibitions": "[editContent]",
-						className: "border-slate-200",
+						className: "border-border",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardHeader, {
-							"data-uid": "src/components/caixa/CaixaAberto.tsx:88:11",
+							"data-uid": "src/components/caixa/CaixaAberto.tsx:100:11",
 							"data-prohibitions": "[]",
 							className: "pb-2 flex flex-row items-center justify-between",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardTitle, {
-								"data-uid": "src/components/caixa/CaixaAberto.tsx:89:13",
+								"data-uid": "src/components/caixa/CaixaAberto.tsx:101:13",
 								"data-prohibitions": "[]",
-								className: "text-sm font-medium text-slate-500",
+								className: "text-sm font-medium text-muted-foreground",
 								children: "Movimentações Manuais"
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowDownRight, {
-								"data-uid": "src/components/caixa/CaixaAberto.tsx:92:13",
+								"data-uid": "src/components/caixa/CaixaAberto.tsx:104:13",
 								"data-prohibitions": "[editContent]",
 								className: "h-4 w-4 text-orange-500"
 							})]
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardContent, {
-							"data-uid": "src/components/caixa/CaixaAberto.tsx:94:11",
+							"data-uid": "src/components/caixa/CaixaAberto.tsx:106:11",
 							"data-prohibitions": "[editContent]",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								"data-uid": "src/components/caixa/CaixaAberto.tsx:95:13",
+								"data-uid": "src/components/caixa/CaixaAberto.tsx:107:13",
 								"data-prohibitions": "[editContent]",
-								className: "text-sm text-emerald-600 font-medium",
+								className: "text-sm text-emerald-600 dark:text-emerald-400 font-medium",
 								children: [
 									"+",
 									formatCurrency(totals.entradas),
 									" (Entradas)"
 								]
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								"data-uid": "src/components/caixa/CaixaAberto.tsx:98:13",
+								"data-uid": "src/components/caixa/CaixaAberto.tsx:110:13",
 								"data-prohibitions": "[editContent]",
-								className: "text-sm text-red-600 font-medium",
+								className: "text-sm text-destructive font-medium",
 								children: [
 									"-",
 									formatCurrency(totals.saidas),
@@ -69518,30 +75517,30 @@ function CaixaAberto({ caixa, movements, sales, onFechar, onNovaMov }) {
 						})]
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Card, {
-						"data-uid": "src/components/caixa/CaixaAberto.tsx:103:9",
+						"data-uid": "src/components/caixa/CaixaAberto.tsx:115:9",
 						"data-prohibitions": "[editContent]",
-						className: "border-emerald-200 bg-emerald-50 shadow-sm",
+						className: "border-emerald-200 dark:border-emerald-900 bg-emerald-50 dark:bg-emerald-950/30 shadow-sm",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardHeader, {
-							"data-uid": "src/components/caixa/CaixaAberto.tsx:104:11",
+							"data-uid": "src/components/caixa/CaixaAberto.tsx:116:11",
 							"data-prohibitions": "[]",
 							className: "pb-2 flex flex-row items-center justify-between",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardTitle, {
-								"data-uid": "src/components/caixa/CaixaAberto.tsx:105:13",
+								"data-uid": "src/components/caixa/CaixaAberto.tsx:117:13",
 								"data-prohibitions": "[]",
-								className: "text-sm font-bold text-emerald-800",
+								className: "text-sm font-bold text-emerald-800 dark:text-emerald-400",
 								children: "Saldo Atual (Gaveta)"
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SquareCheckBig, {
-								"data-uid": "src/components/caixa/CaixaAberto.tsx:108:13",
+								"data-uid": "src/components/caixa/CaixaAberto.tsx:120:13",
 								"data-prohibitions": "[editContent]",
 								className: "h-4 w-4 text-emerald-600"
 							})]
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardContent, {
-							"data-uid": "src/components/caixa/CaixaAberto.tsx:110:11",
+							"data-uid": "src/components/caixa/CaixaAberto.tsx:122:11",
 							"data-prohibitions": "[editContent]",
 							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-								"data-uid": "src/components/caixa/CaixaAberto.tsx:111:13",
+								"data-uid": "src/components/caixa/CaixaAberto.tsx:123:13",
 								"data-prohibitions": "[editContent]",
-								className: "text-3xl font-black text-emerald-900",
+								className: "text-3xl font-black text-emerald-900 dark:text-emerald-300",
 								children: formatCurrency(totals.atual)
 							})
 						})]
@@ -69549,22 +75548,21 @@ function CaixaAberto({ caixa, movements, sales, onFechar, onNovaMov }) {
 				]
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				"data-uid": "src/components/caixa/CaixaAberto.tsx:118:7",
+				"data-uid": "src/components/caixa/CaixaAberto.tsx:130:7",
 				"data-prohibitions": "[]",
 				className: "flex flex-col sm:flex-row gap-4",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button$1, {
-					"data-uid": "src/components/caixa/CaixaAberto.tsx:119:9",
+					"data-uid": "src/components/caixa/CaixaAberto.tsx:131:9",
 					"data-prohibitions": "[]",
 					onClick: () => setMovOpen(true),
 					variant: "outline",
-					className: "bg-white",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Plus, {
-						"data-uid": "src/components/caixa/CaixaAberto.tsx:120:11",
+						"data-uid": "src/components/caixa/CaixaAberto.tsx:132:11",
 						"data-prohibitions": "[editContent]",
 						className: "mr-2 h-4 w-4"
 					}), " Nova Movimentação"]
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
-					"data-uid": "src/components/caixa/CaixaAberto.tsx:122:9",
+					"data-uid": "src/components/caixa/CaixaAberto.tsx:134:9",
 					"data-prohibitions": "[]",
 					onClick: () => setCloseOpen(true),
 					variant: "destructive",
@@ -69572,15 +75570,15 @@ function CaixaAberto({ caixa, movements, sales, onFechar, onNovaMov }) {
 				})]
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Tabs, {
-				"data-uid": "src/components/caixa/CaixaAberto.tsx:127:7",
+				"data-uid": "src/components/caixa/CaixaAberto.tsx:139:7",
 				"data-prohibitions": "[editContent]",
 				defaultValue: "vendas",
 				children: [
 					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TabsList, {
-						"data-uid": "src/components/caixa/CaixaAberto.tsx:128:9",
+						"data-uid": "src/components/caixa/CaixaAberto.tsx:140:9",
 						"data-prohibitions": "[editContent]",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TabsTrigger, {
-							"data-uid": "src/components/caixa/CaixaAberto.tsx:129:11",
+							"data-uid": "src/components/caixa/CaixaAberto.tsx:141:11",
 							"data-prohibitions": "[editContent]",
 							value: "vendas",
 							children: [
@@ -69589,7 +75587,7 @@ function CaixaAberto({ caixa, movements, sales, onFechar, onNovaMov }) {
 								")"
 							]
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TabsTrigger, {
-							"data-uid": "src/components/caixa/CaixaAberto.tsx:130:11",
+							"data-uid": "src/components/caixa/CaixaAberto.tsx:142:11",
 							"data-prohibitions": "[editContent]",
 							value: "movimentacoes",
 							children: [
@@ -69600,37 +75598,38 @@ function CaixaAberto({ caixa, movements, sales, onFechar, onNovaMov }) {
 						})]
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TabsContent, {
-						"data-uid": "src/components/caixa/CaixaAberto.tsx:132:9",
+						"data-uid": "src/components/caixa/CaixaAberto.tsx:144:9",
 						"data-prohibitions": "[editContent]",
 						value: "vendas",
-						className: "mt-4 border rounded-lg bg-card overflow-hidden",
+						className: "mt-4 border border-border rounded-lg bg-card overflow-hidden",
 						children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Table, {
-							"data-uid": "src/components/caixa/CaixaAberto.tsx:133:11",
+							"data-uid": "src/components/caixa/CaixaAberto.tsx:148:11",
 							"data-prohibitions": "[editContent]",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHeader, {
-								"data-uid": "src/components/caixa/CaixaAberto.tsx:134:13",
+								"data-uid": "src/components/caixa/CaixaAberto.tsx:149:13",
 								"data-prohibitions": "[]",
+								className: "bg-muted/50",
 								children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TableRow, {
-									"data-uid": "src/components/caixa/CaixaAberto.tsx:135:15",
+									"data-uid": "src/components/caixa/CaixaAberto.tsx:150:15",
 									"data-prohibitions": "[]",
 									children: [
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
-											"data-uid": "src/components/caixa/CaixaAberto.tsx:136:17",
+											"data-uid": "src/components/caixa/CaixaAberto.tsx:151:17",
 											"data-prohibitions": "[]",
 											children: "Hora"
 										}),
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
-											"data-uid": "src/components/caixa/CaixaAberto.tsx:137:17",
+											"data-uid": "src/components/caixa/CaixaAberto.tsx:152:17",
 											"data-prohibitions": "[]",
 											children: "ID Venda"
 										}),
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
-											"data-uid": "src/components/caixa/CaixaAberto.tsx:138:17",
+											"data-uid": "src/components/caixa/CaixaAberto.tsx:153:17",
 											"data-prohibitions": "[]",
 											children: "Método"
 										}),
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
-											"data-uid": "src/components/caixa/CaixaAberto.tsx:139:17",
+											"data-uid": "src/components/caixa/CaixaAberto.tsx:154:17",
 											"data-prohibitions": "[]",
 											className: "text-right",
 											children: "Valor"
@@ -69638,40 +75637,40 @@ function CaixaAberto({ caixa, movements, sales, onFechar, onNovaMov }) {
 									]
 								})
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TableBody, {
-								"data-uid": "src/components/caixa/CaixaAberto.tsx:142:13",
+								"data-uid": "src/components/caixa/CaixaAberto.tsx:157:13",
 								"data-prohibitions": "[editContent]",
 								children: [sales.map((s) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TableRow, {
-									"data-uid": "src/components/caixa/CaixaAberto.tsx:144:17",
+									"data-uid": "src/components/caixa/CaixaAberto.tsx:159:17",
 									"data-prohibitions": "[editContent]",
 									children: [
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-											"data-uid": "src/components/caixa/CaixaAberto.tsx:145:19",
+											"data-uid": "src/components/caixa/CaixaAberto.tsx:160:19",
 											"data-prohibitions": "[editContent]",
 											children: new Date(s.data).toLocaleTimeString("pt-BR")
 										}),
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-											"data-uid": "src/components/caixa/CaixaAberto.tsx:146:19",
+											"data-uid": "src/components/caixa/CaixaAberto.tsx:161:19",
 											"data-prohibitions": "[editContent]",
 											className: "font-mono text-xs text-muted-foreground",
 											children: s.id.split("-")[0]
 										}),
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-											"data-uid": "src/components/caixa/CaixaAberto.tsx:149:19",
+											"data-uid": "src/components/caixa/CaixaAberto.tsx:164:19",
 											"data-prohibitions": "[editContent]",
 											children: s.metodo_pagamento
 										}),
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-											"data-uid": "src/components/caixa/CaixaAberto.tsx:150:19",
+											"data-uid": "src/components/caixa/CaixaAberto.tsx:165:19",
 											"data-prohibitions": "[editContent]",
 											className: "text-right font-semibold",
 											children: formatCurrency(s.total)
 										})
 									]
 								}, s.id)), sales.length === 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableRow, {
-									"data-uid": "src/components/caixa/CaixaAberto.tsx:156:17",
+									"data-uid": "src/components/caixa/CaixaAberto.tsx:171:17",
 									"data-prohibitions": "[]",
 									children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-										"data-uid": "src/components/caixa/CaixaAberto.tsx:157:19",
+										"data-uid": "src/components/caixa/CaixaAberto.tsx:172:19",
 										"data-prohibitions": "[]",
 										colSpan: 4,
 										className: "text-center py-6 text-muted-foreground",
@@ -69682,37 +75681,38 @@ function CaixaAberto({ caixa, movements, sales, onFechar, onNovaMov }) {
 						})
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TabsContent, {
-						"data-uid": "src/components/caixa/CaixaAberto.tsx:165:9",
+						"data-uid": "src/components/caixa/CaixaAberto.tsx:180:9",
 						"data-prohibitions": "[editContent]",
 						value: "movimentacoes",
-						className: "mt-4 border rounded-lg bg-card overflow-hidden",
+						className: "mt-4 border border-border rounded-lg bg-card overflow-hidden",
 						children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Table, {
-							"data-uid": "src/components/caixa/CaixaAberto.tsx:169:11",
+							"data-uid": "src/components/caixa/CaixaAberto.tsx:184:11",
 							"data-prohibitions": "[editContent]",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHeader, {
-								"data-uid": "src/components/caixa/CaixaAberto.tsx:170:13",
+								"data-uid": "src/components/caixa/CaixaAberto.tsx:185:13",
 								"data-prohibitions": "[]",
+								className: "bg-muted/50",
 								children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TableRow, {
-									"data-uid": "src/components/caixa/CaixaAberto.tsx:171:15",
+									"data-uid": "src/components/caixa/CaixaAberto.tsx:186:15",
 									"data-prohibitions": "[]",
 									children: [
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
-											"data-uid": "src/components/caixa/CaixaAberto.tsx:172:17",
+											"data-uid": "src/components/caixa/CaixaAberto.tsx:187:17",
 											"data-prohibitions": "[]",
 											children: "Hora"
 										}),
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
-											"data-uid": "src/components/caixa/CaixaAberto.tsx:173:17",
+											"data-uid": "src/components/caixa/CaixaAberto.tsx:188:17",
 											"data-prohibitions": "[]",
 											children: "Tipo"
 										}),
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
-											"data-uid": "src/components/caixa/CaixaAberto.tsx:174:17",
+											"data-uid": "src/components/caixa/CaixaAberto.tsx:189:17",
 											"data-prohibitions": "[]",
 											children: "Descrição"
 										}),
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
-											"data-uid": "src/components/caixa/CaixaAberto.tsx:175:17",
+											"data-uid": "src/components/caixa/CaixaAberto.tsx:190:17",
 											"data-prohibitions": "[]",
 											className: "text-right",
 											children: "Valor"
@@ -69720,45 +75720,45 @@ function CaixaAberto({ caixa, movements, sales, onFechar, onNovaMov }) {
 									]
 								})
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TableBody, {
-								"data-uid": "src/components/caixa/CaixaAberto.tsx:178:13",
+								"data-uid": "src/components/caixa/CaixaAberto.tsx:193:13",
 								"data-prohibitions": "[editContent]",
 								children: [movements.map((m) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TableRow, {
-									"data-uid": "src/components/caixa/CaixaAberto.tsx:180:17",
+									"data-uid": "src/components/caixa/CaixaAberto.tsx:195:17",
 									"data-prohibitions": "[editContent]",
 									children: [
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-											"data-uid": "src/components/caixa/CaixaAberto.tsx:181:19",
+											"data-uid": "src/components/caixa/CaixaAberto.tsx:196:19",
 											"data-prohibitions": "[editContent]",
 											children: new Date(m.data).toLocaleTimeString("pt-BR")
 										}),
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-											"data-uid": "src/components/caixa/CaixaAberto.tsx:182:19",
+											"data-uid": "src/components/caixa/CaixaAberto.tsx:197:19",
 											"data-prohibitions": "[editContent]",
 											children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Badge, {
-												"data-uid": "src/components/caixa/CaixaAberto.tsx:183:21",
+												"data-uid": "src/components/caixa/CaixaAberto.tsx:198:21",
 												"data-prohibitions": "[editContent]",
 												variant: m.tipo === "entrada" ? "default" : "destructive",
-												className: m.tipo === "entrada" ? "bg-emerald-100 text-emerald-800 hover:bg-emerald-200" : "",
+												className: m.tipo === "entrada" ? "bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-300 hover:bg-emerald-200" : "",
 												children: m.tipo === "entrada" ? "Entrada" : "Saída"
 											})
 										}),
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-											"data-uid": "src/components/caixa/CaixaAberto.tsx:194:19",
+											"data-uid": "src/components/caixa/CaixaAberto.tsx:209:19",
 											"data-prohibitions": "[editContent]",
 											children: m.descricao
 										}),
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-											"data-uid": "src/components/caixa/CaixaAberto.tsx:195:19",
+											"data-uid": "src/components/caixa/CaixaAberto.tsx:210:19",
 											"data-prohibitions": "[editContent]",
 											className: "text-right font-semibold",
 											children: formatCurrency(m.valor)
 										})
 									]
 								}, m.id)), movements.length === 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableRow, {
-									"data-uid": "src/components/caixa/CaixaAberto.tsx:201:17",
+									"data-uid": "src/components/caixa/CaixaAberto.tsx:216:17",
 									"data-prohibitions": "[]",
 									children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-										"data-uid": "src/components/caixa/CaixaAberto.tsx:202:19",
+										"data-uid": "src/components/caixa/CaixaAberto.tsx:217:19",
 										"data-prohibitions": "[]",
 										colSpan: 4,
 										className: "text-center py-6 text-muted-foreground",
@@ -69771,41 +75771,41 @@ function CaixaAberto({ caixa, movements, sales, onFechar, onNovaMov }) {
 				]
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Dialog, {
-				"data-uid": "src/components/caixa/CaixaAberto.tsx:212:7",
+				"data-uid": "src/components/caixa/CaixaAberto.tsx:227:7",
 				"data-prohibitions": "[]",
 				open: movOpen,
 				onOpenChange: setMovOpen,
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogContent, {
-					"data-uid": "src/components/caixa/CaixaAberto.tsx:213:9",
+					"data-uid": "src/components/caixa/CaixaAberto.tsx:228:9",
 					"data-prohibitions": "[]",
 					children: [
 						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogHeader, {
-							"data-uid": "src/components/caixa/CaixaAberto.tsx:214:11",
+							"data-uid": "src/components/caixa/CaixaAberto.tsx:229:11",
 							"data-prohibitions": "[]",
 							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogTitle, {
-								"data-uid": "src/components/caixa/CaixaAberto.tsx:215:13",
+								"data-uid": "src/components/caixa/CaixaAberto.tsx:230:13",
 								"data-prohibitions": "[]",
 								children: "Registrar Movimentação de Caixa"
 							})
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							"data-uid": "src/components/caixa/CaixaAberto.tsx:217:11",
+							"data-uid": "src/components/caixa/CaixaAberto.tsx:232:11",
 							"data-prohibitions": "[]",
 							className: "space-y-4 py-4",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								"data-uid": "src/components/caixa/CaixaAberto.tsx:218:13",
+								"data-uid": "src/components/caixa/CaixaAberto.tsx:233:13",
 								"data-prohibitions": "[]",
 								className: "grid grid-cols-2 gap-4",
 								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-									"data-uid": "src/components/caixa/CaixaAberto.tsx:219:15",
+									"data-uid": "src/components/caixa/CaixaAberto.tsx:234:15",
 									"data-prohibitions": "[]",
 									className: "space-y-2",
 									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$1, {
-										"data-uid": "src/components/caixa/CaixaAberto.tsx:220:17",
+										"data-uid": "src/components/caixa/CaixaAberto.tsx:235:17",
 										"data-prohibitions": "[]",
 										children: "Tipo"
 									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Select$1, {
-										"data-uid": "src/components/caixa/CaixaAberto.tsx:221:17",
+										"data-uid": "src/components/caixa/CaixaAberto.tsx:236:17",
 										"data-prohibitions": "[]",
 										value: form.tipo,
 										onValueChange: (v) => setForm({
@@ -69813,22 +75813,22 @@ function CaixaAberto({ caixa, movements, sales, onFechar, onNovaMov }) {
 											tipo: v
 										}),
 										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectTrigger, {
-											"data-uid": "src/components/caixa/CaixaAberto.tsx:222:19",
+											"data-uid": "src/components/caixa/CaixaAberto.tsx:237:19",
 											"data-prohibitions": "[]",
 											children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectValue, {
-												"data-uid": "src/components/caixa/CaixaAberto.tsx:223:21",
+												"data-uid": "src/components/caixa/CaixaAberto.tsx:238:21",
 												"data-prohibitions": "[editContent]"
 											})
 										}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(SelectContent, {
-											"data-uid": "src/components/caixa/CaixaAberto.tsx:225:19",
+											"data-uid": "src/components/caixa/CaixaAberto.tsx:240:19",
 											"data-prohibitions": "[]",
 											children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectItem, {
-												"data-uid": "src/components/caixa/CaixaAberto.tsx:226:21",
+												"data-uid": "src/components/caixa/CaixaAberto.tsx:241:21",
 												"data-prohibitions": "[]",
 												value: "entrada",
 												children: "Entrada (Suprimento)"
 											}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectItem, {
-												"data-uid": "src/components/caixa/CaixaAberto.tsx:227:21",
+												"data-uid": "src/components/caixa/CaixaAberto.tsx:242:21",
 												"data-prohibitions": "[]",
 												value: "saida",
 												children: "Saída (Sangria)"
@@ -69836,15 +75836,15 @@ function CaixaAberto({ caixa, movements, sales, onFechar, onNovaMov }) {
 										})]
 									})]
 								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-									"data-uid": "src/components/caixa/CaixaAberto.tsx:231:15",
+									"data-uid": "src/components/caixa/CaixaAberto.tsx:246:15",
 									"data-prohibitions": "[]",
 									className: "space-y-2",
 									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$1, {
-										"data-uid": "src/components/caixa/CaixaAberto.tsx:232:17",
+										"data-uid": "src/components/caixa/CaixaAberto.tsx:247:17",
 										"data-prohibitions": "[]",
 										children: "Valor"
 									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
-										"data-uid": "src/components/caixa/CaixaAberto.tsx:233:17",
+										"data-uid": "src/components/caixa/CaixaAberto.tsx:248:17",
 										"data-prohibitions": "[editContent]",
 										type: "number",
 										step: "0.01",
@@ -69856,15 +75856,15 @@ function CaixaAberto({ caixa, movements, sales, onFechar, onNovaMov }) {
 									})]
 								})]
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								"data-uid": "src/components/caixa/CaixaAberto.tsx:241:13",
+								"data-uid": "src/components/caixa/CaixaAberto.tsx:256:13",
 								"data-prohibitions": "[]",
 								className: "space-y-2",
 								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$1, {
-									"data-uid": "src/components/caixa/CaixaAberto.tsx:242:15",
+									"data-uid": "src/components/caixa/CaixaAberto.tsx:257:15",
 									"data-prohibitions": "[]",
 									children: "Descrição"
 								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
-									"data-uid": "src/components/caixa/CaixaAberto.tsx:243:15",
+									"data-uid": "src/components/caixa/CaixaAberto.tsx:258:15",
 									"data-prohibitions": "[editContent]",
 									value: form.descricao,
 									onChange: (e) => setForm({
@@ -69876,16 +75876,16 @@ function CaixaAberto({ caixa, movements, sales, onFechar, onNovaMov }) {
 							})]
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogFooter, {
-							"data-uid": "src/components/caixa/CaixaAberto.tsx:250:11",
+							"data-uid": "src/components/caixa/CaixaAberto.tsx:265:11",
 							"data-prohibitions": "[]",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
-								"data-uid": "src/components/caixa/CaixaAberto.tsx:251:13",
+								"data-uid": "src/components/caixa/CaixaAberto.tsx:266:13",
 								"data-prohibitions": "[]",
 								variant: "outline",
 								onClick: () => setMovOpen(false),
 								children: "Cancelar"
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
-								"data-uid": "src/components/caixa/CaixaAberto.tsx:254:13",
+								"data-uid": "src/components/caixa/CaixaAberto.tsx:269:13",
 								"data-prohibitions": "[]",
 								onClick: handleMov,
 								children: "Registrar"
@@ -69895,59 +75895,59 @@ function CaixaAberto({ caixa, movements, sales, onFechar, onNovaMov }) {
 				})
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Dialog, {
-				"data-uid": "src/components/caixa/CaixaAberto.tsx:259:7",
+				"data-uid": "src/components/caixa/CaixaAberto.tsx:274:7",
 				"data-prohibitions": "[editContent]",
 				open: closeOpen,
 				onOpenChange: setCloseOpen,
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogContent, {
-					"data-uid": "src/components/caixa/CaixaAberto.tsx:260:9",
+					"data-uid": "src/components/caixa/CaixaAberto.tsx:275:9",
 					"data-prohibitions": "[editContent]",
 					children: [
 						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogHeader, {
-							"data-uid": "src/components/caixa/CaixaAberto.tsx:261:11",
+							"data-uid": "src/components/caixa/CaixaAberto.tsx:276:11",
 							"data-prohibitions": "[]",
 							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogTitle, {
-								"data-uid": "src/components/caixa/CaixaAberto.tsx:262:13",
+								"data-uid": "src/components/caixa/CaixaAberto.tsx:277:13",
 								"data-prohibitions": "[]",
 								children: "Confirmar Fechamento de Caixa"
 							})
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							"data-uid": "src/components/caixa/CaixaAberto.tsx:264:11",
+							"data-uid": "src/components/caixa/CaixaAberto.tsx:279:11",
 							"data-prohibitions": "[editContent]",
 							className: "py-6 text-center space-y-2",
 							children: [
 								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-									"data-uid": "src/components/caixa/CaixaAberto.tsx:265:13",
+									"data-uid": "src/components/caixa/CaixaAberto.tsx:280:13",
 									"data-prohibitions": "[]",
-									className: "text-slate-500",
+									className: "text-muted-foreground",
 									children: "O saldo atual calculado para gaveta é de:"
 								}),
 								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-									"data-uid": "src/components/caixa/CaixaAberto.tsx:266:13",
+									"data-uid": "src/components/caixa/CaixaAberto.tsx:281:13",
 									"data-prohibitions": "[editContent]",
-									className: "text-4xl font-bold text-emerald-700",
+									className: "text-4xl font-bold text-emerald-600",
 									children: formatCurrency(totals.atual)
 								}),
 								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-									"data-uid": "src/components/caixa/CaixaAberto.tsx:267:13",
+									"data-uid": "src/components/caixa/CaixaAberto.tsx:282:13",
 									"data-prohibitions": "[]",
-									className: "text-sm text-slate-400 mt-4",
+									className: "text-sm text-muted-foreground mt-4",
 									children: "Confira se os valores físicos em gaveta batem com o saldo acima antes de confirmar o fechamento."
 								})
 							]
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogFooter, {
-							"data-uid": "src/components/caixa/CaixaAberto.tsx:272:11",
+							"data-uid": "src/components/caixa/CaixaAberto.tsx:287:11",
 							"data-prohibitions": "[]",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
-								"data-uid": "src/components/caixa/CaixaAberto.tsx:273:13",
+								"data-uid": "src/components/caixa/CaixaAberto.tsx:288:13",
 								"data-prohibitions": "[]",
 								variant: "outline",
 								onClick: () => setCloseOpen(false),
 								children: "Cancelar"
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
-								"data-uid": "src/components/caixa/CaixaAberto.tsx:276:13",
+								"data-uid": "src/components/caixa/CaixaAberto.tsx:291:13",
 								"data-prohibitions": "[]",
 								variant: "destructive",
 								onClick: () => onFechar(totals.atual),
@@ -69979,7 +75979,7 @@ function CaixaFechado({ onAbrir }) {
 		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Card, {
 			"data-uid": "src/components/caixa/CaixaFechado.tsx:29:7",
 			"data-prohibitions": "[]",
-			className: "max-w-md w-full text-center shadow-md",
+			className: "max-w-md w-full text-center shadow-md bg-card",
 			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardHeader, {
 				"data-uid": "src/components/caixa/CaixaFechado.tsx:30:9",
 				"data-prohibitions": "[]",
@@ -69987,11 +75987,11 @@ function CaixaFechado({ onAbrir }) {
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 						"data-uid": "src/components/caixa/CaixaFechado.tsx:31:11",
 						"data-prohibitions": "[]",
-						className: "mx-auto bg-slate-100 w-16 h-16 flex items-center justify-center rounded-full mb-4",
+						className: "mx-auto bg-muted w-16 h-16 flex items-center justify-center rounded-full mb-4",
 						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(LockKeyhole, {
 							"data-uid": "src/components/caixa/CaixaFechado.tsx:32:13",
 							"data-prohibitions": "[editContent]",
-							className: "h-8 w-8 text-slate-500"
+							className: "h-8 w-8 text-muted-foreground"
 						})
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardTitle, {
@@ -70043,7 +76043,7 @@ function CaixaFechado({ onAbrir }) {
 						children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 							"data-uid": "src/components/caixa/CaixaFechado.tsx:50:13",
 							"data-prohibitions": "[]",
-							className: "space-y-2",
+							className: "space-y-2 text-left",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$1, {
 								"data-uid": "src/components/caixa/CaixaFechado.tsx:51:15",
 								"data-prohibitions": "[]",
@@ -70093,14 +76093,14 @@ function HistoricoCaixa({ history }) {
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Card, {
 		"data-uid": "src/components/caixa/HistoricoCaixa.tsx:16:5",
 		"data-prohibitions": "[editContent]",
-		className: "border-slate-200 overflow-hidden",
+		className: "border-border overflow-hidden bg-card",
 		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Table, {
 			"data-uid": "src/components/caixa/HistoricoCaixa.tsx:17:7",
 			"data-prohibitions": "[editContent]",
 			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHeader, {
 				"data-uid": "src/components/caixa/HistoricoCaixa.tsx:18:9",
 				"data-prohibitions": "[]",
-				className: "bg-slate-50",
+				className: "bg-muted/50",
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TableRow, {
 					"data-uid": "src/components/caixa/HistoricoCaixa.tsx:19:11",
 					"data-prohibitions": "[]",
@@ -70157,7 +76157,7 @@ function HistoricoCaixa({ history }) {
 						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
 							"data-uid": "src/components/caixa/HistoricoCaixa.tsx:35:15",
 							"data-prohibitions": "[editContent]",
-							className: "font-semibold text-emerald-700",
+							className: "font-semibold text-emerald-600 dark:text-emerald-400",
 							children: h.saldo_final !== null ? formatCurrency(Number(h.saldo_final)) : "-"
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
@@ -70167,7 +76167,7 @@ function HistoricoCaixa({ history }) {
 								"data-uid": "src/components/caixa/HistoricoCaixa.tsx:39:17",
 								"data-prohibitions": "[]",
 								variant: "secondary",
-								className: "bg-slate-100 text-slate-600 border-0",
+								className: "bg-muted text-muted-foreground border-0",
 								children: "Fechado"
 							})
 						})
@@ -70354,6 +76354,347 @@ function CaixaPage() {
 	});
 }
 //#endregion
+//#region src/components/estoque/ProdutoFormModal.tsx
+var schema = object({
+	nome: string().min(2, "O nome é obrigatório"),
+	codigo: string().min(1, "Código (SKU) é obrigatório"),
+	preco: number().min(.01, "Preço deve ser maior que 0"),
+	estoque: number().min(0, "Estoque não pode ser negativo"),
+	estoque_minimo: number().min(0, "Estoque mínimo inválido"),
+	categoria: string().optional()
+});
+function ProdutoFormModal({ open, onClose, product, onSuccess }) {
+	const form = useForm({
+		resolver: a(schema),
+		defaultValues: {
+			nome: "",
+			codigo: "",
+			preco: 0,
+			estoque: 0,
+			estoque_minimo: 0,
+			categoria: ""
+		}
+	});
+	(0, import_react.useEffect)(() => {
+		if (product && open) form.reset({
+			nome: product.nome,
+			codigo: product.codigo || "",
+			preco: product.preco,
+			estoque: product.estoque,
+			estoque_minimo: product.estoque_minimo,
+			categoria: product.categoria || ""
+		});
+		else if (open) form.reset({
+			nome: "",
+			codigo: "",
+			preco: 0,
+			estoque: 0,
+			estoque_minimo: 0,
+			categoria: ""
+		});
+	}, [
+		product,
+		open,
+		form
+	]);
+	const onSubmit = async (data) => {
+		let query = supabase.from("produtos").select("id").eq("codigo", data.codigo);
+		if (product) query = query.neq("id", product.id);
+		const { data: existing } = await query;
+		if (existing && existing.length > 0) {
+			form.setError("codigo", { message: "Este código já está em uso" });
+			return;
+		}
+		const payload = {
+			...data,
+			categoria: data.categoria || null
+		};
+		if (product) {
+			const { error } = await supabase.from("produtos").update(payload).eq("id", product.id);
+			if (error) toast$1({
+				title: "Erro",
+				description: "Não foi possível atualizar.",
+				variant: "destructive"
+			});
+			else {
+				toast$1({
+					title: "Sucesso",
+					description: "Produto atualizado."
+				});
+				onSuccess();
+				onClose();
+			}
+		} else {
+			const { error } = await supabase.from("produtos").insert(payload);
+			if (error) toast$1({
+				title: "Erro",
+				description: "Não foi possível cadastrar.",
+				variant: "destructive"
+			});
+			else {
+				toast$1({
+					title: "Sucesso",
+					description: "Produto cadastrado com sucesso."
+				});
+				onSuccess();
+				onClose();
+			}
+		}
+	};
+	const isSubmitting = form.formState.isSubmitting;
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Dialog, {
+		"data-uid": "src/components/estoque/ProdutoFormModal.tsx:103:5",
+		"data-prohibitions": "[editContent]",
+		open,
+		onOpenChange: (o) => !o && onClose(),
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogContent, {
+			"data-uid": "src/components/estoque/ProdutoFormModal.tsx:104:7",
+			"data-prohibitions": "[editContent]",
+			className: "sm:max-w-[425px] bg-card text-card-foreground",
+			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogHeader, {
+				"data-uid": "src/components/estoque/ProdutoFormModal.tsx:105:9",
+				"data-prohibitions": "[editContent]",
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogTitle, {
+					"data-uid": "src/components/estoque/ProdutoFormModal.tsx:106:11",
+					"data-prohibitions": "[editContent]",
+					children: product ? "Editar Produto" : "Novo Produto"
+				})
+			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Form, {
+				"data-uid": "src/components/estoque/ProdutoFormModal.tsx:108:9",
+				"data-prohibitions": "[editContent]",
+				...form,
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("form", {
+					"data-uid": "src/components/estoque/ProdutoFormModal.tsx:109:11",
+					"data-prohibitions": "[editContent]",
+					onSubmit: form.handleSubmit(onSubmit),
+					className: "space-y-4 py-4",
+					children: [
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormField, {
+							"data-uid": "src/components/estoque/ProdutoFormModal.tsx:110:13",
+							"data-prohibitions": "[editContent]",
+							control: form.control,
+							name: "nome",
+							render: ({ field }) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(FormItem, {
+								"data-uid": "src/components/estoque/ProdutoFormModal.tsx:114:17",
+								"data-prohibitions": "[]",
+								children: [
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormLabel, {
+										"data-uid": "src/components/estoque/ProdutoFormModal.tsx:115:19",
+										"data-prohibitions": "[]",
+										children: "Nome do Produto *"
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormControl, {
+										"data-uid": "src/components/estoque/ProdutoFormModal.tsx:116:19",
+										"data-prohibitions": "[]",
+										children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
+											"data-uid": "src/components/estoque/ProdutoFormModal.tsx:117:21",
+											"data-prohibitions": "[editContent]",
+											...field
+										})
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormMessage, {
+										"data-uid": "src/components/estoque/ProdutoFormModal.tsx:119:19",
+										"data-prohibitions": "[editContent]"
+									})
+								]
+							})
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							"data-uid": "src/components/estoque/ProdutoFormModal.tsx:123:13",
+							"data-prohibitions": "[]",
+							className: "grid grid-cols-2 gap-4",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormField, {
+								"data-uid": "src/components/estoque/ProdutoFormModal.tsx:124:15",
+								"data-prohibitions": "[editContent]",
+								control: form.control,
+								name: "codigo",
+								render: ({ field }) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(FormItem, {
+									"data-uid": "src/components/estoque/ProdutoFormModal.tsx:128:19",
+									"data-prohibitions": "[]",
+									children: [
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormLabel, {
+											"data-uid": "src/components/estoque/ProdutoFormModal.tsx:129:21",
+											"data-prohibitions": "[]",
+											children: "Código (SKU) *"
+										}),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormControl, {
+											"data-uid": "src/components/estoque/ProdutoFormModal.tsx:130:21",
+											"data-prohibitions": "[]",
+											children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
+												"data-uid": "src/components/estoque/ProdutoFormModal.tsx:131:23",
+												"data-prohibitions": "[editContent]",
+												...field
+											})
+										}),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormMessage, {
+											"data-uid": "src/components/estoque/ProdutoFormModal.tsx:133:21",
+											"data-prohibitions": "[editContent]"
+										})
+									]
+								})
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormField, {
+								"data-uid": "src/components/estoque/ProdutoFormModal.tsx:137:15",
+								"data-prohibitions": "[editContent]",
+								control: form.control,
+								name: "categoria",
+								render: ({ field }) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(FormItem, {
+									"data-uid": "src/components/estoque/ProdutoFormModal.tsx:141:19",
+									"data-prohibitions": "[]",
+									children: [
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormLabel, {
+											"data-uid": "src/components/estoque/ProdutoFormModal.tsx:142:21",
+											"data-prohibitions": "[]",
+											children: "Categoria"
+										}),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormControl, {
+											"data-uid": "src/components/estoque/ProdutoFormModal.tsx:143:21",
+											"data-prohibitions": "[]",
+											children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
+												"data-uid": "src/components/estoque/ProdutoFormModal.tsx:144:23",
+												"data-prohibitions": "[editContent]",
+												...field
+											})
+										}),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormMessage, {
+											"data-uid": "src/components/estoque/ProdutoFormModal.tsx:146:21",
+											"data-prohibitions": "[editContent]"
+										})
+									]
+								})
+							})]
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							"data-uid": "src/components/estoque/ProdutoFormModal.tsx:151:13",
+							"data-prohibitions": "[]",
+							className: "grid grid-cols-3 gap-4",
+							children: [
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormField, {
+									"data-uid": "src/components/estoque/ProdutoFormModal.tsx:152:15",
+									"data-prohibitions": "[editContent]",
+									control: form.control,
+									name: "preco",
+									render: ({ field }) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(FormItem, {
+										"data-uid": "src/components/estoque/ProdutoFormModal.tsx:156:19",
+										"data-prohibitions": "[]",
+										children: [
+											/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormLabel, {
+												"data-uid": "src/components/estoque/ProdutoFormModal.tsx:157:21",
+												"data-prohibitions": "[]",
+												children: "Preço (R$) *"
+											}),
+											/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormControl, {
+												"data-uid": "src/components/estoque/ProdutoFormModal.tsx:158:21",
+												"data-prohibitions": "[]",
+												children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
+													"data-uid": "src/components/estoque/ProdutoFormModal.tsx:159:23",
+													"data-prohibitions": "[editContent]",
+													type: "number",
+													step: "0.01",
+													...field
+												})
+											}),
+											/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormMessage, {
+												"data-uid": "src/components/estoque/ProdutoFormModal.tsx:161:21",
+												"data-prohibitions": "[editContent]"
+											})
+										]
+									})
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormField, {
+									"data-uid": "src/components/estoque/ProdutoFormModal.tsx:165:15",
+									"data-prohibitions": "[editContent]",
+									control: form.control,
+									name: "estoque",
+									render: ({ field }) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(FormItem, {
+										"data-uid": "src/components/estoque/ProdutoFormModal.tsx:169:19",
+										"data-prohibitions": "[]",
+										children: [
+											/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormLabel, {
+												"data-uid": "src/components/estoque/ProdutoFormModal.tsx:170:21",
+												"data-prohibitions": "[]",
+												children: "Estoque"
+											}),
+											/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormControl, {
+												"data-uid": "src/components/estoque/ProdutoFormModal.tsx:171:21",
+												"data-prohibitions": "[]",
+												children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
+													"data-uid": "src/components/estoque/ProdutoFormModal.tsx:172:23",
+													"data-prohibitions": "[editContent]",
+													type: "number",
+													...field
+												})
+											}),
+											/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormMessage, {
+												"data-uid": "src/components/estoque/ProdutoFormModal.tsx:174:21",
+												"data-prohibitions": "[editContent]"
+											})
+										]
+									})
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormField, {
+									"data-uid": "src/components/estoque/ProdutoFormModal.tsx:178:15",
+									"data-prohibitions": "[editContent]",
+									control: form.control,
+									name: "estoque_minimo",
+									render: ({ field }) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(FormItem, {
+										"data-uid": "src/components/estoque/ProdutoFormModal.tsx:182:19",
+										"data-prohibitions": "[]",
+										children: [
+											/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormLabel, {
+												"data-uid": "src/components/estoque/ProdutoFormModal.tsx:183:21",
+												"data-prohibitions": "[]",
+												children: "Est. Min."
+											}),
+											/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormControl, {
+												"data-uid": "src/components/estoque/ProdutoFormModal.tsx:184:21",
+												"data-prohibitions": "[]",
+												children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
+													"data-uid": "src/components/estoque/ProdutoFormModal.tsx:185:23",
+													"data-prohibitions": "[editContent]",
+													type: "number",
+													...field
+												})
+											}),
+											/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormMessage, {
+												"data-uid": "src/components/estoque/ProdutoFormModal.tsx:187:21",
+												"data-prohibitions": "[editContent]"
+											})
+										]
+									})
+								})
+							]
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogFooter, {
+							"data-uid": "src/components/estoque/ProdutoFormModal.tsx:192:13",
+							"data-prohibitions": "[editContent]",
+							className: "pt-4",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
+								"data-uid": "src/components/estoque/ProdutoFormModal.tsx:193:15",
+								"data-prohibitions": "[]",
+								type: "button",
+								variant: "outline",
+								onClick: onClose,
+								disabled: isSubmitting,
+								children: "Cancelar"
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button$1, {
+								"data-uid": "src/components/estoque/ProdutoFormModal.tsx:196:15",
+								"data-prohibitions": "[editContent]",
+								type: "submit",
+								disabled: isSubmitting,
+								children: [isSubmitting && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(LoaderCircle, {
+									"data-uid": "src/components/estoque/ProdutoFormModal.tsx:197:34",
+									"data-prohibitions": "[editContent]",
+									className: "mr-2 h-4 w-4 animate-spin"
+								}), " Salvar"]
+							})]
+						})
+					]
+				})
+			})]
+		})
+	});
+}
+//#endregion
 //#region src/components/estoque/EstoqueAtual.tsx
 function EstoqueAtual() {
 	const { user } = useAuth();
@@ -70364,9 +76705,11 @@ function EstoqueAtual() {
 	const [submitting, setSubmitting] = (0, import_react.useState)(false);
 	const [form, setForm] = (0, import_react.useState)({
 		quantidade: "",
-		tipo: "",
-		motivo: ""
+		tipo: "entrada",
+		motivo: "ajuste"
 	});
+	const [formOpen, setFormOpen] = (0, import_react.useState)(false);
+	const [editingProduct, setEditingProduct] = (0, import_react.useState)(null);
 	const fetchProducts = async () => {
 		setLoading(true);
 		const { data } = await supabase.from("produtos").select("*").order("nome");
@@ -70407,219 +76750,276 @@ function EstoqueAtual() {
 			fetchProducts();
 		}
 	};
-	const openAdjustDialog = (product) => {
-		setAdjustProduct(product);
-		setForm({
-			quantidade: "",
-			tipo: "entrada",
-			motivo: "ajuste"
-		});
-	};
 	if (loading) return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-		"data-uid": "src/components/estoque/EstoqueAtual.tsx:108:7",
+		"data-uid": "src/components/estoque/EstoqueAtual.tsx:103:7",
 		"data-prohibitions": "[]",
 		className: "flex h-40 items-center justify-center",
 		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(LoaderCircle, {
-			"data-uid": "src/components/estoque/EstoqueAtual.tsx:109:9",
+			"data-uid": "src/components/estoque/EstoqueAtual.tsx:104:9",
 			"data-prohibitions": "[editContent]",
 			className: "h-8 w-8 animate-spin text-primary"
 		})
 	});
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-		"data-uid": "src/components/estoque/EstoqueAtual.tsx:115:5",
+		"data-uid": "src/components/estoque/EstoqueAtual.tsx:109:5",
 		"data-prohibitions": "[editContent]",
 		className: "space-y-4",
 		children: [
-			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-				"data-uid": "src/components/estoque/EstoqueAtual.tsx:116:7",
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				"data-uid": "src/components/estoque/EstoqueAtual.tsx:110:7",
 				"data-prohibitions": "[editContent]",
-				className: "flex items-center gap-4 mb-4",
-				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-					"data-uid": "src/components/estoque/EstoqueAtual.tsx:117:9",
+				className: "flex items-center justify-between mb-4 gap-4",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+					"data-uid": "src/components/estoque/EstoqueAtual.tsx:111:9",
 					"data-prohibitions": "[editContent]",
 					className: "w-64",
 					children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Select$1, {
-						"data-uid": "src/components/estoque/EstoqueAtual.tsx:118:11",
+						"data-uid": "src/components/estoque/EstoqueAtual.tsx:112:11",
 						"data-prohibitions": "[editContent]",
 						value: categoryFilter,
 						onValueChange: setCategoryFilter,
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectTrigger, {
-							"data-uid": "src/components/estoque/EstoqueAtual.tsx:119:13",
+							"data-uid": "src/components/estoque/EstoqueAtual.tsx:113:13",
 							"data-prohibitions": "[]",
 							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectValue, {
-								"data-uid": "src/components/estoque/EstoqueAtual.tsx:120:15",
+								"data-uid": "src/components/estoque/EstoqueAtual.tsx:114:15",
 								"data-prohibitions": "[editContent]",
 								placeholder: "Filtrar Categoria"
 							})
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectContent, {
-							"data-uid": "src/components/estoque/EstoqueAtual.tsx:122:13",
+							"data-uid": "src/components/estoque/EstoqueAtual.tsx:116:13",
 							"data-prohibitions": "[editContent]",
 							children: categories.map((cat) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectItem, {
-								"data-uid": "src/components/estoque/EstoqueAtual.tsx:124:17",
+								"data-uid": "src/components/estoque/EstoqueAtual.tsx:118:17",
 								"data-prohibitions": "[editContent]",
 								value: cat,
 								children: cat
 							}, cat))
 						})]
 					})
-				})
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button$1, {
+					"data-uid": "src/components/estoque/EstoqueAtual.tsx:125:9",
+					"data-prohibitions": "[]",
+					onClick: () => {
+						setEditingProduct(null);
+						setFormOpen(true);
+					},
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Plus, {
+						"data-uid": "src/components/estoque/EstoqueAtual.tsx:131:11",
+						"data-prohibitions": "[editContent]",
+						className: "h-4 w-4 mr-2"
+					}), " Novo Produto"]
+				})]
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Card, {
-				"data-uid": "src/components/estoque/EstoqueAtual.tsx:133:7",
+				"data-uid": "src/components/estoque/EstoqueAtual.tsx:135:7",
 				"data-prohibitions": "[editContent]",
-				className: "shadow-sm border-slate-200",
+				className: "shadow-sm border-border bg-card",
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardContent, {
-					"data-uid": "src/components/estoque/EstoqueAtual.tsx:134:9",
+					"data-uid": "src/components/estoque/EstoqueAtual.tsx:136:9",
 					"data-prohibitions": "[editContent]",
 					className: "p-0",
 					children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Table, {
-						"data-uid": "src/components/estoque/EstoqueAtual.tsx:135:11",
+						"data-uid": "src/components/estoque/EstoqueAtual.tsx:137:11",
 						"data-prohibitions": "[editContent]",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHeader, {
-							"data-uid": "src/components/estoque/EstoqueAtual.tsx:136:13",
+							"data-uid": "src/components/estoque/EstoqueAtual.tsx:138:13",
 							"data-prohibitions": "[]",
-							className: "bg-slate-50",
+							className: "bg-muted/50",
 							children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TableRow, {
-								"data-uid": "src/components/estoque/EstoqueAtual.tsx:137:15",
+								"data-uid": "src/components/estoque/EstoqueAtual.tsx:139:15",
 								"data-prohibitions": "[]",
 								children: [
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
-										"data-uid": "src/components/estoque/EstoqueAtual.tsx:138:17",
+										"data-uid": "src/components/estoque/EstoqueAtual.tsx:140:17",
+										"data-prohibitions": "[]",
+										children: "Código"
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
+										"data-uid": "src/components/estoque/EstoqueAtual.tsx:141:17",
 										"data-prohibitions": "[]",
 										children: "Nome"
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
-										"data-uid": "src/components/estoque/EstoqueAtual.tsx:139:17",
+										"data-uid": "src/components/estoque/EstoqueAtual.tsx:142:17",
 										"data-prohibitions": "[]",
 										children: "Categoria"
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
-										"data-uid": "src/components/estoque/EstoqueAtual.tsx:140:17",
+										"data-uid": "src/components/estoque/EstoqueAtual.tsx:143:17",
+										"data-prohibitions": "[]",
+										children: "Preço"
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
+										"data-uid": "src/components/estoque/EstoqueAtual.tsx:144:17",
 										"data-prohibitions": "[]",
 										className: "text-center",
 										children: "Estoque Atual"
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
-										"data-uid": "src/components/estoque/EstoqueAtual.tsx:141:17",
+										"data-uid": "src/components/estoque/EstoqueAtual.tsx:145:17",
 										"data-prohibitions": "[]",
 										className: "text-center",
-										children: "Estoque Mínimo"
+										children: "Est. Mínimo"
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
-										"data-uid": "src/components/estoque/EstoqueAtual.tsx:142:17",
+										"data-uid": "src/components/estoque/EstoqueAtual.tsx:146:17",
 										"data-prohibitions": "[]",
 										className: "text-right",
 										children: "Ações"
 									})
 								]
 							})
-						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableBody, {
-							"data-uid": "src/components/estoque/EstoqueAtual.tsx:145:13",
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TableBody, {
+							"data-uid": "src/components/estoque/EstoqueAtual.tsx:149:13",
 							"data-prohibitions": "[editContent]",
-							children: filteredProducts.map((p) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TableRow, {
-								"data-uid": "src/components/estoque/EstoqueAtual.tsx:147:17",
+							children: [filteredProducts.map((p) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TableRow, {
+								"data-uid": "src/components/estoque/EstoqueAtual.tsx:151:17",
 								"data-prohibitions": "[editContent]",
 								children: [
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-										"data-uid": "src/components/estoque/EstoqueAtual.tsx:148:19",
+										"data-uid": "src/components/estoque/EstoqueAtual.tsx:152:19",
+										"data-prohibitions": "[editContent]",
+										className: "font-mono text-xs",
+										children: p.codigo || "-"
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
+										"data-uid": "src/components/estoque/EstoqueAtual.tsx:153:19",
 										"data-prohibitions": "[editContent]",
 										className: "font-medium",
 										children: p.nome
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-										"data-uid": "src/components/estoque/EstoqueAtual.tsx:149:19",
+										"data-uid": "src/components/estoque/EstoqueAtual.tsx:154:19",
 										"data-prohibitions": "[editContent]",
-										children: p.categoria
+										children: p.categoria || "-"
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-										"data-uid": "src/components/estoque/EstoqueAtual.tsx:150:19",
+										"data-uid": "src/components/estoque/EstoqueAtual.tsx:155:19",
+										"data-prohibitions": "[editContent]",
+										children: formatCurrency(p.preco)
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
+										"data-uid": "src/components/estoque/EstoqueAtual.tsx:156:19",
 										"data-prohibitions": "[editContent]",
 										className: "text-center",
 										children: p.estoque <= p.estoque_minimo ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Badge, {
-											"data-uid": "src/components/estoque/EstoqueAtual.tsx:152:23",
+											"data-uid": "src/components/estoque/EstoqueAtual.tsx:158:23",
 											"data-prohibitions": "[editContent]",
 											variant: "destructive",
 											className: "px-2",
 											children: p.estoque
 										}) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-											"data-uid": "src/components/estoque/EstoqueAtual.tsx:156:23",
+											"data-uid": "src/components/estoque/EstoqueAtual.tsx:162:23",
 											"data-prohibitions": "[editContent]",
-											className: "font-semibold text-slate-700",
+											className: "font-semibold text-foreground",
 											children: p.estoque
 										})
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-										"data-uid": "src/components/estoque/EstoqueAtual.tsx:159:19",
+										"data-uid": "src/components/estoque/EstoqueAtual.tsx:165:19",
 										"data-prohibitions": "[editContent]",
 										className: "text-center text-muted-foreground",
 										children: p.estoque_minimo
 									}),
-									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-										"data-uid": "src/components/estoque/EstoqueAtual.tsx:162:19",
+									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TableCell, {
+										"data-uid": "src/components/estoque/EstoqueAtual.tsx:168:19",
 										"data-prohibitions": "[]",
-										className: "text-right",
-										children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button$1, {
-											"data-uid": "src/components/estoque/EstoqueAtual.tsx:163:21",
+										className: "text-right space-x-2",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
+											"data-uid": "src/components/estoque/EstoqueAtual.tsx:169:21",
+											"data-prohibitions": "[]",
+											size: "icon",
+											variant: "ghost",
+											title: "Editar Produto",
+											onClick: () => {
+												setEditingProduct(p);
+												setFormOpen(true);
+											},
+											children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SquarePen, {
+												"data-uid": "src/components/estoque/EstoqueAtual.tsx:178:23",
+												"data-prohibitions": "[editContent]",
+												className: "h-4 w-4 text-muted-foreground"
+											})
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button$1, {
+											"data-uid": "src/components/estoque/EstoqueAtual.tsx:180:21",
 											"data-prohibitions": "[]",
 											size: "sm",
 											variant: "outline",
-											onClick: () => openAdjustDialog(p),
+											onClick: () => {
+												setAdjustProduct(p);
+												setForm({
+													quantidade: "",
+													tipo: "entrada",
+													motivo: "ajuste"
+												});
+											},
 											children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SquarePen, {
-												"data-uid": "src/components/estoque/EstoqueAtual.tsx:164:23",
+												"data-uid": "src/components/estoque/EstoqueAtual.tsx:188:23",
 												"data-prohibitions": "[editContent]",
 												className: "h-4 w-4 mr-2"
 											}), " Ajustar"]
-										})
+										})]
 									})
 								]
-							}, p.id))
+							}, p.id)), filteredProducts.length === 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableRow, {
+								"data-uid": "src/components/estoque/EstoqueAtual.tsx:194:17",
+								"data-prohibitions": "[]",
+								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
+									"data-uid": "src/components/estoque/EstoqueAtual.tsx:195:19",
+									"data-prohibitions": "[]",
+									colSpan: 7,
+									className: "text-center py-8 text-muted-foreground",
+									children: "Nenhum produto encontrado."
+								})
+							})]
 						})]
 					})
 				})
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Dialog, {
-				"data-uid": "src/components/estoque/EstoqueAtual.tsx:174:7",
+				"data-uid": "src/components/estoque/EstoqueAtual.tsx:205:7",
 				"data-prohibitions": "[editContent]",
 				open: !!adjustProduct,
 				onOpenChange: (open) => !open && setAdjustProduct(null),
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogContent, {
-					"data-uid": "src/components/estoque/EstoqueAtual.tsx:175:9",
+					"data-uid": "src/components/estoque/EstoqueAtual.tsx:206:9",
 					"data-prohibitions": "[editContent]",
 					className: "sm:max-w-[425px]",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogHeader, {
-						"data-uid": "src/components/estoque/EstoqueAtual.tsx:176:11",
+						"data-uid": "src/components/estoque/EstoqueAtual.tsx:207:11",
 						"data-prohibitions": "[]",
 						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogTitle, {
-							"data-uid": "src/components/estoque/EstoqueAtual.tsx:177:13",
+							"data-uid": "src/components/estoque/EstoqueAtual.tsx:208:13",
 							"data-prohibitions": "[]",
 							children: "Ajuste Manual de Estoque"
 						})
 					}), adjustProduct && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("form", {
-						"data-uid": "src/components/estoque/EstoqueAtual.tsx:180:13",
+						"data-uid": "src/components/estoque/EstoqueAtual.tsx:211:13",
 						"data-prohibitions": "[editContent]",
 						onSubmit: handleAdjust,
 						className: "space-y-4 py-4",
 						children: [
 							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								"data-uid": "src/components/estoque/EstoqueAtual.tsx:181:15",
+								"data-uid": "src/components/estoque/EstoqueAtual.tsx:212:15",
 								"data-prohibitions": "[editContent]",
-								className: "text-sm font-medium mb-4 pb-2 border-b",
+								className: "text-sm font-medium mb-4 pb-2 border-b border-border",
 								children: ["Produto: ", adjustProduct.nome]
 							}),
 							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								"data-uid": "src/components/estoque/EstoqueAtual.tsx:185:15",
+								"data-uid": "src/components/estoque/EstoqueAtual.tsx:215:15",
 								"data-prohibitions": "[]",
 								className: "grid grid-cols-2 gap-4",
 								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-									"data-uid": "src/components/estoque/EstoqueAtual.tsx:186:17",
+									"data-uid": "src/components/estoque/EstoqueAtual.tsx:216:17",
 									"data-prohibitions": "[]",
 									className: "space-y-2",
 									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$1, {
-										"data-uid": "src/components/estoque/EstoqueAtual.tsx:187:19",
+										"data-uid": "src/components/estoque/EstoqueAtual.tsx:217:19",
 										"data-prohibitions": "[]",
 										children: "Tipo de Ajuste"
 									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Select$1, {
-										"data-uid": "src/components/estoque/EstoqueAtual.tsx:188:19",
+										"data-uid": "src/components/estoque/EstoqueAtual.tsx:218:19",
 										"data-prohibitions": "[]",
 										required: true,
 										value: form.tipo,
@@ -70628,22 +77028,22 @@ function EstoqueAtual() {
 											tipo: v
 										}),
 										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectTrigger, {
-											"data-uid": "src/components/estoque/EstoqueAtual.tsx:193:21",
+											"data-uid": "src/components/estoque/EstoqueAtual.tsx:223:21",
 											"data-prohibitions": "[]",
 											children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectValue, {
-												"data-uid": "src/components/estoque/EstoqueAtual.tsx:194:23",
+												"data-uid": "src/components/estoque/EstoqueAtual.tsx:224:23",
 												"data-prohibitions": "[editContent]"
 											})
 										}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(SelectContent, {
-											"data-uid": "src/components/estoque/EstoqueAtual.tsx:196:21",
+											"data-uid": "src/components/estoque/EstoqueAtual.tsx:226:21",
 											"data-prohibitions": "[]",
 											children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectItem, {
-												"data-uid": "src/components/estoque/EstoqueAtual.tsx:197:23",
+												"data-uid": "src/components/estoque/EstoqueAtual.tsx:227:23",
 												"data-prohibitions": "[]",
 												value: "entrada",
 												children: "Entrada (+)"
 											}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectItem, {
-												"data-uid": "src/components/estoque/EstoqueAtual.tsx:198:23",
+												"data-uid": "src/components/estoque/EstoqueAtual.tsx:228:23",
 												"data-prohibitions": "[]",
 												value: "saida",
 												children: "Saída (-)"
@@ -70651,15 +77051,15 @@ function EstoqueAtual() {
 										})]
 									})]
 								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-									"data-uid": "src/components/estoque/EstoqueAtual.tsx:202:17",
+									"data-uid": "src/components/estoque/EstoqueAtual.tsx:232:17",
 									"data-prohibitions": "[]",
 									className: "space-y-2",
 									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$1, {
-										"data-uid": "src/components/estoque/EstoqueAtual.tsx:203:19",
+										"data-uid": "src/components/estoque/EstoqueAtual.tsx:233:19",
 										"data-prohibitions": "[]",
 										children: "Quantidade"
 									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
-										"data-uid": "src/components/estoque/EstoqueAtual.tsx:204:19",
+										"data-uid": "src/components/estoque/EstoqueAtual.tsx:234:19",
 										"data-prohibitions": "[editContent]",
 										type: "number",
 										min: "1",
@@ -70673,15 +77073,15 @@ function EstoqueAtual() {
 								})]
 							}),
 							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								"data-uid": "src/components/estoque/EstoqueAtual.tsx:214:15",
+								"data-uid": "src/components/estoque/EstoqueAtual.tsx:243:15",
 								"data-prohibitions": "[]",
 								className: "space-y-2",
 								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$1, {
-									"data-uid": "src/components/estoque/EstoqueAtual.tsx:215:17",
+									"data-uid": "src/components/estoque/EstoqueAtual.tsx:244:17",
 									"data-prohibitions": "[]",
 									children: "Motivo"
 								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Select$1, {
-									"data-uid": "src/components/estoque/EstoqueAtual.tsx:216:17",
+									"data-uid": "src/components/estoque/EstoqueAtual.tsx:245:17",
 									"data-prohibitions": "[]",
 									required: true,
 									value: form.motivo,
@@ -70690,30 +77090,30 @@ function EstoqueAtual() {
 										motivo: v
 									}),
 									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectTrigger, {
-										"data-uid": "src/components/estoque/EstoqueAtual.tsx:221:19",
+										"data-uid": "src/components/estoque/EstoqueAtual.tsx:250:19",
 										"data-prohibitions": "[]",
 										children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectValue, {
-											"data-uid": "src/components/estoque/EstoqueAtual.tsx:222:21",
+											"data-uid": "src/components/estoque/EstoqueAtual.tsx:251:21",
 											"data-prohibitions": "[editContent]"
 										})
 									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(SelectContent, {
-										"data-uid": "src/components/estoque/EstoqueAtual.tsx:224:19",
+										"data-uid": "src/components/estoque/EstoqueAtual.tsx:253:19",
 										"data-prohibitions": "[]",
 										children: [
 											/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectItem, {
-												"data-uid": "src/components/estoque/EstoqueAtual.tsx:225:21",
+												"data-uid": "src/components/estoque/EstoqueAtual.tsx:254:21",
 												"data-prohibitions": "[]",
 												value: "ajuste",
 												children: "Ajuste de Inventário"
 											}),
 											/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectItem, {
-												"data-uid": "src/components/estoque/EstoqueAtual.tsx:226:21",
+												"data-uid": "src/components/estoque/EstoqueAtual.tsx:255:21",
 												"data-prohibitions": "[]",
 												value: "devolução",
 												children: "Devolução"
 											}),
 											/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectItem, {
-												"data-uid": "src/components/estoque/EstoqueAtual.tsx:227:21",
+												"data-uid": "src/components/estoque/EstoqueAtual.tsx:256:21",
 												"data-prohibitions": "[]",
 												value: "perda",
 												children: "Perda / Quebra"
@@ -70723,23 +77123,23 @@ function EstoqueAtual() {
 								})]
 							}),
 							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogFooter, {
-								"data-uid": "src/components/estoque/EstoqueAtual.tsx:232:15",
+								"data-uid": "src/components/estoque/EstoqueAtual.tsx:260:15",
 								"data-prohibitions": "[editContent]",
 								className: "pt-4",
 								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
-									"data-uid": "src/components/estoque/EstoqueAtual.tsx:233:17",
+									"data-uid": "src/components/estoque/EstoqueAtual.tsx:261:17",
 									"data-prohibitions": "[]",
 									type: "button",
 									variant: "outline",
 									onClick: () => setAdjustProduct(null),
 									children: "Cancelar"
 								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button$1, {
-									"data-uid": "src/components/estoque/EstoqueAtual.tsx:236:17",
+									"data-uid": "src/components/estoque/EstoqueAtual.tsx:264:17",
 									"data-prohibitions": "[editContent]",
 									type: "submit",
 									disabled: submitting,
 									children: [submitting ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(LoaderCircle, {
-										"data-uid": "src/components/estoque/EstoqueAtual.tsx:237:33",
+										"data-uid": "src/components/estoque/EstoqueAtual.tsx:265:33",
 										"data-prohibitions": "[editContent]",
 										className: "h-4 w-4 animate-spin mr-2"
 									}) : null, " Salvar Ajuste"]
@@ -70748,6 +77148,14 @@ function EstoqueAtual() {
 						]
 					})]
 				})
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ProdutoFormModal, {
+				"data-uid": "src/components/estoque/EstoqueAtual.tsx:273:7",
+				"data-prohibitions": "[editContent]",
+				open: formOpen,
+				onClose: () => setFormOpen(false),
+				product: editingProduct,
+				onSuccess: fetchProducts
 			})
 		]
 	});
@@ -70958,43 +77366,56 @@ function Estoque() {
 }
 //#endregion
 //#region src/components/clientes/ClienteFormModal.tsx
+var clienteSchema = object({
+	nome: string().min(2, "O nome é obrigatório"),
+	cpf: string().optional(),
+	telefone: string().refine((val) => !val || val.replace(/\D/g, "").length >= 10, "Telefone deve ter ao menos 10 dígitos").optional(),
+	email: union([literal(""), string().email("E-mail inválido")]).optional(),
+	endereco: string().optional()
+});
 function ClienteFormModal({ open, onClose, cliente, onSuccess }) {
-	const [form, setForm] = (0, import_react.useState)({
-		nome: "",
-		email: "",
-		telefone: "",
-		cpf: "",
-		endereco: ""
-	});
 	const [loading, setLoading] = (0, import_react.useState)(false);
+	const form = useForm({
+		resolver: a(clienteSchema),
+		defaultValues: {
+			nome: "",
+			cpf: "",
+			telefone: "",
+			email: "",
+			endereco: ""
+		}
+	});
 	(0, import_react.useEffect)(() => {
-		if (cliente && open) setForm({
+		if (cliente && open) form.reset({
 			nome: cliente.nome,
-			email: cliente.email || "",
-			telefone: cliente.telefone || "",
 			cpf: cliente.cpf || "",
+			telefone: cliente.telefone || "",
+			email: cliente.email || "",
 			endereco: cliente.endereco || ""
 		});
-		else if (open) setForm({
+		else if (open) form.reset({
 			nome: "",
-			email: "",
-			telefone: "",
 			cpf: "",
+			telefone: "",
+			email: "",
 			endereco: ""
 		});
-	}, [cliente, open]);
-	const handleSubmit = async (e) => {
-		e.preventDefault();
+	}, [
+		cliente,
+		open,
+		form
+	]);
+	const onSubmit = async (data) => {
 		setLoading(true);
-		const dataToSave = {
-			nome: form.nome,
-			email: form.email || null,
-			telefone: form.telefone || null,
-			cpf: form.cpf || null,
-			endereco: form.endereco || null
+		const payload = {
+			nome: data.nome,
+			cpf: data.cpf || null,
+			telefone: data.telefone || null,
+			email: data.email || null,
+			endereco: data.endereco || null
 		};
 		if (cliente) {
-			const { error } = await supabase.from("clientes").update(dataToSave).eq("id", cliente.id);
+			const { error } = await supabase.from("clientes").update(payload).eq("id", cliente.id);
 			if (error) toast$1({
 				title: "Erro",
 				description: "Não foi possível atualizar.",
@@ -71003,13 +77424,13 @@ function ClienteFormModal({ open, onClose, cliente, onSuccess }) {
 			else {
 				toast$1({
 					title: "Sucesso",
-					description: "Cliente atualizado com sucesso."
+					description: "Cliente atualizado."
 				});
 				onSuccess();
 				onClose();
 			}
 		} else {
-			const { error } = await supabase.from("clientes").insert(dataToSave);
+			const { error } = await supabase.from("clientes").insert(payload);
 			if (error) toast$1({
 				title: "Erro",
 				description: "Não foi possível cadastrar.",
@@ -71027,153 +77448,213 @@ function ClienteFormModal({ open, onClose, cliente, onSuccess }) {
 		setLoading(false);
 	};
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Dialog, {
-		"data-uid": "src/components/clientes/ClienteFormModal.tsx:77:5",
+		"data-uid": "src/components/clientes/ClienteFormModal.tsx:102:5",
 		"data-prohibitions": "[editContent]",
 		open,
 		onOpenChange: (o) => !o && onClose(),
 		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogContent, {
-			"data-uid": "src/components/clientes/ClienteFormModal.tsx:78:7",
+			"data-uid": "src/components/clientes/ClienteFormModal.tsx:103:7",
 			"data-prohibitions": "[editContent]",
-			className: "sm:max-w-[425px]",
+			className: "sm:max-w-[425px] bg-card text-card-foreground",
 			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogHeader, {
-				"data-uid": "src/components/clientes/ClienteFormModal.tsx:79:9",
+				"data-uid": "src/components/clientes/ClienteFormModal.tsx:104:9",
 				"data-prohibitions": "[editContent]",
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogTitle, {
-					"data-uid": "src/components/clientes/ClienteFormModal.tsx:80:11",
+					"data-uid": "src/components/clientes/ClienteFormModal.tsx:105:11",
 					"data-prohibitions": "[editContent]",
 					children: cliente ? "Editar Cliente" : "Novo Cliente"
 				})
-			}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("form", {
-				"data-uid": "src/components/clientes/ClienteFormModal.tsx:82:9",
+			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Form, {
+				"data-uid": "src/components/clientes/ClienteFormModal.tsx:107:9",
 				"data-prohibitions": "[editContent]",
-				onSubmit: handleSubmit,
-				className: "space-y-4 py-4",
-				children: [
-					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						"data-uid": "src/components/clientes/ClienteFormModal.tsx:83:11",
-						"data-prohibitions": "[]",
-						className: "space-y-2",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$1, {
-							"data-uid": "src/components/clientes/ClienteFormModal.tsx:84:13",
-							"data-prohibitions": "[]",
-							children: "Nome *"
-						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
-							"data-uid": "src/components/clientes/ClienteFormModal.tsx:85:13",
+				...form,
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("form", {
+					"data-uid": "src/components/clientes/ClienteFormModal.tsx:108:11",
+					"data-prohibitions": "[editContent]",
+					onSubmit: form.handleSubmit(onSubmit),
+					className: "space-y-4 py-4",
+					children: [
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormField, {
+							"data-uid": "src/components/clientes/ClienteFormModal.tsx:109:13",
 							"data-prohibitions": "[editContent]",
-							required: true,
-							value: form.nome,
-							onChange: (e) => setForm({
-								...form,
-								nome: e.target.value
-							}),
-							placeholder: "Nome completo"
-						})]
-					}),
-					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						"data-uid": "src/components/clientes/ClienteFormModal.tsx:92:11",
-						"data-prohibitions": "[]",
-						className: "grid grid-cols-2 gap-4",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							"data-uid": "src/components/clientes/ClienteFormModal.tsx:93:13",
-							"data-prohibitions": "[]",
-							className: "space-y-2",
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$1, {
-								"data-uid": "src/components/clientes/ClienteFormModal.tsx:94:15",
+							control: form.control,
+							name: "nome",
+							render: ({ field }) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(FormItem, {
+								"data-uid": "src/components/clientes/ClienteFormModal.tsx:113:17",
 								"data-prohibitions": "[]",
-								children: "CPF"
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
-								"data-uid": "src/components/clientes/ClienteFormModal.tsx:95:15",
-								"data-prohibitions": "[editContent]",
-								value: form.cpf,
-								onChange: (e) => setForm({
-									...form,
-									cpf: e.target.value
-								}),
-								placeholder: "000.000.000-00"
-							})]
-						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							"data-uid": "src/components/clientes/ClienteFormModal.tsx:101:13",
+								children: [
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormLabel, {
+										"data-uid": "src/components/clientes/ClienteFormModal.tsx:114:19",
+										"data-prohibitions": "[]",
+										children: "Nome *"
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormControl, {
+										"data-uid": "src/components/clientes/ClienteFormModal.tsx:115:19",
+										"data-prohibitions": "[]",
+										children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
+											"data-uid": "src/components/clientes/ClienteFormModal.tsx:116:21",
+											"data-prohibitions": "[editContent]",
+											...field
+										})
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormMessage, {
+										"data-uid": "src/components/clientes/ClienteFormModal.tsx:118:19",
+										"data-prohibitions": "[editContent]"
+									})
+								]
+							})
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							"data-uid": "src/components/clientes/ClienteFormModal.tsx:122:13",
 							"data-prohibitions": "[]",
-							className: "space-y-2",
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$1, {
-								"data-uid": "src/components/clientes/ClienteFormModal.tsx:102:15",
+							className: "grid grid-cols-2 gap-4",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormField, {
+								"data-uid": "src/components/clientes/ClienteFormModal.tsx:123:15",
+								"data-prohibitions": "[editContent]",
+								control: form.control,
+								name: "cpf",
+								render: ({ field }) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(FormItem, {
+									"data-uid": "src/components/clientes/ClienteFormModal.tsx:127:19",
+									"data-prohibitions": "[]",
+									children: [
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormLabel, {
+											"data-uid": "src/components/clientes/ClienteFormModal.tsx:128:21",
+											"data-prohibitions": "[]",
+											children: "CPF"
+										}),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormControl, {
+											"data-uid": "src/components/clientes/ClienteFormModal.tsx:129:21",
+											"data-prohibitions": "[]",
+											children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
+												"data-uid": "src/components/clientes/ClienteFormModal.tsx:130:23",
+												"data-prohibitions": "[editContent]",
+												...field
+											})
+										}),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormMessage, {
+											"data-uid": "src/components/clientes/ClienteFormModal.tsx:132:21",
+											"data-prohibitions": "[editContent]"
+										})
+									]
+								})
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormField, {
+								"data-uid": "src/components/clientes/ClienteFormModal.tsx:136:15",
+								"data-prohibitions": "[editContent]",
+								control: form.control,
+								name: "telefone",
+								render: ({ field }) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(FormItem, {
+									"data-uid": "src/components/clientes/ClienteFormModal.tsx:140:19",
+									"data-prohibitions": "[]",
+									children: [
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormLabel, {
+											"data-uid": "src/components/clientes/ClienteFormModal.tsx:141:21",
+											"data-prohibitions": "[]",
+											children: "Telefone"
+										}),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormControl, {
+											"data-uid": "src/components/clientes/ClienteFormModal.tsx:142:21",
+											"data-prohibitions": "[]",
+											children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
+												"data-uid": "src/components/clientes/ClienteFormModal.tsx:143:23",
+												"data-prohibitions": "[editContent]",
+												...field
+											})
+										}),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormMessage, {
+											"data-uid": "src/components/clientes/ClienteFormModal.tsx:145:21",
+											"data-prohibitions": "[editContent]"
+										})
+									]
+								})
+							})]
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormField, {
+							"data-uid": "src/components/clientes/ClienteFormModal.tsx:150:13",
+							"data-prohibitions": "[editContent]",
+							control: form.control,
+							name: "email",
+							render: ({ field }) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(FormItem, {
+								"data-uid": "src/components/clientes/ClienteFormModal.tsx:154:17",
 								"data-prohibitions": "[]",
-								children: "Telefone"
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
-								"data-uid": "src/components/clientes/ClienteFormModal.tsx:103:15",
+								children: [
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormLabel, {
+										"data-uid": "src/components/clientes/ClienteFormModal.tsx:155:19",
+										"data-prohibitions": "[]",
+										children: "E-mail"
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormControl, {
+										"data-uid": "src/components/clientes/ClienteFormModal.tsx:156:19",
+										"data-prohibitions": "[]",
+										children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
+											"data-uid": "src/components/clientes/ClienteFormModal.tsx:157:21",
+											"data-prohibitions": "[editContent]",
+											type: "email",
+											...field
+										})
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormMessage, {
+										"data-uid": "src/components/clientes/ClienteFormModal.tsx:159:19",
+										"data-prohibitions": "[editContent]"
+									})
+								]
+							})
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormField, {
+							"data-uid": "src/components/clientes/ClienteFormModal.tsx:163:13",
+							"data-prohibitions": "[editContent]",
+							control: form.control,
+							name: "endereco",
+							render: ({ field }) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(FormItem, {
+								"data-uid": "src/components/clientes/ClienteFormModal.tsx:167:17",
+								"data-prohibitions": "[]",
+								children: [
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormLabel, {
+										"data-uid": "src/components/clientes/ClienteFormModal.tsx:168:19",
+										"data-prohibitions": "[]",
+										children: "Endereço"
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormControl, {
+										"data-uid": "src/components/clientes/ClienteFormModal.tsx:169:19",
+										"data-prohibitions": "[]",
+										children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
+											"data-uid": "src/components/clientes/ClienteFormModal.tsx:170:21",
+											"data-prohibitions": "[editContent]",
+											...field
+										})
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormMessage, {
+										"data-uid": "src/components/clientes/ClienteFormModal.tsx:172:19",
+										"data-prohibitions": "[editContent]"
+									})
+								]
+							})
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogFooter, {
+							"data-uid": "src/components/clientes/ClienteFormModal.tsx:176:13",
+							"data-prohibitions": "[editContent]",
+							className: "pt-4",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
+								"data-uid": "src/components/clientes/ClienteFormModal.tsx:177:15",
+								"data-prohibitions": "[]",
+								type: "button",
+								variant: "outline",
+								onClick: onClose,
+								disabled: loading,
+								children: "Cancelar"
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button$1, {
+								"data-uid": "src/components/clientes/ClienteFormModal.tsx:180:15",
 								"data-prohibitions": "[editContent]",
-								value: form.telefone,
-								onChange: (e) => setForm({
-									...form,
-									telefone: e.target.value
-								}),
-								placeholder: "(00) 00000-0000"
+								type: "submit",
+								disabled: loading,
+								children: [loading && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(LoaderCircle, {
+									"data-uid": "src/components/clientes/ClienteFormModal.tsx:181:29",
+									"data-prohibitions": "[editContent]",
+									className: "mr-2 h-4 w-4 animate-spin"
+								}), " Salvar"]
 							})]
-						})]
-					}),
-					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						"data-uid": "src/components/clientes/ClienteFormModal.tsx:110:11",
-						"data-prohibitions": "[]",
-						className: "space-y-2",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$1, {
-							"data-uid": "src/components/clientes/ClienteFormModal.tsx:111:13",
-							"data-prohibitions": "[]",
-							children: "Email"
-						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
-							"data-uid": "src/components/clientes/ClienteFormModal.tsx:112:13",
-							"data-prohibitions": "[editContent]",
-							type: "email",
-							value: form.email,
-							onChange: (e) => setForm({
-								...form,
-								email: e.target.value
-							}),
-							placeholder: "email@exemplo.com"
-						})]
-					}),
-					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						"data-uid": "src/components/clientes/ClienteFormModal.tsx:119:11",
-						"data-prohibitions": "[]",
-						className: "space-y-2",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$1, {
-							"data-uid": "src/components/clientes/ClienteFormModal.tsx:120:13",
-							"data-prohibitions": "[]",
-							children: "Endereço"
-						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
-							"data-uid": "src/components/clientes/ClienteFormModal.tsx:121:13",
-							"data-prohibitions": "[editContent]",
-							value: form.endereco,
-							onChange: (e) => setForm({
-								...form,
-								endereco: e.target.value
-							}),
-							placeholder: "Rua, Número, Bairro"
-						})]
-					}),
-					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogFooter, {
-						"data-uid": "src/components/clientes/ClienteFormModal.tsx:127:11",
-						"data-prohibitions": "[editContent]",
-						className: "pt-4",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
-							"data-uid": "src/components/clientes/ClienteFormModal.tsx:128:13",
-							"data-prohibitions": "[]",
-							type: "button",
-							variant: "outline",
-							onClick: onClose,
-							children: "Cancelar"
-						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button$1, {
-							"data-uid": "src/components/clientes/ClienteFormModal.tsx:131:13",
-							"data-prohibitions": "[editContent]",
-							type: "submit",
-							disabled: loading,
-							children: [loading ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(LoaderCircle, {
-								"data-uid": "src/components/clientes/ClienteFormModal.tsx:132:26",
-								"data-prohibitions": "[editContent]",
-								className: "h-4 w-4 animate-spin mr-2"
-							}) : null, "Salvar"]
-						})]
-					})
-				]
+						})
+					]
+				})
 			})]
 		})
 	});
@@ -79515,7 +85996,7 @@ function RelatoriosKPIs({ totalSales, avgTicket, salesCount }) {
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Card, {
 				"data-uid": "src/components/relatorios/RelatoriosKPIs.tsx:14:7",
 				"data-prohibitions": "[editContent]",
-				className: "shadow-sm border-emerald-100 bg-emerald-50/30",
+				className: "shadow-sm border-emerald-200 dark:border-emerald-900 bg-emerald-50/30 dark:bg-emerald-950/20",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardHeader, {
 					"data-uid": "src/components/relatorios/RelatoriosKPIs.tsx:15:9",
 					"data-prohibitions": "[]",
@@ -79523,59 +86004,59 @@ function RelatoriosKPIs({ totalSales, avgTicket, salesCount }) {
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardTitle, {
 						"data-uid": "src/components/relatorios/RelatoriosKPIs.tsx:16:11",
 						"data-prohibitions": "[]",
-						className: "text-sm font-medium text-emerald-800",
+						className: "text-sm font-medium text-emerald-800 dark:text-emerald-400",
 						children: "Total em Vendas"
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DollarSign, {
-						"data-uid": "src/components/relatorios/RelatoriosKPIs.tsx:17:11",
+						"data-uid": "src/components/relatorios/RelatoriosKPIs.tsx:19:11",
 						"data-prohibitions": "[editContent]",
 						className: "h-4 w-4 text-emerald-600"
 					})]
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardContent, {
-					"data-uid": "src/components/relatorios/RelatoriosKPIs.tsx:19:9",
+					"data-uid": "src/components/relatorios/RelatoriosKPIs.tsx:21:9",
 					"data-prohibitions": "[editContent]",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-						"data-uid": "src/components/relatorios/RelatoriosKPIs.tsx:20:11",
+						"data-uid": "src/components/relatorios/RelatoriosKPIs.tsx:22:11",
 						"data-prohibitions": "[editContent]",
-						className: "text-3xl font-bold text-emerald-900",
+						className: "text-3xl font-bold text-emerald-900 dark:text-emerald-300",
 						children: formatCurrency(totalSales)
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-						"data-uid": "src/components/relatorios/RelatoriosKPIs.tsx:21:11",
+						"data-uid": "src/components/relatorios/RelatoriosKPIs.tsx:25:11",
 						"data-prohibitions": "[]",
-						className: "text-xs text-emerald-600/80 font-medium mt-1",
+						className: "text-xs text-emerald-600/80 dark:text-emerald-500 font-medium mt-1",
 						children: "No período selecionado"
 					})]
 				})]
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Card, {
-				"data-uid": "src/components/relatorios/RelatoriosKPIs.tsx:25:7",
+				"data-uid": "src/components/relatorios/RelatoriosKPIs.tsx:31:7",
 				"data-prohibitions": "[editContent]",
-				className: "shadow-sm border-blue-100 bg-blue-50/30",
+				className: "shadow-sm border-blue-200 dark:border-blue-900 bg-blue-50/30 dark:bg-blue-950/20",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardHeader, {
-					"data-uid": "src/components/relatorios/RelatoriosKPIs.tsx:26:9",
+					"data-uid": "src/components/relatorios/RelatoriosKPIs.tsx:32:9",
 					"data-prohibitions": "[]",
 					className: "flex flex-row items-center justify-between pb-2",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardTitle, {
-						"data-uid": "src/components/relatorios/RelatoriosKPIs.tsx:27:11",
+						"data-uid": "src/components/relatorios/RelatoriosKPIs.tsx:33:11",
 						"data-prohibitions": "[]",
-						className: "text-sm font-medium text-blue-800",
+						className: "text-sm font-medium text-blue-800 dark:text-blue-400",
 						children: "Ticket Médio"
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TrendingUp, {
-						"data-uid": "src/components/relatorios/RelatoriosKPIs.tsx:28:11",
+						"data-uid": "src/components/relatorios/RelatoriosKPIs.tsx:36:11",
 						"data-prohibitions": "[editContent]",
 						className: "h-4 w-4 text-blue-600"
 					})]
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardContent, {
-					"data-uid": "src/components/relatorios/RelatoriosKPIs.tsx:30:9",
+					"data-uid": "src/components/relatorios/RelatoriosKPIs.tsx:38:9",
 					"data-prohibitions": "[editContent]",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-						"data-uid": "src/components/relatorios/RelatoriosKPIs.tsx:31:11",
+						"data-uid": "src/components/relatorios/RelatoriosKPIs.tsx:39:11",
 						"data-prohibitions": "[editContent]",
-						className: "text-3xl font-bold text-blue-900",
+						className: "text-3xl font-bold text-blue-900 dark:text-blue-300",
 						children: formatCurrency(avgTicket)
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
-						"data-uid": "src/components/relatorios/RelatoriosKPIs.tsx:32:11",
+						"data-uid": "src/components/relatorios/RelatoriosKPIs.tsx:42:11",
 						"data-prohibitions": "[editContent]",
-						className: "text-xs text-blue-600/80 font-medium mt-1",
+						className: "text-xs text-blue-600/80 dark:text-blue-500 font-medium mt-1",
 						children: [
 							"Baseado em ",
 							salesCount,
@@ -79585,33 +86066,33 @@ function RelatoriosKPIs({ totalSales, avgTicket, salesCount }) {
 				})]
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Card, {
-				"data-uid": "src/components/relatorios/RelatoriosKPIs.tsx:38:7",
+				"data-uid": "src/components/relatorios/RelatoriosKPIs.tsx:48:7",
 				"data-prohibitions": "[editContent]",
-				className: "shadow-sm border-slate-200",
+				className: "shadow-sm bg-card border-border",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardHeader, {
-					"data-uid": "src/components/relatorios/RelatoriosKPIs.tsx:39:9",
+					"data-uid": "src/components/relatorios/RelatoriosKPIs.tsx:49:9",
 					"data-prohibitions": "[]",
 					className: "flex flex-row items-center justify-between pb-2",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardTitle, {
-						"data-uid": "src/components/relatorios/RelatoriosKPIs.tsx:40:11",
+						"data-uid": "src/components/relatorios/RelatoriosKPIs.tsx:50:11",
 						"data-prohibitions": "[]",
 						className: "text-sm font-medium text-muted-foreground",
 						children: "Volume de Vendas"
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Receipt, {
-						"data-uid": "src/components/relatorios/RelatoriosKPIs.tsx:43:11",
+						"data-uid": "src/components/relatorios/RelatoriosKPIs.tsx:53:11",
 						"data-prohibitions": "[editContent]",
 						className: "h-4 w-4 text-primary"
 					})]
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardContent, {
-					"data-uid": "src/components/relatorios/RelatoriosKPIs.tsx:45:9",
+					"data-uid": "src/components/relatorios/RelatoriosKPIs.tsx:55:9",
 					"data-prohibitions": "[editContent]",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-						"data-uid": "src/components/relatorios/RelatoriosKPIs.tsx:46:11",
+						"data-uid": "src/components/relatorios/RelatoriosKPIs.tsx:56:11",
 						"data-prohibitions": "[editContent]",
-						className: "text-3xl font-bold",
+						className: "text-3xl font-bold text-foreground",
 						children: salesCount
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-						"data-uid": "src/components/relatorios/RelatoriosKPIs.tsx:47:11",
+						"data-uid": "src/components/relatorios/RelatoriosKPIs.tsx:57:11",
 						"data-prohibitions": "[]",
 						className: "text-xs text-muted-foreground mt-1",
 						children: "Operações concluídas"
@@ -79631,7 +86112,7 @@ function ChartTopProducts({ data }) {
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Card, {
 		"data-uid": "src/components/relatorios/ChartTopProducts.tsx:20:5",
 		"data-prohibitions": "[editContent]",
-		className: "shadow-sm border-slate-200 flex flex-col",
+		className: "shadow-sm border-border flex flex-col bg-card",
 		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardHeader, {
 			"data-uid": "src/components/relatorios/ChartTopProducts.tsx:21:7",
 			"data-prohibitions": "[]",
@@ -79677,37 +86158,37 @@ function ChartTopProducts({ data }) {
 								"data-prohibitions": "[editContent]",
 								strokeDasharray: "3 3",
 								horizontal: false,
-								stroke: "#E2E8F0"
+								stroke: "hsl(var(--border))"
 							}),
 							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(XAxis, {
-								"data-uid": "src/components/relatorios/ChartTopProducts.tsx:38:17",
+								"data-uid": "src/components/relatorios/ChartTopProducts.tsx:42:17",
 								"data-prohibitions": "[editContent]",
 								type: "number",
 								hide: true
 							}),
 							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(YAxis, {
-								"data-uid": "src/components/relatorios/ChartTopProducts.tsx:39:17",
+								"data-uid": "src/components/relatorios/ChartTopProducts.tsx:43:17",
 								"data-prohibitions": "[editContent]",
 								dataKey: "name",
 								type: "category",
 								axisLine: false,
 								tickLine: false,
 								tick: {
-									fill: "#475569",
+									fill: "hsl(var(--foreground))",
 									fontSize: 12
 								},
 								width: 120
 							}),
 							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChartTooltip, {
-								"data-uid": "src/components/relatorios/ChartTopProducts.tsx:47:17",
+								"data-uid": "src/components/relatorios/ChartTopProducts.tsx:51:17",
 								"data-prohibitions": "[editContent]",
 								content: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChartTooltipContent, {
-									"data-uid": "src/components/relatorios/ChartTopProducts.tsx:47:40",
+									"data-uid": "src/components/relatorios/ChartTopProducts.tsx:51:40",
 									"data-prohibitions": "[editContent]"
 								})
 							}),
 							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Bar, {
-								"data-uid": "src/components/relatorios/ChartTopProducts.tsx:48:17",
+								"data-uid": "src/components/relatorios/ChartTopProducts.tsx:52:17",
 								"data-prohibitions": "[editContent]",
 								dataKey: "quantidade",
 								fill: "var(--color-quantidade)",
@@ -79733,7 +86214,7 @@ function ChartCategories({ data }) {
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Card, {
 		"data-uid": "src/components/relatorios/ChartCategories.tsx:21:5",
 		"data-prohibitions": "[editContent]",
-		className: "shadow-sm border-slate-200 flex flex-col",
+		className: "shadow-sm border-border flex flex-col bg-card",
 		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardHeader, {
 			"data-uid": "src/components/relatorios/ChartCategories.tsx:22:7",
 			"data-prohibitions": "[]",
@@ -79802,7 +86283,7 @@ function ChartCategories({ data }) {
 var config$1 = {
 	entradas: {
 		label: "Entradas",
-		color: "hsl(var(--emerald-500))"
+		color: "hsl(var(--chart-2))"
 	},
 	saidas: {
 		label: "Saídas",
@@ -79813,7 +86294,7 @@ function ChartCashFlow({ data }) {
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Card, {
 		"data-uid": "src/components/relatorios/ChartCashFlow.tsx:21:5",
 		"data-prohibitions": "[editContent]",
-		className: "shadow-sm border-slate-200",
+		className: "shadow-sm border-border bg-card",
 		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardHeader, {
 			"data-uid": "src/components/relatorios/ChartCashFlow.tsx:22:7",
 			"data-prohibitions": "[]",
@@ -79904,7 +86385,7 @@ function ChartCashFlow({ data }) {
 								"data-prohibitions": "[editContent]",
 								strokeDasharray: "3 3",
 								vertical: false,
-								stroke: "#E2E8F0"
+								stroke: "hsl(var(--border))"
 							}),
 							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(XAxis, {
 								"data-uid": "src/components/relatorios/ChartCashFlow.tsx:45:17",
@@ -79913,7 +86394,7 @@ function ChartCashFlow({ data }) {
 								axisLine: false,
 								tickLine: false,
 								tick: {
-									fill: "#64748B",
+									fill: "hsl(var(--muted-foreground))",
 									fontSize: 12
 								},
 								dy: 10
@@ -79924,20 +86405,20 @@ function ChartCashFlow({ data }) {
 								axisLine: false,
 								tickLine: false,
 								tick: {
-									fill: "#64748B",
+									fill: "hsl(var(--muted-foreground))",
 									fontSize: 12
 								}
 							}),
 							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChartTooltip, {
-								"data-uid": "src/components/relatorios/ChartCashFlow.tsx:53:17",
+								"data-uid": "src/components/relatorios/ChartCashFlow.tsx:57:17",
 								"data-prohibitions": "[editContent]",
 								content: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChartTooltipContent, {
-									"data-uid": "src/components/relatorios/ChartCashFlow.tsx:53:40",
+									"data-uid": "src/components/relatorios/ChartCashFlow.tsx:57:40",
 									"data-prohibitions": "[editContent]"
 								})
 							}),
 							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Area, {
-								"data-uid": "src/components/relatorios/ChartCashFlow.tsx:54:17",
+								"data-uid": "src/components/relatorios/ChartCashFlow.tsx:58:17",
 								"data-prohibitions": "[editContent]",
 								type: "monotone",
 								dataKey: "entradas",
@@ -79947,7 +86428,7 @@ function ChartCashFlow({ data }) {
 								fill: "url(#colorEntradas)"
 							}),
 							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Area, {
-								"data-uid": "src/components/relatorios/ChartCashFlow.tsx:62:17",
+								"data-uid": "src/components/relatorios/ChartCashFlow.tsx:66:17",
 								"data-prohibitions": "[editContent]",
 								type: "monotone",
 								dataKey: "saidas",
@@ -79980,7 +86461,7 @@ function ChartAccounts({ data }) {
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Card, {
 		"data-uid": "src/components/relatorios/ChartAccounts.tsx:24:5",
 		"data-prohibitions": "[editContent]",
-		className: "shadow-sm border-slate-200",
+		className: "shadow-sm border-border bg-card",
 		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardHeader, {
 			"data-uid": "src/components/relatorios/ChartAccounts.tsx:25:7",
 			"data-prohibitions": "[]",
@@ -80024,7 +86505,7 @@ function ChartAccounts({ data }) {
 								"data-prohibitions": "[editContent]",
 								strokeDasharray: "3 3",
 								vertical: false,
-								stroke: "#E2E8F0"
+								stroke: "hsl(var(--border))"
 							}),
 							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(XAxis, {
 								"data-uid": "src/components/relatorios/ChartAccounts.tsx:38:17",
@@ -80040,7 +86521,7 @@ function ChartAccounts({ data }) {
 								axisLine: false,
 								tickLine: false,
 								tick: {
-									fill: "#64748B",
+									fill: "hsl(var(--muted-foreground))",
 									fontSize: 12
 								},
 								tickFormatter: (val) => `R$ ${val}`
@@ -80102,15 +86583,15 @@ function TableCriticalStock({ data }) {
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Card, {
 		"data-uid": "src/components/relatorios/TableCriticalStock.tsx:19:5",
 		"data-prohibitions": "[editContent]",
-		className: "shadow-sm border-red-200",
+		className: "shadow-sm border-red-200 dark:border-red-900",
 		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardHeader, {
 			"data-uid": "src/components/relatorios/TableCriticalStock.tsx:20:7",
 			"data-prohibitions": "[]",
-			className: "bg-red-50/50 border-b border-red-100 pb-4",
+			className: "bg-red-50/50 dark:bg-red-950/20 border-b border-red-100 dark:border-red-900/50 pb-4",
 			children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardTitle, {
 				"data-uid": "src/components/relatorios/TableCriticalStock.tsx:21:9",
 				"data-prohibitions": "[]",
-				className: "text-lg flex items-center text-red-900",
+				className: "text-lg flex items-center text-red-900 dark:text-red-400",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TriangleAlert, {
 					"data-uid": "src/components/relatorios/TableCriticalStock.tsx:22:11",
 					"data-prohibitions": "[editContent]",
@@ -80120,7 +86601,7 @@ function TableCriticalStock({ data }) {
 		}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardContent, {
 			"data-uid": "src/components/relatorios/TableCriticalStock.tsx:26:7",
 			"data-prohibitions": "[editContent]",
-			className: "p-0",
+			className: "p-0 bg-card",
 			children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Table, {
 				"data-uid": "src/components/relatorios/TableCriticalStock.tsx:27:9",
 				"data-prohibitions": "[editContent]",
@@ -80130,7 +86611,7 @@ function TableCriticalStock({ data }) {
 					children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TableRow, {
 						"data-uid": "src/components/relatorios/TableCriticalStock.tsx:29:13",
 						"data-prohibitions": "[]",
-						className: "bg-slate-50/50",
+						className: "bg-muted/30",
 						children: [
 							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
 								"data-uid": "src/components/relatorios/TableCriticalStock.tsx:30:15",
@@ -80189,27 +86670,27 @@ function TableCriticalStock({ data }) {
 							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
 								"data-uid": "src/components/relatorios/TableCriticalStock.tsx:45:17",
 								"data-prohibitions": "[editContent]",
-								className: "text-right font-bold text-red-600",
+								className: "text-right font-bold text-red-600 dark:text-red-400",
 								children: item.estoque
 							}),
 							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-								"data-uid": "src/components/relatorios/TableCriticalStock.tsx:46:17",
+								"data-uid": "src/components/relatorios/TableCriticalStock.tsx:48:17",
 								"data-prohibitions": "[]",
 								className: "text-center",
 								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Badge, {
-									"data-uid": "src/components/relatorios/TableCriticalStock.tsx:47:19",
+									"data-uid": "src/components/relatorios/TableCriticalStock.tsx:49:19",
 									"data-prohibitions": "[]",
 									variant: "destructive",
-									className: "bg-red-100 text-red-800 hover:bg-red-200",
+									className: "bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-300 hover:bg-red-200",
 									children: "Crítico"
 								})
 							})
 						]
 					}, item.id)), data.length === 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableRow, {
-						"data-uid": "src/components/relatorios/TableCriticalStock.tsx:54:15",
+						"data-uid": "src/components/relatorios/TableCriticalStock.tsx:59:15",
 						"data-prohibitions": "[]",
 						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-							"data-uid": "src/components/relatorios/TableCriticalStock.tsx:55:17",
+							"data-uid": "src/components/relatorios/TableCriticalStock.tsx:60:17",
 							"data-prohibitions": "[]",
 							colSpan: 5,
 							className: "text-center py-8 text-muted-foreground",
@@ -80373,19 +86854,19 @@ function AppSidebar() {
 	const { signOut, user } = useAuth();
 	const links = [
 		{
+			to: "/dashboard",
+			icon: LayoutDashboard,
+			label: "Dashboard"
+		},
+		{
 			to: "/",
 			icon: ShoppingCart,
 			label: "Vendas (PDV)"
 		},
 		{
-			to: "/caixa",
-			icon: Calculator,
-			label: "Fluxo de Caixa"
-		},
-		{
-			to: "/dashboard",
-			icon: LayoutDashboard,
-			label: "Dashboard"
+			to: "/estoque",
+			icon: Package,
+			label: "Produtos e Estoque"
 		},
 		{
 			to: "/clientes",
@@ -80403,83 +86884,78 @@ function AppSidebar() {
 			label: "Contas a Pagar"
 		},
 		{
-			to: "/estoque",
-			icon: Package,
-			label: "Controle de Estoque"
+			to: "/caixa",
+			icon: Calculator,
+			label: "Caixa"
 		},
 		{
 			to: "/relatorios",
 			icon: ChartPie,
 			label: "Relatórios"
-		},
-		{
-			to: "#",
-			icon: Settings,
-			label: "Configurações"
 		}
 	];
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-		"data-uid": "src/components/Sidebar.tsx:36:5",
+		"data-uid": "src/components/Sidebar.tsx:34:5",
 		"data-prohibitions": "[editContent]",
-		className: "w-64 bg-[#1E293B] text-slate-300 flex flex-col shrink-0 h-full",
+		className: "w-64 bg-sidebar border-r border-sidebar-border text-sidebar-foreground flex flex-col shrink-0 h-full",
 		children: [
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				"data-uid": "src/components/Sidebar.tsx:37:7",
+				"data-uid": "src/components/Sidebar.tsx:35:7",
 				"data-prohibitions": "[]",
-				className: "h-16 flex items-center px-6 border-b border-slate-700 bg-slate-900",
+				className: "h-16 flex items-center px-6 border-b border-sidebar-border bg-sidebar",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Store, {
-					"data-uid": "src/components/Sidebar.tsx:38:9",
+					"data-uid": "src/components/Sidebar.tsx:36:9",
 					"data-prohibitions": "[editContent]",
 					className: "h-6 w-6 text-primary mr-3"
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-					"data-uid": "src/components/Sidebar.tsx:39:9",
+					"data-uid": "src/components/Sidebar.tsx:37:9",
 					"data-prohibitions": "[]",
-					className: "font-bold text-white text-lg tracking-wider",
+					className: "font-bold text-lg tracking-wider",
 					children: "NEXUS PDV"
 				})]
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("nav", {
-				"data-uid": "src/components/Sidebar.tsx:42:7",
+				"data-uid": "src/components/Sidebar.tsx:40:7",
 				"data-prohibitions": "[editContent]",
 				className: "flex-1 py-6 px-3 space-y-1 overflow-y-auto",
 				children: links.map((link) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Link, {
-					"data-uid": "src/components/Sidebar.tsx:44:11",
+					"data-uid": "src/components/Sidebar.tsx:42:11",
 					"data-prohibitions": "[editContent]",
 					to: link.to,
-					className: cn$1("flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-colors", location.pathname === link.to ? "bg-primary text-white shadow-md" : "hover:bg-slate-800 hover:text-white"),
+					className: cn$1("flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-colors", location.pathname === link.to ? "bg-sidebar-primary text-sidebar-primary-foreground shadow-sm" : "hover:bg-sidebar-accent hover:text-sidebar-accent-foreground text-sidebar-foreground/80"),
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(link.icon, {
-						"data-uid": "src/components/Sidebar.tsx:54:13",
+						"data-uid": "src/components/Sidebar.tsx:52:13",
 						"data-prohibitions": "[editContent]",
 						className: "h-5 w-5"
 					}), link.label]
 				}, link.label))
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				"data-uid": "src/components/Sidebar.tsx:60:7",
+				"data-uid": "src/components/Sidebar.tsx:58:7",
 				"data-prohibitions": "[editContent]",
-				className: "p-4 border-t border-slate-700 m-3 rounded-lg bg-slate-800/50 shrink-0",
+				className: "p-4 border-t border-sidebar-border m-3 rounded-lg bg-sidebar-accent/50 shrink-0",
 				children: [
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-						"data-uid": "src/components/Sidebar.tsx:61:9",
+						"data-uid": "src/components/Sidebar.tsx:59:9",
 						"data-prohibitions": "[]",
-						className: "text-xs font-semibold text-slate-400 mb-1",
+						className: "text-xs font-semibold text-sidebar-foreground/60 mb-1",
 						children: "Operador Caixa"
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-						"data-uid": "src/components/Sidebar.tsx:62:9",
+						"data-uid": "src/components/Sidebar.tsx:60:9",
 						"data-prohibitions": "[editContent]",
-						className: "text-sm font-bold text-white mb-4 truncate",
+						className: "text-sm font-bold mb-4 truncate",
 						title: user?.email || "",
 						children: user?.email || "Usuário"
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button$1, {
-						"data-uid": "src/components/Sidebar.tsx:65:9",
+						"data-uid": "src/components/Sidebar.tsx:63:9",
 						"data-prohibitions": "[]",
 						variant: "destructive",
-						className: "w-full text-xs h-9 bg-red-500/20 text-red-400 hover:bg-red-500 hover:text-white border-0",
+						className: "w-full text-xs h-9 bg-destructive/10 text-destructive hover:bg-destructive hover:text-destructive-foreground border-0",
 						onClick: signOut,
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(LogOut, {
-							"data-uid": "src/components/Sidebar.tsx:70:11",
+							"data-uid": "src/components/Sidebar.tsx:68:11",
 							"data-prohibitions": "[editContent]",
 							className: "h-4 w-4 mr-2"
 						}), " Encerrar Sessão"]
@@ -80493,62 +86969,90 @@ function AppSidebar() {
 //#region src/components/Header.tsx
 function Header() {
 	const location = useLocation();
+	const { theme, setTheme } = useTheme();
 	const getTitle = () => {
 		switch (location.pathname) {
 			case "/": return "CAIXA LIVRE - VENDA";
 			case "/dashboard": return "DASHBOARD GERENCIAL";
+			case "/caixa": return "FLUXO DE CAIXA";
+			case "/clientes": return "CLIENTES";
+			case "/contas-receber": return "CONTAS A RECEBER";
+			case "/contas-pagar": return "CONTAS A PAGAR";
+			case "/estoque": return "PRODUTOS E ESTOQUE";
+			case "/relatorios": return "RELATÓRIOS";
 			default: return "SISTEMA";
 		}
 	};
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("header", {
-		"data-uid": "src/components/Header.tsx:20:5",
+		"data-uid": "src/components/Header.tsx:35:5",
 		"data-prohibitions": "[editContent]",
-		className: "h-16 bg-white border-b flex items-center justify-between px-6 shrink-0 shadow-sm z-10 relative",
+		className: "h-16 bg-background border-b border-border flex items-center justify-between px-6 shrink-0 shadow-sm z-10 relative",
 		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-			"data-uid": "src/components/Header.tsx:21:7",
+			"data-uid": "src/components/Header.tsx:36:7",
 			"data-prohibitions": "[editContent]",
 			className: "flex items-center gap-4",
 			children: [
 				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h1", {
-					"data-uid": "src/components/Header.tsx:22:9",
+					"data-uid": "src/components/Header.tsx:37:9",
 					"data-prohibitions": "[editContent]",
-					className: "text-lg font-bold text-slate-800 tracking-tight",
+					className: "text-lg font-bold text-foreground tracking-tight",
 					children: getTitle()
 				}),
 				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-					"data-uid": "src/components/Header.tsx:23:9",
+					"data-uid": "src/components/Header.tsx:38:9",
 					"data-prohibitions": "[]",
-					className: "h-6 w-[2px] bg-slate-200 hidden sm:block"
+					className: "h-6 w-[2px] bg-border hidden sm:block"
 				}),
 				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					"data-uid": "src/components/Header.tsx:24:9",
+					"data-uid": "src/components/Header.tsx:39:9",
 					"data-prohibitions": "[]",
-					className: "hidden sm:flex items-center gap-2 bg-slate-100 px-3 py-1 rounded-full border",
+					className: "hidden sm:flex items-center gap-2 bg-muted px-3 py-1 rounded-full border border-border",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-						"data-uid": "src/components/Header.tsx:25:11",
+						"data-uid": "src/components/Header.tsx:40:11",
 						"data-prohibitions": "[]",
 						className: "w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-						"data-uid": "src/components/Header.tsx:26:11",
+						"data-uid": "src/components/Header.tsx:41:11",
 						"data-prohibitions": "[]",
-						className: "text-xs font-semibold text-emerald-700",
+						className: "text-xs font-semibold text-emerald-700 dark:text-emerald-400",
 						children: "SAT Disponível"
 					})]
 				})
 			]
 		}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-			"data-uid": "src/components/Header.tsx:30:7",
+			"data-uid": "src/components/Header.tsx:47:7",
 			"data-prohibitions": "[]",
-			className: "relative w-72 hidden md:block",
-			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Search, {
-				"data-uid": "src/components/Header.tsx:31:9",
-				"data-prohibitions": "[editContent]",
-				className: "absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground"
-			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
-				"data-uid": "src/components/Header.tsx:32:9",
-				"data-prohibitions": "[editContent]",
-				placeholder: "Buscar produto em todo o sistema...",
-				className: "pl-9 bg-slate-50 border-slate-200 h-9"
+			className: "flex items-center gap-4",
+			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				"data-uid": "src/components/Header.tsx:48:9",
+				"data-prohibitions": "[]",
+				className: "relative w-72 hidden md:block",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Search, {
+					"data-uid": "src/components/Header.tsx:49:11",
+					"data-prohibitions": "[editContent]",
+					className: "absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground"
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
+					"data-uid": "src/components/Header.tsx:50:11",
+					"data-prohibitions": "[editContent]",
+					placeholder: "Buscar produto em todo o sistema...",
+					className: "pl-9 bg-muted border-border h-9"
+				})]
+			}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button$1, {
+				"data-uid": "src/components/Header.tsx:55:9",
+				"data-prohibitions": "[]",
+				variant: "ghost",
+				size: "icon",
+				onClick: () => setTheme(theme === "dark" ? "light" : "dark"),
+				className: "text-foreground",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Sun, {
+					"data-uid": "src/components/Header.tsx:61:11",
+					"data-prohibitions": "[editContent]",
+					className: "h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0"
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Moon, {
+					"data-uid": "src/components/Header.tsx:62:11",
+					"data-prohibitions": "[editContent]",
+					className: "absolute h-5 w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100"
+				})]
 			})]
 		})]
 	});
@@ -81261,7 +87765,7 @@ function ReceiptView({ receipt, change, onNewSale }) {
 			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 				"data-uid": "src/components/pdv/ReceiptView.tsx:17:9",
 				"data-prohibitions": "[]",
-				className: "mx-auto w-12 h-12 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mb-4",
+				className: "mx-auto w-12 h-12 bg-emerald-100 dark:bg-emerald-900/50 text-emerald-600 dark:text-emerald-400 rounded-full flex items-center justify-center mb-4",
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CircleCheck, {
 					"data-uid": "src/components/pdv/ReceiptView.tsx:18:11",
 					"data-prohibitions": "[editContent]",
@@ -81277,54 +87781,54 @@ function ReceiptView({ receipt, change, onNewSale }) {
 		/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 			"data-uid": "src/components/pdv/ReceiptView.tsx:23:7",
 			"data-prohibitions": "[editContent]",
-			className: "bg-slate-50 p-6 rounded-lg border text-sm space-y-4 font-mono mt-2 shadow-inner",
+			className: "bg-muted/30 p-6 rounded-lg border border-border text-sm space-y-4 font-mono mt-2 shadow-inner",
 			children: [
 				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 					"data-uid": "src/components/pdv/ReceiptView.tsx:24:9",
 					"data-prohibitions": "[editContent]",
-					className: "text-center border-b border-dashed pb-4 mb-4 border-slate-300",
+					className: "text-center border-b border-dashed border-border pb-4 mb-4",
 					children: [
 						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
 							"data-uid": "src/components/pdv/ReceiptView.tsx:25:11",
 							"data-prohibitions": "[]",
-							className: "font-bold text-lg mb-1",
+							className: "font-bold text-lg mb-1 text-foreground",
 							children: "RECIBO DE VENDA"
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
 							"data-uid": "src/components/pdv/ReceiptView.tsx:26:11",
 							"data-prohibitions": "[editContent]",
-							className: "text-slate-500 text-xs truncate",
+							className: "text-muted-foreground text-xs truncate",
 							children: ["ID: ", receipt.id]
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 							"data-uid": "src/components/pdv/ReceiptView.tsx:27:11",
 							"data-prohibitions": "[editContent]",
-							className: "text-slate-500 text-xs",
+							className: "text-muted-foreground text-xs",
 							children: new Date(receipt.data).toLocaleString("pt-BR")
 						})
 					]
 				}),
 				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-					"data-uid": "src/components/pdv/ReceiptView.tsx:30:9",
+					"data-uid": "src/components/pdv/ReceiptView.tsx:32:9",
 					"data-prohibitions": "[editContent]",
 					className: "space-y-3 mb-4 max-h-[40vh] overflow-y-auto pr-2",
 					children: receipt.items.map((item, idx) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						"data-uid": "src/components/pdv/ReceiptView.tsx:32:13",
+						"data-uid": "src/components/pdv/ReceiptView.tsx:34:13",
 						"data-prohibitions": "[editContent]",
-						className: "flex justify-between",
+						className: "flex justify-between text-foreground",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							"data-uid": "src/components/pdv/ReceiptView.tsx:33:15",
+							"data-uid": "src/components/pdv/ReceiptView.tsx:35:15",
 							"data-prohibitions": "[editContent]",
 							className: "flex-1 pr-4",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-								"data-uid": "src/components/pdv/ReceiptView.tsx:34:17",
+								"data-uid": "src/components/pdv/ReceiptView.tsx:36:17",
 								"data-prohibitions": "[editContent]",
 								className: "block font-semibold line-clamp-1",
 								children: item.nome
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-								"data-uid": "src/components/pdv/ReceiptView.tsx:35:17",
+								"data-uid": "src/components/pdv/ReceiptView.tsx:37:17",
 								"data-prohibitions": "[editContent]",
-								className: "text-xs text-slate-500",
+								className: "text-xs text-muted-foreground",
 								children: [
 									item.quantidade,
 									"x ",
@@ -81332,7 +87836,7 @@ function ReceiptView({ receipt, change, onNewSale }) {
 								]
 							})]
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-							"data-uid": "src/components/pdv/ReceiptView.tsx:39:15",
+							"data-uid": "src/components/pdv/ReceiptView.tsx:41:15",
 							"data-prohibitions": "[editContent]",
 							className: "font-medium",
 							children: formatCurrency(item.quantidade * item.preco_unitario)
@@ -81340,49 +87844,49 @@ function ReceiptView({ receipt, change, onNewSale }) {
 					}, idx))
 				}),
 				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					"data-uid": "src/components/pdv/ReceiptView.tsx:46:9",
+					"data-uid": "src/components/pdv/ReceiptView.tsx:48:9",
 					"data-prohibitions": "[editContent]",
-					className: "border-t border-dashed pt-4 mb-2 border-slate-300",
+					className: "border-t border-dashed border-border pt-4 mb-2",
 					children: [
 						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							"data-uid": "src/components/pdv/ReceiptView.tsx:47:11",
+							"data-uid": "src/components/pdv/ReceiptView.tsx:49:11",
 							"data-prohibitions": "[editContent]",
-							className: "flex justify-between font-bold text-xl mb-2",
+							className: "flex justify-between font-bold text-xl mb-2 text-foreground",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-								"data-uid": "src/components/pdv/ReceiptView.tsx:48:13",
+								"data-uid": "src/components/pdv/ReceiptView.tsx:50:13",
 								"data-prohibitions": "[]",
 								children: "TOTAL"
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-								"data-uid": "src/components/pdv/ReceiptView.tsx:49:13",
+								"data-uid": "src/components/pdv/ReceiptView.tsx:51:13",
 								"data-prohibitions": "[editContent]",
 								children: formatCurrency(receipt.total)
 							})]
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							"data-uid": "src/components/pdv/ReceiptView.tsx:51:11",
+							"data-uid": "src/components/pdv/ReceiptView.tsx:53:11",
 							"data-prohibitions": "[editContent]",
-							className: "flex justify-between text-slate-600 text-base",
+							className: "flex justify-between text-muted-foreground text-base",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-								"data-uid": "src/components/pdv/ReceiptView.tsx:52:13",
+								"data-uid": "src/components/pdv/ReceiptView.tsx:54:13",
 								"data-prohibitions": "[]",
 								children: "Método"
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-								"data-uid": "src/components/pdv/ReceiptView.tsx:53:13",
+								"data-uid": "src/components/pdv/ReceiptView.tsx:55:13",
 								"data-prohibitions": "[editContent]",
-								className: "font-semibold",
+								className: "font-semibold text-foreground",
 								children: receipt.metodo_pagamento
 							})]
 						}),
 						receipt.metodo_pagamento === "Dinheiro" && change > 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							"data-uid": "src/components/pdv/ReceiptView.tsx:56:13",
+							"data-uid": "src/components/pdv/ReceiptView.tsx:58:13",
 							"data-prohibitions": "[editContent]",
-							className: "flex justify-between text-emerald-600 font-medium mt-1",
+							className: "flex justify-between text-emerald-600 dark:text-emerald-400 font-medium mt-1",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-								"data-uid": "src/components/pdv/ReceiptView.tsx:57:15",
+								"data-uid": "src/components/pdv/ReceiptView.tsx:59:15",
 								"data-prohibitions": "[]",
 								children: "Troco"
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-								"data-uid": "src/components/pdv/ReceiptView.tsx:58:15",
+								"data-uid": "src/components/pdv/ReceiptView.tsx:60:15",
 								"data-prohibitions": "[editContent]",
 								children: formatCurrency(change)
 							})]
@@ -81392,11 +87896,11 @@ function ReceiptView({ receipt, change, onNewSale }) {
 			]
 		}),
 		/* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogFooter, {
-			"data-uid": "src/components/pdv/ReceiptView.tsx:64:7",
+			"data-uid": "src/components/pdv/ReceiptView.tsx:66:7",
 			"data-prohibitions": "[]",
 			className: "mt-4 sm:justify-center",
 			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
-				"data-uid": "src/components/pdv/ReceiptView.tsx:65:9",
+				"data-uid": "src/components/pdv/ReceiptView.tsx:67:9",
 				"data-prohibitions": "[]",
 				className: "w-full h-12 text-lg font-bold",
 				onClick: onNewSale,
@@ -81434,7 +87938,7 @@ function CustomerSelect({ onSelect }) {
 		}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 			"data-uid": "src/components/pdv/CustomerSelect.tsx:44:9",
 			"data-prohibitions": "[editContent]",
-			className: "flex items-center justify-between p-3 border rounded-lg bg-slate-50 border-slate-200",
+			className: "flex items-center justify-between p-3 border rounded-lg bg-muted/30 border-border",
 			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 				"data-uid": "src/components/pdv/CustomerSelect.tsx:45:11",
 				"data-prohibitions": "[editContent]",
@@ -81451,7 +87955,7 @@ function CustomerSelect({ onSelect }) {
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
 					"data-uid": "src/components/pdv/CustomerSelect.tsx:49:13",
 					"data-prohibitions": "[editContent]",
-					className: "font-semibold text-slate-700",
+					className: "font-semibold text-foreground",
 					children: selected.nome
 				})]
 			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
@@ -81459,7 +87963,7 @@ function CustomerSelect({ onSelect }) {
 				"data-prohibitions": "[]",
 				variant: "ghost",
 				size: "sm",
-				className: "h-8 w-8 p-0 rounded-full hover:bg-slate-200",
+				className: "h-8 w-8 p-0 rounded-full hover:bg-destructive/10 hover:text-destructive",
 				onClick: () => handleSelect(null),
 				title: "Remover Cliente",
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(X, {
@@ -81493,7 +87997,7 @@ function CustomerSelect({ onSelect }) {
 					"data-uid": "src/components/pdv/CustomerSelect.tsx:72:9",
 					"data-prohibitions": "[editContent]",
 					placeholder: "Buscar cliente por nome ou CPF...",
-					className: "pl-9 bg-white shadow-sm",
+					className: "pl-9 bg-background shadow-sm",
 					value: search,
 					onChange: (e) => {
 						setSearch(e.target.value);
@@ -81506,7 +88010,7 @@ function CustomerSelect({ onSelect }) {
 			open && search && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 				"data-uid": "src/components/pdv/CustomerSelect.tsx:85:9",
 				"data-prohibitions": "[editContent]",
-				className: "absolute top-full left-0 mt-1 w-full bg-white border border-slate-200 rounded-lg shadow-xl z-50 max-h-48 overflow-y-auto",
+				className: "absolute top-full left-0 mt-1 w-full bg-popover border border-border rounded-lg shadow-xl z-50 max-h-48 overflow-y-auto",
 				children: filtered.length === 0 ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 					"data-uid": "src/components/pdv/CustomerSelect.tsx:87:13",
 					"data-prohibitions": "[]",
@@ -81515,12 +88019,12 @@ function CustomerSelect({ onSelect }) {
 				}) : filtered.map((c) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 					"data-uid": "src/components/pdv/CustomerSelect.tsx:92:15",
 					"data-prohibitions": "[editContent]",
-					className: "p-3 hover:bg-slate-50 cursor-pointer border-b last:border-0 border-slate-100 flex flex-col",
+					className: "p-3 hover:bg-accent cursor-pointer border-b last:border-0 border-border flex flex-col",
 					onMouseDown: () => handleSelect(c),
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
 						"data-uid": "src/components/pdv/CustomerSelect.tsx:97:17",
 						"data-prohibitions": "[editContent]",
-						className: "font-medium text-sm text-slate-800",
+						className: "font-medium text-sm text-foreground",
 						children: c.nome
 					}), c.cpf && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
 						"data-uid": "src/components/pdv/CustomerSelect.tsx:98:27",
@@ -81557,6 +88061,23 @@ function CheckoutModal({ open, onOpenChange }) {
 	};
 	const handleConfirm = async () => {
 		if (!method || !user) return;
+		if (method === "A Prazo" && !selectedCustomer) {
+			toast$1({
+				title: "Atenção",
+				description: "Para vendas A Prazo, é obrigatório selecionar um cliente.",
+				variant: "destructive"
+			});
+			return;
+		}
+		const numericReceived = parseFloat(amountReceived.replace(",", ".")) || 0;
+		if (method === "Dinheiro" && numericReceived < total) {
+			toast$1({
+				title: "Atenção",
+				description: "Valor recebido insuficiente.",
+				variant: "destructive"
+			});
+			return;
+		}
 		setIsSubmitting(true);
 		try {
 			const { data: venda, error: vendaError } = await supabase.from("vendas").insert({
@@ -81577,12 +88098,14 @@ function CheckoutModal({ open, onOpenChange }) {
 			if (itemsError) throw itemsError;
 			const dataVencimento = /* @__PURE__ */ new Date();
 			dataVencimento.setDate(dataVencimento.getDate() + 30);
+			const isPending = method === "A Prazo";
 			const { error: contasError } = await supabase.from("contas_receber").insert({
 				venda_id: venda.id,
 				cliente_id: selectedCustomer?.id || null,
 				valor: total,
-				data_vencimento: dataVencimento.toISOString(),
-				status: "pendente"
+				data_vencimento: isPending ? dataVencimento.toISOString() : (/* @__PURE__ */ new Date()).toISOString(),
+				status: isPending ? "pendente" : "pago",
+				data_pagamento: isPending ? null : (/* @__PURE__ */ new Date()).toISOString()
 			});
 			if (contasError) throw contasError;
 			for (const item of items) await supabase.rpc("decrement_stock", {
@@ -81591,8 +88114,7 @@ function CheckoutModal({ open, onOpenChange }) {
 			});
 			toast$1({
 				title: "Venda realizada com sucesso!",
-				description: `Pagamento via ${method} registrado.`,
-				className: "bg-emerald-50 border-emerald-200 text-emerald-900"
+				description: `Pagamento registrado.`
 			});
 			const receiptData = {
 				id: venda.id,
@@ -81610,8 +88132,17 @@ function CheckoutModal({ open, onOpenChange }) {
 				telefone: selectedCustomer.telefone,
 				receipt: receiptData
 			} }).then(({ error }) => {
-				if (error) console.error("Failed to send WhatsApp receipt:", error);
-				else console.log("WhatsApp receipt processing triggered");
+				if (error) {
+					console.error("Failed to send WhatsApp receipt:", error);
+					toast$1({
+						title: "Aviso",
+						description: "Venda concluída, mas falha ao enviar recibo por WhatsApp.",
+						variant: "destructive"
+					});
+				} else toast$1({
+					title: "Recibo Enviado",
+					description: "Recibo enviado via WhatsApp com sucesso."
+				});
 			});
 		} catch (error) {
 			toast$1({
@@ -81626,16 +88157,16 @@ function CheckoutModal({ open, onOpenChange }) {
 	const numericReceived = parseFloat(amountReceived.replace(",", ".")) || 0;
 	const change = numericReceived > total ? numericReceived - total : 0;
 	if (receipt) return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Dialog, {
-		"data-uid": "src/components/pdv/CheckoutModal.tsx:137:7",
+		"data-uid": "src/components/pdv/CheckoutModal.tsx:163:7",
 		"data-prohibitions": "[]",
 		open,
 		onOpenChange: handleOpenChange,
 		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogContent, {
-			"data-uid": "src/components/pdv/CheckoutModal.tsx:138:9",
+			"data-uid": "src/components/pdv/CheckoutModal.tsx:164:9",
 			"data-prohibitions": "[]",
-			className: "max-w-md sm:rounded-2xl",
+			className: "max-w-md sm:rounded-2xl bg-card",
 			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ReceiptView, {
-				"data-uid": "src/components/pdv/CheckoutModal.tsx:139:11",
+				"data-uid": "src/components/pdv/CheckoutModal.tsx:165:11",
 				"data-prohibitions": "[editContent]",
 				receipt,
 				change,
@@ -81644,46 +88175,46 @@ function CheckoutModal({ open, onOpenChange }) {
 		})
 	});
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Dialog, {
-		"data-uid": "src/components/pdv/CheckoutModal.tsx:150:5",
+		"data-uid": "src/components/pdv/CheckoutModal.tsx:176:5",
 		"data-prohibitions": "[editContent]",
 		open,
 		onOpenChange: handleOpenChange,
 		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogContent, {
-			"data-uid": "src/components/pdv/CheckoutModal.tsx:151:7",
+			"data-uid": "src/components/pdv/CheckoutModal.tsx:177:7",
 			"data-prohibitions": "[editContent]",
-			className: "max-w-3xl sm:rounded-2xl",
+			className: "max-w-3xl sm:rounded-2xl bg-card",
 			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogHeader, {
-				"data-uid": "src/components/pdv/CheckoutModal.tsx:152:9",
+				"data-uid": "src/components/pdv/CheckoutModal.tsx:178:9",
 				"data-prohibitions": "[]",
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogTitle, {
-					"data-uid": "src/components/pdv/CheckoutModal.tsx:153:11",
+					"data-uid": "src/components/pdv/CheckoutModal.tsx:179:11",
 					"data-prohibitions": "[]",
 					className: "text-2xl font-bold",
 					children: "Finalizar Venda"
 				})
 			}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				"data-uid": "src/components/pdv/CheckoutModal.tsx:156:9",
+				"data-uid": "src/components/pdv/CheckoutModal.tsx:181:9",
 				"data-prohibitions": "[editContent]",
 				className: "grid grid-cols-1 md:grid-cols-2 gap-8 py-2",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					"data-uid": "src/components/pdv/CheckoutModal.tsx:157:11",
+					"data-uid": "src/components/pdv/CheckoutModal.tsx:182:11",
 					"data-prohibitions": "[editContent]",
 					className: "space-y-8",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CustomerSelect, {
-						"data-uid": "src/components/pdv/CheckoutModal.tsx:158:13",
+						"data-uid": "src/components/pdv/CheckoutModal.tsx:183:13",
 						"data-prohibitions": "[editContent]",
 						onSelect: setSelectedCustomer
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						"data-uid": "src/components/pdv/CheckoutModal.tsx:160:13",
+						"data-uid": "src/components/pdv/CheckoutModal.tsx:184:13",
 						"data-prohibitions": "[editContent]",
 						className: "space-y-4",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", {
-							"data-uid": "src/components/pdv/CheckoutModal.tsx:161:15",
+							"data-uid": "src/components/pdv/CheckoutModal.tsx:185:15",
 							"data-prohibitions": "[]",
 							className: "text-xs font-bold text-muted-foreground uppercase tracking-wider",
 							children: "Forma de Pagamento"
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-							"data-uid": "src/components/pdv/CheckoutModal.tsx:164:15",
+							"data-uid": "src/components/pdv/CheckoutModal.tsx:188:15",
 							"data-prohibitions": "[editContent]",
 							className: "grid grid-cols-2 gap-3",
 							children: [
@@ -81702,19 +88233,23 @@ function CheckoutModal({ open, onOpenChange }) {
 								{
 									id: "PIX",
 									icon: QrCode
+								},
+								{
+									id: "A Prazo",
+									icon: CalendarClock
 								}
 							].map((m) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button$1, {
-								"data-uid": "src/components/pdv/CheckoutModal.tsx:171:19",
+								"data-uid": "src/components/pdv/CheckoutModal.tsx:196:19",
 								"data-prohibitions": "[editContent]",
 								variant: method === m.id ? "default" : "outline",
 								className: `h-20 flex flex-col gap-2 ${method === m.id ? "ring-2 ring-primary ring-offset-2" : ""}`,
 								onClick: () => setMethod(m.id),
 								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(m.icon, {
-									"data-uid": "src/components/pdv/CheckoutModal.tsx:177:21",
+									"data-uid": "src/components/pdv/CheckoutModal.tsx:202:21",
 									"data-prohibitions": "[editContent]",
 									className: "h-6 w-6"
 								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									"data-uid": "src/components/pdv/CheckoutModal.tsx:178:21",
+									"data-uid": "src/components/pdv/CheckoutModal.tsx:203:21",
 									"data-prohibitions": "[editContent]",
 									children: m.id
 								})]
@@ -81722,79 +88257,79 @@ function CheckoutModal({ open, onOpenChange }) {
 						})]
 					})]
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					"data-uid": "src/components/pdv/CheckoutModal.tsx:185:11",
+					"data-uid": "src/components/pdv/CheckoutModal.tsx:209:11",
 					"data-prohibitions": "[editContent]",
-					className: "bg-slate-50 p-6 rounded-xl border border-slate-200 flex flex-col justify-between shadow-sm",
+					className: "bg-muted/50 p-6 rounded-xl border border-border flex flex-col justify-between shadow-sm",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						"data-uid": "src/components/pdv/CheckoutModal.tsx:186:13",
+						"data-uid": "src/components/pdv/CheckoutModal.tsx:210:13",
 						"data-prohibitions": "[editContent]",
 						className: "space-y-4",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							"data-uid": "src/components/pdv/CheckoutModal.tsx:187:15",
+							"data-uid": "src/components/pdv/CheckoutModal.tsx:211:15",
 							"data-prohibitions": "[editContent]",
 							className: "flex justify-between items-center text-lg",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-								"data-uid": "src/components/pdv/CheckoutModal.tsx:188:17",
+								"data-uid": "src/components/pdv/CheckoutModal.tsx:212:17",
 								"data-prohibitions": "[]",
 								className: "text-muted-foreground font-medium",
 								children: "Total a Pagar"
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-								"data-uid": "src/components/pdv/CheckoutModal.tsx:189:17",
+								"data-uid": "src/components/pdv/CheckoutModal.tsx:213:17",
 								"data-prohibitions": "[editContent]",
-								className: "font-bold text-3xl text-slate-900",
+								className: "font-bold text-3xl text-foreground",
 								children: formatCurrency(total)
 							})]
 						}), method === "Dinheiro" && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							"data-uid": "src/components/pdv/CheckoutModal.tsx:193:17",
+							"data-uid": "src/components/pdv/CheckoutModal.tsx:216:17",
 							"data-prohibitions": "[editContent]",
-							className: "space-y-4 pt-6 border-t border-slate-200 animate-in fade-in slide-in-from-top-2",
+							className: "space-y-4 pt-6 border-t border-border animate-in fade-in slide-in-from-top-2",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								"data-uid": "src/components/pdv/CheckoutModal.tsx:194:19",
+								"data-uid": "src/components/pdv/CheckoutModal.tsx:217:19",
 								"data-prohibitions": "[]",
 								className: "space-y-2",
 								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$1, {
-									"data-uid": "src/components/pdv/CheckoutModal.tsx:195:21",
+									"data-uid": "src/components/pdv/CheckoutModal.tsx:218:21",
 									"data-prohibitions": "[]",
 									htmlFor: "received",
-									className: "text-slate-600 font-medium",
+									className: "text-foreground font-medium",
 									children: "Valor Recebido"
 								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
-									"data-uid": "src/components/pdv/CheckoutModal.tsx:198:21",
+									"data-uid": "src/components/pdv/CheckoutModal.tsx:221:21",
 									"data-prohibitions": "[editContent]",
 									id: "received",
 									type: "number",
 									placeholder: "0.00",
-									className: "text-xl h-14 font-semibold text-slate-900 bg-white",
+									className: "text-xl h-14 font-semibold text-foreground bg-background",
 									value: amountReceived,
 									onChange: (e) => setAmountReceived(e.target.value),
 									autoFocus: true
 								})]
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								"data-uid": "src/components/pdv/CheckoutModal.tsx:208:19",
+								"data-uid": "src/components/pdv/CheckoutModal.tsx:231:19",
 								"data-prohibitions": "[editContent]",
-								className: "flex justify-between items-center text-lg text-emerald-600 font-bold bg-emerald-50 p-3 rounded-lg border border-emerald-100",
+								className: "flex justify-between items-center text-lg text-emerald-600 dark:text-emerald-400 font-bold bg-emerald-50 dark:bg-emerald-950/30 p-3 rounded-lg border border-emerald-100 dark:border-emerald-900",
 								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									"data-uid": "src/components/pdv/CheckoutModal.tsx:209:21",
+									"data-uid": "src/components/pdv/CheckoutModal.tsx:232:21",
 									"data-prohibitions": "[]",
 									children: "Troco"
 								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									"data-uid": "src/components/pdv/CheckoutModal.tsx:210:21",
+									"data-uid": "src/components/pdv/CheckoutModal.tsx:233:21",
 									"data-prohibitions": "[editContent]",
 									children: formatCurrency(change)
 								})]
 							})]
 						})]
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button$1, {
-						"data-uid": "src/components/pdv/CheckoutModal.tsx:216:13",
+						"data-uid": "src/components/pdv/CheckoutModal.tsx:238:13",
 						"data-prohibitions": "[editContent]",
 						className: "w-full h-14 text-lg font-bold mt-8 shadow-sm",
 						disabled: !method || method === "Dinheiro" && numericReceived < total || isSubmitting,
 						onClick: handleConfirm,
-						children: [isSubmitting ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(LoaderCircle, {
-							"data-uid": "src/components/pdv/CheckoutModal.tsx:223:31",
+						children: [isSubmitting && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(LoaderCircle, {
+							"data-uid": "src/components/pdv/CheckoutModal.tsx:245:32",
 							"data-prohibitions": "[editContent]",
 							className: "h-5 w-5 animate-spin mr-2"
-						}) : null, isSubmitting ? "Processando..." : "Confirmar Pagamento"]
+						}), isSubmitting ? "Processando..." : "Confirmar Pagamento"]
 					})]
 				})]
 			})]
@@ -81809,16 +88344,16 @@ function CartSidebar() {
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 		"data-uid": "src/components/pdv/CartSidebar.tsx:14:5",
 		"data-prohibitions": "[editContent]",
-		className: "w-80 bg-white border-l shadow-xl flex flex-col h-full shrink-0 z-20",
+		className: "w-80 bg-background border-l border-border shadow-xl flex flex-col h-full shrink-0 z-20",
 		children: [
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 				"data-uid": "src/components/pdv/CartSidebar.tsx:15:7",
 				"data-prohibitions": "[]",
-				className: "p-4 border-b bg-slate-50 flex items-center justify-between",
+				className: "p-4 border-b border-border bg-muted/30 flex items-center justify-between",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("h2", {
 					"data-uid": "src/components/pdv/CartSidebar.tsx:16:9",
 					"data-prohibitions": "[]",
-					className: "font-bold flex items-center gap-2 text-lg",
+					className: "font-bold flex items-center gap-2 text-lg text-foreground",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ShoppingCart, {
 						"data-uid": "src/components/pdv/CartSidebar.tsx:17:11",
 						"data-prohibitions": "[editContent]",
@@ -81830,7 +88365,7 @@ function CartSidebar() {
 					variant: "ghost",
 					size: "sm",
 					onClick: clearCart,
-					className: "text-red-500 text-xs h-8 hover:text-red-600 hover:bg-red-50",
+					className: "text-destructive text-xs h-8 hover:text-destructive hover:bg-destructive/10",
 					children: "Limpar"
 				})]
 			}),
@@ -81859,81 +88394,81 @@ function CartSidebar() {
 					children: items.map((item) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 						"data-uid": "src/components/pdv/CartSidebar.tsx:37:15",
 						"data-prohibitions": "[editContent]",
-						className: "flex gap-3 border-b pb-4 last:border-0",
+						className: "flex gap-3 border-b border-border pb-4 last:border-0",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 							"data-uid": "src/components/pdv/CartSidebar.tsx:38:17",
 							"data-prohibitions": "[]",
-							className: "h-16 w-16 bg-slate-100 rounded-md p-1.5 shrink-0 flex items-center justify-center border",
+							className: "h-16 w-16 bg-muted/50 rounded-md p-1.5 shrink-0 flex items-center justify-center border border-border",
 							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
 								"data-uid": "src/components/pdv/CartSidebar.tsx:39:19",
 								"data-prohibitions": "[editContent]",
-								src: item.imagem_url,
+								src: item.imagem_url || `https://img.usecurling.com/p/100/100?q=${encodeURIComponent(item.nome)}`,
 								alt: item.nome,
-								className: "h-full w-full object-contain mix-blend-multiply"
+								className: "h-full w-full object-contain mix-blend-multiply dark:mix-blend-normal"
 							})
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							"data-uid": "src/components/pdv/CartSidebar.tsx:45:17",
+							"data-uid": "src/components/pdv/CartSidebar.tsx:48:17",
 							"data-prohibitions": "[editContent]",
 							className: "flex-1 min-w-0",
 							children: [
 								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", {
-									"data-uid": "src/components/pdv/CartSidebar.tsx:46:19",
+									"data-uid": "src/components/pdv/CartSidebar.tsx:49:19",
 									"data-prohibitions": "[editContent]",
-									className: "text-sm font-semibold line-clamp-2 leading-tight mb-1",
+									className: "text-sm font-semibold line-clamp-2 leading-tight mb-1 text-foreground",
 									children: item.nome
 								}),
 								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-									"data-uid": "src/components/pdv/CartSidebar.tsx:49:19",
+									"data-uid": "src/components/pdv/CartSidebar.tsx:52:19",
 									"data-prohibitions": "[editContent]",
 									className: "text-primary font-bold text-sm mb-2",
 									children: formatCurrency(item.preco)
 								}),
 								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-									"data-uid": "src/components/pdv/CartSidebar.tsx:52:19",
+									"data-uid": "src/components/pdv/CartSidebar.tsx:55:19",
 									"data-prohibitions": "[editContent]",
 									className: "flex items-center gap-1.5",
 									children: [
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
-											"data-uid": "src/components/pdv/CartSidebar.tsx:53:21",
+											"data-uid": "src/components/pdv/CartSidebar.tsx:56:21",
 											"data-prohibitions": "[]",
 											size: "icon",
 											variant: "outline",
 											className: "h-7 w-7 rounded-full",
 											onClick: () => updateQuantity(item.id, -1),
 											children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Minus, {
-												"data-uid": "src/components/pdv/CartSidebar.tsx:59:23",
+												"data-uid": "src/components/pdv/CartSidebar.tsx:62:23",
 												"data-prohibitions": "[editContent]",
 												className: "h-3 w-3"
 											})
 										}),
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-											"data-uid": "src/components/pdv/CartSidebar.tsx:61:21",
+											"data-uid": "src/components/pdv/CartSidebar.tsx:64:21",
 											"data-prohibitions": "[editContent]",
-											className: "text-sm w-6 text-center font-semibold",
+											className: "text-sm w-6 text-center font-semibold text-foreground",
 											children: item.quantity
 										}),
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
-											"data-uid": "src/components/pdv/CartSidebar.tsx:62:21",
+											"data-uid": "src/components/pdv/CartSidebar.tsx:67:21",
 											"data-prohibitions": "[]",
 											size: "icon",
 											variant: "outline",
 											className: "h-7 w-7 rounded-full",
 											onClick: () => updateQuantity(item.id, 1),
 											children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Plus, {
-												"data-uid": "src/components/pdv/CartSidebar.tsx:68:23",
+												"data-uid": "src/components/pdv/CartSidebar.tsx:73:23",
 												"data-prohibitions": "[editContent]",
 												className: "h-3 w-3"
 											})
 										}),
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
-											"data-uid": "src/components/pdv/CartSidebar.tsx:70:21",
+											"data-uid": "src/components/pdv/CartSidebar.tsx:75:21",
 											"data-prohibitions": "[]",
 											size: "icon",
 											variant: "ghost",
-											className: "h-7 w-7 ml-auto text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-full",
+											className: "h-7 w-7 ml-auto text-muted-foreground hover:text-destructive hover:bg-destructive/10 rounded-full",
 											onClick: () => removeItem(item.id),
 											children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Trash2, {
-												"data-uid": "src/components/pdv/CartSidebar.tsx:76:23",
+												"data-uid": "src/components/pdv/CartSidebar.tsx:81:23",
 												"data-prohibitions": "[editContent]",
 												className: "h-4 w-4"
 											})
@@ -81946,42 +88481,43 @@ function CartSidebar() {
 				})
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				"data-uid": "src/components/pdv/CartSidebar.tsx:85:7",
+				"data-uid": "src/components/pdv/CartSidebar.tsx:90:7",
 				"data-prohibitions": "[editContent]",
-				className: "p-5 bg-slate-50 border-t space-y-4 shadow-[0_-4px_10px_rgba(0,0,0,0.02)]",
+				className: "p-5 bg-card border-t border-border space-y-4 shadow-[0_-4px_10px_rgba(0,0,0,0.02)] dark:shadow-none",
 				children: [
 					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						"data-uid": "src/components/pdv/CartSidebar.tsx:86:9",
+						"data-uid": "src/components/pdv/CartSidebar.tsx:91:9",
 						"data-prohibitions": "[editContent]",
-						className: "flex justify-between text-sm text-slate-500",
+						className: "flex justify-between text-sm text-muted-foreground",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-							"data-uid": "src/components/pdv/CartSidebar.tsx:87:11",
+							"data-uid": "src/components/pdv/CartSidebar.tsx:92:11",
 							"data-prohibitions": "[]",
 							children: "Subtotal"
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-							"data-uid": "src/components/pdv/CartSidebar.tsx:88:11",
+							"data-uid": "src/components/pdv/CartSidebar.tsx:93:11",
 							"data-prohibitions": "[editContent]",
-							className: "font-medium text-slate-700",
+							className: "font-medium text-foreground",
 							children: formatCurrency(subtotal)
 						})]
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						"data-uid": "src/components/pdv/CartSidebar.tsx:90:9",
+						"data-uid": "src/components/pdv/CartSidebar.tsx:95:9",
 						"data-prohibitions": "[editContent]",
 						className: "flex justify-between text-xl font-bold items-center",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-							"data-uid": "src/components/pdv/CartSidebar.tsx:91:11",
+							"data-uid": "src/components/pdv/CartSidebar.tsx:96:11",
 							"data-prohibitions": "[]",
+							className: "text-foreground",
 							children: "Total"
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-							"data-uid": "src/components/pdv/CartSidebar.tsx:92:11",
+							"data-uid": "src/components/pdv/CartSidebar.tsx:97:11",
 							"data-prohibitions": "[editContent]",
 							className: "text-primary text-2xl",
 							children: formatCurrency(total)
 						})]
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
-						"data-uid": "src/components/pdv/CartSidebar.tsx:94:9",
+						"data-uid": "src/components/pdv/CartSidebar.tsx:99:9",
 						"data-prohibitions": "[]",
 						className: "w-full h-14 text-lg font-bold shadow-sm",
 						disabled: items.length === 0,
@@ -81991,7 +88527,7 @@ function CartSidebar() {
 				]
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CheckoutModal, {
-				"data-uid": "src/components/pdv/CartSidebar.tsx:102:7",
+				"data-uid": "src/components/pdv/CartSidebar.tsx:107:7",
 				"data-prohibitions": "[editContent]",
 				open: isCheckoutOpen,
 				onOpenChange: setCheckoutOpen
@@ -82224,146 +88760,152 @@ function ProtectedRoute() {
 }
 //#endregion
 //#region src/App.tsx
-var App = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(BrowserRouter, {
-	"data-uid": "src/App.tsx:21:3",
+var App = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ThemeProvider, {
+	"data-uid": "src/App.tsx:22:3",
 	"data-prohibitions": "[]",
-	future: {
-		v7_startTransition: false,
-		v7_relativeSplatPath: false
-	},
-	children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AuthProvider, {
-		"data-uid": "src/App.tsx:22:5",
+	defaultTheme: "system",
+	storageKey: "nexus-theme",
+	children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(BrowserRouter, {
+		"data-uid": "src/App.tsx:23:5",
 		"data-prohibitions": "[]",
-		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CartProvider, {
-			"data-uid": "src/App.tsx:23:7",
+		future: {
+			v7_startTransition: false,
+			v7_relativeSplatPath: false
+		},
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AuthProvider, {
+			"data-uid": "src/App.tsx:24:7",
 			"data-prohibitions": "[]",
-			children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TooltipProvider, {
-				"data-uid": "src/App.tsx:24:9",
+			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CartProvider, {
+				"data-uid": "src/App.tsx:25:9",
 				"data-prohibitions": "[]",
-				children: [
-					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Toaster$2, {
-						"data-uid": "src/App.tsx:25:11",
-						"data-prohibitions": "[editContent]"
-					}),
-					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Toaster, {
-						"data-uid": "src/App.tsx:26:11",
-						"data-prohibitions": "[editContent]"
-					}),
-					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Routes, {
-						"data-uid": "src/App.tsx:27:11",
-						"data-prohibitions": "[]",
-						children: [
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Route, {
-								"data-uid": "src/App.tsx:28:13",
-								"data-prohibitions": "[editContent]",
-								path: "/login",
-								element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Login, {
-									"data-uid": "src/App.tsx:28:43",
-									"data-prohibitions": "[editContent]"
-								})
-							}),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Route, {
-								"data-uid": "src/App.tsx:30:13",
-								"data-prohibitions": "[]",
-								element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ProtectedRoute, {
-									"data-uid": "src/App.tsx:30:29",
-									"data-prohibitions": "[editContent]"
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TooltipProvider, {
+					"data-uid": "src/App.tsx:26:11",
+					"data-prohibitions": "[]",
+					children: [
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Toaster$2, {
+							"data-uid": "src/App.tsx:27:13",
+							"data-prohibitions": "[editContent]"
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Toaster, {
+							"data-uid": "src/App.tsx:28:13",
+							"data-prohibitions": "[editContent]"
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Routes, {
+							"data-uid": "src/App.tsx:29:13",
+							"data-prohibitions": "[]",
+							children: [
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Route, {
+									"data-uid": "src/App.tsx:30:15",
+									"data-prohibitions": "[editContent]",
+									path: "/login",
+									element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Login, {
+										"data-uid": "src/App.tsx:30:45",
+										"data-prohibitions": "[editContent]"
+									})
 								}),
-								children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Route, {
-									"data-uid": "src/App.tsx:31:15",
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Route, {
+									"data-uid": "src/App.tsx:32:15",
 									"data-prohibitions": "[]",
-									element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Layout, {
-										"data-uid": "src/App.tsx:31:31",
+									element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ProtectedRoute, {
+										"data-uid": "src/App.tsx:32:31",
 										"data-prohibitions": "[editContent]"
 									}),
-									children: [
-										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Route, {
-											"data-uid": "src/App.tsx:32:17",
-											"data-prohibitions": "[editContent]",
-											path: "/",
-											element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Index, {
-												"data-uid": "src/App.tsx:32:42",
-												"data-prohibitions": "[editContent]"
-											})
+									children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Route, {
+										"data-uid": "src/App.tsx:33:17",
+										"data-prohibitions": "[]",
+										element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Layout, {
+											"data-uid": "src/App.tsx:33:33",
+											"data-prohibitions": "[editContent]"
 										}),
-										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Route, {
-											"data-uid": "src/App.tsx:33:17",
-											"data-prohibitions": "[editContent]",
-											path: "/caixa",
-											element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CaixaPage, {
-												"data-uid": "src/App.tsx:33:47",
-												"data-prohibitions": "[editContent]"
+										children: [
+											/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Route, {
+												"data-uid": "src/App.tsx:34:19",
+												"data-prohibitions": "[editContent]",
+												path: "/",
+												element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Index, {
+													"data-uid": "src/App.tsx:34:44",
+													"data-prohibitions": "[editContent]"
+												})
+											}),
+											/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Route, {
+												"data-uid": "src/App.tsx:35:19",
+												"data-prohibitions": "[editContent]",
+												path: "/caixa",
+												element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CaixaPage, {
+													"data-uid": "src/App.tsx:35:49",
+													"data-prohibitions": "[editContent]"
+												})
+											}),
+											/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Route, {
+												"data-uid": "src/App.tsx:36:19",
+												"data-prohibitions": "[editContent]",
+												path: "/dashboard",
+												element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Dashboard, {
+													"data-uid": "src/App.tsx:36:53",
+													"data-prohibitions": "[editContent]"
+												})
+											}),
+											/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Route, {
+												"data-uid": "src/App.tsx:37:19",
+												"data-prohibitions": "[editContent]",
+												path: "/clientes",
+												element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Clientes, {
+													"data-uid": "src/App.tsx:37:52",
+													"data-prohibitions": "[editContent]"
+												})
+											}),
+											/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Route, {
+												"data-uid": "src/App.tsx:38:19",
+												"data-prohibitions": "[editContent]",
+												path: "/contas-receber",
+												element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ContasReceber, {
+													"data-uid": "src/App.tsx:38:58",
+													"data-prohibitions": "[editContent]"
+												})
+											}),
+											/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Route, {
+												"data-uid": "src/App.tsx:39:19",
+												"data-prohibitions": "[editContent]",
+												path: "/contas-pagar",
+												element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ContasPagar, {
+													"data-uid": "src/App.tsx:39:56",
+													"data-prohibitions": "[editContent]"
+												})
+											}),
+											/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Route, {
+												"data-uid": "src/App.tsx:40:19",
+												"data-prohibitions": "[editContent]",
+												path: "/estoque",
+												element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Estoque, {
+													"data-uid": "src/App.tsx:40:51",
+													"data-prohibitions": "[editContent]"
+												})
+											}),
+											/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Route, {
+												"data-uid": "src/App.tsx:41:19",
+												"data-prohibitions": "[editContent]",
+												path: "/relatorios",
+												element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Relatorios, {
+													"data-uid": "src/App.tsx:41:54",
+													"data-prohibitions": "[editContent]"
+												})
 											})
-										}),
-										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Route, {
-											"data-uid": "src/App.tsx:34:17",
-											"data-prohibitions": "[editContent]",
-											path: "/dashboard",
-											element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Dashboard, {
-												"data-uid": "src/App.tsx:34:51",
-												"data-prohibitions": "[editContent]"
-											})
-										}),
-										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Route, {
-											"data-uid": "src/App.tsx:35:17",
-											"data-prohibitions": "[editContent]",
-											path: "/clientes",
-											element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Clientes, {
-												"data-uid": "src/App.tsx:35:50",
-												"data-prohibitions": "[editContent]"
-											})
-										}),
-										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Route, {
-											"data-uid": "src/App.tsx:36:17",
-											"data-prohibitions": "[editContent]",
-											path: "/contas-receber",
-											element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ContasReceber, {
-												"data-uid": "src/App.tsx:36:56",
-												"data-prohibitions": "[editContent]"
-											})
-										}),
-										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Route, {
-											"data-uid": "src/App.tsx:37:17",
-											"data-prohibitions": "[editContent]",
-											path: "/contas-pagar",
-											element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ContasPagar, {
-												"data-uid": "src/App.tsx:37:54",
-												"data-prohibitions": "[editContent]"
-											})
-										}),
-										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Route, {
-											"data-uid": "src/App.tsx:38:17",
-											"data-prohibitions": "[editContent]",
-											path: "/estoque",
-											element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Estoque, {
-												"data-uid": "src/App.tsx:38:49",
-												"data-prohibitions": "[editContent]"
-											})
-										}),
-										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Route, {
-											"data-uid": "src/App.tsx:39:17",
-											"data-prohibitions": "[editContent]",
-											path: "/relatorios",
-											element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Relatorios, {
-												"data-uid": "src/App.tsx:39:52",
-												"data-prohibitions": "[editContent]"
-											})
-										})
-									]
+										]
+									})
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Route, {
+									"data-uid": "src/App.tsx:45:15",
+									"data-prohibitions": "[editContent]",
+									path: "*",
+									element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(NotFound, {
+										"data-uid": "src/App.tsx:45:40",
+										"data-prohibitions": "[editContent]"
+									})
 								})
-							}),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Route, {
-								"data-uid": "src/App.tsx:43:13",
-								"data-prohibitions": "[editContent]",
-								path: "*",
-								element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(NotFound, {
-									"data-uid": "src/App.tsx:43:38",
-									"data-prohibitions": "[editContent]"
-								})
-							})
-						]
-					})
-				]
+							]
+						})
+					]
+				})
 			})
 		})
 	})
@@ -82376,4 +88918,4 @@ var App = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(BrowserRouter, {
 }));
 //#endregion
 
-//# sourceMappingURL=index-CyxFWxIm.js.map
+//# sourceMappingURL=index-DCCsq66G.js.map

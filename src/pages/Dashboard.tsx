@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import { mockChartDataLine, mockChartDataBar } from '@/data/mock'
 import { formatCurrency } from '@/lib/format'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import {
@@ -42,19 +41,64 @@ export default function Dashboard() {
   const [transactions, setTransactions] = useState<Transaction[]>([])
   const [totalSales, setTotalSales] = useState(0)
   const [loading, setLoading] = useState(true)
+  const [chartDataLine, setChartDataLine] = useState<any[]>([])
+  const [chartDataBar, setChartDataBar] = useState<any[]>([])
 
   useEffect(() => {
     const fetchDashboardData = async () => {
-      const { data } = await supabase
+      // Fetch latest 10 sales
+      const { data: sales } = await supabase
         .from('vendas')
         .select('*')
         .order('data', { ascending: false })
         .limit(10)
-      if (data) {
-        setTransactions(data)
-        const total = data.reduce((acc, curr) => acc + Number(curr.total), 0)
+
+      if (sales) {
+        setTransactions(sales)
+        const total = sales.reduce((acc, curr) => acc + Number(curr.total), 0)
         setTotalSales(total)
       }
+
+      // Fetch all sales today for line chart
+      const today = new Date()
+      today.setHours(0, 0, 0, 0)
+      const { data: todaySales } = await supabase
+        .from('vendas')
+        .select('data, total')
+        .gte('data', today.toISOString())
+
+      if (todaySales) {
+        const hourlyMap = new Map()
+        todaySales.forEach((s) => {
+          const d = new Date(s.data)
+          const hour = `${String(d.getHours()).padStart(2, '0')}:00`
+          hourlyMap.set(hour, (hourlyMap.get(hour) || 0) + Number(s.total))
+        })
+        const lineData = Array.from(hourlyMap.entries())
+          .map(([time, sales]) => ({ time, sales }))
+          .sort((a, b) => a.time.localeCompare(b.time))
+        setChartDataLine(lineData.length > 0 ? lineData : [{ time: '00:00', sales: 0 }])
+      }
+
+      // Fetch category data for bar chart
+      const { data: itens } = await supabase
+        .from('itens_venda')
+        .select('quantidade, preco_unitario, produto:produtos(categoria)')
+
+      if (itens) {
+        const catMap = new Map()
+        itens.forEach((i) => {
+          const cat = i.produto?.categoria || 'Sem categoria'
+          const val = Number(i.quantidade) * Number(i.preco_unitario)
+          catMap.set(cat, (catMap.get(cat) || 0) + val)
+        })
+        const barData = Array.from(catMap.entries())
+          .map(([category, value]) => ({ category, value }))
+          .sort((a, b) => b.value - a.value)
+          .slice(0, 5)
+        setChartDataBar(barData)
+      }
+
       setLoading(false)
     }
     fetchDashboardData()
@@ -63,7 +107,7 @@ export default function Dashboard() {
   return (
     <div className="space-y-6 animate-fade-in max-w-6xl mx-auto">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <Card className="shadow-sm border-slate-200">
+        <Card className="shadow-sm">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium text-muted-foreground">
               Vendas Recentes
@@ -76,14 +120,14 @@ export default function Dashboard() {
             ) : (
               <>
                 <div className="text-3xl font-bold">{formatCurrency(totalSales)}</div>
-                <p className="text-xs text-emerald-600 font-medium mt-1 flex items-center">
+                <p className="text-xs text-emerald-600 dark:text-emerald-400 font-medium mt-1 flex items-center">
                   <TrendingUp className="h-3 w-3 mr-1" /> Nas últimas 10 transações
                 </p>
               </>
             )}
           </CardContent>
         </Card>
-        <Card className="shadow-sm border-slate-200">
+        <Card className="shadow-sm">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium text-muted-foreground">
               Ticket Médio (Aprox)
@@ -98,7 +142,7 @@ export default function Dashboard() {
             </div>
           </CardContent>
         </Card>
-        <Card className="shadow-sm border-slate-200">
+        <Card className="shadow-sm">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium text-muted-foreground">Transações</CardTitle>
             <ShoppingBag className="h-4 w-4 text-primary" />
@@ -110,15 +154,15 @@ export default function Dashboard() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <Card className="shadow-sm border-slate-200">
+        <Card className="shadow-sm">
           <CardHeader>
-            <CardTitle>Vendas por Hora</CardTitle>
+            <CardTitle>Vendas por Hora (Hoje)</CardTitle>
           </CardHeader>
           <CardContent>
             <ChartContainer config={chartConfigLine} className="h-[300px] w-full">
               <ResponsiveContainer width="100%" height="100%">
                 <AreaChart
-                  data={mockChartDataLine}
+                  data={chartDataLine}
                   margin={{ top: 10, right: 10, left: -20, bottom: 0 }}
                 >
                   <defs>
@@ -127,18 +171,22 @@ export default function Dashboard() {
                       <stop offset="95%" stopColor="var(--color-sales)" stopOpacity={0} />
                     </linearGradient>
                   </defs>
-                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#E2E8F0" />
+                  <CartesianGrid
+                    strokeDasharray="3 3"
+                    vertical={false}
+                    stroke="hsl(var(--border))"
+                  />
                   <XAxis
                     dataKey="time"
                     axisLine={false}
                     tickLine={false}
-                    tick={{ fill: '#64748B', fontSize: 12 }}
+                    tick={{ fill: 'hsl(var(--muted-foreground))', fontSize: 12 }}
                     dy={10}
                   />
                   <YAxis
                     axisLine={false}
                     tickLine={false}
-                    tick={{ fill: '#64748B', fontSize: 12 }}
+                    tick={{ fill: 'hsl(var(--muted-foreground))', fontSize: 12 }}
                   />
                   <ChartTooltip content={<ChartTooltipContent />} />
                   <Area
@@ -155,7 +203,7 @@ export default function Dashboard() {
           </CardContent>
         </Card>
 
-        <Card className="shadow-sm border-slate-200">
+        <Card className="shadow-sm">
           <CardHeader>
             <CardTitle>Vendas por Categoria</CardTitle>
           </CardHeader>
@@ -163,24 +211,28 @@ export default function Dashboard() {
             <ChartContainer config={chartConfigBar} className="h-[300px] w-full">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart
-                  data={mockChartDataBar}
+                  data={chartDataBar}
                   margin={{ top: 10, right: 10, left: -20, bottom: 0 }}
                   layout="vertical"
                 >
-                  <CartesianGrid strokeDasharray="3 3" horizontal={false} stroke="#E2E8F0" />
+                  <CartesianGrid
+                    strokeDasharray="3 3"
+                    horizontal={false}
+                    stroke="hsl(var(--border))"
+                  />
                   <XAxis
                     type="number"
                     axisLine={false}
                     tickLine={false}
-                    tick={{ fill: '#64748B', fontSize: 12 }}
+                    tick={{ fill: 'hsl(var(--muted-foreground))', fontSize: 12 }}
                   />
                   <YAxis
                     dataKey="category"
                     type="category"
                     axisLine={false}
                     tickLine={false}
-                    tick={{ fill: '#475569', fontSize: 12, fontWeight: 500 }}
-                    width={80}
+                    tick={{ fill: 'hsl(var(--foreground))', fontSize: 12, fontWeight: 500 }}
+                    width={100}
                   />
                   <ChartTooltip content={<ChartTooltipContent />} />
                   <Bar
@@ -196,14 +248,14 @@ export default function Dashboard() {
         </Card>
       </div>
 
-      <Card className="shadow-sm border-slate-200">
+      <Card className="shadow-sm">
         <CardHeader>
           <CardTitle>Últimas Transações Registradas</CardTitle>
         </CardHeader>
         <CardContent>
           <Table>
             <TableHeader>
-              <TableRow className="bg-slate-50/50">
+              <TableRow className="bg-muted/50">
                 <TableHead>ID</TableHead>
                 <TableHead>Data/Hora</TableHead>
                 <TableHead>Método</TableHead>
@@ -226,7 +278,7 @@ export default function Dashboard() {
                       variant={trx.status === 'Concluído' ? 'default' : 'destructive'}
                       className={
                         trx.status === 'Concluído'
-                          ? 'bg-emerald-100 text-emerald-800 hover:bg-emerald-200 border-emerald-200'
+                          ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-300 hover:bg-emerald-200 border-0'
                           : ''
                       }
                     >

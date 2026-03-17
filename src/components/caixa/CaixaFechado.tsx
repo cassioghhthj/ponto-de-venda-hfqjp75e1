@@ -26,10 +26,10 @@ export default function CaixaFechado({ onAbrir }: { onAbrir: (saldo: number) => 
 
   return (
     <div className="flex items-center justify-center h-full p-6">
-      <Card className="max-w-md w-full text-center shadow-md">
+      <Card className="max-w-md w-full text-center shadow-md bg-card">
         <CardHeader>
-          <div className="mx-auto bg-slate-100 w-16 h-16 flex items-center justify-center rounded-full mb-4">
-            <LockKeyhole className="h-8 w-8 text-slate-500" />
+          <div className="mx-auto bg-muted w-16 h-16 flex items-center justify-center rounded-full mb-4">
+            <LockKeyhole className="h-8 w-8 text-muted-foreground" />
           </div>
           <CardTitle className="text-2xl">Caixa Fechado</CardTitle>
           <CardDescription>Não há nenhuma sessão de caixa aberta no momento.</CardDescription>
@@ -47,7 +47,7 @@ export default function CaixaFechado({ onAbrir }: { onAbrir: (saldo: number) => 
             <DialogTitle>Abrir Caixa</DialogTitle>
           </DialogHeader>
           <div className="space-y-4 py-4">
-            <div className="space-y-2">
+            <div className="space-y-2 text-left">
               <Label>Saldo Inicial (Troco em Gaveta)</Label>
               <Input
                 type="number"
