@@ -47,6 +47,36 @@ export type Database = {
           },
         ]
       }
+      clientes: {
+        Row: {
+          cpf: string | null
+          data_cadastro: string
+          email: string | null
+          endereco: string | null
+          id: string
+          nome: string
+          telefone: string | null
+        }
+        Insert: {
+          cpf?: string | null
+          data_cadastro?: string
+          email?: string | null
+          endereco?: string | null
+          id?: string
+          nome: string
+          telefone?: string | null
+        }
+        Update: {
+          cpf?: string | null
+          data_cadastro?: string
+          email?: string | null
+          endereco?: string | null
+          id?: string
+          nome?: string
+          telefone?: string | null
+        }
+        Relationships: []
+      }
       contas_pagar: {
         Row: {
           categoria: string | null
@@ -296,6 +326,7 @@ export type Database = {
       }
       vendas: {
         Row: {
+          cliente_id: string | null
           data: string | null
           id: string
           metodo_pagamento: string | null
@@ -304,6 +335,7 @@ export type Database = {
           user_id: string | null
         }
         Insert: {
+          cliente_id?: string | null
           data?: string | null
           id?: string
           metodo_pagamento?: string | null
@@ -312,6 +344,7 @@ export type Database = {
           user_id?: string | null
         }
         Update: {
+          cliente_id?: string | null
           data?: string | null
           id?: string
           metodo_pagamento?: string | null
@@ -320,6 +353,13 @@ export type Database = {
           user_id?: string | null
         }
         Relationships: [
+          {
+            foreignKeyName: 'vendas_cliente_id_fkey'
+            columns: ['cliente_id']
+            isOneToOne: false
+            referencedRelation: 'clientes'
+            referencedColumns: ['id']
+          },
           {
             foreignKeyName: 'vendas_user_id_fkey'
             columns: ['user_id']
@@ -487,6 +527,14 @@ export const Constants = {
 //   saldo_inicial: numeric (not null)
 //   saldo_final: numeric (nullable)
 //   status: text (not null, default: 'aberto'::text)
+// Table: clientes
+//   id: uuid (not null, default: gen_random_uuid())
+//   nome: text (not null)
+//   email: text (nullable)
+//   telefone: text (nullable)
+//   cpf: text (nullable)
+//   endereco: text (nullable)
+//   data_cadastro: timestamp with time zone (not null, default: now())
 // Table: contas_pagar
 //   id: uuid (not null, default: gen_random_uuid())
 //   descricao: text (not null)
@@ -547,12 +595,15 @@ export const Constants = {
 //   total: numeric (not null)
 //   metodo_pagamento: text (nullable)
 //   status: text (nullable, default: 'Concluído'::text)
+//   cliente_id: uuid (nullable)
 
 // --- CONSTRAINTS ---
 // Table: caixa
 //   PRIMARY KEY caixa_pkey: PRIMARY KEY (id)
 //   CHECK caixa_status_check: CHECK ((status = ANY (ARRAY['aberto'::text, 'fechado'::text])))
 //   FOREIGN KEY caixa_user_id_fkey: FOREIGN KEY (user_id) REFERENCES users(id)
+// Table: clientes
+//   PRIMARY KEY clientes_pkey: PRIMARY KEY (id)
 // Table: contas_pagar
 //   PRIMARY KEY contas_pagar_pkey: PRIMARY KEY (id)
 // Table: contas_receber
@@ -577,12 +628,17 @@ export const Constants = {
 //   FOREIGN KEY users_id_fkey: FOREIGN KEY (id) REFERENCES auth.users(id) ON DELETE CASCADE
 //   PRIMARY KEY users_pkey: PRIMARY KEY (id)
 // Table: vendas
+//   FOREIGN KEY vendas_cliente_id_fkey: FOREIGN KEY (cliente_id) REFERENCES clientes(id) ON DELETE SET NULL
 //   PRIMARY KEY vendas_pkey: PRIMARY KEY (id)
 //   FOREIGN KEY vendas_user_id_fkey: FOREIGN KEY (user_id) REFERENCES users(id)
 
 // --- ROW LEVEL SECURITY POLICIES ---
 // Table: caixa
 //   Policy "auth_all_caixa" (ALL, PERMISSIVE) roles={authenticated}
+//     USING: true
+//     WITH CHECK: true
+// Table: clientes
+//   Policy "auth_all_clientes" (ALL, PERMISSIVE) roles={authenticated}
 //     USING: true
 //     WITH CHECK: true
 // Table: contas_pagar

@@ -10,6 +10,7 @@ import {
   CreditCard,
   Calculator,
   Users,
+  PieChart,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { useAuth } from '@/hooks/use-auth'
@@ -27,6 +28,7 @@ export function AppSidebar() {
     { to: '/contas-receber', icon: ReceiptText, label: 'Contas a Receber' },
     { to: '/contas-pagar', icon: CreditCard, label: 'Contas a Pagar' },
     { to: '/estoque', icon: Package, label: 'Controle de Estoque' },
+    { to: '/relatorios', icon: PieChart, label: 'Relatórios' },
     { to: '#', icon: Settings, label: 'Configurações' },
   ]
 
@@ -37,7 +39,7 @@ export function AppSidebar() {
         <span className="font-bold text-white text-lg tracking-wider">NEXUS PDV</span>
       </div>
 
-      <nav className="flex-1 py-6 px-3 space-y-1">
+      <nav className="flex-1 py-6 px-3 space-y-1 overflow-y-auto">
         {links.map((link) => (
           <Link
             key={link.label}
@@ -55,7 +57,7 @@ export function AppSidebar() {
         ))}
       </nav>
 
-      <div className="p-4 border-t border-slate-700 m-3 rounded-lg bg-slate-800/50">
+      <div className="p-4 border-t border-slate-700 m-3 rounded-lg bg-slate-800/50 shrink-0">
         <div className="text-xs font-semibold text-slate-400 mb-1">Operador Caixa</div>
         <div className="text-sm font-bold text-white mb-4 truncate" title={user?.email || ''}>
           {user?.email || 'Usuário'}

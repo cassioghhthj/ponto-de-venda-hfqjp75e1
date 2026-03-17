@@ -18142,15 +18142,15 @@ function handleAndDispatchCustomEvent$1(name, handler, detail, { discrete }) {
 	if (discrete) dispatchDiscreteCustomEvent(target, event);
 	else target.dispatchEvent(event);
 }
-var Root$6 = DismissableLayer;
+var Root$7 = DismissableLayer;
 var Branch = DismissableLayerBranch;
 //#endregion
 //#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/@radix-ui+react-use-layout-effect@1.1.1_@types+react@19.2.14_react@19.2.4/node_modules/@radix-ui/react-use-layout-effect/dist/index.mjs
 var useLayoutEffect2 = globalThis?.document ? import_react.useLayoutEffect : () => {};
 //#endregion
 //#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/@radix-ui+react-portal@1.1.9_@types+react-dom@19.2.3_@types+react@19.2.14__@types+react_7668895bec2444446faa4e0f4eb5244b/node_modules/@radix-ui/react-portal/dist/index.mjs
-var PORTAL_NAME$3 = "Portal";
-var Portal$2 = import_react.forwardRef((props, forwardedRef) => {
+var PORTAL_NAME$4 = "Portal";
+var Portal$3 = import_react.forwardRef((props, forwardedRef) => {
 	const { container: containerProp, ...portalProps } = props;
 	const [mounted, setMounted] = import_react.useState(false);
 	useLayoutEffect2(() => setMounted(true), []);
@@ -18160,7 +18160,7 @@ var Portal$2 = import_react.forwardRef((props, forwardedRef) => {
 		ref: forwardedRef
 	}), container) : null;
 });
-Portal$2.displayName = PORTAL_NAME$3;
+Portal$3.displayName = PORTAL_NAME$4;
 //#endregion
 //#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/@radix-ui+react-presence@1.1.5_@types+react-dom@19.2.3_@types+react@19.2.14__@types+rea_c01c26c80b5ab5e3ecefbda6eca51ad1/node_modules/@radix-ui/react-presence/dist/index.mjs
 function useStateMachine$1(initialState, machine) {
@@ -18284,7 +18284,7 @@ function useControllableState({ prop, defaultProp, onChange = () => {}, caller }
 	}
 	return [value, import_react.useCallback((nextValue) => {
 		if (isControlled) {
-			const value2 = isFunction$18(nextValue) ? nextValue(prop) : nextValue;
+			const value2 = isFunction$21(nextValue) ? nextValue(prop) : nextValue;
 			if (value2 !== prop) onChangeRef.current?.(value2);
 		} else setUncontrolledProp(nextValue);
 	}, [
@@ -18313,7 +18313,7 @@ function useUncontrolledState({ defaultProp, onChange }) {
 		onChangeRef
 	];
 }
-function isFunction$18(value) {
+function isFunction$21(value) {
 	return typeof value === "function";
 }
 //#endregion
@@ -18342,7 +18342,7 @@ var VisuallyHidden = import_react.forwardRef((props, forwardedRef) => {
 	});
 });
 VisuallyHidden.displayName = NAME$2;
-var Root$5 = VisuallyHidden;
+var Root$6 = VisuallyHidden;
 //#endregion
 //#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/@radix-ui+react-toast@1.2.15_@types+react-dom@19.2.3_@types+react@19.2.14__@types+react_4581e89c6ba13e4159ce65546c8b2a16/node_modules/@radix-ui/react-toast/dist/index.mjs
 var PROVIDER_NAME$1 = "ToastProvider";
@@ -18642,7 +18642,7 @@ var ToastImpl = import_react.forwardRef((props, forwardedRef) => {
 		onClose: handleClose,
 		children: import_react_dom.createPortal(/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Collection$2.ItemSlot, {
 			scope: __scopeToast,
-			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root$6, {
+			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root$7, {
 				asChild: true,
 				onEscapeKeyDown: composeEventHandlers(onEscapeKeyDown, () => {
 					if (!context.isFocusedToastEscapeKeyDownRef.current) handleClose();
@@ -18733,7 +18733,7 @@ var ToastAnnounce = (props) => {
 		const timer = window.setTimeout(() => setIsAnnounced(true), 1e3);
 		return () => window.clearTimeout(timer);
 	}, []);
-	return isAnnounced ? null : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Portal$2, {
+	return isAnnounced ? null : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Portal$3, {
 		asChild: true,
 		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(VisuallyHidden, {
 			...announceProps,
@@ -18780,10 +18780,10 @@ var ToastAction$1 = import_react.forwardRef((props, forwardedRef) => {
 	});
 });
 ToastAction$1.displayName = ACTION_NAME;
-var CLOSE_NAME$1 = "ToastClose";
+var CLOSE_NAME$2 = "ToastClose";
 var ToastClose$1 = import_react.forwardRef((props, forwardedRef) => {
 	const { __scopeToast, ...closeProps } = props;
-	const interactiveContext = useToastInteractiveContext(CLOSE_NAME$1, __scopeToast);
+	const interactiveContext = useToastInteractiveContext(CLOSE_NAME$2, __scopeToast);
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ToastAnnounceExclude, {
 		asChild: true,
 		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.button, {
@@ -18794,7 +18794,7 @@ var ToastClose$1 = import_react.forwardRef((props, forwardedRef) => {
 		})
 	});
 });
-ToastClose$1.displayName = CLOSE_NAME$1;
+ToastClose$1.displayName = CLOSE_NAME$2;
 var ToastAnnounceExclude = import_react.forwardRef((props, forwardedRef) => {
 	const { __scopeToast, altText, ...announceExcludeProps } = props;
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.div, {
@@ -18872,7 +18872,7 @@ function focusFirst$2(candidates) {
 }
 var Provider$1 = ToastProvider$1;
 var Viewport$2 = ToastViewport$1;
-var Root2$3 = Toast$2;
+var Root2$4 = Toast$2;
 var Title$1 = ToastTitle$1;
 var Description$1 = ToastDescription$1;
 var Action = ToastAction$1;
@@ -19133,6 +19133,35 @@ var Calculator = createLucideIcon("calculator", [
 		key: "lrp35t"
 	}]
 ]);
+var Calendar$1 = createLucideIcon("calendar", [
+	["path", {
+		d: "M8 2v4",
+		key: "1cmpym"
+	}],
+	["path", {
+		d: "M16 2v4",
+		key: "4m81vk"
+	}],
+	["rect", {
+		width: "18",
+		height: "18",
+		x: "3",
+		y: "4",
+		rx: "2",
+		key: "1hopcy"
+	}],
+	["path", {
+		d: "M3 10h18",
+		key: "8toen8"
+	}]
+]);
+var ChartPie = createLucideIcon("chart-pie", [["path", {
+	d: "M21 12c.552 0 1.005-.449.95-.998a10 10 0 0 0-8.953-8.951c-.55-.055-.998.398-.998.95v8a1 1 0 0 0 1 1z",
+	key: "pzmjnu"
+}], ["path", {
+	d: "M21.21 15.89A10 10 0 1 1 8 2.83",
+	key: "k2fpak"
+}]]);
 var Check = createLucideIcon("check", [["path", {
 	d: "M20 6 9 17l-5-5",
 	key: "1gmf2c"
@@ -19140,6 +19169,14 @@ var Check = createLucideIcon("check", [["path", {
 var ChevronDown = createLucideIcon("chevron-down", [["path", {
 	d: "m6 9 6 6 6-6",
 	key: "qrunsl"
+}]]);
+var ChevronLeft = createLucideIcon("chevron-left", [["path", {
+	d: "m15 18-6-6 6-6",
+	key: "1wnfg3"
+}]]);
+var ChevronRight = createLucideIcon("chevron-right", [["path", {
+	d: "m9 18 6-6-6-6",
+	key: "mthhwq"
 }]]);
 var ChevronUp = createLucideIcon("chevron-up", [["path", {
 	d: "m18 15-6-6-6 6",
@@ -19373,6 +19410,20 @@ var ReceiptText = createLucideIcon("receipt-text", [
 		key: "ycz6yz"
 	}]
 ]);
+var Receipt = createLucideIcon("receipt", [
+	["path", {
+		d: "M12 17V7",
+		key: "pyj7ub"
+	}],
+	["path", {
+		d: "M16 8h-6a2 2 0 0 0 0 4h4a2 2 0 0 1 0 4H8",
+		key: "1elt7d"
+	}],
+	["path", {
+		d: "M4 3a1 1 0 0 1 1-1 1.3 1.3 0 0 1 .7.2l.933.6a1.3 1.3 0 0 0 1.4 0l.934-.6a1.3 1.3 0 0 1 1.4 0l.933.6a1.3 1.3 0 0 0 1.4 0l.933-.6a1.3 1.3 0 0 1 1.4 0l.934.6a1.3 1.3 0 0 0 1.4 0l.933-.6A1.3 1.3 0 0 1 19 2a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1 1.3 1.3 0 0 1-.7-.2l-.933-.6a1.3 1.3 0 0 0-1.4 0l-.934.6a1.3 1.3 0 0 1-1.4 0l-.933-.6a1.3 1.3 0 0 0-1.4 0l-.933.6a1.3 1.3 0 0 1-1.4 0l-.934-.6a1.3 1.3 0 0 0-1.4 0l-.933.6a1.3 1.3 0 0 1-.7.2 1 1 0 0 1-1-1z",
+		key: "ycz6yz"
+	}]
+]);
 var Search = createLucideIcon("search", [["path", {
 	d: "m21 21-4.34-4.34",
 	key: "14j7rj"
@@ -19480,6 +19531,20 @@ var TrendingUp = createLucideIcon("trending-up", [["path", {
 	d: "m22 7-8.5 8.5-5-5L2 17",
 	key: "1t1m79"
 }]]);
+var TriangleAlert = createLucideIcon("triangle-alert", [
+	["path", {
+		d: "m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3",
+		key: "wmoenq"
+	}],
+	["path", {
+		d: "M12 9v4",
+		key: "juzpu7"
+	}],
+	["path", {
+		d: "M12 17h.01",
+		key: "p32p05"
+	}]
+]);
 var User = createLucideIcon("user", [["path", {
 	d: "M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2",
 	key: "975kel"
@@ -20963,7 +21028,7 @@ var toastVariants = cva("group pointer-events-auto relative flex w-full items-ce
 	defaultVariants: { variant: "default" }
 });
 var Toast$1 = import_react.forwardRef(({ className, variant, ...props }, ref) => {
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root2$3, {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root2$4, {
 		"data-uid": "src/components/ui/toast.tsx:47:5",
 		"data-prohibitions": "[editContent]",
 		ref,
@@ -20971,7 +21036,7 @@ var Toast$1 = import_react.forwardRef(({ className, variant, ...props }, ref) =>
 		...props
 	});
 });
-Toast$1.displayName = Root2$3.displayName;
+Toast$1.displayName = Root2$4.displayName;
 var ToastAction = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Action, {
 	"data-uid": "src/components/ui/toast.tsx:60:3",
 	"data-prohibitions": "[editContent]",
@@ -22040,8 +22105,8 @@ var sides = [
 	"bottom",
 	"left"
 ];
-var min$2 = Math.min;
-var max$3 = Math.max;
+var min$3 = Math.min;
+var max$4 = Math.max;
 var round = Math.round;
 var floor = Math.floor;
 var createCoords = (v) => ({
@@ -22055,7 +22120,7 @@ var oppositeSideMap = {
 	top: "bottom"
 };
 function clamp$1(start, value, end) {
-	return max$3(start, min$2(value, end));
+	return max$4(start, min$3(value, end));
 }
 function evaluate(value, param) {
 	return typeof value === "function" ? value(param) : value;
@@ -22359,8 +22424,8 @@ var arrow$3 = (options) => ({
 		if (!clientSize || !await (platform.isElement == null ? void 0 : platform.isElement(arrowOffsetParent))) clientSize = elements.floating[clientProp] || rects.floating[length];
 		const centerToReference = endDiff / 2 - startDiff / 2;
 		const largestPossiblePadding = clientSize / 2 - arrowDimensions[length] / 2 - 1;
-		const minPadding = min$2(paddingObject[minProp], largestPossiblePadding);
-		const maxPadding = min$2(paddingObject[maxProp], largestPossiblePadding);
+		const minPadding = min$3(paddingObject[minProp], largestPossiblePadding);
+		const maxPadding = min$3(paddingObject[maxProp], largestPossiblePadding);
 		const min$1 = minPadding;
 		const max = clientSize - arrowDimensions[length] - maxPadding;
 		const center = clientSize / 2 - arrowDimensions[length] / 2 + centerToReference;
@@ -22699,20 +22764,20 @@ var size$2 = function(options) {
 			}
 			const maximumClippingHeight = height - overflow.top - overflow.bottom;
 			const maximumClippingWidth = width - overflow.left - overflow.right;
-			const overflowAvailableHeight = min$2(height - overflow[heightSide], maximumClippingHeight);
-			const overflowAvailableWidth = min$2(width - overflow[widthSide], maximumClippingWidth);
+			const overflowAvailableHeight = min$3(height - overflow[heightSide], maximumClippingHeight);
+			const overflowAvailableWidth = min$3(width - overflow[widthSide], maximumClippingWidth);
 			const noShift = !state.middlewareData.shift;
 			let availableHeight = overflowAvailableHeight;
 			let availableWidth = overflowAvailableWidth;
 			if ((_state$middlewareData = state.middlewareData.shift) != null && _state$middlewareData.enabled.x) availableWidth = maximumClippingWidth;
 			if ((_state$middlewareData2 = state.middlewareData.shift) != null && _state$middlewareData2.enabled.y) availableHeight = maximumClippingHeight;
 			if (noShift && !alignment) {
-				const xMin = max$3(overflow.left, 0);
-				const xMax = max$3(overflow.right, 0);
-				const yMin = max$3(overflow.top, 0);
-				const yMax = max$3(overflow.bottom, 0);
-				if (isYAxis) availableWidth = width - 2 * (xMin !== 0 || xMax !== 0 ? xMin + xMax : max$3(overflow.left, overflow.right));
-				else availableHeight = height - 2 * (yMin !== 0 || yMax !== 0 ? yMin + yMax : max$3(overflow.top, overflow.bottom));
+				const xMin = max$4(overflow.left, 0);
+				const xMax = max$4(overflow.right, 0);
+				const yMin = max$4(overflow.top, 0);
+				const yMax = max$4(overflow.bottom, 0);
+				if (isYAxis) availableWidth = width - 2 * (xMin !== 0 || xMax !== 0 ? xMin + xMax : max$4(overflow.left, overflow.right));
+				else availableHeight = height - 2 * (yMin !== 0 || yMax !== 0 ? yMin + yMax : max$4(overflow.top, overflow.bottom));
 			}
 			await apply({
 				...state,
@@ -22980,11 +23045,11 @@ function getDocumentRect(element) {
 	const html = getDocumentElement(element);
 	const scroll = getNodeScroll(element);
 	const body = element.ownerDocument.body;
-	const width = max$3(html.scrollWidth, html.clientWidth, body.scrollWidth, body.clientWidth);
-	const height = max$3(html.scrollHeight, html.clientHeight, body.scrollHeight, body.clientHeight);
+	const width = max$4(html.scrollWidth, html.clientWidth, body.scrollWidth, body.clientWidth);
+	const height = max$4(html.scrollHeight, html.clientHeight, body.scrollHeight, body.clientHeight);
 	let x = -scroll.scrollLeft + getWindowScrollBarX(element);
 	const y = -scroll.scrollTop;
-	if (getComputedStyle$1(body).direction === "rtl") x += max$3(html.clientWidth, body.clientWidth) - width;
+	if (getComputedStyle$1(body).direction === "rtl") x += max$4(html.clientWidth, body.clientWidth) - width;
 	return {
 		width,
 		height,
@@ -23087,10 +23152,10 @@ function getClippingRect(_ref) {
 	let left = firstRect.left;
 	for (let i = 1; i < clippingAncestors.length; i++) {
 		const rect = getClientRectFromClippingAncestor(element, clippingAncestors[i], strategy);
-		top = max$3(rect.top, top);
-		right = min$2(rect.right, right);
-		bottom = min$2(rect.bottom, bottom);
-		left = max$3(rect.left, left);
+		top = max$4(rect.top, top);
+		right = min$3(rect.right, right);
+		bottom = min$3(rect.bottom, bottom);
+		left = max$4(rect.left, left);
 	}
 	return {
 		width: right - left,
@@ -23218,7 +23283,7 @@ function observeMove(element, onMove) {
 		const insetLeft = floor(left);
 		const options = {
 			rootMargin: -insetTop + "px " + -insetRight + "px " + -insetBottom + "px " + -insetLeft + "px",
-			threshold: max$3(0, min$2(1, threshold)) || 1
+			threshold: max$4(0, min$3(1, threshold)) || 1
 		};
 		let isFirstUpdate = true;
 		function handleObserve(entries) {
@@ -23697,7 +23762,7 @@ var Arrow$1 = import_react.forwardRef((props, forwardedRef) => {
 	});
 });
 Arrow$1.displayName = NAME$1;
-var Root$4 = Arrow$1;
+var Root$5 = Arrow$1;
 //#endregion
 //#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/@radix-ui+react-use-size@1.1.1_@types+react@19.2.14_react@19.2.4/node_modules/@radix-ui/react-use-size/dist/index.mjs
 function useSize(element) {
@@ -23750,10 +23815,10 @@ var Popper = (props) => {
 	});
 };
 Popper.displayName = POPPER_NAME;
-var ANCHOR_NAME = "PopperAnchor";
+var ANCHOR_NAME$1 = "PopperAnchor";
 var PopperAnchor = import_react.forwardRef((props, forwardedRef) => {
 	const { __scopePopper, virtualRef, ...anchorProps } = props;
-	const context = usePopperContext(ANCHOR_NAME, __scopePopper);
+	const context = usePopperContext(ANCHOR_NAME$1, __scopePopper);
 	const ref = import_react.useRef(null);
 	const composedRefs = useComposedRefs(forwardedRef, ref);
 	const anchorRef = import_react.useRef(null);
@@ -23767,12 +23832,12 @@ var PopperAnchor = import_react.forwardRef((props, forwardedRef) => {
 		ref: composedRefs
 	});
 });
-PopperAnchor.displayName = ANCHOR_NAME;
-var CONTENT_NAME$4 = "PopperContent";
-var [PopperContentProvider, useContentContext] = createPopperContext(CONTENT_NAME$4);
+PopperAnchor.displayName = ANCHOR_NAME$1;
+var CONTENT_NAME$5 = "PopperContent";
+var [PopperContentProvider, useContentContext] = createPopperContext(CONTENT_NAME$5);
 var PopperContent = import_react.forwardRef((props, forwardedRef) => {
 	const { __scopePopper, side = "bottom", sideOffset = 0, align = "center", alignOffset = 0, arrowPadding = 0, avoidCollisions = true, collisionBoundary = [], collisionPadding: collisionPaddingProp = 0, sticky = "partial", hideWhenDetached = false, updatePositionStrategy = "optimized", onPlaced, ...contentProps } = props;
-	const context = usePopperContext(CONTENT_NAME$4, __scopePopper);
+	const context = usePopperContext(CONTENT_NAME$5, __scopePopper);
 	const [content, setContent] = import_react.useState(null);
 	const composedRefs = useComposedRefs(forwardedRef, (node) => setContent(node));
 	const [arrow$4, setArrow] = import_react.useState(null);
@@ -23885,8 +23950,8 @@ var PopperContent = import_react.forwardRef((props, forwardedRef) => {
 		})
 	});
 });
-PopperContent.displayName = CONTENT_NAME$4;
-var ARROW_NAME$2 = "PopperArrow";
+PopperContent.displayName = CONTENT_NAME$5;
+var ARROW_NAME$3 = "PopperArrow";
 var OPPOSITE_SIDE = {
 	top: "bottom",
 	right: "left",
@@ -23895,7 +23960,7 @@ var OPPOSITE_SIDE = {
 };
 var PopperArrow = import_react.forwardRef(function PopperArrow2(props, forwardedRef) {
 	const { __scopePopper, ...arrowProps } = props;
-	const contentContext = useContentContext(ARROW_NAME$2, __scopePopper);
+	const contentContext = useContentContext(ARROW_NAME$3, __scopePopper);
 	const baseSide = OPPOSITE_SIDE[contentContext.placedSide];
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
 		ref: contentContext.onArrowChange,
@@ -23918,7 +23983,7 @@ var PopperArrow = import_react.forwardRef(function PopperArrow2(props, forwarded
 			}[contentContext.placedSide],
 			visibility: contentContext.shouldHideArrow ? "hidden" : void 0
 		},
-		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root$4, {
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root$5, {
 			...arrowProps,
 			ref: forwardedRef,
 			style: {
@@ -23928,7 +23993,7 @@ var PopperArrow = import_react.forwardRef(function PopperArrow2(props, forwarded
 		})
 	});
 });
-PopperArrow.displayName = ARROW_NAME$2;
+PopperArrow.displayName = ARROW_NAME$3;
 function isNotNull(value) {
 	return value !== null;
 }
@@ -23973,14 +24038,14 @@ function getSideAndAlignFromPlacement(placement) {
 	const [side, align = "center"] = placement.split("-");
 	return [side, align];
 }
-var Root2$2 = Popper;
+var Root2$3 = Popper;
 var Anchor = PopperAnchor;
 var Content$2 = PopperContent;
 var Arrow = PopperArrow;
 //#endregion
 //#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/@radix-ui+react-tooltip@1.2.8_@types+react-dom@19.2.3_@types+react@19.2.14__@types+reac_9074d9fb06315b089b2bee17c4c65951/node_modules/@radix-ui/react-tooltip/dist/index.mjs
 var [createTooltipContext, createTooltipScope] = createContextScope("Tooltip", [createPopperScope]);
-var usePopperScope$1 = createPopperScope();
+var usePopperScope$2 = createPopperScope();
 var PROVIDER_NAME = "TooltipProvider";
 var DEFAULT_DELAY_DURATION = 700;
 var TOOLTIP_OPEN = "tooltip.open";
@@ -24020,7 +24085,7 @@ var [TooltipContextProvider, useTooltipContext] = createTooltipContext(TOOLTIP_N
 var Tooltip$2 = (props) => {
 	const { __scopeTooltip, children, open: openProp, defaultOpen, onOpenChange, disableHoverableContent: disableHoverableContentProp, delayDuration: delayDurationProp } = props;
 	const providerContext = useTooltipProviderContext(TOOLTIP_NAME, props.__scopeTooltip);
-	const popperScope = usePopperScope$1(__scopeTooltip);
+	const popperScope = usePopperScope$2(__scopeTooltip);
 	const [trigger, setTrigger] = import_react.useState(null);
 	const contentId = useId();
 	const openTimerRef = import_react.useRef(0);
@@ -24069,7 +24134,7 @@ var Tooltip$2 = (props) => {
 			}
 		};
 	}, []);
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root2$2, {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root2$3, {
 		...popperScope,
 		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TooltipContextProvider, {
 			scope: __scopeTooltip,
@@ -24101,12 +24166,12 @@ var Tooltip$2 = (props) => {
 	});
 };
 Tooltip$2.displayName = TOOLTIP_NAME;
-var TRIGGER_NAME$3 = "TooltipTrigger";
+var TRIGGER_NAME$4 = "TooltipTrigger";
 var TooltipTrigger$1 = import_react.forwardRef((props, forwardedRef) => {
 	const { __scopeTooltip, ...triggerProps } = props;
-	const context = useTooltipContext(TRIGGER_NAME$3, __scopeTooltip);
-	const providerContext = useTooltipProviderContext(TRIGGER_NAME$3, __scopeTooltip);
-	const popperScope = usePopperScope$1(__scopeTooltip);
+	const context = useTooltipContext(TRIGGER_NAME$4, __scopeTooltip);
+	const providerContext = useTooltipProviderContext(TRIGGER_NAME$4, __scopeTooltip);
+	const popperScope = usePopperScope$2(__scopeTooltip);
 	const composedRefs = useComposedRefs(forwardedRef, import_react.useRef(null), context.onTriggerChange);
 	const isPointerDownRef = import_react.useRef(false);
 	const hasPointerMoveOpenedRef = import_react.useRef(false);
@@ -24146,18 +24211,18 @@ var TooltipTrigger$1 = import_react.forwardRef((props, forwardedRef) => {
 		})
 	});
 });
-TooltipTrigger$1.displayName = TRIGGER_NAME$3;
-var PORTAL_NAME$2 = "TooltipPortal";
-var [PortalProvider$1, usePortalContext$1] = createTooltipContext(PORTAL_NAME$2, { forceMount: void 0 });
+TooltipTrigger$1.displayName = TRIGGER_NAME$4;
+var PORTAL_NAME$3 = "TooltipPortal";
+var [PortalProvider$2, usePortalContext$2] = createTooltipContext(PORTAL_NAME$3, { forceMount: void 0 });
 var TooltipPortal = (props) => {
 	const { __scopeTooltip, forceMount, children, container } = props;
-	const context = useTooltipContext(PORTAL_NAME$2, __scopeTooltip);
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(PortalProvider$1, {
+	const context = useTooltipContext(PORTAL_NAME$3, __scopeTooltip);
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(PortalProvider$2, {
 		scope: __scopeTooltip,
 		forceMount,
 		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Presence, {
 			present: forceMount || context.open,
-			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Portal$2, {
+			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Portal$3, {
 				asChild: true,
 				container,
 				children
@@ -24165,12 +24230,12 @@ var TooltipPortal = (props) => {
 		})
 	});
 };
-TooltipPortal.displayName = PORTAL_NAME$2;
-var CONTENT_NAME$3 = "TooltipContent";
+TooltipPortal.displayName = PORTAL_NAME$3;
+var CONTENT_NAME$4 = "TooltipContent";
 var TooltipContent$1 = import_react.forwardRef((props, forwardedRef) => {
-	const portalContext = usePortalContext$1(CONTENT_NAME$3, props.__scopeTooltip);
+	const portalContext = usePortalContext$2(CONTENT_NAME$4, props.__scopeTooltip);
 	const { forceMount = portalContext.forceMount, side = "top", ...contentProps } = props;
-	const context = useTooltipContext(CONTENT_NAME$3, props.__scopeTooltip);
+	const context = useTooltipContext(CONTENT_NAME$4, props.__scopeTooltip);
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Presence, {
 		present: forceMount || context.open,
 		children: context.disableHoverableContent ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TooltipContentImpl, {
@@ -24185,8 +24250,8 @@ var TooltipContent$1 = import_react.forwardRef((props, forwardedRef) => {
 	});
 });
 var TooltipContentHoverable = import_react.forwardRef((props, forwardedRef) => {
-	const context = useTooltipContext(CONTENT_NAME$3, props.__scopeTooltip);
-	const providerContext = useTooltipProviderContext(CONTENT_NAME$3, props.__scopeTooltip);
+	const context = useTooltipContext(CONTENT_NAME$4, props.__scopeTooltip);
+	const providerContext = useTooltipProviderContext(CONTENT_NAME$4, props.__scopeTooltip);
 	const ref = import_react.useRef(null);
 	const composedRefs = useComposedRefs(forwardedRef, ref);
 	const [pointerGraceArea, setPointerGraceArea] = import_react.useState(null);
@@ -24263,8 +24328,8 @@ var [VisuallyHiddenContentContextProvider, useVisuallyHiddenContentContext] = cr
 var Slottable = /* @__PURE__ */ createSlottable("TooltipContent");
 var TooltipContentImpl = import_react.forwardRef((props, forwardedRef) => {
 	const { __scopeTooltip, children, "aria-label": ariaLabel, onEscapeKeyDown, onPointerDownOutside, ...contentProps } = props;
-	const context = useTooltipContext(CONTENT_NAME$3, __scopeTooltip);
-	const popperScope = usePopperScope$1(__scopeTooltip);
+	const context = useTooltipContext(CONTENT_NAME$4, __scopeTooltip);
+	const popperScope = usePopperScope$2(__scopeTooltip);
 	const { onClose } = context;
 	import_react.useEffect(() => {
 		document.addEventListener(TOOLTIP_OPEN, onClose);
@@ -24302,7 +24367,7 @@ var TooltipContentImpl = import_react.forwardRef((props, forwardedRef) => {
 			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Slottable, { children }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(VisuallyHiddenContentContextProvider, {
 				scope: __scopeTooltip,
 				isInside: true,
-				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root$5, {
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root$6, {
 					id: context.contentId,
 					role: "tooltip",
 					children: ariaLabel || children
@@ -24311,18 +24376,18 @@ var TooltipContentImpl = import_react.forwardRef((props, forwardedRef) => {
 		})
 	});
 });
-TooltipContent$1.displayName = CONTENT_NAME$3;
-var ARROW_NAME$1 = "TooltipArrow";
+TooltipContent$1.displayName = CONTENT_NAME$4;
+var ARROW_NAME$2 = "TooltipArrow";
 var TooltipArrow = import_react.forwardRef((props, forwardedRef) => {
 	const { __scopeTooltip, ...arrowProps } = props;
-	const popperScope = usePopperScope$1(__scopeTooltip);
-	return useVisuallyHiddenContentContext(ARROW_NAME$1, __scopeTooltip).isInside ? null : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Arrow, {
+	const popperScope = usePopperScope$2(__scopeTooltip);
+	return useVisuallyHiddenContentContext(ARROW_NAME$2, __scopeTooltip).isInside ? null : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Arrow, {
 		...popperScope,
 		...arrowProps,
 		ref: forwardedRef
 	});
 });
-TooltipArrow.displayName = ARROW_NAME$1;
+TooltipArrow.displayName = ARROW_NAME$2;
 function getExitSideFromRect(point, rect) {
 	const top = Math.abs(rect.top - point.y);
 	const bottom = Math.abs(rect.bottom - point.y);
@@ -24454,11 +24519,11 @@ function getHullPresorted(points) {
 	else return upperHull.concat(lowerHull);
 }
 var Provider = TooltipProvider$1;
-var Content2$1 = TooltipContent$1;
+var Content2$2 = TooltipContent$1;
 //#endregion
 //#region src/components/ui/tooltip.tsx
 var TooltipProvider = Provider;
-var TooltipContent = import_react.forwardRef(({ className, sideOffset = 4, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Content2$1, {
+var TooltipContent = import_react.forwardRef(({ className, sideOffset = 4, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Content2$2, {
 	"data-uid": "src/components/ui/tooltip.tsx:17:3",
 	"data-prohibitions": "[editContent]",
 	ref,
@@ -24466,7 +24531,7 @@ var TooltipContent = import_react.forwardRef(({ className, sideOffset = 4, ...pr
 	className: cn$1("z-50 overflow-hidden rounded-md border bg-popover px-3 py-1.5 text-sm text-popover-foreground shadow-md animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 origin-[--radix-tooltip-content-transform-origin]", className),
 	...props
 }));
-TooltipContent.displayName = Content2$1.displayName;
+TooltipContent.displayName = Content2$2.displayName;
 //#endregion
 //#region src/components/ui/input.tsx
 var Input = import_react.forwardRef(({ className, type, ...props }, ref) => {
@@ -24669,7 +24734,7 @@ function focusFirst$1(candidates, preventScroll = false) {
 function wrapArray$1(array, startIndex) {
 	return array.map((_, index) => array[(startIndex + index) % array.length]);
 }
-var Root$3 = RovingFocusGroup;
+var Root$4 = RovingFocusGroup;
 var Item$1 = RovingFocusGroupItem;
 //#endregion
 //#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/@radix-ui+react-tabs@1.1.13_@types+react-dom@19.2.3_@types+react@19.2.14__@types+react@_2ad0945e3cb98dc5bbfaaf29c105e977/node_modules/@radix-ui/react-tabs/dist/index.mjs
@@ -24708,7 +24773,7 @@ var TabsList$1 = import_react.forwardRef((props, forwardedRef) => {
 	const { __scopeTabs, loop = true, ...listProps } = props;
 	const context = useTabsContext(TAB_LIST_NAME, __scopeTabs);
 	const rovingFocusGroupScope = useRovingFocusGroupScope(__scopeTabs);
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root$3, {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root$4, {
 		asChild: true,
 		...rovingFocusGroupScope,
 		orientation: context.orientation,
@@ -24723,10 +24788,10 @@ var TabsList$1 = import_react.forwardRef((props, forwardedRef) => {
 	});
 });
 TabsList$1.displayName = TAB_LIST_NAME;
-var TRIGGER_NAME$2 = "TabsTrigger";
+var TRIGGER_NAME$3 = "TabsTrigger";
 var TabsTrigger$1 = import_react.forwardRef((props, forwardedRef) => {
 	const { __scopeTabs, value, disabled = false, ...triggerProps } = props;
-	const context = useTabsContext(TRIGGER_NAME$2, __scopeTabs);
+	const context = useTabsContext(TRIGGER_NAME$3, __scopeTabs);
 	const rovingFocusGroupScope = useRovingFocusGroupScope(__scopeTabs);
 	const triggerId = makeTriggerId(context.baseId, value);
 	const contentId = makeContentId(context.baseId, value);
@@ -24761,11 +24826,11 @@ var TabsTrigger$1 = import_react.forwardRef((props, forwardedRef) => {
 		})
 	});
 });
-TabsTrigger$1.displayName = TRIGGER_NAME$2;
-var CONTENT_NAME$2 = "TabsContent";
+TabsTrigger$1.displayName = TRIGGER_NAME$3;
+var CONTENT_NAME$3 = "TabsContent";
 var TabsContent$1 = import_react.forwardRef((props, forwardedRef) => {
 	const { __scopeTabs, value, forceMount, children, ...contentProps } = props;
-	const context = useTabsContext(CONTENT_NAME$2, __scopeTabs);
+	const context = useTabsContext(CONTENT_NAME$3, __scopeTabs);
 	const triggerId = makeTriggerId(context.baseId, value);
 	const contentId = makeContentId(context.baseId, value);
 	const isSelected = value === context.value;
@@ -24794,20 +24859,20 @@ var TabsContent$1 = import_react.forwardRef((props, forwardedRef) => {
 		})
 	});
 });
-TabsContent$1.displayName = CONTENT_NAME$2;
+TabsContent$1.displayName = CONTENT_NAME$3;
 function makeTriggerId(baseId, value) {
 	return `${baseId}-trigger-${value}`;
 }
 function makeContentId(baseId, value) {
 	return `${baseId}-content-${value}`;
 }
-var Root2$1 = Tabs$1;
+var Root2$2 = Tabs$1;
 var List = TabsList$1;
-var Trigger$2 = TabsTrigger$1;
+var Trigger$3 = TabsTrigger$1;
 var Content$1 = TabsContent$1;
 //#endregion
 //#region src/components/ui/tabs.tsx
-var Tabs = Root2$1;
+var Tabs = Root2$2;
 var TabsList = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(List, {
 	"data-uid": "src/components/ui/tabs.tsx:13:3",
 	"data-prohibitions": "[editContent]",
@@ -24816,14 +24881,14 @@ var TabsList = import_react.forwardRef(({ className, ...props }, ref) => /* @__P
 	...props
 }));
 TabsList.displayName = List.displayName;
-var TabsTrigger = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Trigger$2, {
+var TabsTrigger = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Trigger$3, {
 	"data-uid": "src/components/ui/tabs.tsx:28:3",
 	"data-prohibitions": "[editContent]",
 	ref,
 	className: cn$1("inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm", className),
 	...props
 }));
-TabsTrigger.displayName = Trigger$2.displayName;
+TabsTrigger.displayName = Trigger$3.displayName;
 var TabsContent = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Content$1, {
 	"data-uid": "src/components/ui/tabs.tsx:43:3",
 	"data-prohibitions": "[editContent]",
@@ -24923,7 +24988,7 @@ function createSlot(ownerName) {
 	Slot2.displayName = `${ownerName}.Slot`;
 	return Slot2;
 }
-var Slot$2 = /* @__PURE__ */ createSlot("Slot");
+var Slot$3 = /* @__PURE__ */ createSlot("Slot");
 /* @__NO_SIDE_EFFECTS__ */
 function createSlotClone(ownerName) {
 	const SlotClone = import_react.forwardRef((props, forwardedRef) => {
@@ -25000,8 +25065,8 @@ var buttonVariants = cva("inline-flex items-center justify-center gap-2 whitespa
 		size: "default"
 	}
 });
-var Button = import_react.forwardRef(({ className, variant, size, asChild = false, ...props }, ref) => {
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(asChild ? Slot$2 : "button", {
+var Button$1 = import_react.forwardRef(({ className, variant, size, asChild = false, ...props }, ref) => {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(asChild ? Slot$3 : "button", {
 		"data-uid": "src/components/ui/button.tsx:44:7",
 		"data-prohibitions": "[editContent]",
 		className: cn$1(buttonVariants({
@@ -25013,7 +25078,7 @@ var Button = import_react.forwardRef(({ className, variant, size, asChild = fals
 		...props
 	});
 });
-Button.displayName = "Button";
+Button$1.displayName = "Button";
 //#endregion
 //#region src/lib/format.ts
 var formatCurrency = (value) => {
@@ -25139,7 +25204,7 @@ function ProductCard({ product }) {
 						"data-prohibitions": "[editContent]",
 						className: "font-bold text-lg text-primary",
 						children: formatCurrency(product.preco)
-					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
 						"data-uid": "src/components/pdv/ProductCard.tsx:37:11",
 						"data-prohibitions": "[]",
 						size: "icon",
@@ -27619,29 +27684,29 @@ var PostgrestQueryBuilder = class {
 		});
 	}
 };
-function _typeof$48(o) {
+function _typeof$51(o) {
 	"@babel/helpers - typeof";
-	return _typeof$48 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o$1) {
+	return _typeof$51 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o$1) {
 		return typeof o$1;
 	} : function(o$1) {
 		return o$1 && "function" == typeof Symbol && o$1.constructor === Symbol && o$1 !== Symbol.prototype ? "symbol" : typeof o$1;
-	}, _typeof$48(o);
+	}, _typeof$51(o);
 }
 function toPrimitive$2(t, r) {
-	if ("object" != _typeof$48(t) || !t) return t;
+	if ("object" != _typeof$51(t) || !t) return t;
 	var e = t[Symbol.toPrimitive];
 	if (void 0 !== e) {
 		var i = e.call(t, r || "default");
-		if ("object" != _typeof$48(i)) return i;
+		if ("object" != _typeof$51(i)) return i;
 		throw new TypeError("@@toPrimitive must return a primitive value.");
 	}
 	return ("string" === r ? String : Number)(t);
 }
 function toPropertyKey$2(t) {
 	var i = toPrimitive$2(t, "string");
-	return "symbol" == _typeof$48(i) ? i : i + "";
+	return "symbol" == _typeof$51(i) ? i : i + "";
 }
-function _defineProperty$43(e, r, t) {
+function _defineProperty$46(e, r, t) {
 	return (r = toPropertyKey$2(r)) in e ? Object.defineProperty(e, r, {
 		value: t,
 		enumerable: !0,
@@ -27649,7 +27714,7 @@ function _defineProperty$43(e, r, t) {
 		writable: !0
 	}) : e[r] = t, e;
 }
-function ownKeys$38(e, r) {
+function ownKeys$41(e, r) {
 	var t = Object.keys(e);
 	if (Object.getOwnPropertySymbols) {
 		var o = Object.getOwnPropertySymbols(e);
@@ -27662,9 +27727,9 @@ function ownKeys$38(e, r) {
 function _objectSpread2$2(e) {
 	for (var r = 1; r < arguments.length; r++) {
 		var t = null != arguments[r] ? arguments[r] : {};
-		r % 2 ? ownKeys$38(Object(t), !0).forEach(function(r$1) {
-			_defineProperty$43(e, r$1, t[r$1]);
-		}) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$38(Object(t)).forEach(function(r$1) {
+		r % 2 ? ownKeys$41(Object(t), !0).forEach(function(r$1) {
+			_defineProperty$46(e, r$1, t[r$1]);
+		}) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$41(Object(t)).forEach(function(r$1) {
 			Object.defineProperty(e, r$1, Object.getOwnPropertyDescriptor(t, r$1));
 		});
 	}
@@ -30486,29 +30551,29 @@ var isValidBucketName = (bucketName) => {
 	if (bucketName.includes("/") || bucketName.includes("\\")) return false;
 	return /^[\w!.\*'() &$@=;:+,?-]+$/.test(bucketName);
 };
-function _typeof$47(o) {
+function _typeof$50(o) {
 	"@babel/helpers - typeof";
-	return _typeof$47 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o$1) {
+	return _typeof$50 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o$1) {
 		return typeof o$1;
 	} : function(o$1) {
 		return o$1 && "function" == typeof Symbol && o$1.constructor === Symbol && o$1 !== Symbol.prototype ? "symbol" : typeof o$1;
-	}, _typeof$47(o);
+	}, _typeof$50(o);
 }
 function toPrimitive$1(t, r) {
-	if ("object" != _typeof$47(t) || !t) return t;
+	if ("object" != _typeof$50(t) || !t) return t;
 	var e = t[Symbol.toPrimitive];
 	if (void 0 !== e) {
 		var i = e.call(t, r || "default");
-		if ("object" != _typeof$47(i)) return i;
+		if ("object" != _typeof$50(i)) return i;
 		throw new TypeError("@@toPrimitive must return a primitive value.");
 	}
 	return ("string" === r ? String : Number)(t);
 }
 function toPropertyKey$1(t) {
 	var i = toPrimitive$1(t, "string");
-	return "symbol" == _typeof$47(i) ? i : i + "";
+	return "symbol" == _typeof$50(i) ? i : i + "";
 }
-function _defineProperty$42(e, r, t) {
+function _defineProperty$45(e, r, t) {
 	return (r = toPropertyKey$1(r)) in e ? Object.defineProperty(e, r, {
 		value: t,
 		enumerable: !0,
@@ -30516,7 +30581,7 @@ function _defineProperty$42(e, r, t) {
 		writable: !0
 	}) : e[r] = t, e;
 }
-function ownKeys$37(e, r) {
+function ownKeys$40(e, r) {
 	var t = Object.keys(e);
 	if (Object.getOwnPropertySymbols) {
 		var o = Object.getOwnPropertySymbols(e);
@@ -30529,9 +30594,9 @@ function ownKeys$37(e, r) {
 function _objectSpread2$1(e) {
 	for (var r = 1; r < arguments.length; r++) {
 		var t = null != arguments[r] ? arguments[r] : {};
-		r % 2 ? ownKeys$37(Object(t), !0).forEach(function(r$1) {
-			_defineProperty$42(e, r$1, t[r$1]);
-		}) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$37(Object(t)).forEach(function(r$1) {
+		r % 2 ? ownKeys$40(Object(t), !0).forEach(function(r$1) {
+			_defineProperty$45(e, r$1, t[r$1]);
+		}) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$40(Object(t)).forEach(function(r$1) {
 			Object.defineProperty(e, r$1, Object.getOwnPropertyDescriptor(t, r$1));
 		});
 	}
@@ -30645,7 +30710,7 @@ function createFetchApi(namespace = "storage") {
 		}
 	};
 }
-var { get: get$5, post, put, head, remove } = createFetchApi("storage");
+var { get: get$6, post, put, head, remove } = createFetchApi("storage");
 var vectorsApi = createFetchApi("vectors");
 /**
 * @ignore
@@ -31308,7 +31373,7 @@ var StorageFileApi = class extends BaseApiClient {
 		const transformationQuery = this.transformOptsToQueryString((options === null || options === void 0 ? void 0 : options.transform) || {});
 		const queryString = transformationQuery ? `?${transformationQuery}` : "";
 		const _path = this._getFinalPath(path);
-		const downloadFn = () => get$5(this.fetch, `${this.url}/${renderPath}/${_path}${queryString}`, {
+		const downloadFn = () => get$6(this.fetch, `${this.url}/${renderPath}/${_path}${queryString}`, {
 			headers: this.headers,
 			noResolveJson: true
 		}, parameters);
@@ -31341,7 +31406,7 @@ var StorageFileApi = class extends BaseApiClient {
 		var _this10 = this;
 		const _path = _this10._getFinalPath(path);
 		return _this10.handleOperation(async () => {
-			return recursiveToCamel(await get$5(_this10.fetch, `${_this10.url}/object/info/${_path}`, { headers: _this10.headers }));
+			return recursiveToCamel(await get$6(_this10.fetch, `${_this10.url}/object/info/${_path}`, { headers: _this10.headers }));
 		});
 	}
 	/**
@@ -31690,7 +31755,7 @@ var StorageBucketApi = class extends BaseApiClient {
 		var _this = this;
 		return _this.handleOperation(async () => {
 			const queryString = _this.listBucketOptionsToQueryString(options);
-			return await get$5(_this.fetch, `${_this.url}/bucket${queryString}`, { headers: _this.headers });
+			return await get$6(_this.fetch, `${_this.url}/bucket${queryString}`, { headers: _this.headers });
 		});
 	}
 	/**
@@ -31729,7 +31794,7 @@ var StorageBucketApi = class extends BaseApiClient {
 	async getBucket(id) {
 		var _this2 = this;
 		return _this2.handleOperation(async () => {
-			return await get$5(_this2.fetch, `${_this2.url}/bucket/${id}`, { headers: _this2.headers });
+			return await get$6(_this2.fetch, `${_this2.url}/bucket/${id}`, { headers: _this2.headers });
 		});
 	}
 	/**
@@ -32026,7 +32091,7 @@ var StorageAnalyticsClient = class extends BaseApiClient {
 			if (options === null || options === void 0 ? void 0 : options.search) queryParams.set("search", options.search);
 			const queryString = queryParams.toString();
 			const url = queryString ? `${_this2.url}/bucket?${queryString}` : `${_this2.url}/bucket`;
-			return await get$5(_this2.fetch, url, { headers: _this2.headers });
+			return await get$6(_this2.fetch, url, { headers: _this2.headers });
 		});
 	}
 	/**
@@ -38307,29 +38372,29 @@ var DEFAULT_AUTH_OPTIONS = {
 	flowType: "implicit"
 };
 var DEFAULT_REALTIME_OPTIONS = {};
-function _typeof$46(o) {
+function _typeof$49(o) {
 	"@babel/helpers - typeof";
-	return _typeof$46 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o$1) {
+	return _typeof$49 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o$1) {
 		return typeof o$1;
 	} : function(o$1) {
 		return o$1 && "function" == typeof Symbol && o$1.constructor === Symbol && o$1 !== Symbol.prototype ? "symbol" : typeof o$1;
-	}, _typeof$46(o);
+	}, _typeof$49(o);
 }
 function toPrimitive(t, r) {
-	if ("object" != _typeof$46(t) || !t) return t;
+	if ("object" != _typeof$49(t) || !t) return t;
 	var e = t[Symbol.toPrimitive];
 	if (void 0 !== e) {
 		var i = e.call(t, r || "default");
-		if ("object" != _typeof$46(i)) return i;
+		if ("object" != _typeof$49(i)) return i;
 		throw new TypeError("@@toPrimitive must return a primitive value.");
 	}
 	return ("string" === r ? String : Number)(t);
 }
 function toPropertyKey(t) {
 	var i = toPrimitive(t, "string");
-	return "symbol" == _typeof$46(i) ? i : i + "";
+	return "symbol" == _typeof$49(i) ? i : i + "";
 }
-function _defineProperty$41(e, r, t) {
+function _defineProperty$44(e, r, t) {
 	return (r = toPropertyKey(r)) in e ? Object.defineProperty(e, r, {
 		value: t,
 		enumerable: !0,
@@ -38337,7 +38402,7 @@ function _defineProperty$41(e, r, t) {
 		writable: !0
 	}) : e[r] = t, e;
 }
-function ownKeys$36(e, r) {
+function ownKeys$39(e, r) {
 	var t = Object.keys(e);
 	if (Object.getOwnPropertySymbols) {
 		var o = Object.getOwnPropertySymbols(e);
@@ -38350,9 +38415,9 @@ function ownKeys$36(e, r) {
 function _objectSpread2(e) {
 	for (var r = 1; r < arguments.length; r++) {
 		var t = null != arguments[r] ? arguments[r] : {};
-		r % 2 ? ownKeys$36(Object(t), !0).forEach(function(r$1) {
-			_defineProperty$41(e, r$1, t[r$1]);
-		}) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$36(Object(t)).forEach(function(r$1) {
+		r % 2 ? ownKeys$39(Object(t), !0).forEach(function(r$1) {
+			_defineProperty$44(e, r$1, t[r$1]);
+		}) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$39(Object(t)).forEach(function(r$1) {
 			Object.defineProperty(e, r$1, Object.getOwnPropertyDescriptor(t, r$1));
 		});
 	}
@@ -40591,13 +40656,13 @@ function shallowEqual$1(a, b) {
 //#endregion
 //#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/recharts@2.15.4_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/recharts/es6/util/types.js
 var import_isObject = /* @__PURE__ */ __toESM(require_isObject());
-function _typeof$45(o) {
+function _typeof$48(o) {
 	"@babel/helpers - typeof";
-	return _typeof$45 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o) {
+	return _typeof$48 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o) {
 		return typeof o;
 	} : function(o) {
 		return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
-	}, _typeof$45(o);
+	}, _typeof$48(o);
 }
 /**
 * Determines how values are stacked:
@@ -41141,7 +41206,7 @@ var getEventHandlerOfChild = function getEventHandlerOfChild(originalHandler, da
 	};
 };
 var adaptEventsOfChild = function adaptEventsOfChild(props, data, index) {
-	if (!(0, import_isObject.default)(props) || _typeof$45(props) !== "object") return null;
+	if (!(0, import_isObject.default)(props) || _typeof$48(props) !== "object") return null;
 	var out = null;
 	Object.keys(props).forEach(function(key) {
 		var item = props[key];
@@ -41156,10 +41221,10 @@ var adaptEventsOfChild = function adaptEventsOfChild(props, data, index) {
 //#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/recharts@2.15.4_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/recharts/es6/util/ReactUtils.js
 var import_isFunction = /* @__PURE__ */ __toESM(require_isFunction());
 var import_react_is = require_react_is$1();
-var _excluded$17 = ["children"], _excluded2$6 = ["children"];
-function _objectWithoutProperties$17(source, excluded) {
+var _excluded$19 = ["children"], _excluded2$7 = ["children"];
+function _objectWithoutProperties$19(source, excluded) {
 	if (source == null) return {};
-	var target = _objectWithoutPropertiesLoose$17(source, excluded);
+	var target = _objectWithoutPropertiesLoose$19(source, excluded);
 	var key, i;
 	if (Object.getOwnPropertySymbols) {
 		var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
@@ -41172,7 +41237,7 @@ function _objectWithoutProperties$17(source, excluded) {
 	}
 	return target;
 }
-function _objectWithoutPropertiesLoose$17(source, excluded) {
+function _objectWithoutPropertiesLoose$19(source, excluded) {
 	if (source == null) return {};
 	var target = {};
 	for (var key in source) if (Object.prototype.hasOwnProperty.call(source, key)) {
@@ -41181,13 +41246,13 @@ function _objectWithoutPropertiesLoose$17(source, excluded) {
 	}
 	return target;
 }
-function _typeof$44(o) {
+function _typeof$47(o) {
 	"@babel/helpers - typeof";
-	return _typeof$44 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o) {
+	return _typeof$47 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o) {
 		return typeof o;
 	} : function(o) {
 		return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
-	}, _typeof$44(o);
+	}, _typeof$47(o);
 }
 var REACT_BROWSER_EVENT_MAP = {
 	click: "onClick",
@@ -41342,7 +41407,7 @@ var isSvgElement = function isSvgElement(child) {
 	return child && child.type && (0, import_isString.default)(child.type) && SVG_TAGS.indexOf(child.type) >= 0;
 };
 var hasClipDot = function hasClipDot(dot) {
-	return dot && _typeof$44(dot) === "object" && "clipDot" in dot;
+	return dot && _typeof$47(dot) === "object" && "clipDot" in dot;
 };
 /**
 * Checks if the property is valid to spread onto an SVG element or onto a specific component
@@ -41405,8 +41470,8 @@ var isChildrenEqual = function isChildrenEqual(nextChildren, prevChildren) {
 var isSingleChildEqual = function isSingleChildEqual(nextChild, prevChild) {
 	if ((0, import_isNil.default)(nextChild) && (0, import_isNil.default)(prevChild)) return true;
 	if (!(0, import_isNil.default)(nextChild) && !(0, import_isNil.default)(prevChild)) {
-		var _ref = nextChild.props || {}, nextChildren = _ref.children, nextProps = _objectWithoutProperties$17(_ref, _excluded$17);
-		var _ref2 = prevChild.props || {}, prevChildren = _ref2.children, prevProps = _objectWithoutProperties$17(_ref2, _excluded2$6);
+		var _ref = nextChild.props || {}, nextChildren = _ref.children, nextProps = _objectWithoutProperties$19(_ref, _excluded$19);
+		var _ref2 = prevChild.props || {}, prevChildren = _ref2.children, prevProps = _objectWithoutProperties$19(_ref2, _excluded2$7);
 		if (nextChildren && prevChildren) return shallowEqual$1(nextProps, prevProps) && isChildrenEqual(nextChildren, prevChildren);
 		if (!nextChildren && !prevChildren) return shallowEqual$1(nextProps, prevProps);
 		return false;
@@ -41443,7 +41508,7 @@ var parseChildIndex = function parseChildIndex(child, children) {
 /**
 * @fileOverview Surface
 */
-var _excluded$16 = [
+var _excluded$18 = [
 	"children",
 	"width",
 	"height",
@@ -41453,19 +41518,19 @@ var _excluded$16 = [
 	"title",
 	"desc"
 ];
-function _extends$26() {
-	_extends$26 = Object.assign ? Object.assign.bind() : function(target) {
+function _extends$30() {
+	_extends$30 = Object.assign ? Object.assign.bind() : function(target) {
 		for (var i = 1; i < arguments.length; i++) {
 			var source = arguments[i];
 			for (var key in source) if (Object.prototype.hasOwnProperty.call(source, key)) target[key] = source[key];
 		}
 		return target;
 	};
-	return _extends$26.apply(this, arguments);
+	return _extends$30.apply(this, arguments);
 }
-function _objectWithoutProperties$16(source, excluded) {
+function _objectWithoutProperties$18(source, excluded) {
 	if (source == null) return {};
-	var target = _objectWithoutPropertiesLoose$16(source, excluded);
+	var target = _objectWithoutPropertiesLoose$18(source, excluded);
 	var key, i;
 	if (Object.getOwnPropertySymbols) {
 		var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
@@ -41478,7 +41543,7 @@ function _objectWithoutProperties$16(source, excluded) {
 	}
 	return target;
 }
-function _objectWithoutPropertiesLoose$16(source, excluded) {
+function _objectWithoutPropertiesLoose$18(source, excluded) {
 	if (source == null) return {};
 	var target = {};
 	for (var key in source) if (Object.prototype.hasOwnProperty.call(source, key)) {
@@ -41488,7 +41553,7 @@ function _objectWithoutPropertiesLoose$16(source, excluded) {
 	return target;
 }
 function Surface(props) {
-	var children = props.children, width = props.width, height = props.height, viewBox = props.viewBox, className = props.className, style = props.style, title = props.title, desc = props.desc, others = _objectWithoutProperties$16(props, _excluded$16);
+	var children = props.children, width = props.width, height = props.height, viewBox = props.viewBox, className = props.className, style = props.style, title = props.title, desc = props.desc, others = _objectWithoutProperties$18(props, _excluded$18);
 	var svgView = viewBox || {
 		width,
 		height,
@@ -41496,7 +41561,7 @@ function Surface(props) {
 		y: 0
 	};
 	var layerClass = clsx("recharts-surface", className);
-	return /* @__PURE__ */ import_react.createElement("svg", _extends$26({}, filterProps(others, true, "svg"), {
+	return /* @__PURE__ */ import_react.createElement("svg", _extends$30({}, filterProps(others, true, "svg"), {
 		className: layerClass,
 		width,
 		height,
@@ -41506,20 +41571,20 @@ function Surface(props) {
 }
 //#endregion
 //#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/recharts@2.15.4_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/recharts/es6/container/Layer.js
-var _excluded$15 = ["children", "className"];
-function _extends$25() {
-	_extends$25 = Object.assign ? Object.assign.bind() : function(target) {
+var _excluded$17 = ["children", "className"];
+function _extends$29() {
+	_extends$29 = Object.assign ? Object.assign.bind() : function(target) {
 		for (var i = 1; i < arguments.length; i++) {
 			var source = arguments[i];
 			for (var key in source) if (Object.prototype.hasOwnProperty.call(source, key)) target[key] = source[key];
 		}
 		return target;
 	};
-	return _extends$25.apply(this, arguments);
+	return _extends$29.apply(this, arguments);
 }
-function _objectWithoutProperties$15(source, excluded) {
+function _objectWithoutProperties$17(source, excluded) {
 	if (source == null) return {};
-	var target = _objectWithoutPropertiesLoose$15(source, excluded);
+	var target = _objectWithoutPropertiesLoose$17(source, excluded);
 	var key, i;
 	if (Object.getOwnPropertySymbols) {
 		var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
@@ -41532,7 +41597,7 @@ function _objectWithoutProperties$15(source, excluded) {
 	}
 	return target;
 }
-function _objectWithoutPropertiesLoose$15(source, excluded) {
+function _objectWithoutPropertiesLoose$17(source, excluded) {
 	if (source == null) return {};
 	var target = {};
 	for (var key in source) if (Object.prototype.hasOwnProperty.call(source, key)) {
@@ -41542,9 +41607,9 @@ function _objectWithoutPropertiesLoose$15(source, excluded) {
 	return target;
 }
 var Layer = /* @__PURE__ */ import_react.forwardRef(function(props, ref) {
-	var children = props.children, className = props.className, others = _objectWithoutProperties$15(props, _excluded$15);
+	var children = props.children, className = props.className, others = _objectWithoutProperties$17(props, _excluded$17);
 	var layerClass = clsx("recharts-layer", className);
-	return /* @__PURE__ */ import_react.createElement("g", _extends$25({ className: layerClass }, filterProps(others, true), { ref }), children);
+	return /* @__PURE__ */ import_react.createElement("g", _extends$29({ className: layerClass }, filterProps(others, true), { ref }), children);
 });
 //#endregion
 //#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/recharts@2.15.4_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/recharts/es6/util/LogUtils.js
@@ -42613,30 +42678,30 @@ function wiggle_default(series, order) {
 * @fileOverview Curve
 */
 var import_upperFirst = /* @__PURE__ */ __toESM(require_upperFirst());
-function _typeof$43(o) {
+function _typeof$46(o) {
 	"@babel/helpers - typeof";
-	return _typeof$43 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o) {
+	return _typeof$46 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o) {
 		return typeof o;
 	} : function(o) {
 		return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
-	}, _typeof$43(o);
+	}, _typeof$46(o);
 }
-var _excluded$14 = [
+var _excluded$16 = [
 	"type",
 	"size",
 	"sizeType"
 ];
-function _extends$24() {
-	_extends$24 = Object.assign ? Object.assign.bind() : function(target) {
+function _extends$28() {
+	_extends$28 = Object.assign ? Object.assign.bind() : function(target) {
 		for (var i = 1; i < arguments.length; i++) {
 			var source = arguments[i];
 			for (var key in source) if (Object.prototype.hasOwnProperty.call(source, key)) target[key] = source[key];
 		}
 		return target;
 	};
-	return _extends$24.apply(this, arguments);
+	return _extends$28.apply(this, arguments);
 }
-function ownKeys$35(e, r) {
+function ownKeys$38(e, r) {
 	var t = Object.keys(e);
 	if (Object.getOwnPropertySymbols) {
 		var o = Object.getOwnPropertySymbols(e);
@@ -42646,19 +42711,19 @@ function ownKeys$35(e, r) {
 	}
 	return t;
 }
-function _objectSpread$35(e) {
+function _objectSpread$38(e) {
 	for (var r = 1; r < arguments.length; r++) {
 		var t = null != arguments[r] ? arguments[r] : {};
-		r % 2 ? ownKeys$35(Object(t), !0).forEach(function(r) {
-			_defineProperty$40(e, r, t[r]);
-		}) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$35(Object(t)).forEach(function(r) {
+		r % 2 ? ownKeys$38(Object(t), !0).forEach(function(r) {
+			_defineProperty$43(e, r, t[r]);
+		}) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$38(Object(t)).forEach(function(r) {
 			Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r));
 		});
 	}
 	return e;
 }
-function _defineProperty$40(obj, key, value) {
-	key = _toPropertyKey$41(key);
+function _defineProperty$43(obj, key, value) {
+	key = _toPropertyKey$44(key);
 	if (key in obj) Object.defineProperty(obj, key, {
 		value,
 		enumerable: true,
@@ -42668,23 +42733,23 @@ function _defineProperty$40(obj, key, value) {
 	else obj[key] = value;
 	return obj;
 }
-function _toPropertyKey$41(t) {
-	var i = _toPrimitive$41(t, "string");
-	return "symbol" == _typeof$43(i) ? i : i + "";
+function _toPropertyKey$44(t) {
+	var i = _toPrimitive$44(t, "string");
+	return "symbol" == _typeof$46(i) ? i : i + "";
 }
-function _toPrimitive$41(t, r) {
-	if ("object" != _typeof$43(t) || !t) return t;
+function _toPrimitive$44(t, r) {
+	if ("object" != _typeof$46(t) || !t) return t;
 	var e = t[Symbol.toPrimitive];
 	if (void 0 !== e) {
 		var i = e.call(t, r || "default");
-		if ("object" != _typeof$43(i)) return i;
+		if ("object" != _typeof$46(i)) return i;
 		throw new TypeError("@@toPrimitive must return a primitive value.");
 	}
 	return ("string" === r ? String : Number)(t);
 }
-function _objectWithoutProperties$14(source, excluded) {
+function _objectWithoutProperties$16(source, excluded) {
 	if (source == null) return {};
-	var target = _objectWithoutPropertiesLoose$14(source, excluded);
+	var target = _objectWithoutPropertiesLoose$16(source, excluded);
 	var key, i;
 	if (Object.getOwnPropertySymbols) {
 		var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
@@ -42697,7 +42762,7 @@ function _objectWithoutProperties$14(source, excluded) {
 	}
 	return target;
 }
-function _objectWithoutPropertiesLoose$14(source, excluded) {
+function _objectWithoutPropertiesLoose$16(source, excluded) {
 	if (source == null) return {};
 	var target = {};
 	for (var key in source) if (Object.prototype.hasOwnProperty.call(source, key)) {
@@ -42715,7 +42780,7 @@ var symbolFactories = {
 	symbolTriangle: triangle_default,
 	symbolWye: wye_default
 };
-var RADIAN$1 = Math.PI / 180;
+var RADIAN$2 = Math.PI / 180;
 var getSymbolFactory = function getSymbolFactory(type) {
 	return symbolFactories["symbol".concat((0, import_upperFirst.default)(type))] || circle_default;
 };
@@ -42726,7 +42791,7 @@ var calculateAreaSize = function calculateAreaSize(size, sizeType, type) {
 		case "diamond": return .5 * size * size / Math.sqrt(3);
 		case "square": return size * size;
 		case "star":
-			var angle = 18 * RADIAN$1;
+			var angle = 18 * RADIAN$2;
 			return 1.25 * size * size * (Math.tan(angle) - Math.tan(angle * 2) * Math.pow(Math.tan(angle), 2));
 		case "triangle": return Math.sqrt(3) * size * size / 4;
 		case "wye": return (21 - 10 * Math.sqrt(3)) * size * size / 8;
@@ -42738,7 +42803,7 @@ var registerSymbol = function registerSymbol(key, factory) {
 };
 var Symbols = function Symbols(_ref) {
 	var _ref$type = _ref.type, type = _ref$type === void 0 ? "circle" : _ref$type, _ref$size = _ref.size, size = _ref$size === void 0 ? 64 : _ref$size, _ref$sizeType = _ref.sizeType, sizeType = _ref$sizeType === void 0 ? "area" : _ref$sizeType;
-	var props = _objectSpread$35(_objectSpread$35({}, _objectWithoutProperties$14(_ref, _excluded$14)), {}, {
+	var props = _objectSpread$38(_objectSpread$38({}, _objectWithoutProperties$16(_ref, _excluded$16)), {}, {
 		type,
 		size,
 		sizeType
@@ -42753,7 +42818,7 @@ var Symbols = function Symbols(_ref) {
 	};
 	var className = props.className, cx = props.cx, cy = props.cy;
 	var filteredProps = filterProps(props, true);
-	if (cx === +cx && cy === +cy && size === +size) return /* @__PURE__ */ import_react.createElement("path", _extends$24({}, filteredProps, {
+	if (cx === +cx && cy === +cy && size === +size) return /* @__PURE__ */ import_react.createElement("path", _extends$28({}, filteredProps, {
 		className: clsx("recharts-symbols", className),
 		transform: "translate(".concat(cx, ", ").concat(cy, ")"),
 		d: getPath()
@@ -42766,25 +42831,25 @@ Symbols.registerSymbol = registerSymbol;
 /**
 * @fileOverview Default Legend Content
 */
-function _typeof$42(o) {
+function _typeof$45(o) {
 	"@babel/helpers - typeof";
-	return _typeof$42 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o) {
+	return _typeof$45 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o) {
 		return typeof o;
 	} : function(o) {
 		return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
-	}, _typeof$42(o);
+	}, _typeof$45(o);
 }
-function _extends$23() {
-	_extends$23 = Object.assign ? Object.assign.bind() : function(target) {
+function _extends$27() {
+	_extends$27 = Object.assign ? Object.assign.bind() : function(target) {
 		for (var i = 1; i < arguments.length; i++) {
 			var source = arguments[i];
 			for (var key in source) if (Object.prototype.hasOwnProperty.call(source, key)) target[key] = source[key];
 		}
 		return target;
 	};
-	return _extends$23.apply(this, arguments);
+	return _extends$27.apply(this, arguments);
 }
-function ownKeys$34(e, r) {
+function ownKeys$37(e, r) {
 	var t = Object.keys(e);
 	if (Object.getOwnPropertySymbols) {
 		var o = Object.getOwnPropertySymbols(e);
@@ -42794,62 +42859,62 @@ function ownKeys$34(e, r) {
 	}
 	return t;
 }
-function _objectSpread$34(e) {
+function _objectSpread$37(e) {
 	for (var r = 1; r < arguments.length; r++) {
 		var t = null != arguments[r] ? arguments[r] : {};
-		r % 2 ? ownKeys$34(Object(t), !0).forEach(function(r) {
-			_defineProperty$39(e, r, t[r]);
-		}) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$34(Object(t)).forEach(function(r) {
+		r % 2 ? ownKeys$37(Object(t), !0).forEach(function(r) {
+			_defineProperty$42(e, r, t[r]);
+		}) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$37(Object(t)).forEach(function(r) {
 			Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r));
 		});
 	}
 	return e;
 }
-function _classCallCheck$18(instance, Constructor) {
+function _classCallCheck$21(instance, Constructor) {
 	if (!(instance instanceof Constructor)) throw new TypeError("Cannot call a class as a function");
 }
-function _defineProperties$18(target, props) {
+function _defineProperties$21(target, props) {
 	for (var i = 0; i < props.length; i++) {
 		var descriptor = props[i];
 		descriptor.enumerable = descriptor.enumerable || false;
 		descriptor.configurable = true;
 		if ("value" in descriptor) descriptor.writable = true;
-		Object.defineProperty(target, _toPropertyKey$40(descriptor.key), descriptor);
+		Object.defineProperty(target, _toPropertyKey$43(descriptor.key), descriptor);
 	}
 }
-function _createClass$18(Constructor, protoProps, staticProps) {
-	if (protoProps) _defineProperties$18(Constructor.prototype, protoProps);
-	if (staticProps) _defineProperties$18(Constructor, staticProps);
+function _createClass$21(Constructor, protoProps, staticProps) {
+	if (protoProps) _defineProperties$21(Constructor.prototype, protoProps);
+	if (staticProps) _defineProperties$21(Constructor, staticProps);
 	Object.defineProperty(Constructor, "prototype", { writable: false });
 	return Constructor;
 }
-function _callSuper$14(t, o, e) {
-	return o = _getPrototypeOf$15(o), _possibleConstructorReturn$15(t, _isNativeReflectConstruct$15() ? Reflect.construct(o, e || [], _getPrototypeOf$15(t).constructor) : o.apply(t, e));
+function _callSuper$17(t, o, e) {
+	return o = _getPrototypeOf$18(o), _possibleConstructorReturn$18(t, _isNativeReflectConstruct$18() ? Reflect.construct(o, e || [], _getPrototypeOf$18(t).constructor) : o.apply(t, e));
 }
-function _possibleConstructorReturn$15(self, call) {
-	if (call && (_typeof$42(call) === "object" || typeof call === "function")) return call;
+function _possibleConstructorReturn$18(self, call) {
+	if (call && (_typeof$45(call) === "object" || typeof call === "function")) return call;
 	else if (call !== void 0) throw new TypeError("Derived constructors may only return object or undefined");
-	return _assertThisInitialized$15(self);
+	return _assertThisInitialized$18(self);
 }
-function _assertThisInitialized$15(self) {
+function _assertThisInitialized$18(self) {
 	if (self === void 0) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
 	return self;
 }
-function _isNativeReflectConstruct$15() {
+function _isNativeReflectConstruct$18() {
 	try {
 		var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function() {}));
 	} catch (t) {}
-	return (_isNativeReflectConstruct$15 = function _isNativeReflectConstruct() {
+	return (_isNativeReflectConstruct$18 = function _isNativeReflectConstruct() {
 		return !!t;
 	})();
 }
-function _getPrototypeOf$15(o) {
-	_getPrototypeOf$15 = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
+function _getPrototypeOf$18(o) {
+	_getPrototypeOf$18 = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
 		return o.__proto__ || Object.getPrototypeOf(o);
 	};
-	return _getPrototypeOf$15(o);
+	return _getPrototypeOf$18(o);
 }
-function _inherits$15(subClass, superClass) {
+function _inherits$18(subClass, superClass) {
 	if (typeof superClass !== "function" && superClass !== null) throw new TypeError("Super expression must either be null or a function");
 	subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: {
 		value: subClass,
@@ -42857,17 +42922,17 @@ function _inherits$15(subClass, superClass) {
 		configurable: true
 	} });
 	Object.defineProperty(subClass, "prototype", { writable: false });
-	if (superClass) _setPrototypeOf$15(subClass, superClass);
+	if (superClass) _setPrototypeOf$18(subClass, superClass);
 }
-function _setPrototypeOf$15(o, p) {
-	_setPrototypeOf$15 = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
+function _setPrototypeOf$18(o, p) {
+	_setPrototypeOf$18 = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
 		o.__proto__ = p;
 		return o;
 	};
-	return _setPrototypeOf$15(o, p);
+	return _setPrototypeOf$18(o, p);
 }
-function _defineProperty$39(obj, key, value) {
-	key = _toPropertyKey$40(key);
+function _defineProperty$42(obj, key, value) {
+	key = _toPropertyKey$43(key);
 	if (key in obj) Object.defineProperty(obj, key, {
 		value,
 		enumerable: true,
@@ -42877,16 +42942,16 @@ function _defineProperty$39(obj, key, value) {
 	else obj[key] = value;
 	return obj;
 }
-function _toPropertyKey$40(t) {
-	var i = _toPrimitive$40(t, "string");
-	return "symbol" == _typeof$42(i) ? i : i + "";
+function _toPropertyKey$43(t) {
+	var i = _toPrimitive$43(t, "string");
+	return "symbol" == _typeof$45(i) ? i : i + "";
 }
-function _toPrimitive$40(t, r) {
-	if ("object" != _typeof$42(t) || !t) return t;
+function _toPrimitive$43(t, r) {
+	if ("object" != _typeof$45(t) || !t) return t;
 	var e = t[Symbol.toPrimitive];
 	if (void 0 !== e) {
 		var i = e.call(t, r || "default");
-		if ("object" != _typeof$42(i)) return i;
+		if ("object" != _typeof$45(i)) return i;
 		throw new TypeError("@@toPrimitive must return a primitive value.");
 	}
 	return ("string" === r ? String : Number)(t);
@@ -42894,11 +42959,11 @@ function _toPrimitive$40(t, r) {
 var SIZE = 32;
 var DefaultLegendContent = /* @__PURE__ */ function(_PureComponent) {
 	function DefaultLegendContent() {
-		_classCallCheck$18(this, DefaultLegendContent);
-		return _callSuper$14(this, DefaultLegendContent, arguments);
+		_classCallCheck$21(this, DefaultLegendContent);
+		return _callSuper$17(this, DefaultLegendContent, arguments);
 	}
-	_inherits$15(DefaultLegendContent, _PureComponent);
-	return _createClass$18(DefaultLegendContent, [
+	_inherits$18(DefaultLegendContent, _PureComponent);
+	return _createClass$21(DefaultLegendContent, [
 		{
 			key: "renderIcon",
 			value: function renderIcon(data) {
@@ -42932,7 +42997,7 @@ var DefaultLegendContent = /* @__PURE__ */ function(_PureComponent) {
 					className: "recharts-legend-icon"
 				});
 				if (/* @__PURE__ */ import_react.isValidElement(data.legendIcon)) {
-					var iconProps = _objectSpread$34({}, data);
+					var iconProps = _objectSpread$37({}, data);
 					delete iconProps.legendIcon;
 					return /* @__PURE__ */ import_react.cloneElement(data.legendIcon, iconProps);
 				}
@@ -42968,12 +43033,12 @@ var DefaultLegendContent = /* @__PURE__ */ function(_PureComponent) {
 				};
 				return payload.map(function(entry, i) {
 					var finalFormatter = entry.formatter || formatter;
-					var className = clsx(_defineProperty$39(_defineProperty$39({ "recharts-legend-item": true }, "legend-item-".concat(i), true), "inactive", entry.inactive));
+					var className = clsx(_defineProperty$42(_defineProperty$42({ "recharts-legend-item": true }, "legend-item-".concat(i), true), "inactive", entry.inactive));
 					if (entry.type === "none") return null;
 					var entryValue = !(0, import_isFunction.default)(entry.value) ? entry.value : null;
 					warn$1(!(0, import_isFunction.default)(entry.value), "The name property is also required when using a function for the dataKey of a chart's cartesian components. Ex: <Bar name=\"Name of my Data\"/>");
 					var color = entry.inactive ? inactiveColor : entry.color;
-					return /* @__PURE__ */ import_react.createElement("li", _extends$23({
+					return /* @__PURE__ */ import_react.createElement("li", _extends$27({
 						className,
 						style: itemStyle,
 						key: "legend-item-".concat(i)
@@ -43007,8 +43072,8 @@ var DefaultLegendContent = /* @__PURE__ */ function(_PureComponent) {
 		}
 	]);
 }(import_react.PureComponent);
-_defineProperty$39(DefaultLegendContent, "displayName", "Legend");
-_defineProperty$39(DefaultLegendContent, "defaultProps", {
+_defineProperty$42(DefaultLegendContent, "displayName", "Legend");
+_defineProperty$42(DefaultLegendContent, "defaultProps", {
 	iconSize: 14,
 	layout: "horizontal",
 	align: "center",
@@ -44617,16 +44682,16 @@ function getUniqPayload(payload, option, defaultUniqBy) {
 /**
 * @fileOverview Legend
 */
-function _typeof$41(o) {
+function _typeof$44(o) {
 	"@babel/helpers - typeof";
-	return _typeof$41 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o) {
+	return _typeof$44 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o) {
 		return typeof o;
 	} : function(o) {
 		return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
-	}, _typeof$41(o);
+	}, _typeof$44(o);
 }
-var _excluded$13 = ["ref"];
-function ownKeys$33(e, r) {
+var _excluded$15 = ["ref"];
+function ownKeys$36(e, r) {
 	var t = Object.keys(e);
 	if (Object.getOwnPropertySymbols) {
 		var o = Object.getOwnPropertySymbols(e);
@@ -44636,62 +44701,62 @@ function ownKeys$33(e, r) {
 	}
 	return t;
 }
-function _objectSpread$33(e) {
+function _objectSpread$36(e) {
 	for (var r = 1; r < arguments.length; r++) {
 		var t = null != arguments[r] ? arguments[r] : {};
-		r % 2 ? ownKeys$33(Object(t), !0).forEach(function(r) {
-			_defineProperty$38(e, r, t[r]);
-		}) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$33(Object(t)).forEach(function(r) {
+		r % 2 ? ownKeys$36(Object(t), !0).forEach(function(r) {
+			_defineProperty$41(e, r, t[r]);
+		}) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$36(Object(t)).forEach(function(r) {
 			Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r));
 		});
 	}
 	return e;
 }
-function _classCallCheck$17(instance, Constructor) {
+function _classCallCheck$20(instance, Constructor) {
 	if (!(instance instanceof Constructor)) throw new TypeError("Cannot call a class as a function");
 }
-function _defineProperties$17(target, props) {
+function _defineProperties$20(target, props) {
 	for (var i = 0; i < props.length; i++) {
 		var descriptor = props[i];
 		descriptor.enumerable = descriptor.enumerable || false;
 		descriptor.configurable = true;
 		if ("value" in descriptor) descriptor.writable = true;
-		Object.defineProperty(target, _toPropertyKey$39(descriptor.key), descriptor);
+		Object.defineProperty(target, _toPropertyKey$42(descriptor.key), descriptor);
 	}
 }
-function _createClass$17(Constructor, protoProps, staticProps) {
-	if (protoProps) _defineProperties$17(Constructor.prototype, protoProps);
-	if (staticProps) _defineProperties$17(Constructor, staticProps);
+function _createClass$20(Constructor, protoProps, staticProps) {
+	if (protoProps) _defineProperties$20(Constructor.prototype, protoProps);
+	if (staticProps) _defineProperties$20(Constructor, staticProps);
 	Object.defineProperty(Constructor, "prototype", { writable: false });
 	return Constructor;
 }
-function _callSuper$13(t, o, e) {
-	return o = _getPrototypeOf$14(o), _possibleConstructorReturn$14(t, _isNativeReflectConstruct$14() ? Reflect.construct(o, e || [], _getPrototypeOf$14(t).constructor) : o.apply(t, e));
+function _callSuper$16(t, o, e) {
+	return o = _getPrototypeOf$17(o), _possibleConstructorReturn$17(t, _isNativeReflectConstruct$17() ? Reflect.construct(o, e || [], _getPrototypeOf$17(t).constructor) : o.apply(t, e));
 }
-function _possibleConstructorReturn$14(self, call) {
-	if (call && (_typeof$41(call) === "object" || typeof call === "function")) return call;
+function _possibleConstructorReturn$17(self, call) {
+	if (call && (_typeof$44(call) === "object" || typeof call === "function")) return call;
 	else if (call !== void 0) throw new TypeError("Derived constructors may only return object or undefined");
-	return _assertThisInitialized$14(self);
+	return _assertThisInitialized$17(self);
 }
-function _assertThisInitialized$14(self) {
+function _assertThisInitialized$17(self) {
 	if (self === void 0) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
 	return self;
 }
-function _isNativeReflectConstruct$14() {
+function _isNativeReflectConstruct$17() {
 	try {
 		var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function() {}));
 	} catch (t) {}
-	return (_isNativeReflectConstruct$14 = function _isNativeReflectConstruct() {
+	return (_isNativeReflectConstruct$17 = function _isNativeReflectConstruct() {
 		return !!t;
 	})();
 }
-function _getPrototypeOf$14(o) {
-	_getPrototypeOf$14 = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
+function _getPrototypeOf$17(o) {
+	_getPrototypeOf$17 = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
 		return o.__proto__ || Object.getPrototypeOf(o);
 	};
-	return _getPrototypeOf$14(o);
+	return _getPrototypeOf$17(o);
 }
-function _inherits$14(subClass, superClass) {
+function _inherits$17(subClass, superClass) {
 	if (typeof superClass !== "function" && superClass !== null) throw new TypeError("Super expression must either be null or a function");
 	subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: {
 		value: subClass,
@@ -44699,17 +44764,17 @@ function _inherits$14(subClass, superClass) {
 		configurable: true
 	} });
 	Object.defineProperty(subClass, "prototype", { writable: false });
-	if (superClass) _setPrototypeOf$14(subClass, superClass);
+	if (superClass) _setPrototypeOf$17(subClass, superClass);
 }
-function _setPrototypeOf$14(o, p) {
-	_setPrototypeOf$14 = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
+function _setPrototypeOf$17(o, p) {
+	_setPrototypeOf$17 = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
 		o.__proto__ = p;
 		return o;
 	};
-	return _setPrototypeOf$14(o, p);
+	return _setPrototypeOf$17(o, p);
 }
-function _defineProperty$38(obj, key, value) {
-	key = _toPropertyKey$39(key);
+function _defineProperty$41(obj, key, value) {
+	key = _toPropertyKey$42(key);
 	if (key in obj) Object.defineProperty(obj, key, {
 		value,
 		enumerable: true,
@@ -44719,23 +44784,23 @@ function _defineProperty$38(obj, key, value) {
 	else obj[key] = value;
 	return obj;
 }
-function _toPropertyKey$39(t) {
-	var i = _toPrimitive$39(t, "string");
-	return "symbol" == _typeof$41(i) ? i : i + "";
+function _toPropertyKey$42(t) {
+	var i = _toPrimitive$42(t, "string");
+	return "symbol" == _typeof$44(i) ? i : i + "";
 }
-function _toPrimitive$39(t, r) {
-	if ("object" != _typeof$41(t) || !t) return t;
+function _toPrimitive$42(t, r) {
+	if ("object" != _typeof$44(t) || !t) return t;
 	var e = t[Symbol.toPrimitive];
 	if (void 0 !== e) {
 		var i = e.call(t, r || "default");
-		if ("object" != _typeof$41(i)) return i;
+		if ("object" != _typeof$44(i)) return i;
 		throw new TypeError("@@toPrimitive must return a primitive value.");
 	}
 	return ("string" === r ? String : Number)(t);
 }
-function _objectWithoutProperties$13(source, excluded) {
+function _objectWithoutProperties$15(source, excluded) {
 	if (source == null) return {};
-	var target = _objectWithoutPropertiesLoose$13(source, excluded);
+	var target = _objectWithoutPropertiesLoose$15(source, excluded);
 	var key, i;
 	if (Object.getOwnPropertySymbols) {
 		var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
@@ -44748,7 +44813,7 @@ function _objectWithoutProperties$13(source, excluded) {
 	}
 	return target;
 }
-function _objectWithoutPropertiesLoose$13(source, excluded) {
+function _objectWithoutPropertiesLoose$15(source, excluded) {
 	if (source == null) return {};
 	var target = {};
 	for (var key in source) if (Object.prototype.hasOwnProperty.call(source, key)) {
@@ -44764,24 +44829,24 @@ function renderContent$1(content, props) {
 	if (/* @__PURE__ */ import_react.isValidElement(content)) return /* @__PURE__ */ import_react.cloneElement(content, props);
 	if (typeof content === "function") return /* @__PURE__ */ import_react.createElement(content, props);
 	props.ref;
-	var otherProps = _objectWithoutProperties$13(props, _excluded$13);
+	var otherProps = _objectWithoutProperties$15(props, _excluded$15);
 	return /* @__PURE__ */ import_react.createElement(DefaultLegendContent, otherProps);
 }
 var EPS$1 = 1;
 var Legend = /* @__PURE__ */ function(_PureComponent) {
 	function Legend() {
 		var _this;
-		_classCallCheck$17(this, Legend);
+		_classCallCheck$20(this, Legend);
 		for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) args[_key] = arguments[_key];
-		_this = _callSuper$13(this, Legend, [].concat(args));
-		_defineProperty$38(_this, "lastBoundingBox", {
+		_this = _callSuper$16(this, Legend, [].concat(args));
+		_defineProperty$41(_this, "lastBoundingBox", {
 			width: -1,
 			height: -1
 		});
 		return _this;
 	}
-	_inherits$14(Legend, _PureComponent);
-	return _createClass$17(Legend, [
+	_inherits$17(Legend, _PureComponent);
+	return _createClass$20(Legend, [
 		{
 			key: "componentDidMount",
 			value: function componentDidMount() {
@@ -44827,7 +44892,7 @@ var Legend = /* @__PURE__ */ function(_PureComponent) {
 		{
 			key: "getBBoxSnapshot",
 			value: function getBBoxSnapshot() {
-				if (this.lastBoundingBox.width >= 0 && this.lastBoundingBox.height >= 0) return _objectSpread$33({}, this.lastBoundingBox);
+				if (this.lastBoundingBox.width >= 0 && this.lastBoundingBox.height >= 0) return _objectSpread$36({}, this.lastBoundingBox);
 				return {
 					width: 0,
 					height: 0
@@ -44847,7 +44912,7 @@ var Legend = /* @__PURE__ */ function(_PureComponent) {
 					var _box = this.getBBoxSnapshot();
 					vPos = { top: ((chartHeight || 0) - _box.height) / 2 };
 				} else vPos = verticalAlign === "bottom" ? { bottom: margin && margin.bottom || 0 } : { top: margin && margin.top || 0 };
-				return _objectSpread$33(_objectSpread$33({}, hPos), vPos);
+				return _objectSpread$36(_objectSpread$36({}, hPos), vPos);
 			}
 		},
 		{
@@ -44855,7 +44920,7 @@ var Legend = /* @__PURE__ */ function(_PureComponent) {
 			value: function render() {
 				var _this2 = this;
 				var _this$props2 = this.props, content = _this$props2.content, width = _this$props2.width, height = _this$props2.height, wrapperStyle = _this$props2.wrapperStyle, payloadUniqBy = _this$props2.payloadUniqBy, payload = _this$props2.payload;
-				var outerStyle = _objectSpread$33(_objectSpread$33({
+				var outerStyle = _objectSpread$36(_objectSpread$36({
 					position: "absolute",
 					width: width || "auto",
 					height: height || "auto"
@@ -44866,21 +44931,21 @@ var Legend = /* @__PURE__ */ function(_PureComponent) {
 					ref: function ref(node) {
 						_this2.wrapperNode = node;
 					}
-				}, renderContent$1(content, _objectSpread$33(_objectSpread$33({}, this.props), {}, { payload: getUniqPayload(payload, payloadUniqBy, defaultUniqBy$1) })));
+				}, renderContent$1(content, _objectSpread$36(_objectSpread$36({}, this.props), {}, { payload: getUniqPayload(payload, payloadUniqBy, defaultUniqBy$1) })));
 			}
 		}
 	], [{
 		key: "getWithHeight",
 		value: function getWithHeight(item, chartWidth) {
-			var layout = _objectSpread$33(_objectSpread$33({}, this.defaultProps), item.props).layout;
+			var layout = _objectSpread$36(_objectSpread$36({}, this.defaultProps), item.props).layout;
 			if (layout === "vertical" && isNumber(item.props.height)) return { height: item.props.height };
 			if (layout === "horizontal") return { width: item.props.width || chartWidth };
 			return null;
 		}
 	}]);
 }(import_react.PureComponent);
-_defineProperty$38(Legend, "displayName", "Legend");
-_defineProperty$38(Legend, "defaultProps", {
+_defineProperty$41(Legend, "displayName", "Legend");
+_defineProperty$41(Legend, "defaultProps", {
 	iconSize: 14,
 	layout: "horizontal",
 	align: "center",
@@ -45334,44 +45399,44 @@ var import_sortBy = /* @__PURE__ */ __toESM((/* @__PURE__ */ __commonJSMin(((exp
 		return baseOrderBy(collection, baseFlatten(iteratees, 1), []);
 	});
 })))());
-function _typeof$40(o) {
+function _typeof$43(o) {
 	"@babel/helpers - typeof";
-	return _typeof$40 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o) {
+	return _typeof$43 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o) {
 		return typeof o;
 	} : function(o) {
 		return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
-	}, _typeof$40(o);
+	}, _typeof$43(o);
 }
-function _extends$22() {
-	_extends$22 = Object.assign ? Object.assign.bind() : function(target) {
+function _extends$26() {
+	_extends$26 = Object.assign ? Object.assign.bind() : function(target) {
 		for (var i = 1; i < arguments.length; i++) {
 			var source = arguments[i];
 			for (var key in source) if (Object.prototype.hasOwnProperty.call(source, key)) target[key] = source[key];
 		}
 		return target;
 	};
-	return _extends$22.apply(this, arguments);
+	return _extends$26.apply(this, arguments);
 }
-function _slicedToArray$11(arr, i) {
-	return _arrayWithHoles$12(arr) || _iterableToArrayLimit$11(arr, i) || _unsupportedIterableToArray$18(arr, i) || _nonIterableRest$12();
+function _slicedToArray$12(arr, i) {
+	return _arrayWithHoles$13(arr) || _iterableToArrayLimit$12(arr, i) || _unsupportedIterableToArray$20(arr, i) || _nonIterableRest$13();
 }
-function _nonIterableRest$12() {
+function _nonIterableRest$13() {
 	throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
-function _unsupportedIterableToArray$18(o, minLen) {
+function _unsupportedIterableToArray$20(o, minLen) {
 	if (!o) return;
-	if (typeof o === "string") return _arrayLikeToArray$18(o, minLen);
+	if (typeof o === "string") return _arrayLikeToArray$20(o, minLen);
 	var n = Object.prototype.toString.call(o).slice(8, -1);
 	if (n === "Object" && o.constructor) n = o.constructor.name;
 	if (n === "Map" || n === "Set") return Array.from(o);
-	if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray$18(o, minLen);
+	if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray$20(o, minLen);
 }
-function _arrayLikeToArray$18(arr, len) {
+function _arrayLikeToArray$20(arr, len) {
 	if (len == null || len > arr.length) len = arr.length;
 	for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
 	return arr2;
 }
-function _iterableToArrayLimit$11(r, l) {
+function _iterableToArrayLimit$12(r, l) {
 	var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"];
 	if (null != t) {
 		var e, n, i, u, a = [], f = !0, o = !1;
@@ -45392,10 +45457,10 @@ function _iterableToArrayLimit$11(r, l) {
 		return a;
 	}
 }
-function _arrayWithHoles$12(arr) {
+function _arrayWithHoles$13(arr) {
 	if (Array.isArray(arr)) return arr;
 }
-function ownKeys$32(e, r) {
+function ownKeys$35(e, r) {
 	var t = Object.keys(e);
 	if (Object.getOwnPropertySymbols) {
 		var o = Object.getOwnPropertySymbols(e);
@@ -45405,19 +45470,19 @@ function ownKeys$32(e, r) {
 	}
 	return t;
 }
-function _objectSpread$32(e) {
+function _objectSpread$35(e) {
 	for (var r = 1; r < arguments.length; r++) {
 		var t = null != arguments[r] ? arguments[r] : {};
-		r % 2 ? ownKeys$32(Object(t), !0).forEach(function(r) {
-			_defineProperty$37(e, r, t[r]);
-		}) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$32(Object(t)).forEach(function(r) {
+		r % 2 ? ownKeys$35(Object(t), !0).forEach(function(r) {
+			_defineProperty$40(e, r, t[r]);
+		}) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$35(Object(t)).forEach(function(r) {
 			Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r));
 		});
 	}
 	return e;
 }
-function _defineProperty$37(obj, key, value) {
-	key = _toPropertyKey$38(key);
+function _defineProperty$40(obj, key, value) {
+	key = _toPropertyKey$41(key);
 	if (key in obj) Object.defineProperty(obj, key, {
 		value,
 		enumerable: true,
@@ -45427,16 +45492,16 @@ function _defineProperty$37(obj, key, value) {
 	else obj[key] = value;
 	return obj;
 }
-function _toPropertyKey$38(t) {
-	var i = _toPrimitive$38(t, "string");
-	return "symbol" == _typeof$40(i) ? i : i + "";
+function _toPropertyKey$41(t) {
+	var i = _toPrimitive$41(t, "string");
+	return "symbol" == _typeof$43(i) ? i : i + "";
 }
-function _toPrimitive$38(t, r) {
-	if ("object" != _typeof$40(t) || !t) return t;
+function _toPrimitive$41(t, r) {
+	if ("object" != _typeof$43(t) || !t) return t;
 	var e = t[Symbol.toPrimitive];
 	if (void 0 !== e) {
 		var i = e.call(t, r || "default");
-		if ("object" != _typeof$40(i)) return i;
+		if ("object" != _typeof$43(i)) return i;
 		throw new TypeError("@@toPrimitive must return a primitive value.");
 	}
 	return ("string" === r ? String : Number)(t);
@@ -45454,7 +45519,7 @@ var DefaultTooltipContent = function DefaultTooltipContent(props) {
 			};
 			var items = (itemSorter ? (0, import_sortBy.default)(payload, itemSorter) : payload).map(function(entry, i) {
 				if (entry.type === "none") return null;
-				var finalItemStyle = _objectSpread$32({
+				var finalItemStyle = _objectSpread$35({
 					display: "block",
 					paddingTop: 4,
 					paddingBottom: 4,
@@ -45467,7 +45532,7 @@ var DefaultTooltipContent = function DefaultTooltipContent(props) {
 				if (finalFormatter && finalValue != null && finalName != null) {
 					var formatted = finalFormatter(value, name, entry, i, payload);
 					if (Array.isArray(formatted)) {
-						var _formatted = _slicedToArray$11(formatted, 2);
+						var _formatted = _slicedToArray$12(formatted, 2);
 						finalValue = _formatted[0];
 						finalName = _formatted[1];
 					} else finalValue = formatted;
@@ -45485,14 +45550,14 @@ var DefaultTooltipContent = function DefaultTooltipContent(props) {
 		}
 		return null;
 	};
-	var finalStyle = _objectSpread$32({
+	var finalStyle = _objectSpread$35({
 		margin: 0,
 		padding: 10,
 		backgroundColor: "#fff",
 		border: "1px solid #ccc",
 		whiteSpace: "nowrap"
 	}, contentStyle);
-	var finalLabelStyle = _objectSpread$32({ margin: 0 }, labelStyle);
+	var finalLabelStyle = _objectSpread$35({ margin: 0 }, labelStyle);
 	var hasLabel = !(0, import_isNil.default)(label);
 	var finalLabel = hasLabel ? label : "";
 	var wrapperCN = clsx("recharts-default-tooltip", wrapperClassName);
@@ -45502,7 +45567,7 @@ var DefaultTooltipContent = function DefaultTooltipContent(props) {
 		role: "status",
 		"aria-live": "assertive"
 	} : {};
-	return /* @__PURE__ */ import_react.createElement("div", _extends$22({
+	return /* @__PURE__ */ import_react.createElement("div", _extends$26({
 		className: wrapperCN,
 		style: finalStyle
 	}, accessibilityAttributes), /* @__PURE__ */ import_react.createElement("p", {
@@ -45512,16 +45577,16 @@ var DefaultTooltipContent = function DefaultTooltipContent(props) {
 };
 //#endregion
 //#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/recharts@2.15.4_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/recharts/es6/util/tooltip/translate.js
-function _typeof$39(o) {
+function _typeof$42(o) {
 	"@babel/helpers - typeof";
-	return _typeof$39 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o) {
+	return _typeof$42 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o) {
 		return typeof o;
 	} : function(o) {
 		return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
-	}, _typeof$39(o);
+	}, _typeof$42(o);
 }
-function _defineProperty$36(obj, key, value) {
-	key = _toPropertyKey$37(key);
+function _defineProperty$39(obj, key, value) {
+	key = _toPropertyKey$40(key);
 	if (key in obj) Object.defineProperty(obj, key, {
 		value,
 		enumerable: true,
@@ -45531,16 +45596,16 @@ function _defineProperty$36(obj, key, value) {
 	else obj[key] = value;
 	return obj;
 }
-function _toPropertyKey$37(t) {
-	var i = _toPrimitive$37(t, "string");
-	return "symbol" == _typeof$39(i) ? i : i + "";
+function _toPropertyKey$40(t) {
+	var i = _toPrimitive$40(t, "string");
+	return "symbol" == _typeof$42(i) ? i : i + "";
 }
-function _toPrimitive$37(t, r) {
-	if ("object" != _typeof$39(t) || !t) return t;
+function _toPrimitive$40(t, r) {
+	if ("object" != _typeof$42(t) || !t) return t;
 	var e = t[Symbol.toPrimitive];
 	if (void 0 !== e) {
 		var i = e.call(t, r || "default");
-		if ("object" != _typeof$39(i)) return i;
+		if ("object" != _typeof$42(i)) return i;
 		throw new TypeError("@@toPrimitive must return a primitive value.");
 	}
 	return ("string" === r ? String : Number)(t);
@@ -45549,7 +45614,7 @@ var CSS_CLASS_PREFIX = "recharts-tooltip-wrapper";
 var TOOLTIP_HIDDEN = { visibility: "hidden" };
 function getTooltipCSSClassName(_ref) {
 	var coordinate = _ref.coordinate, translateX = _ref.translateX, translateY = _ref.translateY;
-	return clsx(CSS_CLASS_PREFIX, _defineProperty$36(_defineProperty$36(_defineProperty$36(_defineProperty$36({}, "".concat(CSS_CLASS_PREFIX, "-right"), isNumber(translateX) && coordinate && isNumber(coordinate.x) && translateX >= coordinate.x), "".concat(CSS_CLASS_PREFIX, "-left"), isNumber(translateX) && coordinate && isNumber(coordinate.x) && translateX < coordinate.x), "".concat(CSS_CLASS_PREFIX, "-bottom"), isNumber(translateY) && coordinate && isNumber(coordinate.y) && translateY >= coordinate.y), "".concat(CSS_CLASS_PREFIX, "-top"), isNumber(translateY) && coordinate && isNumber(coordinate.y) && translateY < coordinate.y));
+	return clsx(CSS_CLASS_PREFIX, _defineProperty$39(_defineProperty$39(_defineProperty$39(_defineProperty$39({}, "".concat(CSS_CLASS_PREFIX, "-right"), isNumber(translateX) && coordinate && isNumber(coordinate.x) && translateX >= coordinate.x), "".concat(CSS_CLASS_PREFIX, "-left"), isNumber(translateX) && coordinate && isNumber(coordinate.x) && translateX < coordinate.x), "".concat(CSS_CLASS_PREFIX, "-bottom"), isNumber(translateY) && coordinate && isNumber(coordinate.y) && translateY >= coordinate.y), "".concat(CSS_CLASS_PREFIX, "-top"), isNumber(translateY) && coordinate && isNumber(coordinate.y) && translateY < coordinate.y));
 }
 function getTooltipTranslateXY(_ref2) {
 	var allowEscapeViewBox = _ref2.allowEscapeViewBox, coordinate = _ref2.coordinate, key = _ref2.key, offsetTopLeft = _ref2.offsetTopLeft, position = _ref2.position, reverseDirection = _ref2.reverseDirection, tooltipDimension = _ref2.tooltipDimension, viewBox = _ref2.viewBox, viewBoxDimension = _ref2.viewBoxDimension;
@@ -45611,15 +45676,15 @@ function getTooltipTranslate(_ref4) {
 }
 //#endregion
 //#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/recharts@2.15.4_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/recharts/es6/component/TooltipBoundingBox.js
-function _typeof$38(o) {
+function _typeof$41(o) {
 	"@babel/helpers - typeof";
-	return _typeof$38 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o) {
+	return _typeof$41 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o) {
 		return typeof o;
 	} : function(o) {
 		return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
-	}, _typeof$38(o);
+	}, _typeof$41(o);
 }
-function ownKeys$31(e, r) {
+function ownKeys$34(e, r) {
 	var t = Object.keys(e);
 	if (Object.getOwnPropertySymbols) {
 		var o = Object.getOwnPropertySymbols(e);
@@ -45629,62 +45694,62 @@ function ownKeys$31(e, r) {
 	}
 	return t;
 }
-function _objectSpread$31(e) {
+function _objectSpread$34(e) {
 	for (var r = 1; r < arguments.length; r++) {
 		var t = null != arguments[r] ? arguments[r] : {};
-		r % 2 ? ownKeys$31(Object(t), !0).forEach(function(r) {
-			_defineProperty$35(e, r, t[r]);
-		}) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$31(Object(t)).forEach(function(r) {
+		r % 2 ? ownKeys$34(Object(t), !0).forEach(function(r) {
+			_defineProperty$38(e, r, t[r]);
+		}) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$34(Object(t)).forEach(function(r) {
 			Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r));
 		});
 	}
 	return e;
 }
-function _classCallCheck$16(instance, Constructor) {
+function _classCallCheck$19(instance, Constructor) {
 	if (!(instance instanceof Constructor)) throw new TypeError("Cannot call a class as a function");
 }
-function _defineProperties$16(target, props) {
+function _defineProperties$19(target, props) {
 	for (var i = 0; i < props.length; i++) {
 		var descriptor = props[i];
 		descriptor.enumerable = descriptor.enumerable || false;
 		descriptor.configurable = true;
 		if ("value" in descriptor) descriptor.writable = true;
-		Object.defineProperty(target, _toPropertyKey$36(descriptor.key), descriptor);
+		Object.defineProperty(target, _toPropertyKey$39(descriptor.key), descriptor);
 	}
 }
-function _createClass$16(Constructor, protoProps, staticProps) {
-	if (protoProps) _defineProperties$16(Constructor.prototype, protoProps);
-	if (staticProps) _defineProperties$16(Constructor, staticProps);
+function _createClass$19(Constructor, protoProps, staticProps) {
+	if (protoProps) _defineProperties$19(Constructor.prototype, protoProps);
+	if (staticProps) _defineProperties$19(Constructor, staticProps);
 	Object.defineProperty(Constructor, "prototype", { writable: false });
 	return Constructor;
 }
-function _callSuper$12(t, o, e) {
-	return o = _getPrototypeOf$13(o), _possibleConstructorReturn$13(t, _isNativeReflectConstruct$13() ? Reflect.construct(o, e || [], _getPrototypeOf$13(t).constructor) : o.apply(t, e));
+function _callSuper$15(t, o, e) {
+	return o = _getPrototypeOf$16(o), _possibleConstructorReturn$16(t, _isNativeReflectConstruct$16() ? Reflect.construct(o, e || [], _getPrototypeOf$16(t).constructor) : o.apply(t, e));
 }
-function _possibleConstructorReturn$13(self, call) {
-	if (call && (_typeof$38(call) === "object" || typeof call === "function")) return call;
+function _possibleConstructorReturn$16(self, call) {
+	if (call && (_typeof$41(call) === "object" || typeof call === "function")) return call;
 	else if (call !== void 0) throw new TypeError("Derived constructors may only return object or undefined");
-	return _assertThisInitialized$13(self);
+	return _assertThisInitialized$16(self);
 }
-function _assertThisInitialized$13(self) {
+function _assertThisInitialized$16(self) {
 	if (self === void 0) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
 	return self;
 }
-function _isNativeReflectConstruct$13() {
+function _isNativeReflectConstruct$16() {
 	try {
 		var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function() {}));
 	} catch (t) {}
-	return (_isNativeReflectConstruct$13 = function _isNativeReflectConstruct() {
+	return (_isNativeReflectConstruct$16 = function _isNativeReflectConstruct() {
 		return !!t;
 	})();
 }
-function _getPrototypeOf$13(o) {
-	_getPrototypeOf$13 = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
+function _getPrototypeOf$16(o) {
+	_getPrototypeOf$16 = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
 		return o.__proto__ || Object.getPrototypeOf(o);
 	};
-	return _getPrototypeOf$13(o);
+	return _getPrototypeOf$16(o);
 }
-function _inherits$13(subClass, superClass) {
+function _inherits$16(subClass, superClass) {
 	if (typeof superClass !== "function" && superClass !== null) throw new TypeError("Super expression must either be null or a function");
 	subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: {
 		value: subClass,
@@ -45692,17 +45757,17 @@ function _inherits$13(subClass, superClass) {
 		configurable: true
 	} });
 	Object.defineProperty(subClass, "prototype", { writable: false });
-	if (superClass) _setPrototypeOf$13(subClass, superClass);
+	if (superClass) _setPrototypeOf$16(subClass, superClass);
 }
-function _setPrototypeOf$13(o, p) {
-	_setPrototypeOf$13 = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
+function _setPrototypeOf$16(o, p) {
+	_setPrototypeOf$16 = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
 		o.__proto__ = p;
 		return o;
 	};
-	return _setPrototypeOf$13(o, p);
+	return _setPrototypeOf$16(o, p);
 }
-function _defineProperty$35(obj, key, value) {
-	key = _toPropertyKey$36(key);
+function _defineProperty$38(obj, key, value) {
+	key = _toPropertyKey$39(key);
 	if (key in obj) Object.defineProperty(obj, key, {
 		value,
 		enumerable: true,
@@ -45712,16 +45777,16 @@ function _defineProperty$35(obj, key, value) {
 	else obj[key] = value;
 	return obj;
 }
-function _toPropertyKey$36(t) {
-	var i = _toPrimitive$36(t, "string");
-	return "symbol" == _typeof$38(i) ? i : i + "";
+function _toPropertyKey$39(t) {
+	var i = _toPrimitive$39(t, "string");
+	return "symbol" == _typeof$41(i) ? i : i + "";
 }
-function _toPrimitive$36(t, r) {
-	if ("object" != _typeof$38(t) || !t) return t;
+function _toPrimitive$39(t, r) {
+	if ("object" != _typeof$41(t) || !t) return t;
 	var e = t[Symbol.toPrimitive];
 	if (void 0 !== e) {
 		var i = e.call(t, r || "default");
-		if ("object" != _typeof$38(i)) return i;
+		if ("object" != _typeof$41(i)) return i;
 		throw new TypeError("@@toPrimitive must return a primitive value.");
 	}
 	return ("string" === r ? String : Number)(t);
@@ -45730,10 +45795,10 @@ var EPSILON = 1;
 var TooltipBoundingBox = /* @__PURE__ */ function(_PureComponent) {
 	function TooltipBoundingBox() {
 		var _this;
-		_classCallCheck$16(this, TooltipBoundingBox);
+		_classCallCheck$19(this, TooltipBoundingBox);
 		for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) args[_key] = arguments[_key];
-		_this = _callSuper$12(this, TooltipBoundingBox, [].concat(args));
-		_defineProperty$35(_this, "state", {
+		_this = _callSuper$15(this, TooltipBoundingBox, [].concat(args));
+		_defineProperty$38(_this, "state", {
 			dismissed: false,
 			dismissedAtCoordinate: {
 				x: 0,
@@ -45744,7 +45809,7 @@ var TooltipBoundingBox = /* @__PURE__ */ function(_PureComponent) {
 				height: -1
 			}
 		});
-		_defineProperty$35(_this, "handleKeyDown", function(event) {
+		_defineProperty$38(_this, "handleKeyDown", function(event) {
 			if (event.key === "Escape") {
 				var _this$props$coordinat, _this$props$coordinat2, _this$props$coordinat3, _this$props$coordinat4;
 				_this.setState({
@@ -45758,8 +45823,8 @@ var TooltipBoundingBox = /* @__PURE__ */ function(_PureComponent) {
 		});
 		return _this;
 	}
-	_inherits$13(TooltipBoundingBox, _PureComponent);
-	return _createClass$16(TooltipBoundingBox, [
+	_inherits$16(TooltipBoundingBox, _PureComponent);
+	return _createClass$19(TooltipBoundingBox, [
 		{
 			key: "updateBBox",
 			value: function updateBBox() {
@@ -45812,7 +45877,7 @@ var TooltipBoundingBox = /* @__PURE__ */ function(_PureComponent) {
 					useTranslate3d,
 					viewBox
 				}), cssClasses = _getTooltipTranslate.cssClasses, cssProperties = _getTooltipTranslate.cssProperties;
-				var outerStyle = _objectSpread$31(_objectSpread$31({ transition: isAnimationActive && active ? "transform ".concat(animationDuration, "ms ").concat(animationEasing) : void 0 }, cssProperties), {}, {
+				var outerStyle = _objectSpread$34(_objectSpread$34({ transition: isAnimationActive && active ? "transform ".concat(animationDuration, "ms ").concat(animationEasing) : void 0 }, cssProperties), {}, {
 					pointerEvents: "none",
 					visibility: !this.state.dismissed && active && hasPayload ? "visible" : "hidden",
 					position: "absolute",
@@ -45853,15 +45918,15 @@ var Global = {
 /**
 * @fileOverview Tooltip
 */
-function _typeof$37(o) {
+function _typeof$40(o) {
 	"@babel/helpers - typeof";
-	return _typeof$37 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o) {
+	return _typeof$40 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o) {
 		return typeof o;
 	} : function(o) {
 		return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
-	}, _typeof$37(o);
+	}, _typeof$40(o);
 }
-function ownKeys$30(e, r) {
+function ownKeys$33(e, r) {
 	var t = Object.keys(e);
 	if (Object.getOwnPropertySymbols) {
 		var o = Object.getOwnPropertySymbols(e);
@@ -45871,62 +45936,62 @@ function ownKeys$30(e, r) {
 	}
 	return t;
 }
-function _objectSpread$30(e) {
+function _objectSpread$33(e) {
 	for (var r = 1; r < arguments.length; r++) {
 		var t = null != arguments[r] ? arguments[r] : {};
-		r % 2 ? ownKeys$30(Object(t), !0).forEach(function(r) {
-			_defineProperty$34(e, r, t[r]);
-		}) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$30(Object(t)).forEach(function(r) {
+		r % 2 ? ownKeys$33(Object(t), !0).forEach(function(r) {
+			_defineProperty$37(e, r, t[r]);
+		}) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$33(Object(t)).forEach(function(r) {
 			Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r));
 		});
 	}
 	return e;
 }
-function _classCallCheck$15(instance, Constructor) {
+function _classCallCheck$18(instance, Constructor) {
 	if (!(instance instanceof Constructor)) throw new TypeError("Cannot call a class as a function");
 }
-function _defineProperties$15(target, props) {
+function _defineProperties$18(target, props) {
 	for (var i = 0; i < props.length; i++) {
 		var descriptor = props[i];
 		descriptor.enumerable = descriptor.enumerable || false;
 		descriptor.configurable = true;
 		if ("value" in descriptor) descriptor.writable = true;
-		Object.defineProperty(target, _toPropertyKey$35(descriptor.key), descriptor);
+		Object.defineProperty(target, _toPropertyKey$38(descriptor.key), descriptor);
 	}
 }
-function _createClass$15(Constructor, protoProps, staticProps) {
-	if (protoProps) _defineProperties$15(Constructor.prototype, protoProps);
-	if (staticProps) _defineProperties$15(Constructor, staticProps);
+function _createClass$18(Constructor, protoProps, staticProps) {
+	if (protoProps) _defineProperties$18(Constructor.prototype, protoProps);
+	if (staticProps) _defineProperties$18(Constructor, staticProps);
 	Object.defineProperty(Constructor, "prototype", { writable: false });
 	return Constructor;
 }
-function _callSuper$11(t, o, e) {
-	return o = _getPrototypeOf$12(o), _possibleConstructorReturn$12(t, _isNativeReflectConstruct$12() ? Reflect.construct(o, e || [], _getPrototypeOf$12(t).constructor) : o.apply(t, e));
+function _callSuper$14(t, o, e) {
+	return o = _getPrototypeOf$15(o), _possibleConstructorReturn$15(t, _isNativeReflectConstruct$15() ? Reflect.construct(o, e || [], _getPrototypeOf$15(t).constructor) : o.apply(t, e));
 }
-function _possibleConstructorReturn$12(self, call) {
-	if (call && (_typeof$37(call) === "object" || typeof call === "function")) return call;
+function _possibleConstructorReturn$15(self, call) {
+	if (call && (_typeof$40(call) === "object" || typeof call === "function")) return call;
 	else if (call !== void 0) throw new TypeError("Derived constructors may only return object or undefined");
-	return _assertThisInitialized$12(self);
+	return _assertThisInitialized$15(self);
 }
-function _assertThisInitialized$12(self) {
+function _assertThisInitialized$15(self) {
 	if (self === void 0) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
 	return self;
 }
-function _isNativeReflectConstruct$12() {
+function _isNativeReflectConstruct$15() {
 	try {
 		var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function() {}));
 	} catch (t) {}
-	return (_isNativeReflectConstruct$12 = function _isNativeReflectConstruct() {
+	return (_isNativeReflectConstruct$15 = function _isNativeReflectConstruct() {
 		return !!t;
 	})();
 }
-function _getPrototypeOf$12(o) {
-	_getPrototypeOf$12 = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
+function _getPrototypeOf$15(o) {
+	_getPrototypeOf$15 = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
 		return o.__proto__ || Object.getPrototypeOf(o);
 	};
-	return _getPrototypeOf$12(o);
+	return _getPrototypeOf$15(o);
 }
-function _inherits$12(subClass, superClass) {
+function _inherits$15(subClass, superClass) {
 	if (typeof superClass !== "function" && superClass !== null) throw new TypeError("Super expression must either be null or a function");
 	subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: {
 		value: subClass,
@@ -45934,17 +45999,17 @@ function _inherits$12(subClass, superClass) {
 		configurable: true
 	} });
 	Object.defineProperty(subClass, "prototype", { writable: false });
-	if (superClass) _setPrototypeOf$12(subClass, superClass);
+	if (superClass) _setPrototypeOf$15(subClass, superClass);
 }
-function _setPrototypeOf$12(o, p) {
-	_setPrototypeOf$12 = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
+function _setPrototypeOf$15(o, p) {
+	_setPrototypeOf$15 = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
 		o.__proto__ = p;
 		return o;
 	};
-	return _setPrototypeOf$12(o, p);
+	return _setPrototypeOf$15(o, p);
 }
-function _defineProperty$34(obj, key, value) {
-	key = _toPropertyKey$35(key);
+function _defineProperty$37(obj, key, value) {
+	key = _toPropertyKey$38(key);
 	if (key in obj) Object.defineProperty(obj, key, {
 		value,
 		enumerable: true,
@@ -45954,16 +46019,16 @@ function _defineProperty$34(obj, key, value) {
 	else obj[key] = value;
 	return obj;
 }
-function _toPropertyKey$35(t) {
-	var i = _toPrimitive$35(t, "string");
-	return "symbol" == _typeof$37(i) ? i : i + "";
+function _toPropertyKey$38(t) {
+	var i = _toPrimitive$38(t, "string");
+	return "symbol" == _typeof$40(i) ? i : i + "";
 }
-function _toPrimitive$35(t, r) {
-	if ("object" != _typeof$37(t) || !t) return t;
+function _toPrimitive$38(t, r) {
+	if ("object" != _typeof$40(t) || !t) return t;
 	var e = t[Symbol.toPrimitive];
 	if (void 0 !== e) {
 		var i = e.call(t, r || "default");
-		if ("object" != _typeof$37(i)) return i;
+		if ("object" != _typeof$40(i)) return i;
 		throw new TypeError("@@toPrimitive must return a primitive value.");
 	}
 	return ("string" === r ? String : Number)(t);
@@ -45978,11 +46043,11 @@ function renderContent(content, props) {
 }
 var Tooltip = /* @__PURE__ */ function(_PureComponent) {
 	function Tooltip() {
-		_classCallCheck$15(this, Tooltip);
-		return _callSuper$11(this, Tooltip, arguments);
+		_classCallCheck$18(this, Tooltip);
+		return _callSuper$14(this, Tooltip, arguments);
 	}
-	_inherits$12(Tooltip, _PureComponent);
-	return _createClass$15(Tooltip, [{
+	_inherits$15(Tooltip, _PureComponent);
+	return _createClass$18(Tooltip, [{
 		key: "render",
 		value: function render() {
 			var _this = this;
@@ -46006,12 +46071,12 @@ var Tooltip = /* @__PURE__ */ function(_PureComponent) {
 				useTranslate3d,
 				viewBox,
 				wrapperStyle
-			}, renderContent(content, _objectSpread$30(_objectSpread$30({}, this.props), {}, { payload: finalPayload })));
+			}, renderContent(content, _objectSpread$33(_objectSpread$33({}, this.props), {}, { payload: finalPayload })));
 		}
 	}]);
 }(import_react.PureComponent);
-_defineProperty$34(Tooltip, "displayName", "Tooltip");
-_defineProperty$34(Tooltip, "defaultProps", {
+_defineProperty$37(Tooltip, "displayName", "Tooltip");
+_defineProperty$37(Tooltip, "defaultProps", {
 	accessibilityLayer: false,
 	allowEscapeViewBox: {
 		x: false,
@@ -46360,15 +46425,15 @@ var import_throttle = /* @__PURE__ */ __toESM((/* @__PURE__ */ __commonJSMin(((e
 	}
 	module.exports = throttle;
 })))());
-function _typeof$36(o) {
+function _typeof$39(o) {
 	"@babel/helpers - typeof";
-	return _typeof$36 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o) {
+	return _typeof$39 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o) {
 		return typeof o;
 	} : function(o) {
 		return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
-	}, _typeof$36(o);
+	}, _typeof$39(o);
 }
-function ownKeys$29(e, r) {
+function ownKeys$32(e, r) {
 	var t = Object.keys(e);
 	if (Object.getOwnPropertySymbols) {
 		var o = Object.getOwnPropertySymbols(e);
@@ -46378,19 +46443,19 @@ function ownKeys$29(e, r) {
 	}
 	return t;
 }
-function _objectSpread$29(e) {
+function _objectSpread$32(e) {
 	for (var r = 1; r < arguments.length; r++) {
 		var t = null != arguments[r] ? arguments[r] : {};
-		r % 2 ? ownKeys$29(Object(t), !0).forEach(function(r) {
-			_defineProperty$33(e, r, t[r]);
-		}) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$29(Object(t)).forEach(function(r) {
+		r % 2 ? ownKeys$32(Object(t), !0).forEach(function(r) {
+			_defineProperty$36(e, r, t[r]);
+		}) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$32(Object(t)).forEach(function(r) {
 			Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r));
 		});
 	}
 	return e;
 }
-function _defineProperty$33(obj, key, value) {
-	key = _toPropertyKey$34(key);
+function _defineProperty$36(obj, key, value) {
+	key = _toPropertyKey$37(key);
 	if (key in obj) Object.defineProperty(obj, key, {
 		value,
 		enumerable: true,
@@ -46400,40 +46465,40 @@ function _defineProperty$33(obj, key, value) {
 	else obj[key] = value;
 	return obj;
 }
-function _toPropertyKey$34(t) {
-	var i = _toPrimitive$34(t, "string");
-	return "symbol" == _typeof$36(i) ? i : i + "";
+function _toPropertyKey$37(t) {
+	var i = _toPrimitive$37(t, "string");
+	return "symbol" == _typeof$39(i) ? i : i + "";
 }
-function _toPrimitive$34(t, r) {
-	if ("object" != _typeof$36(t) || !t) return t;
+function _toPrimitive$37(t, r) {
+	if ("object" != _typeof$39(t) || !t) return t;
 	var e = t[Symbol.toPrimitive];
 	if (void 0 !== e) {
 		var i = e.call(t, r || "default");
-		if ("object" != _typeof$36(i)) return i;
+		if ("object" != _typeof$39(i)) return i;
 		throw new TypeError("@@toPrimitive must return a primitive value.");
 	}
 	return ("string" === r ? String : Number)(t);
 }
-function _slicedToArray$10(arr, i) {
-	return _arrayWithHoles$11(arr) || _iterableToArrayLimit$10(arr, i) || _unsupportedIterableToArray$17(arr, i) || _nonIterableRest$11();
+function _slicedToArray$11(arr, i) {
+	return _arrayWithHoles$12(arr) || _iterableToArrayLimit$11(arr, i) || _unsupportedIterableToArray$19(arr, i) || _nonIterableRest$12();
 }
-function _nonIterableRest$11() {
+function _nonIterableRest$12() {
 	throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
-function _unsupportedIterableToArray$17(o, minLen) {
+function _unsupportedIterableToArray$19(o, minLen) {
 	if (!o) return;
-	if (typeof o === "string") return _arrayLikeToArray$17(o, minLen);
+	if (typeof o === "string") return _arrayLikeToArray$19(o, minLen);
 	var n = Object.prototype.toString.call(o).slice(8, -1);
 	if (n === "Object" && o.constructor) n = o.constructor.name;
 	if (n === "Map" || n === "Set") return Array.from(o);
-	if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray$17(o, minLen);
+	if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray$19(o, minLen);
 }
-function _arrayLikeToArray$17(arr, len) {
+function _arrayLikeToArray$19(arr, len) {
 	if (len == null || len > arr.length) len = arr.length;
 	for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
 	return arr2;
 }
-function _iterableToArrayLimit$10(r, l) {
+function _iterableToArrayLimit$11(r, l) {
 	var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"];
 	if (null != t) {
 		var e, n, i, u, a = [], f = !0, o = !1;
@@ -46454,7 +46519,7 @@ function _iterableToArrayLimit$10(r, l) {
 		return a;
 	}
 }
-function _arrayWithHoles$11(arr) {
+function _arrayWithHoles$12(arr) {
 	if (Array.isArray(arr)) return arr;
 }
 var ResponsiveContainer = /* @__PURE__ */ (0, import_react.forwardRef)(function(_ref, ref) {
@@ -46474,7 +46539,7 @@ var ResponsiveContainer = /* @__PURE__ */ (0, import_react.forwardRef)(function(
 			configurable: true
 		});
 	});
-	var _useState2 = _slicedToArray$10((0, import_react.useState)({
+	var _useState2 = _slicedToArray$11((0, import_react.useState)({
 		containerWidth: initialDimension.width,
 		containerHeight: initialDimension.height
 	}), 2), sizes = _useState2[0], setSizes = _useState2[1];
@@ -46523,10 +46588,10 @@ var ResponsiveContainer = /* @__PURE__ */ (0, import_react.forwardRef)(function(
 		warn$1(calculatedWidth > 0 || calculatedHeight > 0, "The width(%s) and height(%s) of chart should be greater than 0,\n       please check the style of container, or the props width(%s) and height(%s),\n       or add a minWidth(%s) or minHeight(%s) or use aspect(%s) to control the\n       height and width.", calculatedWidth, calculatedHeight, width, height, minWidth, minHeight, aspect);
 		var isCharts = !Array.isArray(children) && getDisplayName(children.type).endsWith("Chart");
 		return import_react.Children.map(children, function(child) {
-			if (/* @__PURE__ */ import_react.isValidElement(child)) return /* @__PURE__ */ (0, import_react.cloneElement)(child, _objectSpread$29({
+			if (/* @__PURE__ */ import_react.isValidElement(child)) return /* @__PURE__ */ (0, import_react.cloneElement)(child, _objectSpread$32({
 				width: calculatedWidth,
 				height: calculatedHeight
-			}, isCharts ? { style: _objectSpread$29({
+			}, isCharts ? { style: _objectSpread$32({
 				height: "100%",
 				width: "100%",
 				maxHeight: calculatedHeight,
@@ -46547,7 +46612,7 @@ var ResponsiveContainer = /* @__PURE__ */ (0, import_react.forwardRef)(function(
 	return /* @__PURE__ */ import_react.createElement("div", {
 		id: id ? "".concat(id) : void 0,
 		className: clsx("recharts-responsive-container", className),
-		style: _objectSpread$29(_objectSpread$29({}, style), {}, {
+		style: _objectSpread$32(_objectSpread$32({}, style), {}, {
 			width,
 			height,
 			minWidth,
@@ -46568,15 +46633,15 @@ var Cell = function Cell(_props) {
 Cell.displayName = "Cell";
 //#endregion
 //#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/recharts@2.15.4_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/recharts/es6/util/DOMUtils.js
-function _typeof$35(o) {
+function _typeof$38(o) {
 	"@babel/helpers - typeof";
-	return _typeof$35 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o) {
+	return _typeof$38 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o) {
 		return typeof o;
 	} : function(o) {
 		return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
-	}, _typeof$35(o);
+	}, _typeof$38(o);
 }
-function ownKeys$28(e, r) {
+function ownKeys$31(e, r) {
 	var t = Object.keys(e);
 	if (Object.getOwnPropertySymbols) {
 		var o = Object.getOwnPropertySymbols(e);
@@ -46586,19 +46651,19 @@ function ownKeys$28(e, r) {
 	}
 	return t;
 }
-function _objectSpread$28(e) {
+function _objectSpread$31(e) {
 	for (var r = 1; r < arguments.length; r++) {
 		var t = null != arguments[r] ? arguments[r] : {};
-		r % 2 ? ownKeys$28(Object(t), !0).forEach(function(r) {
-			_defineProperty$32(e, r, t[r]);
-		}) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$28(Object(t)).forEach(function(r) {
+		r % 2 ? ownKeys$31(Object(t), !0).forEach(function(r) {
+			_defineProperty$35(e, r, t[r]);
+		}) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$31(Object(t)).forEach(function(r) {
 			Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r));
 		});
 	}
 	return e;
 }
-function _defineProperty$32(obj, key, value) {
-	key = _toPropertyKey$33(key);
+function _defineProperty$35(obj, key, value) {
+	key = _toPropertyKey$36(key);
 	if (key in obj) Object.defineProperty(obj, key, {
 		value,
 		enumerable: true,
@@ -46608,16 +46673,16 @@ function _defineProperty$32(obj, key, value) {
 	else obj[key] = value;
 	return obj;
 }
-function _toPropertyKey$33(t) {
-	var i = _toPrimitive$33(t, "string");
-	return "symbol" == _typeof$35(i) ? i : i + "";
+function _toPropertyKey$36(t) {
+	var i = _toPrimitive$36(t, "string");
+	return "symbol" == _typeof$38(i) ? i : i + "";
 }
-function _toPrimitive$33(t, r) {
-	if ("object" != _typeof$35(t) || !t) return t;
+function _toPrimitive$36(t, r) {
+	if ("object" != _typeof$38(t) || !t) return t;
 	var e = t[Symbol.toPrimitive];
 	if (void 0 !== e) {
 		var i = e.call(t, r || "default");
-		if ("object" != _typeof$35(i)) return i;
+		if ("object" != _typeof$38(i)) return i;
 		throw new TypeError("@@toPrimitive must return a primitive value.");
 	}
 	return ("string" === r ? String : Number)(t);
@@ -46638,7 +46703,7 @@ var SPAN_STYLE = {
 };
 var MEASUREMENT_SPAN_ID = "recharts_measurement_span";
 function removeInvalidKeys(obj) {
-	var copyObj = _objectSpread$28({}, obj);
+	var copyObj = _objectSpread$31({}, obj);
 	Object.keys(copyObj).forEach(function(key) {
 		if (!copyObj[key]) delete copyObj[key];
 	});
@@ -46664,7 +46729,7 @@ var getStringSize = function getStringSize(text) {
 			measurementSpan.setAttribute("aria-hidden", "true");
 			document.body.appendChild(measurementSpan);
 		}
-		var measurementSpanStyle = _objectSpread$28(_objectSpread$28({}, SPAN_STYLE), copyStyle);
+		var measurementSpanStyle = _objectSpread$31(_objectSpread$31({}, SPAN_STYLE), copyStyle);
 		Object.assign(measurementSpan.style, measurementSpanStyle);
 		measurementSpan.textContent = "".concat(text);
 		var rect = measurementSpan.getBoundingClientRect();
@@ -46693,34 +46758,34 @@ var getOffset$1 = function getOffset(rect) {
 };
 //#endregion
 //#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/recharts@2.15.4_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/recharts/es6/util/ReduceCSSCalc.js
-function _typeof$34(o) {
+function _typeof$37(o) {
 	"@babel/helpers - typeof";
-	return _typeof$34 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o) {
+	return _typeof$37 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o) {
 		return typeof o;
 	} : function(o) {
 		return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
-	}, _typeof$34(o);
+	}, _typeof$37(o);
 }
-function _slicedToArray$9(arr, i) {
-	return _arrayWithHoles$10(arr) || _iterableToArrayLimit$9(arr, i) || _unsupportedIterableToArray$16(arr, i) || _nonIterableRest$10();
+function _slicedToArray$10(arr, i) {
+	return _arrayWithHoles$11(arr) || _iterableToArrayLimit$10(arr, i) || _unsupportedIterableToArray$18(arr, i) || _nonIterableRest$11();
 }
-function _nonIterableRest$10() {
+function _nonIterableRest$11() {
 	throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
-function _unsupportedIterableToArray$16(o, minLen) {
+function _unsupportedIterableToArray$18(o, minLen) {
 	if (!o) return;
-	if (typeof o === "string") return _arrayLikeToArray$16(o, minLen);
+	if (typeof o === "string") return _arrayLikeToArray$18(o, minLen);
 	var n = Object.prototype.toString.call(o).slice(8, -1);
 	if (n === "Object" && o.constructor) n = o.constructor.name;
 	if (n === "Map" || n === "Set") return Array.from(o);
-	if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray$16(o, minLen);
+	if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray$18(o, minLen);
 }
-function _arrayLikeToArray$16(arr, len) {
+function _arrayLikeToArray$18(arr, len) {
 	if (len == null || len > arr.length) len = arr.length;
 	for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
 	return arr2;
 }
-function _iterableToArrayLimit$9(r, l) {
+function _iterableToArrayLimit$10(r, l) {
 	var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"];
 	if (null != t) {
 		var e, n, i, u, a = [], f = !0, o = !1;
@@ -46741,37 +46806,37 @@ function _iterableToArrayLimit$9(r, l) {
 		return a;
 	}
 }
-function _arrayWithHoles$10(arr) {
+function _arrayWithHoles$11(arr) {
 	if (Array.isArray(arr)) return arr;
 }
-function _classCallCheck$14(instance, Constructor) {
+function _classCallCheck$17(instance, Constructor) {
 	if (!(instance instanceof Constructor)) throw new TypeError("Cannot call a class as a function");
 }
-function _defineProperties$14(target, props) {
+function _defineProperties$17(target, props) {
 	for (var i = 0; i < props.length; i++) {
 		var descriptor = props[i];
 		descriptor.enumerable = descriptor.enumerable || false;
 		descriptor.configurable = true;
 		if ("value" in descriptor) descriptor.writable = true;
-		Object.defineProperty(target, _toPropertyKey$32(descriptor.key), descriptor);
+		Object.defineProperty(target, _toPropertyKey$35(descriptor.key), descriptor);
 	}
 }
-function _createClass$14(Constructor, protoProps, staticProps) {
-	if (protoProps) _defineProperties$14(Constructor.prototype, protoProps);
-	if (staticProps) _defineProperties$14(Constructor, staticProps);
+function _createClass$17(Constructor, protoProps, staticProps) {
+	if (protoProps) _defineProperties$17(Constructor.prototype, protoProps);
+	if (staticProps) _defineProperties$17(Constructor, staticProps);
 	Object.defineProperty(Constructor, "prototype", { writable: false });
 	return Constructor;
 }
-function _toPropertyKey$32(t) {
-	var i = _toPrimitive$32(t, "string");
-	return "symbol" == _typeof$34(i) ? i : i + "";
+function _toPropertyKey$35(t) {
+	var i = _toPrimitive$35(t, "string");
+	return "symbol" == _typeof$37(i) ? i : i + "";
 }
-function _toPrimitive$32(t, r) {
-	if ("object" != _typeof$34(t) || !t) return t;
+function _toPrimitive$35(t, r) {
+	if ("object" != _typeof$37(t) || !t) return t;
 	var e = t[Symbol.toPrimitive];
 	if (void 0 !== e) {
 		var i = e.call(t, r || "default");
-		if ("object" != _typeof$34(i)) return i;
+		if ("object" != _typeof$37(i)) return i;
 		throw new TypeError("@@toPrimitive must return a primitive value.");
 	}
 	return ("string" === r ? String : Number)(t);
@@ -46796,7 +46861,7 @@ function convertToPx(value, unit) {
 }
 var DecimalCSS = /* @__PURE__ */ function() {
 	function DecimalCSS(num, unit) {
-		_classCallCheck$14(this, DecimalCSS);
+		_classCallCheck$17(this, DecimalCSS);
 		this.num = num;
 		this.unit = unit;
 		this.num = num;
@@ -46811,7 +46876,7 @@ var DecimalCSS = /* @__PURE__ */ function() {
 			this.unit = "px";
 		}
 	}
-	return _createClass$14(DecimalCSS, [
+	return _createClass$17(DecimalCSS, [
 		{
 			key: "add",
 			value: function add(other) {
@@ -46856,7 +46921,7 @@ var DecimalCSS = /* @__PURE__ */ function() {
 		key: "parse",
 		value: function parse(str) {
 			var _NUM_SPLIT_REGEX$exec;
-			var _ref2 = _slicedToArray$9((_NUM_SPLIT_REGEX$exec = NUM_SPLIT_REGEX.exec(str)) !== null && _NUM_SPLIT_REGEX$exec !== void 0 ? _NUM_SPLIT_REGEX$exec : [], 3), numStr = _ref2[1], unit = _ref2[2];
+			var _ref2 = _slicedToArray$10((_NUM_SPLIT_REGEX$exec = NUM_SPLIT_REGEX.exec(str)) !== null && _NUM_SPLIT_REGEX$exec !== void 0 ? _NUM_SPLIT_REGEX$exec : [], 3), numStr = _ref2[1], unit = _ref2[2];
 			return new DecimalCSS(parseFloat(numStr), unit !== null && unit !== void 0 ? unit : "");
 		}
 	}]);
@@ -46866,7 +46931,7 @@ function calculateArithmetic(expr) {
 	var newExpr = expr;
 	while (newExpr.includes("*") || newExpr.includes("/")) {
 		var _MULTIPLY_OR_DIVIDE_R;
-		var _ref4 = _slicedToArray$9((_MULTIPLY_OR_DIVIDE_R = MULTIPLY_OR_DIVIDE_REGEX.exec(newExpr)) !== null && _MULTIPLY_OR_DIVIDE_R !== void 0 ? _MULTIPLY_OR_DIVIDE_R : [], 4), leftOperand = _ref4[1], operator = _ref4[2], rightOperand = _ref4[3];
+		var _ref4 = _slicedToArray$10((_MULTIPLY_OR_DIVIDE_R = MULTIPLY_OR_DIVIDE_REGEX.exec(newExpr)) !== null && _MULTIPLY_OR_DIVIDE_R !== void 0 ? _MULTIPLY_OR_DIVIDE_R : [], 4), leftOperand = _ref4[1], operator = _ref4[2], rightOperand = _ref4[3];
 		var lTs = DecimalCSS.parse(leftOperand !== null && leftOperand !== void 0 ? leftOperand : "");
 		var rTs = DecimalCSS.parse(rightOperand !== null && rightOperand !== void 0 ? rightOperand : "");
 		var result = operator === "*" ? lTs.multiply(rTs) : lTs.divide(rTs);
@@ -46875,7 +46940,7 @@ function calculateArithmetic(expr) {
 	}
 	while (newExpr.includes("+") || /.-\d+(?:\.\d+)?/.test(newExpr)) {
 		var _ADD_OR_SUBTRACT_REGE;
-		var _ref6 = _slicedToArray$9((_ADD_OR_SUBTRACT_REGE = ADD_OR_SUBTRACT_REGEX.exec(newExpr)) !== null && _ADD_OR_SUBTRACT_REGE !== void 0 ? _ADD_OR_SUBTRACT_REGE : [], 4), _leftOperand = _ref6[1], _operator = _ref6[2], _rightOperand = _ref6[3];
+		var _ref6 = _slicedToArray$10((_ADD_OR_SUBTRACT_REGE = ADD_OR_SUBTRACT_REGEX.exec(newExpr)) !== null && _ADD_OR_SUBTRACT_REGE !== void 0 ? _ADD_OR_SUBTRACT_REGE : [], 4), _leftOperand = _ref6[1], _operator = _ref6[2], _rightOperand = _ref6[3];
 		var _lTs = DecimalCSS.parse(_leftOperand !== null && _leftOperand !== void 0 ? _leftOperand : "");
 		var _rTs = DecimalCSS.parse(_rightOperand !== null && _rightOperand !== void 0 ? _rightOperand : "");
 		var _result = _operator === "+" ? _lTs.add(_rTs) : _lTs.subtract(_rTs);
@@ -46888,7 +46953,7 @@ var PARENTHESES_REGEX = /\(([^()]*)\)/;
 function calculateParentheses(expr) {
 	var newExpr = expr;
 	while (newExpr.includes("(")) {
-		var parentheticalExpression = _slicedToArray$9(PARENTHESES_REGEX.exec(newExpr), 2)[1];
+		var parentheticalExpression = _slicedToArray$10(PARENTHESES_REGEX.exec(newExpr), 2)[1];
 		newExpr = newExpr.replace(PARENTHESES_REGEX, calculateArithmetic(parentheticalExpression));
 	}
 	return newExpr;
@@ -46914,7 +46979,7 @@ function reduceCSSCalc(expression) {
 }
 //#endregion
 //#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/recharts@2.15.4_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/recharts/es6/component/Text.js
-var _excluded$12 = [
+var _excluded$14 = [
 	"x",
 	"y",
 	"lineHeight",
@@ -46923,26 +46988,26 @@ var _excluded$12 = [
 	"textAnchor",
 	"verticalAnchor",
 	"fill"
-], _excluded2$5 = [
+], _excluded2$6 = [
 	"dx",
 	"dy",
 	"angle",
 	"className",
 	"breakAll"
 ];
-function _extends$21() {
-	_extends$21 = Object.assign ? Object.assign.bind() : function(target) {
+function _extends$25() {
+	_extends$25 = Object.assign ? Object.assign.bind() : function(target) {
 		for (var i = 1; i < arguments.length; i++) {
 			var source = arguments[i];
 			for (var key in source) if (Object.prototype.hasOwnProperty.call(source, key)) target[key] = source[key];
 		}
 		return target;
 	};
-	return _extends$21.apply(this, arguments);
+	return _extends$25.apply(this, arguments);
 }
-function _objectWithoutProperties$12(source, excluded) {
+function _objectWithoutProperties$14(source, excluded) {
 	if (source == null) return {};
-	var target = _objectWithoutPropertiesLoose$12(source, excluded);
+	var target = _objectWithoutPropertiesLoose$14(source, excluded);
 	var key, i;
 	if (Object.getOwnPropertySymbols) {
 		var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
@@ -46955,7 +47020,7 @@ function _objectWithoutProperties$12(source, excluded) {
 	}
 	return target;
 }
-function _objectWithoutPropertiesLoose$12(source, excluded) {
+function _objectWithoutPropertiesLoose$14(source, excluded) {
 	if (source == null) return {};
 	var target = {};
 	for (var key in source) if (Object.prototype.hasOwnProperty.call(source, key)) {
@@ -46964,26 +47029,26 @@ function _objectWithoutPropertiesLoose$12(source, excluded) {
 	}
 	return target;
 }
-function _slicedToArray$8(arr, i) {
-	return _arrayWithHoles$9(arr) || _iterableToArrayLimit$8(arr, i) || _unsupportedIterableToArray$15(arr, i) || _nonIterableRest$9();
+function _slicedToArray$9(arr, i) {
+	return _arrayWithHoles$10(arr) || _iterableToArrayLimit$9(arr, i) || _unsupportedIterableToArray$17(arr, i) || _nonIterableRest$10();
 }
-function _nonIterableRest$9() {
+function _nonIterableRest$10() {
 	throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
-function _unsupportedIterableToArray$15(o, minLen) {
+function _unsupportedIterableToArray$17(o, minLen) {
 	if (!o) return;
-	if (typeof o === "string") return _arrayLikeToArray$15(o, minLen);
+	if (typeof o === "string") return _arrayLikeToArray$17(o, minLen);
 	var n = Object.prototype.toString.call(o).slice(8, -1);
 	if (n === "Object" && o.constructor) n = o.constructor.name;
 	if (n === "Map" || n === "Set") return Array.from(o);
-	if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray$15(o, minLen);
+	if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray$17(o, minLen);
 }
-function _arrayLikeToArray$15(arr, len) {
+function _arrayLikeToArray$17(arr, len) {
 	if (len == null || len > arr.length) len = arr.length;
 	for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
 	return arr2;
 }
-function _iterableToArrayLimit$8(r, l) {
+function _iterableToArrayLimit$9(r, l) {
 	var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"];
 	if (null != t) {
 		var e, n, i, u, a = [], f = !0, o = !1;
@@ -47004,7 +47069,7 @@ function _iterableToArrayLimit$8(r, l) {
 		return a;
 	}
 }
-function _arrayWithHoles$9(arr) {
+function _arrayWithHoles$10(arr) {
 	if (Array.isArray(arr)) return arr;
 }
 var BREAKING_SPACES = /[ \f\n\r\t\v\u2028\u2029]+/;
@@ -47071,8 +47136,8 @@ var calculateWordsByLines = function calculateWordsByLines(_ref2, initialWordsWi
 	var trimmedResult;
 	while (start <= end && iterations <= text.length - 1) {
 		var middle = Math.floor((start + end) / 2);
-		var _checkOverflow2 = _slicedToArray$8(checkOverflow(middle - 1), 2), doesPrevOverflow = _checkOverflow2[0], result = _checkOverflow2[1];
-		var doesMiddleOverflow = _slicedToArray$8(checkOverflow(middle), 1)[0];
+		var _checkOverflow2 = _slicedToArray$9(checkOverflow(middle - 1), 2), doesPrevOverflow = _checkOverflow2[0], result = _checkOverflow2[1];
+		var doesMiddleOverflow = _slicedToArray$9(checkOverflow(middle), 1)[0];
 		if (!doesPrevOverflow && !doesMiddleOverflow) start = middle + 1;
 		if (doesPrevOverflow && doesMiddleOverflow) end = middle - 1;
 		if (!doesPrevOverflow && doesMiddleOverflow) {
@@ -47111,7 +47176,7 @@ var getWordsByLines = function getWordsByLines(_ref4) {
 };
 var DEFAULT_FILL = "#808080";
 var Text = function Text(_ref5) {
-	var _ref5$x = _ref5.x, propsX = _ref5$x === void 0 ? 0 : _ref5$x, _ref5$y = _ref5.y, propsY = _ref5$y === void 0 ? 0 : _ref5$y, _ref5$lineHeight = _ref5.lineHeight, lineHeight = _ref5$lineHeight === void 0 ? "1em" : _ref5$lineHeight, _ref5$capHeight = _ref5.capHeight, capHeight = _ref5$capHeight === void 0 ? "0.71em" : _ref5$capHeight, _ref5$scaleToFit = _ref5.scaleToFit, scaleToFit = _ref5$scaleToFit === void 0 ? false : _ref5$scaleToFit, _ref5$textAnchor = _ref5.textAnchor, textAnchor = _ref5$textAnchor === void 0 ? "start" : _ref5$textAnchor, _ref5$verticalAnchor = _ref5.verticalAnchor, verticalAnchor = _ref5$verticalAnchor === void 0 ? "end" : _ref5$verticalAnchor, _ref5$fill = _ref5.fill, fill = _ref5$fill === void 0 ? DEFAULT_FILL : _ref5$fill, props = _objectWithoutProperties$12(_ref5, _excluded$12);
+	var _ref5$x = _ref5.x, propsX = _ref5$x === void 0 ? 0 : _ref5$x, _ref5$y = _ref5.y, propsY = _ref5$y === void 0 ? 0 : _ref5$y, _ref5$lineHeight = _ref5.lineHeight, lineHeight = _ref5$lineHeight === void 0 ? "1em" : _ref5$lineHeight, _ref5$capHeight = _ref5.capHeight, capHeight = _ref5$capHeight === void 0 ? "0.71em" : _ref5$capHeight, _ref5$scaleToFit = _ref5.scaleToFit, scaleToFit = _ref5$scaleToFit === void 0 ? false : _ref5$scaleToFit, _ref5$textAnchor = _ref5.textAnchor, textAnchor = _ref5$textAnchor === void 0 ? "start" : _ref5$textAnchor, _ref5$verticalAnchor = _ref5.verticalAnchor, verticalAnchor = _ref5$verticalAnchor === void 0 ? "end" : _ref5$verticalAnchor, _ref5$fill = _ref5.fill, fill = _ref5$fill === void 0 ? DEFAULT_FILL : _ref5$fill, props = _objectWithoutProperties$14(_ref5, _excluded$14);
 	var wordsByLines = (0, import_react.useMemo)(function() {
 		return getWordsByLines({
 			breakAll: props.breakAll,
@@ -47129,7 +47194,7 @@ var Text = function Text(_ref5) {
 		props.style,
 		props.width
 	]);
-	var dx = props.dx, dy = props.dy, angle = props.angle, className = props.className, breakAll = props.breakAll, textProps = _objectWithoutProperties$12(props, _excluded2$5);
+	var dx = props.dx, dy = props.dy, angle = props.angle, className = props.className, breakAll = props.breakAll, textProps = _objectWithoutProperties$14(props, _excluded2$6);
 	if (!isNumOrStr(propsX) || !isNumOrStr(propsY)) return null;
 	var x = propsX + (isNumber(dx) ? dx : 0);
 	var y = propsY + (isNumber(dy) ? dy : 0);
@@ -47153,7 +47218,7 @@ var Text = function Text(_ref5) {
 	}
 	if (angle) transforms.push("rotate(".concat(angle, ", ").concat(x, ", ").concat(y, ")"));
 	if (transforms.length) textProps.transform = transforms.join(" ");
-	return /* @__PURE__ */ import_react.createElement("text", _extends$21({}, filterProps(textProps, true), {
+	return /* @__PURE__ */ import_react.createElement("text", _extends$25({}, filterProps(textProps, true), {
 		x,
 		y,
 		className: clsx("recharts-text", className),
@@ -47355,7 +47420,7 @@ function tickStep(start, stop, count) {
 }
 //#endregion
 //#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/d3-array@3.2.4/node_modules/d3-array/src/max.js
-function max$2(values, valueof) {
+function max$3(values, valueof) {
 	let max;
 	if (valueof === void 0) {
 		for (const value of values) if (value != null && (max < value || max === void 0 && value >= value)) max = value;
@@ -47367,7 +47432,7 @@ function max$2(values, valueof) {
 }
 //#endregion
 //#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/d3-array@3.2.4/node_modules/d3-array/src/min.js
-function min$1(values, valueof) {
+function min$2(values, valueof) {
 	let min;
 	if (valueof === void 0) {
 		for (const value of values) if (value != null && (min > value || min === void 0 && value >= value)) min = value;
@@ -47423,10 +47488,10 @@ function swap(array, i, j) {
 function quantile$1(values, p, valueof) {
 	values = Float64Array.from(numbers(values, valueof));
 	if (!(n = values.length) || isNaN(p = +p)) return;
-	if (p <= 0 || n < 2) return min$1(values);
-	if (p >= 1) return max$2(values);
-	var n, i = (n - 1) * p, i0 = Math.floor(i), value0 = max$2(quickselect(values, i0).subarray(0, i0 + 1));
-	return value0 + (min$1(values.subarray(i0 + 1)) - value0) * (i - i0);
+	if (p <= 0 || n < 2) return min$2(values);
+	if (p >= 1) return max$3(values);
+	var n, i = (n - 1) * p, i0 = Math.floor(i), value0 = max$3(quickselect(values, i0).subarray(0, i0 + 1));
+	return value0 + (min$2(values.subarray(i0 + 1)) - value0) * (i - i0);
 }
 function quantileSorted(values, p, valueof = number$2) {
 	if (!(n = values.length) || isNaN(p = +p)) return;
@@ -48242,9 +48307,9 @@ function formatNumerals_default(numerals) {
 }
 //#endregion
 //#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/d3-format@3.1.2/node_modules/d3-format/src/formatSpecifier.js
-var re = /^(?:(.)?([<>=^]))?([+\-( ])?([$#])?(0)?(\d+)?(,)?(\.\d+)?(~)?([a-z%])?$/i;
+var re$1 = /^(?:(.)?([<>=^]))?([+\-( ])?([$#])?(0)?(\d+)?(,)?(\.\d+)?(~)?([a-z%])?$/i;
 function formatSpecifier(specifier) {
-	if (!(match = re.exec(specifier))) throw new Error("invalid format: " + specifier);
+	if (!(match = re$1.exec(specifier))) throw new Error("invalid format: " + specifier);
 	var match;
 	return new FormatSpecifier({
 		fill: match[1],
@@ -48424,7 +48489,7 @@ function locale_default(locale) {
 //#endregion
 //#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/d3-format@3.1.2/node_modules/d3-format/src/defaultLocale.js
 var locale$1;
-var format;
+var format$1;
 var formatPrefix;
 defaultLocale$1({
 	thousands: ",",
@@ -48433,7 +48498,7 @@ defaultLocale$1({
 });
 function defaultLocale$1(definition) {
 	locale$1 = locale_default(definition);
-	format = locale$1.format;
+	format$1 = locale$1.format;
 	formatPrefix = locale$1.formatPrefix;
 	return locale$1;
 }
@@ -48475,7 +48540,7 @@ function tickFormat(start, stop, count, specifier) {
 			if (specifier.precision == null && !isNaN(precision = precisionFixed_default(step))) specifier.precision = precision - (specifier.type === "%") * 2;
 			break;
 	}
-	return format(specifier);
+	return format$1(specifier);
 }
 //#endregion
 //#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/d3-scale@4.0.2/node_modules/d3-scale/src/linear.js
@@ -48644,7 +48709,7 @@ function loggish(transform) {
 		if (specifier == null) specifier = base === 10 ? "s" : ",";
 		if (typeof specifier !== "function") {
 			if (!(base % 1) && (specifier = formatSpecifier(specifier)).precision == null) specifier.trim = true;
-			specifier = format(specifier);
+			specifier = format$1(specifier);
 		}
 		if (count === Infinity) return specifier;
 		const k = Math.max(1, base * count / scale.ticks().length);
@@ -51246,27 +51311,27 @@ var require_decimal = /* @__PURE__ */ __commonJSMin(((exports, module) => {
 }));
 //#endregion
 //#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/recharts-scale@0.4.5/node_modules/recharts-scale/es6/util/utils.js
-function _toConsumableArray$9(arr) {
-	return _arrayWithoutHoles$9(arr) || _iterableToArray$10(arr) || _unsupportedIterableToArray$14(arr) || _nonIterableSpread$9();
+function _toConsumableArray$10(arr) {
+	return _arrayWithoutHoles$10(arr) || _iterableToArray$11(arr) || _unsupportedIterableToArray$16(arr) || _nonIterableSpread$10();
 }
-function _nonIterableSpread$9() {
+function _nonIterableSpread$10() {
 	throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
-function _unsupportedIterableToArray$14(o, minLen) {
+function _unsupportedIterableToArray$16(o, minLen) {
 	if (!o) return;
-	if (typeof o === "string") return _arrayLikeToArray$14(o, minLen);
+	if (typeof o === "string") return _arrayLikeToArray$16(o, minLen);
 	var n = Object.prototype.toString.call(o).slice(8, -1);
 	if (n === "Object" && o.constructor) n = o.constructor.name;
 	if (n === "Map" || n === "Set") return Array.from(o);
-	if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray$14(o, minLen);
+	if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray$16(o, minLen);
 }
-function _iterableToArray$10(iter) {
+function _iterableToArray$11(iter) {
 	if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);
 }
-function _arrayWithoutHoles$9(arr) {
-	if (Array.isArray(arr)) return _arrayLikeToArray$14(arr);
+function _arrayWithoutHoles$10(arr) {
+	if (Array.isArray(arr)) return _arrayLikeToArray$16(arr);
 }
-function _arrayLikeToArray$14(arr, len) {
+function _arrayLikeToArray$16(arr, len) {
 	if (len == null || len > arr.length) len = arr.length;
 	for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
 	return arr2;
@@ -51297,7 +51362,7 @@ var curryN = function curryN(n, fn) {
 			var newArgs = args.map(function(arg) {
 				return isPlaceHolder(arg) ? restArgs.shift() : arg;
 			});
-			return fn.apply(void 0, _toConsumableArray$9(newArgs).concat(restArgs));
+			return fn.apply(void 0, _toConsumableArray$10(newArgs).concat(restArgs));
 		}));
 	});
 };
@@ -51407,38 +51472,38 @@ var arithmetic_default = {
 * @author xile611, arcthur
 * @date 2015-09-17
 */
-function _toConsumableArray$8(arr) {
-	return _arrayWithoutHoles$8(arr) || _iterableToArray$9(arr) || _unsupportedIterableToArray$13(arr) || _nonIterableSpread$8();
+function _toConsumableArray$9(arr) {
+	return _arrayWithoutHoles$9(arr) || _iterableToArray$10(arr) || _unsupportedIterableToArray$15(arr) || _nonIterableSpread$9();
 }
-function _nonIterableSpread$8() {
+function _nonIterableSpread$9() {
 	throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
-function _iterableToArray$9(iter) {
+function _iterableToArray$10(iter) {
 	if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);
 }
-function _arrayWithoutHoles$8(arr) {
-	if (Array.isArray(arr)) return _arrayLikeToArray$13(arr);
+function _arrayWithoutHoles$9(arr) {
+	if (Array.isArray(arr)) return _arrayLikeToArray$15(arr);
 }
-function _slicedToArray$7(arr, i) {
-	return _arrayWithHoles$8(arr) || _iterableToArrayLimit$7(arr, i) || _unsupportedIterableToArray$13(arr, i) || _nonIterableRest$8();
+function _slicedToArray$8(arr, i) {
+	return _arrayWithHoles$9(arr) || _iterableToArrayLimit$8(arr, i) || _unsupportedIterableToArray$15(arr, i) || _nonIterableRest$9();
 }
-function _nonIterableRest$8() {
+function _nonIterableRest$9() {
 	throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
-function _unsupportedIterableToArray$13(o, minLen) {
+function _unsupportedIterableToArray$15(o, minLen) {
 	if (!o) return;
-	if (typeof o === "string") return _arrayLikeToArray$13(o, minLen);
+	if (typeof o === "string") return _arrayLikeToArray$15(o, minLen);
 	var n = Object.prototype.toString.call(o).slice(8, -1);
 	if (n === "Object" && o.constructor) n = o.constructor.name;
 	if (n === "Map" || n === "Set") return Array.from(o);
-	if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray$13(o, minLen);
+	if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray$15(o, minLen);
 }
-function _arrayLikeToArray$13(arr, len) {
+function _arrayLikeToArray$15(arr, len) {
 	if (len == null || len > arr.length) len = arr.length;
 	for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
 	return arr2;
 }
-function _iterableToArrayLimit$7(arr, i) {
+function _iterableToArrayLimit$8(arr, i) {
 	if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return;
 	var _arr = [];
 	var _n = true;
@@ -51461,7 +51526,7 @@ function _iterableToArrayLimit$7(arr, i) {
 	}
 	return _arr;
 }
-function _arrayWithHoles$8(arr) {
+function _arrayWithHoles$9(arr) {
 	if (Array.isArray(arr)) return arr;
 }
 /**
@@ -51472,7 +51537,7 @@ function _arrayWithHoles$8(arr) {
 * @return {Array} An interval
 */
 function getValidInterval(_ref) {
-	var _ref2 = _slicedToArray$7(_ref, 2), min = _ref2[0], max = _ref2[1];
+	var _ref2 = _slicedToArray$8(_ref, 2), min = _ref2[0], max = _ref2[1];
 	var validMin = min, validMax = max;
 	if (min > max) {
 		validMin = max;
@@ -51569,15 +51634,15 @@ function calculateStep(min, max, tickCount, allowDecimals) {
 * @return {Array}   ticks
 */
 function getNiceTickValuesFn(_ref3) {
-	var _ref4 = _slicedToArray$7(_ref3, 2), min = _ref4[0], max = _ref4[1];
+	var _ref4 = _slicedToArray$8(_ref3, 2), min = _ref4[0], max = _ref4[1];
 	var tickCount = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : 6;
 	var allowDecimals = arguments.length > 2 && arguments[2] !== void 0 ? arguments[2] : true;
 	var count = Math.max(tickCount, 2);
-	var _getValidInterval2 = _slicedToArray$7(getValidInterval([min, max]), 2), cormin = _getValidInterval2[0], cormax = _getValidInterval2[1];
+	var _getValidInterval2 = _slicedToArray$8(getValidInterval([min, max]), 2), cormin = _getValidInterval2[0], cormax = _getValidInterval2[1];
 	if (cormin === -Infinity || cormax === Infinity) {
-		var _values = cormax === Infinity ? [cormin].concat(_toConsumableArray$8(range$2(0, tickCount - 1).map(function() {
+		var _values = cormax === Infinity ? [cormin].concat(_toConsumableArray$9(range$2(0, tickCount - 1).map(function() {
 			return Infinity;
-		}))) : [].concat(_toConsumableArray$8(range$2(0, tickCount - 1).map(function() {
+		}))) : [].concat(_toConsumableArray$9(range$2(0, tickCount - 1).map(function() {
 			return -Infinity;
 		})), [cormax]);
 		return min > max ? reverse(_values) : _values;
@@ -51596,11 +51661,11 @@ function getNiceTickValuesFn(_ref3) {
 * @return {Array}   ticks
 */
 function getTickValuesFn(_ref5) {
-	var _ref6 = _slicedToArray$7(_ref5, 2), min = _ref6[0], max = _ref6[1];
+	var _ref6 = _slicedToArray$8(_ref5, 2), min = _ref6[0], max = _ref6[1];
 	var tickCount = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : 6;
 	var allowDecimals = arguments.length > 2 && arguments[2] !== void 0 ? arguments[2] : true;
 	var count = Math.max(tickCount, 2);
-	var _getValidInterval4 = _slicedToArray$7(getValidInterval([min, max]), 2), cormin = _getValidInterval4[0], cormax = _getValidInterval4[1];
+	var _getValidInterval4 = _slicedToArray$8(getValidInterval([min, max]), 2), cormin = _getValidInterval4[0], cormax = _getValidInterval4[1];
 	if (cormin === -Infinity || cormax === Infinity) return [min, max];
 	if (cormin === cormax) return getTickOfSingleValue(cormin, tickCount, allowDecimals);
 	var step = getFormatStep(new import_decimal.default(cormax).sub(cormin).div(count - 1), allowDecimals, 0);
@@ -51621,14 +51686,14 @@ function getTickValuesFn(_ref5) {
 * @return {Array}   ticks
 */
 function getTickValuesFixedDomainFn(_ref7, tickCount) {
-	var _ref8 = _slicedToArray$7(_ref7, 2), min = _ref8[0], max = _ref8[1];
+	var _ref8 = _slicedToArray$8(_ref7, 2), min = _ref8[0], max = _ref8[1];
 	var allowDecimals = arguments.length > 2 && arguments[2] !== void 0 ? arguments[2] : true;
-	var _getValidInterval6 = _slicedToArray$7(getValidInterval([min, max]), 2), cormin = _getValidInterval6[0], cormax = _getValidInterval6[1];
+	var _getValidInterval6 = _slicedToArray$8(getValidInterval([min, max]), 2), cormin = _getValidInterval6[0], cormax = _getValidInterval6[1];
 	if (cormin === -Infinity || cormax === Infinity) return [min, max];
 	if (cormin === cormax) return [cormin];
 	var count = Math.max(tickCount, 2);
 	var step = getFormatStep(new import_decimal.default(cormax).sub(cormin).div(count - 1), allowDecimals, 0);
-	var values = [].concat(_toConsumableArray$8(arithmetic_default.rangeStep(new import_decimal.default(cormin), new import_decimal.default(cormax).sub(new import_decimal.default(.99).mul(step)), step)), [cormax]);
+	var values = [].concat(_toConsumableArray$9(arithmetic_default.rangeStep(new import_decimal.default(cormin), new import_decimal.default(cormax).sub(new import_decimal.default(.99).mul(step)), step)), [cormax]);
 	return min > max ? reverse(values) : values;
 }
 var getNiceTickValues = memoize$1(getNiceTickValuesFn);
@@ -51650,7 +51715,7 @@ function invariant(condition, message) {
 /**
 * @fileOverview Render a group of error bar
 */
-var _excluded$11 = [
+var _excluded$13 = [
 	"offset",
 	"layout",
 	"width",
@@ -51660,44 +51725,44 @@ var _excluded$11 = [
 	"xAxis",
 	"yAxis"
 ];
-function _typeof$33(o) {
+function _typeof$36(o) {
 	"@babel/helpers - typeof";
-	return _typeof$33 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o) {
+	return _typeof$36 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o) {
 		return typeof o;
 	} : function(o) {
 		return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
-	}, _typeof$33(o);
+	}, _typeof$36(o);
 }
-function _extends$20() {
-	_extends$20 = Object.assign ? Object.assign.bind() : function(target) {
+function _extends$24() {
+	_extends$24 = Object.assign ? Object.assign.bind() : function(target) {
 		for (var i = 1; i < arguments.length; i++) {
 			var source = arguments[i];
 			for (var key in source) if (Object.prototype.hasOwnProperty.call(source, key)) target[key] = source[key];
 		}
 		return target;
 	};
-	return _extends$20.apply(this, arguments);
+	return _extends$24.apply(this, arguments);
 }
-function _slicedToArray$6(arr, i) {
-	return _arrayWithHoles$7(arr) || _iterableToArrayLimit$6(arr, i) || _unsupportedIterableToArray$12(arr, i) || _nonIterableRest$7();
+function _slicedToArray$7(arr, i) {
+	return _arrayWithHoles$8(arr) || _iterableToArrayLimit$7(arr, i) || _unsupportedIterableToArray$14(arr, i) || _nonIterableRest$8();
 }
-function _nonIterableRest$7() {
+function _nonIterableRest$8() {
 	throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
-function _unsupportedIterableToArray$12(o, minLen) {
+function _unsupportedIterableToArray$14(o, minLen) {
 	if (!o) return;
-	if (typeof o === "string") return _arrayLikeToArray$12(o, minLen);
+	if (typeof o === "string") return _arrayLikeToArray$14(o, minLen);
 	var n = Object.prototype.toString.call(o).slice(8, -1);
 	if (n === "Object" && o.constructor) n = o.constructor.name;
 	if (n === "Map" || n === "Set") return Array.from(o);
-	if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray$12(o, minLen);
+	if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray$14(o, minLen);
 }
-function _arrayLikeToArray$12(arr, len) {
+function _arrayLikeToArray$14(arr, len) {
 	if (len == null || len > arr.length) len = arr.length;
 	for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
 	return arr2;
 }
-function _iterableToArrayLimit$6(r, l) {
+function _iterableToArrayLimit$7(r, l) {
 	var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"];
 	if (null != t) {
 		var e, n, i, u, a = [], f = !0, o = !1;
@@ -51718,12 +51783,12 @@ function _iterableToArrayLimit$6(r, l) {
 		return a;
 	}
 }
-function _arrayWithHoles$7(arr) {
+function _arrayWithHoles$8(arr) {
 	if (Array.isArray(arr)) return arr;
 }
-function _objectWithoutProperties$11(source, excluded) {
+function _objectWithoutProperties$13(source, excluded) {
 	if (source == null) return {};
-	var target = _objectWithoutPropertiesLoose$11(source, excluded);
+	var target = _objectWithoutPropertiesLoose$13(source, excluded);
 	var key, i;
 	if (Object.getOwnPropertySymbols) {
 		var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
@@ -51736,7 +51801,7 @@ function _objectWithoutProperties$11(source, excluded) {
 	}
 	return target;
 }
-function _objectWithoutPropertiesLoose$11(source, excluded) {
+function _objectWithoutPropertiesLoose$13(source, excluded) {
 	if (source == null) return {};
 	var target = {};
 	for (var key in source) if (Object.prototype.hasOwnProperty.call(source, key)) {
@@ -51745,51 +51810,51 @@ function _objectWithoutPropertiesLoose$11(source, excluded) {
 	}
 	return target;
 }
-function _classCallCheck$13(instance, Constructor) {
+function _classCallCheck$16(instance, Constructor) {
 	if (!(instance instanceof Constructor)) throw new TypeError("Cannot call a class as a function");
 }
-function _defineProperties$13(target, props) {
+function _defineProperties$16(target, props) {
 	for (var i = 0; i < props.length; i++) {
 		var descriptor = props[i];
 		descriptor.enumerable = descriptor.enumerable || false;
 		descriptor.configurable = true;
 		if ("value" in descriptor) descriptor.writable = true;
-		Object.defineProperty(target, _toPropertyKey$31(descriptor.key), descriptor);
+		Object.defineProperty(target, _toPropertyKey$34(descriptor.key), descriptor);
 	}
 }
-function _createClass$13(Constructor, protoProps, staticProps) {
-	if (protoProps) _defineProperties$13(Constructor.prototype, protoProps);
-	if (staticProps) _defineProperties$13(Constructor, staticProps);
+function _createClass$16(Constructor, protoProps, staticProps) {
+	if (protoProps) _defineProperties$16(Constructor.prototype, protoProps);
+	if (staticProps) _defineProperties$16(Constructor, staticProps);
 	Object.defineProperty(Constructor, "prototype", { writable: false });
 	return Constructor;
 }
-function _callSuper$10(t, o, e) {
-	return o = _getPrototypeOf$11(o), _possibleConstructorReturn$11(t, _isNativeReflectConstruct$11() ? Reflect.construct(o, e || [], _getPrototypeOf$11(t).constructor) : o.apply(t, e));
+function _callSuper$13(t, o, e) {
+	return o = _getPrototypeOf$14(o), _possibleConstructorReturn$14(t, _isNativeReflectConstruct$14() ? Reflect.construct(o, e || [], _getPrototypeOf$14(t).constructor) : o.apply(t, e));
 }
-function _possibleConstructorReturn$11(self, call) {
-	if (call && (_typeof$33(call) === "object" || typeof call === "function")) return call;
+function _possibleConstructorReturn$14(self, call) {
+	if (call && (_typeof$36(call) === "object" || typeof call === "function")) return call;
 	else if (call !== void 0) throw new TypeError("Derived constructors may only return object or undefined");
-	return _assertThisInitialized$11(self);
+	return _assertThisInitialized$14(self);
 }
-function _assertThisInitialized$11(self) {
+function _assertThisInitialized$14(self) {
 	if (self === void 0) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
 	return self;
 }
-function _isNativeReflectConstruct$11() {
+function _isNativeReflectConstruct$14() {
 	try {
 		var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function() {}));
 	} catch (t) {}
-	return (_isNativeReflectConstruct$11 = function _isNativeReflectConstruct() {
+	return (_isNativeReflectConstruct$14 = function _isNativeReflectConstruct() {
 		return !!t;
 	})();
 }
-function _getPrototypeOf$11(o) {
-	_getPrototypeOf$11 = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
+function _getPrototypeOf$14(o) {
+	_getPrototypeOf$14 = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
 		return o.__proto__ || Object.getPrototypeOf(o);
 	};
-	return _getPrototypeOf$11(o);
+	return _getPrototypeOf$14(o);
 }
-function _inherits$11(subClass, superClass) {
+function _inherits$14(subClass, superClass) {
 	if (typeof superClass !== "function" && superClass !== null) throw new TypeError("Super expression must either be null or a function");
 	subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: {
 		value: subClass,
@@ -51797,17 +51862,17 @@ function _inherits$11(subClass, superClass) {
 		configurable: true
 	} });
 	Object.defineProperty(subClass, "prototype", { writable: false });
-	if (superClass) _setPrototypeOf$11(subClass, superClass);
+	if (superClass) _setPrototypeOf$14(subClass, superClass);
 }
-function _setPrototypeOf$11(o, p) {
-	_setPrototypeOf$11 = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
+function _setPrototypeOf$14(o, p) {
+	_setPrototypeOf$14 = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
 		o.__proto__ = p;
 		return o;
 	};
-	return _setPrototypeOf$11(o, p);
+	return _setPrototypeOf$14(o, p);
 }
-function _defineProperty$31(obj, key, value) {
-	key = _toPropertyKey$31(key);
+function _defineProperty$34(obj, key, value) {
+	key = _toPropertyKey$34(key);
 	if (key in obj) Object.defineProperty(obj, key, {
 		value,
 		enumerable: true,
@@ -51817,31 +51882,31 @@ function _defineProperty$31(obj, key, value) {
 	else obj[key] = value;
 	return obj;
 }
-function _toPropertyKey$31(t) {
-	var i = _toPrimitive$31(t, "string");
-	return "symbol" == _typeof$33(i) ? i : i + "";
+function _toPropertyKey$34(t) {
+	var i = _toPrimitive$34(t, "string");
+	return "symbol" == _typeof$36(i) ? i : i + "";
 }
-function _toPrimitive$31(t, r) {
-	if ("object" != _typeof$33(t) || !t) return t;
+function _toPrimitive$34(t, r) {
+	if ("object" != _typeof$36(t) || !t) return t;
 	var e = t[Symbol.toPrimitive];
 	if (void 0 !== e) {
 		var i = e.call(t, r || "default");
-		if ("object" != _typeof$33(i)) return i;
+		if ("object" != _typeof$36(i)) return i;
 		throw new TypeError("@@toPrimitive must return a primitive value.");
 	}
 	return ("string" === r ? String : Number)(t);
 }
 var ErrorBar = /* @__PURE__ */ function(_React$Component) {
 	function ErrorBar() {
-		_classCallCheck$13(this, ErrorBar);
-		return _callSuper$10(this, ErrorBar, arguments);
+		_classCallCheck$16(this, ErrorBar);
+		return _callSuper$13(this, ErrorBar, arguments);
 	}
-	_inherits$11(ErrorBar, _React$Component);
-	return _createClass$13(ErrorBar, [{
+	_inherits$14(ErrorBar, _React$Component);
+	return _createClass$16(ErrorBar, [{
 		key: "render",
 		value: function render() {
 			var _this$props = this.props, offset = _this$props.offset, layout = _this$props.layout, width = _this$props.width, dataKey = _this$props.dataKey, data = _this$props.data, dataPointFormatter = _this$props.dataPointFormatter, xAxis = _this$props.xAxis, yAxis = _this$props.yAxis;
-			var svgProps = filterProps(_objectWithoutProperties$11(_this$props, _excluded$11), false);
+			var svgProps = filterProps(_objectWithoutProperties$13(_this$props, _excluded$13), false);
 			this.props.direction === "x" && xAxis.type !== "number" && invariant(false, "ErrorBar requires Axis type property to be \"number\".");
 			var errorBars = data.map(function(entry) {
 				var _dataPointFormatter = dataPointFormatter(entry, dataKey), x = _dataPointFormatter.x, y = _dataPointFormatter.y, value = _dataPointFormatter.value, errorVal = _dataPointFormatter.errorVal;
@@ -51849,7 +51914,7 @@ var ErrorBar = /* @__PURE__ */ function(_React$Component) {
 				var lineCoordinates = [];
 				var lowBound, highBound;
 				if (Array.isArray(errorVal)) {
-					var _errorVal = _slicedToArray$6(errorVal, 2);
+					var _errorVal = _slicedToArray$7(errorVal, 2);
 					lowBound = _errorVal[0];
 					highBound = _errorVal[1];
 				} else lowBound = highBound = errorVal;
@@ -51904,38 +51969,38 @@ var ErrorBar = /* @__PURE__ */ function(_React$Component) {
 						y2: _yMin
 					});
 				}
-				return /* @__PURE__ */ import_react.createElement(Layer, _extends$20({
+				return /* @__PURE__ */ import_react.createElement(Layer, _extends$24({
 					className: "recharts-errorBar",
 					key: "bar-".concat(lineCoordinates.map(function(c) {
 						return "".concat(c.x1, "-").concat(c.x2, "-").concat(c.y1, "-").concat(c.y2);
 					}))
 				}, svgProps), lineCoordinates.map(function(coordinates) {
-					return /* @__PURE__ */ import_react.createElement("line", _extends$20({}, coordinates, { key: "line-".concat(coordinates.x1, "-").concat(coordinates.x2, "-").concat(coordinates.y1, "-").concat(coordinates.y2) }));
+					return /* @__PURE__ */ import_react.createElement("line", _extends$24({}, coordinates, { key: "line-".concat(coordinates.x1, "-").concat(coordinates.x2, "-").concat(coordinates.y1, "-").concat(coordinates.y2) }));
 				}));
 			});
 			return /* @__PURE__ */ import_react.createElement(Layer, { className: "recharts-errorBars" }, errorBars);
 		}
 	}]);
 }(import_react.Component);
-_defineProperty$31(ErrorBar, "defaultProps", {
+_defineProperty$34(ErrorBar, "defaultProps", {
 	stroke: "black",
 	strokeWidth: 1.5,
 	width: 5,
 	offset: 0,
 	layout: "horizontal"
 });
-_defineProperty$31(ErrorBar, "displayName", "ErrorBar");
+_defineProperty$34(ErrorBar, "displayName", "ErrorBar");
 //#endregion
 //#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/recharts@2.15.4_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/recharts/es6/util/getLegendProps.js
-function _typeof$32(o) {
+function _typeof$35(o) {
 	"@babel/helpers - typeof";
-	return _typeof$32 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o) {
+	return _typeof$35 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o) {
 		return typeof o;
 	} : function(o) {
 		return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
-	}, _typeof$32(o);
+	}, _typeof$35(o);
 }
-function ownKeys$27(e, r) {
+function ownKeys$30(e, r) {
 	var t = Object.keys(e);
 	if (Object.getOwnPropertySymbols) {
 		var o = Object.getOwnPropertySymbols(e);
@@ -51945,19 +52010,19 @@ function ownKeys$27(e, r) {
 	}
 	return t;
 }
-function _objectSpread$27(e) {
+function _objectSpread$30(e) {
 	for (var r = 1; r < arguments.length; r++) {
 		var t = null != arguments[r] ? arguments[r] : {};
-		r % 2 ? ownKeys$27(Object(t), !0).forEach(function(r) {
-			_defineProperty$30(e, r, t[r]);
-		}) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$27(Object(t)).forEach(function(r) {
+		r % 2 ? ownKeys$30(Object(t), !0).forEach(function(r) {
+			_defineProperty$33(e, r, t[r]);
+		}) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$30(Object(t)).forEach(function(r) {
 			Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r));
 		});
 	}
 	return e;
 }
-function _defineProperty$30(obj, key, value) {
-	key = _toPropertyKey$30(key);
+function _defineProperty$33(obj, key, value) {
+	key = _toPropertyKey$33(key);
 	if (key in obj) Object.defineProperty(obj, key, {
 		value,
 		enumerable: true,
@@ -51967,16 +52032,16 @@ function _defineProperty$30(obj, key, value) {
 	else obj[key] = value;
 	return obj;
 }
-function _toPropertyKey$30(t) {
-	var i = _toPrimitive$30(t, "string");
-	return "symbol" == _typeof$32(i) ? i : i + "";
+function _toPropertyKey$33(t) {
+	var i = _toPrimitive$33(t, "string");
+	return "symbol" == _typeof$35(i) ? i : i + "";
 }
-function _toPrimitive$30(t, r) {
-	if ("object" != _typeof$32(t) || !t) return t;
+function _toPrimitive$33(t, r) {
+	if ("object" != _typeof$35(t) || !t) return t;
 	var e = t[Symbol.toPrimitive];
 	if (void 0 !== e) {
 		var i = e.call(t, r || "default");
-		if ("object" != _typeof$32(i)) return i;
+		if ("object" != _typeof$35(i)) return i;
 		throw new TypeError("@@toPrimitive must return a primitive value.");
 	}
 	return ("string" === r ? String : Number)(t);
@@ -51986,7 +52051,7 @@ var getLegendProps = function getLegendProps(_ref) {
 	var legendItem = findChildByType(children, Legend);
 	if (!legendItem) return null;
 	var legendDefaultProps = Legend.defaultProps;
-	var legendProps = legendDefaultProps !== void 0 ? _objectSpread$27(_objectSpread$27({}, legendDefaultProps), legendItem.props) : {};
+	var legendProps = legendDefaultProps !== void 0 ? _objectSpread$30(_objectSpread$30({}, legendDefaultProps), legendItem.props) : {};
 	var legendData;
 	if (legendItem.props && legendItem.props.payload) legendData = legendItem.props && legendItem.props.payload;
 	else if (legendContent === "children") legendData = (formattedGraphicalItems || []).reduce(function(result, _ref2) {
@@ -52004,7 +52069,7 @@ var getLegendProps = function getLegendProps(_ref) {
 	else legendData = (formattedGraphicalItems || []).map(function(_ref3) {
 		var item = _ref3.item;
 		var itemDefaultProps = item.type.defaultProps;
-		var itemProps = itemDefaultProps !== void 0 ? _objectSpread$27(_objectSpread$27({}, itemDefaultProps), item.props) : {};
+		var itemProps = itemDefaultProps !== void 0 ? _objectSpread$30(_objectSpread$30({}, itemDefaultProps), item.props) : {};
 		var dataKey = itemProps.dataKey, name = itemProps.name, legendType = itemProps.legendType;
 		return {
 			inactive: itemProps.hide,
@@ -52015,7 +52080,7 @@ var getLegendProps = function getLegendProps(_ref) {
 			payload: itemProps
 		};
 	});
-	return _objectSpread$27(_objectSpread$27(_objectSpread$27({}, legendProps), Legend.getWithHeight(legendItem, legendWidth)), {}, {
+	return _objectSpread$30(_objectSpread$30(_objectSpread$30({}, legendProps), Legend.getWithHeight(legendItem, legendWidth)), {}, {
 		payload: legendData,
 		item: legendItem
 	});
@@ -52026,40 +52091,40 @@ var import_max = /* @__PURE__ */ __toESM(require_max());
 var import_min = /* @__PURE__ */ __toESM(require_min());
 var import_flatMap = /* @__PURE__ */ __toESM(require_flatMap());
 var import_isEqual = /* @__PURE__ */ __toESM(require_isEqual());
-function _typeof$31(o) {
+function _typeof$34(o) {
 	"@babel/helpers - typeof";
-	return _typeof$31 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o) {
+	return _typeof$34 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o) {
 		return typeof o;
 	} : function(o) {
 		return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
-	}, _typeof$31(o);
+	}, _typeof$34(o);
 }
-function _toConsumableArray$7(arr) {
-	return _arrayWithoutHoles$7(arr) || _iterableToArray$8(arr) || _unsupportedIterableToArray$11(arr) || _nonIterableSpread$7();
+function _toConsumableArray$8(arr) {
+	return _arrayWithoutHoles$8(arr) || _iterableToArray$9(arr) || _unsupportedIterableToArray$13(arr) || _nonIterableSpread$8();
 }
-function _nonIterableSpread$7() {
+function _nonIterableSpread$8() {
 	throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
-function _unsupportedIterableToArray$11(o, minLen) {
+function _unsupportedIterableToArray$13(o, minLen) {
 	if (!o) return;
-	if (typeof o === "string") return _arrayLikeToArray$11(o, minLen);
+	if (typeof o === "string") return _arrayLikeToArray$13(o, minLen);
 	var n = Object.prototype.toString.call(o).slice(8, -1);
 	if (n === "Object" && o.constructor) n = o.constructor.name;
 	if (n === "Map" || n === "Set") return Array.from(o);
-	if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray$11(o, minLen);
+	if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray$13(o, minLen);
 }
-function _iterableToArray$8(iter) {
+function _iterableToArray$9(iter) {
 	if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
 }
-function _arrayWithoutHoles$7(arr) {
-	if (Array.isArray(arr)) return _arrayLikeToArray$11(arr);
+function _arrayWithoutHoles$8(arr) {
+	if (Array.isArray(arr)) return _arrayLikeToArray$13(arr);
 }
-function _arrayLikeToArray$11(arr, len) {
+function _arrayLikeToArray$13(arr, len) {
 	if (len == null || len > arr.length) len = arr.length;
 	for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
 	return arr2;
 }
-function ownKeys$26(e, r) {
+function ownKeys$29(e, r) {
 	var t = Object.keys(e);
 	if (Object.getOwnPropertySymbols) {
 		var o = Object.getOwnPropertySymbols(e);
@@ -52069,19 +52134,19 @@ function ownKeys$26(e, r) {
 	}
 	return t;
 }
-function _objectSpread$26(e) {
+function _objectSpread$29(e) {
 	for (var r = 1; r < arguments.length; r++) {
 		var t = null != arguments[r] ? arguments[r] : {};
-		r % 2 ? ownKeys$26(Object(t), !0).forEach(function(r) {
-			_defineProperty$29(e, r, t[r]);
-		}) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$26(Object(t)).forEach(function(r) {
+		r % 2 ? ownKeys$29(Object(t), !0).forEach(function(r) {
+			_defineProperty$32(e, r, t[r]);
+		}) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$29(Object(t)).forEach(function(r) {
 			Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r));
 		});
 	}
 	return e;
 }
-function _defineProperty$29(obj, key, value) {
-	key = _toPropertyKey$29(key);
+function _defineProperty$32(obj, key, value) {
+	key = _toPropertyKey$32(key);
 	if (key in obj) Object.defineProperty(obj, key, {
 		value,
 		enumerable: true,
@@ -52091,16 +52156,16 @@ function _defineProperty$29(obj, key, value) {
 	else obj[key] = value;
 	return obj;
 }
-function _toPropertyKey$29(t) {
-	var i = _toPrimitive$29(t, "string");
-	return "symbol" == _typeof$31(i) ? i : i + "";
+function _toPropertyKey$32(t) {
+	var i = _toPrimitive$32(t, "string");
+	return "symbol" == _typeof$34(i) ? i : i + "";
 }
-function _toPrimitive$29(t, r) {
-	if ("object" != _typeof$31(t) || !t) return t;
+function _toPrimitive$32(t, r) {
+	if ("object" != _typeof$34(t) || !t) return t;
 	var e = t[Symbol.toPrimitive];
 	if (void 0 !== e) {
 		var i = e.call(t, r || "default");
-		if ("object" != _typeof$31(i)) return i;
+		if ("object" != _typeof$34(i)) return i;
 		throw new TypeError("@@toPrimitive must return a primitive value.");
 	}
 	return ("string" === r ? String : Number)(t);
@@ -52191,7 +52256,7 @@ var calculateActiveTickIndex = function calculateActiveTickIndex(coordinate) {
 var getMainColorOfGraphicItem = function getMainColorOfGraphicItem(item) {
 	var _item$type;
 	var displayName = item.type.displayName;
-	var defaultedProps = (_item$type = item.type) !== null && _item$type !== void 0 && _item$type.defaultProps ? _objectSpread$26(_objectSpread$26({}, item.type.defaultProps), item.props) : item.props;
+	var defaultedProps = (_item$type = item.type) !== null && _item$type !== void 0 && _item$type.defaultProps ? _objectSpread$29(_objectSpread$29({}, item.type.defaultProps), item.props) : item.props;
 	var stroke = defaultedProps.stroke, fill = defaultedProps.fill;
 	var result;
 	switch (displayName) {
@@ -52228,7 +52293,7 @@ var getBarSizeList = function getBarSizeList(_ref2) {
 			});
 			if (barItems && barItems.length) {
 				var barItemDefaultProps = barItems[0].type.defaultProps;
-				var barItemProps = barItemDefaultProps !== void 0 ? _objectSpread$26(_objectSpread$26({}, barItemDefaultProps), barItems[0].props) : barItems[0].props;
+				var barItemProps = barItemDefaultProps !== void 0 ? _objectSpread$29(_objectSpread$29({}, barItemDefaultProps), barItems[0].props) : barItems[0].props;
 				var selfSize = barItemProps.barSize;
 				var cateId = barItemProps[cateAxisId];
 				if (!result[cateId]) result[cateId] = [];
@@ -52290,7 +52355,7 @@ var getBarPosition = function getBarPosition(_ref3) {
 					size: useFull ? fullBarSize : entry.barSize
 				}
 			};
-			var newRes = [].concat(_toConsumableArray$7(res), [newPosition]);
+			var newRes = [].concat(_toConsumableArray$8(res), [newPosition]);
 			prev = newRes[newRes.length - 1].position;
 			if (entry.stackList && entry.stackList.length) entry.stackList.forEach(function(item) {
 				newRes.push({
@@ -52307,7 +52372,7 @@ var getBarPosition = function getBarPosition(_ref3) {
 		if (originalSize > 1) originalSize >>= 0;
 		var size = maxBarSize === +maxBarSize ? Math.min(originalSize, maxBarSize) : originalSize;
 		result = sizeList.reduce(function(res, entry, i) {
-			var newRes = [].concat(_toConsumableArray$7(res), [{
+			var newRes = [].concat(_toConsumableArray$8(res), [{
 				item: entry.item,
 				position: {
 					offset: _offset + (originalSize + realBarGap) * i + (originalSize - size) / 2,
@@ -52334,8 +52399,8 @@ var appendOffsetOfLegend = function appendOffsetOfLegend(offset, _unused, props,
 	if (legendProps) {
 		var _ref4 = legendBox || {}, boxWidth = _ref4.width, boxHeight = _ref4.height;
 		var align = legendProps.align, verticalAlign = legendProps.verticalAlign, layout = legendProps.layout;
-		if ((layout === "vertical" || layout === "horizontal" && verticalAlign === "middle") && align !== "center" && isNumber(offset[align])) return _objectSpread$26(_objectSpread$26({}, offset), {}, _defineProperty$29({}, align, offset[align] + (boxWidth || 0)));
-		if ((layout === "horizontal" || layout === "vertical" && align === "center") && verticalAlign !== "middle" && isNumber(offset[verticalAlign])) return _objectSpread$26(_objectSpread$26({}, offset), {}, _defineProperty$29({}, verticalAlign, offset[verticalAlign] + (boxHeight || 0)));
+		if ((layout === "vertical" || layout === "horizontal" && verticalAlign === "middle") && align !== "center" && isNumber(offset[align])) return _objectSpread$29(_objectSpread$29({}, offset), {}, _defineProperty$32({}, align, offset[align] + (boxWidth || 0)));
+		if ((layout === "horizontal" || layout === "vertical" && align === "center") && verticalAlign !== "middle" && isNumber(offset[verticalAlign])) return _objectSpread$29(_objectSpread$29({}, offset), {}, _defineProperty$32({}, verticalAlign, offset[verticalAlign] + (boxHeight || 0)));
 	}
 	return offset;
 };
@@ -52649,7 +52714,7 @@ var getStackGroupsByAxisId = function getStackGroupsByAxisId(data, _items, numer
 	if (!data) return null;
 	var stackGroups = (reverseStackOrder ? _items.reverse() : _items).reduce(function(result, item) {
 		var _item$type2;
-		var defaultedProps = (_item$type2 = item.type) !== null && _item$type2 !== void 0 && _item$type2.defaultProps ? _objectSpread$26(_objectSpread$26({}, item.type.defaultProps), item.props) : item.props;
+		var defaultedProps = (_item$type2 = item.type) !== null && _item$type2 !== void 0 && _item$type2.defaultProps ? _objectSpread$29(_objectSpread$29({}, item.type.defaultProps), item.props) : item.props;
 		var stackId = defaultedProps.stackId;
 		if (defaultedProps.hide) return result;
 		var axisId = defaultedProps[numericAxisId];
@@ -52671,20 +52736,20 @@ var getStackGroupsByAxisId = function getStackGroupsByAxisId(data, _items, numer
 			cateAxisId,
 			items: [item]
 		};
-		return _objectSpread$26(_objectSpread$26({}, result), {}, _defineProperty$29({}, axisId, parentGroup));
+		return _objectSpread$29(_objectSpread$29({}, result), {}, _defineProperty$32({}, axisId, parentGroup));
 	}, {});
 	return Object.keys(stackGroups).reduce(function(result, axisId) {
 		var group = stackGroups[axisId];
 		if (group.hasStack) group.stackGroups = Object.keys(group.stackGroups).reduce(function(res, stackId) {
 			var g = group.stackGroups[stackId];
-			return _objectSpread$26(_objectSpread$26({}, res), {}, _defineProperty$29({}, stackId, {
+			return _objectSpread$29(_objectSpread$29({}, res), {}, _defineProperty$32({}, stackId, {
 				numericAxisId,
 				cateAxisId,
 				items: g.items,
 				stackedData: getStackedData(data, g.items, offsetType)
 			}));
 		}, {});
-		return _objectSpread$26(_objectSpread$26({}, result), {}, _defineProperty$29({}, axisId, group));
+		return _objectSpread$29(_objectSpread$29({}, result), {}, _defineProperty$32({}, axisId, group));
 	}, {});
 };
 /**
@@ -52739,7 +52804,7 @@ var getBaseValueOfBar = function getBaseValueOfBar(_ref7) {
 };
 var getStackedDataOfItem = function getStackedDataOfItem(item, stackGroups) {
 	var _item$type3;
-	var stackId = ((_item$type3 = item.type) !== null && _item$type3 !== void 0 && _item$type3.defaultProps ? _objectSpread$26(_objectSpread$26({}, item.type.defaultProps), item.props) : item.props).stackId;
+	var stackId = ((_item$type3 = item.type) !== null && _item$type3 !== void 0 && _item$type3.defaultProps ? _objectSpread$29(_objectSpread$29({}, item.type.defaultProps), item.props) : item.props).stackId;
 	if (isNumOrStr(stackId)) {
 		var group = stackGroups[stackId];
 		if (group) {
@@ -52824,9 +52889,9 @@ var parseDomainOfCategoryAxis = function parseDomainOfCategoryAxis(specifiedDoma
 	return specifiedDomain;
 };
 var getTooltipItem = function getTooltipItem(graphicalItem, payload) {
-	var defaultedProps = graphicalItem.type.defaultProps ? _objectSpread$26(_objectSpread$26({}, graphicalItem.type.defaultProps), graphicalItem.props) : graphicalItem.props;
+	var defaultedProps = graphicalItem.type.defaultProps ? _objectSpread$29(_objectSpread$29({}, graphicalItem.type.defaultProps), graphicalItem.props) : graphicalItem.props;
 	var dataKey = defaultedProps.dataKey, name = defaultedProps.name, unit = defaultedProps.unit, formatter = defaultedProps.formatter, tooltipType = defaultedProps.tooltipType, chartType = defaultedProps.chartType, hide = defaultedProps.hide;
-	return _objectSpread$26(_objectSpread$26({}, filterProps(graphicalItem, false)), {}, {
+	return _objectSpread$29(_objectSpread$29({}, filterProps(graphicalItem, false)), {}, {
 		dataKey,
 		unit,
 		formatter,
@@ -52841,15 +52906,15 @@ var getTooltipItem = function getTooltipItem(graphicalItem, payload) {
 };
 //#endregion
 //#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/recharts@2.15.4_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/recharts/es6/util/PolarUtils.js
-function _typeof$30(o) {
+function _typeof$33(o) {
 	"@babel/helpers - typeof";
-	return _typeof$30 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o) {
+	return _typeof$33 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o) {
 		return typeof o;
 	} : function(o) {
 		return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
-	}, _typeof$30(o);
+	}, _typeof$33(o);
 }
-function ownKeys$25(e, r) {
+function ownKeys$28(e, r) {
 	var t = Object.keys(e);
 	if (Object.getOwnPropertySymbols) {
 		var o = Object.getOwnPropertySymbols(e);
@@ -52859,19 +52924,19 @@ function ownKeys$25(e, r) {
 	}
 	return t;
 }
-function _objectSpread$25(e) {
+function _objectSpread$28(e) {
 	for (var r = 1; r < arguments.length; r++) {
 		var t = null != arguments[r] ? arguments[r] : {};
-		r % 2 ? ownKeys$25(Object(t), !0).forEach(function(r) {
-			_defineProperty$28(e, r, t[r]);
-		}) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$25(Object(t)).forEach(function(r) {
+		r % 2 ? ownKeys$28(Object(t), !0).forEach(function(r) {
+			_defineProperty$31(e, r, t[r]);
+		}) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$28(Object(t)).forEach(function(r) {
 			Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r));
 		});
 	}
 	return e;
 }
-function _defineProperty$28(obj, key, value) {
-	key = _toPropertyKey$28(key);
+function _defineProperty$31(obj, key, value) {
+	key = _toPropertyKey$31(key);
 	if (key in obj) Object.defineProperty(obj, key, {
 		value,
 		enumerable: true,
@@ -52881,29 +52946,131 @@ function _defineProperty$28(obj, key, value) {
 	else obj[key] = value;
 	return obj;
 }
-function _toPropertyKey$28(t) {
-	var i = _toPrimitive$28(t, "string");
-	return "symbol" == _typeof$30(i) ? i : i + "";
+function _toPropertyKey$31(t) {
+	var i = _toPrimitive$31(t, "string");
+	return "symbol" == _typeof$33(i) ? i : i + "";
 }
-function _toPrimitive$28(t, r) {
-	if ("object" != _typeof$30(t) || !t) return t;
+function _toPrimitive$31(t, r) {
+	if ("object" != _typeof$33(t) || !t) return t;
 	var e = t[Symbol.toPrimitive];
 	if (void 0 !== e) {
 		var i = e.call(t, r || "default");
-		if ("object" != _typeof$30(i)) return i;
+		if ("object" != _typeof$33(i)) return i;
 		throw new TypeError("@@toPrimitive must return a primitive value.");
 	}
 	return ("string" === r ? String : Number)(t);
 }
-var RADIAN = Math.PI / 180;
+function _slicedToArray$6(arr, i) {
+	return _arrayWithHoles$7(arr) || _iterableToArrayLimit$6(arr, i) || _unsupportedIterableToArray$12(arr, i) || _nonIterableRest$7();
+}
+function _nonIterableRest$7() {
+	throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+function _unsupportedIterableToArray$12(o, minLen) {
+	if (!o) return;
+	if (typeof o === "string") return _arrayLikeToArray$12(o, minLen);
+	var n = Object.prototype.toString.call(o).slice(8, -1);
+	if (n === "Object" && o.constructor) n = o.constructor.name;
+	if (n === "Map" || n === "Set") return Array.from(o);
+	if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray$12(o, minLen);
+}
+function _arrayLikeToArray$12(arr, len) {
+	if (len == null || len > arr.length) len = arr.length;
+	for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+	return arr2;
+}
+function _iterableToArrayLimit$6(r, l) {
+	var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"];
+	if (null != t) {
+		var e, n, i, u, a = [], f = !0, o = !1;
+		try {
+			if (i = (t = t.call(r)).next, 0 === l) {
+				if (Object(t) !== t) return;
+				f = !1;
+			} else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0);
+		} catch (r) {
+			o = !0, n = r;
+		} finally {
+			try {
+				if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return;
+			} finally {
+				if (o) throw n;
+			}
+		}
+		return a;
+	}
+}
+function _arrayWithHoles$7(arr) {
+	if (Array.isArray(arr)) return arr;
+}
+var RADIAN$1 = Math.PI / 180;
 var radianToDegree = function radianToDegree(angleInRadian) {
 	return angleInRadian * 180 / Math.PI;
 };
 var polarToCartesian = function polarToCartesian(cx, cy, radius, angle) {
 	return {
-		x: cx + Math.cos(-RADIAN * angle) * radius,
-		y: cy + Math.sin(-RADIAN * angle) * radius
+		x: cx + Math.cos(-RADIAN$1 * angle) * radius,
+		y: cy + Math.sin(-RADIAN$1 * angle) * radius
 	};
+};
+var getMaxRadius = function getMaxRadius(width, height) {
+	var offset = arguments.length > 2 && arguments[2] !== void 0 ? arguments[2] : {
+		top: 0,
+		right: 0,
+		bottom: 0,
+		left: 0
+	};
+	return Math.min(Math.abs(width - (offset.left || 0) - (offset.right || 0)), Math.abs(height - (offset.top || 0) - (offset.bottom || 0))) / 2;
+};
+/**
+* Calculate the scale function, position, width, height of axes
+* @param  {Object} props     Latest props
+* @param  {Object} axisMap   The configuration of axes
+* @param  {Object} offset    The offset of main part in the svg element
+* @param  {Object} axisType  The type of axes, radius-axis or angle-axis
+* @param  {String} chartName The name of chart
+* @return {Object} Configuration
+*/
+var formatAxisMap$1 = function formatAxisMap(props, axisMap, offset, axisType, chartName) {
+	var width = props.width, height = props.height;
+	var startAngle = props.startAngle, endAngle = props.endAngle;
+	var cx = getPercentValue(props.cx, width, width / 2);
+	var cy = getPercentValue(props.cy, height, height / 2);
+	var maxRadius = getMaxRadius(width, height, offset);
+	var innerRadius = getPercentValue(props.innerRadius, maxRadius, 0);
+	var outerRadius = getPercentValue(props.outerRadius, maxRadius, maxRadius * .8);
+	return Object.keys(axisMap).reduce(function(result, id) {
+		var axis = axisMap[id];
+		var domain = axis.domain, reversed = axis.reversed;
+		var range;
+		if ((0, import_isNil.default)(axis.range)) {
+			if (axisType === "angleAxis") range = [startAngle, endAngle];
+			else if (axisType === "radiusAxis") range = [innerRadius, outerRadius];
+			if (reversed) range = [range[1], range[0]];
+		} else {
+			range = axis.range;
+			var _range2 = _slicedToArray$6(range, 2);
+			startAngle = _range2[0];
+			endAngle = _range2[1];
+		}
+		var _parseScale = parseScale(axis, chartName), realScaleType = _parseScale.realScaleType, scale = _parseScale.scale;
+		scale.domain(domain).range(range);
+		checkDomainOfScale(scale);
+		var ticks = getTicksOfScale(scale, _objectSpread$28(_objectSpread$28({}, axis), {}, { realScaleType }));
+		var finalAxis = _objectSpread$28(_objectSpread$28(_objectSpread$28({}, axis), ticks), {}, {
+			range,
+			radius: outerRadius,
+			realScaleType,
+			scale,
+			cx,
+			cy,
+			innerRadius,
+			outerRadius,
+			startAngle,
+			endAngle
+		});
+		return _objectSpread$28(_objectSpread$28({}, result), {}, _defineProperty$31({}, id, finalAxis));
+	}, {});
 };
 var distanceBetweenPoints = function distanceBetweenPoints(point, anotherPoint) {
 	var x1 = point.x, y1 = point.y;
@@ -52967,51 +53134,54 @@ var inRangeOfSector = function inRangeOfSector(_ref5, sector) {
 		while (formatAngle < endAngle) formatAngle += 360;
 		inRange = formatAngle >= endAngle && formatAngle <= startAngle;
 	}
-	if (inRange) return _objectSpread$25(_objectSpread$25({}, sector), {}, {
+	if (inRange) return _objectSpread$28(_objectSpread$28({}, sector), {}, {
 		radius,
 		angle: reverseFormatAngleOfSetor(formatAngle, sector)
 	});
 	return null;
 };
+var getTickClassName = function getTickClassName(tick) {
+	return !/* @__PURE__ */ (0, import_react.isValidElement)(tick) && !(0, import_isFunction.default)(tick) && typeof tick !== "boolean" ? tick.className : "";
+};
 //#endregion
 //#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/recharts@2.15.4_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/recharts/es6/component/Label.js
-function _typeof$29(o) {
+function _typeof$32(o) {
 	"@babel/helpers - typeof";
-	return _typeof$29 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o) {
+	return _typeof$32 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o) {
 		return typeof o;
 	} : function(o) {
 		return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
-	}, _typeof$29(o);
+	}, _typeof$32(o);
 }
-var _excluded$10 = ["offset"];
-function _toConsumableArray$6(arr) {
-	return _arrayWithoutHoles$6(arr) || _iterableToArray$7(arr) || _unsupportedIterableToArray$10(arr) || _nonIterableSpread$6();
+var _excluded$12 = ["offset"];
+function _toConsumableArray$7(arr) {
+	return _arrayWithoutHoles$7(arr) || _iterableToArray$8(arr) || _unsupportedIterableToArray$11(arr) || _nonIterableSpread$7();
 }
-function _nonIterableSpread$6() {
+function _nonIterableSpread$7() {
 	throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
-function _unsupportedIterableToArray$10(o, minLen) {
+function _unsupportedIterableToArray$11(o, minLen) {
 	if (!o) return;
-	if (typeof o === "string") return _arrayLikeToArray$10(o, minLen);
+	if (typeof o === "string") return _arrayLikeToArray$11(o, minLen);
 	var n = Object.prototype.toString.call(o).slice(8, -1);
 	if (n === "Object" && o.constructor) n = o.constructor.name;
 	if (n === "Map" || n === "Set") return Array.from(o);
-	if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray$10(o, minLen);
+	if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray$11(o, minLen);
 }
-function _iterableToArray$7(iter) {
+function _iterableToArray$8(iter) {
 	if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
 }
-function _arrayWithoutHoles$6(arr) {
-	if (Array.isArray(arr)) return _arrayLikeToArray$10(arr);
+function _arrayWithoutHoles$7(arr) {
+	if (Array.isArray(arr)) return _arrayLikeToArray$11(arr);
 }
-function _arrayLikeToArray$10(arr, len) {
+function _arrayLikeToArray$11(arr, len) {
 	if (len == null || len > arr.length) len = arr.length;
 	for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
 	return arr2;
 }
-function _objectWithoutProperties$10(source, excluded) {
+function _objectWithoutProperties$12(source, excluded) {
 	if (source == null) return {};
-	var target = _objectWithoutPropertiesLoose$10(source, excluded);
+	var target = _objectWithoutPropertiesLoose$12(source, excluded);
 	var key, i;
 	if (Object.getOwnPropertySymbols) {
 		var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
@@ -53024,7 +53194,7 @@ function _objectWithoutProperties$10(source, excluded) {
 	}
 	return target;
 }
-function _objectWithoutPropertiesLoose$10(source, excluded) {
+function _objectWithoutPropertiesLoose$12(source, excluded) {
 	if (source == null) return {};
 	var target = {};
 	for (var key in source) if (Object.prototype.hasOwnProperty.call(source, key)) {
@@ -53033,7 +53203,7 @@ function _objectWithoutPropertiesLoose$10(source, excluded) {
 	}
 	return target;
 }
-function ownKeys$24(e, r) {
+function ownKeys$27(e, r) {
 	var t = Object.keys(e);
 	if (Object.getOwnPropertySymbols) {
 		var o = Object.getOwnPropertySymbols(e);
@@ -53043,19 +53213,19 @@ function ownKeys$24(e, r) {
 	}
 	return t;
 }
-function _objectSpread$24(e) {
+function _objectSpread$27(e) {
 	for (var r = 1; r < arguments.length; r++) {
 		var t = null != arguments[r] ? arguments[r] : {};
-		r % 2 ? ownKeys$24(Object(t), !0).forEach(function(r) {
-			_defineProperty$27(e, r, t[r]);
-		}) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$24(Object(t)).forEach(function(r) {
+		r % 2 ? ownKeys$27(Object(t), !0).forEach(function(r) {
+			_defineProperty$30(e, r, t[r]);
+		}) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$27(Object(t)).forEach(function(r) {
 			Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r));
 		});
 	}
 	return e;
 }
-function _defineProperty$27(obj, key, value) {
-	key = _toPropertyKey$27(key);
+function _defineProperty$30(obj, key, value) {
+	key = _toPropertyKey$30(key);
 	if (key in obj) Object.defineProperty(obj, key, {
 		value,
 		enumerable: true,
@@ -53065,29 +53235,29 @@ function _defineProperty$27(obj, key, value) {
 	else obj[key] = value;
 	return obj;
 }
-function _toPropertyKey$27(t) {
-	var i = _toPrimitive$27(t, "string");
-	return "symbol" == _typeof$29(i) ? i : i + "";
+function _toPropertyKey$30(t) {
+	var i = _toPrimitive$30(t, "string");
+	return "symbol" == _typeof$32(i) ? i : i + "";
 }
-function _toPrimitive$27(t, r) {
-	if ("object" != _typeof$29(t) || !t) return t;
+function _toPrimitive$30(t, r) {
+	if ("object" != _typeof$32(t) || !t) return t;
 	var e = t[Symbol.toPrimitive];
 	if (void 0 !== e) {
 		var i = e.call(t, r || "default");
-		if ("object" != _typeof$29(i)) return i;
+		if ("object" != _typeof$32(i)) return i;
 		throw new TypeError("@@toPrimitive must return a primitive value.");
 	}
 	return ("string" === r ? String : Number)(t);
 }
-function _extends$19() {
-	_extends$19 = Object.assign ? Object.assign.bind() : function(target) {
+function _extends$23() {
+	_extends$23 = Object.assign ? Object.assign.bind() : function(target) {
 		for (var i = 1; i < arguments.length; i++) {
 			var source = arguments[i];
 			for (var key in source) if (Object.prototype.hasOwnProperty.call(source, key)) target[key] = source[key];
 		}
 		return target;
 	};
-	return _extends$19.apply(this, arguments);
+	return _extends$23.apply(this, arguments);
 }
 var getLabel = function getLabel(props) {
 	var value = props.value, formatter = props.formatter;
@@ -53120,7 +53290,7 @@ var renderRadialLabel = function renderRadialLabel(labelProps, label, attrs) {
 	var endPoint = polarToCartesian(cx, cy, radius, labelAngle + (direction ? 1 : -1) * 359);
 	var path = "M".concat(startPoint.x, ",").concat(startPoint.y, "\n    A").concat(radius, ",").concat(radius, ",0,1,").concat(direction ? 0 : 1, ",\n    ").concat(endPoint.x, ",").concat(endPoint.y);
 	var id = (0, import_isNil.default)(labelProps.id) ? uniqueId("recharts-radial-line-") : labelProps.id;
-	return /* @__PURE__ */ import_react.createElement("text", _extends$19({}, attrs, {
+	return /* @__PURE__ */ import_react.createElement("text", _extends$23({}, attrs, {
 		dominantBaseline: "central",
 		className: clsx("recharts-radial-bar-label", className)
 	}), /* @__PURE__ */ import_react.createElement("defs", null, /* @__PURE__ */ import_react.createElement("path", {
@@ -53178,7 +53348,7 @@ var getAttrsOfCartesianLabel = function getAttrsOfCartesianLabel(props) {
 	var horizontalOffset = horizontalSign * offset;
 	var horizontalEnd = horizontalSign > 0 ? "end" : "start";
 	var horizontalStart = horizontalSign > 0 ? "start" : "end";
-	if (position === "top") return _objectSpread$24(_objectSpread$24({}, {
+	if (position === "top") return _objectSpread$27(_objectSpread$27({}, {
 		x: x + width / 2,
 		y: y - verticalSign * offset,
 		textAnchor: "middle",
@@ -53187,7 +53357,7 @@ var getAttrsOfCartesianLabel = function getAttrsOfCartesianLabel(props) {
 		height: Math.max(y - parentViewBox.y, 0),
 		width
 	} : {});
-	if (position === "bottom") return _objectSpread$24(_objectSpread$24({}, {
+	if (position === "bottom") return _objectSpread$27(_objectSpread$27({}, {
 		x: x + width / 2,
 		y: y + height + verticalOffset,
 		textAnchor: "middle",
@@ -53203,7 +53373,7 @@ var getAttrsOfCartesianLabel = function getAttrsOfCartesianLabel(props) {
 			textAnchor: horizontalEnd,
 			verticalAnchor: "middle"
 		};
-		return _objectSpread$24(_objectSpread$24({}, _attrs2), parentViewBox ? {
+		return _objectSpread$27(_objectSpread$27({}, _attrs2), parentViewBox ? {
 			width: Math.max(_attrs2.x - parentViewBox.x, 0),
 			height
 		} : {});
@@ -53215,7 +53385,7 @@ var getAttrsOfCartesianLabel = function getAttrsOfCartesianLabel(props) {
 			textAnchor: horizontalStart,
 			verticalAnchor: "middle"
 		};
-		return _objectSpread$24(_objectSpread$24({}, _attrs3), parentViewBox ? {
+		return _objectSpread$27(_objectSpread$27({}, _attrs3), parentViewBox ? {
 			width: Math.max(parentViewBox.x + parentViewBox.width - _attrs3.x, 0),
 			height
 		} : {});
@@ -53224,61 +53394,61 @@ var getAttrsOfCartesianLabel = function getAttrsOfCartesianLabel(props) {
 		width,
 		height
 	} : {};
-	if (position === "insideLeft") return _objectSpread$24({
+	if (position === "insideLeft") return _objectSpread$27({
 		x: x + horizontalOffset,
 		y: y + height / 2,
 		textAnchor: horizontalStart,
 		verticalAnchor: "middle"
 	}, sizeAttrs);
-	if (position === "insideRight") return _objectSpread$24({
+	if (position === "insideRight") return _objectSpread$27({
 		x: x + width - horizontalOffset,
 		y: y + height / 2,
 		textAnchor: horizontalEnd,
 		verticalAnchor: "middle"
 	}, sizeAttrs);
-	if (position === "insideTop") return _objectSpread$24({
+	if (position === "insideTop") return _objectSpread$27({
 		x: x + width / 2,
 		y: y + verticalOffset,
 		textAnchor: "middle",
 		verticalAnchor: verticalStart
 	}, sizeAttrs);
-	if (position === "insideBottom") return _objectSpread$24({
+	if (position === "insideBottom") return _objectSpread$27({
 		x: x + width / 2,
 		y: y + height - verticalOffset,
 		textAnchor: "middle",
 		verticalAnchor: verticalEnd
 	}, sizeAttrs);
-	if (position === "insideTopLeft") return _objectSpread$24({
+	if (position === "insideTopLeft") return _objectSpread$27({
 		x: x + horizontalOffset,
 		y: y + verticalOffset,
 		textAnchor: horizontalStart,
 		verticalAnchor: verticalStart
 	}, sizeAttrs);
-	if (position === "insideTopRight") return _objectSpread$24({
+	if (position === "insideTopRight") return _objectSpread$27({
 		x: x + width - horizontalOffset,
 		y: y + verticalOffset,
 		textAnchor: horizontalEnd,
 		verticalAnchor: verticalStart
 	}, sizeAttrs);
-	if (position === "insideBottomLeft") return _objectSpread$24({
+	if (position === "insideBottomLeft") return _objectSpread$27({
 		x: x + horizontalOffset,
 		y: y + height - verticalOffset,
 		textAnchor: horizontalStart,
 		verticalAnchor: verticalEnd
 	}, sizeAttrs);
-	if (position === "insideBottomRight") return _objectSpread$24({
+	if (position === "insideBottomRight") return _objectSpread$27({
 		x: x + width - horizontalOffset,
 		y: y + height - verticalOffset,
 		textAnchor: horizontalEnd,
 		verticalAnchor: verticalEnd
 	}, sizeAttrs);
-	if ((0, import_isObject.default)(position) && (isNumber(position.x) || isPercent(position.x)) && (isNumber(position.y) || isPercent(position.y))) return _objectSpread$24({
+	if ((0, import_isObject.default)(position) && (isNumber(position.x) || isPercent(position.x)) && (isNumber(position.y) || isPercent(position.y))) return _objectSpread$27({
 		x: x + getPercentValue(position.x, width),
 		y: y + getPercentValue(position.y, height),
 		textAnchor: "end",
 		verticalAnchor: "end"
 	}, sizeAttrs);
-	return _objectSpread$24({
+	return _objectSpread$27({
 		x: x + width / 2,
 		y: y + height / 2,
 		textAnchor: "middle",
@@ -53289,8 +53459,8 @@ var isPolar = function isPolar(viewBox) {
 	return "cx" in viewBox && isNumber(viewBox.cx);
 };
 function Label$3(_ref4) {
-	var _ref4$offset = _ref4.offset, offset = _ref4$offset === void 0 ? 5 : _ref4$offset, restProps = _objectWithoutProperties$10(_ref4, _excluded$10);
-	var props = _objectSpread$24({ offset }, restProps);
+	var _ref4$offset = _ref4.offset, offset = _ref4$offset === void 0 ? 5 : _ref4$offset, restProps = _objectWithoutProperties$12(_ref4, _excluded$12);
+	var props = _objectSpread$27({ offset }, restProps);
 	var viewBox = props.viewBox, position = props.position, value = props.value, children = props.children, content = props.content, _props$className = props.className, className = _props$className === void 0 ? "" : _props$className, textBreakAll = props.textBreakAll;
 	if (!viewBox || (0, import_isNil.default)(value) && (0, import_isNil.default)(children) && !/* @__PURE__ */ (0, import_react.isValidElement)(content) && !(0, import_isFunction.default)(content)) return null;
 	if (/* @__PURE__ */ (0, import_react.isValidElement)(content)) return /* @__PURE__ */ (0, import_react.cloneElement)(content, props);
@@ -53303,7 +53473,7 @@ function Label$3(_ref4) {
 	var attrs = filterProps(props, true);
 	if (isPolarLabel && (position === "insideStart" || position === "insideEnd" || position === "end")) return renderRadialLabel(props, label, attrs);
 	var positionAttrs = isPolarLabel ? getAttrsOfPolarLabel(props) : getAttrsOfCartesianLabel(props);
-	return /* @__PURE__ */ import_react.createElement(Text, _extends$19({ className: clsx("recharts-label", className) }, attrs, positionAttrs, { breakAll: textBreakAll }), label);
+	return /* @__PURE__ */ import_react.createElement(Text, _extends$23({ className: clsx("recharts-label", className) }, attrs, positionAttrs, { breakAll: textBreakAll }), label);
 }
 Label$3.displayName = "Label";
 var parseViewBox = function parseViewBox(props) {
@@ -53368,7 +53538,7 @@ var parseLabel = function parseLabel(label, viewBox) {
 		content: label,
 		viewBox
 	});
-	if ((0, import_isObject.default)(label)) return /* @__PURE__ */ import_react.createElement(Label$3, _extends$19({ viewBox }, label, { key: "label-implicit" }));
+	if ((0, import_isObject.default)(label)) return /* @__PURE__ */ import_react.createElement(Label$3, _extends$23({ viewBox }, label, { key: "label-implicit" }));
 	return null;
 };
 var renderCallByParent$1 = function renderCallByParent(parentProps, viewBox) {
@@ -53383,7 +53553,7 @@ var renderCallByParent$1 = function renderCallByParent(parentProps, viewBox) {
 		});
 	});
 	if (!checkPropsLabel) return explicitChildren;
-	return [parseLabel(parentProps.label, viewBox || parentViewBox)].concat(_toConsumableArray$6(explicitChildren));
+	return [parseLabel(parentProps.label, viewBox || parentViewBox)].concat(_toConsumableArray$7(explicitChildren));
 };
 Label$3.parseViewBox = parseViewBox;
 Label$3.renderCallByParent = renderCallByParent$1;
@@ -53410,57 +53580,57 @@ var import_last = /* @__PURE__ */ __toESM((/* @__PURE__ */ __commonJSMin(((expor
 	}
 	module.exports = last;
 })))());
-function _typeof$28(o) {
+function _typeof$31(o) {
 	"@babel/helpers - typeof";
-	return _typeof$28 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o) {
+	return _typeof$31 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o) {
 		return typeof o;
 	} : function(o) {
 		return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
-	}, _typeof$28(o);
+	}, _typeof$31(o);
 }
-var _excluded$9 = ["valueAccessor"], _excluded2$4 = [
+var _excluded$11 = ["valueAccessor"], _excluded2$5 = [
 	"data",
 	"dataKey",
 	"clockWise",
 	"id",
 	"textBreakAll"
 ];
-function _toConsumableArray$5(arr) {
-	return _arrayWithoutHoles$5(arr) || _iterableToArray$6(arr) || _unsupportedIterableToArray$9(arr) || _nonIterableSpread$5();
+function _toConsumableArray$6(arr) {
+	return _arrayWithoutHoles$6(arr) || _iterableToArray$7(arr) || _unsupportedIterableToArray$10(arr) || _nonIterableSpread$6();
 }
-function _nonIterableSpread$5() {
+function _nonIterableSpread$6() {
 	throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
-function _unsupportedIterableToArray$9(o, minLen) {
+function _unsupportedIterableToArray$10(o, minLen) {
 	if (!o) return;
-	if (typeof o === "string") return _arrayLikeToArray$9(o, minLen);
+	if (typeof o === "string") return _arrayLikeToArray$10(o, minLen);
 	var n = Object.prototype.toString.call(o).slice(8, -1);
 	if (n === "Object" && o.constructor) n = o.constructor.name;
 	if (n === "Map" || n === "Set") return Array.from(o);
-	if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray$9(o, minLen);
+	if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray$10(o, minLen);
 }
-function _iterableToArray$6(iter) {
+function _iterableToArray$7(iter) {
 	if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
 }
-function _arrayWithoutHoles$5(arr) {
-	if (Array.isArray(arr)) return _arrayLikeToArray$9(arr);
+function _arrayWithoutHoles$6(arr) {
+	if (Array.isArray(arr)) return _arrayLikeToArray$10(arr);
 }
-function _arrayLikeToArray$9(arr, len) {
+function _arrayLikeToArray$10(arr, len) {
 	if (len == null || len > arr.length) len = arr.length;
 	for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
 	return arr2;
 }
-function _extends$18() {
-	_extends$18 = Object.assign ? Object.assign.bind() : function(target) {
+function _extends$22() {
+	_extends$22 = Object.assign ? Object.assign.bind() : function(target) {
 		for (var i = 1; i < arguments.length; i++) {
 			var source = arguments[i];
 			for (var key in source) if (Object.prototype.hasOwnProperty.call(source, key)) target[key] = source[key];
 		}
 		return target;
 	};
-	return _extends$18.apply(this, arguments);
+	return _extends$22.apply(this, arguments);
 }
-function ownKeys$23(e, r) {
+function ownKeys$26(e, r) {
 	var t = Object.keys(e);
 	if (Object.getOwnPropertySymbols) {
 		var o = Object.getOwnPropertySymbols(e);
@@ -53470,19 +53640,19 @@ function ownKeys$23(e, r) {
 	}
 	return t;
 }
-function _objectSpread$23(e) {
+function _objectSpread$26(e) {
 	for (var r = 1; r < arguments.length; r++) {
 		var t = null != arguments[r] ? arguments[r] : {};
-		r % 2 ? ownKeys$23(Object(t), !0).forEach(function(r) {
-			_defineProperty$26(e, r, t[r]);
-		}) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$23(Object(t)).forEach(function(r) {
+		r % 2 ? ownKeys$26(Object(t), !0).forEach(function(r) {
+			_defineProperty$29(e, r, t[r]);
+		}) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$26(Object(t)).forEach(function(r) {
 			Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r));
 		});
 	}
 	return e;
 }
-function _defineProperty$26(obj, key, value) {
-	key = _toPropertyKey$26(key);
+function _defineProperty$29(obj, key, value) {
+	key = _toPropertyKey$29(key);
 	if (key in obj) Object.defineProperty(obj, key, {
 		value,
 		enumerable: true,
@@ -53492,23 +53662,23 @@ function _defineProperty$26(obj, key, value) {
 	else obj[key] = value;
 	return obj;
 }
-function _toPropertyKey$26(t) {
-	var i = _toPrimitive$26(t, "string");
-	return "symbol" == _typeof$28(i) ? i : i + "";
+function _toPropertyKey$29(t) {
+	var i = _toPrimitive$29(t, "string");
+	return "symbol" == _typeof$31(i) ? i : i + "";
 }
-function _toPrimitive$26(t, r) {
-	if ("object" != _typeof$28(t) || !t) return t;
+function _toPrimitive$29(t, r) {
+	if ("object" != _typeof$31(t) || !t) return t;
 	var e = t[Symbol.toPrimitive];
 	if (void 0 !== e) {
 		var i = e.call(t, r || "default");
-		if ("object" != _typeof$28(i)) return i;
+		if ("object" != _typeof$31(i)) return i;
 		throw new TypeError("@@toPrimitive must return a primitive value.");
 	}
 	return ("string" === r ? String : Number)(t);
 }
-function _objectWithoutProperties$9(source, excluded) {
+function _objectWithoutProperties$11(source, excluded) {
 	if (source == null) return {};
-	var target = _objectWithoutPropertiesLoose$9(source, excluded);
+	var target = _objectWithoutPropertiesLoose$11(source, excluded);
 	var key, i;
 	if (Object.getOwnPropertySymbols) {
 		var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
@@ -53521,7 +53691,7 @@ function _objectWithoutProperties$9(source, excluded) {
 	}
 	return target;
 }
-function _objectWithoutPropertiesLoose$9(source, excluded) {
+function _objectWithoutPropertiesLoose$11(source, excluded) {
 	if (source == null) return {};
 	var target = {};
 	for (var key in source) if (Object.prototype.hasOwnProperty.call(source, key)) {
@@ -53534,17 +53704,17 @@ var defaultAccessor = function defaultAccessor(entry) {
 	return Array.isArray(entry.value) ? (0, import_last.default)(entry.value) : entry.value;
 };
 function LabelList(_ref) {
-	var _ref$valueAccessor = _ref.valueAccessor, valueAccessor = _ref$valueAccessor === void 0 ? defaultAccessor : _ref$valueAccessor, restProps = _objectWithoutProperties$9(_ref, _excluded$9);
-	var data = restProps.data, dataKey = restProps.dataKey, clockWise = restProps.clockWise, id = restProps.id, textBreakAll = restProps.textBreakAll, others = _objectWithoutProperties$9(restProps, _excluded2$4);
+	var _ref$valueAccessor = _ref.valueAccessor, valueAccessor = _ref$valueAccessor === void 0 ? defaultAccessor : _ref$valueAccessor, restProps = _objectWithoutProperties$11(_ref, _excluded$11);
+	var data = restProps.data, dataKey = restProps.dataKey, clockWise = restProps.clockWise, id = restProps.id, textBreakAll = restProps.textBreakAll, others = _objectWithoutProperties$11(restProps, _excluded2$5);
 	if (!data || !data.length) return null;
 	return /* @__PURE__ */ import_react.createElement(Layer, { className: "recharts-label-list" }, data.map(function(entry, index) {
 		var value = (0, import_isNil.default)(dataKey) ? valueAccessor(entry, index) : getValueByDataKey(entry && entry.payload, dataKey);
 		var idProps = (0, import_isNil.default)(id) ? {} : { id: "".concat(id, "-").concat(index) };
-		return /* @__PURE__ */ import_react.createElement(Label$3, _extends$18({}, filterProps(entry, true), others, idProps, {
+		return /* @__PURE__ */ import_react.createElement(Label$3, _extends$22({}, filterProps(entry, true), others, idProps, {
 			parentViewBox: entry.parentViewBox,
 			value,
 			textBreakAll,
-			viewBox: Label$3.parseViewBox((0, import_isNil.default)(clockWise) ? entry : _objectSpread$23(_objectSpread$23({}, entry), {}, { clockWise })),
+			viewBox: Label$3.parseViewBox((0, import_isNil.default)(clockWise) ? entry : _objectSpread$26(_objectSpread$26({}, entry), {}, { clockWise })),
 			key: "label-".concat(index),
 			index
 		}));
@@ -53562,7 +53732,7 @@ function parseLabelList(label, data) {
 		data,
 		content: label
 	});
-	if ((0, import_isObject.default)(label)) return /* @__PURE__ */ import_react.createElement(LabelList, _extends$18({ data }, label, { key: "labelList-implicit" }));
+	if ((0, import_isObject.default)(label)) return /* @__PURE__ */ import_react.createElement(LabelList, _extends$22({ data }, label, { key: "labelList-implicit" }));
 	return null;
 }
 function renderCallByParent(parentProps, data) {
@@ -53576,7 +53746,7 @@ function renderCallByParent(parentProps, data) {
 		});
 	});
 	if (!checkPropsLabel) return explicitChildren;
-	return [parseLabelList(parentProps.label, data)].concat(_toConsumableArray$5(explicitChildren));
+	return [parseLabelList(parentProps.label, data)].concat(_toConsumableArray$6(explicitChildren));
 }
 LabelList.renderCallByParent = renderCallByParent;
 //#endregion
@@ -53584,25 +53754,25 @@ LabelList.renderCallByParent = renderCallByParent;
 /**
 * @fileOverview Sector
 */
-function _typeof$27(o) {
+function _typeof$30(o) {
 	"@babel/helpers - typeof";
-	return _typeof$27 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o) {
+	return _typeof$30 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o) {
 		return typeof o;
 	} : function(o) {
 		return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
-	}, _typeof$27(o);
+	}, _typeof$30(o);
 }
-function _extends$17() {
-	_extends$17 = Object.assign ? Object.assign.bind() : function(target) {
+function _extends$21() {
+	_extends$21 = Object.assign ? Object.assign.bind() : function(target) {
 		for (var i = 1; i < arguments.length; i++) {
 			var source = arguments[i];
 			for (var key in source) if (Object.prototype.hasOwnProperty.call(source, key)) target[key] = source[key];
 		}
 		return target;
 	};
-	return _extends$17.apply(this, arguments);
+	return _extends$21.apply(this, arguments);
 }
-function ownKeys$22(e, r) {
+function ownKeys$25(e, r) {
 	var t = Object.keys(e);
 	if (Object.getOwnPropertySymbols) {
 		var o = Object.getOwnPropertySymbols(e);
@@ -53612,19 +53782,19 @@ function ownKeys$22(e, r) {
 	}
 	return t;
 }
-function _objectSpread$22(e) {
+function _objectSpread$25(e) {
 	for (var r = 1; r < arguments.length; r++) {
 		var t = null != arguments[r] ? arguments[r] : {};
-		r % 2 ? ownKeys$22(Object(t), !0).forEach(function(r) {
-			_defineProperty$25(e, r, t[r]);
-		}) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$22(Object(t)).forEach(function(r) {
+		r % 2 ? ownKeys$25(Object(t), !0).forEach(function(r) {
+			_defineProperty$28(e, r, t[r]);
+		}) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$25(Object(t)).forEach(function(r) {
 			Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r));
 		});
 	}
 	return e;
 }
-function _defineProperty$25(obj, key, value) {
-	key = _toPropertyKey$25(key);
+function _defineProperty$28(obj, key, value) {
+	key = _toPropertyKey$28(key);
 	if (key in obj) Object.defineProperty(obj, key, {
 		value,
 		enumerable: true,
@@ -53634,16 +53804,16 @@ function _defineProperty$25(obj, key, value) {
 	else obj[key] = value;
 	return obj;
 }
-function _toPropertyKey$25(t) {
-	var i = _toPrimitive$25(t, "string");
-	return "symbol" == _typeof$27(i) ? i : i + "";
+function _toPropertyKey$28(t) {
+	var i = _toPrimitive$28(t, "string");
+	return "symbol" == _typeof$30(i) ? i : i + "";
 }
-function _toPrimitive$25(t, r) {
-	if ("object" != _typeof$27(t) || !t) return t;
+function _toPrimitive$28(t, r) {
+	if ("object" != _typeof$30(t) || !t) return t;
 	var e = t[Symbol.toPrimitive];
 	if (void 0 !== e) {
 		var i = e.call(t, r || "default");
-		if ("object" != _typeof$27(i)) return i;
+		if ("object" != _typeof$30(i)) return i;
 		throw new TypeError("@@toPrimitive must return a primitive value.");
 	}
 	return ("string" === r ? String : Number)(t);
@@ -53654,7 +53824,7 @@ var getDeltaAngle = function getDeltaAngle(startAngle, endAngle) {
 var getTangentCircle = function getTangentCircle(_ref) {
 	var cx = _ref.cx, cy = _ref.cy, radius = _ref.radius, angle = _ref.angle, sign = _ref.sign, isExternal = _ref.isExternal, cornerRadius = _ref.cornerRadius, cornerIsExternal = _ref.cornerIsExternal;
 	var centerRadius = cornerRadius * (isExternal ? 1 : -1) + radius;
-	var theta = Math.asin(cornerRadius / centerRadius) / RADIAN;
+	var theta = Math.asin(cornerRadius / centerRadius) / RADIAN$1;
 	var centerAngle = cornerIsExternal ? angle : angle + sign * theta;
 	var center = polarToCartesian(cx, cy, centerRadius, centerAngle);
 	var circleTangency = polarToCartesian(cx, cy, radius, centerAngle);
@@ -53662,7 +53832,7 @@ var getTangentCircle = function getTangentCircle(_ref) {
 	return {
 		center,
 		circleTangency,
-		lineTangency: polarToCartesian(cx, cy, centerRadius * Math.cos(theta * RADIAN), lineTangencyAngle),
+		lineTangency: polarToCartesian(cx, cy, centerRadius * Math.cos(theta * RADIAN$1), lineTangencyAngle),
 		theta
 	};
 };
@@ -53753,7 +53923,7 @@ var defaultProps$3 = {
 	cornerIsExternal: false
 };
 var Sector = function Sector(sectorProps) {
-	var props = _objectSpread$22(_objectSpread$22({}, defaultProps$3), sectorProps);
+	var props = _objectSpread$25(_objectSpread$25({}, defaultProps$3), sectorProps);
 	var cx = props.cx, cy = props.cy, innerRadius = props.innerRadius, outerRadius = props.outerRadius, cornerRadius = props.cornerRadius, forceCornerRadius = props.forceCornerRadius, cornerIsExternal = props.cornerIsExternal, startAngle = props.startAngle, endAngle = props.endAngle, className = props.className;
 	if (outerRadius < innerRadius || startAngle === endAngle) return null;
 	var layerClass = clsx("recharts-sector", className);
@@ -53779,7 +53949,7 @@ var Sector = function Sector(sectorProps) {
 		startAngle,
 		endAngle
 	});
-	return /* @__PURE__ */ import_react.createElement("path", _extends$17({}, filterProps(props, true), {
+	return /* @__PURE__ */ import_react.createElement("path", _extends$21({}, filterProps(props, true), {
 		className: layerClass,
 		d: path,
 		role: "img"
@@ -53790,25 +53960,25 @@ var Sector = function Sector(sectorProps) {
 /**
 * @fileOverview Curve
 */
-function _typeof$26(o) {
+function _typeof$29(o) {
 	"@babel/helpers - typeof";
-	return _typeof$26 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o) {
+	return _typeof$29 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o) {
 		return typeof o;
 	} : function(o) {
 		return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
-	}, _typeof$26(o);
+	}, _typeof$29(o);
 }
-function _extends$16() {
-	_extends$16 = Object.assign ? Object.assign.bind() : function(target) {
+function _extends$20() {
+	_extends$20 = Object.assign ? Object.assign.bind() : function(target) {
 		for (var i = 1; i < arguments.length; i++) {
 			var source = arguments[i];
 			for (var key in source) if (Object.prototype.hasOwnProperty.call(source, key)) target[key] = source[key];
 		}
 		return target;
 	};
-	return _extends$16.apply(this, arguments);
+	return _extends$20.apply(this, arguments);
 }
-function ownKeys$21(e, r) {
+function ownKeys$24(e, r) {
 	var t = Object.keys(e);
 	if (Object.getOwnPropertySymbols) {
 		var o = Object.getOwnPropertySymbols(e);
@@ -53818,19 +53988,19 @@ function ownKeys$21(e, r) {
 	}
 	return t;
 }
-function _objectSpread$21(e) {
+function _objectSpread$24(e) {
 	for (var r = 1; r < arguments.length; r++) {
 		var t = null != arguments[r] ? arguments[r] : {};
-		r % 2 ? ownKeys$21(Object(t), !0).forEach(function(r) {
-			_defineProperty$24(e, r, t[r]);
-		}) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$21(Object(t)).forEach(function(r) {
+		r % 2 ? ownKeys$24(Object(t), !0).forEach(function(r) {
+			_defineProperty$27(e, r, t[r]);
+		}) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$24(Object(t)).forEach(function(r) {
 			Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r));
 		});
 	}
 	return e;
 }
-function _defineProperty$24(obj, key, value) {
-	key = _toPropertyKey$24(key);
+function _defineProperty$27(obj, key, value) {
+	key = _toPropertyKey$27(key);
 	if (key in obj) Object.defineProperty(obj, key, {
 		value,
 		enumerable: true,
@@ -53840,16 +54010,16 @@ function _defineProperty$24(obj, key, value) {
 	else obj[key] = value;
 	return obj;
 }
-function _toPropertyKey$24(t) {
-	var i = _toPrimitive$24(t, "string");
-	return "symbol" == _typeof$26(i) ? i : i + "";
+function _toPropertyKey$27(t) {
+	var i = _toPrimitive$27(t, "string");
+	return "symbol" == _typeof$29(i) ? i : i + "";
 }
-function _toPrimitive$24(t, r) {
-	if ("object" != _typeof$26(t) || !t) return t;
+function _toPrimitive$27(t, r) {
+	if ("object" != _typeof$29(t) || !t) return t;
 	var e = t[Symbol.toPrimitive];
 	if (void 0 !== e) {
 		var i = e.call(t, r || "default");
-		if ("object" != _typeof$26(i)) return i;
+		if ("object" != _typeof$29(i)) return i;
 		throw new TypeError("@@toPrimitive must return a primitive value.");
 	}
 	return ("string" === r ? String : Number)(t);
@@ -53900,7 +54070,7 @@ var getPath$1 = function getPath(_ref) {
 			return defined(base);
 		}) : baseLine;
 		var areaPoints = formatPoints.map(function(entry, index) {
-			return _objectSpread$21(_objectSpread$21({}, entry), {}, { base: formatBaseLine[index] });
+			return _objectSpread$24(_objectSpread$24({}, entry), {}, { base: formatBaseLine[index] });
 		});
 		if (layout === "vertical") lineFunction = area_default().y(getY).x1(getX).x0(function(d) {
 			return d.base.x;
@@ -53921,7 +54091,7 @@ var Curve = function Curve(props) {
 	var className = props.className, points = props.points, path = props.path, pathRef = props.pathRef;
 	if ((!points || !points.length) && !path) return null;
 	var realPath = points && points.length ? getPath$1(props) : path;
-	return /* @__PURE__ */ import_react.createElement("path", _extends$16({}, filterProps(props, false), adaptEventHandlers(props), {
+	return /* @__PURE__ */ import_react.createElement("path", _extends$20({}, filterProps(props, false), adaptEventHandlers(props), {
 		className: clsx("recharts-curve", className),
 		d: realPath,
 		ref: pathRef
@@ -55054,34 +55224,34 @@ function setRafTimeout(callback) {
 }
 //#endregion
 //#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-smooth@4.0.4_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/react-smooth/es6/AnimateManager.js
-function _typeof$25(o) {
+function _typeof$28(o) {
 	"@babel/helpers - typeof";
-	return _typeof$25 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o) {
+	return _typeof$28 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o) {
 		return typeof o;
 	} : function(o) {
 		return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
-	}, _typeof$25(o);
+	}, _typeof$28(o);
 }
 function _toArray(arr) {
-	return _arrayWithHoles$6(arr) || _iterableToArray$5(arr) || _unsupportedIterableToArray$8(arr) || _nonIterableRest$6();
+	return _arrayWithHoles$6(arr) || _iterableToArray$6(arr) || _unsupportedIterableToArray$9(arr) || _nonIterableRest$6();
 }
 function _nonIterableRest$6() {
 	throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
-function _unsupportedIterableToArray$8(o, minLen) {
+function _unsupportedIterableToArray$9(o, minLen) {
 	if (!o) return;
-	if (typeof o === "string") return _arrayLikeToArray$8(o, minLen);
+	if (typeof o === "string") return _arrayLikeToArray$9(o, minLen);
 	var n = Object.prototype.toString.call(o).slice(8, -1);
 	if (n === "Object" && o.constructor) n = o.constructor.name;
 	if (n === "Map" || n === "Set") return Array.from(o);
-	if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray$8(o, minLen);
+	if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray$9(o, minLen);
 }
-function _arrayLikeToArray$8(arr, len) {
+function _arrayLikeToArray$9(arr, len) {
 	if (len == null || len > arr.length) len = arr.length;
 	for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
 	return arr2;
 }
-function _iterableToArray$5(iter) {
+function _iterableToArray$6(iter) {
 	if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
 }
 function _arrayWithHoles$6(arr) {
@@ -55106,7 +55276,7 @@ function createAnimateManager() {
 			setRafTimeout(setStyle.bind(null, restStyles));
 			return;
 		}
-		if (_typeof$25(_style) === "object") {
+		if (_typeof$28(_style) === "object") {
 			currStyle = _style;
 			handleChange(currStyle);
 		}
@@ -55132,15 +55302,15 @@ function createAnimateManager() {
 }
 //#endregion
 //#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-smooth@4.0.4_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/react-smooth/es6/util.js
-function _typeof$24(o) {
+function _typeof$27(o) {
 	"@babel/helpers - typeof";
-	return _typeof$24 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o) {
+	return _typeof$27 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o) {
 		return typeof o;
 	} : function(o) {
 		return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
-	}, _typeof$24(o);
+	}, _typeof$27(o);
 }
-function ownKeys$20(e, r) {
+function ownKeys$23(e, r) {
 	var t = Object.keys(e);
 	if (Object.getOwnPropertySymbols) {
 		var o = Object.getOwnPropertySymbols(e);
@@ -55150,19 +55320,19 @@ function ownKeys$20(e, r) {
 	}
 	return t;
 }
-function _objectSpread$20(e) {
+function _objectSpread$23(e) {
 	for (var r = 1; r < arguments.length; r++) {
 		var t = null != arguments[r] ? arguments[r] : {};
-		r % 2 ? ownKeys$20(Object(t), !0).forEach(function(r) {
-			_defineProperty$23(e, r, t[r]);
-		}) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$20(Object(t)).forEach(function(r) {
+		r % 2 ? ownKeys$23(Object(t), !0).forEach(function(r) {
+			_defineProperty$26(e, r, t[r]);
+		}) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$23(Object(t)).forEach(function(r) {
 			Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r));
 		});
 	}
 	return e;
 }
-function _defineProperty$23(obj, key, value) {
-	key = _toPropertyKey$23(key);
+function _defineProperty$26(obj, key, value) {
+	key = _toPropertyKey$26(key);
 	if (key in obj) Object.defineProperty(obj, key, {
 		value,
 		enumerable: true,
@@ -55172,16 +55342,16 @@ function _defineProperty$23(obj, key, value) {
 	else obj[key] = value;
 	return obj;
 }
-function _toPropertyKey$23(arg) {
-	var key = _toPrimitive$23(arg, "string");
-	return _typeof$24(key) === "symbol" ? key : String(key);
+function _toPropertyKey$26(arg) {
+	var key = _toPrimitive$26(arg, "string");
+	return _typeof$27(key) === "symbol" ? key : String(key);
 }
-function _toPrimitive$23(input, hint) {
-	if (_typeof$24(input) !== "object" || input === null) return input;
+function _toPrimitive$26(input, hint) {
+	if (_typeof$27(input) !== "object" || input === null) return input;
 	var prim = input[Symbol.toPrimitive];
 	if (prim !== void 0) {
 		var res = prim.call(input, hint || "default");
-		if (_typeof$24(res) !== "object") return res;
+		if (_typeof$27(res) !== "object") return res;
 		throw new TypeError("@@toPrimitive must return a primitive value.");
 	}
 	return (hint === "string" ? String : Number)(input);
@@ -55203,7 +55373,7 @@ var getDashCase = function getDashCase(name) {
 };
 var mapObject = function mapObject(fn, obj) {
 	return Object.keys(obj).reduce(function(res, key) {
-		return _objectSpread$20(_objectSpread$20({}, res), {}, _defineProperty$23({}, key, fn(key, obj[key])));
+		return _objectSpread$23(_objectSpread$23({}, res), {}, _defineProperty$26({}, key, fn(key, obj[key])));
 	}, {});
 };
 var getTransitionVal = function getTransitionVal(props, duration, easing) {
@@ -55235,7 +55405,7 @@ var warn = function warn(condition, format, a, b, c, d, e, f) {
 //#endregion
 //#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-smooth@4.0.4_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/react-smooth/es6/easing.js
 function _slicedToArray$5(arr, i) {
-	return _arrayWithHoles$5(arr) || _iterableToArrayLimit$5(arr, i) || _unsupportedIterableToArray$7(arr, i) || _nonIterableRest$5();
+	return _arrayWithHoles$5(arr) || _iterableToArrayLimit$5(arr, i) || _unsupportedIterableToArray$8(arr, i) || _nonIterableRest$5();
 }
 function _nonIterableRest$5() {
 	throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
@@ -55264,27 +55434,27 @@ function _iterableToArrayLimit$5(r, l) {
 function _arrayWithHoles$5(arr) {
 	if (Array.isArray(arr)) return arr;
 }
-function _toConsumableArray$4(arr) {
-	return _arrayWithoutHoles$4(arr) || _iterableToArray$4(arr) || _unsupportedIterableToArray$7(arr) || _nonIterableSpread$4();
+function _toConsumableArray$5(arr) {
+	return _arrayWithoutHoles$5(arr) || _iterableToArray$5(arr) || _unsupportedIterableToArray$8(arr) || _nonIterableSpread$5();
 }
-function _nonIterableSpread$4() {
+function _nonIterableSpread$5() {
 	throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
-function _unsupportedIterableToArray$7(o, minLen) {
+function _unsupportedIterableToArray$8(o, minLen) {
 	if (!o) return;
-	if (typeof o === "string") return _arrayLikeToArray$7(o, minLen);
+	if (typeof o === "string") return _arrayLikeToArray$8(o, minLen);
 	var n = Object.prototype.toString.call(o).slice(8, -1);
 	if (n === "Object" && o.constructor) n = o.constructor.name;
 	if (n === "Map" || n === "Set") return Array.from(o);
-	if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray$7(o, minLen);
+	if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray$8(o, minLen);
 }
-function _iterableToArray$4(iter) {
+function _iterableToArray$5(iter) {
 	if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
 }
-function _arrayWithoutHoles$4(arr) {
-	if (Array.isArray(arr)) return _arrayLikeToArray$7(arr);
+function _arrayWithoutHoles$5(arr) {
+	if (Array.isArray(arr)) return _arrayLikeToArray$8(arr);
 }
-function _arrayLikeToArray$7(arr, len) {
+function _arrayLikeToArray$8(arr, len) {
 	if (len == null || len > arr.length) len = arr.length;
 	for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
 	return arr2;
@@ -55313,7 +55483,7 @@ var cubicBezier = function cubicBezier(c1, c2) {
 var derivativeCubicBezier = function derivativeCubicBezier(c1, c2) {
 	return function(t) {
 		var params = cubicBezierFactor(c1, c2);
-		return multyTime([].concat(_toConsumableArray$4(params.map(function(param, i) {
+		return multyTime([].concat(_toConsumableArray$5(params.map(function(param, i) {
 			return param * i;
 		}).slice(1)), [0]), t);
 	};
@@ -55427,27 +55597,27 @@ var configEasing = function configEasing() {
 };
 //#endregion
 //#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-smooth@4.0.4_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/react-smooth/es6/configUpdate.js
-function _typeof$23(o) {
+function _typeof$26(o) {
 	"@babel/helpers - typeof";
-	return _typeof$23 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o) {
+	return _typeof$26 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o) {
 		return typeof o;
 	} : function(o) {
 		return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
-	}, _typeof$23(o);
+	}, _typeof$26(o);
 }
-function _toConsumableArray$3(arr) {
-	return _arrayWithoutHoles$3(arr) || _iterableToArray$3(arr) || _unsupportedIterableToArray$6(arr) || _nonIterableSpread$3();
+function _toConsumableArray$4(arr) {
+	return _arrayWithoutHoles$4(arr) || _iterableToArray$4(arr) || _unsupportedIterableToArray$7(arr) || _nonIterableSpread$4();
 }
-function _nonIterableSpread$3() {
+function _nonIterableSpread$4() {
 	throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
-function _iterableToArray$3(iter) {
+function _iterableToArray$4(iter) {
 	if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
 }
-function _arrayWithoutHoles$3(arr) {
-	if (Array.isArray(arr)) return _arrayLikeToArray$6(arr);
+function _arrayWithoutHoles$4(arr) {
+	if (Array.isArray(arr)) return _arrayLikeToArray$7(arr);
 }
-function ownKeys$19(e, r) {
+function ownKeys$22(e, r) {
 	var t = Object.keys(e);
 	if (Object.getOwnPropertySymbols) {
 		var o = Object.getOwnPropertySymbols(e);
@@ -55457,19 +55627,19 @@ function ownKeys$19(e, r) {
 	}
 	return t;
 }
-function _objectSpread$19(e) {
+function _objectSpread$22(e) {
 	for (var r = 1; r < arguments.length; r++) {
 		var t = null != arguments[r] ? arguments[r] : {};
-		r % 2 ? ownKeys$19(Object(t), !0).forEach(function(r) {
-			_defineProperty$22(e, r, t[r]);
-		}) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$19(Object(t)).forEach(function(r) {
+		r % 2 ? ownKeys$22(Object(t), !0).forEach(function(r) {
+			_defineProperty$25(e, r, t[r]);
+		}) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$22(Object(t)).forEach(function(r) {
 			Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r));
 		});
 	}
 	return e;
 }
-function _defineProperty$22(obj, key, value) {
-	key = _toPropertyKey$22(key);
+function _defineProperty$25(obj, key, value) {
+	key = _toPropertyKey$25(key);
 	if (key in obj) Object.defineProperty(obj, key, {
 		value,
 		enumerable: true,
@@ -55479,35 +55649,35 @@ function _defineProperty$22(obj, key, value) {
 	else obj[key] = value;
 	return obj;
 }
-function _toPropertyKey$22(arg) {
-	var key = _toPrimitive$22(arg, "string");
-	return _typeof$23(key) === "symbol" ? key : String(key);
+function _toPropertyKey$25(arg) {
+	var key = _toPrimitive$25(arg, "string");
+	return _typeof$26(key) === "symbol" ? key : String(key);
 }
-function _toPrimitive$22(input, hint) {
-	if (_typeof$23(input) !== "object" || input === null) return input;
+function _toPrimitive$25(input, hint) {
+	if (_typeof$26(input) !== "object" || input === null) return input;
 	var prim = input[Symbol.toPrimitive];
 	if (prim !== void 0) {
 		var res = prim.call(input, hint || "default");
-		if (_typeof$23(res) !== "object") return res;
+		if (_typeof$26(res) !== "object") return res;
 		throw new TypeError("@@toPrimitive must return a primitive value.");
 	}
 	return (hint === "string" ? String : Number)(input);
 }
 function _slicedToArray$4(arr, i) {
-	return _arrayWithHoles$4(arr) || _iterableToArrayLimit$4(arr, i) || _unsupportedIterableToArray$6(arr, i) || _nonIterableRest$4();
+	return _arrayWithHoles$4(arr) || _iterableToArrayLimit$4(arr, i) || _unsupportedIterableToArray$7(arr, i) || _nonIterableRest$4();
 }
 function _nonIterableRest$4() {
 	throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
-function _unsupportedIterableToArray$6(o, minLen) {
+function _unsupportedIterableToArray$7(o, minLen) {
 	if (!o) return;
-	if (typeof o === "string") return _arrayLikeToArray$6(o, minLen);
+	if (typeof o === "string") return _arrayLikeToArray$7(o, minLen);
 	var n = Object.prototype.toString.call(o).slice(8, -1);
 	if (n === "Object" && o.constructor) n = o.constructor.name;
 	if (n === "Map" || n === "Set") return Array.from(o);
-	if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray$6(o, minLen);
+	if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray$7(o, minLen);
 }
-function _arrayLikeToArray$6(arr, len) {
+function _arrayLikeToArray$7(arr, len) {
 	if (len == null || len > arr.length) len = arr.length;
 	for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
 	return arr2;
@@ -55546,7 +55716,7 @@ var calStepperVals = function calStepperVals(easing, preVals, steps) {
 	var nextStepVals = mapObject(function(key, val) {
 		if (needContinue(val)) {
 			var _easing2 = _slicedToArray$4(easing(val.from, val.to, val.velocity), 2), newX = _easing2[0], newV = _easing2[1];
-			return _objectSpread$19(_objectSpread$19({}, val), {}, {
+			return _objectSpread$22(_objectSpread$22({}, val), {}, {
 				from: newX,
 				velocity: newV
 			});
@@ -55554,7 +55724,7 @@ var calStepperVals = function calStepperVals(easing, preVals, steps) {
 		return val;
 	}, preVals);
 	if (steps < 1) return mapObject(function(key, val) {
-		if (needContinue(val)) return _objectSpread$19(_objectSpread$19({}, val), {}, {
+		if (needContinue(val)) return _objectSpread$22(_objectSpread$22({}, val), {}, {
 			velocity: alpha(val.velocity, nextStepVals[key].velocity, steps),
 			from: alpha(val.from, nextStepVals[key].from, steps)
 		});
@@ -55565,10 +55735,10 @@ var calStepperVals = function calStepperVals(easing, preVals, steps) {
 var configUpdate_default = (function(from, to, easing, duration, render) {
 	var interKeys = getIntersectionKeys(from, to);
 	var timingStyle = interKeys.reduce(function(res, key) {
-		return _objectSpread$19(_objectSpread$19({}, res), {}, _defineProperty$22({}, key, [from[key], to[key]]));
+		return _objectSpread$22(_objectSpread$22({}, res), {}, _defineProperty$25({}, key, [from[key], to[key]]));
 	}, {});
 	var stepperStyle = interKeys.reduce(function(res, key) {
-		return _objectSpread$19(_objectSpread$19({}, res), {}, _defineProperty$22({}, key, {
+		return _objectSpread$22(_objectSpread$22({}, res), {}, _defineProperty$25({}, key, {
 			from: from[key],
 			velocity: 0,
 			to: to[key]
@@ -55592,22 +55762,22 @@ var configUpdate_default = (function(from, to, easing, duration, render) {
 		if (!preTime) preTime = now;
 		var steps = (now - preTime) / easing.dt;
 		stepperStyle = calStepperVals(easing, stepperStyle, steps);
-		render(_objectSpread$19(_objectSpread$19(_objectSpread$19({}, from), to), getCurrStyle(stepperStyle)));
+		render(_objectSpread$22(_objectSpread$22(_objectSpread$22({}, from), to), getCurrStyle(stepperStyle)));
 		preTime = now;
 		if (!shouldStopAnimation()) cafId = requestAnimationFrame(update);
 	} : function timingUpdate(now) {
 		if (!beginTime) beginTime = now;
 		var t = (now - beginTime) / duration;
 		var currStyle = mapObject(function(key, val) {
-			return alpha.apply(void 0, _toConsumableArray$3(val).concat([easing(t)]));
+			return alpha.apply(void 0, _toConsumableArray$4(val).concat([easing(t)]));
 		}, timingStyle);
-		render(_objectSpread$19(_objectSpread$19(_objectSpread$19({}, from), to), currStyle));
+		render(_objectSpread$22(_objectSpread$22(_objectSpread$22({}, from), to), currStyle));
 		if (t < 1) cafId = requestAnimationFrame(update);
 		else {
 			var finalStyle = mapObject(function(key, val) {
-				return alpha.apply(void 0, _toConsumableArray$3(val).concat([easing(1)]));
+				return alpha.apply(void 0, _toConsumableArray$4(val).concat([easing(1)]));
 			}, timingStyle);
-			render(_objectSpread$19(_objectSpread$19(_objectSpread$19({}, from), to), finalStyle));
+			render(_objectSpread$22(_objectSpread$22(_objectSpread$22({}, from), to), finalStyle));
 		}
 	};
 	return function() {
@@ -55620,15 +55790,15 @@ var configUpdate_default = (function(from, to, easing, duration, render) {
 //#endregion
 //#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-smooth@4.0.4_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/react-smooth/es6/Animate.js
 var import_prop_types = /* @__PURE__ */ __toESM(require_prop_types());
-function _typeof$22(o) {
+function _typeof$25(o) {
 	"@babel/helpers - typeof";
-	return _typeof$22 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o) {
+	return _typeof$25 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o) {
 		return typeof o;
 	} : function(o) {
 		return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
-	}, _typeof$22(o);
+	}, _typeof$25(o);
 }
-var _excluded$8 = [
+var _excluded$10 = [
 	"children",
 	"begin",
 	"duration",
@@ -55643,9 +55813,9 @@ var _excluded$8 = [
 	"shouldReAnimate",
 	"onAnimationReStart"
 ];
-function _objectWithoutProperties$8(source, excluded) {
+function _objectWithoutProperties$10(source, excluded) {
 	if (source == null) return {};
-	var target = _objectWithoutPropertiesLoose$8(source, excluded);
+	var target = _objectWithoutPropertiesLoose$10(source, excluded);
 	var key, i;
 	if (Object.getOwnPropertySymbols) {
 		var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
@@ -55658,7 +55828,7 @@ function _objectWithoutProperties$8(source, excluded) {
 	}
 	return target;
 }
-function _objectWithoutPropertiesLoose$8(source, excluded) {
+function _objectWithoutPropertiesLoose$10(source, excluded) {
 	if (source == null) return {};
 	var target = {};
 	var sourceKeys = Object.keys(source);
@@ -55670,32 +55840,32 @@ function _objectWithoutPropertiesLoose$8(source, excluded) {
 	}
 	return target;
 }
-function _toConsumableArray$2(arr) {
-	return _arrayWithoutHoles$2(arr) || _iterableToArray$2(arr) || _unsupportedIterableToArray$5(arr) || _nonIterableSpread$2();
+function _toConsumableArray$3(arr) {
+	return _arrayWithoutHoles$3(arr) || _iterableToArray$3(arr) || _unsupportedIterableToArray$6(arr) || _nonIterableSpread$3();
 }
-function _nonIterableSpread$2() {
+function _nonIterableSpread$3() {
 	throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
-function _unsupportedIterableToArray$5(o, minLen) {
+function _unsupportedIterableToArray$6(o, minLen) {
 	if (!o) return;
-	if (typeof o === "string") return _arrayLikeToArray$5(o, minLen);
+	if (typeof o === "string") return _arrayLikeToArray$6(o, minLen);
 	var n = Object.prototype.toString.call(o).slice(8, -1);
 	if (n === "Object" && o.constructor) n = o.constructor.name;
 	if (n === "Map" || n === "Set") return Array.from(o);
-	if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray$5(o, minLen);
+	if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray$6(o, minLen);
 }
-function _iterableToArray$2(iter) {
+function _iterableToArray$3(iter) {
 	if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
 }
-function _arrayWithoutHoles$2(arr) {
-	if (Array.isArray(arr)) return _arrayLikeToArray$5(arr);
+function _arrayWithoutHoles$3(arr) {
+	if (Array.isArray(arr)) return _arrayLikeToArray$6(arr);
 }
-function _arrayLikeToArray$5(arr, len) {
+function _arrayLikeToArray$6(arr, len) {
 	if (len == null || len > arr.length) len = arr.length;
 	for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
 	return arr2;
 }
-function ownKeys$18(e, r) {
+function ownKeys$21(e, r) {
 	var t = Object.keys(e);
 	if (Object.getOwnPropertySymbols) {
 		var o = Object.getOwnPropertySymbols(e);
@@ -55705,19 +55875,19 @@ function ownKeys$18(e, r) {
 	}
 	return t;
 }
-function _objectSpread$18(e) {
+function _objectSpread$21(e) {
 	for (var r = 1; r < arguments.length; r++) {
 		var t = null != arguments[r] ? arguments[r] : {};
-		r % 2 ? ownKeys$18(Object(t), !0).forEach(function(r) {
-			_defineProperty$21(e, r, t[r]);
-		}) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$18(Object(t)).forEach(function(r) {
+		r % 2 ? ownKeys$21(Object(t), !0).forEach(function(r) {
+			_defineProperty$24(e, r, t[r]);
+		}) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$21(Object(t)).forEach(function(r) {
 			Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r));
 		});
 	}
 	return e;
 }
-function _defineProperty$21(obj, key, value) {
-	key = _toPropertyKey$21(key);
+function _defineProperty$24(obj, key, value) {
+	key = _toPropertyKey$24(key);
 	if (key in obj) Object.defineProperty(obj, key, {
 		value,
 		enumerable: true,
@@ -55727,39 +55897,39 @@ function _defineProperty$21(obj, key, value) {
 	else obj[key] = value;
 	return obj;
 }
-function _classCallCheck$12(instance, Constructor) {
+function _classCallCheck$15(instance, Constructor) {
 	if (!(instance instanceof Constructor)) throw new TypeError("Cannot call a class as a function");
 }
-function _defineProperties$12(target, props) {
+function _defineProperties$15(target, props) {
 	for (var i = 0; i < props.length; i++) {
 		var descriptor = props[i];
 		descriptor.enumerable = descriptor.enumerable || false;
 		descriptor.configurable = true;
 		if ("value" in descriptor) descriptor.writable = true;
-		Object.defineProperty(target, _toPropertyKey$21(descriptor.key), descriptor);
+		Object.defineProperty(target, _toPropertyKey$24(descriptor.key), descriptor);
 	}
 }
-function _createClass$12(Constructor, protoProps, staticProps) {
-	if (protoProps) _defineProperties$12(Constructor.prototype, protoProps);
-	if (staticProps) _defineProperties$12(Constructor, staticProps);
+function _createClass$15(Constructor, protoProps, staticProps) {
+	if (protoProps) _defineProperties$15(Constructor.prototype, protoProps);
+	if (staticProps) _defineProperties$15(Constructor, staticProps);
 	Object.defineProperty(Constructor, "prototype", { writable: false });
 	return Constructor;
 }
-function _toPropertyKey$21(arg) {
-	var key = _toPrimitive$21(arg, "string");
-	return _typeof$22(key) === "symbol" ? key : String(key);
+function _toPropertyKey$24(arg) {
+	var key = _toPrimitive$24(arg, "string");
+	return _typeof$25(key) === "symbol" ? key : String(key);
 }
-function _toPrimitive$21(input, hint) {
-	if (_typeof$22(input) !== "object" || input === null) return input;
+function _toPrimitive$24(input, hint) {
+	if (_typeof$25(input) !== "object" || input === null) return input;
 	var prim = input[Symbol.toPrimitive];
 	if (prim !== void 0) {
 		var res = prim.call(input, hint || "default");
-		if (_typeof$22(res) !== "object") return res;
+		if (_typeof$25(res) !== "object") return res;
 		throw new TypeError("@@toPrimitive must return a primitive value.");
 	}
 	return (hint === "string" ? String : Number)(input);
 }
-function _inherits$10(subClass, superClass) {
+function _inherits$13(subClass, superClass) {
 	if (typeof superClass !== "function" && superClass !== null) throw new TypeError("Super expression must either be null or a function");
 	subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: {
 		value: subClass,
@@ -55767,36 +55937,36 @@ function _inherits$10(subClass, superClass) {
 		configurable: true
 	} });
 	Object.defineProperty(subClass, "prototype", { writable: false });
-	if (superClass) _setPrototypeOf$10(subClass, superClass);
+	if (superClass) _setPrototypeOf$13(subClass, superClass);
 }
-function _setPrototypeOf$10(o, p) {
-	_setPrototypeOf$10 = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
+function _setPrototypeOf$13(o, p) {
+	_setPrototypeOf$13 = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
 		o.__proto__ = p;
 		return o;
 	};
-	return _setPrototypeOf$10(o, p);
+	return _setPrototypeOf$13(o, p);
 }
 function _createSuper(Derived) {
-	var hasNativeReflectConstruct = _isNativeReflectConstruct$10();
+	var hasNativeReflectConstruct = _isNativeReflectConstruct$13();
 	return function _createSuperInternal() {
-		var Super = _getPrototypeOf$10(Derived), result;
+		var Super = _getPrototypeOf$13(Derived), result;
 		if (hasNativeReflectConstruct) {
-			var NewTarget = _getPrototypeOf$10(this).constructor;
+			var NewTarget = _getPrototypeOf$13(this).constructor;
 			result = Reflect.construct(Super, arguments, NewTarget);
 		} else result = Super.apply(this, arguments);
-		return _possibleConstructorReturn$10(this, result);
+		return _possibleConstructorReturn$13(this, result);
 	};
 }
-function _possibleConstructorReturn$10(self, call) {
-	if (call && (_typeof$22(call) === "object" || typeof call === "function")) return call;
+function _possibleConstructorReturn$13(self, call) {
+	if (call && (_typeof$25(call) === "object" || typeof call === "function")) return call;
 	else if (call !== void 0) throw new TypeError("Derived constructors may only return object or undefined");
-	return _assertThisInitialized$10(self);
+	return _assertThisInitialized$13(self);
 }
-function _assertThisInitialized$10(self) {
+function _assertThisInitialized$13(self) {
 	if (self === void 0) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
 	return self;
 }
-function _isNativeReflectConstruct$10() {
+function _isNativeReflectConstruct$13() {
 	if (typeof Reflect === "undefined" || !Reflect.construct) return false;
 	if (Reflect.construct.sham) return false;
 	if (typeof Proxy === "function") return true;
@@ -55807,38 +55977,38 @@ function _isNativeReflectConstruct$10() {
 		return false;
 	}
 }
-function _getPrototypeOf$10(o) {
-	_getPrototypeOf$10 = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
+function _getPrototypeOf$13(o) {
+	_getPrototypeOf$13 = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
 		return o.__proto__ || Object.getPrototypeOf(o);
 	};
-	return _getPrototypeOf$10(o);
+	return _getPrototypeOf$13(o);
 }
 var Animate = /* @__PURE__ */ function(_PureComponent) {
-	_inherits$10(Animate, _PureComponent);
+	_inherits$13(Animate, _PureComponent);
 	var _super = _createSuper(Animate);
 	function Animate(props, context) {
 		var _this;
-		_classCallCheck$12(this, Animate);
+		_classCallCheck$15(this, Animate);
 		_this = _super.call(this, props, context);
 		var _this$props = _this.props, isActive = _this$props.isActive, attributeName = _this$props.attributeName, from = _this$props.from, to = _this$props.to, steps = _this$props.steps, children = _this$props.children, duration = _this$props.duration;
-		_this.handleStyleChange = _this.handleStyleChange.bind(_assertThisInitialized$10(_this));
-		_this.changeStyle = _this.changeStyle.bind(_assertThisInitialized$10(_this));
+		_this.handleStyleChange = _this.handleStyleChange.bind(_assertThisInitialized$13(_this));
+		_this.changeStyle = _this.changeStyle.bind(_assertThisInitialized$13(_this));
 		if (!isActive || duration <= 0) {
 			_this.state = { style: {} };
 			if (typeof children === "function") _this.state = { style: to };
-			return _possibleConstructorReturn$10(_this);
+			return _possibleConstructorReturn$13(_this);
 		}
 		if (steps && steps.length) _this.state = { style: steps[0].style };
 		else if (from) {
 			if (typeof children === "function") {
 				_this.state = { style: from };
-				return _possibleConstructorReturn$10(_this);
+				return _possibleConstructorReturn$13(_this);
 			}
-			_this.state = { style: attributeName ? _defineProperty$21({}, attributeName, from) : from };
+			_this.state = { style: attributeName ? _defineProperty$24({}, attributeName, from) : from };
 		} else _this.state = { style: {} };
 		return _this;
 	}
-	_createClass$12(Animate, [
+	_createClass$15(Animate, [
 		{
 			key: "componentDidMount",
 			value: function componentDidMount() {
@@ -55855,7 +56025,7 @@ var Animate = /* @__PURE__ */ function(_PureComponent) {
 				var style = this.state.style;
 				if (!canBegin) return;
 				if (!isActive) {
-					var newState = { style: attributeName ? _defineProperty$21({}, attributeName, to) : to };
+					var newState = { style: attributeName ? _defineProperty$24({}, attributeName, to) : to };
 					if (this.state && style) {
 						if (attributeName && style[attributeName] !== to || !attributeName && style !== to) this.setState(newState);
 					}
@@ -55867,10 +56037,10 @@ var Animate = /* @__PURE__ */ function(_PureComponent) {
 				if (this.stopJSAnimation) this.stopJSAnimation();
 				var from = isTriggered || shouldReAnimate ? currentFrom : prevProps.to;
 				if (this.state && style) {
-					var _newState = { style: attributeName ? _defineProperty$21({}, attributeName, from) : from };
+					var _newState = { style: attributeName ? _defineProperty$24({}, attributeName, from) : from };
 					if (attributeName && style[attributeName] !== from || !attributeName && style !== from) this.setState(_newState);
 				}
-				this.runAnimation(_objectSpread$18(_objectSpread$18({}, this.props), {}, {
+				this.runAnimation(_objectSpread$21(_objectSpread$21({}, this.props), {}, {
 					from,
 					begin: 0
 				}));
@@ -55925,20 +56095,20 @@ var Animate = /* @__PURE__ */ function(_PureComponent) {
 				var _this3 = this;
 				var steps = props.steps, begin = props.begin, onAnimationStart = props.onAnimationStart;
 				var _steps$ = steps[0], initialStyle = _steps$.style, _steps$$duration = _steps$.duration, initialTime = _steps$$duration === void 0 ? 0 : _steps$$duration;
-				return this.manager.start([onAnimationStart].concat(_toConsumableArray$2(steps.reduce(function addStyle(sequence, nextItem, index) {
+				return this.manager.start([onAnimationStart].concat(_toConsumableArray$3(steps.reduce(function addStyle(sequence, nextItem, index) {
 					if (index === 0) return sequence;
 					var duration = nextItem.duration, _nextItem$easing = nextItem.easing, easing = _nextItem$easing === void 0 ? "ease" : _nextItem$easing, style = nextItem.style, nextProperties = nextItem.properties, onAnimationEnd = nextItem.onAnimationEnd;
 					var preItem = index > 0 ? steps[index - 1] : nextItem;
 					var properties = nextProperties || Object.keys(style);
-					if (typeof easing === "function" || easing === "spring") return [].concat(_toConsumableArray$2(sequence), [_this3.runJSAnimation.bind(_this3, {
+					if (typeof easing === "function" || easing === "spring") return [].concat(_toConsumableArray$3(sequence), [_this3.runJSAnimation.bind(_this3, {
 						from: preItem.style,
 						to: style,
 						duration,
 						easing
 					}), duration]);
 					var transition = getTransitionVal(properties, duration, easing);
-					var newStyle = _objectSpread$18(_objectSpread$18(_objectSpread$18({}, preItem.style), style), {}, { transition });
-					return [].concat(_toConsumableArray$2(sequence), [
+					var newStyle = _objectSpread$21(_objectSpread$21(_objectSpread$21({}, preItem.style), style), {}, { transition });
+					return [].concat(_toConsumableArray$3(sequence), [
 						newStyle,
 						duration,
 						onAnimationEnd
@@ -55961,12 +56131,12 @@ var Animate = /* @__PURE__ */ function(_PureComponent) {
 					this.runStepAnimation(props);
 					return;
 				}
-				var to = attributeName ? _defineProperty$21({}, attributeName, propsTo) : propsTo;
+				var to = attributeName ? _defineProperty$24({}, attributeName, propsTo) : propsTo;
 				var transition = getTransitionVal(Object.keys(to), duration, easing);
 				manager.start([
 					onAnimationStart,
 					begin,
-					_objectSpread$18(_objectSpread$18({}, to), {}, { transition }),
+					_objectSpread$21(_objectSpread$21({}, to), {}, { transition }),
 					duration,
 					onAnimationEnd
 				]);
@@ -55988,15 +56158,15 @@ var Animate = /* @__PURE__ */ function(_PureComponent) {
 				_this$props4.onAnimationEnd;
 				_this$props4.shouldReAnimate;
 				_this$props4.onAnimationReStart;
-				var others = _objectWithoutProperties$8(_this$props4, _excluded$8);
+				var others = _objectWithoutProperties$10(_this$props4, _excluded$10);
 				var count = import_react.Children.count(children);
 				var stateStyle = this.state.style;
 				if (typeof children === "function") return children(stateStyle);
 				if (!isActive || count === 0 || duration <= 0) return children;
 				var cloneContainer = function cloneContainer(container) {
 					var _container$props = container.props, _container$props$styl = _container$props.style, style = _container$props$styl === void 0 ? {} : _container$props$styl, className = _container$props.className;
-					return /* @__PURE__ */ (0, import_react.cloneElement)(container, _objectSpread$18(_objectSpread$18({}, others), {}, {
-						style: _objectSpread$18(_objectSpread$18({}, style), stateStyle),
+					return /* @__PURE__ */ (0, import_react.cloneElement)(container, _objectSpread$21(_objectSpread$21({}, others), {}, {
+						style: _objectSpread$21(_objectSpread$21({}, style), stateStyle),
 						className
 					}));
 				};
@@ -56059,39 +56229,39 @@ var es6_default = Animate;
 /**
 * @fileOverview Rectangle
 */
-function _typeof$21(o) {
+function _typeof$24(o) {
 	"@babel/helpers - typeof";
-	return _typeof$21 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o) {
+	return _typeof$24 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o) {
 		return typeof o;
 	} : function(o) {
 		return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
-	}, _typeof$21(o);
+	}, _typeof$24(o);
 }
-function _extends$15() {
-	_extends$15 = Object.assign ? Object.assign.bind() : function(target) {
+function _extends$19() {
+	_extends$19 = Object.assign ? Object.assign.bind() : function(target) {
 		for (var i = 1; i < arguments.length; i++) {
 			var source = arguments[i];
 			for (var key in source) if (Object.prototype.hasOwnProperty.call(source, key)) target[key] = source[key];
 		}
 		return target;
 	};
-	return _extends$15.apply(this, arguments);
+	return _extends$19.apply(this, arguments);
 }
 function _slicedToArray$3(arr, i) {
-	return _arrayWithHoles$3(arr) || _iterableToArrayLimit$3(arr, i) || _unsupportedIterableToArray$4(arr, i) || _nonIterableRest$3();
+	return _arrayWithHoles$3(arr) || _iterableToArrayLimit$3(arr, i) || _unsupportedIterableToArray$5(arr, i) || _nonIterableRest$3();
 }
 function _nonIterableRest$3() {
 	throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
-function _unsupportedIterableToArray$4(o, minLen) {
+function _unsupportedIterableToArray$5(o, minLen) {
 	if (!o) return;
-	if (typeof o === "string") return _arrayLikeToArray$4(o, minLen);
+	if (typeof o === "string") return _arrayLikeToArray$5(o, minLen);
 	var n = Object.prototype.toString.call(o).slice(8, -1);
 	if (n === "Object" && o.constructor) n = o.constructor.name;
 	if (n === "Map" || n === "Set") return Array.from(o);
-	if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray$4(o, minLen);
+	if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray$5(o, minLen);
 }
-function _arrayLikeToArray$4(arr, len) {
+function _arrayLikeToArray$5(arr, len) {
 	if (len == null || len > arr.length) len = arr.length;
 	for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
 	return arr2;
@@ -56120,7 +56290,7 @@ function _iterableToArrayLimit$3(r, l) {
 function _arrayWithHoles$3(arr) {
 	if (Array.isArray(arr)) return arr;
 }
-function ownKeys$17(e, r) {
+function ownKeys$20(e, r) {
 	var t = Object.keys(e);
 	if (Object.getOwnPropertySymbols) {
 		var o = Object.getOwnPropertySymbols(e);
@@ -56130,19 +56300,19 @@ function ownKeys$17(e, r) {
 	}
 	return t;
 }
-function _objectSpread$17(e) {
+function _objectSpread$20(e) {
 	for (var r = 1; r < arguments.length; r++) {
 		var t = null != arguments[r] ? arguments[r] : {};
-		r % 2 ? ownKeys$17(Object(t), !0).forEach(function(r) {
-			_defineProperty$20(e, r, t[r]);
-		}) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$17(Object(t)).forEach(function(r) {
+		r % 2 ? ownKeys$20(Object(t), !0).forEach(function(r) {
+			_defineProperty$23(e, r, t[r]);
+		}) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$20(Object(t)).forEach(function(r) {
 			Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r));
 		});
 	}
 	return e;
 }
-function _defineProperty$20(obj, key, value) {
-	key = _toPropertyKey$20(key);
+function _defineProperty$23(obj, key, value) {
+	key = _toPropertyKey$23(key);
 	if (key in obj) Object.defineProperty(obj, key, {
 		value,
 		enumerable: true,
@@ -56152,16 +56322,16 @@ function _defineProperty$20(obj, key, value) {
 	else obj[key] = value;
 	return obj;
 }
-function _toPropertyKey$20(t) {
-	var i = _toPrimitive$20(t, "string");
-	return "symbol" == _typeof$21(i) ? i : i + "";
+function _toPropertyKey$23(t) {
+	var i = _toPrimitive$23(t, "string");
+	return "symbol" == _typeof$24(i) ? i : i + "";
 }
-function _toPrimitive$20(t, r) {
-	if ("object" != _typeof$21(t) || !t) return t;
+function _toPrimitive$23(t, r) {
+	if ("object" != _typeof$24(t) || !t) return t;
 	var e = t[Symbol.toPrimitive];
 	if (void 0 !== e) {
 		var i = e.call(t, r || "default");
-		if ("object" != _typeof$21(i)) return i;
+		if ("object" != _typeof$24(i)) return i;
 		throw new TypeError("@@toPrimitive must return a primitive value.");
 	}
 	return ("string" === r ? String : Number)(t);
@@ -56221,7 +56391,7 @@ var defaultProps$2 = {
 	animationEasing: "ease"
 };
 var Rectangle = function Rectangle(rectangleProps) {
-	var props = _objectSpread$17(_objectSpread$17({}, defaultProps$2), rectangleProps);
+	var props = _objectSpread$20(_objectSpread$20({}, defaultProps$2), rectangleProps);
 	var pathRef = (0, import_react.useRef)();
 	var _useState2 = _slicedToArray$3((0, import_react.useState)(-1), 2), totalLength = _useState2[0], setTotalLength = _useState2[1];
 	(0, import_react.useEffect)(function() {
@@ -56234,7 +56404,7 @@ var Rectangle = function Rectangle(rectangleProps) {
 	var animationEasing = props.animationEasing, animationDuration = props.animationDuration, animationBegin = props.animationBegin, isAnimationActive = props.isAnimationActive, isUpdateAnimationActive = props.isUpdateAnimationActive;
 	if (x !== +x || y !== +y || width !== +width || height !== +height || width === 0 || height === 0) return null;
 	var layerClass = clsx("recharts-rectangle", className);
-	if (!isUpdateAnimationActive) return /* @__PURE__ */ import_react.createElement("path", _extends$15({}, filterProps(props, true), {
+	if (!isUpdateAnimationActive) return /* @__PURE__ */ import_react.createElement("path", _extends$19({}, filterProps(props, true), {
 		className: layerClass,
 		d: getRectanglePath(x, y, width, height, radius)
 	}));
@@ -56266,7 +56436,7 @@ var Rectangle = function Rectangle(rectangleProps) {
 			duration: animationDuration,
 			isActive: isAnimationActive,
 			easing: animationEasing
-		}, /* @__PURE__ */ import_react.createElement("path", _extends$15({}, filterProps(props, true), {
+		}, /* @__PURE__ */ import_react.createElement("path", _extends$19({}, filterProps(props, true), {
 			className: layerClass,
 			d: getRectanglePath(currX, currY, currWidth, currHeight, radius),
 			ref: pathRef
@@ -56274,24 +56444,150 @@ var Rectangle = function Rectangle(rectangleProps) {
 	});
 };
 //#endregion
-//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/recharts@2.15.4_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/recharts/es6/shape/Dot.js
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/recharts@2.15.4_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/recharts/es6/shape/Polygon.js
 /**
-* @fileOverview Dot
+* @fileOverview Polygon
 */
-function _extends$14() {
-	_extends$14 = Object.assign ? Object.assign.bind() : function(target) {
+var _excluded$9 = [
+	"points",
+	"className",
+	"baseLinePoints",
+	"connectNulls"
+];
+function _extends$18() {
+	_extends$18 = Object.assign ? Object.assign.bind() : function(target) {
 		for (var i = 1; i < arguments.length; i++) {
 			var source = arguments[i];
 			for (var key in source) if (Object.prototype.hasOwnProperty.call(source, key)) target[key] = source[key];
 		}
 		return target;
 	};
-	return _extends$14.apply(this, arguments);
+	return _extends$18.apply(this, arguments);
+}
+function _objectWithoutProperties$9(source, excluded) {
+	if (source == null) return {};
+	var target = _objectWithoutPropertiesLoose$9(source, excluded);
+	var key, i;
+	if (Object.getOwnPropertySymbols) {
+		var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+		for (i = 0; i < sourceSymbolKeys.length; i++) {
+			key = sourceSymbolKeys[i];
+			if (excluded.indexOf(key) >= 0) continue;
+			if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
+			target[key] = source[key];
+		}
+	}
+	return target;
+}
+function _objectWithoutPropertiesLoose$9(source, excluded) {
+	if (source == null) return {};
+	var target = {};
+	for (var key in source) if (Object.prototype.hasOwnProperty.call(source, key)) {
+		if (excluded.indexOf(key) >= 0) continue;
+		target[key] = source[key];
+	}
+	return target;
+}
+function _toConsumableArray$2(arr) {
+	return _arrayWithoutHoles$2(arr) || _iterableToArray$2(arr) || _unsupportedIterableToArray$4(arr) || _nonIterableSpread$2();
+}
+function _nonIterableSpread$2() {
+	throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+function _unsupportedIterableToArray$4(o, minLen) {
+	if (!o) return;
+	if (typeof o === "string") return _arrayLikeToArray$4(o, minLen);
+	var n = Object.prototype.toString.call(o).slice(8, -1);
+	if (n === "Object" && o.constructor) n = o.constructor.name;
+	if (n === "Map" || n === "Set") return Array.from(o);
+	if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray$4(o, minLen);
+}
+function _iterableToArray$2(iter) {
+	if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
+}
+function _arrayWithoutHoles$2(arr) {
+	if (Array.isArray(arr)) return _arrayLikeToArray$4(arr);
+}
+function _arrayLikeToArray$4(arr, len) {
+	if (len == null || len > arr.length) len = arr.length;
+	for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+	return arr2;
+}
+var isValidatePoint = function isValidatePoint(point) {
+	return point && point.x === +point.x && point.y === +point.y;
+};
+var getParsedPoints = function getParsedPoints() {
+	var points = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : [];
+	var segmentPoints = [[]];
+	points.forEach(function(entry) {
+		if (isValidatePoint(entry)) segmentPoints[segmentPoints.length - 1].push(entry);
+		else if (segmentPoints[segmentPoints.length - 1].length > 0) segmentPoints.push([]);
+	});
+	if (isValidatePoint(points[0])) segmentPoints[segmentPoints.length - 1].push(points[0]);
+	if (segmentPoints[segmentPoints.length - 1].length <= 0) segmentPoints = segmentPoints.slice(0, -1);
+	return segmentPoints;
+};
+var getSinglePolygonPath = function getSinglePolygonPath(points, connectNulls) {
+	var segmentPoints = getParsedPoints(points);
+	if (connectNulls) segmentPoints = [segmentPoints.reduce(function(res, segPoints) {
+		return [].concat(_toConsumableArray$2(res), _toConsumableArray$2(segPoints));
+	}, [])];
+	var polygonPath = segmentPoints.map(function(segPoints) {
+		return segPoints.reduce(function(path, point, index) {
+			return "".concat(path).concat(index === 0 ? "M" : "L").concat(point.x, ",").concat(point.y);
+		}, "");
+	}).join("");
+	return segmentPoints.length === 1 ? "".concat(polygonPath, "Z") : polygonPath;
+};
+var getRanglePath = function getRanglePath(points, baseLinePoints, connectNulls) {
+	var outerPath = getSinglePolygonPath(points, connectNulls);
+	return "".concat(outerPath.slice(-1) === "Z" ? outerPath.slice(0, -1) : outerPath, "L").concat(getSinglePolygonPath(baseLinePoints.reverse(), connectNulls).slice(1));
+};
+var Polygon = function Polygon(props) {
+	var points = props.points, className = props.className, baseLinePoints = props.baseLinePoints, connectNulls = props.connectNulls, others = _objectWithoutProperties$9(props, _excluded$9);
+	if (!points || !points.length) return null;
+	var layerClass = clsx("recharts-polygon", className);
+	if (baseLinePoints && baseLinePoints.length) {
+		var hasStroke = others.stroke && others.stroke !== "none";
+		var rangePath = getRanglePath(points, baseLinePoints, connectNulls);
+		return /* @__PURE__ */ import_react.createElement("g", { className: layerClass }, /* @__PURE__ */ import_react.createElement("path", _extends$18({}, filterProps(others, true), {
+			fill: rangePath.slice(-1) === "Z" ? others.fill : "none",
+			stroke: "none",
+			d: rangePath
+		})), hasStroke ? /* @__PURE__ */ import_react.createElement("path", _extends$18({}, filterProps(others, true), {
+			fill: "none",
+			d: getSinglePolygonPath(points, connectNulls)
+		})) : null, hasStroke ? /* @__PURE__ */ import_react.createElement("path", _extends$18({}, filterProps(others, true), {
+			fill: "none",
+			d: getSinglePolygonPath(baseLinePoints, connectNulls)
+		})) : null);
+	}
+	var singlePath = getSinglePolygonPath(points, connectNulls);
+	return /* @__PURE__ */ import_react.createElement("path", _extends$18({}, filterProps(others, true), {
+		fill: singlePath.slice(-1) === "Z" ? others.fill : "none",
+		className: layerClass,
+		d: singlePath
+	}));
+};
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/recharts@2.15.4_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/recharts/es6/shape/Dot.js
+/**
+* @fileOverview Dot
+*/
+function _extends$17() {
+	_extends$17 = Object.assign ? Object.assign.bind() : function(target) {
+		for (var i = 1; i < arguments.length; i++) {
+			var source = arguments[i];
+			for (var key in source) if (Object.prototype.hasOwnProperty.call(source, key)) target[key] = source[key];
+		}
+		return target;
+	};
+	return _extends$17.apply(this, arguments);
 }
 var Dot = function Dot(props) {
 	var cx = props.cx, cy = props.cy, r = props.r, className = props.className;
 	var layerClass = clsx("recharts-dot", className);
-	if (cx === +cx && cy === +cy && r === +r) return /* @__PURE__ */ import_react.createElement("circle", _extends$14({}, filterProps(props, false), adaptEventHandlers(props), {
+	if (cx === +cx && cy === +cy && r === +r) return /* @__PURE__ */ import_react.createElement("circle", _extends$17({}, filterProps(props, false), adaptEventHandlers(props), {
 		className: layerClass,
 		cx,
 		cy,
@@ -56304,15 +56600,15 @@ var Dot = function Dot(props) {
 /**
 * @fileOverview Cross
 */
-function _typeof$20(o) {
+function _typeof$23(o) {
 	"@babel/helpers - typeof";
-	return _typeof$20 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o) {
+	return _typeof$23 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o) {
 		return typeof o;
 	} : function(o) {
 		return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
-	}, _typeof$20(o);
+	}, _typeof$23(o);
 }
-var _excluded$7 = [
+var _excluded$8 = [
 	"x",
 	"y",
 	"top",
@@ -56321,17 +56617,17 @@ var _excluded$7 = [
 	"height",
 	"className"
 ];
-function _extends$13() {
-	_extends$13 = Object.assign ? Object.assign.bind() : function(target) {
+function _extends$16() {
+	_extends$16 = Object.assign ? Object.assign.bind() : function(target) {
 		for (var i = 1; i < arguments.length; i++) {
 			var source = arguments[i];
 			for (var key in source) if (Object.prototype.hasOwnProperty.call(source, key)) target[key] = source[key];
 		}
 		return target;
 	};
-	return _extends$13.apply(this, arguments);
+	return _extends$16.apply(this, arguments);
 }
-function ownKeys$16(e, r) {
+function ownKeys$19(e, r) {
 	var t = Object.keys(e);
 	if (Object.getOwnPropertySymbols) {
 		var o = Object.getOwnPropertySymbols(e);
@@ -56341,19 +56637,19 @@ function ownKeys$16(e, r) {
 	}
 	return t;
 }
-function _objectSpread$16(e) {
+function _objectSpread$19(e) {
 	for (var r = 1; r < arguments.length; r++) {
 		var t = null != arguments[r] ? arguments[r] : {};
-		r % 2 ? ownKeys$16(Object(t), !0).forEach(function(r) {
-			_defineProperty$19(e, r, t[r]);
-		}) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$16(Object(t)).forEach(function(r) {
+		r % 2 ? ownKeys$19(Object(t), !0).forEach(function(r) {
+			_defineProperty$22(e, r, t[r]);
+		}) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$19(Object(t)).forEach(function(r) {
 			Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r));
 		});
 	}
 	return e;
 }
-function _defineProperty$19(obj, key, value) {
-	key = _toPropertyKey$19(key);
+function _defineProperty$22(obj, key, value) {
+	key = _toPropertyKey$22(key);
 	if (key in obj) Object.defineProperty(obj, key, {
 		value,
 		enumerable: true,
@@ -56363,19 +56659,185 @@ function _defineProperty$19(obj, key, value) {
 	else obj[key] = value;
 	return obj;
 }
-function _toPropertyKey$19(t) {
-	var i = _toPrimitive$19(t, "string");
-	return "symbol" == _typeof$20(i) ? i : i + "";
+function _toPropertyKey$22(t) {
+	var i = _toPrimitive$22(t, "string");
+	return "symbol" == _typeof$23(i) ? i : i + "";
 }
-function _toPrimitive$19(t, r) {
-	if ("object" != _typeof$20(t) || !t) return t;
+function _toPrimitive$22(t, r) {
+	if ("object" != _typeof$23(t) || !t) return t;
 	var e = t[Symbol.toPrimitive];
 	if (void 0 !== e) {
 		var i = e.call(t, r || "default");
-		if ("object" != _typeof$20(i)) return i;
+		if ("object" != _typeof$23(i)) return i;
 		throw new TypeError("@@toPrimitive must return a primitive value.");
 	}
 	return ("string" === r ? String : Number)(t);
+}
+function _objectWithoutProperties$8(source, excluded) {
+	if (source == null) return {};
+	var target = _objectWithoutPropertiesLoose$8(source, excluded);
+	var key, i;
+	if (Object.getOwnPropertySymbols) {
+		var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+		for (i = 0; i < sourceSymbolKeys.length; i++) {
+			key = sourceSymbolKeys[i];
+			if (excluded.indexOf(key) >= 0) continue;
+			if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
+			target[key] = source[key];
+		}
+	}
+	return target;
+}
+function _objectWithoutPropertiesLoose$8(source, excluded) {
+	if (source == null) return {};
+	var target = {};
+	for (var key in source) if (Object.prototype.hasOwnProperty.call(source, key)) {
+		if (excluded.indexOf(key) >= 0) continue;
+		target[key] = source[key];
+	}
+	return target;
+}
+var getPath = function getPath(x, y, width, height, top, left) {
+	return "M".concat(x, ",").concat(top, "v").concat(height, "M").concat(left, ",").concat(y, "h").concat(width);
+};
+var Cross = function Cross(_ref) {
+	var _ref$x = _ref.x, x = _ref$x === void 0 ? 0 : _ref$x, _ref$y = _ref.y, y = _ref$y === void 0 ? 0 : _ref$y, _ref$top = _ref.top, top = _ref$top === void 0 ? 0 : _ref$top, _ref$left = _ref.left, left = _ref$left === void 0 ? 0 : _ref$left, _ref$width = _ref.width, width = _ref$width === void 0 ? 0 : _ref$width, _ref$height = _ref.height, height = _ref$height === void 0 ? 0 : _ref$height, className = _ref.className, rest = _objectWithoutProperties$8(_ref, _excluded$8);
+	var props = _objectSpread$19({
+		x,
+		y,
+		top,
+		left,
+		width,
+		height
+	}, rest);
+	if (!isNumber(x) || !isNumber(y) || !isNumber(width) || !isNumber(height) || !isNumber(top) || !isNumber(left)) return null;
+	return /* @__PURE__ */ import_react.createElement("path", _extends$16({}, filterProps(props, true), {
+		className: clsx("recharts-cross", className),
+		d: getPath(x, y, width, height, top, left)
+	}));
+};
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/lodash@4.17.23/node_modules/lodash/maxBy.js
+var require_maxBy = /* @__PURE__ */ __commonJSMin(((exports, module) => {
+	var baseExtremum = require__baseExtremum(), baseGt = require__baseGt(), baseIteratee = require__baseIteratee();
+	/**
+	* This method is like `_.max` except that it accepts `iteratee` which is
+	* invoked for each element in `array` to generate the criterion by which
+	* the value is ranked. The iteratee is invoked with one argument: (value).
+	*
+	* @static
+	* @memberOf _
+	* @since 4.0.0
+	* @category Math
+	* @param {Array} array The array to iterate over.
+	* @param {Function} [iteratee=_.identity] The iteratee invoked per element.
+	* @returns {*} Returns the maximum value.
+	* @example
+	*
+	* var objects = [{ 'n': 1 }, { 'n': 2 }];
+	*
+	* _.maxBy(objects, function(o) { return o.n; });
+	* // => { 'n': 2 }
+	*
+	* // The `_.property` iteratee shorthand.
+	* _.maxBy(objects, 'n');
+	* // => { 'n': 2 }
+	*/
+	function maxBy(array, iteratee) {
+		return array && array.length ? baseExtremum(array, baseIteratee(iteratee, 2), baseGt) : void 0;
+	}
+	module.exports = maxBy;
+}));
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/lodash@4.17.23/node_modules/lodash/minBy.js
+var require_minBy = /* @__PURE__ */ __commonJSMin(((exports, module) => {
+	var baseExtremum = require__baseExtremum(), baseIteratee = require__baseIteratee(), baseLt = require__baseLt();
+	/**
+	* This method is like `_.min` except that it accepts `iteratee` which is
+	* invoked for each element in `array` to generate the criterion by which
+	* the value is ranked. The iteratee is invoked with one argument: (value).
+	*
+	* @static
+	* @memberOf _
+	* @since 4.0.0
+	* @category Math
+	* @param {Array} array The array to iterate over.
+	* @param {Function} [iteratee=_.identity] The iteratee invoked per element.
+	* @returns {*} Returns the minimum value.
+	* @example
+	*
+	* var objects = [{ 'n': 1 }, { 'n': 2 }];
+	*
+	* _.minBy(objects, function(o) { return o.n; });
+	* // => { 'n': 1 }
+	*
+	* // The `_.property` iteratee shorthand.
+	* _.minBy(objects, 'n');
+	* // => { 'n': 1 }
+	*/
+	function minBy(array, iteratee) {
+		return array && array.length ? baseExtremum(array, baseIteratee(iteratee, 2), baseLt) : void 0;
+	}
+	module.exports = minBy;
+}));
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/recharts@2.15.4_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/recharts/es6/polar/PolarRadiusAxis.js
+/**
+* @fileOverview The axis of polar coordinate system
+*/
+var import_maxBy = /* @__PURE__ */ __toESM(require_maxBy());
+var import_minBy = /* @__PURE__ */ __toESM(require_minBy());
+var _excluded$7 = [
+	"cx",
+	"cy",
+	"angle",
+	"ticks",
+	"axisLine"
+], _excluded2$4 = [
+	"ticks",
+	"tick",
+	"angle",
+	"tickFormatter",
+	"stroke"
+];
+function _typeof$22(o) {
+	"@babel/helpers - typeof";
+	return _typeof$22 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o) {
+		return typeof o;
+	} : function(o) {
+		return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
+	}, _typeof$22(o);
+}
+function _extends$15() {
+	_extends$15 = Object.assign ? Object.assign.bind() : function(target) {
+		for (var i = 1; i < arguments.length; i++) {
+			var source = arguments[i];
+			for (var key in source) if (Object.prototype.hasOwnProperty.call(source, key)) target[key] = source[key];
+		}
+		return target;
+	};
+	return _extends$15.apply(this, arguments);
+}
+function ownKeys$18(e, r) {
+	var t = Object.keys(e);
+	if (Object.getOwnPropertySymbols) {
+		var o = Object.getOwnPropertySymbols(e);
+		r && (o = o.filter(function(r) {
+			return Object.getOwnPropertyDescriptor(e, r).enumerable;
+		})), t.push.apply(t, o);
+	}
+	return t;
+}
+function _objectSpread$18(e) {
+	for (var r = 1; r < arguments.length; r++) {
+		var t = null != arguments[r] ? arguments[r] : {};
+		r % 2 ? ownKeys$18(Object(t), !0).forEach(function(r) {
+			_defineProperty$21(e, r, t[r]);
+		}) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$18(Object(t)).forEach(function(r) {
+			Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r));
+		});
+	}
+	return e;
 }
 function _objectWithoutProperties$7(source, excluded) {
 	if (source == null) return {};
@@ -56401,25 +56863,468 @@ function _objectWithoutPropertiesLoose$7(source, excluded) {
 	}
 	return target;
 }
-var getPath = function getPath(x, y, width, height, top, left) {
-	return "M".concat(x, ",").concat(top, "v").concat(height, "M").concat(left, ",").concat(y, "h").concat(width);
-};
-var Cross = function Cross(_ref) {
-	var _ref$x = _ref.x, x = _ref$x === void 0 ? 0 : _ref$x, _ref$y = _ref.y, y = _ref$y === void 0 ? 0 : _ref$y, _ref$top = _ref.top, top = _ref$top === void 0 ? 0 : _ref$top, _ref$left = _ref.left, left = _ref$left === void 0 ? 0 : _ref$left, _ref$width = _ref.width, width = _ref$width === void 0 ? 0 : _ref$width, _ref$height = _ref.height, height = _ref$height === void 0 ? 0 : _ref$height, className = _ref.className, rest = _objectWithoutProperties$7(_ref, _excluded$7);
-	var props = _objectSpread$16({
-		x,
-		y,
-		top,
-		left,
-		width,
-		height
-	}, rest);
-	if (!isNumber(x) || !isNumber(y) || !isNumber(width) || !isNumber(height) || !isNumber(top) || !isNumber(left)) return null;
-	return /* @__PURE__ */ import_react.createElement("path", _extends$13({}, filterProps(props, true), {
-		className: clsx("recharts-cross", className),
-		d: getPath(x, y, width, height, top, left)
-	}));
-};
+function _classCallCheck$14(instance, Constructor) {
+	if (!(instance instanceof Constructor)) throw new TypeError("Cannot call a class as a function");
+}
+function _defineProperties$14(target, props) {
+	for (var i = 0; i < props.length; i++) {
+		var descriptor = props[i];
+		descriptor.enumerable = descriptor.enumerable || false;
+		descriptor.configurable = true;
+		if ("value" in descriptor) descriptor.writable = true;
+		Object.defineProperty(target, _toPropertyKey$21(descriptor.key), descriptor);
+	}
+}
+function _createClass$14(Constructor, protoProps, staticProps) {
+	if (protoProps) _defineProperties$14(Constructor.prototype, protoProps);
+	if (staticProps) _defineProperties$14(Constructor, staticProps);
+	Object.defineProperty(Constructor, "prototype", { writable: false });
+	return Constructor;
+}
+function _callSuper$12(t, o, e) {
+	return o = _getPrototypeOf$12(o), _possibleConstructorReturn$12(t, _isNativeReflectConstruct$12() ? Reflect.construct(o, e || [], _getPrototypeOf$12(t).constructor) : o.apply(t, e));
+}
+function _possibleConstructorReturn$12(self, call) {
+	if (call && (_typeof$22(call) === "object" || typeof call === "function")) return call;
+	else if (call !== void 0) throw new TypeError("Derived constructors may only return object or undefined");
+	return _assertThisInitialized$12(self);
+}
+function _assertThisInitialized$12(self) {
+	if (self === void 0) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+	return self;
+}
+function _isNativeReflectConstruct$12() {
+	try {
+		var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function() {}));
+	} catch (t) {}
+	return (_isNativeReflectConstruct$12 = function _isNativeReflectConstruct() {
+		return !!t;
+	})();
+}
+function _getPrototypeOf$12(o) {
+	_getPrototypeOf$12 = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
+		return o.__proto__ || Object.getPrototypeOf(o);
+	};
+	return _getPrototypeOf$12(o);
+}
+function _inherits$12(subClass, superClass) {
+	if (typeof superClass !== "function" && superClass !== null) throw new TypeError("Super expression must either be null or a function");
+	subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: {
+		value: subClass,
+		writable: true,
+		configurable: true
+	} });
+	Object.defineProperty(subClass, "prototype", { writable: false });
+	if (superClass) _setPrototypeOf$12(subClass, superClass);
+}
+function _setPrototypeOf$12(o, p) {
+	_setPrototypeOf$12 = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
+		o.__proto__ = p;
+		return o;
+	};
+	return _setPrototypeOf$12(o, p);
+}
+function _defineProperty$21(obj, key, value) {
+	key = _toPropertyKey$21(key);
+	if (key in obj) Object.defineProperty(obj, key, {
+		value,
+		enumerable: true,
+		configurable: true,
+		writable: true
+	});
+	else obj[key] = value;
+	return obj;
+}
+function _toPropertyKey$21(t) {
+	var i = _toPrimitive$21(t, "string");
+	return "symbol" == _typeof$22(i) ? i : i + "";
+}
+function _toPrimitive$21(t, r) {
+	if ("object" != _typeof$22(t) || !t) return t;
+	var e = t[Symbol.toPrimitive];
+	if (void 0 !== e) {
+		var i = e.call(t, r || "default");
+		if ("object" != _typeof$22(i)) return i;
+		throw new TypeError("@@toPrimitive must return a primitive value.");
+	}
+	return ("string" === r ? String : Number)(t);
+}
+var PolarRadiusAxis = /* @__PURE__ */ function(_PureComponent) {
+	function PolarRadiusAxis() {
+		_classCallCheck$14(this, PolarRadiusAxis);
+		return _callSuper$12(this, PolarRadiusAxis, arguments);
+	}
+	_inherits$12(PolarRadiusAxis, _PureComponent);
+	return _createClass$14(PolarRadiusAxis, [
+		{
+			key: "getTickValueCoord",
+			value: function getTickValueCoord(_ref) {
+				var coordinate = _ref.coordinate;
+				var _this$props = this.props, angle = _this$props.angle, cx = _this$props.cx, cy = _this$props.cy;
+				return polarToCartesian(cx, cy, coordinate, angle);
+			}
+		},
+		{
+			key: "getTickTextAnchor",
+			value: function getTickTextAnchor() {
+				var orientation = this.props.orientation;
+				var textAnchor;
+				switch (orientation) {
+					case "left":
+						textAnchor = "end";
+						break;
+					case "right":
+						textAnchor = "start";
+						break;
+					default:
+						textAnchor = "middle";
+						break;
+				}
+				return textAnchor;
+			}
+		},
+		{
+			key: "getViewBox",
+			value: function getViewBox() {
+				var _this$props2 = this.props, cx = _this$props2.cx, cy = _this$props2.cy, angle = _this$props2.angle, ticks = _this$props2.ticks;
+				var maxRadiusTick = (0, import_maxBy.default)(ticks, function(entry) {
+					return entry.coordinate || 0;
+				});
+				return {
+					cx,
+					cy,
+					startAngle: angle,
+					endAngle: angle,
+					innerRadius: (0, import_minBy.default)(ticks, function(entry) {
+						return entry.coordinate || 0;
+					}).coordinate || 0,
+					outerRadius: maxRadiusTick.coordinate || 0
+				};
+			}
+		},
+		{
+			key: "renderAxisLine",
+			value: function renderAxisLine() {
+				var _this$props3 = this.props, cx = _this$props3.cx, cy = _this$props3.cy, angle = _this$props3.angle, ticks = _this$props3.ticks, axisLine = _this$props3.axisLine, others = _objectWithoutProperties$7(_this$props3, _excluded$7);
+				var extent = ticks.reduce(function(result, entry) {
+					return [Math.min(result[0], entry.coordinate), Math.max(result[1], entry.coordinate)];
+				}, [Infinity, -Infinity]);
+				var point0 = polarToCartesian(cx, cy, extent[0], angle);
+				var point1 = polarToCartesian(cx, cy, extent[1], angle);
+				var props = _objectSpread$18(_objectSpread$18(_objectSpread$18({}, filterProps(others, false)), {}, { fill: "none" }, filterProps(axisLine, false)), {}, {
+					x1: point0.x,
+					y1: point0.y,
+					x2: point1.x,
+					y2: point1.y
+				});
+				return /* @__PURE__ */ import_react.createElement("line", _extends$15({ className: "recharts-polar-radius-axis-line" }, props));
+			}
+		},
+		{
+			key: "renderTicks",
+			value: function renderTicks() {
+				var _this = this;
+				var _this$props4 = this.props, ticks = _this$props4.ticks, tick = _this$props4.tick, angle = _this$props4.angle, tickFormatter = _this$props4.tickFormatter, stroke = _this$props4.stroke, others = _objectWithoutProperties$7(_this$props4, _excluded2$4);
+				var textAnchor = this.getTickTextAnchor();
+				var axisProps = filterProps(others, false);
+				var customTickProps = filterProps(tick, false);
+				var items = ticks.map(function(entry, i) {
+					var coord = _this.getTickValueCoord(entry);
+					var tickProps = _objectSpread$18(_objectSpread$18(_objectSpread$18(_objectSpread$18({
+						textAnchor,
+						transform: "rotate(".concat(90 - angle, ", ").concat(coord.x, ", ").concat(coord.y, ")")
+					}, axisProps), {}, {
+						stroke: "none",
+						fill: stroke
+					}, customTickProps), {}, { index: i }, coord), {}, { payload: entry });
+					return /* @__PURE__ */ import_react.createElement(Layer, _extends$15({
+						className: clsx("recharts-polar-radius-axis-tick", getTickClassName(tick)),
+						key: "tick-".concat(entry.coordinate)
+					}, adaptEventsOfChild(_this.props, entry, i)), PolarRadiusAxis.renderTickItem(tick, tickProps, tickFormatter ? tickFormatter(entry.value, i) : entry.value));
+				});
+				return /* @__PURE__ */ import_react.createElement(Layer, { className: "recharts-polar-radius-axis-ticks" }, items);
+			}
+		},
+		{
+			key: "render",
+			value: function render() {
+				var _this$props5 = this.props, ticks = _this$props5.ticks, axisLine = _this$props5.axisLine, tick = _this$props5.tick;
+				if (!ticks || !ticks.length) return null;
+				return /* @__PURE__ */ import_react.createElement(Layer, { className: clsx("recharts-polar-radius-axis", this.props.className) }, axisLine && this.renderAxisLine(), tick && this.renderTicks(), Label$3.renderCallByParent(this.props, this.getViewBox()));
+			}
+		}
+	], [{
+		key: "renderTickItem",
+		value: function renderTickItem(option, props, value) {
+			var tickItem;
+			if (/* @__PURE__ */ import_react.isValidElement(option)) tickItem = /* @__PURE__ */ import_react.cloneElement(option, props);
+			else if ((0, import_isFunction.default)(option)) tickItem = option(props);
+			else tickItem = /* @__PURE__ */ import_react.createElement(Text, _extends$15({}, props, { className: "recharts-polar-radius-axis-tick-value" }), value);
+			return tickItem;
+		}
+	}]);
+}(import_react.PureComponent);
+_defineProperty$21(PolarRadiusAxis, "displayName", "PolarRadiusAxis");
+_defineProperty$21(PolarRadiusAxis, "axisType", "radiusAxis");
+_defineProperty$21(PolarRadiusAxis, "defaultProps", {
+	type: "number",
+	radiusAxisId: 0,
+	cx: 0,
+	cy: 0,
+	angle: 0,
+	orientation: "right",
+	stroke: "#ccc",
+	axisLine: true,
+	tick: true,
+	tickCount: 5,
+	allowDataOverflow: false,
+	scale: "auto",
+	allowDuplicatedCategory: true
+});
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/recharts@2.15.4_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/recharts/es6/polar/PolarAngleAxis.js
+/**
+* @fileOverview Axis of radial direction
+*/
+function _typeof$21(o) {
+	"@babel/helpers - typeof";
+	return _typeof$21 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o) {
+		return typeof o;
+	} : function(o) {
+		return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
+	}, _typeof$21(o);
+}
+function _extends$14() {
+	_extends$14 = Object.assign ? Object.assign.bind() : function(target) {
+		for (var i = 1; i < arguments.length; i++) {
+			var source = arguments[i];
+			for (var key in source) if (Object.prototype.hasOwnProperty.call(source, key)) target[key] = source[key];
+		}
+		return target;
+	};
+	return _extends$14.apply(this, arguments);
+}
+function ownKeys$17(e, r) {
+	var t = Object.keys(e);
+	if (Object.getOwnPropertySymbols) {
+		var o = Object.getOwnPropertySymbols(e);
+		r && (o = o.filter(function(r) {
+			return Object.getOwnPropertyDescriptor(e, r).enumerable;
+		})), t.push.apply(t, o);
+	}
+	return t;
+}
+function _objectSpread$17(e) {
+	for (var r = 1; r < arguments.length; r++) {
+		var t = null != arguments[r] ? arguments[r] : {};
+		r % 2 ? ownKeys$17(Object(t), !0).forEach(function(r) {
+			_defineProperty$20(e, r, t[r]);
+		}) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$17(Object(t)).forEach(function(r) {
+			Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r));
+		});
+	}
+	return e;
+}
+function _classCallCheck$13(instance, Constructor) {
+	if (!(instance instanceof Constructor)) throw new TypeError("Cannot call a class as a function");
+}
+function _defineProperties$13(target, props) {
+	for (var i = 0; i < props.length; i++) {
+		var descriptor = props[i];
+		descriptor.enumerable = descriptor.enumerable || false;
+		descriptor.configurable = true;
+		if ("value" in descriptor) descriptor.writable = true;
+		Object.defineProperty(target, _toPropertyKey$20(descriptor.key), descriptor);
+	}
+}
+function _createClass$13(Constructor, protoProps, staticProps) {
+	if (protoProps) _defineProperties$13(Constructor.prototype, protoProps);
+	if (staticProps) _defineProperties$13(Constructor, staticProps);
+	Object.defineProperty(Constructor, "prototype", { writable: false });
+	return Constructor;
+}
+function _callSuper$11(t, o, e) {
+	return o = _getPrototypeOf$11(o), _possibleConstructorReturn$11(t, _isNativeReflectConstruct$11() ? Reflect.construct(o, e || [], _getPrototypeOf$11(t).constructor) : o.apply(t, e));
+}
+function _possibleConstructorReturn$11(self, call) {
+	if (call && (_typeof$21(call) === "object" || typeof call === "function")) return call;
+	else if (call !== void 0) throw new TypeError("Derived constructors may only return object or undefined");
+	return _assertThisInitialized$11(self);
+}
+function _assertThisInitialized$11(self) {
+	if (self === void 0) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+	return self;
+}
+function _isNativeReflectConstruct$11() {
+	try {
+		var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function() {}));
+	} catch (t) {}
+	return (_isNativeReflectConstruct$11 = function _isNativeReflectConstruct() {
+		return !!t;
+	})();
+}
+function _getPrototypeOf$11(o) {
+	_getPrototypeOf$11 = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
+		return o.__proto__ || Object.getPrototypeOf(o);
+	};
+	return _getPrototypeOf$11(o);
+}
+function _inherits$11(subClass, superClass) {
+	if (typeof superClass !== "function" && superClass !== null) throw new TypeError("Super expression must either be null or a function");
+	subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: {
+		value: subClass,
+		writable: true,
+		configurable: true
+	} });
+	Object.defineProperty(subClass, "prototype", { writable: false });
+	if (superClass) _setPrototypeOf$11(subClass, superClass);
+}
+function _setPrototypeOf$11(o, p) {
+	_setPrototypeOf$11 = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
+		o.__proto__ = p;
+		return o;
+	};
+	return _setPrototypeOf$11(o, p);
+}
+function _defineProperty$20(obj, key, value) {
+	key = _toPropertyKey$20(key);
+	if (key in obj) Object.defineProperty(obj, key, {
+		value,
+		enumerable: true,
+		configurable: true,
+		writable: true
+	});
+	else obj[key] = value;
+	return obj;
+}
+function _toPropertyKey$20(t) {
+	var i = _toPrimitive$20(t, "string");
+	return "symbol" == _typeof$21(i) ? i : i + "";
+}
+function _toPrimitive$20(t, r) {
+	if ("object" != _typeof$21(t) || !t) return t;
+	var e = t[Symbol.toPrimitive];
+	if (void 0 !== e) {
+		var i = e.call(t, r || "default");
+		if ("object" != _typeof$21(i)) return i;
+		throw new TypeError("@@toPrimitive must return a primitive value.");
+	}
+	return ("string" === r ? String : Number)(t);
+}
+var RADIAN = Math.PI / 180;
+var eps = 1e-5;
+var PolarAngleAxis = /* @__PURE__ */ function(_PureComponent) {
+	function PolarAngleAxis() {
+		_classCallCheck$13(this, PolarAngleAxis);
+		return _callSuper$11(this, PolarAngleAxis, arguments);
+	}
+	_inherits$11(PolarAngleAxis, _PureComponent);
+	return _createClass$13(PolarAngleAxis, [
+		{
+			key: "getTickLineCoord",
+			value: function getTickLineCoord(data) {
+				var _this$props = this.props, cx = _this$props.cx, cy = _this$props.cy, radius = _this$props.radius, orientation = _this$props.orientation;
+				var tickLineSize = _this$props.tickSize || 8;
+				var p1 = polarToCartesian(cx, cy, radius, data.coordinate);
+				var p2 = polarToCartesian(cx, cy, radius + (orientation === "inner" ? -1 : 1) * tickLineSize, data.coordinate);
+				return {
+					x1: p1.x,
+					y1: p1.y,
+					x2: p2.x,
+					y2: p2.y
+				};
+			}
+		},
+		{
+			key: "getTickTextAnchor",
+			value: function getTickTextAnchor(data) {
+				var orientation = this.props.orientation;
+				var cos = Math.cos(-data.coordinate * RADIAN);
+				var textAnchor;
+				if (cos > eps) textAnchor = orientation === "outer" ? "start" : "end";
+				else if (cos < -eps) textAnchor = orientation === "outer" ? "end" : "start";
+				else textAnchor = "middle";
+				return textAnchor;
+			}
+		},
+		{
+			key: "renderAxisLine",
+			value: function renderAxisLine() {
+				var _this$props2 = this.props, cx = _this$props2.cx, cy = _this$props2.cy, radius = _this$props2.radius, axisLine = _this$props2.axisLine, axisLineType = _this$props2.axisLineType;
+				var props = _objectSpread$17(_objectSpread$17({}, filterProps(this.props, false)), {}, { fill: "none" }, filterProps(axisLine, false));
+				if (axisLineType === "circle") return /* @__PURE__ */ import_react.createElement(Dot, _extends$14({ className: "recharts-polar-angle-axis-line" }, props, {
+					cx,
+					cy,
+					r: radius
+				}));
+				var points = this.props.ticks.map(function(entry) {
+					return polarToCartesian(cx, cy, radius, entry.coordinate);
+				});
+				return /* @__PURE__ */ import_react.createElement(Polygon, _extends$14({ className: "recharts-polar-angle-axis-line" }, props, { points }));
+			}
+		},
+		{
+			key: "renderTicks",
+			value: function renderTicks() {
+				var _this = this;
+				var _this$props3 = this.props, ticks = _this$props3.ticks, tick = _this$props3.tick, tickLine = _this$props3.tickLine, tickFormatter = _this$props3.tickFormatter, stroke = _this$props3.stroke;
+				var axisProps = filterProps(this.props, false);
+				var customTickProps = filterProps(tick, false);
+				var tickLineProps = _objectSpread$17(_objectSpread$17({}, axisProps), {}, { fill: "none" }, filterProps(tickLine, false));
+				var items = ticks.map(function(entry, i) {
+					var lineCoord = _this.getTickLineCoord(entry);
+					var tickProps = _objectSpread$17(_objectSpread$17(_objectSpread$17({ textAnchor: _this.getTickTextAnchor(entry) }, axisProps), {}, {
+						stroke: "none",
+						fill: stroke
+					}, customTickProps), {}, {
+						index: i,
+						payload: entry,
+						x: lineCoord.x2,
+						y: lineCoord.y2
+					});
+					return /* @__PURE__ */ import_react.createElement(Layer, _extends$14({
+						className: clsx("recharts-polar-angle-axis-tick", getTickClassName(tick)),
+						key: "tick-".concat(entry.coordinate)
+					}, adaptEventsOfChild(_this.props, entry, i)), tickLine && /* @__PURE__ */ import_react.createElement("line", _extends$14({ className: "recharts-polar-angle-axis-tick-line" }, tickLineProps, lineCoord)), tick && PolarAngleAxis.renderTickItem(tick, tickProps, tickFormatter ? tickFormatter(entry.value, i) : entry.value));
+				});
+				return /* @__PURE__ */ import_react.createElement(Layer, { className: "recharts-polar-angle-axis-ticks" }, items);
+			}
+		},
+		{
+			key: "render",
+			value: function render() {
+				var _this$props4 = this.props, ticks = _this$props4.ticks, radius = _this$props4.radius, axisLine = _this$props4.axisLine;
+				if (radius <= 0 || !ticks || !ticks.length) return null;
+				return /* @__PURE__ */ import_react.createElement(Layer, { className: clsx("recharts-polar-angle-axis", this.props.className) }, axisLine && this.renderAxisLine(), this.renderTicks());
+			}
+		}
+	], [{
+		key: "renderTickItem",
+		value: function renderTickItem(option, props, value) {
+			var tickItem;
+			if (/* @__PURE__ */ import_react.isValidElement(option)) tickItem = /* @__PURE__ */ import_react.cloneElement(option, props);
+			else if ((0, import_isFunction.default)(option)) tickItem = option(props);
+			else tickItem = /* @__PURE__ */ import_react.createElement(Text, _extends$14({}, props, { className: "recharts-polar-angle-axis-tick-value" }), value);
+			return tickItem;
+		}
+	}]);
+}(import_react.PureComponent);
+_defineProperty$20(PolarAngleAxis, "displayName", "PolarAngleAxis");
+_defineProperty$20(PolarAngleAxis, "axisType", "angleAxis");
+_defineProperty$20(PolarAngleAxis, "defaultProps", {
+	type: "category",
+	angleAxisId: 0,
+	scale: "auto",
+	cx: 0,
+	cy: 0,
+	orientation: "outer",
+	axisLine: true,
+	tickLine: true,
+	tickSize: 8,
+	tick: true,
+	hide: false,
+	allowDuplicatedCategory: true
+});
 //#endregion
 //#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/lodash@4.17.23/node_modules/lodash/_getPrototype.js
 var require__getPrototype = /* @__PURE__ */ __commonJSMin(((exports, module) => {
@@ -56509,23 +57414,23 @@ var require_isBoolean = /* @__PURE__ */ __commonJSMin(((exports, module) => {
 /**
 * @fileOverview Rectangle
 */
-function _typeof$19(o) {
+function _typeof$20(o) {
 	"@babel/helpers - typeof";
-	return _typeof$19 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o) {
+	return _typeof$20 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o) {
 		return typeof o;
 	} : function(o) {
 		return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
-	}, _typeof$19(o);
+	}, _typeof$20(o);
 }
-function _extends$12() {
-	_extends$12 = Object.assign ? Object.assign.bind() : function(target) {
+function _extends$13() {
+	_extends$13 = Object.assign ? Object.assign.bind() : function(target) {
 		for (var i = 1; i < arguments.length; i++) {
 			var source = arguments[i];
 			for (var key in source) if (Object.prototype.hasOwnProperty.call(source, key)) target[key] = source[key];
 		}
 		return target;
 	};
-	return _extends$12.apply(this, arguments);
+	return _extends$13.apply(this, arguments);
 }
 function _slicedToArray$2(arr, i) {
 	return _arrayWithHoles$2(arr) || _iterableToArrayLimit$2(arr, i) || _unsupportedIterableToArray$3(arr, i) || _nonIterableRest$2();
@@ -56569,6 +57474,169 @@ function _iterableToArrayLimit$2(r, l) {
 }
 function _arrayWithHoles$2(arr) {
 	if (Array.isArray(arr)) return arr;
+}
+function ownKeys$16(e, r) {
+	var t = Object.keys(e);
+	if (Object.getOwnPropertySymbols) {
+		var o = Object.getOwnPropertySymbols(e);
+		r && (o = o.filter(function(r) {
+			return Object.getOwnPropertyDescriptor(e, r).enumerable;
+		})), t.push.apply(t, o);
+	}
+	return t;
+}
+function _objectSpread$16(e) {
+	for (var r = 1; r < arguments.length; r++) {
+		var t = null != arguments[r] ? arguments[r] : {};
+		r % 2 ? ownKeys$16(Object(t), !0).forEach(function(r) {
+			_defineProperty$19(e, r, t[r]);
+		}) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$16(Object(t)).forEach(function(r) {
+			Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r));
+		});
+	}
+	return e;
+}
+function _defineProperty$19(obj, key, value) {
+	key = _toPropertyKey$19(key);
+	if (key in obj) Object.defineProperty(obj, key, {
+		value,
+		enumerable: true,
+		configurable: true,
+		writable: true
+	});
+	else obj[key] = value;
+	return obj;
+}
+function _toPropertyKey$19(t) {
+	var i = _toPrimitive$19(t, "string");
+	return "symbol" == _typeof$20(i) ? i : i + "";
+}
+function _toPrimitive$19(t, r) {
+	if ("object" != _typeof$20(t) || !t) return t;
+	var e = t[Symbol.toPrimitive];
+	if (void 0 !== e) {
+		var i = e.call(t, r || "default");
+		if ("object" != _typeof$20(i)) return i;
+		throw new TypeError("@@toPrimitive must return a primitive value.");
+	}
+	return ("string" === r ? String : Number)(t);
+}
+var getTrapezoidPath = function getTrapezoidPath(x, y, upperWidth, lowerWidth, height) {
+	var widthGap = upperWidth - lowerWidth;
+	var path = "M ".concat(x, ",").concat(y);
+	path += "L ".concat(x + upperWidth, ",").concat(y);
+	path += "L ".concat(x + upperWidth - widthGap / 2, ",").concat(y + height);
+	path += "L ".concat(x + upperWidth - widthGap / 2 - lowerWidth, ",").concat(y + height);
+	path += "L ".concat(x, ",").concat(y, " Z");
+	return path;
+};
+var defaultProps$1 = {
+	x: 0,
+	y: 0,
+	upperWidth: 0,
+	lowerWidth: 0,
+	height: 0,
+	isUpdateAnimationActive: false,
+	animationBegin: 0,
+	animationDuration: 1500,
+	animationEasing: "ease"
+};
+var Trapezoid = function Trapezoid(props) {
+	var trapezoidProps = _objectSpread$16(_objectSpread$16({}, defaultProps$1), props);
+	var pathRef = (0, import_react.useRef)();
+	var _useState2 = _slicedToArray$2((0, import_react.useState)(-1), 2), totalLength = _useState2[0], setTotalLength = _useState2[1];
+	(0, import_react.useEffect)(function() {
+		if (pathRef.current && pathRef.current.getTotalLength) try {
+			var pathTotalLength = pathRef.current.getTotalLength();
+			if (pathTotalLength) setTotalLength(pathTotalLength);
+		} catch (err) {}
+	}, []);
+	var x = trapezoidProps.x, y = trapezoidProps.y, upperWidth = trapezoidProps.upperWidth, lowerWidth = trapezoidProps.lowerWidth, height = trapezoidProps.height, className = trapezoidProps.className;
+	var animationEasing = trapezoidProps.animationEasing, animationDuration = trapezoidProps.animationDuration, animationBegin = trapezoidProps.animationBegin, isUpdateAnimationActive = trapezoidProps.isUpdateAnimationActive;
+	if (x !== +x || y !== +y || upperWidth !== +upperWidth || lowerWidth !== +lowerWidth || height !== +height || upperWidth === 0 && lowerWidth === 0 || height === 0) return null;
+	var layerClass = clsx("recharts-trapezoid", className);
+	if (!isUpdateAnimationActive) return /* @__PURE__ */ import_react.createElement("g", null, /* @__PURE__ */ import_react.createElement("path", _extends$13({}, filterProps(trapezoidProps, true), {
+		className: layerClass,
+		d: getTrapezoidPath(x, y, upperWidth, lowerWidth, height)
+	})));
+	return /* @__PURE__ */ import_react.createElement(es6_default, {
+		canBegin: totalLength > 0,
+		from: {
+			upperWidth: 0,
+			lowerWidth: 0,
+			height,
+			x,
+			y
+		},
+		to: {
+			upperWidth,
+			lowerWidth,
+			height,
+			x,
+			y
+		},
+		duration: animationDuration,
+		animationEasing,
+		isActive: isUpdateAnimationActive
+	}, function(_ref) {
+		var currUpperWidth = _ref.upperWidth, currLowerWidth = _ref.lowerWidth, currHeight = _ref.height, currX = _ref.x, currY = _ref.y;
+		return /* @__PURE__ */ import_react.createElement(es6_default, {
+			canBegin: totalLength > 0,
+			from: "0px ".concat(totalLength === -1 ? 1 : totalLength, "px"),
+			to: "".concat(totalLength, "px 0px"),
+			attributeName: "strokeDasharray",
+			begin: animationBegin,
+			duration: animationDuration,
+			easing: animationEasing
+		}, /* @__PURE__ */ import_react.createElement("path", _extends$13({}, filterProps(trapezoidProps, true), {
+			className: layerClass,
+			d: getTrapezoidPath(currX, currY, currUpperWidth, currLowerWidth, currHeight),
+			ref: pathRef
+		})));
+	});
+};
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/recharts@2.15.4_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/recharts/es6/util/ActiveShapeUtils.js
+var import_isPlainObject = /* @__PURE__ */ __toESM(require_isPlainObject());
+var import_isBoolean = /* @__PURE__ */ __toESM(require_isBoolean());
+var _excluded$6 = [
+	"option",
+	"shapeType",
+	"propTransformer",
+	"activeClassName",
+	"isActive"
+];
+function _typeof$19(o) {
+	"@babel/helpers - typeof";
+	return _typeof$19 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o) {
+		return typeof o;
+	} : function(o) {
+		return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
+	}, _typeof$19(o);
+}
+function _objectWithoutProperties$6(source, excluded) {
+	if (source == null) return {};
+	var target = _objectWithoutPropertiesLoose$6(source, excluded);
+	var key, i;
+	if (Object.getOwnPropertySymbols) {
+		var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+		for (i = 0; i < sourceSymbolKeys.length; i++) {
+			key = sourceSymbolKeys[i];
+			if (excluded.indexOf(key) >= 0) continue;
+			if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
+			target[key] = source[key];
+		}
+	}
+	return target;
+}
+function _objectWithoutPropertiesLoose$6(source, excluded) {
+	if (source == null) return {};
+	var target = {};
+	for (var key in source) if (Object.prototype.hasOwnProperty.call(source, key)) {
+		if (excluded.indexOf(key) >= 0) continue;
+		target[key] = source[key];
+	}
+	return target;
 }
 function ownKeys$15(e, r) {
 	var t = Object.keys(e);
@@ -56616,169 +57684,6 @@ function _toPrimitive$18(t, r) {
 	}
 	return ("string" === r ? String : Number)(t);
 }
-var getTrapezoidPath = function getTrapezoidPath(x, y, upperWidth, lowerWidth, height) {
-	var widthGap = upperWidth - lowerWidth;
-	var path = "M ".concat(x, ",").concat(y);
-	path += "L ".concat(x + upperWidth, ",").concat(y);
-	path += "L ".concat(x + upperWidth - widthGap / 2, ",").concat(y + height);
-	path += "L ".concat(x + upperWidth - widthGap / 2 - lowerWidth, ",").concat(y + height);
-	path += "L ".concat(x, ",").concat(y, " Z");
-	return path;
-};
-var defaultProps$1 = {
-	x: 0,
-	y: 0,
-	upperWidth: 0,
-	lowerWidth: 0,
-	height: 0,
-	isUpdateAnimationActive: false,
-	animationBegin: 0,
-	animationDuration: 1500,
-	animationEasing: "ease"
-};
-var Trapezoid = function Trapezoid(props) {
-	var trapezoidProps = _objectSpread$15(_objectSpread$15({}, defaultProps$1), props);
-	var pathRef = (0, import_react.useRef)();
-	var _useState2 = _slicedToArray$2((0, import_react.useState)(-1), 2), totalLength = _useState2[0], setTotalLength = _useState2[1];
-	(0, import_react.useEffect)(function() {
-		if (pathRef.current && pathRef.current.getTotalLength) try {
-			var pathTotalLength = pathRef.current.getTotalLength();
-			if (pathTotalLength) setTotalLength(pathTotalLength);
-		} catch (err) {}
-	}, []);
-	var x = trapezoidProps.x, y = trapezoidProps.y, upperWidth = trapezoidProps.upperWidth, lowerWidth = trapezoidProps.lowerWidth, height = trapezoidProps.height, className = trapezoidProps.className;
-	var animationEasing = trapezoidProps.animationEasing, animationDuration = trapezoidProps.animationDuration, animationBegin = trapezoidProps.animationBegin, isUpdateAnimationActive = trapezoidProps.isUpdateAnimationActive;
-	if (x !== +x || y !== +y || upperWidth !== +upperWidth || lowerWidth !== +lowerWidth || height !== +height || upperWidth === 0 && lowerWidth === 0 || height === 0) return null;
-	var layerClass = clsx("recharts-trapezoid", className);
-	if (!isUpdateAnimationActive) return /* @__PURE__ */ import_react.createElement("g", null, /* @__PURE__ */ import_react.createElement("path", _extends$12({}, filterProps(trapezoidProps, true), {
-		className: layerClass,
-		d: getTrapezoidPath(x, y, upperWidth, lowerWidth, height)
-	})));
-	return /* @__PURE__ */ import_react.createElement(es6_default, {
-		canBegin: totalLength > 0,
-		from: {
-			upperWidth: 0,
-			lowerWidth: 0,
-			height,
-			x,
-			y
-		},
-		to: {
-			upperWidth,
-			lowerWidth,
-			height,
-			x,
-			y
-		},
-		duration: animationDuration,
-		animationEasing,
-		isActive: isUpdateAnimationActive
-	}, function(_ref) {
-		var currUpperWidth = _ref.upperWidth, currLowerWidth = _ref.lowerWidth, currHeight = _ref.height, currX = _ref.x, currY = _ref.y;
-		return /* @__PURE__ */ import_react.createElement(es6_default, {
-			canBegin: totalLength > 0,
-			from: "0px ".concat(totalLength === -1 ? 1 : totalLength, "px"),
-			to: "".concat(totalLength, "px 0px"),
-			attributeName: "strokeDasharray",
-			begin: animationBegin,
-			duration: animationDuration,
-			easing: animationEasing
-		}, /* @__PURE__ */ import_react.createElement("path", _extends$12({}, filterProps(trapezoidProps, true), {
-			className: layerClass,
-			d: getTrapezoidPath(currX, currY, currUpperWidth, currLowerWidth, currHeight),
-			ref: pathRef
-		})));
-	});
-};
-//#endregion
-//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/recharts@2.15.4_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/recharts/es6/util/ActiveShapeUtils.js
-var import_isPlainObject = /* @__PURE__ */ __toESM(require_isPlainObject());
-var import_isBoolean = /* @__PURE__ */ __toESM(require_isBoolean());
-var _excluded$6 = [
-	"option",
-	"shapeType",
-	"propTransformer",
-	"activeClassName",
-	"isActive"
-];
-function _typeof$18(o) {
-	"@babel/helpers - typeof";
-	return _typeof$18 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o) {
-		return typeof o;
-	} : function(o) {
-		return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
-	}, _typeof$18(o);
-}
-function _objectWithoutProperties$6(source, excluded) {
-	if (source == null) return {};
-	var target = _objectWithoutPropertiesLoose$6(source, excluded);
-	var key, i;
-	if (Object.getOwnPropertySymbols) {
-		var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
-		for (i = 0; i < sourceSymbolKeys.length; i++) {
-			key = sourceSymbolKeys[i];
-			if (excluded.indexOf(key) >= 0) continue;
-			if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
-			target[key] = source[key];
-		}
-	}
-	return target;
-}
-function _objectWithoutPropertiesLoose$6(source, excluded) {
-	if (source == null) return {};
-	var target = {};
-	for (var key in source) if (Object.prototype.hasOwnProperty.call(source, key)) {
-		if (excluded.indexOf(key) >= 0) continue;
-		target[key] = source[key];
-	}
-	return target;
-}
-function ownKeys$14(e, r) {
-	var t = Object.keys(e);
-	if (Object.getOwnPropertySymbols) {
-		var o = Object.getOwnPropertySymbols(e);
-		r && (o = o.filter(function(r) {
-			return Object.getOwnPropertyDescriptor(e, r).enumerable;
-		})), t.push.apply(t, o);
-	}
-	return t;
-}
-function _objectSpread$14(e) {
-	for (var r = 1; r < arguments.length; r++) {
-		var t = null != arguments[r] ? arguments[r] : {};
-		r % 2 ? ownKeys$14(Object(t), !0).forEach(function(r) {
-			_defineProperty$17(e, r, t[r]);
-		}) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$14(Object(t)).forEach(function(r) {
-			Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r));
-		});
-	}
-	return e;
-}
-function _defineProperty$17(obj, key, value) {
-	key = _toPropertyKey$17(key);
-	if (key in obj) Object.defineProperty(obj, key, {
-		value,
-		enumerable: true,
-		configurable: true,
-		writable: true
-	});
-	else obj[key] = value;
-	return obj;
-}
-function _toPropertyKey$17(t) {
-	var i = _toPrimitive$17(t, "string");
-	return "symbol" == _typeof$18(i) ? i : i + "";
-}
-function _toPrimitive$17(t, r) {
-	if ("object" != _typeof$18(t) || !t) return t;
-	var e = t[Symbol.toPrimitive];
-	if (void 0 !== e) {
-		var i = e.call(t, r || "default");
-		if ("object" != _typeof$18(i)) return i;
-		throw new TypeError("@@toPrimitive must return a primitive value.");
-	}
-	return ("string" === r ? String : Number)(t);
-}
 /**
 * This is an abstraction for rendering a user defined prop for a customized shape in several forms.
 *
@@ -56793,7 +57698,7 @@ function _toPrimitive$17(t, r) {
 *
 */
 function defaultPropTransformer(option, props) {
-	return _objectSpread$14(_objectSpread$14({}, props), option);
+	return _objectSpread$15(_objectSpread$15({}, props), option);
 }
 function isSymbolsProps(shapeType, _elementProps) {
 	return shapeType === "symbols";
@@ -56817,7 +57722,7 @@ function getPropsFromShapeOption(option) {
 function Shape(_ref2) {
 	var option = _ref2.option, shapeType = _ref2.shapeType, _ref2$propTransformer = _ref2.propTransformer, propTransformer = _ref2$propTransformer === void 0 ? defaultPropTransformer : _ref2$propTransformer, _ref2$activeClassName = _ref2.activeClassName, activeClassName = _ref2$activeClassName === void 0 ? "recharts-active-shape" : _ref2$activeClassName, isActive = _ref2.isActive, props = _objectWithoutProperties$6(_ref2, _excluded$6);
 	var shape;
-	if (/* @__PURE__ */ (0, import_react.isValidElement)(option)) shape = /* @__PURE__ */ (0, import_react.cloneElement)(option, _objectSpread$14(_objectSpread$14({}, props), getPropsFromShapeOption(option)));
+	if (/* @__PURE__ */ (0, import_react.isValidElement)(option)) shape = /* @__PURE__ */ (0, import_react.cloneElement)(option, _objectSpread$15(_objectSpread$15({}, props), getPropsFromShapeOption(option)));
 	else if ((0, import_isFunction.default)(option)) shape = option(props);
 	else if ((0, import_isPlainObject.default)(option) && !(0, import_isBoolean.default)(option)) {
 		var nextProps = propTransformer(option, props);
@@ -56914,6 +57819,524 @@ function getActiveShapeIndexForTooltip(_ref3) {
 	});
 	return itemData.indexOf(activeItemMatches[activeItemMatches.length - 1]);
 }
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/recharts@2.15.4_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/recharts/es6/polar/Pie.js
+/**
+* @fileOverview Render sectors of a pie
+*/
+var _Pie;
+function _typeof$18(o) {
+	"@babel/helpers - typeof";
+	return _typeof$18 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o) {
+		return typeof o;
+	} : function(o) {
+		return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
+	}, _typeof$18(o);
+}
+function _extends$12() {
+	_extends$12 = Object.assign ? Object.assign.bind() : function(target) {
+		for (var i = 1; i < arguments.length; i++) {
+			var source = arguments[i];
+			for (var key in source) if (Object.prototype.hasOwnProperty.call(source, key)) target[key] = source[key];
+		}
+		return target;
+	};
+	return _extends$12.apply(this, arguments);
+}
+function ownKeys$14(e, r) {
+	var t = Object.keys(e);
+	if (Object.getOwnPropertySymbols) {
+		var o = Object.getOwnPropertySymbols(e);
+		r && (o = o.filter(function(r) {
+			return Object.getOwnPropertyDescriptor(e, r).enumerable;
+		})), t.push.apply(t, o);
+	}
+	return t;
+}
+function _objectSpread$14(e) {
+	for (var r = 1; r < arguments.length; r++) {
+		var t = null != arguments[r] ? arguments[r] : {};
+		r % 2 ? ownKeys$14(Object(t), !0).forEach(function(r) {
+			_defineProperty$17(e, r, t[r]);
+		}) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$14(Object(t)).forEach(function(r) {
+			Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r));
+		});
+	}
+	return e;
+}
+function _classCallCheck$12(instance, Constructor) {
+	if (!(instance instanceof Constructor)) throw new TypeError("Cannot call a class as a function");
+}
+function _defineProperties$12(target, props) {
+	for (var i = 0; i < props.length; i++) {
+		var descriptor = props[i];
+		descriptor.enumerable = descriptor.enumerable || false;
+		descriptor.configurable = true;
+		if ("value" in descriptor) descriptor.writable = true;
+		Object.defineProperty(target, _toPropertyKey$17(descriptor.key), descriptor);
+	}
+}
+function _createClass$12(Constructor, protoProps, staticProps) {
+	if (protoProps) _defineProperties$12(Constructor.prototype, protoProps);
+	if (staticProps) _defineProperties$12(Constructor, staticProps);
+	Object.defineProperty(Constructor, "prototype", { writable: false });
+	return Constructor;
+}
+function _callSuper$10(t, o, e) {
+	return o = _getPrototypeOf$10(o), _possibleConstructorReturn$10(t, _isNativeReflectConstruct$10() ? Reflect.construct(o, e || [], _getPrototypeOf$10(t).constructor) : o.apply(t, e));
+}
+function _possibleConstructorReturn$10(self, call) {
+	if (call && (_typeof$18(call) === "object" || typeof call === "function")) return call;
+	else if (call !== void 0) throw new TypeError("Derived constructors may only return object or undefined");
+	return _assertThisInitialized$10(self);
+}
+function _assertThisInitialized$10(self) {
+	if (self === void 0) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+	return self;
+}
+function _isNativeReflectConstruct$10() {
+	try {
+		var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function() {}));
+	} catch (t) {}
+	return (_isNativeReflectConstruct$10 = function _isNativeReflectConstruct() {
+		return !!t;
+	})();
+}
+function _getPrototypeOf$10(o) {
+	_getPrototypeOf$10 = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
+		return o.__proto__ || Object.getPrototypeOf(o);
+	};
+	return _getPrototypeOf$10(o);
+}
+function _inherits$10(subClass, superClass) {
+	if (typeof superClass !== "function" && superClass !== null) throw new TypeError("Super expression must either be null or a function");
+	subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: {
+		value: subClass,
+		writable: true,
+		configurable: true
+	} });
+	Object.defineProperty(subClass, "prototype", { writable: false });
+	if (superClass) _setPrototypeOf$10(subClass, superClass);
+}
+function _setPrototypeOf$10(o, p) {
+	_setPrototypeOf$10 = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
+		o.__proto__ = p;
+		return o;
+	};
+	return _setPrototypeOf$10(o, p);
+}
+function _defineProperty$17(obj, key, value) {
+	key = _toPropertyKey$17(key);
+	if (key in obj) Object.defineProperty(obj, key, {
+		value,
+		enumerable: true,
+		configurable: true,
+		writable: true
+	});
+	else obj[key] = value;
+	return obj;
+}
+function _toPropertyKey$17(t) {
+	var i = _toPrimitive$17(t, "string");
+	return "symbol" == _typeof$18(i) ? i : i + "";
+}
+function _toPrimitive$17(t, r) {
+	if ("object" != _typeof$18(t) || !t) return t;
+	var e = t[Symbol.toPrimitive];
+	if (void 0 !== e) {
+		var i = e.call(t, r || "default");
+		if ("object" != _typeof$18(i)) return i;
+		throw new TypeError("@@toPrimitive must return a primitive value.");
+	}
+	return ("string" === r ? String : Number)(t);
+}
+var Pie = /* @__PURE__ */ function(_PureComponent) {
+	function Pie(props) {
+		var _this;
+		_classCallCheck$12(this, Pie);
+		_this = _callSuper$10(this, Pie, [props]);
+		_defineProperty$17(_this, "pieRef", null);
+		_defineProperty$17(_this, "sectorRefs", []);
+		_defineProperty$17(_this, "id", uniqueId("recharts-pie-"));
+		_defineProperty$17(_this, "handleAnimationEnd", function() {
+			var onAnimationEnd = _this.props.onAnimationEnd;
+			_this.setState({ isAnimationFinished: true });
+			if ((0, import_isFunction.default)(onAnimationEnd)) onAnimationEnd();
+		});
+		_defineProperty$17(_this, "handleAnimationStart", function() {
+			var onAnimationStart = _this.props.onAnimationStart;
+			_this.setState({ isAnimationFinished: false });
+			if ((0, import_isFunction.default)(onAnimationStart)) onAnimationStart();
+		});
+		_this.state = {
+			isAnimationFinished: !props.isAnimationActive,
+			prevIsAnimationActive: props.isAnimationActive,
+			prevAnimationId: props.animationId,
+			sectorToFocus: 0
+		};
+		return _this;
+	}
+	_inherits$10(Pie, _PureComponent);
+	return _createClass$12(Pie, [
+		{
+			key: "isActiveIndex",
+			value: function isActiveIndex(i) {
+				var activeIndex = this.props.activeIndex;
+				if (Array.isArray(activeIndex)) return activeIndex.indexOf(i) !== -1;
+				return i === activeIndex;
+			}
+		},
+		{
+			key: "hasActiveIndex",
+			value: function hasActiveIndex() {
+				var activeIndex = this.props.activeIndex;
+				return Array.isArray(activeIndex) ? activeIndex.length !== 0 : activeIndex || activeIndex === 0;
+			}
+		},
+		{
+			key: "renderLabels",
+			value: function renderLabels(sectors) {
+				if (this.props.isAnimationActive && !this.state.isAnimationFinished) return null;
+				var _this$props = this.props, label = _this$props.label, labelLine = _this$props.labelLine, dataKey = _this$props.dataKey, valueKey = _this$props.valueKey;
+				var pieProps = filterProps(this.props, false);
+				var customLabelProps = filterProps(label, false);
+				var customLabelLineProps = filterProps(labelLine, false);
+				var offsetRadius = label && label.offsetRadius || 20;
+				var labels = sectors.map(function(entry, i) {
+					var midAngle = (entry.startAngle + entry.endAngle) / 2;
+					var endPoint = polarToCartesian(entry.cx, entry.cy, entry.outerRadius + offsetRadius, midAngle);
+					var labelProps = _objectSpread$14(_objectSpread$14(_objectSpread$14(_objectSpread$14({}, pieProps), entry), {}, { stroke: "none" }, customLabelProps), {}, {
+						index: i,
+						textAnchor: Pie.getTextAnchor(endPoint.x, entry.cx)
+					}, endPoint);
+					var lineProps = _objectSpread$14(_objectSpread$14(_objectSpread$14(_objectSpread$14({}, pieProps), entry), {}, {
+						fill: "none",
+						stroke: entry.fill
+					}, customLabelLineProps), {}, {
+						index: i,
+						points: [polarToCartesian(entry.cx, entry.cy, entry.outerRadius, midAngle), endPoint]
+					});
+					var realDataKey = dataKey;
+					if ((0, import_isNil.default)(dataKey) && (0, import_isNil.default)(valueKey)) realDataKey = "value";
+					else if ((0, import_isNil.default)(dataKey)) realDataKey = valueKey;
+					return /* @__PURE__ */ import_react.createElement(Layer, { key: "label-".concat(entry.startAngle, "-").concat(entry.endAngle, "-").concat(entry.midAngle, "-").concat(i) }, labelLine && Pie.renderLabelLineItem(labelLine, lineProps, "line"), Pie.renderLabelItem(label, labelProps, getValueByDataKey(entry, realDataKey)));
+				});
+				return /* @__PURE__ */ import_react.createElement(Layer, { className: "recharts-pie-labels" }, labels);
+			}
+		},
+		{
+			key: "renderSectorsStatically",
+			value: function renderSectorsStatically(sectors) {
+				var _this2 = this;
+				var _this$props2 = this.props, activeShape = _this$props2.activeShape, blendStroke = _this$props2.blendStroke, inactiveShapeProp = _this$props2.inactiveShape;
+				return sectors.map(function(entry, i) {
+					if ((entry === null || entry === void 0 ? void 0 : entry.startAngle) === 0 && (entry === null || entry === void 0 ? void 0 : entry.endAngle) === 0 && sectors.length !== 1) return null;
+					var isActive = _this2.isActiveIndex(i);
+					var inactiveShape = inactiveShapeProp && _this2.hasActiveIndex() ? inactiveShapeProp : null;
+					var sectorOptions = isActive ? activeShape : inactiveShape;
+					var sectorProps = _objectSpread$14(_objectSpread$14({}, entry), {}, {
+						stroke: blendStroke ? entry.fill : entry.stroke,
+						tabIndex: -1
+					});
+					return /* @__PURE__ */ import_react.createElement(Layer, _extends$12({
+						ref: function ref(_ref) {
+							if (_ref && !_this2.sectorRefs.includes(_ref)) _this2.sectorRefs.push(_ref);
+						},
+						tabIndex: -1,
+						className: "recharts-pie-sector"
+					}, adaptEventsOfChild(_this2.props, entry, i), { key: "sector-".concat(entry === null || entry === void 0 ? void 0 : entry.startAngle, "-").concat(entry === null || entry === void 0 ? void 0 : entry.endAngle, "-").concat(entry.midAngle, "-").concat(i) }), /* @__PURE__ */ import_react.createElement(Shape, _extends$12({
+						option: sectorOptions,
+						isActive,
+						shapeType: "sector"
+					}, sectorProps)));
+				});
+			}
+		},
+		{
+			key: "renderSectorsWithAnimation",
+			value: function renderSectorsWithAnimation() {
+				var _this3 = this;
+				var _this$props3 = this.props, sectors = _this$props3.sectors, isAnimationActive = _this$props3.isAnimationActive, animationBegin = _this$props3.animationBegin, animationDuration = _this$props3.animationDuration, animationEasing = _this$props3.animationEasing, animationId = _this$props3.animationId;
+				var _this$state = this.state, prevSectors = _this$state.prevSectors, prevIsAnimationActive = _this$state.prevIsAnimationActive;
+				return /* @__PURE__ */ import_react.createElement(es6_default, {
+					begin: animationBegin,
+					duration: animationDuration,
+					isActive: isAnimationActive,
+					easing: animationEasing,
+					from: { t: 0 },
+					to: { t: 1 },
+					key: "pie-".concat(animationId, "-").concat(prevIsAnimationActive),
+					onAnimationStart: this.handleAnimationStart,
+					onAnimationEnd: this.handleAnimationEnd
+				}, function(_ref2) {
+					var t = _ref2.t;
+					var stepData = [];
+					var curAngle = (sectors && sectors[0]).startAngle;
+					sectors.forEach(function(entry, index) {
+						var prev = prevSectors && prevSectors[index];
+						var paddingAngle = index > 0 ? (0, import_get.default)(entry, "paddingAngle", 0) : 0;
+						if (prev) {
+							var angleIp = interpolateNumber$1(prev.endAngle - prev.startAngle, entry.endAngle - entry.startAngle);
+							var latest = _objectSpread$14(_objectSpread$14({}, entry), {}, {
+								startAngle: curAngle + paddingAngle,
+								endAngle: curAngle + angleIp(t) + paddingAngle
+							});
+							stepData.push(latest);
+							curAngle = latest.endAngle;
+						} else {
+							var endAngle = entry.endAngle, startAngle = entry.startAngle;
+							var deltaAngle = interpolateNumber$1(0, endAngle - startAngle)(t);
+							var _latest = _objectSpread$14(_objectSpread$14({}, entry), {}, {
+								startAngle: curAngle + paddingAngle,
+								endAngle: curAngle + deltaAngle + paddingAngle
+							});
+							stepData.push(_latest);
+							curAngle = _latest.endAngle;
+						}
+					});
+					return /* @__PURE__ */ import_react.createElement(Layer, null, _this3.renderSectorsStatically(stepData));
+				});
+			}
+		},
+		{
+			key: "attachKeyboardHandlers",
+			value: function attachKeyboardHandlers(pieRef) {
+				var _this4 = this;
+				pieRef.onkeydown = function(e) {
+					if (!e.altKey) switch (e.key) {
+						case "ArrowLeft":
+							var next = ++_this4.state.sectorToFocus % _this4.sectorRefs.length;
+							_this4.sectorRefs[next].focus();
+							_this4.setState({ sectorToFocus: next });
+							break;
+						case "ArrowRight":
+							var _next = --_this4.state.sectorToFocus < 0 ? _this4.sectorRefs.length - 1 : _this4.state.sectorToFocus % _this4.sectorRefs.length;
+							_this4.sectorRefs[_next].focus();
+							_this4.setState({ sectorToFocus: _next });
+							break;
+						case "Escape":
+							_this4.sectorRefs[_this4.state.sectorToFocus].blur();
+							_this4.setState({ sectorToFocus: 0 });
+							break;
+						default:
+					}
+				};
+			}
+		},
+		{
+			key: "renderSectors",
+			value: function renderSectors() {
+				var _this$props4 = this.props, sectors = _this$props4.sectors, isAnimationActive = _this$props4.isAnimationActive;
+				var prevSectors = this.state.prevSectors;
+				if (isAnimationActive && sectors && sectors.length && (!prevSectors || !(0, import_isEqual.default)(prevSectors, sectors))) return this.renderSectorsWithAnimation();
+				return this.renderSectorsStatically(sectors);
+			}
+		},
+		{
+			key: "componentDidMount",
+			value: function componentDidMount() {
+				if (this.pieRef) this.attachKeyboardHandlers(this.pieRef);
+			}
+		},
+		{
+			key: "render",
+			value: function render() {
+				var _this5 = this;
+				var _this$props5 = this.props, hide = _this$props5.hide, sectors = _this$props5.sectors, className = _this$props5.className, label = _this$props5.label, cx = _this$props5.cx, cy = _this$props5.cy, innerRadius = _this$props5.innerRadius, outerRadius = _this$props5.outerRadius, isAnimationActive = _this$props5.isAnimationActive;
+				var isAnimationFinished = this.state.isAnimationFinished;
+				if (hide || !sectors || !sectors.length || !isNumber(cx) || !isNumber(cy) || !isNumber(innerRadius) || !isNumber(outerRadius)) return null;
+				var layerClass = clsx("recharts-pie", className);
+				return /* @__PURE__ */ import_react.createElement(Layer, {
+					tabIndex: this.props.rootTabIndex,
+					className: layerClass,
+					ref: function ref(_ref3) {
+						_this5.pieRef = _ref3;
+					}
+				}, this.renderSectors(), label && this.renderLabels(sectors), Label$3.renderCallByParent(this.props, null, false), (!isAnimationActive || isAnimationFinished) && LabelList.renderCallByParent(this.props, sectors, false));
+			}
+		}
+	], [
+		{
+			key: "getDerivedStateFromProps",
+			value: function getDerivedStateFromProps(nextProps, prevState) {
+				if (prevState.prevIsAnimationActive !== nextProps.isAnimationActive) return {
+					prevIsAnimationActive: nextProps.isAnimationActive,
+					prevAnimationId: nextProps.animationId,
+					curSectors: nextProps.sectors,
+					prevSectors: [],
+					isAnimationFinished: true
+				};
+				if (nextProps.isAnimationActive && nextProps.animationId !== prevState.prevAnimationId) return {
+					prevAnimationId: nextProps.animationId,
+					curSectors: nextProps.sectors,
+					prevSectors: prevState.curSectors,
+					isAnimationFinished: true
+				};
+				if (nextProps.sectors !== prevState.curSectors) return {
+					curSectors: nextProps.sectors,
+					isAnimationFinished: true
+				};
+				return null;
+			}
+		},
+		{
+			key: "getTextAnchor",
+			value: function getTextAnchor(x, cx) {
+				if (x > cx) return "start";
+				if (x < cx) return "end";
+				return "middle";
+			}
+		},
+		{
+			key: "renderLabelLineItem",
+			value: function renderLabelLineItem(option, props, key) {
+				if (/* @__PURE__ */ import_react.isValidElement(option)) return /* @__PURE__ */ import_react.cloneElement(option, props);
+				if ((0, import_isFunction.default)(option)) return option(props);
+				var className = clsx("recharts-pie-label-line", typeof option !== "boolean" ? option.className : "");
+				return /* @__PURE__ */ import_react.createElement(Curve, _extends$12({}, props, {
+					key,
+					type: "linear",
+					className
+				}));
+			}
+		},
+		{
+			key: "renderLabelItem",
+			value: function renderLabelItem(option, props, value) {
+				if (/* @__PURE__ */ import_react.isValidElement(option)) return /* @__PURE__ */ import_react.cloneElement(option, props);
+				var label = value;
+				if ((0, import_isFunction.default)(option)) {
+					label = option(props);
+					if (/* @__PURE__ */ import_react.isValidElement(label)) return label;
+				}
+				var className = clsx("recharts-pie-label-text", typeof option !== "boolean" && !(0, import_isFunction.default)(option) ? option.className : "");
+				return /* @__PURE__ */ import_react.createElement(Text, _extends$12({}, props, {
+					alignmentBaseline: "middle",
+					className
+				}), label);
+			}
+		}
+	]);
+}(import_react.PureComponent);
+_Pie = Pie;
+_defineProperty$17(Pie, "displayName", "Pie");
+_defineProperty$17(Pie, "defaultProps", {
+	stroke: "#fff",
+	fill: "#808080",
+	legendType: "rect",
+	cx: "50%",
+	cy: "50%",
+	startAngle: 0,
+	endAngle: 360,
+	innerRadius: 0,
+	outerRadius: "80%",
+	paddingAngle: 0,
+	labelLine: true,
+	hide: false,
+	minAngle: 0,
+	isAnimationActive: !Global.isSsr,
+	animationBegin: 400,
+	animationDuration: 1500,
+	animationEasing: "ease",
+	nameKey: "name",
+	blendStroke: false,
+	rootTabIndex: 0
+});
+_defineProperty$17(Pie, "parseDeltaAngle", function(startAngle, endAngle) {
+	return mathSign(endAngle - startAngle) * Math.min(Math.abs(endAngle - startAngle), 360);
+});
+_defineProperty$17(Pie, "getRealPieData", function(itemProps) {
+	var data = itemProps.data, children = itemProps.children;
+	var presentationProps = filterProps(itemProps, false);
+	var cells = findAllByType(children, Cell);
+	if (data && data.length) return data.map(function(entry, index) {
+		return _objectSpread$14(_objectSpread$14(_objectSpread$14({ payload: entry }, presentationProps), entry), cells && cells[index] && cells[index].props);
+	});
+	if (cells && cells.length) return cells.map(function(cell) {
+		return _objectSpread$14(_objectSpread$14({}, presentationProps), cell.props);
+	});
+	return [];
+});
+_defineProperty$17(Pie, "parseCoordinateOfPie", function(itemProps, offset) {
+	var top = offset.top, left = offset.left, width = offset.width, height = offset.height;
+	var maxPieRadius = getMaxRadius(width, height);
+	return {
+		cx: left + getPercentValue(itemProps.cx, width, width / 2),
+		cy: top + getPercentValue(itemProps.cy, height, height / 2),
+		innerRadius: getPercentValue(itemProps.innerRadius, maxPieRadius, 0),
+		outerRadius: getPercentValue(itemProps.outerRadius, maxPieRadius, maxPieRadius * .8),
+		maxRadius: itemProps.maxRadius || Math.sqrt(width * width + height * height) / 2
+	};
+});
+_defineProperty$17(Pie, "getComposedData", function(_ref4) {
+	var item = _ref4.item, offset = _ref4.offset;
+	var itemProps = item.type.defaultProps !== void 0 ? _objectSpread$14(_objectSpread$14({}, item.type.defaultProps), item.props) : item.props;
+	var pieData = _Pie.getRealPieData(itemProps);
+	if (!pieData || !pieData.length) return null;
+	var cornerRadius = itemProps.cornerRadius, startAngle = itemProps.startAngle, endAngle = itemProps.endAngle, paddingAngle = itemProps.paddingAngle, dataKey = itemProps.dataKey, nameKey = itemProps.nameKey, valueKey = itemProps.valueKey, tooltipType = itemProps.tooltipType;
+	var minAngle = Math.abs(itemProps.minAngle);
+	var coordinate = _Pie.parseCoordinateOfPie(itemProps, offset);
+	var deltaAngle = _Pie.parseDeltaAngle(startAngle, endAngle);
+	var absDeltaAngle = Math.abs(deltaAngle);
+	var realDataKey = dataKey;
+	if ((0, import_isNil.default)(dataKey) && (0, import_isNil.default)(valueKey)) {
+		warn$1(false, "Use \"dataKey\" to specify the value of pie,\n      the props \"valueKey\" will be deprecated in 1.1.0");
+		realDataKey = "value";
+	} else if ((0, import_isNil.default)(dataKey)) {
+		warn$1(false, "Use \"dataKey\" to specify the value of pie,\n      the props \"valueKey\" will be deprecated in 1.1.0");
+		realDataKey = valueKey;
+	}
+	var notZeroItemCount = pieData.filter(function(entry) {
+		return getValueByDataKey(entry, realDataKey, 0) !== 0;
+	}).length;
+	var totalPadingAngle = (absDeltaAngle >= 360 ? notZeroItemCount : notZeroItemCount - 1) * paddingAngle;
+	var realTotalAngle = absDeltaAngle - notZeroItemCount * minAngle - totalPadingAngle;
+	var sum = pieData.reduce(function(result, entry) {
+		var val = getValueByDataKey(entry, realDataKey, 0);
+		return result + (isNumber(val) ? val : 0);
+	}, 0);
+	var sectors;
+	if (sum > 0) {
+		var prev;
+		sectors = pieData.map(function(entry, i) {
+			var val = getValueByDataKey(entry, realDataKey, 0);
+			var name = getValueByDataKey(entry, nameKey, i);
+			var percent = (isNumber(val) ? val : 0) / sum;
+			var tempStartAngle;
+			if (i) tempStartAngle = prev.endAngle + mathSign(deltaAngle) * paddingAngle * (val !== 0 ? 1 : 0);
+			else tempStartAngle = startAngle;
+			var tempEndAngle = tempStartAngle + mathSign(deltaAngle) * ((val !== 0 ? minAngle : 0) + percent * realTotalAngle);
+			var midAngle = (tempStartAngle + tempEndAngle) / 2;
+			var middleRadius = (coordinate.innerRadius + coordinate.outerRadius) / 2;
+			prev = _objectSpread$14(_objectSpread$14(_objectSpread$14({
+				percent,
+				cornerRadius,
+				name,
+				tooltipPayload: [{
+					name,
+					value: val,
+					payload: entry,
+					dataKey: realDataKey,
+					type: tooltipType
+				}],
+				midAngle,
+				middleRadius,
+				tooltipPosition: polarToCartesian(coordinate.cx, coordinate.cy, middleRadius, midAngle)
+			}, entry), coordinate), {}, {
+				value: getValueByDataKey(entry, realDataKey),
+				startAngle: tempStartAngle,
+				endAngle: tempEndAngle,
+				payload: entry,
+				paddingAngle: mathSign(deltaAngle) * paddingAngle
+			});
+			return prev;
+		});
+	}
+	return _objectSpread$14(_objectSpread$14({}, coordinate), {}, {
+		sectors,
+		data: pieData
+	});
+});
 //#endregion
 //#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/lodash@4.17.23/node_modules/lodash/_baseRange.js
 var require__baseRange = /* @__PURE__ */ __commonJSMin(((exports, module) => {
@@ -63797,6 +65220,35 @@ var BarChart = generateCategoricalChart({
 	formatAxisMap
 });
 //#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/recharts@2.15.4_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/recharts/es6/chart/PieChart.js
+/**
+* @fileOverview Pie Chart
+*/
+var PieChart = generateCategoricalChart({
+	chartName: "PieChart",
+	GraphicalChild: Pie,
+	validateTooltipEventTypes: ["item"],
+	defaultTooltipEventType: "item",
+	legendContent: "children",
+	axisComponents: [{
+		axisType: "angleAxis",
+		AxisComp: PolarAngleAxis
+	}, {
+		axisType: "radiusAxis",
+		AxisComp: PolarRadiusAxis
+	}],
+	formatAxisMap: formatAxisMap$1,
+	defaultProps: {
+		layout: "centric",
+		startAngle: 0,
+		endAngle: 360,
+		cx: "50%",
+		cy: "50%",
+		innerRadius: 0,
+		outerRadius: "80%"
+	}
+});
+//#endregion
 //#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/recharts@2.15.4_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/recharts/es6/chart/AreaChart.js
 /**
 * @fileOverview Area Chart
@@ -65496,34 +66948,34 @@ var Dialog$1 = (props) => {
 	});
 };
 Dialog$1.displayName = DIALOG_NAME;
-var TRIGGER_NAME$1 = "DialogTrigger";
+var TRIGGER_NAME$2 = "DialogTrigger";
 var DialogTrigger$1 = import_react.forwardRef((props, forwardedRef) => {
 	const { __scopeDialog, ...triggerProps } = props;
-	const context = useDialogContext(TRIGGER_NAME$1, __scopeDialog);
+	const context = useDialogContext(TRIGGER_NAME$2, __scopeDialog);
 	const composedTriggerRef = useComposedRefs(forwardedRef, context.triggerRef);
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.button, {
 		type: "button",
 		"aria-haspopup": "dialog",
 		"aria-expanded": context.open,
 		"aria-controls": context.contentId,
-		"data-state": getState(context.open),
+		"data-state": getState$1(context.open),
 		...triggerProps,
 		ref: composedTriggerRef,
 		onClick: composeEventHandlers(props.onClick, context.onOpenToggle)
 	});
 });
-DialogTrigger$1.displayName = TRIGGER_NAME$1;
-var PORTAL_NAME$1 = "DialogPortal";
-var [PortalProvider, usePortalContext] = createDialogContext(PORTAL_NAME$1, { forceMount: void 0 });
+DialogTrigger$1.displayName = TRIGGER_NAME$2;
+var PORTAL_NAME$2 = "DialogPortal";
+var [PortalProvider$1, usePortalContext$1] = createDialogContext(PORTAL_NAME$2, { forceMount: void 0 });
 var DialogPortal$1 = (props) => {
 	const { __scopeDialog, forceMount, children, container } = props;
-	const context = useDialogContext(PORTAL_NAME$1, __scopeDialog);
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(PortalProvider, {
+	const context = useDialogContext(PORTAL_NAME$2, __scopeDialog);
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(PortalProvider$1, {
 		scope: __scopeDialog,
 		forceMount,
 		children: import_react.Children.map(children, (child) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Presence, {
 			present: forceMount || context.open,
-			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Portal$2, {
+			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Portal$3, {
 				asChild: true,
 				container,
 				children: child
@@ -65531,10 +66983,10 @@ var DialogPortal$1 = (props) => {
 		}))
 	});
 };
-DialogPortal$1.displayName = PORTAL_NAME$1;
+DialogPortal$1.displayName = PORTAL_NAME$2;
 var OVERLAY_NAME = "DialogOverlay";
 var DialogOverlay$1 = import_react.forwardRef((props, forwardedRef) => {
-	const portalContext = usePortalContext(OVERLAY_NAME, props.__scopeDialog);
+	const portalContext = usePortalContext$1(OVERLAY_NAME, props.__scopeDialog);
 	const { forceMount = portalContext.forceMount, ...overlayProps } = props;
 	const context = useDialogContext(OVERLAY_NAME, props.__scopeDialog);
 	return context.modal ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Presence, {
@@ -65546,16 +66998,16 @@ var DialogOverlay$1 = import_react.forwardRef((props, forwardedRef) => {
 	}) : null;
 });
 DialogOverlay$1.displayName = OVERLAY_NAME;
-var Slot$1 = /* @__PURE__ */ createSlot$1("DialogOverlay.RemoveScroll");
+var Slot$2 = /* @__PURE__ */ createSlot$1("DialogOverlay.RemoveScroll");
 var DialogOverlayImpl = import_react.forwardRef((props, forwardedRef) => {
 	const { __scopeDialog, ...overlayProps } = props;
 	const context = useDialogContext(OVERLAY_NAME, __scopeDialog);
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ReactRemoveScroll, {
-		as: Slot$1,
+		as: Slot$2,
 		allowPinchZoom: true,
 		shards: [context.contentRef],
 		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.div, {
-			"data-state": getState(context.open),
+			"data-state": getState$1(context.open),
 			...overlayProps,
 			ref: forwardedRef,
 			style: {
@@ -65565,11 +67017,11 @@ var DialogOverlayImpl = import_react.forwardRef((props, forwardedRef) => {
 		})
 	});
 });
-var CONTENT_NAME$1 = "DialogContent";
+var CONTENT_NAME$2 = "DialogContent";
 var DialogContent$1 = import_react.forwardRef((props, forwardedRef) => {
-	const portalContext = usePortalContext(CONTENT_NAME$1, props.__scopeDialog);
+	const portalContext = usePortalContext$1(CONTENT_NAME$2, props.__scopeDialog);
 	const { forceMount = portalContext.forceMount, ...contentProps } = props;
-	const context = useDialogContext(CONTENT_NAME$1, props.__scopeDialog);
+	const context = useDialogContext(CONTENT_NAME$2, props.__scopeDialog);
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Presence, {
 		present: forceMount || context.open,
 		children: context.modal ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogContentModal, {
@@ -65581,9 +67033,9 @@ var DialogContent$1 = import_react.forwardRef((props, forwardedRef) => {
 		})
 	});
 });
-DialogContent$1.displayName = CONTENT_NAME$1;
+DialogContent$1.displayName = CONTENT_NAME$2;
 var DialogContentModal = import_react.forwardRef((props, forwardedRef) => {
-	const context = useDialogContext(CONTENT_NAME$1, props.__scopeDialog);
+	const context = useDialogContext(CONTENT_NAME$2, props.__scopeDialog);
 	const contentRef = import_react.useRef(null);
 	const composedRefs = useComposedRefs(forwardedRef, context.contentRef, contentRef);
 	import_react.useEffect(() => {
@@ -65608,7 +67060,7 @@ var DialogContentModal = import_react.forwardRef((props, forwardedRef) => {
 	});
 });
 var DialogContentNonModal = import_react.forwardRef((props, forwardedRef) => {
-	const context = useDialogContext(CONTENT_NAME$1, props.__scopeDialog);
+	const context = useDialogContext(CONTENT_NAME$2, props.__scopeDialog);
 	const hasInteractedOutsideRef = import_react.useRef(false);
 	const hasPointerDownOutsideRef = import_react.useRef(false);
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogContentImpl, {
@@ -65639,7 +67091,7 @@ var DialogContentNonModal = import_react.forwardRef((props, forwardedRef) => {
 });
 var DialogContentImpl = import_react.forwardRef((props, forwardedRef) => {
 	const { __scopeDialog, trapFocus, onOpenAutoFocus, onCloseAutoFocus, ...contentProps } = props;
-	const context = useDialogContext(CONTENT_NAME$1, __scopeDialog);
+	const context = useDialogContext(CONTENT_NAME$2, __scopeDialog);
 	const contentRef = import_react.useRef(null);
 	const composedRefs = useComposedRefs(forwardedRef, contentRef);
 	useFocusGuards();
@@ -65654,7 +67106,7 @@ var DialogContentImpl = import_react.forwardRef((props, forwardedRef) => {
 			id: context.contentId,
 			"aria-describedby": context.descriptionId,
 			"aria-labelledby": context.titleId,
-			"data-state": getState(context.open),
+			"data-state": getState$1(context.open),
 			...contentProps,
 			ref: composedRefs,
 			onDismiss: () => context.onOpenChange(false)
@@ -65686,10 +67138,10 @@ var DialogDescription$1 = import_react.forwardRef((props, forwardedRef) => {
 	});
 });
 DialogDescription$1.displayName = DESCRIPTION_NAME;
-var CLOSE_NAME = "DialogClose";
+var CLOSE_NAME$1 = "DialogClose";
 var DialogClose$1 = import_react.forwardRef((props, forwardedRef) => {
 	const { __scopeDialog, ...closeProps } = props;
-	const context = useDialogContext(CLOSE_NAME, __scopeDialog);
+	const context = useDialogContext(CLOSE_NAME$1, __scopeDialog);
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.button, {
 		type: "button",
 		...closeProps,
@@ -65697,13 +67149,13 @@ var DialogClose$1 = import_react.forwardRef((props, forwardedRef) => {
 		onClick: composeEventHandlers(props.onClick, () => context.onOpenChange(false))
 	});
 });
-DialogClose$1.displayName = CLOSE_NAME;
-function getState(open) {
+DialogClose$1.displayName = CLOSE_NAME$1;
+function getState$1(open) {
 	return open ? "open" : "closed";
 }
 var TITLE_WARNING_NAME = "DialogTitleWarning";
 var [WarningProvider, useWarningContext] = createContext2(TITLE_WARNING_NAME, {
-	contentName: CONTENT_NAME$1,
+	contentName: CONTENT_NAME$2,
 	titleName: TITLE_NAME,
 	docsSlug: "dialog"
 });
@@ -65736,8 +67188,8 @@ var DescriptionWarning = ({ contentRef, descriptionId }) => {
 	]);
 	return null;
 };
-var Root$2 = Dialog$1;
-var Portal$1 = DialogPortal$1;
+var Root$3 = Dialog$1;
+var Portal$2 = DialogPortal$1;
 var Overlay = DialogOverlay$1;
 var Content = DialogContent$1;
 var Title = DialogTitle$1;
@@ -65745,8 +67197,8 @@ var Description = DialogDescription$1;
 var Close = DialogClose$1;
 //#endregion
 //#region src/components/ui/dialog.tsx
-var Dialog = Root$2;
-var DialogPortal = Portal$1;
+var Dialog = Root$3;
+var DialogPortal = Portal$2;
 var DialogOverlay = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Overlay, {
 	"data-uid": "src/components/ui/dialog.tsx:20:3",
 	"data-prohibitions": "[editContent]",
@@ -65867,18 +67319,18 @@ var Label$2 = import_react.forwardRef((props, forwardedRef) => {
 	});
 });
 Label$2.displayName = NAME;
-var Root$1 = Label$2;
+var Root$2 = Label$2;
 //#endregion
 //#region src/components/ui/label.tsx
 var labelVariants = cva("text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70");
-var Label$1 = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root$1, {
+var Label$1 = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root$2, {
 	"data-uid": "src/components/ui/label.tsx:16:3",
 	"data-prohibitions": "[editContent]",
 	ref,
 	className: cn$1(labelVariants(), className),
 	...props
 }));
-Label$1.displayName = Root$1.displayName;
+Label$1.displayName = Root$2.displayName;
 //#endregion
 //#region src/pages/ContasReceber.tsx
 function ContasReceber() {
@@ -66145,7 +67597,7 @@ function ContasReceber() {
 										"data-uid": "src/pages/ContasReceber.tsx:194:21",
 										"data-prohibitions": "[editContent]",
 										className: "text-right",
-										children: conta.status === "pendente" && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
+										children: conta.status === "pendente" && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
 											"data-uid": "src/pages/ContasReceber.tsx:196:25",
 											"data-prohibitions": "[]",
 											size: "sm",
@@ -66220,14 +67672,14 @@ function ContasReceber() {
 						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogFooter, {
 							"data-uid": "src/pages/ContasReceber.tsx:242:11",
 							"data-prohibitions": "[editContent]",
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
 								"data-uid": "src/pages/ContasReceber.tsx:243:13",
 								"data-prohibitions": "[]",
 								variant: "outline",
 								onClick: () => setPayingConta(null),
 								disabled: submitting,
 								children: "Cancelar"
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button, {
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button$1, {
 								"data-uid": "src/pages/ContasReceber.tsx:246:13",
 								"data-prohibitions": "[editContent]",
 								onClick: handlePay,
@@ -66457,7 +67909,7 @@ function ContasPagar() {
 							onChange: (e) => setSearchCategoria(e.target.value)
 						})]
 					})]
-				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button, {
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button$1, {
 					"data-uid": "src/pages/ContasPagar.tsx:174:9",
 					"data-prohibitions": "[]",
 					onClick: () => setIsModalOpen(true),
@@ -66583,7 +68035,7 @@ function ContasPagar() {
 										"data-uid": "src/pages/ContasPagar.tsx:220:21",
 										"data-prohibitions": "[editContent]",
 										className: "text-right",
-										children: conta.status === "pendente" && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
+										children: conta.status === "pendente" && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
 											"data-uid": "src/pages/ContasPagar.tsx:222:25",
 											"data-prohibitions": "[editContent]",
 											size: "sm",
@@ -66746,14 +68198,14 @@ function ContasPagar() {
 								"data-uid": "src/pages/ContasPagar.tsx:304:13",
 								"data-prohibitions": "[editContent]",
 								className: "pt-4",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
 									"data-uid": "src/pages/ContasPagar.tsx:305:15",
 									"data-prohibitions": "[]",
 									type: "button",
 									variant: "outline",
 									onClick: () => setIsModalOpen(false),
 									children: "Cancelar"
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button, {
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button$1, {
 									"data-uid": "src/pages/ContasPagar.tsx:308:15",
 									"data-prohibitions": "[editContent]",
 									type: "submit",
@@ -66862,12 +68314,12 @@ var SELECTION_KEYS = [" ", "Enter"];
 var SELECT_NAME = "Select";
 var [Collection, useCollection, createCollectionScope] = createCollection(SELECT_NAME);
 var [createSelectContext, createSelectScope] = createContextScope(SELECT_NAME, [createCollectionScope, createPopperScope]);
-var usePopperScope = createPopperScope();
+var usePopperScope$1 = createPopperScope();
 var [SelectProvider, useSelectContext] = createSelectContext(SELECT_NAME);
 var [SelectNativeOptionsProvider, useSelectNativeOptionsContext] = createSelectContext(SELECT_NAME);
-var Select$1 = (props) => {
+var Select$2 = (props) => {
 	const { __scopeSelect, children, open: openProp, defaultOpen, onOpenChange, value: valueProp, defaultValue, onValueChange, dir, name, autoComplete, disabled, required, form } = props;
-	const popperScope = usePopperScope(__scopeSelect);
+	const popperScope = usePopperScope$1(__scopeSelect);
 	const [trigger, setTrigger] = import_react.useState(null);
 	const [valueNode, setValueNode] = import_react.useState(null);
 	const [valueNodeHasChildren, setValueNodeHasChildren] = import_react.useState(false);
@@ -66888,7 +68340,7 @@ var Select$1 = (props) => {
 	const isFormControl = trigger ? form || !!trigger.closest("form") : true;
 	const [nativeOptionsSet, setNativeOptionsSet] = import_react.useState(/* @__PURE__ */ new Set());
 	const nativeSelectKey = Array.from(nativeOptionsSet).map((option) => option.props.value).join(";");
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root2$2, {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root2$3, {
 		...popperScope,
 		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(SelectProvider, {
 			required,
@@ -66938,12 +68390,12 @@ var Select$1 = (props) => {
 		})
 	});
 };
-Select$1.displayName = SELECT_NAME;
-var TRIGGER_NAME = "SelectTrigger";
+Select$2.displayName = SELECT_NAME;
+var TRIGGER_NAME$1 = "SelectTrigger";
 var SelectTrigger$1 = import_react.forwardRef((props, forwardedRef) => {
 	const { __scopeSelect, disabled = false, ...triggerProps } = props;
-	const popperScope = usePopperScope(__scopeSelect);
-	const context = useSelectContext(TRIGGER_NAME, __scopeSelect);
+	const popperScope = usePopperScope$1(__scopeSelect);
+	const context = useSelectContext(TRIGGER_NAME$1, __scopeSelect);
 	const isDisabled = context.disabled || disabled;
 	const composedRefs = useComposedRefs(forwardedRef, context.onTriggerChange);
 	const getItems = useCollection(__scopeSelect);
@@ -67005,7 +68457,7 @@ var SelectTrigger$1 = import_react.forwardRef((props, forwardedRef) => {
 		})
 	});
 });
-SelectTrigger$1.displayName = TRIGGER_NAME;
+SelectTrigger$1.displayName = TRIGGER_NAME$1;
 var VALUE_NAME = "SelectValue";
 var SelectValue$1 = import_react.forwardRef((props, forwardedRef) => {
 	const { __scopeSelect, className, style, children, placeholder = "", ...valueProps } = props;
@@ -67035,17 +68487,17 @@ var SelectIcon = import_react.forwardRef((props, forwardedRef) => {
 	});
 });
 SelectIcon.displayName = ICON_NAME;
-var PORTAL_NAME = "SelectPortal";
+var PORTAL_NAME$1 = "SelectPortal";
 var SelectPortal = (props) => {
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Portal$2, {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Portal$3, {
 		asChild: true,
 		...props
 	});
 };
-SelectPortal.displayName = PORTAL_NAME;
-var CONTENT_NAME = "SelectContent";
+SelectPortal.displayName = PORTAL_NAME$1;
+var CONTENT_NAME$1 = "SelectContent";
 var SelectContent$1 = import_react.forwardRef((props, forwardedRef) => {
-	const context = useSelectContext(CONTENT_NAME, props.__scopeSelect);
+	const context = useSelectContext(CONTENT_NAME$1, props.__scopeSelect);
 	const [fragment, setFragment] = import_react.useState();
 	useLayoutEffect2(() => {
 		setFragment(new DocumentFragment());
@@ -67065,14 +68517,14 @@ var SelectContent$1 = import_react.forwardRef((props, forwardedRef) => {
 		ref: forwardedRef
 	});
 });
-SelectContent$1.displayName = CONTENT_NAME;
+SelectContent$1.displayName = CONTENT_NAME$1;
 var CONTENT_MARGIN = 10;
-var [SelectContentProvider, useSelectContentContext] = createSelectContext(CONTENT_NAME);
+var [SelectContentProvider, useSelectContentContext] = createSelectContext(CONTENT_NAME$1);
 var CONTENT_IMPL_NAME = "SelectContentImpl";
-var Slot = /* @__PURE__ */ createSlot$1("SelectContent.RemoveScroll");
+var Slot$1 = /* @__PURE__ */ createSlot$1("SelectContent.RemoveScroll");
 var SelectContentImpl = import_react.forwardRef((props, forwardedRef) => {
 	const { __scopeSelect, position = "item-aligned", onCloseAutoFocus, onEscapeKeyDown, onPointerDownOutside, side, sideOffset, align, alignOffset, arrowPadding, collisionBoundary, collisionPadding, sticky, hideWhenDetached, avoidCollisions, ...contentProps } = props;
-	const context = useSelectContext(CONTENT_NAME, __scopeSelect);
+	const context = useSelectContext(CONTENT_NAME$1, __scopeSelect);
 	const [content, setContent] = import_react.useState(null);
 	const [viewport, setViewport] = import_react.useState(null);
 	const composedRefs = useComposedRefs(forwardedRef, (node) => setContent(node));
@@ -67196,7 +68648,7 @@ var SelectContentImpl = import_react.forwardRef((props, forwardedRef) => {
 		isPositioned,
 		searchRef,
 		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ReactRemoveScroll, {
-			as: Slot,
+			as: Slot$1,
 			allowPinchZoom: true,
 			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(FocusScope, {
 				asChild: true,
@@ -67262,8 +68714,8 @@ SelectContentImpl.displayName = CONTENT_IMPL_NAME;
 var ITEM_ALIGNED_POSITION_NAME = "SelectItemAlignedPosition";
 var SelectItemAlignedPosition = import_react.forwardRef((props, forwardedRef) => {
 	const { __scopeSelect, onPlaced, ...popperProps } = props;
-	const context = useSelectContext(CONTENT_NAME, __scopeSelect);
-	const contentContext = useSelectContentContext(CONTENT_NAME, __scopeSelect);
+	const context = useSelectContext(CONTENT_NAME$1, __scopeSelect);
+	const contentContext = useSelectContentContext(CONTENT_NAME$1, __scopeSelect);
 	const [contentWrapper, setContentWrapper] = import_react.useState(null);
 	const [content, setContent] = import_react.useState(null);
 	const composedRefs = useComposedRefs(forwardedRef, (node) => setContent(node));
@@ -67388,7 +68840,7 @@ SelectItemAlignedPosition.displayName = ITEM_ALIGNED_POSITION_NAME;
 var POPPER_POSITION_NAME = "SelectPopperPosition";
 var SelectPopperPosition = import_react.forwardRef((props, forwardedRef) => {
 	const { __scopeSelect, align = "start", collisionPadding = CONTENT_MARGIN, ...popperProps } = props;
-	const popperScope = usePopperScope(__scopeSelect);
+	const popperScope = usePopperScope$1(__scopeSelect);
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Content$2, {
 		...popperScope,
 		...popperProps,
@@ -67407,7 +68859,7 @@ var SelectPopperPosition = import_react.forwardRef((props, forwardedRef) => {
 	});
 });
 SelectPopperPosition.displayName = POPPER_POSITION_NAME;
-var [SelectViewportProvider, useSelectViewportContext] = createSelectContext(CONTENT_NAME, {});
+var [SelectViewportProvider, useSelectViewportContext] = createSelectContext(CONTENT_NAME$1, {});
 var VIEWPORT_NAME$1 = "SelectViewport";
 var SelectViewport = import_react.forwardRef((props, forwardedRef) => {
 	const { __scopeSelect, nonce, ...viewportProps } = props;
@@ -67707,19 +69159,19 @@ var SelectSeparator$1 = import_react.forwardRef((props, forwardedRef) => {
 	});
 });
 SelectSeparator$1.displayName = SEPARATOR_NAME;
-var ARROW_NAME = "SelectArrow";
+var ARROW_NAME$1 = "SelectArrow";
 var SelectArrow = import_react.forwardRef((props, forwardedRef) => {
 	const { __scopeSelect, ...arrowProps } = props;
-	const popperScope = usePopperScope(__scopeSelect);
-	const context = useSelectContext(ARROW_NAME, __scopeSelect);
-	const contentContext = useSelectContentContext(ARROW_NAME, __scopeSelect);
+	const popperScope = usePopperScope$1(__scopeSelect);
+	const context = useSelectContext(ARROW_NAME$1, __scopeSelect);
+	const contentContext = useSelectContentContext(ARROW_NAME$1, __scopeSelect);
 	return context.open && contentContext.position === "popper" ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Arrow, {
 		...popperScope,
 		...arrowProps,
 		ref: forwardedRef
 	}) : null;
 });
-SelectArrow.displayName = ARROW_NAME;
+SelectArrow.displayName = ARROW_NAME$1;
 var BUBBLE_INPUT_NAME = "SelectBubbleInput";
 var SelectBubbleInput = import_react.forwardRef(({ __scopeSelect, value, ...props }, forwardedRef) => {
 	const ref = import_react.useRef(null);
@@ -67787,12 +69239,12 @@ function findNextItem(items, search, currentItem) {
 function wrapArray(array, startIndex) {
 	return array.map((_, index) => array[(startIndex + index) % array.length]);
 }
-var Root2 = Select$1;
-var Trigger = SelectTrigger$1;
+var Root2$1 = Select$2;
+var Trigger$1 = SelectTrigger$1;
 var Value = SelectValue$1;
 var Icon = SelectIcon;
-var Portal = SelectPortal;
-var Content2 = SelectContent$1;
+var Portal$1 = SelectPortal;
+var Content2$1 = SelectContent$1;
 var Viewport$1 = SelectViewport;
 var Label = SelectLabel$1;
 var Item = SelectItem$1;
@@ -67803,9 +69255,9 @@ var ScrollDownButton = SelectScrollDownButton$1;
 var Separator = SelectSeparator$1;
 //#endregion
 //#region src/components/ui/select.tsx
-var Select = Root2;
+var Select$1 = Root2$1;
 var SelectValue = Value;
-var SelectTrigger = import_react.forwardRef(({ className, children, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Trigger, {
+var SelectTrigger = import_react.forwardRef(({ className, children, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Trigger$1, {
 	"data-uid": "src/components/ui/select.tsx:18:3",
 	"data-prohibitions": "[editContent]",
 	ref,
@@ -67822,7 +69274,7 @@ var SelectTrigger = import_react.forwardRef(({ className, children, ...props }, 
 		})
 	})]
 }));
-SelectTrigger.displayName = Trigger.displayName;
+SelectTrigger.displayName = Trigger$1.displayName;
 var SelectScrollUpButton = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ScrollUpButton, {
 	"data-uid": "src/components/ui/select.tsx:38:3",
 	"data-prohibitions": "[editContent]",
@@ -67849,10 +69301,10 @@ var SelectScrollDownButton = import_react.forwardRef(({ className, ...props }, r
 	})
 }));
 SelectScrollDownButton.displayName = ScrollDownButton.displayName;
-var SelectContent = import_react.forwardRef(({ className, children, position = "popper", ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Portal, {
+var SelectContent = import_react.forwardRef(({ className, children, position = "popper", ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Portal$1, {
 	"data-uid": "src/components/ui/select.tsx:66:3",
 	"data-prohibitions": "[editContent]",
-	children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Content2, {
+	children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Content2$1, {
 		"data-uid": "src/components/ui/select.tsx:67:5",
 		"data-prohibitions": "[editContent]",
 		ref,
@@ -67877,7 +69329,7 @@ var SelectContent = import_react.forwardRef(({ className, children, position = "
 		]
 	})
 }));
-SelectContent.displayName = Content2.displayName;
+SelectContent.displayName = Content2$1.displayName;
 var SelectLabel = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label, {
 	"data-uid": "src/components/ui/select.tsx:98:3",
 	"data-prohibitions": "[editContent]",
@@ -68100,7 +69552,7 @@ function CaixaAberto({ caixa, movements, sales, onFechar, onNovaMov }) {
 				"data-uid": "src/components/caixa/CaixaAberto.tsx:118:7",
 				"data-prohibitions": "[]",
 				className: "flex flex-col sm:flex-row gap-4",
-				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button, {
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button$1, {
 					"data-uid": "src/components/caixa/CaixaAberto.tsx:119:9",
 					"data-prohibitions": "[]",
 					onClick: () => setMovOpen(true),
@@ -68111,7 +69563,7 @@ function CaixaAberto({ caixa, movements, sales, onFechar, onNovaMov }) {
 						"data-prohibitions": "[editContent]",
 						className: "mr-2 h-4 w-4"
 					}), " Nova Movimentação"]
-				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
 					"data-uid": "src/components/caixa/CaixaAberto.tsx:122:9",
 					"data-prohibitions": "[]",
 					onClick: () => setCloseOpen(true),
@@ -68352,7 +69804,7 @@ function CaixaAberto({ caixa, movements, sales, onFechar, onNovaMov }) {
 										"data-uid": "src/components/caixa/CaixaAberto.tsx:220:17",
 										"data-prohibitions": "[]",
 										children: "Tipo"
-									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Select, {
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Select$1, {
 										"data-uid": "src/components/caixa/CaixaAberto.tsx:221:17",
 										"data-prohibitions": "[]",
 										value: form.tipo,
@@ -68426,13 +69878,13 @@ function CaixaAberto({ caixa, movements, sales, onFechar, onNovaMov }) {
 						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogFooter, {
 							"data-uid": "src/components/caixa/CaixaAberto.tsx:250:11",
 							"data-prohibitions": "[]",
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
 								"data-uid": "src/components/caixa/CaixaAberto.tsx:251:13",
 								"data-prohibitions": "[]",
 								variant: "outline",
 								onClick: () => setMovOpen(false),
 								children: "Cancelar"
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
 								"data-uid": "src/components/caixa/CaixaAberto.tsx:254:13",
 								"data-prohibitions": "[]",
 								onClick: handleMov,
@@ -68488,13 +69940,13 @@ function CaixaAberto({ caixa, movements, sales, onFechar, onNovaMov }) {
 						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogFooter, {
 							"data-uid": "src/components/caixa/CaixaAberto.tsx:272:11",
 							"data-prohibitions": "[]",
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
 								"data-uid": "src/components/caixa/CaixaAberto.tsx:273:13",
 								"data-prohibitions": "[]",
 								variant: "outline",
 								onClick: () => setCloseOpen(false),
 								children: "Cancelar"
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
 								"data-uid": "src/components/caixa/CaixaAberto.tsx:276:13",
 								"data-prohibitions": "[]",
 								variant: "destructive",
@@ -68557,7 +70009,7 @@ function CaixaFechado({ onAbrir }) {
 			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardContent, {
 				"data-uid": "src/components/caixa/CaixaFechado.tsx:37:9",
 				"data-prohibitions": "[]",
-				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
 					"data-uid": "src/components/caixa/CaixaFechado.tsx:38:11",
 					"data-prohibitions": "[]",
 					className: "w-full",
@@ -68611,14 +70063,14 @@ function CaixaFechado({ onAbrir }) {
 					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogFooter, {
 						"data-uid": "src/components/caixa/CaixaFechado.tsx:62:11",
 						"data-prohibitions": "[editContent]",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
 							"data-uid": "src/components/caixa/CaixaFechado.tsx:63:13",
 							"data-prohibitions": "[]",
 							variant: "outline",
 							onClick: () => setOpen(false),
 							disabled: submitting,
 							children: "Cancelar"
-						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button, {
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button$1, {
 							"data-uid": "src/components/caixa/CaixaFechado.tsx:66:13",
 							"data-prohibitions": "[editContent]",
 							onClick: handleConfirm,
@@ -68986,7 +70438,7 @@ function EstoqueAtual() {
 					"data-uid": "src/components/estoque/EstoqueAtual.tsx:117:9",
 					"data-prohibitions": "[editContent]",
 					className: "w-64",
-					children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Select, {
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Select$1, {
 						"data-uid": "src/components/estoque/EstoqueAtual.tsx:118:11",
 						"data-prohibitions": "[editContent]",
 						value: categoryFilter,
@@ -69106,7 +70558,7 @@ function EstoqueAtual() {
 										"data-uid": "src/components/estoque/EstoqueAtual.tsx:162:19",
 										"data-prohibitions": "[]",
 										className: "text-right",
-										children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button, {
+										children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button$1, {
 											"data-uid": "src/components/estoque/EstoqueAtual.tsx:163:21",
 											"data-prohibitions": "[]",
 											size: "sm",
@@ -69166,7 +70618,7 @@ function EstoqueAtual() {
 										"data-uid": "src/components/estoque/EstoqueAtual.tsx:187:19",
 										"data-prohibitions": "[]",
 										children: "Tipo de Ajuste"
-									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Select, {
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Select$1, {
 										"data-uid": "src/components/estoque/EstoqueAtual.tsx:188:19",
 										"data-prohibitions": "[]",
 										required: true,
@@ -69228,7 +70680,7 @@ function EstoqueAtual() {
 									"data-uid": "src/components/estoque/EstoqueAtual.tsx:215:17",
 									"data-prohibitions": "[]",
 									children: "Motivo"
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Select, {
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Select$1, {
 									"data-uid": "src/components/estoque/EstoqueAtual.tsx:216:17",
 									"data-prohibitions": "[]",
 									required: true,
@@ -69274,14 +70726,14 @@ function EstoqueAtual() {
 								"data-uid": "src/components/estoque/EstoqueAtual.tsx:232:15",
 								"data-prohibitions": "[editContent]",
 								className: "pt-4",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
 									"data-uid": "src/components/estoque/EstoqueAtual.tsx:233:17",
 									"data-prohibitions": "[]",
 									type: "button",
 									variant: "outline",
 									onClick: () => setAdjustProduct(null),
 									children: "Cancelar"
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button, {
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button$1, {
 									"data-uid": "src/components/estoque/EstoqueAtual.tsx:236:17",
 									"data-prohibitions": "[editContent]",
 									type: "submit",
@@ -69702,14 +71154,14 @@ function ClienteFormModal({ open, onClose, cliente, onSuccess }) {
 						"data-uid": "src/components/clientes/ClienteFormModal.tsx:127:11",
 						"data-prohibitions": "[editContent]",
 						className: "pt-4",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
 							"data-uid": "src/components/clientes/ClienteFormModal.tsx:128:13",
 							"data-prohibitions": "[]",
 							type: "button",
 							variant: "outline",
 							onClick: onClose,
 							children: "Cancelar"
-						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button, {
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button$1, {
 							"data-uid": "src/components/clientes/ClienteFormModal.tsx:131:13",
 							"data-prohibitions": "[editContent]",
 							type: "submit",
@@ -69728,8 +71180,8 @@ function ClienteFormModal({ open, onClose, cliente, onSuccess }) {
 }
 //#endregion
 //#region src/components/ui/sheet.tsx
-var Sheet = Root$2;
-var SheetPortal = Portal$1;
+var Sheet = Root$3;
+var SheetPortal = Portal$2;
 var SheetOverlay = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Overlay, {
 	"data-uid": "src/components/ui/sheet.tsx:21:3",
 	"data-prohibitions": "[editContent]",
@@ -70035,7 +71487,7 @@ function Clientes() {
 							value: search,
 							onChange: (e) => setSearch(e.target.value)
 						})]
-					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button, {
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button$1, {
 						"data-uid": "src/pages/Clientes.tsx:76:11",
 						"data-prohibitions": "[]",
 						onClick: () => {
@@ -70140,7 +71592,7 @@ function Clientes() {
 										"data-prohibitions": "[]",
 										className: "text-right space-x-1",
 										children: [
-											/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
+											/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
 												"data-uid": "src/pages/Clientes.tsx:112:23",
 												"data-prohibitions": "[]",
 												variant: "ghost",
@@ -70156,7 +71608,7 @@ function Clientes() {
 													className: "h-4 w-4 text-blue-600"
 												})
 											}),
-											/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
+											/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
 												"data-uid": "src/pages/Clientes.tsx:123:23",
 												"data-prohibitions": "[]",
 												variant: "ghost",
@@ -70172,7 +71624,7 @@ function Clientes() {
 													className: "h-4 w-4 text-slate-500"
 												})
 											}),
-											/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
+											/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
 												"data-uid": "src/pages/Clientes.tsx:134:23",
 												"data-prohibitions": "[]",
 												variant: "ghost",
@@ -70219,6 +71671,8660 @@ function Clientes() {
 				cliente: historyCliente
 			})
 		]
+	});
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/constants.js
+/**
+* @constant
+* @name daysInYear
+* @summary Days in 1 year.
+*
+* @description
+* How many days in a year.
+*
+* One years equals 365.2425 days according to the formula:
+*
+* > Leap year occurs every 4 years, except for years that are divisible by 100 and not divisible by 400.
+* > 1 mean year = (365+1/4-1/100+1/400) days = 365.2425 days
+*/
+var daysInYear = 365.2425;
+Math.pow(10, 8) * 24 * 60 * 60 * 1e3;
+/**
+* @constant
+* @name millisecondsInWeek
+* @summary Milliseconds in 1 week.
+*/
+var millisecondsInWeek = 6048e5;
+/**
+* @constant
+* @name millisecondsInDay
+* @summary Milliseconds in 1 day.
+*/
+var millisecondsInDay = 864e5;
+/**
+* @constant
+* @name secondsInDay
+* @summary Seconds in 1 day.
+*/
+var secondsInDay = 3600 * 24;
+secondsInDay * 7;
+secondsInDay * daysInYear / 12 * 3;
+/**
+* @constant
+* @name constructFromSymbol
+* @summary Symbol enabling Date extensions to inherit properties from the reference date.
+*
+* The symbol is used to enable the `constructFrom` function to construct a date
+* using a reference date and a value. It allows to transfer extra properties
+* from the reference date to the new date. It's useful for extensions like
+* [`TZDate`](https://github.com/date-fns/tz) that accept a time zone as
+* a constructor argument.
+*/
+var constructFromSymbol$1 = Symbol.for("constructDateFrom");
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/constructFrom.js
+/**
+* @name constructFrom
+* @category Generic Helpers
+* @summary Constructs a date using the reference date and the value
+*
+* @description
+* The function constructs a new date using the constructor from the reference
+* date and the given value. It helps to build generic functions that accept
+* date extensions.
+*
+* It defaults to `Date` if the passed reference date is a number or a string.
+*
+* Starting from v3.7.0, it allows to construct a date using `[Symbol.for("constructDateFrom")]`
+* enabling to transfer extra properties from the reference date to the new date.
+* It's useful for extensions like [`TZDate`](https://github.com/date-fns/tz)
+* that accept a time zone as a constructor argument.
+*
+* @typeParam DateType - The `Date` type, the function operates on. Gets inferred from passed arguments. Allows to use extensions like [`UTCDate`](https://github.com/date-fns/utc).
+*
+* @param date - The reference date to take constructor from
+* @param value - The value to create the date
+*
+* @returns Date initialized using the given date and value
+*
+* @example
+* import { constructFrom } from "./constructFrom/date-fns";
+*
+* // A function that clones a date preserving the original type
+* function cloneDate<DateType extends Date>(date: DateType): DateType {
+*   return constructFrom(
+*     date, // Use constructor from the given date
+*     date.getTime() // Use the date value to create a new date
+*   );
+* }
+*/
+function constructFrom(date, value) {
+	if (typeof date === "function") return date(value);
+	if (date && typeof date === "object" && constructFromSymbol$1 in date) return date[constructFromSymbol$1](value);
+	if (date instanceof Date) return new date.constructor(value);
+	return new Date(value);
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/toDate.js
+/**
+* @name toDate
+* @category Common Helpers
+* @summary Convert the given argument to an instance of Date.
+*
+* @description
+* Convert the given argument to an instance of Date.
+*
+* If the argument is an instance of Date, the function returns its clone.
+*
+* If the argument is a number, it is treated as a timestamp.
+*
+* If the argument is none of the above, the function returns Invalid Date.
+*
+* Starting from v3.7.0, it clones a date using `[Symbol.for("constructDateFrom")]`
+* enabling to transfer extra properties from the reference date to the new date.
+* It's useful for extensions like [`TZDate`](https://github.com/date-fns/tz)
+* that accept a time zone as a constructor argument.
+*
+* **Note**: *all* Date arguments passed to any *date-fns* function is processed by `toDate`.
+*
+* @typeParam DateType - The `Date` type, the function operates on. Gets inferred from passed arguments. Allows to use extensions like [`UTCDate`](https://github.com/date-fns/utc).
+* @typeParam ResultDate - The result `Date` type, it is the type returned from the context function if it is passed, or inferred from the arguments.
+*
+* @param argument - The value to convert
+*
+* @returns The parsed date in the local time zone
+*
+* @example
+* // Clone the date:
+* const result = toDate(new Date(2014, 1, 11, 11, 30, 30))
+* //=> Tue Feb 11 2014 11:30:30
+*
+* @example
+* // Convert the timestamp to date:
+* const result = toDate(1392098430000)
+* //=> Tue Feb 11 2014 11:30:30
+*/
+function toDate(argument, context) {
+	return constructFrom(context || argument, argument);
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/addDays.js
+/**
+* The {@link addDays} function options.
+*/
+/**
+* @name addDays
+* @category Day Helpers
+* @summary Add the specified number of days to the given date.
+*
+* @description
+* Add the specified number of days to the given date.
+*
+* @typeParam DateType - The `Date` type, the function operates on. Gets inferred from passed arguments. Allows to use extensions like [`UTCDate`](https://github.com/date-fns/utc).
+* @typeParam ResultDate - The result `Date` type, it is the type returned from the context function if it is passed, or inferred from the arguments.
+*
+* @param date - The date to be changed
+* @param amount - The amount of days to be added.
+* @param options - An object with options
+*
+* @returns The new date with the days added
+*
+* @example
+* // Add 10 days to 1 September 2014:
+* const result = addDays(new Date(2014, 8, 1), 10)
+* //=> Thu Sep 11 2014 00:00:00
+*/
+function addDays(date, amount, options) {
+	const _date = toDate(date, options?.in);
+	if (isNaN(amount)) return constructFrom(options?.in || date, NaN);
+	if (!amount) return _date;
+	_date.setDate(_date.getDate() + amount);
+	return _date;
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/addMonths.js
+/**
+* The {@link addMonths} function options.
+*/
+/**
+* @name addMonths
+* @category Month Helpers
+* @summary Add the specified number of months to the given date.
+*
+* @description
+* Add the specified number of months to the given date.
+*
+* @typeParam DateType - The `Date` type, the function operates on. Gets inferred from passed arguments. Allows to use extensions like [`UTCDate`](https://github.com/date-fns/utc).
+* @typeParam ResultDate - The result `Date` type, it is the type returned from the context function if it is passed, or inferred from the arguments.
+*
+* @param date - The date to be changed
+* @param amount - The amount of months to be added.
+* @param options - The options object
+*
+* @returns The new date with the months added
+*
+* @example
+* // Add 5 months to 1 September 2014:
+* const result = addMonths(new Date(2014, 8, 1), 5)
+* //=> Sun Feb 01 2015 00:00:00
+*
+* // Add one month to 30 January 2023:
+* const result = addMonths(new Date(2023, 0, 30), 1)
+* //=> Tue Feb 28 2023 00:00:00
+*/
+function addMonths(date, amount, options) {
+	const _date = toDate(date, options?.in);
+	if (isNaN(amount)) return constructFrom(options?.in || date, NaN);
+	if (!amount) return _date;
+	const dayOfMonth = _date.getDate();
+	const endOfDesiredMonth = constructFrom(options?.in || date, _date.getTime());
+	endOfDesiredMonth.setMonth(_date.getMonth() + amount + 1, 0);
+	if (dayOfMonth >= endOfDesiredMonth.getDate()) return endOfDesiredMonth;
+	else {
+		_date.setFullYear(endOfDesiredMonth.getFullYear(), endOfDesiredMonth.getMonth(), dayOfMonth);
+		return _date;
+	}
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/_lib/defaultOptions.js
+var defaultOptions = {};
+function getDefaultOptions() {
+	return defaultOptions;
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/startOfWeek.js
+/**
+* The {@link startOfWeek} function options.
+*/
+/**
+* @name startOfWeek
+* @category Week Helpers
+* @summary Return the start of a week for the given date.
+*
+* @description
+* Return the start of a week for the given date.
+* The result will be in the local timezone.
+*
+* @typeParam DateType - The `Date` type, the function operates on. Gets inferred from passed arguments. Allows to use extensions like [`UTCDate`](https://github.com/date-fns/utc).
+* @typeParam ResultDate - The result `Date` type, it is the type returned from the context function if it is passed, or inferred from the arguments.
+*
+* @param date - The original date
+* @param options - An object with options
+*
+* @returns The start of a week
+*
+* @example
+* // The start of a week for 2 September 2014 11:55:00:
+* const result = startOfWeek(new Date(2014, 8, 2, 11, 55, 0))
+* //=> Sun Aug 31 2014 00:00:00
+*
+* @example
+* // If the week starts on Monday, the start of the week for 2 September 2014 11:55:00:
+* const result = startOfWeek(new Date(2014, 8, 2, 11, 55, 0), { weekStartsOn: 1 })
+* //=> Mon Sep 01 2014 00:00:00
+*/
+function startOfWeek(date, options) {
+	const defaultOptions = getDefaultOptions();
+	const weekStartsOn = options?.weekStartsOn ?? options?.locale?.options?.weekStartsOn ?? defaultOptions.weekStartsOn ?? defaultOptions.locale?.options?.weekStartsOn ?? 0;
+	const _date = toDate(date, options?.in);
+	const day = _date.getDay();
+	const diff = (day < weekStartsOn ? 7 : 0) + day - weekStartsOn;
+	_date.setDate(_date.getDate() - diff);
+	_date.setHours(0, 0, 0, 0);
+	return _date;
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/startOfISOWeek.js
+/**
+* The {@link startOfISOWeek} function options.
+*/
+/**
+* @name startOfISOWeek
+* @category ISO Week Helpers
+* @summary Return the start of an ISO week for the given date.
+*
+* @description
+* Return the start of an ISO week for the given date.
+* The result will be in the local timezone.
+*
+* ISO week-numbering year: http://en.wikipedia.org/wiki/ISO_week_date
+*
+* @typeParam DateType - The `Date` type, the function operates on. Gets inferred from passed arguments. Allows to use extensions like [`UTCDate`](https://github.com/date-fns/utc).
+* @typeParam ResultDate - The result `Date` type, it is the type returned from the context function if it is passed, or inferred from the arguments.
+*
+* @param date - The original date
+* @param options - An object with options
+*
+* @returns The start of an ISO week
+*
+* @example
+* // The start of an ISO week for 2 September 2014 11:55:00:
+* const result = startOfISOWeek(new Date(2014, 8, 2, 11, 55, 0))
+* //=> Mon Sep 01 2014 00:00:00
+*/
+function startOfISOWeek(date, options) {
+	return startOfWeek(date, {
+		...options,
+		weekStartsOn: 1
+	});
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/getISOWeekYear.js
+/**
+* The {@link getISOWeekYear} function options.
+*/
+/**
+* @name getISOWeekYear
+* @category ISO Week-Numbering Year Helpers
+* @summary Get the ISO week-numbering year of the given date.
+*
+* @description
+* Get the ISO week-numbering year of the given date,
+* which always starts 3 days before the year's first Thursday.
+*
+* ISO week-numbering year: http://en.wikipedia.org/wiki/ISO_week_date
+*
+* @param date - The given date
+*
+* @returns The ISO week-numbering year
+*
+* @example
+* // Which ISO-week numbering year is 2 January 2005?
+* const result = getISOWeekYear(new Date(2005, 0, 2))
+* //=> 2004
+*/
+function getISOWeekYear(date, options) {
+	const _date = toDate(date, options?.in);
+	const year = _date.getFullYear();
+	const fourthOfJanuaryOfNextYear = constructFrom(_date, 0);
+	fourthOfJanuaryOfNextYear.setFullYear(year + 1, 0, 4);
+	fourthOfJanuaryOfNextYear.setHours(0, 0, 0, 0);
+	const startOfNextYear = startOfISOWeek(fourthOfJanuaryOfNextYear);
+	const fourthOfJanuaryOfThisYear = constructFrom(_date, 0);
+	fourthOfJanuaryOfThisYear.setFullYear(year, 0, 4);
+	fourthOfJanuaryOfThisYear.setHours(0, 0, 0, 0);
+	const startOfThisYear = startOfISOWeek(fourthOfJanuaryOfThisYear);
+	if (_date.getTime() >= startOfNextYear.getTime()) return year + 1;
+	else if (_date.getTime() >= startOfThisYear.getTime()) return year;
+	else return year - 1;
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/_lib/getTimezoneOffsetInMilliseconds.js
+/**
+* Google Chrome as of 67.0.3396.87 introduced timezones with offset that includes seconds.
+* They usually appear for dates that denote time before the timezones were introduced
+* (e.g. for 'Europe/Prague' timezone the offset is GMT+00:57:44 before 1 October 1891
+* and GMT+01:00:00 after that date)
+*
+* Date#getTimezoneOffset returns the offset in minutes and would return 57 for the example above,
+* which would lead to incorrect calculations.
+*
+* This function returns the timezone offset in milliseconds that takes seconds in account.
+*/
+function getTimezoneOffsetInMilliseconds(date) {
+	const _date = toDate(date);
+	const utcDate = new Date(Date.UTC(_date.getFullYear(), _date.getMonth(), _date.getDate(), _date.getHours(), _date.getMinutes(), _date.getSeconds(), _date.getMilliseconds()));
+	utcDate.setUTCFullYear(_date.getFullYear());
+	return +date - +utcDate;
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/_lib/normalizeDates.js
+function normalizeDates(context, ...dates) {
+	const normalize = constructFrom.bind(null, context || dates.find((date) => typeof date === "object"));
+	return dates.map(normalize);
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/startOfDay.js
+/**
+* The {@link startOfDay} function options.
+*/
+/**
+* @name startOfDay
+* @category Day Helpers
+* @summary Return the start of a day for the given date.
+*
+* @description
+* Return the start of a day for the given date.
+* The result will be in the local timezone.
+*
+* @typeParam DateType - The `Date` type, the function operates on. Gets inferred from passed arguments. Allows to use extensions like [`UTCDate`](https://github.com/date-fns/utc).
+* @typeParam ResultDate - The result `Date` type, it is the type returned from the context function if it is passed, or inferred from the arguments.
+*
+* @param date - The original date
+* @param options - The options
+*
+* @returns The start of a day
+*
+* @example
+* // The start of a day for 2 September 2014 11:55:00:
+* const result = startOfDay(new Date(2014, 8, 2, 11, 55, 0))
+* //=> Tue Sep 02 2014 00:00:00
+*/
+function startOfDay(date, options) {
+	const _date = toDate(date, options?.in);
+	_date.setHours(0, 0, 0, 0);
+	return _date;
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/differenceInCalendarDays.js
+/**
+* The {@link differenceInCalendarDays} function options.
+*/
+/**
+* @name differenceInCalendarDays
+* @category Day Helpers
+* @summary Get the number of calendar days between the given dates.
+*
+* @description
+* Get the number of calendar days between the given dates. This means that the times are removed
+* from the dates and then the difference in days is calculated.
+*
+* @param laterDate - The later date
+* @param earlierDate - The earlier date
+* @param options - The options object
+*
+* @returns The number of calendar days
+*
+* @example
+* // How many calendar days are between
+* // 2 July 2011 23:00:00 and 2 July 2012 00:00:00?
+* const result = differenceInCalendarDays(
+*   new Date(2012, 6, 2, 0, 0),
+*   new Date(2011, 6, 2, 23, 0)
+* )
+* //=> 366
+* // How many calendar days are between
+* // 2 July 2011 23:59:00 and 3 July 2011 00:01:00?
+* const result = differenceInCalendarDays(
+*   new Date(2011, 6, 3, 0, 1),
+*   new Date(2011, 6, 2, 23, 59)
+* )
+* //=> 1
+*/
+function differenceInCalendarDays(laterDate, earlierDate, options) {
+	const [laterDate_, earlierDate_] = normalizeDates(options?.in, laterDate, earlierDate);
+	const laterStartOfDay = startOfDay(laterDate_);
+	const earlierStartOfDay = startOfDay(earlierDate_);
+	const laterTimestamp = +laterStartOfDay - getTimezoneOffsetInMilliseconds(laterStartOfDay);
+	const earlierTimestamp = +earlierStartOfDay - getTimezoneOffsetInMilliseconds(earlierStartOfDay);
+	return Math.round((laterTimestamp - earlierTimestamp) / millisecondsInDay);
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/startOfISOWeekYear.js
+/**
+* The {@link startOfISOWeekYear} function options.
+*/
+/**
+* @name startOfISOWeekYear
+* @category ISO Week-Numbering Year Helpers
+* @summary Return the start of an ISO week-numbering year for the given date.
+*
+* @description
+* Return the start of an ISO week-numbering year,
+* which always starts 3 days before the year's first Thursday.
+* The result will be in the local timezone.
+*
+* ISO week-numbering year: http://en.wikipedia.org/wiki/ISO_week_date
+*
+* @typeParam DateType - The `Date` type, the function operates on. Gets inferred from passed arguments. Allows to use extensions like [`UTCDate`](https://github.com/date-fns/utc).
+* @typeParam ResultDate - The result `Date` type, it is the type returned from the context function if it is passed, or inferred from the arguments.
+*
+* @param date - The original date
+* @param options - An object with options
+*
+* @returns The start of an ISO week-numbering year
+*
+* @example
+* // The start of an ISO week-numbering year for 2 July 2005:
+* const result = startOfISOWeekYear(new Date(2005, 6, 2))
+* //=> Mon Jan 03 2005 00:00:00
+*/
+function startOfISOWeekYear(date, options) {
+	const year = getISOWeekYear(date, options);
+	const fourthOfJanuary = constructFrom(options?.in || date, 0);
+	fourthOfJanuary.setFullYear(year, 0, 4);
+	fourthOfJanuary.setHours(0, 0, 0, 0);
+	return startOfISOWeek(fourthOfJanuary);
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/addWeeks.js
+/**
+* The {@link addWeeks} function options.
+*/
+/**
+* @name addWeeks
+* @category Week Helpers
+* @summary Add the specified number of weeks to the given date.
+*
+* @description
+* Add the specified number of weeks to the given date.
+*
+* @typeParam DateType - The `Date` type, the function operates on. Gets inferred from passed arguments. Allows to use extensions like [`UTCDate`](https://github.com/date-fns/utc).
+* @typeParam ResultDate - The result `Date` type, it is the type returned from the context function if it is passed, or inferred from the arguments.
+*
+* @param date - The date to be changed
+* @param amount - The amount of weeks to be added.
+* @param options - An object with options
+*
+* @returns The new date with the weeks added
+*
+* @example
+* // Add 4 weeks to 1 September 2014:
+* const result = addWeeks(new Date(2014, 8, 1), 4)
+* //=> Mon Sep 29 2014 00:00:00
+*/
+function addWeeks(date, amount, options) {
+	return addDays(date, amount * 7, options);
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/addYears.js
+/**
+* The {@link addYears} function options.
+*/
+/**
+* @name addYears
+* @category Year Helpers
+* @summary Add the specified number of years to the given date.
+*
+* @description
+* Add the specified number of years to the given date.
+*
+* @typeParam DateType - The `Date` type, the function operates on. Gets inferred from passed arguments. Allows to use extensions like [`UTCDate`](https://github.com/date-fns/utc).
+* @typeParam ResultDate - The result `Date` type.
+*
+* @param date - The date to be changed
+* @param amount - The amount of years to be added.
+* @param options - The options
+*
+* @returns The new date with the years added
+*
+* @example
+* // Add 5 years to 1 September 2014:
+* const result = addYears(new Date(2014, 8, 1), 5)
+* //=> Sun Sep 01 2019 00:00:00
+*/
+function addYears(date, amount, options) {
+	return addMonths(date, amount * 12, options);
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/max.js
+/**
+* The {@link max} function options.
+*/
+/**
+* @name max
+* @category Common Helpers
+* @summary Return the latest of the given dates.
+*
+* @description
+* Return the latest of the given dates.
+*
+* @typeParam DateType - The `Date` type, the function operates on. Gets inferred from passed arguments. Allows to use extensions like [`UTCDate`](https://github.com/date-fns/utc).
+* @typeParam ResultDate - The result `Date` type, it is the type returned from the context function if it is passed, or inferred from the arguments.
+*
+* @param dates - The dates to compare
+*
+* @returns The latest of the dates
+*
+* @example
+* // Which of these dates is the latest?
+* const result = max([
+*   new Date(1989, 6, 10),
+*   new Date(1987, 1, 11),
+*   new Date(1995, 6, 2),
+*   new Date(1990, 0, 1)
+* ])
+* //=> Sun Jul 02 1995 00:00:00
+*/
+function max(dates, options) {
+	let result;
+	let context = options?.in;
+	dates.forEach((date) => {
+		if (!context && typeof date === "object") context = constructFrom.bind(null, date);
+		const date_ = toDate(date, context);
+		if (!result || result < date_ || isNaN(+date_)) result = date_;
+	});
+	return constructFrom(context, result || NaN);
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/min.js
+/**
+* The {@link min} function options.
+*/
+/**
+* @name min
+* @category Common Helpers
+* @summary Returns the earliest of the given dates.
+*
+* @description
+* Returns the earliest of the given dates.
+*
+* @typeParam DateType - The `Date` type, the function operates on. Gets inferred from passed arguments. Allows to use extensions like [`UTCDate`](https://github.com/date-fns/utc).
+* @typeParam ResultDate - The result `Date` type, it is the type returned from the context function if it is passed, or inferred from the arguments.
+*
+* @param dates - The dates to compare
+*
+* @returns The earliest of the dates
+*
+* @example
+* // Which of these dates is the earliest?
+* const result = min([
+*   new Date(1989, 6, 10),
+*   new Date(1987, 1, 11),
+*   new Date(1995, 6, 2),
+*   new Date(1990, 0, 1)
+* ])
+* //=> Wed Feb 11 1987 00:00:00
+*/
+function min(dates, options) {
+	let result;
+	let context = options?.in;
+	dates.forEach((date) => {
+		if (!context && typeof date === "object") context = constructFrom.bind(null, date);
+		const date_ = toDate(date, context);
+		if (!result || result > date_ || isNaN(+date_)) result = date_;
+	});
+	return constructFrom(context, result || NaN);
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/isSameDay.js
+/**
+* The {@link isSameDay} function options.
+*/
+/**
+* @name isSameDay
+* @category Day Helpers
+* @summary Are the given dates in the same day (and year and month)?
+*
+* @description
+* Are the given dates in the same day (and year and month)?
+*
+* @param laterDate - The first date to check
+* @param earlierDate - The second date to check
+* @param options - An object with options
+*
+* @returns The dates are in the same day (and year and month)
+*
+* @example
+* // Are 4 September 06:00:00 and 4 September 18:00:00 in the same day?
+* const result = isSameDay(new Date(2014, 8, 4, 6, 0), new Date(2014, 8, 4, 18, 0))
+* //=> true
+*
+* @example
+* // Are 4 September and 4 October in the same day?
+* const result = isSameDay(new Date(2014, 8, 4), new Date(2014, 9, 4))
+* //=> false
+*
+* @example
+* // Are 4 September, 2014 and 4 September, 2015 in the same day?
+* const result = isSameDay(new Date(2014, 8, 4), new Date(2015, 8, 4))
+* //=> false
+*/
+function isSameDay(laterDate, earlierDate, options) {
+	const [dateLeft_, dateRight_] = normalizeDates(options?.in, laterDate, earlierDate);
+	return +startOfDay(dateLeft_) === +startOfDay(dateRight_);
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/isDate.js
+/**
+* @name isDate
+* @category Common Helpers
+* @summary Is the given value a date?
+*
+* @description
+* Returns true if the given value is an instance of Date. The function works for dates transferred across iframes.
+*
+* @param value - The value to check
+*
+* @returns True if the given value is a date
+*
+* @example
+* // For a valid date:
+* const result = isDate(new Date())
+* //=> true
+*
+* @example
+* // For an invalid date:
+* const result = isDate(new Date(NaN))
+* //=> true
+*
+* @example
+* // For some value:
+* const result = isDate('2014-02-31')
+* //=> false
+*
+* @example
+* // For an object:
+* const result = isDate({})
+* //=> false
+*/
+function isDate(value) {
+	return value instanceof Date || typeof value === "object" && Object.prototype.toString.call(value) === "[object Date]";
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/isValid.js
+/**
+* @name isValid
+* @category Common Helpers
+* @summary Is the given date valid?
+*
+* @description
+* Returns false if argument is Invalid Date and true otherwise.
+* Argument is converted to Date using `toDate`. See [toDate](https://date-fns.org/docs/toDate)
+* Invalid Date is a Date, whose time value is NaN.
+*
+* Time value of Date: http://es5.github.io/#x15.9.1.1
+*
+* @param date - The date to check
+*
+* @returns The date is valid
+*
+* @example
+* // For the valid date:
+* const result = isValid(new Date(2014, 1, 31))
+* //=> true
+*
+* @example
+* // For the value, convertible into a date:
+* const result = isValid(1393804800000)
+* //=> true
+*
+* @example
+* // For the invalid date:
+* const result = isValid(new Date(''))
+* //=> false
+*/
+function isValid(date) {
+	return !(!isDate(date) && typeof date !== "number" || isNaN(+toDate(date)));
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/differenceInCalendarMonths.js
+/**
+* The {@link differenceInCalendarMonths} function options.
+*/
+/**
+* @name differenceInCalendarMonths
+* @category Month Helpers
+* @summary Get the number of calendar months between the given dates.
+*
+* @description
+* Get the number of calendar months between the given dates.
+*
+* @param laterDate - The later date
+* @param earlierDate - The earlier date
+* @param options - An object with options
+*
+* @returns The number of calendar months
+*
+* @example
+* // How many calendar months are between 31 January 2014 and 1 September 2014?
+* const result = differenceInCalendarMonths(
+*   new Date(2014, 8, 1),
+*   new Date(2014, 0, 31)
+* )
+* //=> 8
+*/
+function differenceInCalendarMonths(laterDate, earlierDate, options) {
+	const [laterDate_, earlierDate_] = normalizeDates(options?.in, laterDate, earlierDate);
+	const yearsDiff = laterDate_.getFullYear() - earlierDate_.getFullYear();
+	const monthsDiff = laterDate_.getMonth() - earlierDate_.getMonth();
+	return yearsDiff * 12 + monthsDiff;
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/endOfDay.js
+/**
+* The {@link endOfDay} function options.
+*/
+/**
+* @name endOfDay
+* @category Day Helpers
+* @summary Return the end of a day for the given date.
+*
+* @description
+* Return the end of a day for the given date.
+* The result will be in the local timezone.
+*
+* @typeParam DateType - The `Date` type, the function operates on. Gets inferred from passed arguments. Allows to use extensions like [`UTCDate`](https://github.com/date-fns/utc).
+* @typeParam ResultDate - The result `Date` type, it is the type returned from the context function if it is passed, or inferred from the arguments.
+*
+* @param date - The original date
+* @param options - An object with options
+*
+* @returns The end of a day
+*
+* @example
+* // The end of a day for 2 September 2014 11:55:00:
+* const result = endOfDay(new Date(2014, 8, 2, 11, 55, 0))
+* //=> Tue Sep 02 2014 23:59:59.999
+*/
+function endOfDay(date, options) {
+	const _date = toDate(date, options?.in);
+	_date.setHours(23, 59, 59, 999);
+	return _date;
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/endOfMonth.js
+/**
+* The {@link endOfMonth} function options.
+*/
+/**
+* @name endOfMonth
+* @category Month Helpers
+* @summary Return the end of a month for the given date.
+*
+* @description
+* Return the end of a month for the given date.
+* The result will be in the local timezone.
+*
+* @typeParam DateType - The `Date` type, the function operates on. Gets inferred from passed arguments. Allows to use extensions like [`UTCDate`](https://github.com/date-fns/utc).
+* @typeParam ResultDate - The result `Date` type, it is the type returned from the context function if it is passed, or inferred from the arguments.
+*
+* @param date - The original date
+* @param options - An object with options
+*
+* @returns The end of a month
+*
+* @example
+* // The end of a month for 2 September 2014 11:55:00:
+* const result = endOfMonth(new Date(2014, 8, 2, 11, 55, 0))
+* //=> Tue Sep 30 2014 23:59:59.999
+*/
+function endOfMonth(date, options) {
+	const _date = toDate(date, options?.in);
+	const month = _date.getMonth();
+	_date.setFullYear(_date.getFullYear(), month + 1, 0);
+	_date.setHours(23, 59, 59, 999);
+	return _date;
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/_lib/normalizeInterval.js
+function normalizeInterval(context, interval) {
+	const [start, end] = normalizeDates(context, interval.start, interval.end);
+	return {
+		start,
+		end
+	};
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/eachMonthOfInterval.js
+/**
+* The {@link eachMonthOfInterval} function options.
+*/
+/**
+* The {@link eachMonthOfInterval} function result type. It resolves the proper data type.
+*/
+/**
+* @name eachMonthOfInterval
+* @category Interval Helpers
+* @summary Return the array of months within the specified time interval.
+*
+* @description
+* Return the array of months within the specified time interval.
+*
+* @typeParam IntervalType - Interval type.
+* @typeParam Options - Options type.
+*
+* @param interval - The interval.
+* @param options - An object with options.
+*
+* @returns The array with starts of months from the month of the interval start to the month of the interval end
+*
+* @example
+* // Each month between 6 February 2014 and 10 August 2014:
+* const result = eachMonthOfInterval({
+*   start: new Date(2014, 1, 6),
+*   end: new Date(2014, 7, 10)
+* })
+* //=> [
+* //   Sat Feb 01 2014 00:00:00,
+* //   Sat Mar 01 2014 00:00:00,
+* //   Tue Apr 01 2014 00:00:00,
+* //   Thu May 01 2014 00:00:00,
+* //   Sun Jun 01 2014 00:00:00,
+* //   Tue Jul 01 2014 00:00:00,
+* //   Fri Aug 01 2014 00:00:00
+* // ]
+*/
+function eachMonthOfInterval(interval, options) {
+	const { start, end } = normalizeInterval(options?.in, interval);
+	let reversed = +start > +end;
+	const endTime = reversed ? +start : +end;
+	const date = reversed ? end : start;
+	date.setHours(0, 0, 0, 0);
+	date.setDate(1);
+	let step = options?.step ?? 1;
+	if (!step) return [];
+	if (step < 0) {
+		step = -step;
+		reversed = !reversed;
+	}
+	const dates = [];
+	while (+date <= endTime) {
+		dates.push(constructFrom(start, date));
+		date.setMonth(date.getMonth() + step);
+	}
+	return reversed ? dates.reverse() : dates;
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/startOfMonth.js
+/**
+* The {@link startOfMonth} function options.
+*/
+/**
+* @name startOfMonth
+* @category Month Helpers
+* @summary Return the start of a month for the given date.
+*
+* @description
+* Return the start of a month for the given date. The result will be in the local timezone.
+*
+* @typeParam DateType - The `Date` type, the function operates on. Gets inferred from passed arguments.
+* Allows to use extensions like [`UTCDate`](https://github.com/date-fns/utc).
+* @typeParam ResultDate - The result `Date` type, it is the type returned from the context function if it is passed,
+* or inferred from the arguments.
+*
+* @param date - The original date
+* @param options - An object with options
+*
+* @returns The start of a month
+*
+* @example
+* // The start of a month for 2 September 2014 11:55:00:
+* const result = startOfMonth(new Date(2014, 8, 2, 11, 55, 0))
+* //=> Mon Sep 01 2014 00:00:00
+*/
+function startOfMonth(date, options) {
+	const _date = toDate(date, options?.in);
+	_date.setDate(1);
+	_date.setHours(0, 0, 0, 0);
+	return _date;
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/endOfYear.js
+/**
+* The {@link endOfYear} function options.
+*/
+/**
+* @name endOfYear
+* @category Year Helpers
+* @summary Return the end of a year for the given date.
+*
+* @description
+* Return the end of a year for the given date.
+* The result will be in the local timezone.
+*
+* @typeParam DateType - The `Date` type, the function operates on. Gets inferred from passed arguments. Allows to use extensions like [`UTCDate`](https://github.com/date-fns/utc).
+* @typeParam ResultDate - The result `Date` type, it is the type returned from the context function if it is passed, or inferred from the arguments.
+*
+* @param date - The original date
+* @param options - The options
+*
+* @returns The end of a year
+*
+* @example
+* // The end of a year for 2 September 2014 11:55:00:
+* const result = endOfYear(new Date(2014, 8, 2, 11, 55, 0))
+* //=> Wed Dec 31 2014 23:59:59.999
+*/
+function endOfYear(date, options) {
+	const _date = toDate(date, options?.in);
+	const year = _date.getFullYear();
+	_date.setFullYear(year + 1, 0, 0);
+	_date.setHours(23, 59, 59, 999);
+	return _date;
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/startOfYear.js
+/**
+* The {@link startOfYear} function options.
+*/
+/**
+* @name startOfYear
+* @category Year Helpers
+* @summary Return the start of a year for the given date.
+*
+* @description
+* Return the start of a year for the given date.
+* The result will be in the local timezone.
+*
+* @typeParam DateType - The `Date` type, the function operates on. Gets inferred from passed arguments. Allows to use extensions like [`UTCDate`](https://github.com/date-fns/utc).
+* @typeParam ResultDate - The result `Date` type, it is the type returned from the context function if it is passed, or inferred from the arguments.
+*
+* @param date - The original date
+* @param options - The options
+*
+* @returns The start of a year
+*
+* @example
+* // The start of a year for 2 September 2014 11:55:00:
+* const result = startOfYear(new Date(2014, 8, 2, 11, 55, 00))
+* //=> Wed Jan 01 2014 00:00:00
+*/
+function startOfYear(date, options) {
+	const date_ = toDate(date, options?.in);
+	date_.setFullYear(date_.getFullYear(), 0, 1);
+	date_.setHours(0, 0, 0, 0);
+	return date_;
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/eachYearOfInterval.js
+/**
+* The {@link eachYearOfInterval} function options.
+*/
+/**
+* The {@link eachYearOfInterval} function result type. It resolves the proper data type.
+* It uses the first argument date object type, starting from the date argument,
+* then the start interval date, and finally the end interval date. If
+* a context function is passed, it uses the context function return type.
+*/
+/**
+* @name eachYearOfInterval
+* @category Interval Helpers
+* @summary Return the array of yearly timestamps within the specified time interval.
+*
+* @description
+* Return the array of yearly timestamps within the specified time interval.
+*
+* @typeParam IntervalType - Interval type.
+* @typeParam Options - Options type.
+*
+* @param interval - The interval.
+* @param options - An object with options.
+*
+* @returns The array with starts of yearly timestamps from the month of the interval start to the month of the interval end
+*
+* @example
+* // Each year between 6 February 2014 and 10 August 2017:
+* const result = eachYearOfInterval({
+*   start: new Date(2014, 1, 6),
+*   end: new Date(2017, 7, 10)
+* })
+* //=> [
+* //   Wed Jan 01 2014 00:00:00,
+* //   Thu Jan 01 2015 00:00:00,
+* //   Fri Jan 01 2016 00:00:00,
+* //   Sun Jan 01 2017 00:00:00
+* // ]
+*/
+function eachYearOfInterval(interval, options) {
+	const { start, end } = normalizeInterval(options?.in, interval);
+	let reversed = +start > +end;
+	const endTime = reversed ? +start : +end;
+	const date = reversed ? end : start;
+	date.setHours(0, 0, 0, 0);
+	date.setMonth(0, 1);
+	let step = options?.step ?? 1;
+	if (!step) return [];
+	if (step < 0) {
+		step = -step;
+		reversed = !reversed;
+	}
+	const dates = [];
+	while (+date <= endTime) {
+		dates.push(constructFrom(start, date));
+		date.setFullYear(date.getFullYear() + step);
+	}
+	return reversed ? dates.reverse() : dates;
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/endOfWeek.js
+/**
+* The {@link endOfWeek} function options.
+*/
+/**
+* @name endOfWeek
+* @category Week Helpers
+* @summary Return the end of a week for the given date.
+*
+* @description
+* Return the end of a week for the given date.
+* The result will be in the local timezone.
+*
+* @typeParam DateType - The `Date` type, the function operates on. Gets inferred from passed arguments. Allows to use extensions like [`UTCDate`](https://github.com/date-fns/utc).
+* @typeParam ResultDate - The result `Date` type, it is the type returned from the context function if it is passed, or inferred from the arguments.
+*
+* @param date - The original date
+* @param options - An object with options
+*
+* @returns The end of a week
+*
+* @example
+* // The end of a week for 2 September 2014 11:55:00:
+* const result = endOfWeek(new Date(2014, 8, 2, 11, 55, 0))
+* //=> Sat Sep 06 2014 23:59:59.999
+*
+* @example
+* // If the week starts on Monday, the end of the week for 2 September 2014 11:55:00:
+* const result = endOfWeek(new Date(2014, 8, 2, 11, 55, 0), { weekStartsOn: 1 })
+* //=> Sun Sep 07 2014 23:59:59.999
+*/
+function endOfWeek(date, options) {
+	const defaultOptions = getDefaultOptions();
+	const weekStartsOn = options?.weekStartsOn ?? options?.locale?.options?.weekStartsOn ?? defaultOptions.weekStartsOn ?? defaultOptions.locale?.options?.weekStartsOn ?? 0;
+	const _date = toDate(date, options?.in);
+	const day = _date.getDay();
+	const diff = (day < weekStartsOn ? -7 : 0) + 6 - (day - weekStartsOn);
+	_date.setDate(_date.getDate() + diff);
+	_date.setHours(23, 59, 59, 999);
+	return _date;
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/endOfISOWeek.js
+/**
+* The {@link endOfISOWeek} function options.
+*/
+/**
+* @name endOfISOWeek
+* @category ISO Week Helpers
+* @summary Return the end of an ISO week for the given date.
+*
+* @description
+* Return the end of an ISO week for the given date.
+* The result will be in the local timezone.
+*
+* ISO week-numbering year: http://en.wikipedia.org/wiki/ISO_week_date
+*
+* @typeParam DateType - The `Date` type, the function operates on. Gets inferred from passed arguments. Allows to use extensions like [`UTCDate`](https://github.com/date-fns/utc).
+* @typeParam ResultDate - The result `Date` type, it is the type returned from the context function if it is passed, or inferred from the arguments.
+*
+* @param date - The original date
+* @param options - An object with options
+*
+* @returns The end of an ISO week
+*
+* @example
+* // The end of an ISO week for 2 September 2014 11:55:00:
+* const result = endOfISOWeek(new Date(2014, 8, 2, 11, 55, 0))
+* //=> Sun Sep 07 2014 23:59:59.999
+*/
+function endOfISOWeek(date, options) {
+	return endOfWeek(date, {
+		...options,
+		weekStartsOn: 1
+	});
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/locale/en-US/_lib/formatDistance.js
+var formatDistanceLocale$1 = {
+	lessThanXSeconds: {
+		one: "less than a second",
+		other: "less than {{count}} seconds"
+	},
+	xSeconds: {
+		one: "1 second",
+		other: "{{count}} seconds"
+	},
+	halfAMinute: "half a minute",
+	lessThanXMinutes: {
+		one: "less than a minute",
+		other: "less than {{count}} minutes"
+	},
+	xMinutes: {
+		one: "1 minute",
+		other: "{{count}} minutes"
+	},
+	aboutXHours: {
+		one: "about 1 hour",
+		other: "about {{count}} hours"
+	},
+	xHours: {
+		one: "1 hour",
+		other: "{{count}} hours"
+	},
+	xDays: {
+		one: "1 day",
+		other: "{{count}} days"
+	},
+	aboutXWeeks: {
+		one: "about 1 week",
+		other: "about {{count}} weeks"
+	},
+	xWeeks: {
+		one: "1 week",
+		other: "{{count}} weeks"
+	},
+	aboutXMonths: {
+		one: "about 1 month",
+		other: "about {{count}} months"
+	},
+	xMonths: {
+		one: "1 month",
+		other: "{{count}} months"
+	},
+	aboutXYears: {
+		one: "about 1 year",
+		other: "about {{count}} years"
+	},
+	xYears: {
+		one: "1 year",
+		other: "{{count}} years"
+	},
+	overXYears: {
+		one: "over 1 year",
+		other: "over {{count}} years"
+	},
+	almostXYears: {
+		one: "almost 1 year",
+		other: "almost {{count}} years"
+	}
+};
+var formatDistance$1 = (token, count, options) => {
+	let result;
+	const tokenValue = formatDistanceLocale$1[token];
+	if (typeof tokenValue === "string") result = tokenValue;
+	else if (count === 1) result = tokenValue.one;
+	else result = tokenValue.other.replace("{{count}}", count.toString());
+	if (options?.addSuffix) if (options.comparison && options.comparison > 0) return "in " + result;
+	else return result + " ago";
+	return result;
+};
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/locale/_lib/buildFormatLongFn.js
+function buildFormatLongFn(args) {
+	return (options = {}) => {
+		const width = options.width ? String(options.width) : args.defaultWidth;
+		return args.formats[width] || args.formats[args.defaultWidth];
+	};
+}
+var formatLong$1 = {
+	date: buildFormatLongFn({
+		formats: {
+			full: "EEEE, MMMM do, y",
+			long: "MMMM do, y",
+			medium: "MMM d, y",
+			short: "MM/dd/yyyy"
+		},
+		defaultWidth: "full"
+	}),
+	time: buildFormatLongFn({
+		formats: {
+			full: "h:mm:ss a zzzz",
+			long: "h:mm:ss a z",
+			medium: "h:mm:ss a",
+			short: "h:mm a"
+		},
+		defaultWidth: "full"
+	}),
+	dateTime: buildFormatLongFn({
+		formats: {
+			full: "{{date}} 'at' {{time}}",
+			long: "{{date}} 'at' {{time}}",
+			medium: "{{date}}, {{time}}",
+			short: "{{date}}, {{time}}"
+		},
+		defaultWidth: "full"
+	})
+};
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/locale/en-US/_lib/formatRelative.js
+var formatRelativeLocale$1 = {
+	lastWeek: "'last' eeee 'at' p",
+	yesterday: "'yesterday at' p",
+	today: "'today at' p",
+	tomorrow: "'tomorrow at' p",
+	nextWeek: "eeee 'at' p",
+	other: "P"
+};
+var formatRelative$1 = (token, _date, _baseDate, _options) => formatRelativeLocale$1[token];
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/locale/_lib/buildLocalizeFn.js
+/**
+* The localize function argument callback which allows to convert raw value to
+* the actual type.
+*
+* @param value - The value to convert
+*
+* @returns The converted value
+*/
+/**
+* The map of localized values for each width.
+*/
+/**
+* The index type of the locale unit value. It types conversion of units of
+* values that don't start at 0 (i.e. quarters).
+*/
+/**
+* Converts the unit value to the tuple of values.
+*/
+/**
+* The tuple of localized era values. The first element represents BC,
+* the second element represents AD.
+*/
+/**
+* The tuple of localized quarter values. The first element represents Q1.
+*/
+/**
+* The tuple of localized day values. The first element represents Sunday.
+*/
+/**
+* The tuple of localized month values. The first element represents January.
+*/
+function buildLocalizeFn(args) {
+	return (value, options) => {
+		const context = options?.context ? String(options.context) : "standalone";
+		let valuesArray;
+		if (context === "formatting" && args.formattingValues) {
+			const defaultWidth = args.defaultFormattingWidth || args.defaultWidth;
+			const width = options?.width ? String(options.width) : defaultWidth;
+			valuesArray = args.formattingValues[width] || args.formattingValues[defaultWidth];
+		} else {
+			const defaultWidth = args.defaultWidth;
+			const width = options?.width ? String(options.width) : args.defaultWidth;
+			valuesArray = args.values[width] || args.values[defaultWidth];
+		}
+		const index = args.argumentCallback ? args.argumentCallback(value) : value;
+		return valuesArray[index];
+	};
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/locale/en-US/_lib/localize.js
+var eraValues$1 = {
+	narrow: ["B", "A"],
+	abbreviated: ["BC", "AD"],
+	wide: ["Before Christ", "Anno Domini"]
+};
+var quarterValues$1 = {
+	narrow: [
+		"1",
+		"2",
+		"3",
+		"4"
+	],
+	abbreviated: [
+		"Q1",
+		"Q2",
+		"Q3",
+		"Q4"
+	],
+	wide: [
+		"1st quarter",
+		"2nd quarter",
+		"3rd quarter",
+		"4th quarter"
+	]
+};
+var monthValues$1 = {
+	narrow: [
+		"J",
+		"F",
+		"M",
+		"A",
+		"M",
+		"J",
+		"J",
+		"A",
+		"S",
+		"O",
+		"N",
+		"D"
+	],
+	abbreviated: [
+		"Jan",
+		"Feb",
+		"Mar",
+		"Apr",
+		"May",
+		"Jun",
+		"Jul",
+		"Aug",
+		"Sep",
+		"Oct",
+		"Nov",
+		"Dec"
+	],
+	wide: [
+		"January",
+		"February",
+		"March",
+		"April",
+		"May",
+		"June",
+		"July",
+		"August",
+		"September",
+		"October",
+		"November",
+		"December"
+	]
+};
+var dayValues$1 = {
+	narrow: [
+		"S",
+		"M",
+		"T",
+		"W",
+		"T",
+		"F",
+		"S"
+	],
+	short: [
+		"Su",
+		"Mo",
+		"Tu",
+		"We",
+		"Th",
+		"Fr",
+		"Sa"
+	],
+	abbreviated: [
+		"Sun",
+		"Mon",
+		"Tue",
+		"Wed",
+		"Thu",
+		"Fri",
+		"Sat"
+	],
+	wide: [
+		"Sunday",
+		"Monday",
+		"Tuesday",
+		"Wednesday",
+		"Thursday",
+		"Friday",
+		"Saturday"
+	]
+};
+var dayPeriodValues$1 = {
+	narrow: {
+		am: "a",
+		pm: "p",
+		midnight: "mi",
+		noon: "n",
+		morning: "morning",
+		afternoon: "afternoon",
+		evening: "evening",
+		night: "night"
+	},
+	abbreviated: {
+		am: "AM",
+		pm: "PM",
+		midnight: "midnight",
+		noon: "noon",
+		morning: "morning",
+		afternoon: "afternoon",
+		evening: "evening",
+		night: "night"
+	},
+	wide: {
+		am: "a.m.",
+		pm: "p.m.",
+		midnight: "midnight",
+		noon: "noon",
+		morning: "morning",
+		afternoon: "afternoon",
+		evening: "evening",
+		night: "night"
+	}
+};
+var formattingDayPeriodValues$1 = {
+	narrow: {
+		am: "a",
+		pm: "p",
+		midnight: "mi",
+		noon: "n",
+		morning: "in the morning",
+		afternoon: "in the afternoon",
+		evening: "in the evening",
+		night: "at night"
+	},
+	abbreviated: {
+		am: "AM",
+		pm: "PM",
+		midnight: "midnight",
+		noon: "noon",
+		morning: "in the morning",
+		afternoon: "in the afternoon",
+		evening: "in the evening",
+		night: "at night"
+	},
+	wide: {
+		am: "a.m.",
+		pm: "p.m.",
+		midnight: "midnight",
+		noon: "noon",
+		morning: "in the morning",
+		afternoon: "in the afternoon",
+		evening: "in the evening",
+		night: "at night"
+	}
+};
+var ordinalNumber$1 = (dirtyNumber, _options) => {
+	const number = Number(dirtyNumber);
+	const rem100 = number % 100;
+	if (rem100 > 20 || rem100 < 10) switch (rem100 % 10) {
+		case 1: return number + "st";
+		case 2: return number + "nd";
+		case 3: return number + "rd";
+	}
+	return number + "th";
+};
+var localize$1 = {
+	ordinalNumber: ordinalNumber$1,
+	era: buildLocalizeFn({
+		values: eraValues$1,
+		defaultWidth: "wide"
+	}),
+	quarter: buildLocalizeFn({
+		values: quarterValues$1,
+		defaultWidth: "wide",
+		argumentCallback: (quarter) => quarter - 1
+	}),
+	month: buildLocalizeFn({
+		values: monthValues$1,
+		defaultWidth: "wide"
+	}),
+	day: buildLocalizeFn({
+		values: dayValues$1,
+		defaultWidth: "wide"
+	}),
+	dayPeriod: buildLocalizeFn({
+		values: dayPeriodValues$1,
+		defaultWidth: "wide",
+		formattingValues: formattingDayPeriodValues$1,
+		defaultFormattingWidth: "wide"
+	})
+};
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/locale/_lib/buildMatchFn.js
+function buildMatchFn(args) {
+	return (string, options = {}) => {
+		const width = options.width;
+		const matchPattern = width && args.matchPatterns[width] || args.matchPatterns[args.defaultMatchWidth];
+		const matchResult = string.match(matchPattern);
+		if (!matchResult) return null;
+		const matchedString = matchResult[0];
+		const parsePatterns = width && args.parsePatterns[width] || args.parsePatterns[args.defaultParseWidth];
+		const key = Array.isArray(parsePatterns) ? findIndex(parsePatterns, (pattern) => pattern.test(matchedString)) : findKey(parsePatterns, (pattern) => pattern.test(matchedString));
+		let value;
+		value = args.valueCallback ? args.valueCallback(key) : key;
+		value = options.valueCallback ? options.valueCallback(value) : value;
+		const rest = string.slice(matchedString.length);
+		return {
+			value,
+			rest
+		};
+	};
+}
+function findKey(object, predicate) {
+	for (const key in object) if (Object.prototype.hasOwnProperty.call(object, key) && predicate(object[key])) return key;
+}
+function findIndex(array, predicate) {
+	for (let key = 0; key < array.length; key++) if (predicate(array[key])) return key;
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/locale/_lib/buildMatchPatternFn.js
+function buildMatchPatternFn(args) {
+	return (string, options = {}) => {
+		const matchResult = string.match(args.matchPattern);
+		if (!matchResult) return null;
+		const matchedString = matchResult[0];
+		const parseResult = string.match(args.parsePattern);
+		if (!parseResult) return null;
+		let value = args.valueCallback ? args.valueCallback(parseResult[0]) : parseResult[0];
+		value = options.valueCallback ? options.valueCallback(value) : value;
+		const rest = string.slice(matchedString.length);
+		return {
+			value,
+			rest
+		};
+	};
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/locale/en-US.js
+/**
+* @category Locales
+* @summary English locale (United States).
+* @language English
+* @iso-639-2 eng
+* @author Sasha Koss [@kossnocorp](https://github.com/kossnocorp)
+* @author Lesha Koss [@leshakoss](https://github.com/leshakoss)
+*/
+var enUS$1 = {
+	code: "en-US",
+	formatDistance: formatDistance$1,
+	formatLong: formatLong$1,
+	formatRelative: formatRelative$1,
+	localize: localize$1,
+	match: {
+		ordinalNumber: buildMatchPatternFn({
+			matchPattern: /^(\d+)(th|st|nd|rd)?/i,
+			parsePattern: /\d+/i,
+			valueCallback: (value) => parseInt(value, 10)
+		}),
+		era: buildMatchFn({
+			matchPatterns: {
+				narrow: /^(b|a)/i,
+				abbreviated: /^(b\.?\s?c\.?|b\.?\s?c\.?\s?e\.?|a\.?\s?d\.?|c\.?\s?e\.?)/i,
+				wide: /^(before christ|before common era|anno domini|common era)/i
+			},
+			defaultMatchWidth: "wide",
+			parsePatterns: { any: [/^b/i, /^(a|c)/i] },
+			defaultParseWidth: "any"
+		}),
+		quarter: buildMatchFn({
+			matchPatterns: {
+				narrow: /^[1234]/i,
+				abbreviated: /^q[1234]/i,
+				wide: /^[1234](th|st|nd|rd)? quarter/i
+			},
+			defaultMatchWidth: "wide",
+			parsePatterns: { any: [
+				/1/i,
+				/2/i,
+				/3/i,
+				/4/i
+			] },
+			defaultParseWidth: "any",
+			valueCallback: (index) => index + 1
+		}),
+		month: buildMatchFn({
+			matchPatterns: {
+				narrow: /^[jfmasond]/i,
+				abbreviated: /^(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)/i,
+				wide: /^(january|february|march|april|may|june|july|august|september|october|november|december)/i
+			},
+			defaultMatchWidth: "wide",
+			parsePatterns: {
+				narrow: [
+					/^j/i,
+					/^f/i,
+					/^m/i,
+					/^a/i,
+					/^m/i,
+					/^j/i,
+					/^j/i,
+					/^a/i,
+					/^s/i,
+					/^o/i,
+					/^n/i,
+					/^d/i
+				],
+				any: [
+					/^ja/i,
+					/^f/i,
+					/^mar/i,
+					/^ap/i,
+					/^may/i,
+					/^jun/i,
+					/^jul/i,
+					/^au/i,
+					/^s/i,
+					/^o/i,
+					/^n/i,
+					/^d/i
+				]
+			},
+			defaultParseWidth: "any"
+		}),
+		day: buildMatchFn({
+			matchPatterns: {
+				narrow: /^[smtwf]/i,
+				short: /^(su|mo|tu|we|th|fr|sa)/i,
+				abbreviated: /^(sun|mon|tue|wed|thu|fri|sat)/i,
+				wide: /^(sunday|monday|tuesday|wednesday|thursday|friday|saturday)/i
+			},
+			defaultMatchWidth: "wide",
+			parsePatterns: {
+				narrow: [
+					/^s/i,
+					/^m/i,
+					/^t/i,
+					/^w/i,
+					/^t/i,
+					/^f/i,
+					/^s/i
+				],
+				any: [
+					/^su/i,
+					/^m/i,
+					/^tu/i,
+					/^w/i,
+					/^th/i,
+					/^f/i,
+					/^sa/i
+				]
+			},
+			defaultParseWidth: "any"
+		}),
+		dayPeriod: buildMatchFn({
+			matchPatterns: {
+				narrow: /^(a|p|mi|n|(in the|at) (morning|afternoon|evening|night))/i,
+				any: /^([ap]\.?\s?m\.?|midnight|noon|(in the|at) (morning|afternoon|evening|night))/i
+			},
+			defaultMatchWidth: "any",
+			parsePatterns: { any: {
+				am: /^a/i,
+				pm: /^p/i,
+				midnight: /^mi/i,
+				noon: /^no/i,
+				morning: /morning/i,
+				afternoon: /afternoon/i,
+				evening: /evening/i,
+				night: /night/i
+			} },
+			defaultParseWidth: "any"
+		})
+	},
+	options: {
+		weekStartsOn: 0,
+		firstWeekContainsDate: 1
+	}
+};
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/getDayOfYear.js
+/**
+* The {@link getDayOfYear} function options.
+*/
+/**
+* @name getDayOfYear
+* @category Day Helpers
+* @summary Get the day of the year of the given date.
+*
+* @description
+* Get the day of the year of the given date.
+*
+* @param date - The given date
+* @param options - The options
+*
+* @returns The day of year
+*
+* @example
+* // Which day of the year is 2 July 2014?
+* const result = getDayOfYear(new Date(2014, 6, 2))
+* //=> 183
+*/
+function getDayOfYear(date, options) {
+	const _date = toDate(date, options?.in);
+	return differenceInCalendarDays(_date, startOfYear(_date)) + 1;
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/getISOWeek.js
+/**
+* The {@link getISOWeek} function options.
+*/
+/**
+* @name getISOWeek
+* @category ISO Week Helpers
+* @summary Get the ISO week of the given date.
+*
+* @description
+* Get the ISO week of the given date.
+*
+* ISO week-numbering year: http://en.wikipedia.org/wiki/ISO_week_date
+*
+* @param date - The given date
+* @param options - The options
+*
+* @returns The ISO week
+*
+* @example
+* // Which week of the ISO-week numbering year is 2 January 2005?
+* const result = getISOWeek(new Date(2005, 0, 2))
+* //=> 53
+*/
+function getISOWeek(date, options) {
+	const _date = toDate(date, options?.in);
+	const diff = +startOfISOWeek(_date) - +startOfISOWeekYear(_date);
+	return Math.round(diff / millisecondsInWeek) + 1;
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/getWeekYear.js
+/**
+* The {@link getWeekYear} function options.
+*/
+/**
+* @name getWeekYear
+* @category Week-Numbering Year Helpers
+* @summary Get the local week-numbering year of the given date.
+*
+* @description
+* Get the local week-numbering year of the given date.
+* The exact calculation depends on the values of
+* `options.weekStartsOn` (which is the index of the first day of the week)
+* and `options.firstWeekContainsDate` (which is the day of January, which is always in
+* the first week of the week-numbering year)
+*
+* Week numbering: https://en.wikipedia.org/wiki/Week#The_ISO_week_date_system
+*
+* @param date - The given date
+* @param options - An object with options.
+*
+* @returns The local week-numbering year
+*
+* @example
+* // Which week numbering year is 26 December 2004 with the default settings?
+* const result = getWeekYear(new Date(2004, 11, 26))
+* //=> 2005
+*
+* @example
+* // Which week numbering year is 26 December 2004 if week starts on Saturday?
+* const result = getWeekYear(new Date(2004, 11, 26), { weekStartsOn: 6 })
+* //=> 2004
+*
+* @example
+* // Which week numbering year is 26 December 2004 if the first week contains 4 January?
+* const result = getWeekYear(new Date(2004, 11, 26), { firstWeekContainsDate: 4 })
+* //=> 2004
+*/
+function getWeekYear(date, options) {
+	const _date = toDate(date, options?.in);
+	const year = _date.getFullYear();
+	const defaultOptions = getDefaultOptions();
+	const firstWeekContainsDate = options?.firstWeekContainsDate ?? options?.locale?.options?.firstWeekContainsDate ?? defaultOptions.firstWeekContainsDate ?? defaultOptions.locale?.options?.firstWeekContainsDate ?? 1;
+	const firstWeekOfNextYear = constructFrom(options?.in || date, 0);
+	firstWeekOfNextYear.setFullYear(year + 1, 0, firstWeekContainsDate);
+	firstWeekOfNextYear.setHours(0, 0, 0, 0);
+	const startOfNextYear = startOfWeek(firstWeekOfNextYear, options);
+	const firstWeekOfThisYear = constructFrom(options?.in || date, 0);
+	firstWeekOfThisYear.setFullYear(year, 0, firstWeekContainsDate);
+	firstWeekOfThisYear.setHours(0, 0, 0, 0);
+	const startOfThisYear = startOfWeek(firstWeekOfThisYear, options);
+	if (+_date >= +startOfNextYear) return year + 1;
+	else if (+_date >= +startOfThisYear) return year;
+	else return year - 1;
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/startOfWeekYear.js
+/**
+* The {@link startOfWeekYear} function options.
+*/
+/**
+* @name startOfWeekYear
+* @category Week-Numbering Year Helpers
+* @summary Return the start of a local week-numbering year for the given date.
+*
+* @description
+* Return the start of a local week-numbering year.
+* The exact calculation depends on the values of
+* `options.weekStartsOn` (which is the index of the first day of the week)
+* and `options.firstWeekContainsDate` (which is the day of January, which is always in
+* the first week of the week-numbering year)
+*
+* Week numbering: https://en.wikipedia.org/wiki/Week#The_ISO_week_date_system
+*
+* @typeParam DateType - The `Date` type, the function operates on. Gets inferred from passed arguments. Allows to use extensions like [`UTCDate`](https://github.com/date-fns/utc).
+* @typeParam ResultDate - The result `Date` type.
+*
+* @param date - The original date
+* @param options - An object with options
+*
+* @returns The start of a week-numbering year
+*
+* @example
+* // The start of an a week-numbering year for 2 July 2005 with default settings:
+* const result = startOfWeekYear(new Date(2005, 6, 2))
+* //=> Sun Dec 26 2004 00:00:00
+*
+* @example
+* // The start of a week-numbering year for 2 July 2005
+* // if Monday is the first day of week
+* // and 4 January is always in the first week of the year:
+* const result = startOfWeekYear(new Date(2005, 6, 2), {
+*   weekStartsOn: 1,
+*   firstWeekContainsDate: 4
+* })
+* //=> Mon Jan 03 2005 00:00:00
+*/
+function startOfWeekYear(date, options) {
+	const defaultOptions = getDefaultOptions();
+	const firstWeekContainsDate = options?.firstWeekContainsDate ?? options?.locale?.options?.firstWeekContainsDate ?? defaultOptions.firstWeekContainsDate ?? defaultOptions.locale?.options?.firstWeekContainsDate ?? 1;
+	const year = getWeekYear(date, options);
+	const firstWeek = constructFrom(options?.in || date, 0);
+	firstWeek.setFullYear(year, 0, firstWeekContainsDate);
+	firstWeek.setHours(0, 0, 0, 0);
+	return startOfWeek(firstWeek, options);
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/getWeek.js
+/**
+* The {@link getWeek} function options.
+*/
+/**
+* @name getWeek
+* @category Week Helpers
+* @summary Get the local week index of the given date.
+*
+* @description
+* Get the local week index of the given date.
+* The exact calculation depends on the values of
+* `options.weekStartsOn` (which is the index of the first day of the week)
+* and `options.firstWeekContainsDate` (which is the day of January, which is always in
+* the first week of the week-numbering year)
+*
+* Week numbering: https://en.wikipedia.org/wiki/Week#The_ISO_week_date_system
+*
+* @param date - The given date
+* @param options - An object with options
+*
+* @returns The week
+*
+* @example
+* // Which week of the local week numbering year is 2 January 2005 with default options?
+* const result = getWeek(new Date(2005, 0, 2))
+* //=> 2
+*
+* @example
+* // Which week of the local week numbering year is 2 January 2005,
+* // if Monday is the first day of the week,
+* // and the first week of the year always contains 4 January?
+* const result = getWeek(new Date(2005, 0, 2), {
+*   weekStartsOn: 1,
+*   firstWeekContainsDate: 4
+* })
+* //=> 53
+*/
+function getWeek(date, options) {
+	const _date = toDate(date, options?.in);
+	const diff = +startOfWeek(_date, options) - +startOfWeekYear(_date, options);
+	return Math.round(diff / millisecondsInWeek) + 1;
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/_lib/addLeadingZeros.js
+function addLeadingZeros(number, targetLength) {
+	return (number < 0 ? "-" : "") + Math.abs(number).toString().padStart(targetLength, "0");
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/_lib/format/lightFormatters.js
+var lightFormatters = {
+	y(date, token) {
+		const signedYear = date.getFullYear();
+		const year = signedYear > 0 ? signedYear : 1 - signedYear;
+		return addLeadingZeros(token === "yy" ? year % 100 : year, token.length);
+	},
+	M(date, token) {
+		const month = date.getMonth();
+		return token === "M" ? String(month + 1) : addLeadingZeros(month + 1, 2);
+	},
+	d(date, token) {
+		return addLeadingZeros(date.getDate(), token.length);
+	},
+	a(date, token) {
+		const dayPeriodEnumValue = date.getHours() / 12 >= 1 ? "pm" : "am";
+		switch (token) {
+			case "a":
+			case "aa": return dayPeriodEnumValue.toUpperCase();
+			case "aaa": return dayPeriodEnumValue;
+			case "aaaaa": return dayPeriodEnumValue[0];
+			default: return dayPeriodEnumValue === "am" ? "a.m." : "p.m.";
+		}
+	},
+	h(date, token) {
+		return addLeadingZeros(date.getHours() % 12 || 12, token.length);
+	},
+	H(date, token) {
+		return addLeadingZeros(date.getHours(), token.length);
+	},
+	m(date, token) {
+		return addLeadingZeros(date.getMinutes(), token.length);
+	},
+	s(date, token) {
+		return addLeadingZeros(date.getSeconds(), token.length);
+	},
+	S(date, token) {
+		const numberOfDigits = token.length;
+		const milliseconds = date.getMilliseconds();
+		return addLeadingZeros(Math.trunc(milliseconds * Math.pow(10, numberOfDigits - 3)), token.length);
+	}
+};
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/_lib/format/formatters.js
+var dayPeriodEnum = {
+	am: "am",
+	pm: "pm",
+	midnight: "midnight",
+	noon: "noon",
+	morning: "morning",
+	afternoon: "afternoon",
+	evening: "evening",
+	night: "night"
+};
+var formatters = {
+	G: function(date, token, localize) {
+		const era = date.getFullYear() > 0 ? 1 : 0;
+		switch (token) {
+			case "G":
+			case "GG":
+			case "GGG": return localize.era(era, { width: "abbreviated" });
+			case "GGGGG": return localize.era(era, { width: "narrow" });
+			default: return localize.era(era, { width: "wide" });
+		}
+	},
+	y: function(date, token, localize) {
+		if (token === "yo") {
+			const signedYear = date.getFullYear();
+			const year = signedYear > 0 ? signedYear : 1 - signedYear;
+			return localize.ordinalNumber(year, { unit: "year" });
+		}
+		return lightFormatters.y(date, token);
+	},
+	Y: function(date, token, localize, options) {
+		const signedWeekYear = getWeekYear(date, options);
+		const weekYear = signedWeekYear > 0 ? signedWeekYear : 1 - signedWeekYear;
+		if (token === "YY") return addLeadingZeros(weekYear % 100, 2);
+		if (token === "Yo") return localize.ordinalNumber(weekYear, { unit: "year" });
+		return addLeadingZeros(weekYear, token.length);
+	},
+	R: function(date, token) {
+		return addLeadingZeros(getISOWeekYear(date), token.length);
+	},
+	u: function(date, token) {
+		return addLeadingZeros(date.getFullYear(), token.length);
+	},
+	Q: function(date, token, localize) {
+		const quarter = Math.ceil((date.getMonth() + 1) / 3);
+		switch (token) {
+			case "Q": return String(quarter);
+			case "QQ": return addLeadingZeros(quarter, 2);
+			case "Qo": return localize.ordinalNumber(quarter, { unit: "quarter" });
+			case "QQQ": return localize.quarter(quarter, {
+				width: "abbreviated",
+				context: "formatting"
+			});
+			case "QQQQQ": return localize.quarter(quarter, {
+				width: "narrow",
+				context: "formatting"
+			});
+			default: return localize.quarter(quarter, {
+				width: "wide",
+				context: "formatting"
+			});
+		}
+	},
+	q: function(date, token, localize) {
+		const quarter = Math.ceil((date.getMonth() + 1) / 3);
+		switch (token) {
+			case "q": return String(quarter);
+			case "qq": return addLeadingZeros(quarter, 2);
+			case "qo": return localize.ordinalNumber(quarter, { unit: "quarter" });
+			case "qqq": return localize.quarter(quarter, {
+				width: "abbreviated",
+				context: "standalone"
+			});
+			case "qqqqq": return localize.quarter(quarter, {
+				width: "narrow",
+				context: "standalone"
+			});
+			default: return localize.quarter(quarter, {
+				width: "wide",
+				context: "standalone"
+			});
+		}
+	},
+	M: function(date, token, localize) {
+		const month = date.getMonth();
+		switch (token) {
+			case "M":
+			case "MM": return lightFormatters.M(date, token);
+			case "Mo": return localize.ordinalNumber(month + 1, { unit: "month" });
+			case "MMM": return localize.month(month, {
+				width: "abbreviated",
+				context: "formatting"
+			});
+			case "MMMMM": return localize.month(month, {
+				width: "narrow",
+				context: "formatting"
+			});
+			default: return localize.month(month, {
+				width: "wide",
+				context: "formatting"
+			});
+		}
+	},
+	L: function(date, token, localize) {
+		const month = date.getMonth();
+		switch (token) {
+			case "L": return String(month + 1);
+			case "LL": return addLeadingZeros(month + 1, 2);
+			case "Lo": return localize.ordinalNumber(month + 1, { unit: "month" });
+			case "LLL": return localize.month(month, {
+				width: "abbreviated",
+				context: "standalone"
+			});
+			case "LLLLL": return localize.month(month, {
+				width: "narrow",
+				context: "standalone"
+			});
+			default: return localize.month(month, {
+				width: "wide",
+				context: "standalone"
+			});
+		}
+	},
+	w: function(date, token, localize, options) {
+		const week = getWeek(date, options);
+		if (token === "wo") return localize.ordinalNumber(week, { unit: "week" });
+		return addLeadingZeros(week, token.length);
+	},
+	I: function(date, token, localize) {
+		const isoWeek = getISOWeek(date);
+		if (token === "Io") return localize.ordinalNumber(isoWeek, { unit: "week" });
+		return addLeadingZeros(isoWeek, token.length);
+	},
+	d: function(date, token, localize) {
+		if (token === "do") return localize.ordinalNumber(date.getDate(), { unit: "date" });
+		return lightFormatters.d(date, token);
+	},
+	D: function(date, token, localize) {
+		const dayOfYear = getDayOfYear(date);
+		if (token === "Do") return localize.ordinalNumber(dayOfYear, { unit: "dayOfYear" });
+		return addLeadingZeros(dayOfYear, token.length);
+	},
+	E: function(date, token, localize) {
+		const dayOfWeek = date.getDay();
+		switch (token) {
+			case "E":
+			case "EE":
+			case "EEE": return localize.day(dayOfWeek, {
+				width: "abbreviated",
+				context: "formatting"
+			});
+			case "EEEEE": return localize.day(dayOfWeek, {
+				width: "narrow",
+				context: "formatting"
+			});
+			case "EEEEEE": return localize.day(dayOfWeek, {
+				width: "short",
+				context: "formatting"
+			});
+			default: return localize.day(dayOfWeek, {
+				width: "wide",
+				context: "formatting"
+			});
+		}
+	},
+	e: function(date, token, localize, options) {
+		const dayOfWeek = date.getDay();
+		const localDayOfWeek = (dayOfWeek - options.weekStartsOn + 8) % 7 || 7;
+		switch (token) {
+			case "e": return String(localDayOfWeek);
+			case "ee": return addLeadingZeros(localDayOfWeek, 2);
+			case "eo": return localize.ordinalNumber(localDayOfWeek, { unit: "day" });
+			case "eee": return localize.day(dayOfWeek, {
+				width: "abbreviated",
+				context: "formatting"
+			});
+			case "eeeee": return localize.day(dayOfWeek, {
+				width: "narrow",
+				context: "formatting"
+			});
+			case "eeeeee": return localize.day(dayOfWeek, {
+				width: "short",
+				context: "formatting"
+			});
+			default: return localize.day(dayOfWeek, {
+				width: "wide",
+				context: "formatting"
+			});
+		}
+	},
+	c: function(date, token, localize, options) {
+		const dayOfWeek = date.getDay();
+		const localDayOfWeek = (dayOfWeek - options.weekStartsOn + 8) % 7 || 7;
+		switch (token) {
+			case "c": return String(localDayOfWeek);
+			case "cc": return addLeadingZeros(localDayOfWeek, token.length);
+			case "co": return localize.ordinalNumber(localDayOfWeek, { unit: "day" });
+			case "ccc": return localize.day(dayOfWeek, {
+				width: "abbreviated",
+				context: "standalone"
+			});
+			case "ccccc": return localize.day(dayOfWeek, {
+				width: "narrow",
+				context: "standalone"
+			});
+			case "cccccc": return localize.day(dayOfWeek, {
+				width: "short",
+				context: "standalone"
+			});
+			default: return localize.day(dayOfWeek, {
+				width: "wide",
+				context: "standalone"
+			});
+		}
+	},
+	i: function(date, token, localize) {
+		const dayOfWeek = date.getDay();
+		const isoDayOfWeek = dayOfWeek === 0 ? 7 : dayOfWeek;
+		switch (token) {
+			case "i": return String(isoDayOfWeek);
+			case "ii": return addLeadingZeros(isoDayOfWeek, token.length);
+			case "io": return localize.ordinalNumber(isoDayOfWeek, { unit: "day" });
+			case "iii": return localize.day(dayOfWeek, {
+				width: "abbreviated",
+				context: "formatting"
+			});
+			case "iiiii": return localize.day(dayOfWeek, {
+				width: "narrow",
+				context: "formatting"
+			});
+			case "iiiiii": return localize.day(dayOfWeek, {
+				width: "short",
+				context: "formatting"
+			});
+			default: return localize.day(dayOfWeek, {
+				width: "wide",
+				context: "formatting"
+			});
+		}
+	},
+	a: function(date, token, localize) {
+		const dayPeriodEnumValue = date.getHours() / 12 >= 1 ? "pm" : "am";
+		switch (token) {
+			case "a":
+			case "aa": return localize.dayPeriod(dayPeriodEnumValue, {
+				width: "abbreviated",
+				context: "formatting"
+			});
+			case "aaa": return localize.dayPeriod(dayPeriodEnumValue, {
+				width: "abbreviated",
+				context: "formatting"
+			}).toLowerCase();
+			case "aaaaa": return localize.dayPeriod(dayPeriodEnumValue, {
+				width: "narrow",
+				context: "formatting"
+			});
+			default: return localize.dayPeriod(dayPeriodEnumValue, {
+				width: "wide",
+				context: "formatting"
+			});
+		}
+	},
+	b: function(date, token, localize) {
+		const hours = date.getHours();
+		let dayPeriodEnumValue;
+		if (hours === 12) dayPeriodEnumValue = dayPeriodEnum.noon;
+		else if (hours === 0) dayPeriodEnumValue = dayPeriodEnum.midnight;
+		else dayPeriodEnumValue = hours / 12 >= 1 ? "pm" : "am";
+		switch (token) {
+			case "b":
+			case "bb": return localize.dayPeriod(dayPeriodEnumValue, {
+				width: "abbreviated",
+				context: "formatting"
+			});
+			case "bbb": return localize.dayPeriod(dayPeriodEnumValue, {
+				width: "abbreviated",
+				context: "formatting"
+			}).toLowerCase();
+			case "bbbbb": return localize.dayPeriod(dayPeriodEnumValue, {
+				width: "narrow",
+				context: "formatting"
+			});
+			default: return localize.dayPeriod(dayPeriodEnumValue, {
+				width: "wide",
+				context: "formatting"
+			});
+		}
+	},
+	B: function(date, token, localize) {
+		const hours = date.getHours();
+		let dayPeriodEnumValue;
+		if (hours >= 17) dayPeriodEnumValue = dayPeriodEnum.evening;
+		else if (hours >= 12) dayPeriodEnumValue = dayPeriodEnum.afternoon;
+		else if (hours >= 4) dayPeriodEnumValue = dayPeriodEnum.morning;
+		else dayPeriodEnumValue = dayPeriodEnum.night;
+		switch (token) {
+			case "B":
+			case "BB":
+			case "BBB": return localize.dayPeriod(dayPeriodEnumValue, {
+				width: "abbreviated",
+				context: "formatting"
+			});
+			case "BBBBB": return localize.dayPeriod(dayPeriodEnumValue, {
+				width: "narrow",
+				context: "formatting"
+			});
+			default: return localize.dayPeriod(dayPeriodEnumValue, {
+				width: "wide",
+				context: "formatting"
+			});
+		}
+	},
+	h: function(date, token, localize) {
+		if (token === "ho") {
+			let hours = date.getHours() % 12;
+			if (hours === 0) hours = 12;
+			return localize.ordinalNumber(hours, { unit: "hour" });
+		}
+		return lightFormatters.h(date, token);
+	},
+	H: function(date, token, localize) {
+		if (token === "Ho") return localize.ordinalNumber(date.getHours(), { unit: "hour" });
+		return lightFormatters.H(date, token);
+	},
+	K: function(date, token, localize) {
+		const hours = date.getHours() % 12;
+		if (token === "Ko") return localize.ordinalNumber(hours, { unit: "hour" });
+		return addLeadingZeros(hours, token.length);
+	},
+	k: function(date, token, localize) {
+		let hours = date.getHours();
+		if (hours === 0) hours = 24;
+		if (token === "ko") return localize.ordinalNumber(hours, { unit: "hour" });
+		return addLeadingZeros(hours, token.length);
+	},
+	m: function(date, token, localize) {
+		if (token === "mo") return localize.ordinalNumber(date.getMinutes(), { unit: "minute" });
+		return lightFormatters.m(date, token);
+	},
+	s: function(date, token, localize) {
+		if (token === "so") return localize.ordinalNumber(date.getSeconds(), { unit: "second" });
+		return lightFormatters.s(date, token);
+	},
+	S: function(date, token) {
+		return lightFormatters.S(date, token);
+	},
+	X: function(date, token, _localize) {
+		const timezoneOffset = date.getTimezoneOffset();
+		if (timezoneOffset === 0) return "Z";
+		switch (token) {
+			case "X": return formatTimezoneWithOptionalMinutes(timezoneOffset);
+			case "XXXX":
+			case "XX": return formatTimezone(timezoneOffset);
+			default: return formatTimezone(timezoneOffset, ":");
+		}
+	},
+	x: function(date, token, _localize) {
+		const timezoneOffset = date.getTimezoneOffset();
+		switch (token) {
+			case "x": return formatTimezoneWithOptionalMinutes(timezoneOffset);
+			case "xxxx":
+			case "xx": return formatTimezone(timezoneOffset);
+			default: return formatTimezone(timezoneOffset, ":");
+		}
+	},
+	O: function(date, token, _localize) {
+		const timezoneOffset = date.getTimezoneOffset();
+		switch (token) {
+			case "O":
+			case "OO":
+			case "OOO": return "GMT" + formatTimezoneShort(timezoneOffset, ":");
+			default: return "GMT" + formatTimezone(timezoneOffset, ":");
+		}
+	},
+	z: function(date, token, _localize) {
+		const timezoneOffset = date.getTimezoneOffset();
+		switch (token) {
+			case "z":
+			case "zz":
+			case "zzz": return "GMT" + formatTimezoneShort(timezoneOffset, ":");
+			default: return "GMT" + formatTimezone(timezoneOffset, ":");
+		}
+	},
+	t: function(date, token, _localize) {
+		return addLeadingZeros(Math.trunc(+date / 1e3), token.length);
+	},
+	T: function(date, token, _localize) {
+		return addLeadingZeros(+date, token.length);
+	}
+};
+function formatTimezoneShort(offset, delimiter = "") {
+	const sign = offset > 0 ? "-" : "+";
+	const absOffset = Math.abs(offset);
+	const hours = Math.trunc(absOffset / 60);
+	const minutes = absOffset % 60;
+	if (minutes === 0) return sign + String(hours);
+	return sign + String(hours) + delimiter + addLeadingZeros(minutes, 2);
+}
+function formatTimezoneWithOptionalMinutes(offset, delimiter) {
+	if (offset % 60 === 0) return (offset > 0 ? "-" : "+") + addLeadingZeros(Math.abs(offset) / 60, 2);
+	return formatTimezone(offset, delimiter);
+}
+function formatTimezone(offset, delimiter = "") {
+	const sign = offset > 0 ? "-" : "+";
+	const absOffset = Math.abs(offset);
+	const hours = addLeadingZeros(Math.trunc(absOffset / 60), 2);
+	const minutes = addLeadingZeros(absOffset % 60, 2);
+	return sign + hours + delimiter + minutes;
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/_lib/format/longFormatters.js
+var dateLongFormatter = (pattern, formatLong) => {
+	switch (pattern) {
+		case "P": return formatLong.date({ width: "short" });
+		case "PP": return formatLong.date({ width: "medium" });
+		case "PPP": return formatLong.date({ width: "long" });
+		default: return formatLong.date({ width: "full" });
+	}
+};
+var timeLongFormatter = (pattern, formatLong) => {
+	switch (pattern) {
+		case "p": return formatLong.time({ width: "short" });
+		case "pp": return formatLong.time({ width: "medium" });
+		case "ppp": return formatLong.time({ width: "long" });
+		default: return formatLong.time({ width: "full" });
+	}
+};
+var dateTimeLongFormatter = (pattern, formatLong) => {
+	const matchResult = pattern.match(/(P+)(p+)?/) || [];
+	const datePattern = matchResult[1];
+	const timePattern = matchResult[2];
+	if (!timePattern) return dateLongFormatter(pattern, formatLong);
+	let dateTimeFormat;
+	switch (datePattern) {
+		case "P":
+			dateTimeFormat = formatLong.dateTime({ width: "short" });
+			break;
+		case "PP":
+			dateTimeFormat = formatLong.dateTime({ width: "medium" });
+			break;
+		case "PPP":
+			dateTimeFormat = formatLong.dateTime({ width: "long" });
+			break;
+		default:
+			dateTimeFormat = formatLong.dateTime({ width: "full" });
+			break;
+	}
+	return dateTimeFormat.replace("{{date}}", dateLongFormatter(datePattern, formatLong)).replace("{{time}}", timeLongFormatter(timePattern, formatLong));
+};
+var longFormatters = {
+	p: timeLongFormatter,
+	P: dateTimeLongFormatter
+};
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/_lib/protectedTokens.js
+var dayOfYearTokenRE = /^D+$/;
+var weekYearTokenRE = /^Y+$/;
+var throwTokens = [
+	"D",
+	"DD",
+	"YY",
+	"YYYY"
+];
+function isProtectedDayOfYearToken(token) {
+	return dayOfYearTokenRE.test(token);
+}
+function isProtectedWeekYearToken(token) {
+	return weekYearTokenRE.test(token);
+}
+function warnOrThrowProtectedError(token, format, input) {
+	const _message = message(token, format, input);
+	console.warn(_message);
+	if (throwTokens.includes(token)) throw new RangeError(_message);
+}
+function message(token, format, input) {
+	const subject = token[0] === "Y" ? "years" : "days of the month";
+	return `Use \`${token.toLowerCase()}\` instead of \`${token}\` (in \`${format}\`) for formatting ${subject} to the input \`${input}\`; see: https://github.com/date-fns/date-fns/blob/master/docs/unicodeTokens.md`;
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/format.js
+var formattingTokensRegExp = /[yYQqMLwIdDecihHKkms]o|(\w)\1*|''|'(''|[^'])+('|$)|./g;
+var longFormattingTokensRegExp = /P+p+|P+|p+|''|'(''|[^'])+('|$)|./g;
+var escapedStringRegExp = /^'([^]*?)'?$/;
+var doubleQuoteRegExp = /''/g;
+var unescapedLatinCharacterRegExp = /[a-zA-Z]/;
+/**
+* The {@link format} function options.
+*/
+/**
+* @name format
+* @alias formatDate
+* @category Common Helpers
+* @summary Format the date.
+*
+* @description
+* Return the formatted date string in the given format. The result may vary by locale.
+*
+* > ⚠️ Please note that the `format` tokens differ from Moment.js and other libraries.
+* > See: https://github.com/date-fns/date-fns/blob/master/docs/unicodeTokens.md
+*
+* The characters wrapped between two single quotes characters (') are escaped.
+* Two single quotes in a row, whether inside or outside a quoted sequence, represent a 'real' single quote.
+* (see the last example)
+*
+* Format of the string is based on Unicode Technical Standard #35:
+* https://www.unicode.org/reports/tr35/tr35-dates.html#Date_Field_Symbol_Table
+* with a few additions (see note 7 below the table).
+*
+* Accepted patterns:
+* | Unit                            | Pattern | Result examples                   | Notes |
+* |---------------------------------|---------|-----------------------------------|-------|
+* | Era                             | G..GGG  | AD, BC                            |       |
+* |                                 | GGGG    | Anno Domini, Before Christ        | 2     |
+* |                                 | GGGGG   | A, B                              |       |
+* | Calendar year                   | y       | 44, 1, 1900, 2017                 | 5     |
+* |                                 | yo      | 44th, 1st, 0th, 17th              | 5,7   |
+* |                                 | yy      | 44, 01, 00, 17                    | 5     |
+* |                                 | yyy     | 044, 001, 1900, 2017              | 5     |
+* |                                 | yyyy    | 0044, 0001, 1900, 2017            | 5     |
+* |                                 | yyyyy   | ...                               | 3,5   |
+* | Local week-numbering year       | Y       | 44, 1, 1900, 2017                 | 5     |
+* |                                 | Yo      | 44th, 1st, 1900th, 2017th         | 5,7   |
+* |                                 | YY      | 44, 01, 00, 17                    | 5,8   |
+* |                                 | YYY     | 044, 001, 1900, 2017              | 5     |
+* |                                 | YYYY    | 0044, 0001, 1900, 2017            | 5,8   |
+* |                                 | YYYYY   | ...                               | 3,5   |
+* | ISO week-numbering year         | R       | -43, 0, 1, 1900, 2017             | 5,7   |
+* |                                 | RR      | -43, 00, 01, 1900, 2017           | 5,7   |
+* |                                 | RRR     | -043, 000, 001, 1900, 2017        | 5,7   |
+* |                                 | RRRR    | -0043, 0000, 0001, 1900, 2017     | 5,7   |
+* |                                 | RRRRR   | ...                               | 3,5,7 |
+* | Extended year                   | u       | -43, 0, 1, 1900, 2017             | 5     |
+* |                                 | uu      | -43, 01, 1900, 2017               | 5     |
+* |                                 | uuu     | -043, 001, 1900, 2017             | 5     |
+* |                                 | uuuu    | -0043, 0001, 1900, 2017           | 5     |
+* |                                 | uuuuu   | ...                               | 3,5   |
+* | Quarter (formatting)            | Q       | 1, 2, 3, 4                        |       |
+* |                                 | Qo      | 1st, 2nd, 3rd, 4th                | 7     |
+* |                                 | QQ      | 01, 02, 03, 04                    |       |
+* |                                 | QQQ     | Q1, Q2, Q3, Q4                    |       |
+* |                                 | QQQQ    | 1st quarter, 2nd quarter, ...     | 2     |
+* |                                 | QQQQQ   | 1, 2, 3, 4                        | 4     |
+* | Quarter (stand-alone)           | q       | 1, 2, 3, 4                        |       |
+* |                                 | qo      | 1st, 2nd, 3rd, 4th                | 7     |
+* |                                 | qq      | 01, 02, 03, 04                    |       |
+* |                                 | qqq     | Q1, Q2, Q3, Q4                    |       |
+* |                                 | qqqq    | 1st quarter, 2nd quarter, ...     | 2     |
+* |                                 | qqqqq   | 1, 2, 3, 4                        | 4     |
+* | Month (formatting)              | M       | 1, 2, ..., 12                     |       |
+* |                                 | Mo      | 1st, 2nd, ..., 12th               | 7     |
+* |                                 | MM      | 01, 02, ..., 12                   |       |
+* |                                 | MMM     | Jan, Feb, ..., Dec                |       |
+* |                                 | MMMM    | January, February, ..., December  | 2     |
+* |                                 | MMMMM   | J, F, ..., D                      |       |
+* | Month (stand-alone)             | L       | 1, 2, ..., 12                     |       |
+* |                                 | Lo      | 1st, 2nd, ..., 12th               | 7     |
+* |                                 | LL      | 01, 02, ..., 12                   |       |
+* |                                 | LLL     | Jan, Feb, ..., Dec                |       |
+* |                                 | LLLL    | January, February, ..., December  | 2     |
+* |                                 | LLLLL   | J, F, ..., D                      |       |
+* | Local week of year              | w       | 1, 2, ..., 53                     |       |
+* |                                 | wo      | 1st, 2nd, ..., 53th               | 7     |
+* |                                 | ww      | 01, 02, ..., 53                   |       |
+* | ISO week of year                | I       | 1, 2, ..., 53                     | 7     |
+* |                                 | Io      | 1st, 2nd, ..., 53th               | 7     |
+* |                                 | II      | 01, 02, ..., 53                   | 7     |
+* | Day of month                    | d       | 1, 2, ..., 31                     |       |
+* |                                 | do      | 1st, 2nd, ..., 31st               | 7     |
+* |                                 | dd      | 01, 02, ..., 31                   |       |
+* | Day of year                     | D       | 1, 2, ..., 365, 366               | 9     |
+* |                                 | Do      | 1st, 2nd, ..., 365th, 366th       | 7     |
+* |                                 | DD      | 01, 02, ..., 365, 366             | 9     |
+* |                                 | DDD     | 001, 002, ..., 365, 366           |       |
+* |                                 | DDDD    | ...                               | 3     |
+* | Day of week (formatting)        | E..EEE  | Mon, Tue, Wed, ..., Sun           |       |
+* |                                 | EEEE    | Monday, Tuesday, ..., Sunday      | 2     |
+* |                                 | EEEEE   | M, T, W, T, F, S, S               |       |
+* |                                 | EEEEEE  | Mo, Tu, We, Th, Fr, Sa, Su        |       |
+* | ISO day of week (formatting)    | i       | 1, 2, 3, ..., 7                   | 7     |
+* |                                 | io      | 1st, 2nd, ..., 7th                | 7     |
+* |                                 | ii      | 01, 02, ..., 07                   | 7     |
+* |                                 | iii     | Mon, Tue, Wed, ..., Sun           | 7     |
+* |                                 | iiii    | Monday, Tuesday, ..., Sunday      | 2,7   |
+* |                                 | iiiii   | M, T, W, T, F, S, S               | 7     |
+* |                                 | iiiiii  | Mo, Tu, We, Th, Fr, Sa, Su        | 7     |
+* | Local day of week (formatting)  | e       | 2, 3, 4, ..., 1                   |       |
+* |                                 | eo      | 2nd, 3rd, ..., 1st                | 7     |
+* |                                 | ee      | 02, 03, ..., 01                   |       |
+* |                                 | eee     | Mon, Tue, Wed, ..., Sun           |       |
+* |                                 | eeee    | Monday, Tuesday, ..., Sunday      | 2     |
+* |                                 | eeeee   | M, T, W, T, F, S, S               |       |
+* |                                 | eeeeee  | Mo, Tu, We, Th, Fr, Sa, Su        |       |
+* | Local day of week (stand-alone) | c       | 2, 3, 4, ..., 1                   |       |
+* |                                 | co      | 2nd, 3rd, ..., 1st                | 7     |
+* |                                 | cc      | 02, 03, ..., 01                   |       |
+* |                                 | ccc     | Mon, Tue, Wed, ..., Sun           |       |
+* |                                 | cccc    | Monday, Tuesday, ..., Sunday      | 2     |
+* |                                 | ccccc   | M, T, W, T, F, S, S               |       |
+* |                                 | cccccc  | Mo, Tu, We, Th, Fr, Sa, Su        |       |
+* | AM, PM                          | a..aa   | AM, PM                            |       |
+* |                                 | aaa     | am, pm                            |       |
+* |                                 | aaaa    | a.m., p.m.                        | 2     |
+* |                                 | aaaaa   | a, p                              |       |
+* | AM, PM, noon, midnight          | b..bb   | AM, PM, noon, midnight            |       |
+* |                                 | bbb     | am, pm, noon, midnight            |       |
+* |                                 | bbbb    | a.m., p.m., noon, midnight        | 2     |
+* |                                 | bbbbb   | a, p, n, mi                       |       |
+* | Flexible day period             | B..BBB  | at night, in the morning, ...     |       |
+* |                                 | BBBB    | at night, in the morning, ...     | 2     |
+* |                                 | BBBBB   | at night, in the morning, ...     |       |
+* | Hour [1-12]                     | h       | 1, 2, ..., 11, 12                 |       |
+* |                                 | ho      | 1st, 2nd, ..., 11th, 12th         | 7     |
+* |                                 | hh      | 01, 02, ..., 11, 12               |       |
+* | Hour [0-23]                     | H       | 0, 1, 2, ..., 23                  |       |
+* |                                 | Ho      | 0th, 1st, 2nd, ..., 23rd          | 7     |
+* |                                 | HH      | 00, 01, 02, ..., 23               |       |
+* | Hour [0-11]                     | K       | 1, 2, ..., 11, 0                  |       |
+* |                                 | Ko      | 1st, 2nd, ..., 11th, 0th          | 7     |
+* |                                 | KK      | 01, 02, ..., 11, 00               |       |
+* | Hour [1-24]                     | k       | 24, 1, 2, ..., 23                 |       |
+* |                                 | ko      | 24th, 1st, 2nd, ..., 23rd         | 7     |
+* |                                 | kk      | 24, 01, 02, ..., 23               |       |
+* | Minute                          | m       | 0, 1, ..., 59                     |       |
+* |                                 | mo      | 0th, 1st, ..., 59th               | 7     |
+* |                                 | mm      | 00, 01, ..., 59                   |       |
+* | Second                          | s       | 0, 1, ..., 59                     |       |
+* |                                 | so      | 0th, 1st, ..., 59th               | 7     |
+* |                                 | ss      | 00, 01, ..., 59                   |       |
+* | Fraction of second              | S       | 0, 1, ..., 9                      |       |
+* |                                 | SS      | 00, 01, ..., 99                   |       |
+* |                                 | SSS     | 000, 001, ..., 999                |       |
+* |                                 | SSSS    | ...                               | 3     |
+* | Timezone (ISO-8601 w/ Z)        | X       | -08, +0530, Z                     |       |
+* |                                 | XX      | -0800, +0530, Z                   |       |
+* |                                 | XXX     | -08:00, +05:30, Z                 |       |
+* |                                 | XXXX    | -0800, +0530, Z, +123456          | 2     |
+* |                                 | XXXXX   | -08:00, +05:30, Z, +12:34:56      |       |
+* | Timezone (ISO-8601 w/o Z)       | x       | -08, +0530, +00                   |       |
+* |                                 | xx      | -0800, +0530, +0000               |       |
+* |                                 | xxx     | -08:00, +05:30, +00:00            | 2     |
+* |                                 | xxxx    | -0800, +0530, +0000, +123456      |       |
+* |                                 | xxxxx   | -08:00, +05:30, +00:00, +12:34:56 |       |
+* | Timezone (GMT)                  | O...OOO | GMT-8, GMT+5:30, GMT+0            |       |
+* |                                 | OOOO    | GMT-08:00, GMT+05:30, GMT+00:00   | 2     |
+* | Timezone (specific non-locat.)  | z...zzz | GMT-8, GMT+5:30, GMT+0            | 6     |
+* |                                 | zzzz    | GMT-08:00, GMT+05:30, GMT+00:00   | 2,6   |
+* | Seconds timestamp               | t       | 512969520                         | 7     |
+* |                                 | tt      | ...                               | 3,7   |
+* | Milliseconds timestamp          | T       | 512969520900                      | 7     |
+* |                                 | TT      | ...                               | 3,7   |
+* | Long localized date             | P       | 04/29/1453                        | 7     |
+* |                                 | PP      | Apr 29, 1453                      | 7     |
+* |                                 | PPP     | April 29th, 1453                  | 7     |
+* |                                 | PPPP    | Friday, April 29th, 1453          | 2,7   |
+* | Long localized time             | p       | 12:00 AM                          | 7     |
+* |                                 | pp      | 12:00:00 AM                       | 7     |
+* |                                 | ppp     | 12:00:00 AM GMT+2                 | 7     |
+* |                                 | pppp    | 12:00:00 AM GMT+02:00             | 2,7   |
+* | Combination of date and time    | Pp      | 04/29/1453, 12:00 AM              | 7     |
+* |                                 | PPpp    | Apr 29, 1453, 12:00:00 AM         | 7     |
+* |                                 | PPPppp  | April 29th, 1453 at ...           | 7     |
+* |                                 | PPPPpppp| Friday, April 29th, 1453 at ...   | 2,7   |
+* Notes:
+* 1. "Formatting" units (e.g. formatting quarter) in the default en-US locale
+*    are the same as "stand-alone" units, but are different in some languages.
+*    "Formatting" units are declined according to the rules of the language
+*    in the context of a date. "Stand-alone" units are always nominative singular:
+*
+*    `format(new Date(2017, 10, 6), 'do LLLL', {locale: cs}) //=> '6. listopad'`
+*
+*    `format(new Date(2017, 10, 6), 'do MMMM', {locale: cs}) //=> '6. listopadu'`
+*
+* 2. Any sequence of the identical letters is a pattern, unless it is escaped by
+*    the single quote characters (see below).
+*    If the sequence is longer than listed in table (e.g. `EEEEEEEEEEE`)
+*    the output will be the same as default pattern for this unit, usually
+*    the longest one (in case of ISO weekdays, `EEEE`). Default patterns for units
+*    are marked with "2" in the last column of the table.
+*
+*    `format(new Date(2017, 10, 6), 'MMM') //=> 'Nov'`
+*
+*    `format(new Date(2017, 10, 6), 'MMMM') //=> 'November'`
+*
+*    `format(new Date(2017, 10, 6), 'MMMMM') //=> 'N'`
+*
+*    `format(new Date(2017, 10, 6), 'MMMMMM') //=> 'November'`
+*
+*    `format(new Date(2017, 10, 6), 'MMMMMMM') //=> 'November'`
+*
+* 3. Some patterns could be unlimited length (such as `yyyyyyyy`).
+*    The output will be padded with zeros to match the length of the pattern.
+*
+*    `format(new Date(2017, 10, 6), 'yyyyyyyy') //=> '00002017'`
+*
+* 4. `QQQQQ` and `qqqqq` could be not strictly numerical in some locales.
+*    These tokens represent the shortest form of the quarter.
+*
+* 5. The main difference between `y` and `u` patterns are B.C. years:
+*
+*    | Year | `y` | `u` |
+*    |------|-----|-----|
+*    | AC 1 |   1 |   1 |
+*    | BC 1 |   1 |   0 |
+*    | BC 2 |   2 |  -1 |
+*
+*    Also `yy` always returns the last two digits of a year,
+*    while `uu` pads single digit years to 2 characters and returns other years unchanged:
+*
+*    | Year | `yy` | `uu` |
+*    |------|------|------|
+*    | 1    |   01 |   01 |
+*    | 14   |   14 |   14 |
+*    | 376  |   76 |  376 |
+*    | 1453 |   53 | 1453 |
+*
+*    The same difference is true for local and ISO week-numbering years (`Y` and `R`),
+*    except local week-numbering years are dependent on `options.weekStartsOn`
+*    and `options.firstWeekContainsDate` (compare [getISOWeekYear](https://date-fns.org/docs/getISOWeekYear)
+*    and [getWeekYear](https://date-fns.org/docs/getWeekYear)).
+*
+* 6. Specific non-location timezones are currently unavailable in `date-fns`,
+*    so right now these tokens fall back to GMT timezones.
+*
+* 7. These patterns are not in the Unicode Technical Standard #35:
+*    - `i`: ISO day of week
+*    - `I`: ISO week of year
+*    - `R`: ISO week-numbering year
+*    - `t`: seconds timestamp
+*    - `T`: milliseconds timestamp
+*    - `o`: ordinal number modifier
+*    - `P`: long localized date
+*    - `p`: long localized time
+*
+* 8. `YY` and `YYYY` tokens represent week-numbering years but they are often confused with years.
+*    You should enable `options.useAdditionalWeekYearTokens` to use them. See: https://github.com/date-fns/date-fns/blob/master/docs/unicodeTokens.md
+*
+* 9. `D` and `DD` tokens represent days of the year but they are often confused with days of the month.
+*    You should enable `options.useAdditionalDayOfYearTokens` to use them. See: https://github.com/date-fns/date-fns/blob/master/docs/unicodeTokens.md
+*
+* @param date - The original date
+* @param format - The string of tokens
+* @param options - An object with options
+*
+* @returns The formatted date string
+*
+* @throws `date` must not be Invalid Date
+* @throws `options.locale` must contain `localize` property
+* @throws `options.locale` must contain `formatLong` property
+* @throws use `yyyy` instead of `YYYY` for formatting years using [format provided] to the input [input provided]; see: https://github.com/date-fns/date-fns/blob/master/docs/unicodeTokens.md
+* @throws use `yy` instead of `YY` for formatting years using [format provided] to the input [input provided]; see: https://github.com/date-fns/date-fns/blob/master/docs/unicodeTokens.md
+* @throws use `d` instead of `D` for formatting days of the month using [format provided] to the input [input provided]; see: https://github.com/date-fns/date-fns/blob/master/docs/unicodeTokens.md
+* @throws use `dd` instead of `DD` for formatting days of the month using [format provided] to the input [input provided]; see: https://github.com/date-fns/date-fns/blob/master/docs/unicodeTokens.md
+* @throws format string contains an unescaped latin alphabet character
+*
+* @example
+* // Represent 11 February 2014 in middle-endian format:
+* const result = format(new Date(2014, 1, 11), 'MM/dd/yyyy')
+* //=> '02/11/2014'
+*
+* @example
+* // Represent 2 July 2014 in Esperanto:
+* import { eoLocale } from 'date-fns/locale/eo'
+* const result = format(new Date(2014, 6, 2), "do 'de' MMMM yyyy", {
+*   locale: eoLocale
+* })
+* //=> '2-a de julio 2014'
+*
+* @example
+* // Escape string by single quote characters:
+* const result = format(new Date(2014, 6, 2, 15), "h 'o''clock'")
+* //=> "3 o'clock"
+*/
+function format(date, formatStr, options) {
+	const defaultOptions = getDefaultOptions();
+	const locale = options?.locale ?? defaultOptions.locale ?? enUS$1;
+	const firstWeekContainsDate = options?.firstWeekContainsDate ?? options?.locale?.options?.firstWeekContainsDate ?? defaultOptions.firstWeekContainsDate ?? defaultOptions.locale?.options?.firstWeekContainsDate ?? 1;
+	const weekStartsOn = options?.weekStartsOn ?? options?.locale?.options?.weekStartsOn ?? defaultOptions.weekStartsOn ?? defaultOptions.locale?.options?.weekStartsOn ?? 0;
+	const originalDate = toDate(date, options?.in);
+	if (!isValid(originalDate)) throw new RangeError("Invalid time value");
+	let parts = formatStr.match(longFormattingTokensRegExp).map((substring) => {
+		const firstCharacter = substring[0];
+		if (firstCharacter === "p" || firstCharacter === "P") {
+			const longFormatter = longFormatters[firstCharacter];
+			return longFormatter(substring, locale.formatLong);
+		}
+		return substring;
+	}).join("").match(formattingTokensRegExp).map((substring) => {
+		if (substring === "''") return {
+			isToken: false,
+			value: "'"
+		};
+		const firstCharacter = substring[0];
+		if (firstCharacter === "'") return {
+			isToken: false,
+			value: cleanEscapedString(substring)
+		};
+		if (formatters[firstCharacter]) return {
+			isToken: true,
+			value: substring
+		};
+		if (firstCharacter.match(unescapedLatinCharacterRegExp)) throw new RangeError("Format string contains an unescaped latin alphabet character `" + firstCharacter + "`");
+		return {
+			isToken: false,
+			value: substring
+		};
+	});
+	if (locale.localize.preprocessor) parts = locale.localize.preprocessor(originalDate, parts);
+	const formatterOptions = {
+		firstWeekContainsDate,
+		weekStartsOn,
+		locale
+	};
+	return parts.map((part) => {
+		if (!part.isToken) return part.value;
+		const token = part.value;
+		if (!options?.useAdditionalWeekYearTokens && isProtectedWeekYearToken(token) || !options?.useAdditionalDayOfYearTokens && isProtectedDayOfYearToken(token)) warnOrThrowProtectedError(token, formatStr, String(date));
+		const formatter = formatters[token[0]];
+		return formatter(originalDate, token, locale.localize, formatterOptions);
+	}).join("");
+}
+function cleanEscapedString(input) {
+	const matched = input.match(escapedStringRegExp);
+	if (!matched) return input;
+	return matched[1].replace(doubleQuoteRegExp, "'");
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/getDaysInMonth.js
+/**
+* The {@link getDaysInMonth} function options.
+*/
+/**
+* @name getDaysInMonth
+* @category Month Helpers
+* @summary Get the number of days in a month of the given date.
+*
+* @description
+* Get the number of days in a month of the given date, considering the context if provided.
+*
+* @param date - The given date
+* @param options - An object with options
+*
+* @returns The number of days in a month
+*
+* @example
+* // How many days are in February 2000?
+* const result = getDaysInMonth(new Date(2000, 1))
+* //=> 29
+*/
+function getDaysInMonth(date, options) {
+	const _date = toDate(date, options?.in);
+	const year = _date.getFullYear();
+	const monthIndex = _date.getMonth();
+	const lastDayOfMonth = constructFrom(_date, 0);
+	lastDayOfMonth.setFullYear(year, monthIndex + 1, 0);
+	lastDayOfMonth.setHours(0, 0, 0, 0);
+	return lastDayOfMonth.getDate();
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/getMonth.js
+/**
+* The {@link getMonth} function options.
+*/
+/**
+* @name getMonth
+* @category Month Helpers
+* @summary Get the month of the given date.
+*
+* @description
+* Get the month of the given date.
+*
+* @param date - The given date
+* @param options - An object with options
+*
+* @returns The month index (0-11)
+*
+* @example
+* // Which month is 29 February 2012?
+* const result = getMonth(new Date(2012, 1, 29))
+* //=> 1
+*/
+function getMonth(date, options) {
+	return toDate(date, options?.in).getMonth();
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/getYear.js
+/**
+* The {@link getYear} function options.
+*/
+/**
+* @name getYear
+* @category Year Helpers
+* @summary Get the year of the given date.
+*
+* @description
+* Get the year of the given date.
+*
+* @param date - The given date
+* @param options - An object with options
+*
+* @returns The year
+*
+* @example
+* // Which year is 2 July 2014?
+* const result = getYear(new Date(2014, 6, 2))
+* //=> 2014
+*/
+function getYear(date, options) {
+	return toDate(date, options?.in).getFullYear();
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/isAfter.js
+/**
+* @name isAfter
+* @category Common Helpers
+* @summary Is the first date after the second one?
+*
+* @description
+* Is the first date after the second one?
+*
+* @param date - The date that should be after the other one to return true
+* @param dateToCompare - The date to compare with
+*
+* @returns The first date is after the second date
+*
+* @example
+* // Is 10 July 1989 after 11 February 1987?
+* const result = isAfter(new Date(1989, 6, 10), new Date(1987, 1, 11))
+* //=> true
+*/
+function isAfter(date, dateToCompare) {
+	return +toDate(date) > +toDate(dateToCompare);
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/isBefore.js
+/**
+* @name isBefore
+* @category Common Helpers
+* @summary Is the first date before the second one?
+*
+* @description
+* Is the first date before the second one?
+*
+* @param date - The date that should be before the other one to return true
+* @param dateToCompare - The date to compare with
+*
+* @returns The first date is before the second date
+*
+* @example
+* // Is 10 July 1989 before 11 February 1987?
+* const result = isBefore(new Date(1989, 6, 10), new Date(1987, 1, 11))
+* //=> false
+*/
+function isBefore(date, dateToCompare) {
+	return +toDate(date) < +toDate(dateToCompare);
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/isSameMonth.js
+/**
+* The {@link isSameMonth} function options.
+*/
+/**
+* @name isSameMonth
+* @category Month Helpers
+* @summary Are the given dates in the same month (and year)?
+*
+* @description
+* Are the given dates in the same month (and year)?
+*
+* @param laterDate - The first date to check
+* @param earlierDate - The second date to check
+* @param options - An object with options
+*
+* @returns The dates are in the same month (and year)
+*
+* @example
+* // Are 2 September 2014 and 25 September 2014 in the same month?
+* const result = isSameMonth(new Date(2014, 8, 2), new Date(2014, 8, 25))
+* //=> true
+*
+* @example
+* // Are 2 September 2014 and 25 September 2015 in the same month?
+* const result = isSameMonth(new Date(2014, 8, 2), new Date(2015, 8, 25))
+* //=> false
+*/
+function isSameMonth(laterDate, earlierDate, options) {
+	const [laterDate_, earlierDate_] = normalizeDates(options?.in, laterDate, earlierDate);
+	return laterDate_.getFullYear() === earlierDate_.getFullYear() && laterDate_.getMonth() === earlierDate_.getMonth();
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/isSameYear.js
+/**
+* The {@link isSameYear} function options.
+*/
+/**
+* @name isSameYear
+* @category Year Helpers
+* @summary Are the given dates in the same year?
+*
+* @description
+* Are the given dates in the same year?
+*
+* @param laterDate - The first date to check
+* @param earlierDate - The second date to check
+* @param options - An object with options
+*
+* @returns The dates are in the same year
+*
+* @example
+* // Are 2 September 2014 and 25 September 2014 in the same year?
+* const result = isSameYear(new Date(2014, 8, 2), new Date(2014, 8, 25))
+* //=> true
+*/
+function isSameYear(laterDate, earlierDate, options) {
+	const [laterDate_, earlierDate_] = normalizeDates(options?.in, laterDate, earlierDate);
+	return laterDate_.getFullYear() === earlierDate_.getFullYear();
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/subDays.js
+/**
+* The {@link subDays} function options.
+*/
+/**
+* @name subDays
+* @category Day Helpers
+* @summary Subtract the specified number of days from the given date.
+*
+* @typeParam DateType - The `Date` type, the function operates on. Gets inferred from passed arguments. Allows to use extensions like [`UTCDate`](https://github.com/date-fns/utc).
+* @typeParam ResultDate - The result `Date` type, it is the type returned from the context function if it is passed, or inferred from the arguments.
+*
+* @param date - The date to be changed
+* @param amount - The amount of days to be subtracted.
+* @param options - An object with options
+*
+* @returns The new date with the days subtracted
+*
+* @example
+* // Subtract 10 days from 1 September 2014:
+* const result = subDays(new Date(2014, 8, 1), 10)
+* //=> Fri Aug 22 2014 00:00:00
+*/
+function subDays(date, amount, options) {
+	return addDays(date, -amount, options);
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/setMonth.js
+/**
+* The {@link setMonth} function options.
+*/
+/**
+* @name setMonth
+* @category Month Helpers
+* @summary Set the month to the given date.
+*
+* @description
+* Set the month to the given date.
+*
+* @typeParam DateType - The `Date` type, the function operates on. Gets inferred from passed arguments. Allows to use extensions like [`UTCDate`](https://github.com/date-fns/utc).
+* @typeParam ResultDate - The result `Date` type, it is the type returned from the context function if it is passed, or inferred from the arguments.
+*
+* @param date - The date to be changed
+* @param month - The month index to set (0-11)
+* @param options - The options
+*
+* @returns The new date with the month set
+*
+* @example
+* // Set February to 1 September 2014:
+* const result = setMonth(new Date(2014, 8, 1), 1)
+* //=> Sat Feb 01 2014 00:00:00
+*/
+function setMonth(date, month, options) {
+	const _date = toDate(date, options?.in);
+	const year = _date.getFullYear();
+	const day = _date.getDate();
+	const midMonth = constructFrom(options?.in || date, 0);
+	midMonth.setFullYear(year, month, 15);
+	midMonth.setHours(0, 0, 0, 0);
+	const daysInMonth = getDaysInMonth(midMonth);
+	_date.setMonth(month, Math.min(day, daysInMonth));
+	return _date;
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/setYear.js
+/**
+* The {@link setYear} function options.
+*/
+/**
+* @name setYear
+* @category Year Helpers
+* @summary Set the year to the given date.
+*
+* @description
+* Set the year to the given date.
+*
+* @typeParam DateType - The `Date` type, the function operates on. Gets inferred from passed arguments. Allows to use extensions like [`UTCDate`](https://github.com/date-fns/utc).
+* @typeParam ResultDate - The result `Date` type, it is the type returned from the context function if it is passed, or inferred from the arguments.
+*
+* @param date - The date to be changed
+* @param year - The year of the new date
+* @param options - An object with options.
+*
+* @returns The new date with the year set
+*
+* @example
+* // Set year 2013 to 1 September 2014:
+* const result = setYear(new Date(2014, 8, 1), 2013)
+* //=> Sun Sep 01 2013 00:00:00
+*/
+function setYear(date, year, options) {
+	const date_ = toDate(date, options?.in);
+	if (isNaN(+date_)) return constructFrom(options?.in || date, NaN);
+	date_.setFullYear(year);
+	return date_;
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/locale/pt-BR/_lib/formatDistance.js
+var formatDistanceLocale = {
+	lessThanXSeconds: {
+		one: "menos de um segundo",
+		other: "menos de {{count}} segundos"
+	},
+	xSeconds: {
+		one: "1 segundo",
+		other: "{{count}} segundos"
+	},
+	halfAMinute: "meio minuto",
+	lessThanXMinutes: {
+		one: "menos de um minuto",
+		other: "menos de {{count}} minutos"
+	},
+	xMinutes: {
+		one: "1 minuto",
+		other: "{{count}} minutos"
+	},
+	aboutXHours: {
+		one: "cerca de 1 hora",
+		other: "cerca de {{count}} horas"
+	},
+	xHours: {
+		one: "1 hora",
+		other: "{{count}} horas"
+	},
+	xDays: {
+		one: "1 dia",
+		other: "{{count}} dias"
+	},
+	aboutXWeeks: {
+		one: "cerca de 1 semana",
+		other: "cerca de {{count}} semanas"
+	},
+	xWeeks: {
+		one: "1 semana",
+		other: "{{count}} semanas"
+	},
+	aboutXMonths: {
+		one: "cerca de 1 mês",
+		other: "cerca de {{count}} meses"
+	},
+	xMonths: {
+		one: "1 mês",
+		other: "{{count}} meses"
+	},
+	aboutXYears: {
+		one: "cerca de 1 ano",
+		other: "cerca de {{count}} anos"
+	},
+	xYears: {
+		one: "1 ano",
+		other: "{{count}} anos"
+	},
+	overXYears: {
+		one: "mais de 1 ano",
+		other: "mais de {{count}} anos"
+	},
+	almostXYears: {
+		one: "quase 1 ano",
+		other: "quase {{count}} anos"
+	}
+};
+var formatDistance = (token, count, options) => {
+	let result;
+	const tokenValue = formatDistanceLocale[token];
+	if (typeof tokenValue === "string") result = tokenValue;
+	else if (count === 1) result = tokenValue.one;
+	else result = tokenValue.other.replace("{{count}}", String(count));
+	if (options?.addSuffix) if (options.comparison && options.comparison > 0) return "em " + result;
+	else return "há " + result;
+	return result;
+};
+var formatLong = {
+	date: buildFormatLongFn({
+		formats: {
+			full: "EEEE, d 'de' MMMM 'de' y",
+			long: "d 'de' MMMM 'de' y",
+			medium: "d MMM y",
+			short: "dd/MM/yyyy"
+		},
+		defaultWidth: "full"
+	}),
+	time: buildFormatLongFn({
+		formats: {
+			full: "HH:mm:ss zzzz",
+			long: "HH:mm:ss z",
+			medium: "HH:mm:ss",
+			short: "HH:mm"
+		},
+		defaultWidth: "full"
+	}),
+	dateTime: buildFormatLongFn({
+		formats: {
+			full: "{{date}} 'às' {{time}}",
+			long: "{{date}} 'às' {{time}}",
+			medium: "{{date}}, {{time}}",
+			short: "{{date}}, {{time}}"
+		},
+		defaultWidth: "full"
+	})
+};
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/locale/pt-BR/_lib/formatRelative.js
+var formatRelativeLocale = {
+	lastWeek: (date) => {
+		const weekday = date.getDay();
+		return "'" + (weekday === 0 || weekday === 6 ? "último" : "última") + "' eeee 'às' p";
+	},
+	yesterday: "'ontem às' p",
+	today: "'hoje às' p",
+	tomorrow: "'amanhã às' p",
+	nextWeek: "eeee 'às' p",
+	other: "P"
+};
+var formatRelative = (token, date, _baseDate, _options) => {
+	const format = formatRelativeLocale[token];
+	if (typeof format === "function") return format(date);
+	return format;
+};
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/locale/pt-BR/_lib/localize.js
+var eraValues = {
+	narrow: ["AC", "DC"],
+	abbreviated: ["AC", "DC"],
+	wide: ["antes de cristo", "depois de cristo"]
+};
+var quarterValues = {
+	narrow: [
+		"1",
+		"2",
+		"3",
+		"4"
+	],
+	abbreviated: [
+		"T1",
+		"T2",
+		"T3",
+		"T4"
+	],
+	wide: [
+		"1º trimestre",
+		"2º trimestre",
+		"3º trimestre",
+		"4º trimestre"
+	]
+};
+var monthValues = {
+	narrow: [
+		"j",
+		"f",
+		"m",
+		"a",
+		"m",
+		"j",
+		"j",
+		"a",
+		"s",
+		"o",
+		"n",
+		"d"
+	],
+	abbreviated: [
+		"jan",
+		"fev",
+		"mar",
+		"abr",
+		"mai",
+		"jun",
+		"jul",
+		"ago",
+		"set",
+		"out",
+		"nov",
+		"dez"
+	],
+	wide: [
+		"janeiro",
+		"fevereiro",
+		"março",
+		"abril",
+		"maio",
+		"junho",
+		"julho",
+		"agosto",
+		"setembro",
+		"outubro",
+		"novembro",
+		"dezembro"
+	]
+};
+var dayValues = {
+	narrow: [
+		"D",
+		"S",
+		"T",
+		"Q",
+		"Q",
+		"S",
+		"S"
+	],
+	short: [
+		"dom",
+		"seg",
+		"ter",
+		"qua",
+		"qui",
+		"sex",
+		"sab"
+	],
+	abbreviated: [
+		"domingo",
+		"segunda",
+		"terça",
+		"quarta",
+		"quinta",
+		"sexta",
+		"sábado"
+	],
+	wide: [
+		"domingo",
+		"segunda-feira",
+		"terça-feira",
+		"quarta-feira",
+		"quinta-feira",
+		"sexta-feira",
+		"sábado"
+	]
+};
+var dayPeriodValues = {
+	narrow: {
+		am: "a",
+		pm: "p",
+		midnight: "mn",
+		noon: "md",
+		morning: "manhã",
+		afternoon: "tarde",
+		evening: "tarde",
+		night: "noite"
+	},
+	abbreviated: {
+		am: "AM",
+		pm: "PM",
+		midnight: "meia-noite",
+		noon: "meio-dia",
+		morning: "manhã",
+		afternoon: "tarde",
+		evening: "tarde",
+		night: "noite"
+	},
+	wide: {
+		am: "a.m.",
+		pm: "p.m.",
+		midnight: "meia-noite",
+		noon: "meio-dia",
+		morning: "manhã",
+		afternoon: "tarde",
+		evening: "tarde",
+		night: "noite"
+	}
+};
+var formattingDayPeriodValues = {
+	narrow: {
+		am: "a",
+		pm: "p",
+		midnight: "mn",
+		noon: "md",
+		morning: "da manhã",
+		afternoon: "da tarde",
+		evening: "da tarde",
+		night: "da noite"
+	},
+	abbreviated: {
+		am: "AM",
+		pm: "PM",
+		midnight: "meia-noite",
+		noon: "meio-dia",
+		morning: "da manhã",
+		afternoon: "da tarde",
+		evening: "da tarde",
+		night: "da noite"
+	},
+	wide: {
+		am: "a.m.",
+		pm: "p.m.",
+		midnight: "meia-noite",
+		noon: "meio-dia",
+		morning: "da manhã",
+		afternoon: "da tarde",
+		evening: "da tarde",
+		night: "da noite"
+	}
+};
+var ordinalNumber = (dirtyNumber, options) => {
+	const number = Number(dirtyNumber);
+	if (options?.unit === "week") return number + "ª";
+	return number + "º";
+};
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/locale/pt-BR.js
+/**
+* @category Locales
+* @summary Portuguese locale (Brazil).
+* @language Portuguese
+* @iso-639-2 por
+* @author Lucas Duailibe [@duailibe](https://github.com/duailibe)
+* @author Yago Carballo [@yagocarballo](https://github.com/YagoCarballo)
+*/
+var ptBR = {
+	code: "pt-BR",
+	formatDistance,
+	formatLong,
+	formatRelative,
+	localize: {
+		ordinalNumber,
+		era: buildLocalizeFn({
+			values: eraValues,
+			defaultWidth: "wide"
+		}),
+		quarter: buildLocalizeFn({
+			values: quarterValues,
+			defaultWidth: "wide",
+			argumentCallback: (quarter) => quarter - 1
+		}),
+		month: buildLocalizeFn({
+			values: monthValues,
+			defaultWidth: "wide"
+		}),
+		day: buildLocalizeFn({
+			values: dayValues,
+			defaultWidth: "wide"
+		}),
+		dayPeriod: buildLocalizeFn({
+			values: dayPeriodValues,
+			defaultWidth: "wide",
+			formattingValues: formattingDayPeriodValues,
+			defaultFormattingWidth: "wide"
+		})
+	},
+	match: {
+		ordinalNumber: buildMatchPatternFn({
+			matchPattern: /^(\d+)[ºªo]?/i,
+			parsePattern: /\d+/i,
+			valueCallback: (value) => parseInt(value, 10)
+		}),
+		era: buildMatchFn({
+			matchPatterns: {
+				narrow: /^(ac|dc|a|d)/i,
+				abbreviated: /^(a\.?\s?c\.?|d\.?\s?c\.?)/i,
+				wide: /^(antes de cristo|depois de cristo)/i
+			},
+			defaultMatchWidth: "wide",
+			parsePatterns: {
+				any: [/^ac/i, /^dc/i],
+				wide: [/^antes de cristo/i, /^depois de cristo/i]
+			},
+			defaultParseWidth: "any"
+		}),
+		quarter: buildMatchFn({
+			matchPatterns: {
+				narrow: /^[1234]/i,
+				abbreviated: /^T[1234]/i,
+				wide: /^[1234](º)? trimestre/i
+			},
+			defaultMatchWidth: "wide",
+			parsePatterns: { any: [
+				/1/i,
+				/2/i,
+				/3/i,
+				/4/i
+			] },
+			defaultParseWidth: "any",
+			valueCallback: (index) => index + 1
+		}),
+		month: buildMatchFn({
+			matchPatterns: {
+				narrow: /^[jfmajsond]/i,
+				abbreviated: /^(jan|fev|mar|abr|mai|jun|jul|ago|set|out|nov|dez)/i,
+				wide: /^(janeiro|fevereiro|março|abril|maio|junho|julho|agosto|setembro|outubro|novembro|dezembro)/i
+			},
+			defaultMatchWidth: "wide",
+			parsePatterns: {
+				narrow: [
+					/^j/i,
+					/^f/i,
+					/^m/i,
+					/^a/i,
+					/^m/i,
+					/^j/i,
+					/^j/i,
+					/^a/i,
+					/^s/i,
+					/^o/i,
+					/^n/i,
+					/^d/i
+				],
+				any: [
+					/^ja/i,
+					/^fev/i,
+					/^mar/i,
+					/^abr/i,
+					/^mai/i,
+					/^jun/i,
+					/^jul/i,
+					/^ago/i,
+					/^set/i,
+					/^out/i,
+					/^nov/i,
+					/^dez/i
+				]
+			},
+			defaultParseWidth: "any"
+		}),
+		day: buildMatchFn({
+			matchPatterns: {
+				narrow: /^(dom|[23456]ª?|s[aá]b)/i,
+				short: /^(dom|[23456]ª?|s[aá]b)/i,
+				abbreviated: /^(dom|seg|ter|qua|qui|sex|s[aá]b)/i,
+				wide: /^(domingo|(segunda|ter[cç]a|quarta|quinta|sexta)([- ]feira)?|s[aá]bado)/i
+			},
+			defaultMatchWidth: "wide",
+			parsePatterns: {
+				short: [
+					/^d/i,
+					/^2/i,
+					/^3/i,
+					/^4/i,
+					/^5/i,
+					/^6/i,
+					/^s[aá]/i
+				],
+				narrow: [
+					/^d/i,
+					/^2/i,
+					/^3/i,
+					/^4/i,
+					/^5/i,
+					/^6/i,
+					/^s[aá]/i
+				],
+				any: [
+					/^d/i,
+					/^seg/i,
+					/^t/i,
+					/^qua/i,
+					/^qui/i,
+					/^sex/i,
+					/^s[aá]b/i
+				]
+			},
+			defaultParseWidth: "any"
+		}),
+		dayPeriod: buildMatchFn({
+			matchPatterns: {
+				narrow: /^(a|p|mn|md|(da) (manhã|tarde|noite))/i,
+				any: /^([ap]\.?\s?m\.?|meia[-\s]noite|meio[-\s]dia|(da) (manhã|tarde|noite))/i
+			},
+			defaultMatchWidth: "any",
+			parsePatterns: { any: {
+				am: /^a/i,
+				pm: /^p/i,
+				midnight: /^mn|^meia[-\s]noite/i,
+				noon: /^md|^meio[-\s]dia/i,
+				morning: /manhã/i,
+				afternoon: /tarde/i,
+				evening: /tarde/i,
+				night: /noite/i
+			} },
+			defaultParseWidth: "any"
+		})
+	},
+	options: {
+		weekStartsOn: 0,
+		firstWeekContainsDate: 1
+	}
+};
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/@date-fns+tz@1.4.1/node_modules/@date-fns/tz/tzName/index.js
+/**
+* Time zone name format.
+*/
+/**
+* The function returns the time zone name for the given date in the specified
+* time zone.
+*
+* It uses the `Intl.DateTimeFormat` API and by default outputs the time zone
+* name in a long format, e.g. "Pacific Standard Time" or
+* "Singapore Standard Time".
+*
+* It is possible to specify the format as the third argument using one of the following options
+*
+* - "short": e.g. "EDT" or "GMT+8".
+* - "long": e.g. "Eastern Daylight Time".
+* - "shortGeneric": e.g. "ET" or "Singapore Time".
+* - "longGeneric": e.g. "Eastern Time" or "Singapore Standard Time".
+*
+* These options correspond to TR35 tokens `z..zzz`, `zzzz`, `v`, and `vvvv` respectively: https://www.unicode.org/reports/tr35/tr35-dates.html#dfst-zone
+*
+* @param timeZone - Time zone name (IANA or UTC offset)
+* @param date - Date object to get the time zone name for
+* @param format - Optional format of the time zone name. Defaults to "long". Can be "short", "long", "shortGeneric", or "longGeneric".
+*
+* @returns Time zone name (e.g. "Singapore Standard Time")
+*/
+function tzName(timeZone, date, format = "long") {
+	return new Intl.DateTimeFormat("en-US", {
+		hour: "numeric",
+		timeZone,
+		timeZoneName: format
+	}).format(date).split(/\s/g).slice(2).join(" ");
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/@date-fns+tz@1.4.1/node_modules/@date-fns/tz/tzOffset/index.js
+var offsetFormatCache = {};
+var offsetCache = {};
+/**
+* The function extracts UTC offset in minutes from the given date in specified
+* time zone.
+*
+* Unlike `Date.prototype.getTimezoneOffset`, this function returns the value
+* mirrored to the sign of the offset in the time zone. For Asia/Singapore
+* (UTC+8), `tzOffset` returns 480, while `getTimezoneOffset` returns -480.
+*
+* @param timeZone - Time zone name (IANA or UTC offset)
+* @param date - Date to check the offset for
+*
+* @returns UTC offset in minutes
+*/
+function tzOffset(timeZone, date) {
+	try {
+		const offsetStr = (offsetFormatCache[timeZone] ||= new Intl.DateTimeFormat("en-US", {
+			timeZone,
+			timeZoneName: "longOffset"
+		}).format)(date).split("GMT")[1];
+		if (offsetStr in offsetCache) return offsetCache[offsetStr];
+		return calcOffset(offsetStr, offsetStr.split(":"));
+	} catch {
+		if (timeZone in offsetCache) return offsetCache[timeZone];
+		const captures = timeZone?.match(offsetRe);
+		if (captures) return calcOffset(timeZone, captures.slice(1));
+		return NaN;
+	}
+}
+var offsetRe = /([+-]\d\d):?(\d\d)?/;
+function calcOffset(cacheStr, values) {
+	const hours = +(values[0] || 0);
+	const minutes = +(values[1] || 0);
+	const seconds = +(values[2] || 0) / 60;
+	return offsetCache[cacheStr] = hours * 60 + minutes > 0 ? hours * 60 + minutes + seconds : hours * 60 - minutes - seconds;
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/@date-fns+tz@1.4.1/node_modules/@date-fns/tz/date/mini.js
+var TZDateMini = class TZDateMini extends Date {
+	constructor(...args) {
+		super();
+		if (args.length > 1 && typeof args[args.length - 1] === "string") this.timeZone = args.pop();
+		this.internal = /* @__PURE__ */ new Date();
+		if (isNaN(tzOffset(this.timeZone, this))) this.setTime(NaN);
+		else if (!args.length) this.setTime(Date.now());
+		else if (typeof args[0] === "number" && (args.length === 1 || args.length === 2 && typeof args[1] !== "number")) this.setTime(args[0]);
+		else if (typeof args[0] === "string") this.setTime(+new Date(args[0]));
+		else if (args[0] instanceof Date) this.setTime(+args[0]);
+		else {
+			this.setTime(+new Date(...args));
+			adjustToSystemTZ(this, NaN);
+			syncToInternal(this);
+		}
+	}
+	static tz(tz, ...args) {
+		return args.length ? new TZDateMini(...args, tz) : new TZDateMini(Date.now(), tz);
+	}
+	withTimeZone(timeZone) {
+		return new TZDateMini(+this, timeZone);
+	}
+	getTimezoneOffset() {
+		const offset = -tzOffset(this.timeZone, this);
+		return offset > 0 ? Math.floor(offset) : Math.ceil(offset);
+	}
+	setTime(time) {
+		Date.prototype.setTime.apply(this, arguments);
+		syncToInternal(this);
+		return +this;
+	}
+	[Symbol.for("constructDateFrom")](date) {
+		return new TZDateMini(+new Date(date), this.timeZone);
+	}
+};
+var re = /^(get|set)(?!UTC)/;
+Object.getOwnPropertyNames(Date.prototype).forEach((method) => {
+	if (!re.test(method)) return;
+	const utcMethod = method.replace(re, "$1UTC");
+	if (!TZDateMini.prototype[utcMethod]) return;
+	if (method.startsWith("get")) TZDateMini.prototype[method] = function() {
+		return this.internal[utcMethod]();
+	};
+	else {
+		TZDateMini.prototype[method] = function() {
+			Date.prototype[utcMethod].apply(this.internal, arguments);
+			syncFromInternal(this);
+			return +this;
+		};
+		TZDateMini.prototype[utcMethod] = function() {
+			Date.prototype[utcMethod].apply(this, arguments);
+			syncToInternal(this);
+			return +this;
+		};
+	}
+});
+/**
+* Function syncs time to internal date, applying the time zone offset.
+*
+* @param {Date} date - Date to sync
+*/
+function syncToInternal(date) {
+	date.internal.setTime(+date);
+	date.internal.setUTCSeconds(date.internal.getUTCSeconds() - Math.round(-tzOffset(date.timeZone, date) * 60));
+}
+/**
+* Function syncs the internal date UTC values to the date. It allows to get
+* accurate timestamp value.
+*
+* @param {Date} date - The date to sync
+*/
+function syncFromInternal(date) {
+	Date.prototype.setFullYear.call(date, date.internal.getUTCFullYear(), date.internal.getUTCMonth(), date.internal.getUTCDate());
+	Date.prototype.setHours.call(date, date.internal.getUTCHours(), date.internal.getUTCMinutes(), date.internal.getUTCSeconds(), date.internal.getUTCMilliseconds());
+	adjustToSystemTZ(date);
+}
+/**
+* Function adjusts the date to the system time zone. It uses the time zone
+* differences to calculate the offset and adjust the date.
+*
+* @param {Date} date - Date to adjust
+*/
+function adjustToSystemTZ(date) {
+	const baseOffset = tzOffset(date.timeZone, date);
+	const offset = baseOffset > 0 ? Math.floor(baseOffset) : Math.ceil(baseOffset);
+	const prevHour = /* @__PURE__ */ new Date(+date);
+	prevHour.setUTCHours(prevHour.getUTCHours() - 1);
+	const systemOffset = -(/* @__PURE__ */ new Date(+date)).getTimezoneOffset();
+	const systemDSTChange = systemOffset - -(/* @__PURE__ */ new Date(+prevHour)).getTimezoneOffset();
+	const dstShift = Date.prototype.getHours.apply(date) !== date.internal.getUTCHours();
+	if (systemDSTChange && dstShift) date.internal.setUTCMinutes(date.internal.getUTCMinutes() + systemDSTChange);
+	const offsetDiff = systemOffset - offset;
+	if (offsetDiff) Date.prototype.setUTCMinutes.call(date, Date.prototype.getUTCMinutes.call(date) + offsetDiff);
+	const systemDate = /* @__PURE__ */ new Date(+date);
+	systemDate.setUTCSeconds(0);
+	const systemSecondsOffset = systemOffset > 0 ? systemDate.getSeconds() : (systemDate.getSeconds() - 60) % 60;
+	const secondsOffset = Math.round(-(tzOffset(date.timeZone, date) * 60)) % 60;
+	if (secondsOffset || systemSecondsOffset) {
+		date.internal.setUTCSeconds(date.internal.getUTCSeconds() + secondsOffset);
+		Date.prototype.setUTCSeconds.call(date, Date.prototype.getUTCSeconds.call(date) + secondsOffset + systemSecondsOffset);
+	}
+	const postBaseOffset = tzOffset(date.timeZone, date);
+	const postOffset = postBaseOffset > 0 ? Math.floor(postBaseOffset) : Math.ceil(postBaseOffset);
+	const postOffsetDiff = -(/* @__PURE__ */ new Date(+date)).getTimezoneOffset() - postOffset;
+	const offsetChanged = postOffset !== offset;
+	const postDiff = postOffsetDiff - offsetDiff;
+	if (offsetChanged && postDiff) {
+		Date.prototype.setUTCMinutes.call(date, Date.prototype.getUTCMinutes.call(date) + postDiff);
+		const newBaseOffset = tzOffset(date.timeZone, date);
+		const offsetChange = postOffset - (newBaseOffset > 0 ? Math.floor(newBaseOffset) : Math.ceil(newBaseOffset));
+		if (offsetChange) {
+			date.internal.setUTCMinutes(date.internal.getUTCMinutes() + offsetChange);
+			Date.prototype.setUTCMinutes.call(date, Date.prototype.getUTCMinutes.call(date) + offsetChange);
+		}
+	}
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/@date-fns+tz@1.4.1/node_modules/@date-fns/tz/date/index.js
+var TZDate = class TZDate extends TZDateMini {
+	static tz(tz, ...args) {
+		return args.length ? new TZDate(...args, tz) : new TZDate(Date.now(), tz);
+	}
+	toISOString() {
+		const [sign, hours, minutes] = this.tzComponents();
+		const tz = `${sign}${hours}:${minutes}`;
+		return this.internal.toISOString().slice(0, -1) + tz;
+	}
+	toString() {
+		return `${this.toDateString()} ${this.toTimeString()}`;
+	}
+	toDateString() {
+		const [day, date, month, year] = this.internal.toUTCString().split(" ");
+		return `${day?.slice(0, -1)} ${month} ${date} ${year}`;
+	}
+	toTimeString() {
+		const time = this.internal.toUTCString().split(" ")[4];
+		const [sign, hours, minutes] = this.tzComponents();
+		return `${time} GMT${sign}${hours}${minutes} (${tzName(this.timeZone, this)})`;
+	}
+	toLocaleString(locales, options) {
+		return Date.prototype.toLocaleString.call(this, locales, {
+			...options,
+			timeZone: options?.timeZone || this.timeZone
+		});
+	}
+	toLocaleDateString(locales, options) {
+		return Date.prototype.toLocaleDateString.call(this, locales, {
+			...options,
+			timeZone: options?.timeZone || this.timeZone
+		});
+	}
+	toLocaleTimeString(locales, options) {
+		return Date.prototype.toLocaleTimeString.call(this, locales, {
+			...options,
+			timeZone: options?.timeZone || this.timeZone
+		});
+	}
+	tzComponents() {
+		const offset = this.getTimezoneOffset();
+		return [
+			offset > 0 ? "-" : "+",
+			String(Math.floor(Math.abs(offset) / 60)).padStart(2, "0"),
+			String(Math.abs(offset) % 60).padStart(2, "0")
+		];
+	}
+	withTimeZone(timeZone) {
+		return new TZDate(+this, timeZone);
+	}
+	[Symbol.for("constructDateFrom")](date) {
+		return new TZDate(+new Date(date), this.timeZone);
+	}
+};
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/helpers/getBroadcastWeeksInMonth.js
+var FIVE_WEEKS = 5;
+var FOUR_WEEKS = 4;
+/**
+* Returns the number of weeks to display in the broadcast calendar for a given
+* month.
+*
+* The broadcast calendar may have either 4 or 5 weeks in a month, depending on
+* the start and end dates of the broadcast weeks.
+*
+* @since 9.4.0
+* @param month The month for which to calculate the number of weeks.
+* @param dateLib The date library to use for date manipulation.
+* @returns The number of weeks in the broadcast calendar (4 or 5).
+*/
+function getBroadcastWeeksInMonth(month, dateLib) {
+	const firstDayOfMonth = dateLib.startOfMonth(month);
+	const firstDayOfWeek = firstDayOfMonth.getDay() > 0 ? firstDayOfMonth.getDay() : 7;
+	const broadcastStartDate = dateLib.addDays(month, -firstDayOfWeek + 1);
+	const lastDateOfLastWeek = dateLib.addDays(broadcastStartDate, FIVE_WEEKS * 7 - 1);
+	return dateLib.getMonth(month) === dateLib.getMonth(lastDateOfLastWeek) ? FIVE_WEEKS : FOUR_WEEKS;
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/helpers/startOfBroadcastWeek.js
+/**
+* Returns the start date of the week in the broadcast calendar.
+*
+* The broadcast week starts on Monday. If the first day of the month is not a
+* Monday, this function calculates the previous Monday as the start of the
+* broadcast week.
+*
+* @since 9.4.0
+* @param date The date for which to calculate the start of the broadcast week.
+* @param dateLib The date library to use for date manipulation.
+* @returns The start date of the broadcast week.
+*/
+function startOfBroadcastWeek(date, dateLib) {
+	const firstOfMonth = dateLib.startOfMonth(date);
+	const dayOfWeek = firstOfMonth.getDay();
+	if (dayOfWeek === 1) return firstOfMonth;
+	else if (dayOfWeek === 0) return dateLib.addDays(firstOfMonth, -6);
+	else return dateLib.addDays(firstOfMonth, -1 * (dayOfWeek - 1));
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/helpers/endOfBroadcastWeek.js
+/**
+* Returns the end date of the week in the broadcast calendar.
+*
+* The broadcast week ends on the last day of the last broadcast week for the
+* given date.
+*
+* @since 9.4.0
+* @param date The date for which to calculate the end of the broadcast week.
+* @param dateLib The date library to use for date manipulation.
+* @returns The end date of the broadcast week.
+*/
+function endOfBroadcastWeek(date, dateLib) {
+	const startDate = startOfBroadcastWeek(date, dateLib);
+	const numberOfWeeks = getBroadcastWeeksInMonth(date, dateLib);
+	return dateLib.addDays(startDate, numberOfWeeks * 7 - 1);
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/locale/en-US.js
+/** English (United States) locale extended with DayPicker-specific translations. */
+var enUS = {
+	...enUS$1,
+	labels: {
+		labelDayButton: (date, modifiers, options, dateLib) => {
+			let formatDate;
+			if (dateLib && typeof dateLib.format === "function") formatDate = dateLib.format.bind(dateLib);
+			else formatDate = (d, pattern) => format(d, pattern, {
+				locale: enUS$1,
+				...options
+			});
+			let label = formatDate(date, "PPPP");
+			if (modifiers.today) label = `Today, ${label}`;
+			if (modifiers.selected) label = `${label}, selected`;
+			return label;
+		},
+		labelMonthDropdown: "Choose the Month",
+		labelNext: "Go to the Next Month",
+		labelPrevious: "Go to the Previous Month",
+		labelWeekNumber: (weekNumber) => `Week ${weekNumber}`,
+		labelYearDropdown: "Choose the Year",
+		labelGrid: (date, options, dateLib) => {
+			let formatDate;
+			if (dateLib && typeof dateLib.format === "function") formatDate = dateLib.format.bind(dateLib);
+			else formatDate = (d, pattern) => format(d, pattern, {
+				locale: enUS$1,
+				...options
+			});
+			return formatDate(date, "LLLL yyyy");
+		},
+		labelGridcell: (date, modifiers, options, dateLib) => {
+			let formatDate;
+			if (dateLib && typeof dateLib.format === "function") formatDate = dateLib.format.bind(dateLib);
+			else formatDate = (d, pattern) => format(d, pattern, {
+				locale: enUS$1,
+				...options
+			});
+			let label = formatDate(date, "PPPP");
+			if (modifiers?.today) label = `Today, ${label}`;
+			return label;
+		},
+		labelNav: "Navigation bar",
+		labelWeekNumberHeader: "Week Number",
+		labelWeekday: (date, options, dateLib) => {
+			let formatDate;
+			if (dateLib && typeof dateLib.format === "function") formatDate = dateLib.format.bind(dateLib);
+			else formatDate = (d, pattern) => format(d, pattern, {
+				locale: enUS$1,
+				...options
+			});
+			return formatDate(date, "cccc");
+		}
+	}
+};
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/classes/DateLib.js
+/**
+* A wrapper class around [date-fns](http://date-fns.org) that provides utility
+* methods for date manipulation and formatting.
+*
+* @since 9.2.0
+* @example
+*   const dateLib = new DateLib({ locale: es });
+*   const newDate = dateLib.addDays(new Date(), 5);
+*/
+var DateLib = class DateLib {
+	/**
+	* Creates an instance of `DateLib`.
+	*
+	* @param options Configuration options for the date library.
+	* @param overrides Custom overrides for the date library functions.
+	*/
+	constructor(options, overrides) {
+		/**
+		* Reference to the built-in Date constructor.
+		*
+		* @deprecated Use `newDate()` or `today()`.
+		*/
+		this.Date = Date;
+		/**
+		* Creates a new `Date` object representing today's date.
+		*
+		* @since 9.5.0
+		* @returns A `Date` object for today's date.
+		*/
+		this.today = () => {
+			if (this.overrides?.today) return this.overrides.today();
+			if (this.options.timeZone) return TZDate.tz(this.options.timeZone);
+			return new this.Date();
+		};
+		/**
+		* Creates a new `Date` object with the specified year, month, and day.
+		*
+		* @since 9.5.0
+		* @param year The year.
+		* @param monthIndex The month (0-11).
+		* @param date The day of the month.
+		* @returns A new `Date` object.
+		*/
+		this.newDate = (year, monthIndex, date) => {
+			if (this.overrides?.newDate) return this.overrides.newDate(year, monthIndex, date);
+			if (this.options.timeZone) return new TZDate(year, monthIndex, date, this.options.timeZone);
+			return new Date(year, monthIndex, date);
+		};
+		/**
+		* Adds the specified number of days to the given date.
+		*
+		* @param date The date to add days to.
+		* @param amount The number of days to add.
+		* @returns The new date with the days added.
+		*/
+		this.addDays = (date, amount) => {
+			return this.overrides?.addDays ? this.overrides.addDays(date, amount) : addDays(date, amount);
+		};
+		/**
+		* Adds the specified number of months to the given date.
+		*
+		* @param date The date to add months to.
+		* @param amount The number of months to add.
+		* @returns The new date with the months added.
+		*/
+		this.addMonths = (date, amount) => {
+			return this.overrides?.addMonths ? this.overrides.addMonths(date, amount) : addMonths(date, amount);
+		};
+		/**
+		* Adds the specified number of weeks to the given date.
+		*
+		* @param date The date to add weeks to.
+		* @param amount The number of weeks to add.
+		* @returns The new date with the weeks added.
+		*/
+		this.addWeeks = (date, amount) => {
+			return this.overrides?.addWeeks ? this.overrides.addWeeks(date, amount) : addWeeks(date, amount);
+		};
+		/**
+		* Adds the specified number of years to the given date.
+		*
+		* @param date The date to add years to.
+		* @param amount The number of years to add.
+		* @returns The new date with the years added.
+		*/
+		this.addYears = (date, amount) => {
+			return this.overrides?.addYears ? this.overrides.addYears(date, amount) : addYears(date, amount);
+		};
+		/**
+		* Returns the number of calendar days between the given dates.
+		*
+		* @param dateLeft The later date.
+		* @param dateRight The earlier date.
+		* @returns The number of calendar days between the dates.
+		*/
+		this.differenceInCalendarDays = (dateLeft, dateRight) => {
+			return this.overrides?.differenceInCalendarDays ? this.overrides.differenceInCalendarDays(dateLeft, dateRight) : differenceInCalendarDays(dateLeft, dateRight);
+		};
+		/**
+		* Returns the number of calendar months between the given dates.
+		*
+		* @param dateLeft The later date.
+		* @param dateRight The earlier date.
+		* @returns The number of calendar months between the dates.
+		*/
+		this.differenceInCalendarMonths = (dateLeft, dateRight) => {
+			return this.overrides?.differenceInCalendarMonths ? this.overrides.differenceInCalendarMonths(dateLeft, dateRight) : differenceInCalendarMonths(dateLeft, dateRight);
+		};
+		/**
+		* Returns the months between the given dates.
+		*
+		* @param interval The interval to get the months for.
+		*/
+		this.eachMonthOfInterval = (interval) => {
+			return this.overrides?.eachMonthOfInterval ? this.overrides.eachMonthOfInterval(interval) : eachMonthOfInterval(interval);
+		};
+		/**
+		* Returns the years between the given dates.
+		*
+		* @since 9.11.1
+		* @param interval The interval to get the years for.
+		* @returns The array of years in the interval.
+		*/
+		this.eachYearOfInterval = (interval) => {
+			const years = this.overrides?.eachYearOfInterval ? this.overrides.eachYearOfInterval(interval) : eachYearOfInterval(interval);
+			const uniqueYears = new Set(years.map((d) => this.getYear(d)));
+			if (uniqueYears.size === years.length) return years;
+			const yearsArray = [];
+			uniqueYears.forEach((y) => {
+				yearsArray.push(new Date(y, 0, 1));
+			});
+			return yearsArray;
+		};
+		/**
+		* Returns the end of the broadcast week for the given date.
+		*
+		* @param date The original date.
+		* @returns The end of the broadcast week.
+		*/
+		this.endOfBroadcastWeek = (date) => {
+			return this.overrides?.endOfBroadcastWeek ? this.overrides.endOfBroadcastWeek(date) : endOfBroadcastWeek(date, this);
+		};
+		/**
+		* Returns the end of the ISO week for the given date.
+		*
+		* @param date The original date.
+		* @returns The end of the ISO week.
+		*/
+		this.endOfISOWeek = (date) => {
+			return this.overrides?.endOfISOWeek ? this.overrides.endOfISOWeek(date) : endOfISOWeek(date);
+		};
+		/**
+		* Returns the end of the month for the given date.
+		*
+		* @param date The original date.
+		* @returns The end of the month.
+		*/
+		this.endOfMonth = (date) => {
+			return this.overrides?.endOfMonth ? this.overrides.endOfMonth(date) : endOfMonth(date);
+		};
+		/**
+		* Returns the end of the week for the given date.
+		*
+		* @param date The original date.
+		* @returns The end of the week.
+		*/
+		this.endOfWeek = (date, options) => {
+			return this.overrides?.endOfWeek ? this.overrides.endOfWeek(date, options) : endOfWeek(date, this.options);
+		};
+		/**
+		* Returns the end of the year for the given date.
+		*
+		* @param date The original date.
+		* @returns The end of the year.
+		*/
+		this.endOfYear = (date) => {
+			return this.overrides?.endOfYear ? this.overrides.endOfYear(date) : endOfYear(date);
+		};
+		/**
+		* Formats the given date using the specified format string.
+		*
+		* @param date The date to format.
+		* @param formatStr The format string.
+		* @returns The formatted date string.
+		*/
+		this.format = (date, formatStr, _options) => {
+			const formatted = this.overrides?.format ? this.overrides.format(date, formatStr, this.options) : format(date, formatStr, this.options);
+			if (this.options.numerals && this.options.numerals !== "latn") return this.replaceDigits(formatted);
+			return formatted;
+		};
+		/**
+		* Returns the ISO week number for the given date.
+		*
+		* @param date The date to get the ISO week number for.
+		* @returns The ISO week number.
+		*/
+		this.getISOWeek = (date) => {
+			return this.overrides?.getISOWeek ? this.overrides.getISOWeek(date) : getISOWeek(date);
+		};
+		/**
+		* Returns the month of the given date.
+		*
+		* @param date The date to get the month for.
+		* @returns The month.
+		*/
+		this.getMonth = (date, _options) => {
+			return this.overrides?.getMonth ? this.overrides.getMonth(date, this.options) : getMonth(date, this.options);
+		};
+		/**
+		* Returns the year of the given date.
+		*
+		* @param date The date to get the year for.
+		* @returns The year.
+		*/
+		this.getYear = (date, _options) => {
+			return this.overrides?.getYear ? this.overrides.getYear(date, this.options) : getYear(date, this.options);
+		};
+		/**
+		* Returns the local week number for the given date.
+		*
+		* @param date The date to get the week number for.
+		* @returns The week number.
+		*/
+		this.getWeek = (date, _options) => {
+			return this.overrides?.getWeek ? this.overrides.getWeek(date, this.options) : getWeek(date, this.options);
+		};
+		/**
+		* Checks if the first date is after the second date.
+		*
+		* @param date The date to compare.
+		* @param dateToCompare The date to compare with.
+		* @returns True if the first date is after the second date.
+		*/
+		this.isAfter = (date, dateToCompare) => {
+			return this.overrides?.isAfter ? this.overrides.isAfter(date, dateToCompare) : isAfter(date, dateToCompare);
+		};
+		/**
+		* Checks if the first date is before the second date.
+		*
+		* @param date The date to compare.
+		* @param dateToCompare The date to compare with.
+		* @returns True if the first date is before the second date.
+		*/
+		this.isBefore = (date, dateToCompare) => {
+			return this.overrides?.isBefore ? this.overrides.isBefore(date, dateToCompare) : isBefore(date, dateToCompare);
+		};
+		/**
+		* Checks if the given value is a Date object.
+		*
+		* @param value The value to check.
+		* @returns True if the value is a Date object.
+		*/
+		this.isDate = (value) => {
+			return this.overrides?.isDate ? this.overrides.isDate(value) : isDate(value);
+		};
+		/**
+		* Checks if the given dates are on the same day.
+		*
+		* @param dateLeft The first date to compare.
+		* @param dateRight The second date to compare.
+		* @returns True if the dates are on the same day.
+		*/
+		this.isSameDay = (dateLeft, dateRight) => {
+			return this.overrides?.isSameDay ? this.overrides.isSameDay(dateLeft, dateRight) : isSameDay(dateLeft, dateRight);
+		};
+		/**
+		* Checks if the given dates are in the same month.
+		*
+		* @param dateLeft The first date to compare.
+		* @param dateRight The second date to compare.
+		* @returns True if the dates are in the same month.
+		*/
+		this.isSameMonth = (dateLeft, dateRight) => {
+			return this.overrides?.isSameMonth ? this.overrides.isSameMonth(dateLeft, dateRight) : isSameMonth(dateLeft, dateRight);
+		};
+		/**
+		* Checks if the given dates are in the same year.
+		*
+		* @param dateLeft The first date to compare.
+		* @param dateRight The second date to compare.
+		* @returns True if the dates are in the same year.
+		*/
+		this.isSameYear = (dateLeft, dateRight) => {
+			return this.overrides?.isSameYear ? this.overrides.isSameYear(dateLeft, dateRight) : isSameYear(dateLeft, dateRight);
+		};
+		/**
+		* Returns the latest date in the given array of dates.
+		*
+		* @param dates The array of dates to compare.
+		* @returns The latest date.
+		*/
+		this.max = (dates) => {
+			return this.overrides?.max ? this.overrides.max(dates) : max(dates);
+		};
+		/**
+		* Returns the earliest date in the given array of dates.
+		*
+		* @param dates The array of dates to compare.
+		* @returns The earliest date.
+		*/
+		this.min = (dates) => {
+			return this.overrides?.min ? this.overrides.min(dates) : min(dates);
+		};
+		/**
+		* Sets the month of the given date.
+		*
+		* @param date The date to set the month on.
+		* @param month The month to set (0-11).
+		* @returns The new date with the month set.
+		*/
+		this.setMonth = (date, month) => {
+			return this.overrides?.setMonth ? this.overrides.setMonth(date, month) : setMonth(date, month);
+		};
+		/**
+		* Sets the year of the given date.
+		*
+		* @param date The date to set the year on.
+		* @param year The year to set.
+		* @returns The new date with the year set.
+		*/
+		this.setYear = (date, year) => {
+			return this.overrides?.setYear ? this.overrides.setYear(date, year) : setYear(date, year);
+		};
+		/**
+		* Returns the start of the broadcast week for the given date.
+		*
+		* @param date The original date.
+		* @returns The start of the broadcast week.
+		*/
+		this.startOfBroadcastWeek = (date, _dateLib) => {
+			return this.overrides?.startOfBroadcastWeek ? this.overrides.startOfBroadcastWeek(date, this) : startOfBroadcastWeek(date, this);
+		};
+		/**
+		* Returns the start of the day for the given date.
+		*
+		* @param date The original date.
+		* @returns The start of the day.
+		*/
+		this.startOfDay = (date) => {
+			return this.overrides?.startOfDay ? this.overrides.startOfDay(date) : startOfDay(date);
+		};
+		/**
+		* Returns the start of the ISO week for the given date.
+		*
+		* @param date The original date.
+		* @returns The start of the ISO week.
+		*/
+		this.startOfISOWeek = (date) => {
+			return this.overrides?.startOfISOWeek ? this.overrides.startOfISOWeek(date) : startOfISOWeek(date);
+		};
+		/**
+		* Returns the start of the month for the given date.
+		*
+		* @param date The original date.
+		* @returns The start of the month.
+		*/
+		this.startOfMonth = (date) => {
+			return this.overrides?.startOfMonth ? this.overrides.startOfMonth(date) : startOfMonth(date);
+		};
+		/**
+		* Returns the start of the week for the given date.
+		*
+		* @param date The original date.
+		* @returns The start of the week.
+		*/
+		this.startOfWeek = (date, _options) => {
+			return this.overrides?.startOfWeek ? this.overrides.startOfWeek(date, this.options) : startOfWeek(date, this.options);
+		};
+		/**
+		* Returns the start of the year for the given date.
+		*
+		* @param date The original date.
+		* @returns The start of the year.
+		*/
+		this.startOfYear = (date) => {
+			return this.overrides?.startOfYear ? this.overrides.startOfYear(date) : startOfYear(date);
+		};
+		this.options = {
+			locale: enUS,
+			...options
+		};
+		this.overrides = overrides;
+	}
+	/**
+	* Generates a mapping of Arabic digits (0-9) to the target numbering system
+	* digits.
+	*
+	* @since 9.5.0
+	* @returns A record mapping Arabic digits to the target numerals.
+	*/
+	getDigitMap() {
+		const { numerals = "latn" } = this.options;
+		const formatter = new Intl.NumberFormat("en-US", { numberingSystem: numerals });
+		const digitMap = {};
+		for (let i = 0; i < 10; i++) digitMap[i.toString()] = formatter.format(i);
+		return digitMap;
+	}
+	/**
+	* Replaces Arabic digits in a string with the target numbering system digits.
+	*
+	* @since 9.5.0
+	* @param input The string containing Arabic digits.
+	* @returns The string with digits replaced.
+	*/
+	replaceDigits(input) {
+		const digitMap = this.getDigitMap();
+		return input.replace(/\d/g, (digit) => digitMap[digit] || digit);
+	}
+	/**
+	* Formats a number using the configured numbering system.
+	*
+	* @since 9.5.0
+	* @param value The number to format.
+	* @returns The formatted number as a string.
+	*/
+	formatNumber(value) {
+		return this.replaceDigits(value.toString());
+	}
+	/**
+	* Returns the preferred ordering for month and year labels for the current
+	* locale.
+	*/
+	getMonthYearOrder() {
+		const code = this.options.locale?.code;
+		if (!code) return "month-first";
+		return DateLib.yearFirstLocales.has(code) ? "year-first" : "month-first";
+	}
+	/**
+	* Formats the month/year pair respecting locale conventions.
+	*
+	* @since 9.11.0
+	*/
+	formatMonthYear(date) {
+		const { locale, timeZone, numerals } = this.options;
+		const localeCode = locale?.code;
+		if (localeCode && DateLib.yearFirstLocales.has(localeCode)) try {
+			return new Intl.DateTimeFormat(localeCode, {
+				month: "long",
+				year: "numeric",
+				timeZone,
+				numberingSystem: numerals
+			}).format(date);
+		} catch {}
+		const pattern = this.getMonthYearOrder() === "year-first" ? "y LLLL" : "LLLL y";
+		return this.format(date, pattern);
+	}
+};
+DateLib.yearFirstLocales = new Set([
+	"eu",
+	"hu",
+	"ja",
+	"ja-Hira",
+	"ja-JP",
+	"ko",
+	"ko-KR",
+	"lt",
+	"lt-LT",
+	"lv",
+	"lv-LV",
+	"mn",
+	"mn-MN",
+	"zh",
+	"zh-CN",
+	"zh-HK",
+	"zh-TW"
+]);
+/**
+* The default date library with English locale.
+*
+* @since 9.2.0
+*/
+var defaultDateLib = new DateLib();
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/classes/CalendarDay.js
+/**
+* Represents a day displayed in the calendar.
+*
+* In DayPicker, a `CalendarDay` is a wrapper around a `Date` object that
+* provides additional information about the day, such as whether it belongs to
+* the displayed month.
+*/
+var CalendarDay = class {
+	constructor(date, displayMonth, dateLib = defaultDateLib) {
+		this.date = date;
+		this.displayMonth = displayMonth;
+		this.outside = Boolean(displayMonth && !dateLib.isSameMonth(date, displayMonth));
+		this.dateLib = dateLib;
+		this.isoDate = dateLib.format(date, "yyyy-MM-dd");
+		this.displayMonthId = dateLib.format(displayMonth, "yyyy-MM");
+		this.dateMonthId = dateLib.format(date, "yyyy-MM");
+	}
+	/**
+	* Checks if this day is equal to another `CalendarDay`, considering both the
+	* date and the displayed month.
+	*
+	* @param day The `CalendarDay` to compare with.
+	* @returns `true` if the days are equal, otherwise `false`.
+	*/
+	isEqualTo(day) {
+		return this.dateLib.isSameDay(day.date, this.date) && this.dateLib.isSameMonth(day.displayMonth, this.displayMonth);
+	}
+};
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/classes/CalendarMonth.js
+/**
+* Represents a month in a calendar year.
+*
+* A `CalendarMonth` contains the weeks within the month and the date of the
+* month.
+*/
+var CalendarMonth = class {
+	constructor(month, weeks) {
+		this.date = month;
+		this.weeks = weeks;
+	}
+};
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/classes/CalendarWeek.js
+/**
+* Represents a week in a calendar month.
+*
+* A `CalendarWeek` contains the days within the week and the week number.
+*/
+var CalendarWeek = class {
+	constructor(weekNumber, days) {
+		this.days = days;
+		this.weekNumber = weekNumber;
+	}
+};
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/components/Button.js
+/**
+* Render the button elements in the calendar.
+*
+* @private
+* @deprecated Use `PreviousMonthButton` or `@link NextMonthButton` instead.
+*/
+function Button(props) {
+	return import_react.createElement("button", { ...props });
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/components/CaptionLabel.js
+/**
+* Render the label in the month caption.
+*
+* @group Components
+* @see https://daypicker.dev/guides/custom-components
+*/
+function CaptionLabel(props) {
+	return import_react.createElement("span", { ...props });
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/components/Chevron.js
+/**
+* Render the chevron icon used in the navigation buttons and dropdowns.
+*
+* @group Components
+* @see https://daypicker.dev/guides/custom-components
+*/
+function Chevron(props) {
+	const { size = 24, orientation = "left", className } = props;
+	return import_react.createElement("svg", {
+		className,
+		width: size,
+		height: size,
+		viewBox: "0 0 24 24"
+	}, orientation === "up" && import_react.createElement("polygon", { points: "6.77 17 12.5 11.43 18.24 17 20 15.28 12.5 8 5 15.28" }), orientation === "down" && import_react.createElement("polygon", { points: "6.77 8 12.5 13.57 18.24 8 20 9.72 12.5 17 5 9.72" }), orientation === "left" && import_react.createElement("polygon", { points: "16 18.112 9.81111111 12 16 5.87733333 14.0888889 4 6 12 14.0888889 20" }), orientation === "right" && import_react.createElement("polygon", { points: "8 18.112 14.18888889 12 8 5.87733333 9.91111111 4 18 12 9.91111111 20" }));
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/components/Day.js
+/**
+* Render a grid cell for a specific day in the calendar.
+*
+* Handles interaction and focus for the day. If you only need to change the
+* content of the day cell, consider swapping the `DayButton` component
+* instead.
+*
+* @group Components
+* @see https://daypicker.dev/guides/custom-components
+*/
+function Day(props) {
+	const { day, modifiers, ...tdProps } = props;
+	return import_react.createElement("td", { ...tdProps });
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/components/DayButton.js
+/**
+* Render a button for a specific day in the calendar.
+*
+* @group Components
+* @see https://daypicker.dev/guides/custom-components
+*/
+function DayButton(props) {
+	const { day, modifiers, ...buttonProps } = props;
+	const ref = import_react.useRef(null);
+	import_react.useEffect(() => {
+		if (modifiers.focused) ref.current?.focus();
+	}, [modifiers.focused]);
+	return import_react.createElement("button", {
+		ref,
+		...buttonProps
+	});
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/UI.js
+/**
+* Enum representing the UI elements composing DayPicker. These elements are
+* mapped to {@link CustomComponents}, {@link ClassNames}, and {@link Styles}.
+*
+* Some elements are extended by flags and modifiers.
+*/
+var UI;
+(function(UI) {
+	/** The root component displaying the months and the navigation bar. */
+	UI["Root"] = "root";
+	/** The Chevron SVG element used by navigation buttons and dropdowns. */
+	UI["Chevron"] = "chevron";
+	/**
+	* The grid cell with the day's date. Extended by {@link DayFlag} and
+	* {@link SelectionState}.
+	*/
+	UI["Day"] = "day";
+	/** The button containing the formatted day's date, inside the grid cell. */
+	UI["DayButton"] = "day_button";
+	/** The caption label of the month (when not showing the dropdown navigation). */
+	UI["CaptionLabel"] = "caption_label";
+	/** The container of the dropdown navigation (when enabled). */
+	UI["Dropdowns"] = "dropdowns";
+	/** The dropdown element to select for years and months. */
+	UI["Dropdown"] = "dropdown";
+	/** The container element of the dropdown. */
+	UI["DropdownRoot"] = "dropdown_root";
+	/** The root element of the footer. */
+	UI["Footer"] = "footer";
+	/** The month grid. */
+	UI["MonthGrid"] = "month_grid";
+	/** Contains the dropdown navigation or the caption label. */
+	UI["MonthCaption"] = "month_caption";
+	/** The dropdown with the months. */
+	UI["MonthsDropdown"] = "months_dropdown";
+	/** Wrapper of the month grid. */
+	UI["Month"] = "month";
+	/** The container of the displayed months. */
+	UI["Months"] = "months";
+	/** The navigation bar with the previous and next buttons. */
+	UI["Nav"] = "nav";
+	/**
+	* The next month button in the navigation. *
+	*
+	* @since 9.1.0
+	*/
+	UI["NextMonthButton"] = "button_next";
+	/**
+	* The previous month button in the navigation.
+	*
+	* @since 9.1.0
+	*/
+	UI["PreviousMonthButton"] = "button_previous";
+	/** The row containing the week. */
+	UI["Week"] = "week";
+	/** The group of row weeks in a month (`tbody`). */
+	UI["Weeks"] = "weeks";
+	/** The column header with the weekday. */
+	UI["Weekday"] = "weekday";
+	/** The row grouping the weekdays in the column headers. */
+	UI["Weekdays"] = "weekdays";
+	/** The cell containing the week number. */
+	UI["WeekNumber"] = "week_number";
+	/** The cell header of the week numbers column. */
+	UI["WeekNumberHeader"] = "week_number_header";
+	/** The dropdown with the years. */
+	UI["YearsDropdown"] = "years_dropdown";
+})(UI || (UI = {}));
+/** Enum representing flags for the {@link UI | UI.Day} element. */
+var DayFlag;
+(function(DayFlag) {
+	/** The day is disabled. */
+	DayFlag["disabled"] = "disabled";
+	/** The day is hidden. */
+	DayFlag["hidden"] = "hidden";
+	/** The day is outside the current month. */
+	DayFlag["outside"] = "outside";
+	/** The day is focused. */
+	DayFlag["focused"] = "focused";
+	/** The day is today. */
+	DayFlag["today"] = "today";
+})(DayFlag || (DayFlag = {}));
+/**
+* Enum representing selection states that can be applied to the
+* {@link UI | UI.Day} element in selection mode.
+*/
+var SelectionState;
+(function(SelectionState) {
+	/** The day is at the end of a selected range. */
+	SelectionState["range_end"] = "range_end";
+	/** The day is at the middle of a selected range. */
+	SelectionState["range_middle"] = "range_middle";
+	/** The day is at the start of a selected range. */
+	SelectionState["range_start"] = "range_start";
+	/** The day is selected. */
+	SelectionState["selected"] = "selected";
+})(SelectionState || (SelectionState = {}));
+/**
+* Enum representing different animation states for transitioning between
+* months.
+*/
+var Animation;
+(function(Animation) {
+	/** The entering weeks when they appear before the exiting month. */
+	Animation["weeks_before_enter"] = "weeks_before_enter";
+	/** The exiting weeks when they disappear before the entering month. */
+	Animation["weeks_before_exit"] = "weeks_before_exit";
+	/** The entering weeks when they appear after the exiting month. */
+	Animation["weeks_after_enter"] = "weeks_after_enter";
+	/** The exiting weeks when they disappear after the entering month. */
+	Animation["weeks_after_exit"] = "weeks_after_exit";
+	/** The entering caption when it appears after the exiting month. */
+	Animation["caption_after_enter"] = "caption_after_enter";
+	/** The exiting caption when it disappears after the entering month. */
+	Animation["caption_after_exit"] = "caption_after_exit";
+	/** The entering caption when it appears before the exiting month. */
+	Animation["caption_before_enter"] = "caption_before_enter";
+	/** The exiting caption when it disappears before the entering month. */
+	Animation["caption_before_exit"] = "caption_before_exit";
+})(Animation || (Animation = {}));
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/components/Dropdown.js
+/**
+* Render a dropdown component for navigation in the calendar.
+*
+* @group Components
+* @see https://daypicker.dev/guides/custom-components
+*/
+function Dropdown(props) {
+	const { options, className, components, classNames, ...selectProps } = props;
+	const cssClassSelect = [classNames[UI.Dropdown], className].join(" ");
+	const selectedOption = options?.find(({ value }) => value === selectProps.value);
+	return import_react.createElement("span", {
+		"data-disabled": selectProps.disabled,
+		className: classNames[UI.DropdownRoot]
+	}, import_react.createElement(components.Select, {
+		className: cssClassSelect,
+		...selectProps
+	}, options?.map(({ value, label, disabled }) => import_react.createElement(components.Option, {
+		key: value,
+		value,
+		disabled
+	}, label))), import_react.createElement("span", {
+		className: classNames[UI.CaptionLabel],
+		"aria-hidden": true
+	}, selectedOption?.label, import_react.createElement(components.Chevron, {
+		orientation: "down",
+		size: 18,
+		className: classNames[UI.Chevron]
+	})));
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/components/DropdownNav.js
+/**
+* Render the navigation dropdowns for the calendar.
+*
+* @group Components
+* @see https://daypicker.dev/guides/custom-components
+*/
+function DropdownNav(props) {
+	return import_react.createElement("div", { ...props });
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/components/Footer.js
+/**
+* Render the footer of the calendar.
+*
+* @group Components
+* @see https://daypicker.dev/guides/custom-components
+*/
+function Footer(props) {
+	return import_react.createElement("div", { ...props });
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/components/Month.js
+/**
+* Render the grid with the weekday header row and the weeks for a specific
+* month.
+*
+* @group Components
+* @see https://daypicker.dev/guides/custom-components
+*/
+function Month(props) {
+	const { calendarMonth, displayIndex, ...divProps } = props;
+	return import_react.createElement("div", { ...divProps }, props.children);
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/components/MonthCaption.js
+/**
+* Render the caption for a month in the calendar.
+*
+* @group Components
+* @see https://daypicker.dev/guides/custom-components
+*/
+function MonthCaption(props) {
+	const { calendarMonth, displayIndex, ...divProps } = props;
+	return import_react.createElement("div", { ...divProps });
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/components/MonthGrid.js
+/**
+* Render the grid of days for a specific month.
+*
+* @group Components
+* @see https://daypicker.dev/guides/custom-components
+*/
+function MonthGrid(props) {
+	return import_react.createElement("table", { ...props });
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/components/Months.js
+/**
+* Render a container wrapping the month grids.
+*
+* @group Components
+* @see https://daypicker.dev/guides/custom-components
+*/
+function Months(props) {
+	return import_react.createElement("div", { ...props });
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/useDayPicker.js
+/** @ignore */
+var dayPickerContext = (0, import_react.createContext)(void 0);
+/**
+* Provides access to the DayPicker context, which includes properties and
+* methods to interact with the DayPicker component. This hook must be used
+* within a custom component.
+*
+* @template T - Use this type to refine the returned context type with a
+*   specific selection mode.
+* @returns The context to work with DayPicker.
+* @throws {Error} If the hook is used outside of a DayPicker provider.
+* @group Hooks
+* @see https://daypicker.dev/guides/custom-components
+*/
+function useDayPicker() {
+	const context = (0, import_react.useContext)(dayPickerContext);
+	if (context === void 0) throw new Error("useDayPicker() must be used within a custom component.");
+	return context;
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/components/MonthsDropdown.js
+/**
+* Render a dropdown to navigate between months in the calendar.
+*
+* @group Components
+* @see https://daypicker.dev/guides/custom-components
+*/
+function MonthsDropdown(props) {
+	const { components } = useDayPicker();
+	return import_react.createElement(components.Dropdown, { ...props });
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/components/Nav.js
+/**
+* Render the navigation toolbar with buttons to navigate between months.
+*
+* @group Components
+* @see https://daypicker.dev/guides/custom-components
+*/
+function Nav(props) {
+	const { onPreviousClick, onNextClick, previousMonth, nextMonth, ...navProps } = props;
+	const { components, classNames, labels: { labelPrevious, labelNext } } = useDayPicker();
+	const handleNextClick = (0, import_react.useCallback)((e) => {
+		if (nextMonth) onNextClick?.(e);
+	}, [nextMonth, onNextClick]);
+	const handlePreviousClick = (0, import_react.useCallback)((e) => {
+		if (previousMonth) onPreviousClick?.(e);
+	}, [previousMonth, onPreviousClick]);
+	return import_react.createElement("nav", { ...navProps }, import_react.createElement(components.PreviousMonthButton, {
+		type: "button",
+		className: classNames[UI.PreviousMonthButton],
+		tabIndex: previousMonth ? void 0 : -1,
+		"aria-disabled": previousMonth ? void 0 : true,
+		"aria-label": labelPrevious(previousMonth),
+		onClick: handlePreviousClick
+	}, import_react.createElement(components.Chevron, {
+		disabled: previousMonth ? void 0 : true,
+		className: classNames[UI.Chevron],
+		orientation: "left"
+	})), import_react.createElement(components.NextMonthButton, {
+		type: "button",
+		className: classNames[UI.NextMonthButton],
+		tabIndex: nextMonth ? void 0 : -1,
+		"aria-disabled": nextMonth ? void 0 : true,
+		"aria-label": labelNext(nextMonth),
+		onClick: handleNextClick
+	}, import_react.createElement(components.Chevron, {
+		disabled: nextMonth ? void 0 : true,
+		orientation: "right",
+		className: classNames[UI.Chevron]
+	})));
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/components/NextMonthButton.js
+/**
+* Render the button to navigate to the next month in the calendar.
+*
+* @group Components
+* @see https://daypicker.dev/guides/custom-components
+*/
+function NextMonthButton(props) {
+	const { components } = useDayPicker();
+	return import_react.createElement(components.Button, { ...props });
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/components/Option.js
+/**
+* Render an `option` element.
+*
+* @group Components
+* @see https://daypicker.dev/guides/custom-components
+*/
+function Option(props) {
+	return import_react.createElement("option", { ...props });
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/components/PreviousMonthButton.js
+/**
+* Render the button to navigate to the previous month in the calendar.
+*
+* @group Components
+* @see https://daypicker.dev/guides/custom-components
+*/
+function PreviousMonthButton(props) {
+	const { components } = useDayPicker();
+	return import_react.createElement(components.Button, { ...props });
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/components/Root.js
+/**
+* Render the root element of the calendar.
+*
+* @group Components
+* @see https://daypicker.dev/guides/custom-components
+*/
+function Root$1(props) {
+	const { rootRef, ...rest } = props;
+	return import_react.createElement("div", {
+		...rest,
+		ref: rootRef
+	});
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/components/Select.js
+/**
+* Render a `select` element.
+*
+* @group Components
+* @see https://daypicker.dev/guides/custom-components
+*/
+function Select(props) {
+	return import_react.createElement("select", { ...props });
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/components/Week.js
+/**
+* Render a table row representing a week in the calendar.
+*
+* @group Components
+* @see https://daypicker.dev/guides/custom-components
+*/
+function Week(props) {
+	const { week, ...trProps } = props;
+	return import_react.createElement("tr", { ...trProps });
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/components/Weekday.js
+/**
+* Render a table header cell with the name of a weekday (e.g., "Mo", "Tu").
+*
+* @group Components
+* @see https://daypicker.dev/guides/custom-components
+*/
+function Weekday(props) {
+	return import_react.createElement("th", { ...props });
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/components/Weekdays.js
+/**
+* Render the table row containing the weekday names.
+*
+* @group Components
+* @see https://daypicker.dev/guides/custom-components
+*/
+function Weekdays(props) {
+	return import_react.createElement("thead", { "aria-hidden": true }, import_react.createElement("tr", { ...props }));
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/components/WeekNumber.js
+/**
+* Render a table cell displaying the number of the week.
+*
+* @group Components
+* @see https://daypicker.dev/guides/custom-components
+*/
+function WeekNumber(props) {
+	const { week, ...thProps } = props;
+	return import_react.createElement("th", { ...thProps });
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/components/WeekNumberHeader.js
+/**
+* Render the header cell for the week numbers column.
+*
+* @group Components
+* @see https://daypicker.dev/guides/custom-components
+*/
+function WeekNumberHeader(props) {
+	return import_react.createElement("th", { ...props });
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/components/Weeks.js
+/**
+* Render the container for the weeks in the month grid.
+*
+* @group Components
+* @see https://daypicker.dev/guides/custom-components
+*/
+function Weeks(props) {
+	return import_react.createElement("tbody", { ...props });
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/components/YearsDropdown.js
+/**
+* Render a dropdown to navigate between years in the calendar.
+*
+* @group Components
+* @see https://daypicker.dev/guides/custom-components
+*/
+function YearsDropdown(props) {
+	const { components } = useDayPicker();
+	return import_react.createElement(components.Dropdown, { ...props });
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/components/custom-components.js
+var custom_components_exports = /* @__PURE__ */ __exportAll({
+	Button: () => Button,
+	CaptionLabel: () => CaptionLabel,
+	Chevron: () => Chevron,
+	Day: () => Day,
+	DayButton: () => DayButton,
+	Dropdown: () => Dropdown,
+	DropdownNav: () => DropdownNav,
+	Footer: () => Footer,
+	Month: () => Month,
+	MonthCaption: () => MonthCaption,
+	MonthGrid: () => MonthGrid,
+	Months: () => Months,
+	MonthsDropdown: () => MonthsDropdown,
+	Nav: () => Nav,
+	NextMonthButton: () => NextMonthButton,
+	Option: () => Option,
+	PreviousMonthButton: () => PreviousMonthButton,
+	Root: () => Root$1,
+	Select: () => Select,
+	Week: () => Week,
+	WeekNumber: () => WeekNumber,
+	WeekNumberHeader: () => WeekNumberHeader,
+	Weekday: () => Weekday,
+	Weekdays: () => Weekdays,
+	Weeks: () => Weeks,
+	YearsDropdown: () => YearsDropdown
+});
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/utils/rangeIncludesDate.js
+/**
+* Checks if a given date is within a specified date range.
+*
+* @since 9.0.0
+* @param range - The date range to check against.
+* @param date - The date to check.
+* @param excludeEnds - If `true`, the range's start and end dates are excluded.
+* @param dateLib - The date utility library instance.
+* @returns `true` if the date is within the range, otherwise `false`.
+* @group Utilities
+*/
+function rangeIncludesDate(range, date, excludeEnds = false, dateLib = defaultDateLib) {
+	let { from, to } = range;
+	const { differenceInCalendarDays, isSameDay } = dateLib;
+	if (from && to) {
+		if (differenceInCalendarDays(to, from) < 0) [from, to] = [to, from];
+		return differenceInCalendarDays(date, from) >= (excludeEnds ? 1 : 0) && differenceInCalendarDays(to, date) >= (excludeEnds ? 1 : 0);
+	}
+	if (!excludeEnds && to) return isSameDay(to, date);
+	if (!excludeEnds && from) return isSameDay(from, date);
+	return false;
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/utils/typeguards.js
+/**
+* Checks if the given value is of type {@link DateInterval}.
+*
+* @param matcher - The value to check.
+* @returns `true` if the value is a {@link DateInterval}, otherwise `false`.
+* @group Utilities
+*/
+function isDateInterval(matcher) {
+	return Boolean(matcher && typeof matcher === "object" && "before" in matcher && "after" in matcher);
+}
+/**
+* Checks if the given value is of type {@link DateRange}.
+*
+* @param value - The value to check.
+* @returns `true` if the value is a {@link DateRange}, otherwise `false`.
+* @group Utilities
+*/
+function isDateRange(value) {
+	return Boolean(value && typeof value === "object" && "from" in value);
+}
+/**
+* Checks if the given value is of type {@link DateAfter}.
+*
+* @param value - The value to check.
+* @returns `true` if the value is a {@link DateAfter}, otherwise `false`.
+* @group Utilities
+*/
+function isDateAfterType(value) {
+	return Boolean(value && typeof value === "object" && "after" in value);
+}
+/**
+* Checks if the given value is of type {@link DateBefore}.
+*
+* @param value - The value to check.
+* @returns `true` if the value is a {@link DateBefore}, otherwise `false`.
+* @group Utilities
+*/
+function isDateBeforeType(value) {
+	return Boolean(value && typeof value === "object" && "before" in value);
+}
+/**
+* Checks if the given value is of type {@link DayOfWeek}.
+*
+* @param value - The value to check.
+* @returns `true` if the value is a {@link DayOfWeek}, otherwise `false`.
+* @group Utilities
+*/
+function isDayOfWeekType(value) {
+	return Boolean(value && typeof value === "object" && "dayOfWeek" in value);
+}
+/**
+* Checks if the given value is an array of valid dates.
+*
+* @private
+* @param value - The value to check.
+* @param dateLib - The date utility library instance.
+* @returns `true` if the value is an array of valid dates, otherwise `false`.
+*/
+function isDatesArray(value, dateLib) {
+	return Array.isArray(value) && value.every(dateLib.isDate);
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/utils/dateMatchModifiers.js
+/**
+* Checks if a given date matches at least one of the specified {@link Matcher}.
+*
+* @param date - The date to check.
+* @param matchers - The matchers to check against.
+* @param dateLib - The date utility library instance.
+* @returns `true` if the date matches any of the matchers, otherwise `false`.
+* @group Utilities
+*/
+function dateMatchModifiers(date, matchers, dateLib = defaultDateLib) {
+	const matchersArr = !Array.isArray(matchers) ? [matchers] : matchers;
+	const { isSameDay, differenceInCalendarDays, isAfter } = dateLib;
+	return matchersArr.some((matcher) => {
+		if (typeof matcher === "boolean") return matcher;
+		if (dateLib.isDate(matcher)) return isSameDay(date, matcher);
+		if (isDatesArray(matcher, dateLib)) return matcher.some((matcherDate) => isSameDay(date, matcherDate));
+		if (isDateRange(matcher)) return rangeIncludesDate(matcher, date, false, dateLib);
+		if (isDayOfWeekType(matcher)) {
+			if (!Array.isArray(matcher.dayOfWeek)) return matcher.dayOfWeek === date.getDay();
+			return matcher.dayOfWeek.includes(date.getDay());
+		}
+		if (isDateInterval(matcher)) {
+			const diffBefore = differenceInCalendarDays(matcher.before, date);
+			const diffAfter = differenceInCalendarDays(matcher.after, date);
+			const isDayBefore = diffBefore > 0;
+			const isDayAfter = diffAfter < 0;
+			if (isAfter(matcher.before, matcher.after)) return isDayAfter && isDayBefore;
+			else return isDayBefore || isDayAfter;
+		}
+		if (isDateAfterType(matcher)) return differenceInCalendarDays(date, matcher.after) > 0;
+		if (isDateBeforeType(matcher)) return differenceInCalendarDays(matcher.before, date) > 0;
+		if (typeof matcher === "function") return matcher(date);
+		return false;
+	});
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/helpers/createGetModifiers.js
+/**
+* Creates a function to retrieve the modifiers for a given day.
+*
+* This function calculates both internal and custom modifiers for each day
+* based on the provided calendar days and DayPicker props.
+*
+* @private
+* @param days The array of `CalendarDay` objects to process.
+* @param props The DayPicker props, including modifiers and configuration
+*   options.
+* @param dateLib The date library to use for date manipulation.
+* @returns A function that retrieves the modifiers for a given `CalendarDay`.
+*/
+function createGetModifiers(days, props, navStart, navEnd, dateLib) {
+	const { disabled, hidden, modifiers, showOutsideDays, broadcastCalendar, today = dateLib.today() } = props;
+	const { isSameDay, isSameMonth, startOfMonth, isBefore, endOfMonth, isAfter } = dateLib;
+	const computedNavStart = navStart && startOfMonth(navStart);
+	const computedNavEnd = navEnd && endOfMonth(navEnd);
+	const internalModifiersMap = {
+		[DayFlag.focused]: [],
+		[DayFlag.outside]: [],
+		[DayFlag.disabled]: [],
+		[DayFlag.hidden]: [],
+		[DayFlag.today]: []
+	};
+	const customModifiersMap = {};
+	for (const day of days) {
+		const { date, displayMonth } = day;
+		const isOutside = Boolean(displayMonth && !isSameMonth(date, displayMonth));
+		const isBeforeNavStart = Boolean(computedNavStart && isBefore(date, computedNavStart));
+		const isAfterNavEnd = Boolean(computedNavEnd && isAfter(date, computedNavEnd));
+		const isDisabled = Boolean(disabled && dateMatchModifiers(date, disabled, dateLib));
+		const isHidden = Boolean(hidden && dateMatchModifiers(date, hidden, dateLib)) || isBeforeNavStart || isAfterNavEnd || !broadcastCalendar && !showOutsideDays && isOutside || broadcastCalendar && showOutsideDays === false && isOutside;
+		const isToday = isSameDay(date, today);
+		if (isOutside) internalModifiersMap.outside.push(day);
+		if (isDisabled) internalModifiersMap.disabled.push(day);
+		if (isHidden) internalModifiersMap.hidden.push(day);
+		if (isToday) internalModifiersMap.today.push(day);
+		if (modifiers) Object.keys(modifiers).forEach((name) => {
+			const modifierValue = modifiers?.[name];
+			if (!(modifierValue ? dateMatchModifiers(date, modifierValue, dateLib) : false)) return;
+			if (customModifiersMap[name]) customModifiersMap[name].push(day);
+			else customModifiersMap[name] = [day];
+		});
+	}
+	return (day) => {
+		const dayFlags = {
+			[DayFlag.focused]: false,
+			[DayFlag.disabled]: false,
+			[DayFlag.hidden]: false,
+			[DayFlag.outside]: false,
+			[DayFlag.today]: false
+		};
+		const customModifiers = {};
+		for (const name in internalModifiersMap) dayFlags[name] = internalModifiersMap[name].some((d) => d === day);
+		for (const name in customModifiersMap) customModifiers[name] = customModifiersMap[name].some((d) => d === day);
+		return {
+			...dayFlags,
+			...customModifiers
+		};
+	};
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/helpers/getClassNamesForModifiers.js
+/**
+* Returns the class names for a day based on its modifiers.
+*
+* This function combines the base class name for the day with any class names
+* associated with active modifiers.
+*
+* @param modifiers The modifiers applied to the day.
+* @param classNames The base class names for the calendar elements.
+* @param modifiersClassNames The class names associated with specific
+*   modifiers.
+* @returns An array of class names for the day.
+*/
+function getClassNamesForModifiers(modifiers, classNames, modifiersClassNames = {}) {
+	return Object.entries(modifiers).filter(([, active]) => active === true).reduce((previousValue, [key]) => {
+		if (modifiersClassNames[key]) previousValue.push(modifiersClassNames[key]);
+		else if (classNames[DayFlag[key]]) previousValue.push(classNames[DayFlag[key]]);
+		else if (classNames[SelectionState[key]]) previousValue.push(classNames[SelectionState[key]]);
+		return previousValue;
+	}, [classNames[UI.Day]]);
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/helpers/getComponents.js
+/**
+* Merges custom components from the props with the default components.
+*
+* This function ensures that any custom components provided in the props
+* override the default components.
+*
+* @param customComponents The custom components provided in the DayPicker
+*   props.
+* @returns An object containing the merged components.
+*/
+function getComponents(customComponents) {
+	return {
+		...custom_components_exports,
+		...customComponents
+	};
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/helpers/getDataAttributes.js
+/**
+* Extracts `data-` attributes from the DayPicker props.
+*
+* This function collects all `data-` attributes from the props and adds
+* additional attributes based on the DayPicker configuration.
+*
+* @param props The DayPicker props.
+* @returns An object containing the `data-` attributes.
+*/
+function getDataAttributes(props) {
+	const dataAttributes = {
+		"data-mode": props.mode ?? void 0,
+		"data-required": "required" in props ? props.required : void 0,
+		"data-multiple-months": props.numberOfMonths && props.numberOfMonths > 1 || void 0,
+		"data-week-numbers": props.showWeekNumber || void 0,
+		"data-broadcast-calendar": props.broadcastCalendar || void 0,
+		"data-nav-layout": props.navLayout || void 0
+	};
+	Object.entries(props).forEach(([key, val]) => {
+		if (key.startsWith("data-")) dataAttributes[key] = val;
+	});
+	return dataAttributes;
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/helpers/getDefaultClassNames.js
+/**
+* Returns the default class names for the UI elements.
+*
+* This function generates a mapping of default class names for various UI
+* elements, day flags, selection states, and animations.
+*
+* @returns An object containing the default class names.
+* @group Utilities
+*/
+function getDefaultClassNames() {
+	const classNames = {};
+	for (const key in UI) classNames[UI[key]] = `rdp-${UI[key]}`;
+	for (const key in DayFlag) classNames[DayFlag[key]] = `rdp-${DayFlag[key]}`;
+	for (const key in SelectionState) classNames[SelectionState[key]] = `rdp-${SelectionState[key]}`;
+	for (const key in Animation) classNames[Animation[key]] = `rdp-${Animation[key]}`;
+	return classNames;
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/formatters/formatCaption.js
+/**
+* Formats the caption of the month.
+*
+* @defaultValue Locale-specific month/year order (e.g., "November 2022").
+* @param month The date representing the month.
+* @param options Configuration options for the date library.
+* @param dateLib The date library to use for formatting. If not provided, a new
+*   instance is created.
+* @returns The formatted caption as a string.
+* @group Formatters
+* @see https://daypicker.dev/docs/translation#custom-formatters
+*/
+function formatCaption(month, options, dateLib) {
+	return (dateLib ?? new DateLib(options)).formatMonthYear(month);
+}
+/**
+* @private
+* @deprecated Use {@link formatCaption} instead.
+* @group Formatters
+*/
+var formatMonthCaption = formatCaption;
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/formatters/formatDay.js
+/**
+* Formats the day date shown in the day cell.
+*
+* @defaultValue `d` (e.g., "1").
+* @param date The date to format.
+* @param options Configuration options for the date library.
+* @param dateLib The date library to use for formatting. If not provided, a new
+*   instance is created.
+* @returns The formatted day as a string.
+* @group Formatters
+* @see https://daypicker.dev/docs/translation#custom-formatters
+*/
+function formatDay(date, options, dateLib) {
+	return (dateLib ?? new DateLib(options)).format(date, "d");
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/formatters/formatMonthDropdown.js
+/**
+* Formats the month for the dropdown option label.
+*
+* @defaultValue The localized full month name.
+* @param month The date representing the month.
+* @param dateLib The date library to use for formatting. Defaults to
+*   `defaultDateLib`.
+* @returns The formatted month name as a string.
+* @group Formatters
+* @see https://daypicker.dev/docs/translation#custom-formatters
+*/
+function formatMonthDropdown(month, dateLib = defaultDateLib) {
+	return dateLib.format(month, "LLLL");
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/formatters/formatWeekdayName.js
+/**
+* Formats the name of a weekday to be displayed in the weekdays header.
+*
+* @defaultValue `cccccc` (e.g., "Mo" for Monday).
+* @param weekday The date representing the weekday.
+* @param options Configuration options for the date library.
+* @param dateLib The date library to use for formatting. If not provided, a new
+*   instance is created.
+* @returns The formatted weekday name as a string.
+* @group Formatters
+* @see https://daypicker.dev/docs/translation#custom-formatters
+*/
+function formatWeekdayName(weekday, options, dateLib) {
+	return (dateLib ?? new DateLib(options)).format(weekday, "cccccc");
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/formatters/formatWeekNumber.js
+/**
+* Formats the week number.
+*
+* @defaultValue The week number as a string, with a leading zero for single-digit numbers.
+* @param weekNumber The week number to format.
+* @param dateLib The date library to use for formatting. Defaults to
+*   `defaultDateLib`.
+* @returns The formatted week number as a string.
+* @group Formatters
+* @see https://daypicker.dev/docs/translation#custom-formatters
+*/
+function formatWeekNumber(weekNumber, dateLib = defaultDateLib) {
+	if (weekNumber < 10) return dateLib.formatNumber(`0${weekNumber.toLocaleString()}`);
+	return dateLib.formatNumber(`${weekNumber.toLocaleString()}`);
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/formatters/formatWeekNumberHeader.js
+/**
+* Formats the header for the week number column.
+*
+* @defaultValue An empty string `""`.
+* @returns The formatted week number header as a string.
+* @group Formatters
+* @see https://daypicker.dev/docs/translation#custom-formatters
+*/
+function formatWeekNumberHeader() {
+	return ``;
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/formatters/formatYearDropdown.js
+/**
+* Formats the year for the dropdown option label.
+*
+* @param year The year to format.
+* @param dateLib The date library to use for formatting. Defaults to
+*   `defaultDateLib`.
+* @returns The formatted year as a string.
+* @group Formatters
+* @see https://daypicker.dev/docs/translation#custom-formatters
+*/
+function formatYearDropdown(year, dateLib = defaultDateLib) {
+	return dateLib.format(year, "yyyy");
+}
+/**
+* @private
+* @deprecated Use `formatYearDropdown` instead.
+* @group Formatters
+*/
+var formatYearCaption = formatYearDropdown;
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/formatters/index.js
+var formatters_exports = /* @__PURE__ */ __exportAll({
+	formatCaption: () => formatCaption,
+	formatDay: () => formatDay,
+	formatMonthCaption: () => formatMonthCaption,
+	formatMonthDropdown: () => formatMonthDropdown,
+	formatWeekNumber: () => formatWeekNumber,
+	formatWeekNumberHeader: () => formatWeekNumberHeader,
+	formatWeekdayName: () => formatWeekdayName,
+	formatYearCaption: () => formatYearCaption,
+	formatYearDropdown: () => formatYearDropdown
+});
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/helpers/getFormatters.js
+/**
+* Merges custom formatters from the props with the default formatters.
+*
+* @param customFormatters The custom formatters provided in the DayPicker
+*   props.
+* @returns The merged formatters object.
+*/
+function getFormatters(customFormatters) {
+	if (customFormatters?.formatMonthCaption && !customFormatters.formatCaption) customFormatters.formatCaption = customFormatters.formatMonthCaption;
+	if (customFormatters?.formatYearCaption && !customFormatters.formatYearDropdown) customFormatters.formatYearDropdown = customFormatters.formatYearCaption;
+	return {
+		...formatters_exports,
+		...customFormatters
+	};
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/labels/labelDayButton.js
+/**
+* Generates the ARIA label for a day button.
+*
+* Use the `modifiers` argument to provide additional context for the label,
+* such as indicating if the day is "today" or "selected."
+*
+* @defaultValue The formatted date.
+* @param date - The date to format.
+* @param modifiers - The modifiers providing context for the day.
+* @param options - Optional configuration for the date formatting library.
+* @param dateLib - An optional instance of the date formatting library.
+* @returns The ARIA label for the day button.
+* @group Labels
+* @see https://daypicker.dev/docs/translation#aria-labels
+*/
+function labelDayButton(date, modifiers, options, dateLib) {
+	let label = (dateLib ?? new DateLib(options)).format(date, "PPPP");
+	if (modifiers.today) label = `Today, ${label}`;
+	if (modifiers.selected) label = `${label}, selected`;
+	return label;
+}
+/**
+* @ignore
+* @deprecated Use `labelDayButton` instead.
+*/
+var labelDay = labelDayButton;
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/labels/labelGrid.js
+/**
+* Generates the ARIA label for the month grid, which is announced when entering
+* the grid.
+*
+* @defaultValue Locale-specific month/year order (e.g., "November 2022").
+* @param date - The date representing the month.
+* @param options - Optional configuration for the date formatting library.
+* @param dateLib - An optional instance of the date formatting library.
+* @returns The ARIA label for the month grid.
+* @group Labels
+* @see https://daypicker.dev/docs/translation#aria-labels
+*/
+function labelGrid(date, options, dateLib) {
+	return (dateLib ?? new DateLib(options)).formatMonthYear(date);
+}
+/**
+* @ignore
+* @deprecated Use {@link labelGrid} instead.
+*/
+var labelCaption = labelGrid;
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/labels/labelGridcell.js
+/**
+* Generates the label for a day grid cell when the calendar is not interactive.
+*
+* @param date - The date to format.
+* @param modifiers - Optional modifiers providing context for the day.
+* @param options - Optional configuration for the date formatting library.
+* @param dateLib - An optional instance of the date formatting library.
+* @returns The label for the day grid cell.
+* @group Labels
+* @see https://daypicker.dev/docs/translation#aria-labels
+*/
+function labelGridcell(date, modifiers, options, dateLib) {
+	let label = (dateLib ?? new DateLib(options)).format(date, "PPPP");
+	if (modifiers?.today) label = `Today, ${label}`;
+	return label;
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/labels/labelMonthDropdown.js
+/**
+* Generates the ARIA label for the months dropdown.
+*
+* @defaultValue `"Choose the Month"`
+* @param options - Optional configuration for the date formatting library.
+* @returns The ARIA label for the months dropdown.
+* @group Labels
+* @see https://daypicker.dev/docs/translation#aria-labels
+*/
+function labelMonthDropdown(_options) {
+	return "Choose the Month";
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/labels/labelNav.js
+/**
+* Generates the ARIA label for the navigation toolbar.
+*
+* @defaultValue `""`
+* @returns The ARIA label for the navigation toolbar.
+* @group Labels
+* @see https://daypicker.dev/docs/translation#aria-labels
+*/
+function labelNav() {
+	return "";
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/labels/labelNext.js
+var defaultLabel = "Go to the Next Month";
+/**
+* Generates the ARIA label for the "next month" button.
+*
+* @defaultValue `"Go to the Next Month"`
+* @param month - The date representing the next month, or `undefined` if there
+*   is no next month.
+* @returns The ARIA label for the "next month" button.
+* @group Labels
+* @see https://daypicker.dev/docs/translation#aria-labels
+*/
+function labelNext(_month, _options) {
+	return defaultLabel;
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/labels/labelPrevious.js
+/**
+* Generates the ARIA label for the "previous month" button.
+*
+* @defaultValue `"Go to the Previous Month"`
+* @param month - The date representing the previous month, or `undefined` if
+*   there is no previous month.
+* @returns The ARIA label for the "previous month" button.
+* @group Labels
+* @see https://daypicker.dev/docs/translation#aria-labels
+*/
+function labelPrevious(_month) {
+	return "Go to the Previous Month";
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/labels/labelWeekday.js
+/**
+* Generates the ARIA label for a weekday column header.
+*
+* @defaultValue `"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"`
+* @param date - The date representing the weekday.
+* @param options - Optional configuration for the date formatting library.
+* @param dateLib - An optional instance of the date formatting library.
+* @returns The ARIA label for the weekday column header.
+* @group Labels
+* @see https://daypicker.dev/docs/translation#aria-labels
+*/
+function labelWeekday(date, options, dateLib) {
+	return (dateLib ?? new DateLib(options)).format(date, "cccc");
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/labels/labelWeekNumber.js
+/**
+* Generates the ARIA label for the week number cell (the first cell in a row).
+*
+* @defaultValue `Week ${weekNumber}`
+* @param weekNumber - The number of the week.
+* @param options - Optional configuration for the date formatting library.
+* @returns The ARIA label for the week number cell.
+* @group Labels
+* @see https://daypicker.dev/docs/translation#aria-labels
+*/
+function labelWeekNumber(weekNumber, _options) {
+	return `Week ${weekNumber}`;
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/labels/labelWeekNumberHeader.js
+/**
+* Generates the ARIA label for the week number header element.
+*
+* @defaultValue `"Week Number"`
+* @param options - Optional configuration for the date formatting library.
+* @returns The ARIA label for the week number header.
+* @group Labels
+* @see https://daypicker.dev/docs/translation#aria-labels
+*/
+function labelWeekNumberHeader(_options) {
+	return "Week Number";
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/labels/labelYearDropdown.js
+/**
+* Generates the ARIA label for the years dropdown.
+*
+* @defaultValue `"Choose the Year"`
+* @param options - Optional configuration for the date formatting library.
+* @returns The ARIA label for the years dropdown.
+* @group Labels
+* @see https://daypicker.dev/docs/translation#aria-labels
+*/
+function labelYearDropdown(_options) {
+	return "Choose the Year";
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/labels/index.js
+var labels_exports = /* @__PURE__ */ __exportAll({
+	labelCaption: () => labelCaption,
+	labelDay: () => labelDay,
+	labelDayButton: () => labelDayButton,
+	labelGrid: () => labelGrid,
+	labelGridcell: () => labelGridcell,
+	labelMonthDropdown: () => labelMonthDropdown,
+	labelNav: () => labelNav,
+	labelNext: () => labelNext,
+	labelPrevious: () => labelPrevious,
+	labelWeekNumber: () => labelWeekNumber,
+	labelWeekNumberHeader: () => labelWeekNumberHeader,
+	labelWeekday: () => labelWeekday,
+	labelYearDropdown: () => labelYearDropdown
+});
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/helpers/getLabels.js
+var resolveLabel = (defaultLabel, customLabel, localeLabel) => {
+	if (customLabel) return customLabel;
+	if (localeLabel) return typeof localeLabel === "function" ? localeLabel : (..._args) => localeLabel;
+	return defaultLabel;
+};
+/**
+* Merges custom labels from the props with the default labels.
+*
+* When available, uses the locale-provided translation for `labelNext`.
+*
+* @param customLabels The custom labels provided in the DayPicker props.
+* @param options Options from the date library, used to resolve locale
+*   translations.
+* @returns The merged labels object with locale-aware defaults.
+*/
+function getLabels(customLabels, options) {
+	const localeLabels = options.locale?.labels ?? {};
+	return {
+		...labels_exports,
+		...customLabels ?? {},
+		labelDayButton: resolveLabel(labelDayButton, customLabels?.labelDayButton, localeLabels.labelDayButton),
+		labelMonthDropdown: resolveLabel(labelMonthDropdown, customLabels?.labelMonthDropdown, localeLabels.labelMonthDropdown),
+		labelNext: resolveLabel(labelNext, customLabels?.labelNext, localeLabels.labelNext),
+		labelPrevious: resolveLabel(labelPrevious, customLabels?.labelPrevious, localeLabels.labelPrevious),
+		labelWeekNumber: resolveLabel(labelWeekNumber, customLabels?.labelWeekNumber, localeLabels.labelWeekNumber),
+		labelYearDropdown: resolveLabel(labelYearDropdown, customLabels?.labelYearDropdown, localeLabels.labelYearDropdown),
+		labelGrid: resolveLabel(labelGrid, customLabels?.labelGrid, localeLabels.labelGrid),
+		labelGridcell: resolveLabel(labelGridcell, customLabels?.labelGridcell, localeLabels.labelGridcell),
+		labelNav: resolveLabel(labelNav, customLabels?.labelNav, localeLabels.labelNav),
+		labelWeekNumberHeader: resolveLabel(labelWeekNumberHeader, customLabels?.labelWeekNumberHeader, localeLabels.labelWeekNumberHeader),
+		labelWeekday: resolveLabel(labelWeekday, customLabels?.labelWeekday, localeLabels.labelWeekday)
+	};
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/helpers/getMonthOptions.js
+/**
+* Returns the months to show in the dropdown.
+*
+* This function generates a list of months for the current year, formatted
+* using the provided formatter, and determines whether each month should be
+* disabled based on the navigation range.
+*
+* @param displayMonth The currently displayed month.
+* @param navStart The start date for navigation.
+* @param navEnd The end date for navigation.
+* @param formatters The formatters to use for formatting the month labels.
+* @param dateLib The date library to use for date manipulation.
+* @returns An array of dropdown options representing the months, or `undefined`
+*   if no months are available.
+*/
+function getMonthOptions(displayMonth, navStart, navEnd, formatters, dateLib) {
+	const { startOfMonth, startOfYear, endOfYear, eachMonthOfInterval, getMonth } = dateLib;
+	return eachMonthOfInterval({
+		start: startOfYear(displayMonth),
+		end: endOfYear(displayMonth)
+	}).map((month) => {
+		const label = formatters.formatMonthDropdown(month, dateLib);
+		return {
+			value: getMonth(month),
+			label,
+			disabled: navStart && month < startOfMonth(navStart) || navEnd && month > startOfMonth(navEnd) || false
+		};
+	});
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/helpers/getStyleForModifiers.js
+/**
+* Returns the computed style for a day based on its modifiers.
+*
+* This function merges the base styles for the day with any styles associated
+* with active modifiers.
+*
+* @param dayModifiers The modifiers applied to the day.
+* @param styles The base styles for the calendar elements.
+* @param modifiersStyles The styles associated with specific modifiers.
+* @returns The computed style for the day.
+*/
+function getStyleForModifiers(dayModifiers, styles = {}, modifiersStyles = {}) {
+	let style = { ...styles?.[UI.Day] };
+	Object.entries(dayModifiers).filter(([, active]) => active === true).forEach(([modifier]) => {
+		style = {
+			...style,
+			...modifiersStyles?.[modifier]
+		};
+	});
+	return style;
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/helpers/getWeekdays.js
+/**
+* Generates a series of 7 days, starting from the beginning of the week, to use
+* for formatting weekday names (e.g., Monday, Tuesday, etc.).
+*
+* @param dateLib The date library to use for date manipulation.
+* @param ISOWeek Whether to use ISO week numbering (weeks start on Monday).
+* @param broadcastCalendar Whether to use the broadcast calendar (weeks start
+*   on Monday, but may include adjustments for broadcast-specific rules).
+* @returns An array of 7 dates representing the weekdays.
+*/
+function getWeekdays(dateLib, ISOWeek, broadcastCalendar, today) {
+	const referenceToday = today ?? dateLib.today();
+	const start = broadcastCalendar ? dateLib.startOfBroadcastWeek(referenceToday, dateLib) : ISOWeek ? dateLib.startOfISOWeek(referenceToday) : dateLib.startOfWeek(referenceToday);
+	const days = [];
+	for (let i = 0; i < 7; i++) {
+		const day = dateLib.addDays(start, i);
+		days.push(day);
+	}
+	return days;
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/helpers/getYearOptions.js
+/**
+* Returns the years to display in the dropdown.
+*
+* This function generates a list of years between the navigation start and end
+* dates, formatted using the provided formatter.
+*
+* @param navStart The start date for navigation.
+* @param navEnd The end date for navigation.
+* @param formatters The formatters to use for formatting the year labels.
+* @param dateLib The date library to use for date manipulation.
+* @param reverse If true, reverses the order of the years (descending).
+* @returns An array of dropdown options representing the years, or `undefined`
+*   if `navStart` or `navEnd` is not provided.
+*/
+function getYearOptions(navStart, navEnd, formatters, dateLib, reverse = false) {
+	if (!navStart) return void 0;
+	if (!navEnd) return void 0;
+	const { startOfYear, endOfYear, eachYearOfInterval, getYear } = dateLib;
+	const years = eachYearOfInterval({
+		start: startOfYear(navStart),
+		end: endOfYear(navEnd)
+	});
+	if (reverse) years.reverse();
+	return years.map((year) => {
+		const label = formatters.formatYearDropdown(year, dateLib);
+		return {
+			value: getYear(year),
+			label,
+			disabled: false
+		};
+	});
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/noonDateLib.js
+/**
+* Creates `dateLib` overrides that keep all calendar math at noon in the target
+* time zone. This avoids second-level offset changes (e.g., historical zones
+* with +03:41:12) from pushing dates backward across midnight.
+*/
+function createNoonOverrides(timeZone, options = {}) {
+	const { weekStartsOn, locale } = options;
+	const fallbackWeekStartsOn = weekStartsOn ?? locale?.options?.weekStartsOn ?? 0;
+	const toNoonTZDate = (date) => {
+		const normalizedDate = typeof date === "number" || typeof date === "string" ? new Date(date) : date;
+		return new TZDate(normalizedDate.getFullYear(), normalizedDate.getMonth(), normalizedDate.getDate(), 12, 0, 0, timeZone);
+	};
+	const toCalendarDate = (date) => {
+		const zoned = toNoonTZDate(date);
+		return new Date(zoned.getFullYear(), zoned.getMonth(), zoned.getDate(), 0, 0, 0, 0);
+	};
+	return {
+		today: () => {
+			return toNoonTZDate(TZDate.tz(timeZone));
+		},
+		newDate: (year, monthIndex, date) => {
+			return new TZDate(year, monthIndex, date, 12, 0, 0, timeZone);
+		},
+		startOfDay: (date) => {
+			return toNoonTZDate(date);
+		},
+		startOfWeek: (date, options) => {
+			const base = toNoonTZDate(date);
+			const weekStartsOnValue = options?.weekStartsOn ?? fallbackWeekStartsOn;
+			const diff = (base.getDay() - weekStartsOnValue + 7) % 7;
+			base.setDate(base.getDate() - diff);
+			return base;
+		},
+		startOfISOWeek: (date) => {
+			const base = toNoonTZDate(date);
+			const diff = (base.getDay() - 1 + 7) % 7;
+			base.setDate(base.getDate() - diff);
+			return base;
+		},
+		startOfMonth: (date) => {
+			const base = toNoonTZDate(date);
+			base.setDate(1);
+			return base;
+		},
+		startOfYear: (date) => {
+			const base = toNoonTZDate(date);
+			base.setMonth(0, 1);
+			return base;
+		},
+		endOfWeek: (date, options) => {
+			const base = toNoonTZDate(date);
+			const diff = (((options?.weekStartsOn ?? fallbackWeekStartsOn) + 6) % 7 - base.getDay() + 7) % 7;
+			base.setDate(base.getDate() + diff);
+			return base;
+		},
+		endOfISOWeek: (date) => {
+			const base = toNoonTZDate(date);
+			const diff = (7 - base.getDay()) % 7;
+			base.setDate(base.getDate() + diff);
+			return base;
+		},
+		endOfMonth: (date) => {
+			const base = toNoonTZDate(date);
+			base.setMonth(base.getMonth() + 1, 0);
+			return base;
+		},
+		endOfYear: (date) => {
+			const base = toNoonTZDate(date);
+			base.setMonth(11, 31);
+			return base;
+		},
+		eachMonthOfInterval: (interval) => {
+			const start = toNoonTZDate(interval.start);
+			const end = toNoonTZDate(interval.end);
+			const result = [];
+			const cursor = new TZDate(start.getFullYear(), start.getMonth(), 1, 12, 0, 0, timeZone);
+			const endKey = end.getFullYear() * 12 + end.getMonth();
+			while (cursor.getFullYear() * 12 + cursor.getMonth() <= endKey) {
+				result.push(new TZDate(cursor, timeZone));
+				cursor.setMonth(cursor.getMonth() + 1, 1);
+			}
+			return result;
+		},
+		addDays: (date, amount) => {
+			const base = toNoonTZDate(date);
+			base.setDate(base.getDate() + amount);
+			return base;
+		},
+		addWeeks: (date, amount) => {
+			const base = toNoonTZDate(date);
+			base.setDate(base.getDate() + amount * 7);
+			return base;
+		},
+		addMonths: (date, amount) => {
+			const base = toNoonTZDate(date);
+			base.setMonth(base.getMonth() + amount);
+			return base;
+		},
+		addYears: (date, amount) => {
+			const base = toNoonTZDate(date);
+			base.setFullYear(base.getFullYear() + amount);
+			return base;
+		},
+		eachYearOfInterval: (interval) => {
+			const start = toNoonTZDate(interval.start);
+			const end = toNoonTZDate(interval.end);
+			const years = [];
+			const cursor = new TZDate(start.getFullYear(), 0, 1, 12, 0, 0, timeZone);
+			while (cursor.getFullYear() <= end.getFullYear()) {
+				years.push(new TZDate(cursor, timeZone));
+				cursor.setFullYear(cursor.getFullYear() + 1, 0, 1);
+			}
+			return years;
+		},
+		getWeek: (date, options) => {
+			return getWeek(toCalendarDate(date), {
+				weekStartsOn: options?.weekStartsOn ?? fallbackWeekStartsOn,
+				firstWeekContainsDate: options?.firstWeekContainsDate ?? locale?.options?.firstWeekContainsDate ?? 1
+			});
+		},
+		getISOWeek: (date) => {
+			return getISOWeek(toCalendarDate(date));
+		},
+		differenceInCalendarDays: (dateLeft, dateRight) => {
+			return differenceInCalendarDays(toCalendarDate(dateLeft), toCalendarDate(dateRight));
+		},
+		differenceInCalendarMonths: (dateLeft, dateRight) => {
+			return differenceInCalendarMonths(toCalendarDate(dateLeft), toCalendarDate(dateRight));
+		}
+	};
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/useAnimation.js
+var asHtmlElement = (element) => {
+	if (element instanceof HTMLElement) return element;
+	return null;
+};
+var queryMonthEls = (element) => [...element.querySelectorAll("[data-animated-month]") ?? []];
+var queryMonthEl = (element) => asHtmlElement(element.querySelector("[data-animated-month]"));
+var queryCaptionEl = (element) => asHtmlElement(element.querySelector("[data-animated-caption]"));
+var queryWeeksEl = (element) => asHtmlElement(element.querySelector("[data-animated-weeks]"));
+var queryNavEl = (element) => asHtmlElement(element.querySelector("[data-animated-nav]"));
+var queryWeekdaysEl = (element) => asHtmlElement(element.querySelector("[data-animated-weekdays]"));
+/**
+* Handles animations for transitioning between months in the DayPicker
+* component.
+*
+* @private
+* @param rootElRef - A reference to the root element of the DayPicker
+*   component.
+* @param enabled - Whether animations are enabled.
+* @param options - Configuration options for the animation, including class
+*   names, months, focused day, and the date utility library.
+*/
+function useAnimation(rootElRef, enabled, { classNames, months, focused, dateLib }) {
+	const previousRootElSnapshotRef = (0, import_react.useRef)(null);
+	const previousMonthsRef = (0, import_react.useRef)(months);
+	const animatingRef = (0, import_react.useRef)(false);
+	(0, import_react.useLayoutEffect)(() => {
+		const previousMonths = previousMonthsRef.current;
+		previousMonthsRef.current = months;
+		if (!enabled || !rootElRef.current || !(rootElRef.current instanceof HTMLElement) || months.length === 0 || previousMonths.length === 0 || months.length !== previousMonths.length) return;
+		const isSameMonth = dateLib.isSameMonth(months[0].date, previousMonths[0].date);
+		const isAfterPreviousMonth = dateLib.isAfter(months[0].date, previousMonths[0].date);
+		const captionAnimationClass = isAfterPreviousMonth ? classNames[Animation.caption_after_enter] : classNames[Animation.caption_before_enter];
+		const weeksAnimationClass = isAfterPreviousMonth ? classNames[Animation.weeks_after_enter] : classNames[Animation.weeks_before_enter];
+		const previousRootElSnapshot = previousRootElSnapshotRef.current;
+		const rootElSnapshot = rootElRef.current.cloneNode(true);
+		if (rootElSnapshot instanceof HTMLElement) {
+			queryMonthEls(rootElSnapshot).forEach((currentMonthElSnapshot) => {
+				if (!(currentMonthElSnapshot instanceof HTMLElement)) return;
+				const previousMonthElSnapshot = queryMonthEl(currentMonthElSnapshot);
+				if (previousMonthElSnapshot && currentMonthElSnapshot.contains(previousMonthElSnapshot)) currentMonthElSnapshot.removeChild(previousMonthElSnapshot);
+				const captionEl = queryCaptionEl(currentMonthElSnapshot);
+				if (captionEl) captionEl.classList.remove(captionAnimationClass);
+				const weeksEl = queryWeeksEl(currentMonthElSnapshot);
+				if (weeksEl) weeksEl.classList.remove(weeksAnimationClass);
+			});
+			previousRootElSnapshotRef.current = rootElSnapshot;
+		} else previousRootElSnapshotRef.current = null;
+		if (animatingRef.current || isSameMonth || focused) return;
+		const previousMonthEls = previousRootElSnapshot instanceof HTMLElement ? queryMonthEls(previousRootElSnapshot) : [];
+		const currentMonthEls = queryMonthEls(rootElRef.current);
+		if (currentMonthEls?.every((el) => el instanceof HTMLElement) && previousMonthEls && previousMonthEls.every((el) => el instanceof HTMLElement)) {
+			animatingRef.current = true;
+			const cleanUpFunctions = [];
+			rootElRef.current.style.isolation = "isolate";
+			const navEl = queryNavEl(rootElRef.current);
+			if (navEl) navEl.style.zIndex = "1";
+			currentMonthEls.forEach((currentMonthEl, index) => {
+				const previousMonthEl = previousMonthEls[index];
+				if (!previousMonthEl) return;
+				currentMonthEl.style.position = "relative";
+				currentMonthEl.style.overflow = "hidden";
+				const captionEl = queryCaptionEl(currentMonthEl);
+				if (captionEl) captionEl.classList.add(captionAnimationClass);
+				const weeksEl = queryWeeksEl(currentMonthEl);
+				if (weeksEl) weeksEl.classList.add(weeksAnimationClass);
+				const cleanUp = () => {
+					animatingRef.current = false;
+					if (rootElRef.current) rootElRef.current.style.isolation = "";
+					if (navEl) navEl.style.zIndex = "";
+					if (captionEl) captionEl.classList.remove(captionAnimationClass);
+					if (weeksEl) weeksEl.classList.remove(weeksAnimationClass);
+					currentMonthEl.style.position = "";
+					currentMonthEl.style.overflow = "";
+					if (currentMonthEl.contains(previousMonthEl)) currentMonthEl.removeChild(previousMonthEl);
+				};
+				cleanUpFunctions.push(cleanUp);
+				previousMonthEl.style.pointerEvents = "none";
+				previousMonthEl.style.position = "absolute";
+				previousMonthEl.style.overflow = "hidden";
+				previousMonthEl.setAttribute("aria-hidden", "true");
+				const previousWeekdaysEl = queryWeekdaysEl(previousMonthEl);
+				if (previousWeekdaysEl) previousWeekdaysEl.style.opacity = "0";
+				const previousCaptionEl = queryCaptionEl(previousMonthEl);
+				if (previousCaptionEl) {
+					previousCaptionEl.classList.add(isAfterPreviousMonth ? classNames[Animation.caption_before_exit] : classNames[Animation.caption_after_exit]);
+					previousCaptionEl.addEventListener("animationend", cleanUp);
+				}
+				const previousWeeksEl = queryWeeksEl(previousMonthEl);
+				if (previousWeeksEl) previousWeeksEl.classList.add(isAfterPreviousMonth ? classNames[Animation.weeks_before_exit] : classNames[Animation.weeks_after_exit]);
+				currentMonthEl.insertBefore(previousMonthEl, currentMonthEl.firstChild);
+			});
+		}
+	});
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/helpers/getDates.js
+/**
+* Returns all the dates to display in the calendar.
+*
+* This function calculates the range of dates to display based on the provided
+* display months, constraints, and calendar configuration.
+*
+* @param displayMonths The months to display in the calendar.
+* @param maxDate The maximum date to include in the range.
+* @param props The DayPicker props, including calendar configuration options.
+* @param dateLib The date library to use for date manipulation.
+* @returns An array of dates to display in the calendar.
+*/
+function getDates(displayMonths, maxDate, props, dateLib) {
+	const firstMonth = displayMonths[0];
+	const lastMonth = displayMonths[displayMonths.length - 1];
+	const { ISOWeek, fixedWeeks, broadcastCalendar } = props ?? {};
+	const { addDays, differenceInCalendarDays, differenceInCalendarMonths, endOfBroadcastWeek, endOfISOWeek, endOfMonth, endOfWeek, isAfter, startOfBroadcastWeek, startOfISOWeek, startOfWeek } = dateLib;
+	const startWeekFirstDate = broadcastCalendar ? startOfBroadcastWeek(firstMonth, dateLib) : ISOWeek ? startOfISOWeek(firstMonth) : startOfWeek(firstMonth);
+	const displayMonthsWeekEnd = broadcastCalendar ? endOfBroadcastWeek(lastMonth) : ISOWeek ? endOfISOWeek(endOfMonth(lastMonth)) : endOfWeek(endOfMonth(lastMonth));
+	const constraintWeekEnd = maxDate && (broadcastCalendar ? endOfBroadcastWeek(maxDate) : ISOWeek ? endOfISOWeek(maxDate) : endOfWeek(maxDate));
+	const nOfDays = differenceInCalendarDays(constraintWeekEnd && isAfter(displayMonthsWeekEnd, constraintWeekEnd) ? constraintWeekEnd : displayMonthsWeekEnd, startWeekFirstDate);
+	const nOfMonths = differenceInCalendarMonths(lastMonth, firstMonth) + 1;
+	const dates = [];
+	for (let i = 0; i <= nOfDays; i++) {
+		const date = addDays(startWeekFirstDate, i);
+		dates.push(date);
+	}
+	const extraDates = (broadcastCalendar ? 35 : 42) * nOfMonths;
+	if (fixedWeeks && dates.length < extraDates) {
+		const daysToAdd = extraDates - dates.length;
+		for (let i = 0; i < daysToAdd; i++) {
+			const date = addDays(dates[dates.length - 1], 1);
+			dates.push(date);
+		}
+	}
+	return dates;
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/helpers/getDays.js
+/**
+* Returns all the days belonging to the calendar by merging the days in the
+* weeks for each month.
+*
+* @param calendarMonths The array of calendar months.
+* @returns An array of `CalendarDay` objects representing all the days in the
+*   calendar.
+*/
+function getDays(calendarMonths) {
+	const initialDays = [];
+	return calendarMonths.reduce((days, month) => {
+		const weekDays = month.weeks.reduce((weekDays, week) => {
+			return weekDays.concat(week.days.slice());
+		}, initialDays.slice());
+		return days.concat(weekDays.slice());
+	}, initialDays.slice());
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/helpers/getDisplayMonths.js
+/**
+* Returns the months to display in the calendar.
+*
+* @param firstDisplayedMonth The first month currently displayed in the
+*   calendar.
+* @param calendarEndMonth The latest month the user can navigate to.
+* @param props The DayPicker props, including `numberOfMonths`.
+* @param dateLib The date library to use for date manipulation.
+* @returns An array of dates representing the months to display.
+*/
+function getDisplayMonths(firstDisplayedMonth, calendarEndMonth, props, dateLib) {
+	const { numberOfMonths = 1 } = props;
+	const months = [];
+	for (let i = 0; i < numberOfMonths; i++) {
+		const month = dateLib.addMonths(firstDisplayedMonth, i);
+		if (calendarEndMonth && month > calendarEndMonth) break;
+		months.push(month);
+	}
+	return months;
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/helpers/getInitialMonth.js
+/**
+* Determines the initial month to display in the calendar based on the provided
+* props.
+*
+* This function calculates the starting month, considering constraints such as
+* `startMonth`, `endMonth`, and the number of months to display.
+*
+* @param props The DayPicker props, including navigation and date constraints.
+* @param dateLib The date library to use for date manipulation.
+* @returns The initial month to display.
+*/
+function getInitialMonth(props, navStart, navEnd, dateLib) {
+	const { month, defaultMonth, today = dateLib.today(), numberOfMonths = 1 } = props;
+	let initialMonth = month || defaultMonth || today;
+	const { differenceInCalendarMonths, addMonths, startOfMonth } = dateLib;
+	if (navEnd && differenceInCalendarMonths(navEnd, initialMonth) < numberOfMonths - 1) initialMonth = addMonths(navEnd, -1 * (numberOfMonths - 1));
+	if (navStart && differenceInCalendarMonths(initialMonth, navStart) < 0) initialMonth = navStart;
+	return startOfMonth(initialMonth);
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/helpers/getMonths.js
+/**
+* Returns the months to display in the calendar.
+*
+* This function generates `CalendarMonth` objects for each month to be
+* displayed, including their weeks and days, based on the provided display
+* months and dates.
+*
+* @param displayMonths The months (as dates) to display in the calendar.
+* @param dates The dates to display in the calendar.
+* @param props Options from the DayPicker props context.
+* @param dateLib The date library to use for date manipulation.
+* @returns An array of `CalendarMonth` objects representing the months to
+*   display.
+*/
+function getMonths(displayMonths, dates, props, dateLib) {
+	const { addDays, endOfBroadcastWeek, endOfISOWeek, endOfMonth, endOfWeek, getISOWeek, getWeek, startOfBroadcastWeek, startOfISOWeek, startOfWeek } = dateLib;
+	const dayPickerMonths = displayMonths.reduce((months, month) => {
+		const firstDateOfFirstWeek = props.broadcastCalendar ? startOfBroadcastWeek(month, dateLib) : props.ISOWeek ? startOfISOWeek(month) : startOfWeek(month);
+		const lastDateOfLastWeek = props.broadcastCalendar ? endOfBroadcastWeek(month) : props.ISOWeek ? endOfISOWeek(endOfMonth(month)) : endOfWeek(endOfMonth(month));
+		/** The dates to display in the month. */
+		const monthDates = dates.filter((date) => {
+			return date >= firstDateOfFirstWeek && date <= lastDateOfLastWeek;
+		});
+		const nrOfDaysWithFixedWeeks = props.broadcastCalendar ? 35 : 42;
+		if (props.fixedWeeks && monthDates.length < nrOfDaysWithFixedWeeks) {
+			const extraDates = dates.filter((date) => {
+				const daysToAdd = nrOfDaysWithFixedWeeks - monthDates.length;
+				return date > lastDateOfLastWeek && date <= addDays(lastDateOfLastWeek, daysToAdd);
+			});
+			monthDates.push(...extraDates);
+		}
+		const dayPickerMonth = new CalendarMonth(month, monthDates.reduce((weeks, date) => {
+			const weekNumber = props.ISOWeek ? getISOWeek(date) : getWeek(date);
+			const week = weeks.find((week) => week.weekNumber === weekNumber);
+			const day = new CalendarDay(date, month, dateLib);
+			if (!week) weeks.push(new CalendarWeek(weekNumber, [day]));
+			else week.days.push(day);
+			return weeks;
+		}, []));
+		months.push(dayPickerMonth);
+		return months;
+	}, []);
+	if (!props.reverseMonths) return dayPickerMonths;
+	else return dayPickerMonths.reverse();
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/helpers/getNavMonth.js
+/**
+* Returns the start and end months for calendar navigation.
+*
+* @param props The DayPicker props, including navigation and layout options.
+* @param dateLib The date library to use for date manipulation.
+* @returns A tuple containing the start and end months for navigation.
+*/
+function getNavMonths(props, dateLib) {
+	let { startMonth, endMonth } = props;
+	const { startOfYear, startOfDay, startOfMonth, endOfMonth, addYears, endOfYear, newDate, today } = dateLib;
+	const { fromYear, toYear, fromMonth, toMonth } = props;
+	if (!startMonth && fromMonth) startMonth = fromMonth;
+	if (!startMonth && fromYear) startMonth = dateLib.newDate(fromYear, 0, 1);
+	if (!endMonth && toMonth) endMonth = toMonth;
+	if (!endMonth && toYear) endMonth = newDate(toYear, 11, 31);
+	const hasYearDropdown = props.captionLayout === "dropdown" || props.captionLayout === "dropdown-years";
+	if (startMonth) startMonth = startOfMonth(startMonth);
+	else if (fromYear) startMonth = newDate(fromYear, 0, 1);
+	else if (!startMonth && hasYearDropdown) startMonth = startOfYear(addYears(props.today ?? today(), -100));
+	if (endMonth) endMonth = endOfMonth(endMonth);
+	else if (toYear) endMonth = newDate(toYear, 11, 31);
+	else if (!endMonth && hasYearDropdown) endMonth = endOfYear(props.today ?? today());
+	return [startMonth ? startOfDay(startMonth) : startMonth, endMonth ? startOfDay(endMonth) : endMonth];
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/helpers/getNextMonth.js
+/**
+* Returns the next month the user can navigate to, based on the given options.
+*
+* The next month is not always the next calendar month:
+*
+* - If it is after the `calendarEndMonth`, it returns `undefined`.
+* - If paged navigation is enabled, it skips forward by the number of displayed
+*   months.
+*
+* @param firstDisplayedMonth The first month currently displayed in the
+*   calendar.
+* @param calendarEndMonth The latest month the user can navigate to.
+* @param options Navigation options, including `numberOfMonths` and
+*   `pagedNavigation`.
+* @param dateLib The date library to use for date manipulation.
+* @returns The next month, or `undefined` if navigation is not possible.
+*/
+function getNextMonth(firstDisplayedMonth, calendarEndMonth, options, dateLib) {
+	if (options.disableNavigation) return;
+	const { pagedNavigation, numberOfMonths = 1 } = options;
+	const { startOfMonth, addMonths, differenceInCalendarMonths } = dateLib;
+	const offset = pagedNavigation ? numberOfMonths : 1;
+	const month = startOfMonth(firstDisplayedMonth);
+	if (!calendarEndMonth) return addMonths(month, offset);
+	if (differenceInCalendarMonths(calendarEndMonth, firstDisplayedMonth) < numberOfMonths) return;
+	return addMonths(month, offset);
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/helpers/getPreviousMonth.js
+/**
+* Returns the previous month the user can navigate to, based on the given
+* options.
+*
+* The previous month is not always the previous calendar month:
+*
+* - If it is before the `calendarStartMonth`, it returns `undefined`.
+* - If paged navigation is enabled, it skips back by the number of displayed
+*   months.
+*
+* @param firstDisplayedMonth The first month currently displayed in the
+*   calendar.
+* @param calendarStartMonth The earliest month the user can navigate to.
+* @param options Navigation options, including `numberOfMonths` and
+*   `pagedNavigation`.
+* @param dateLib The date library to use for date manipulation.
+* @returns The previous month, or `undefined` if navigation is not possible.
+*/
+function getPreviousMonth(firstDisplayedMonth, calendarStartMonth, options, dateLib) {
+	if (options.disableNavigation) return;
+	const { pagedNavigation, numberOfMonths } = options;
+	const { startOfMonth, addMonths, differenceInCalendarMonths } = dateLib;
+	const offset = pagedNavigation ? numberOfMonths ?? 1 : 1;
+	const month = startOfMonth(firstDisplayedMonth);
+	if (!calendarStartMonth) return addMonths(month, -offset);
+	if (differenceInCalendarMonths(month, calendarStartMonth) <= 0) return;
+	return addMonths(month, -offset);
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/helpers/getWeeks.js
+/**
+* Returns an array of calendar weeks from an array of calendar months.
+*
+* @param months The array of calendar months.
+* @returns An array of calendar weeks.
+*/
+function getWeeks(months) {
+	return months.reduce((weeks, month) => {
+		return weeks.concat(month.weeks.slice());
+	}, [].slice());
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/helpers/useControlledValue.js
+/**
+* A custom hook for managing both controlled and uncontrolled component states.
+*
+* This hook allows a component to support both controlled and uncontrolled
+* states by determining whether the `controlledValue` is provided. If it is
+* undefined, the hook falls back to using the internal state.
+*
+* @example
+*   // Uncontrolled usage
+*   const [value, setValue] = useControlledValue(0, undefined);
+*
+*   // Controlled usage
+*   const [value, setValue] = useControlledValue(0, props.value);
+*
+* @template T - The type of the value.
+* @param defaultValue The initial value for the uncontrolled state.
+* @param controlledValue The value for the controlled state. If undefined, the
+*   component will use the uncontrolled state.
+* @returns A tuple where the first element is the current value (either
+*   controlled or uncontrolled) and the second element is a setter function to
+*   update the value.
+*/
+function useControlledValue(defaultValue, controlledValue) {
+	const [uncontrolledValue, setValue] = (0, import_react.useState)(defaultValue);
+	return [controlledValue === void 0 ? uncontrolledValue : controlledValue, setValue];
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/useCalendar.js
+/**
+* Provides the calendar object to work with the calendar in custom components.
+*
+* @private
+* @param props - The DayPicker props related to calendar configuration.
+* @param dateLib - The date utility library instance.
+* @returns The calendar object containing displayed days, weeks, months, and
+*   navigation methods.
+*/
+function useCalendar(props, dateLib) {
+	const [navStart, navEnd] = getNavMonths(props, dateLib);
+	const { startOfMonth, endOfMonth } = dateLib;
+	const initialMonth = getInitialMonth(props, navStart, navEnd, dateLib);
+	const [firstMonth, setFirstMonth] = useControlledValue(initialMonth, props.month ? initialMonth : void 0);
+	(0, import_react.useEffect)(() => {
+		setFirstMonth(getInitialMonth(props, navStart, navEnd, dateLib));
+	}, [props.timeZone]);
+	/** The months displayed in the calendar. */
+	const { months, weeks, days, previousMonth, nextMonth } = (0, import_react.useMemo)(() => {
+		const displayMonths = getDisplayMonths(firstMonth, navEnd, { numberOfMonths: props.numberOfMonths }, dateLib);
+		const months = getMonths(displayMonths, getDates(displayMonths, props.endMonth ? endOfMonth(props.endMonth) : void 0, {
+			ISOWeek: props.ISOWeek,
+			fixedWeeks: props.fixedWeeks,
+			broadcastCalendar: props.broadcastCalendar
+		}, dateLib), {
+			broadcastCalendar: props.broadcastCalendar,
+			fixedWeeks: props.fixedWeeks,
+			ISOWeek: props.ISOWeek,
+			reverseMonths: props.reverseMonths
+		}, dateLib);
+		return {
+			months,
+			weeks: getWeeks(months),
+			days: getDays(months),
+			previousMonth: getPreviousMonth(firstMonth, navStart, props, dateLib),
+			nextMonth: getNextMonth(firstMonth, navEnd, props, dateLib)
+		};
+	}, [
+		dateLib,
+		firstMonth.getTime(),
+		navEnd?.getTime(),
+		navStart?.getTime(),
+		props.disableNavigation,
+		props.broadcastCalendar,
+		props.endMonth?.getTime(),
+		props.fixedWeeks,
+		props.ISOWeek,
+		props.numberOfMonths,
+		props.pagedNavigation,
+		props.reverseMonths
+	]);
+	const { disableNavigation, onMonthChange } = props;
+	const isDayInCalendar = (day) => weeks.some((week) => week.days.some((d) => d.isEqualTo(day)));
+	const goToMonth = (date) => {
+		if (disableNavigation) return;
+		let newMonth = startOfMonth(date);
+		if (navStart && newMonth < startOfMonth(navStart)) newMonth = startOfMonth(navStart);
+		if (navEnd && newMonth > startOfMonth(navEnd)) newMonth = startOfMonth(navEnd);
+		setFirstMonth(newMonth);
+		onMonthChange?.(newMonth);
+	};
+	const goToDay = (day) => {
+		if (isDayInCalendar(day)) return;
+		goToMonth(day.date);
+	};
+	return {
+		months,
+		weeks,
+		days,
+		navStart,
+		navEnd,
+		previousMonth,
+		nextMonth,
+		goToMonth,
+		goToDay
+	};
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/helpers/calculateFocusTarget.js
+var FocusTargetPriority;
+(function(FocusTargetPriority) {
+	FocusTargetPriority[FocusTargetPriority["Today"] = 0] = "Today";
+	FocusTargetPriority[FocusTargetPriority["Selected"] = 1] = "Selected";
+	FocusTargetPriority[FocusTargetPriority["LastFocused"] = 2] = "LastFocused";
+	FocusTargetPriority[FocusTargetPriority["FocusedModifier"] = 3] = "FocusedModifier";
+})(FocusTargetPriority || (FocusTargetPriority = {}));
+/**
+* Determines if a day is focusable based on its modifiers.
+*
+* A day is considered focusable if it is not disabled, hidden, or outside the
+* displayed month.
+*
+* @param modifiers The modifiers applied to the day.
+* @returns `true` if the day is focusable, otherwise `false`.
+*/
+function isFocusableDay(modifiers) {
+	return !modifiers[DayFlag.disabled] && !modifiers[DayFlag.hidden] && !modifiers[DayFlag.outside];
+}
+/**
+* Calculates the focus target day based on priority.
+*
+* This function determines the day that should receive focus in the calendar,
+* prioritizing days with specific modifiers (e.g., "focused", "today") or
+* selection states.
+*
+* @param days The array of `CalendarDay` objects to evaluate.
+* @param getModifiers A function to retrieve the modifiers for a given day.
+* @param isSelected A function to determine if a day is selected.
+* @param lastFocused The last focused day, if any.
+* @returns The `CalendarDay` that should receive focus, or `undefined` if no
+*   focusable day is found.
+*/
+function calculateFocusTarget(days, getModifiers, isSelected, lastFocused) {
+	let focusTarget;
+	let foundFocusTargetPriority = -1;
+	for (const day of days) {
+		const modifiers = getModifiers(day);
+		if (isFocusableDay(modifiers)) {
+			if (modifiers[DayFlag.focused] && foundFocusTargetPriority < FocusTargetPriority.FocusedModifier) {
+				focusTarget = day;
+				foundFocusTargetPriority = FocusTargetPriority.FocusedModifier;
+			} else if (lastFocused?.isEqualTo(day) && foundFocusTargetPriority < FocusTargetPriority.LastFocused) {
+				focusTarget = day;
+				foundFocusTargetPriority = FocusTargetPriority.LastFocused;
+			} else if (isSelected(day.date) && foundFocusTargetPriority < FocusTargetPriority.Selected) {
+				focusTarget = day;
+				foundFocusTargetPriority = FocusTargetPriority.Selected;
+			} else if (modifiers[DayFlag.today] && foundFocusTargetPriority < FocusTargetPriority.Today) {
+				focusTarget = day;
+				foundFocusTargetPriority = FocusTargetPriority.Today;
+			}
+		}
+	}
+	if (!focusTarget) focusTarget = days.find((day) => isFocusableDay(getModifiers(day)));
+	return focusTarget;
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/helpers/getFocusableDate.js
+/**
+* Calculates the next date that should be focused in the calendar.
+*
+* This function determines the next focusable date based on the movement
+* direction, constraints, and calendar configuration.
+*
+* @param moveBy The unit of movement (e.g., "day", "week").
+* @param moveDir The direction of movement ("before" or "after").
+* @param refDate The reference date from which to calculate the next focusable
+*   date.
+* @param navStart The earliest date the user can navigate to.
+* @param navEnd The latest date the user can navigate to.
+* @param props The DayPicker props, including calendar configuration options.
+* @param dateLib The date library to use for date manipulation.
+* @returns The next focusable date.
+*/
+function getFocusableDate(moveBy, moveDir, refDate, navStart, navEnd, props, dateLib) {
+	const { ISOWeek, broadcastCalendar } = props;
+	const { addDays, addMonths, addWeeks, addYears, endOfBroadcastWeek, endOfISOWeek, endOfWeek, max, min, startOfBroadcastWeek, startOfISOWeek, startOfWeek } = dateLib;
+	let focusableDate = {
+		day: addDays,
+		week: addWeeks,
+		month: addMonths,
+		year: addYears,
+		startOfWeek: (date) => broadcastCalendar ? startOfBroadcastWeek(date, dateLib) : ISOWeek ? startOfISOWeek(date) : startOfWeek(date),
+		endOfWeek: (date) => broadcastCalendar ? endOfBroadcastWeek(date) : ISOWeek ? endOfISOWeek(date) : endOfWeek(date)
+	}[moveBy](refDate, moveDir === "after" ? 1 : -1);
+	if (moveDir === "before" && navStart) focusableDate = max([navStart, focusableDate]);
+	else if (moveDir === "after" && navEnd) focusableDate = min([navEnd, focusableDate]);
+	return focusableDate;
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/helpers/getNextFocus.js
+/**
+* Determines the next focusable day in the calendar.
+*
+* This function recursively calculates the next focusable day based on the
+* movement direction and modifiers applied to the days.
+*
+* @param moveBy The unit of movement (e.g., "day", "week").
+* @param moveDir The direction of movement ("before" or "after").
+* @param refDay The currently focused day.
+* @param calendarStartMonth The earliest month the user can navigate to.
+* @param calendarEndMonth The latest month the user can navigate to.
+* @param props The DayPicker props, including modifiers and configuration
+*   options.
+* @param dateLib The date library to use for date manipulation.
+* @param attempt The current recursion attempt (used to limit recursion depth).
+* @returns The next focusable day, or `undefined` if no focusable day is found.
+*/
+function getNextFocus(moveBy, moveDir, refDay, calendarStartMonth, calendarEndMonth, props, dateLib, attempt = 0) {
+	if (attempt > 365) return;
+	const focusableDate = getFocusableDate(moveBy, moveDir, refDay.date, calendarStartMonth, calendarEndMonth, props, dateLib);
+	const isDisabled = Boolean(props.disabled && dateMatchModifiers(focusableDate, props.disabled, dateLib));
+	const isHidden = Boolean(props.hidden && dateMatchModifiers(focusableDate, props.hidden, dateLib));
+	const focusDay = new CalendarDay(focusableDate, focusableDate, dateLib);
+	if (!isDisabled && !isHidden) return focusDay;
+	return getNextFocus(moveBy, moveDir, focusDay, calendarStartMonth, calendarEndMonth, props, dateLib, attempt + 1);
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/useFocus.js
+/**
+* Manages focus behavior for the DayPicker component, including setting,
+* moving, and blurring focus on calendar days.
+*
+* @template T - The type of DayPicker props.
+* @param props - The DayPicker props.
+* @param calendar - The calendar object containing the displayed days and
+*   months.
+* @param getModifiers - A function to retrieve modifiers for a given day.
+* @param isSelected - A function to check if a date is selected.
+* @param dateLib - The date utility library instance.
+* @returns An object containing focus-related methods and the currently focused
+*   day.
+*/
+function useFocus(props, calendar, getModifiers, isSelected, dateLib) {
+	const { autoFocus } = props;
+	const [lastFocused, setLastFocused] = (0, import_react.useState)();
+	const focusTarget = calculateFocusTarget(calendar.days, getModifiers, isSelected || (() => false), lastFocused);
+	const [focusedDay, setFocused] = (0, import_react.useState)(autoFocus ? focusTarget : void 0);
+	const blur = () => {
+		setLastFocused(focusedDay);
+		setFocused(void 0);
+	};
+	const moveFocus = (moveBy, moveDir) => {
+		if (!focusedDay) return;
+		const nextFocus = getNextFocus(moveBy, moveDir, focusedDay, calendar.navStart, calendar.navEnd, props, dateLib);
+		if (!nextFocus) return;
+		if (props.disableNavigation) {
+			if (!calendar.days.some((day) => day.isEqualTo(nextFocus))) return;
+		}
+		calendar.goToDay(nextFocus);
+		setFocused(nextFocus);
+	};
+	const isFocusTarget = (day) => {
+		return Boolean(focusTarget?.isEqualTo(day));
+	};
+	return {
+		isFocusTarget,
+		setFocused,
+		focused: focusedDay,
+		blur,
+		moveFocus
+	};
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/selection/useMulti.js
+/**
+* Hook to manage multiple-date selection in the DayPicker component.
+*
+* @template T - The type of DayPicker props.
+* @param props - The DayPicker props.
+* @param dateLib - The date utility library instance.
+* @returns An object containing the selected dates, a function to select dates,
+*   and a function to check if a date is selected.
+*/
+function useMulti(props, dateLib) {
+	const { selected: initiallySelected, required, onSelect } = props;
+	const [internallySelected, setSelected] = useControlledValue(initiallySelected, onSelect ? initiallySelected : void 0);
+	const selected = !onSelect ? internallySelected : initiallySelected;
+	const { isSameDay } = dateLib;
+	const isSelected = (date) => {
+		return selected?.some((d) => isSameDay(d, date)) ?? false;
+	};
+	const { min, max } = props;
+	const select = (triggerDate, modifiers, e) => {
+		let newDates = [...selected ?? []];
+		if (isSelected(triggerDate)) {
+			if (selected?.length === min) return;
+			if (required && selected?.length === 1) return;
+			newDates = selected?.filter((d) => !isSameDay(d, triggerDate));
+		} else if (selected?.length === max) newDates = [triggerDate];
+		else newDates = [...newDates, triggerDate];
+		if (!onSelect) setSelected(newDates);
+		onSelect?.(newDates, triggerDate, modifiers, e);
+		return newDates;
+	};
+	return {
+		selected,
+		select,
+		isSelected
+	};
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/utils/addToRange.js
+/**
+* Adds a date to an existing range, considering constraints like minimum and
+* maximum range size.
+*
+* @param date - The date to add to the range.
+* @param initialRange - The initial range to which the date will be added.
+* @param min - The minimum number of days in the range.
+* @param max - The maximum number of days in the range.
+* @param required - Whether the range must always include at least one date.
+* @param dateLib - The date utility library instance.
+* @returns The updated date range, or `undefined` if the range is cleared.
+* @group Utilities
+*/
+function addToRange(date, initialRange, min = 0, max = 0, required = false, dateLib = defaultDateLib) {
+	const { from, to } = initialRange || {};
+	const { isSameDay, isAfter, isBefore } = dateLib;
+	let range;
+	if (!from && !to) range = {
+		from: date,
+		to: min > 0 ? void 0 : date
+	};
+	else if (from && !to) if (isSameDay(from, date)) if (min === 0) range = {
+		from,
+		to: date
+	};
+	else if (required) range = {
+		from,
+		to: void 0
+	};
+	else range = void 0;
+	else if (isBefore(date, from)) range = {
+		from: date,
+		to: from
+	};
+	else range = {
+		from,
+		to: date
+	};
+	else if (from && to) if (isSameDay(from, date) && isSameDay(to, date)) if (required) range = {
+		from,
+		to
+	};
+	else range = void 0;
+	else if (isSameDay(from, date)) range = {
+		from,
+		to: min > 0 ? void 0 : date
+	};
+	else if (isSameDay(to, date)) range = {
+		from: date,
+		to: min > 0 ? void 0 : date
+	};
+	else if (isBefore(date, from)) range = {
+		from: date,
+		to
+	};
+	else if (isAfter(date, from)) range = {
+		from,
+		to: date
+	};
+	else if (isAfter(date, to)) range = {
+		from,
+		to: date
+	};
+	else throw new Error("Invalid range");
+	if (range?.from && range?.to) {
+		const diff = dateLib.differenceInCalendarDays(range.to, range.from);
+		if (max > 0 && diff > max) range = {
+			from: date,
+			to: void 0
+		};
+		else if (min > 1 && diff < min) range = {
+			from: date,
+			to: void 0
+		};
+	}
+	return range;
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/utils/rangeContainsDayOfWeek.js
+/**
+* Checks if a date range contains one or more specified days of the week.
+*
+* @since 9.2.2
+* @param range - The date range to check.
+* @param dayOfWeek - The day(s) of the week to check for (`0-6`, where `0` is
+*   Sunday).
+* @param dateLib - The date utility library instance.
+* @returns `true` if the range contains the specified day(s) of the week,
+*   otherwise `false`.
+* @group Utilities
+*/
+function rangeContainsDayOfWeek(range, dayOfWeek, dateLib = defaultDateLib) {
+	const dayOfWeekArr = !Array.isArray(dayOfWeek) ? [dayOfWeek] : dayOfWeek;
+	let date = range.from;
+	const totalDays = dateLib.differenceInCalendarDays(range.to, range.from);
+	const totalDaysLimit = Math.min(totalDays, 6);
+	for (let i = 0; i <= totalDaysLimit; i++) {
+		if (dayOfWeekArr.includes(date.getDay())) return true;
+		date = dateLib.addDays(date, 1);
+	}
+	return false;
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/utils/rangeOverlaps.js
+/**
+* Determines if two date ranges overlap.
+*
+* @since 9.2.2
+* @param rangeLeft - The first date range.
+* @param rangeRight - The second date range.
+* @param dateLib - The date utility library instance.
+* @returns `true` if the ranges overlap, otherwise `false`.
+* @group Utilities
+*/
+function rangeOverlaps(rangeLeft, rangeRight, dateLib = defaultDateLib) {
+	return rangeIncludesDate(rangeLeft, rangeRight.from, false, dateLib) || rangeIncludesDate(rangeLeft, rangeRight.to, false, dateLib) || rangeIncludesDate(rangeRight, rangeLeft.from, false, dateLib) || rangeIncludesDate(rangeRight, rangeLeft.to, false, dateLib);
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/utils/rangeContainsModifiers.js
+/**
+* Checks if a date range contains dates that match the given modifiers.
+*
+* @since 9.2.2
+* @param range - The date range to check.
+* @param modifiers - The modifiers to match against.
+* @param dateLib - The date utility library instance.
+* @returns `true` if the range contains matching dates, otherwise `false`.
+* @group Utilities
+*/
+function rangeContainsModifiers(range, modifiers, dateLib = defaultDateLib) {
+	const matchers = Array.isArray(modifiers) ? modifiers : [modifiers];
+	if (matchers.filter((matcher) => typeof matcher !== "function").some((matcher) => {
+		if (typeof matcher === "boolean") return matcher;
+		if (dateLib.isDate(matcher)) return rangeIncludesDate(range, matcher, false, dateLib);
+		if (isDatesArray(matcher, dateLib)) return matcher.some((date) => rangeIncludesDate(range, date, false, dateLib));
+		if (isDateRange(matcher)) {
+			if (matcher.from && matcher.to) return rangeOverlaps(range, {
+				from: matcher.from,
+				to: matcher.to
+			}, dateLib);
+			return false;
+		}
+		if (isDayOfWeekType(matcher)) return rangeContainsDayOfWeek(range, matcher.dayOfWeek, dateLib);
+		if (isDateInterval(matcher)) {
+			if (dateLib.isAfter(matcher.before, matcher.after)) return rangeOverlaps(range, {
+				from: dateLib.addDays(matcher.after, 1),
+				to: dateLib.addDays(matcher.before, -1)
+			}, dateLib);
+			return dateMatchModifiers(range.from, matcher, dateLib) || dateMatchModifiers(range.to, matcher, dateLib);
+		}
+		if (isDateAfterType(matcher) || isDateBeforeType(matcher)) return dateMatchModifiers(range.from, matcher, dateLib) || dateMatchModifiers(range.to, matcher, dateLib);
+		return false;
+	})) return true;
+	const functionMatchers = matchers.filter((matcher) => typeof matcher === "function");
+	if (functionMatchers.length) {
+		let date = range.from;
+		const totalDays = dateLib.differenceInCalendarDays(range.to, range.from);
+		for (let i = 0; i <= totalDays; i++) {
+			if (functionMatchers.some((matcher) => matcher(date))) return true;
+			date = dateLib.addDays(date, 1);
+		}
+	}
+	return false;
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/selection/useRange.js
+/**
+* Hook to manage range selection in the DayPicker component.
+*
+* @template T - The type of DayPicker props.
+* @param props - The DayPicker props.
+* @param dateLib - The date utility library instance.
+* @returns An object containing the selected range, a function to select a
+*   range, and a function to check if a date is within the range.
+*/
+function useRange(props, dateLib) {
+	const { disabled, excludeDisabled, resetOnSelect, selected: initiallySelected, required, onSelect } = props;
+	const [internallySelected, setSelected] = useControlledValue(initiallySelected, onSelect ? initiallySelected : void 0);
+	const selected = !onSelect ? internallySelected : initiallySelected;
+	const isSelected = (date) => selected && rangeIncludesDate(selected, date, false, dateLib);
+	const select = (triggerDate, modifiers, e) => {
+		const { min, max } = props;
+		let newRange;
+		if (triggerDate) {
+			const selectedFrom = selected?.from;
+			const selectedTo = selected?.to;
+			const hasFullRange = !!selectedFrom && !!selectedTo;
+			const isClickingSingleDayRange = !!selectedFrom && !!selectedTo && dateLib.isSameDay(selectedFrom, selectedTo) && dateLib.isSameDay(triggerDate, selectedFrom);
+			if (resetOnSelect && (hasFullRange || !selected?.from)) if (!required && isClickingSingleDayRange) newRange = void 0;
+			else newRange = {
+				from: triggerDate,
+				to: void 0
+			};
+			else newRange = addToRange(triggerDate, selected, min, max, required, dateLib);
+		}
+		if (excludeDisabled && disabled && newRange?.from && newRange.to) {
+			if (rangeContainsModifiers({
+				from: newRange.from,
+				to: newRange.to
+			}, disabled, dateLib)) {
+				newRange.from = triggerDate;
+				newRange.to = void 0;
+			}
+		}
+		if (!onSelect) setSelected(newRange);
+		onSelect?.(newRange, triggerDate, modifiers, e);
+		return newRange;
+	};
+	return {
+		selected,
+		select,
+		isSelected
+	};
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/selection/useSingle.js
+/**
+* Hook to manage single-date selection in the DayPicker component.
+*
+* @template T - The type of DayPicker props.
+* @param props - The DayPicker props.
+* @param dateLib - The date utility library instance.
+* @returns An object containing the selected date, a function to select a date,
+*   and a function to check if a date is selected.
+*/
+function useSingle(props, dateLib) {
+	const { selected: initiallySelected, required, onSelect } = props;
+	const [internallySelected, setSelected] = useControlledValue(initiallySelected, onSelect ? initiallySelected : void 0);
+	const selected = !onSelect ? internallySelected : initiallySelected;
+	const { isSameDay } = dateLib;
+	const isSelected = (compareDate) => {
+		return selected ? isSameDay(selected, compareDate) : false;
+	};
+	const select = (triggerDate, modifiers, e) => {
+		let newDate = triggerDate;
+		if (!required && selected && selected && isSameDay(triggerDate, selected)) newDate = void 0;
+		if (!onSelect) setSelected(newDate);
+		if (required) onSelect?.(newDate, triggerDate, modifiers, e);
+		else onSelect?.(newDate, triggerDate, modifiers, e);
+		return newDate;
+	};
+	return {
+		selected,
+		select,
+		isSelected
+	};
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/useSelection.js
+/**
+* Determines the appropriate selection hook to use based on the selection mode
+* and returns the corresponding selection object.
+*
+* @template T - The type of DayPicker props.
+* @param props - The DayPicker props.
+* @param dateLib - The date utility library instance.
+* @returns The selection object for the specified mode, or `undefined` if no
+*   mode is set.
+*/
+function useSelection(props, dateLib) {
+	const single = useSingle(props, dateLib);
+	const multi = useMulti(props, dateLib);
+	const range = useRange(props, dateLib);
+	switch (props.mode) {
+		case "single": return single;
+		case "multiple": return multi;
+		case "range": return range;
+		default: return;
+	}
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/utils/toTimeZone.js
+/**
+* Convert a {@link Date} or {@link TZDate} instance to the given time zone.
+* Reuses the same instance when it is already a {@link TZDate} using the target
+* time zone to avoid extra allocations.
+*/
+function toTimeZone(date, timeZone) {
+	if (date instanceof TZDate && date.timeZone === timeZone) return date;
+	return new TZDate(date, timeZone);
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/utils/convertMatchersToTimeZone.js
+function toZoneNoon(date, timeZone, noonSafe) {
+	if (!noonSafe) return toTimeZone(date, timeZone);
+	const zoned = toTimeZone(date, timeZone);
+	const noonZoned = new TZDate(zoned.getFullYear(), zoned.getMonth(), zoned.getDate(), 12, 0, 0, timeZone);
+	return new Date(noonZoned.getTime());
+}
+function convertMatcher(matcher, timeZone, noonSafe) {
+	if (typeof matcher === "boolean" || typeof matcher === "function") return matcher;
+	if (matcher instanceof Date) return toZoneNoon(matcher, timeZone, noonSafe);
+	if (Array.isArray(matcher)) return matcher.map((value) => value instanceof Date ? toZoneNoon(value, timeZone, noonSafe) : value);
+	if (isDateRange(matcher)) return {
+		...matcher,
+		from: matcher.from ? toTimeZone(matcher.from, timeZone) : matcher.from,
+		to: matcher.to ? toTimeZone(matcher.to, timeZone) : matcher.to
+	};
+	if (isDateInterval(matcher)) return {
+		before: toZoneNoon(matcher.before, timeZone, noonSafe),
+		after: toZoneNoon(matcher.after, timeZone, noonSafe)
+	};
+	if (isDateAfterType(matcher)) return { after: toZoneNoon(matcher.after, timeZone, noonSafe) };
+	if (isDateBeforeType(matcher)) return { before: toZoneNoon(matcher.before, timeZone, noonSafe) };
+	return matcher;
+}
+/**
+* Convert any {@link Matcher} or array of matchers to the specified time zone.
+*
+* @param matchers - The matcher or matchers to convert.
+* @param timeZone - The target IANA time zone.
+* @returns The converted matcher(s).
+* @group Utilities
+*/
+function convertMatchersToTimeZone(matchers, timeZone, noonSafe) {
+	if (!matchers) return matchers;
+	if (Array.isArray(matchers)) return matchers.map((matcher) => convertMatcher(matcher, timeZone, noonSafe));
+	return convertMatcher(matchers, timeZone, noonSafe);
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-day-picker@9.14.0_react@19.2.4/node_modules/react-day-picker/dist/esm/DayPicker.js
+/**
+* Renders the DayPicker calendar component.
+*
+* @param initialProps - The props for the DayPicker component.
+* @returns The rendered DayPicker component.
+* @group DayPicker
+* @see https://daypicker.dev
+*/
+function DayPicker(initialProps) {
+	let props = initialProps;
+	const timeZone = props.timeZone;
+	if (timeZone) {
+		props = {
+			...initialProps,
+			timeZone
+		};
+		if (props.today) props.today = toTimeZone(props.today, timeZone);
+		if (props.month) props.month = toTimeZone(props.month, timeZone);
+		if (props.defaultMonth) props.defaultMonth = toTimeZone(props.defaultMonth, timeZone);
+		if (props.startMonth) props.startMonth = toTimeZone(props.startMonth, timeZone);
+		if (props.endMonth) props.endMonth = toTimeZone(props.endMonth, timeZone);
+		if (props.mode === "single" && props.selected) props.selected = toTimeZone(props.selected, timeZone);
+		else if (props.mode === "multiple" && props.selected) props.selected = props.selected?.map((date) => toTimeZone(date, timeZone));
+		else if (props.mode === "range" && props.selected) props.selected = {
+			from: props.selected.from ? toTimeZone(props.selected.from, timeZone) : props.selected.from,
+			to: props.selected.to ? toTimeZone(props.selected.to, timeZone) : props.selected.to
+		};
+		if (props.disabled !== void 0) props.disabled = convertMatchersToTimeZone(props.disabled, timeZone);
+		if (props.hidden !== void 0) props.hidden = convertMatchersToTimeZone(props.hidden, timeZone);
+		if (props.modifiers) {
+			const nextModifiers = {};
+			Object.keys(props.modifiers).forEach((key) => {
+				nextModifiers[key] = convertMatchersToTimeZone(props.modifiers?.[key], timeZone);
+			});
+			props.modifiers = nextModifiers;
+		}
+	}
+	const { components, formatters, labels, dateLib, locale, classNames } = (0, import_react.useMemo)(() => {
+		const locale = {
+			...enUS,
+			...props.locale
+		};
+		const weekStartsOn = props.broadcastCalendar ? 1 : props.weekStartsOn;
+		const noonOverrides = props.noonSafe && props.timeZone ? createNoonOverrides(props.timeZone, {
+			weekStartsOn,
+			locale
+		}) : void 0;
+		const overrides = props.dateLib && noonOverrides ? {
+			...noonOverrides,
+			...props.dateLib
+		} : props.dateLib ?? noonOverrides;
+		const dateLib = new DateLib({
+			locale,
+			weekStartsOn,
+			firstWeekContainsDate: props.firstWeekContainsDate,
+			useAdditionalWeekYearTokens: props.useAdditionalWeekYearTokens,
+			useAdditionalDayOfYearTokens: props.useAdditionalDayOfYearTokens,
+			timeZone: props.timeZone,
+			numerals: props.numerals
+		}, overrides);
+		return {
+			dateLib,
+			components: getComponents(props.components),
+			formatters: getFormatters(props.formatters),
+			labels: getLabels(props.labels, dateLib.options),
+			locale,
+			classNames: {
+				...getDefaultClassNames(),
+				...props.classNames
+			}
+		};
+	}, [
+		props.locale,
+		props.broadcastCalendar,
+		props.weekStartsOn,
+		props.firstWeekContainsDate,
+		props.useAdditionalWeekYearTokens,
+		props.useAdditionalDayOfYearTokens,
+		props.timeZone,
+		props.numerals,
+		props.dateLib,
+		props.noonSafe,
+		props.components,
+		props.formatters,
+		props.labels,
+		props.classNames
+	]);
+	if (!props.today) props = {
+		...props,
+		today: dateLib.today()
+	};
+	const { captionLayout, mode, navLayout, numberOfMonths = 1, onDayBlur, onDayClick, onDayFocus, onDayKeyDown, onDayMouseEnter, onDayMouseLeave, onNextClick, onPrevClick, showWeekNumber, styles } = props;
+	const { formatCaption, formatDay, formatMonthDropdown, formatWeekNumber, formatWeekNumberHeader, formatWeekdayName, formatYearDropdown } = formatters;
+	const calendar = useCalendar(props, dateLib);
+	const { days, months, navStart, navEnd, previousMonth, nextMonth, goToMonth } = calendar;
+	const getModifiers = createGetModifiers(days, props, navStart, navEnd, dateLib);
+	const { isSelected, select, selected: selectedValue } = useSelection(props, dateLib) ?? {};
+	const { blur, focused, isFocusTarget, moveFocus, setFocused } = useFocus(props, calendar, getModifiers, isSelected ?? (() => false), dateLib);
+	const { labelDayButton, labelGridcell, labelGrid, labelMonthDropdown, labelNav, labelPrevious, labelNext, labelWeekday, labelWeekNumber, labelWeekNumberHeader, labelYearDropdown } = labels;
+	const weekdays = (0, import_react.useMemo)(() => getWeekdays(dateLib, props.ISOWeek, props.broadcastCalendar, props.today), [
+		dateLib,
+		props.ISOWeek,
+		props.broadcastCalendar,
+		props.today
+	]);
+	const isInteractive = mode !== void 0 || onDayClick !== void 0;
+	const handlePreviousClick = (0, import_react.useCallback)(() => {
+		if (!previousMonth) return;
+		goToMonth(previousMonth);
+		onPrevClick?.(previousMonth);
+	}, [
+		previousMonth,
+		goToMonth,
+		onPrevClick
+	]);
+	const handleNextClick = (0, import_react.useCallback)(() => {
+		if (!nextMonth) return;
+		goToMonth(nextMonth);
+		onNextClick?.(nextMonth);
+	}, [
+		goToMonth,
+		nextMonth,
+		onNextClick
+	]);
+	const handleDayClick = (0, import_react.useCallback)((day, m) => (e) => {
+		e.preventDefault();
+		e.stopPropagation();
+		setFocused(day);
+		if (m.disabled) return;
+		select?.(day.date, m, e);
+		onDayClick?.(day.date, m, e);
+	}, [
+		select,
+		onDayClick,
+		setFocused
+	]);
+	const handleDayFocus = (0, import_react.useCallback)((day, m) => (e) => {
+		setFocused(day);
+		onDayFocus?.(day.date, m, e);
+	}, [onDayFocus, setFocused]);
+	const handleDayBlur = (0, import_react.useCallback)((day, m) => (e) => {
+		blur();
+		onDayBlur?.(day.date, m, e);
+	}, [blur, onDayBlur]);
+	const handleDayKeyDown = (0, import_react.useCallback)((day, modifiers) => (e) => {
+		const keyMap = {
+			ArrowLeft: [e.shiftKey ? "month" : "day", props.dir === "rtl" ? "after" : "before"],
+			ArrowRight: [e.shiftKey ? "month" : "day", props.dir === "rtl" ? "before" : "after"],
+			ArrowDown: [e.shiftKey ? "year" : "week", "after"],
+			ArrowUp: [e.shiftKey ? "year" : "week", "before"],
+			PageUp: [e.shiftKey ? "year" : "month", "before"],
+			PageDown: [e.shiftKey ? "year" : "month", "after"],
+			Home: ["startOfWeek", "before"],
+			End: ["endOfWeek", "after"]
+		};
+		if (keyMap[e.key]) {
+			e.preventDefault();
+			e.stopPropagation();
+			const [moveBy, moveDir] = keyMap[e.key];
+			moveFocus(moveBy, moveDir);
+		}
+		onDayKeyDown?.(day.date, modifiers, e);
+	}, [
+		moveFocus,
+		onDayKeyDown,
+		props.dir
+	]);
+	const handleDayMouseEnter = (0, import_react.useCallback)((day, modifiers) => (e) => {
+		onDayMouseEnter?.(day.date, modifiers, e);
+	}, [onDayMouseEnter]);
+	const handleDayMouseLeave = (0, import_react.useCallback)((day, modifiers) => (e) => {
+		onDayMouseLeave?.(day.date, modifiers, e);
+	}, [onDayMouseLeave]);
+	const handleMonthChange = (0, import_react.useCallback)((date) => (e) => {
+		const selectedMonth = Number(e.target.value);
+		goToMonth(dateLib.setMonth(dateLib.startOfMonth(date), selectedMonth));
+	}, [dateLib, goToMonth]);
+	const handleYearChange = (0, import_react.useCallback)((date) => (e) => {
+		const selectedYear = Number(e.target.value);
+		goToMonth(dateLib.setYear(dateLib.startOfMonth(date), selectedYear));
+	}, [dateLib, goToMonth]);
+	const { className, style } = (0, import_react.useMemo)(() => ({
+		className: [classNames[UI.Root], props.className].filter(Boolean).join(" "),
+		style: {
+			...styles?.[UI.Root],
+			...props.style
+		}
+	}), [
+		classNames,
+		props.className,
+		props.style,
+		styles
+	]);
+	const dataAttributes = getDataAttributes(props);
+	const rootElRef = (0, import_react.useRef)(null);
+	useAnimation(rootElRef, Boolean(props.animate), {
+		classNames,
+		months,
+		focused,
+		dateLib
+	});
+	const contextValue = {
+		dayPickerProps: props,
+		selected: selectedValue,
+		select,
+		isSelected,
+		months,
+		nextMonth,
+		previousMonth,
+		goToMonth,
+		getModifiers,
+		components,
+		classNames,
+		styles,
+		labels,
+		formatters
+	};
+	return import_react.createElement(dayPickerContext.Provider, { value: contextValue }, import_react.createElement(components.Root, {
+		rootRef: props.animate ? rootElRef : void 0,
+		className,
+		style,
+		dir: props.dir,
+		id: props.id,
+		lang: props.lang ?? locale.code,
+		nonce: props.nonce,
+		title: props.title,
+		role: props.role,
+		"aria-label": props["aria-label"],
+		"aria-labelledby": props["aria-labelledby"],
+		...dataAttributes
+	}, import_react.createElement(components.Months, {
+		className: classNames[UI.Months],
+		style: styles?.[UI.Months]
+	}, !props.hideNavigation && !navLayout && import_react.createElement(components.Nav, {
+		"data-animated-nav": props.animate ? "true" : void 0,
+		className: classNames[UI.Nav],
+		style: styles?.[UI.Nav],
+		"aria-label": labelNav(),
+		onPreviousClick: handlePreviousClick,
+		onNextClick: handleNextClick,
+		previousMonth,
+		nextMonth
+	}), months.map((calendarMonth, displayIndex) => {
+		return import_react.createElement(components.Month, {
+			"data-animated-month": props.animate ? "true" : void 0,
+			className: classNames[UI.Month],
+			style: styles?.[UI.Month],
+			key: displayIndex,
+			displayIndex,
+			calendarMonth
+		}, navLayout === "around" && !props.hideNavigation && displayIndex === 0 && import_react.createElement(components.PreviousMonthButton, {
+			type: "button",
+			className: classNames[UI.PreviousMonthButton],
+			tabIndex: previousMonth ? void 0 : -1,
+			"aria-disabled": previousMonth ? void 0 : true,
+			"aria-label": labelPrevious(previousMonth),
+			onClick: handlePreviousClick,
+			"data-animated-button": props.animate ? "true" : void 0
+		}, import_react.createElement(components.Chevron, {
+			disabled: previousMonth ? void 0 : true,
+			className: classNames[UI.Chevron],
+			orientation: props.dir === "rtl" ? "right" : "left"
+		})), import_react.createElement(components.MonthCaption, {
+			"data-animated-caption": props.animate ? "true" : void 0,
+			className: classNames[UI.MonthCaption],
+			style: styles?.[UI.MonthCaption],
+			calendarMonth,
+			displayIndex
+		}, captionLayout?.startsWith("dropdown") ? import_react.createElement(components.DropdownNav, {
+			className: classNames[UI.Dropdowns],
+			style: styles?.[UI.Dropdowns]
+		}, (() => {
+			const monthControl = captionLayout === "dropdown" || captionLayout === "dropdown-months" ? import_react.createElement(components.MonthsDropdown, {
+				key: "month",
+				className: classNames[UI.MonthsDropdown],
+				"aria-label": labelMonthDropdown(),
+				classNames,
+				components,
+				disabled: Boolean(props.disableNavigation),
+				onChange: handleMonthChange(calendarMonth.date),
+				options: getMonthOptions(calendarMonth.date, navStart, navEnd, formatters, dateLib),
+				style: styles?.[UI.Dropdown],
+				value: dateLib.getMonth(calendarMonth.date)
+			}) : import_react.createElement("span", { key: "month" }, formatMonthDropdown(calendarMonth.date, dateLib));
+			const yearControl = captionLayout === "dropdown" || captionLayout === "dropdown-years" ? import_react.createElement(components.YearsDropdown, {
+				key: "year",
+				className: classNames[UI.YearsDropdown],
+				"aria-label": labelYearDropdown(dateLib.options),
+				classNames,
+				components,
+				disabled: Boolean(props.disableNavigation),
+				onChange: handleYearChange(calendarMonth.date),
+				options: getYearOptions(navStart, navEnd, formatters, dateLib, Boolean(props.reverseYears)),
+				style: styles?.[UI.Dropdown],
+				value: dateLib.getYear(calendarMonth.date)
+			}) : import_react.createElement("span", { key: "year" }, formatYearDropdown(calendarMonth.date, dateLib));
+			return dateLib.getMonthYearOrder() === "year-first" ? [yearControl, monthControl] : [monthControl, yearControl];
+		})(), import_react.createElement("span", {
+			role: "status",
+			"aria-live": "polite",
+			style: {
+				border: 0,
+				clip: "rect(0 0 0 0)",
+				height: "1px",
+				margin: "-1px",
+				overflow: "hidden",
+				padding: 0,
+				position: "absolute",
+				width: "1px",
+				whiteSpace: "nowrap",
+				wordWrap: "normal"
+			}
+		}, formatCaption(calendarMonth.date, dateLib.options, dateLib))) : import_react.createElement(components.CaptionLabel, {
+			className: classNames[UI.CaptionLabel],
+			role: "status",
+			"aria-live": "polite"
+		}, formatCaption(calendarMonth.date, dateLib.options, dateLib))), navLayout === "around" && !props.hideNavigation && displayIndex === numberOfMonths - 1 && import_react.createElement(components.NextMonthButton, {
+			type: "button",
+			className: classNames[UI.NextMonthButton],
+			tabIndex: nextMonth ? void 0 : -1,
+			"aria-disabled": nextMonth ? void 0 : true,
+			"aria-label": labelNext(nextMonth),
+			onClick: handleNextClick,
+			"data-animated-button": props.animate ? "true" : void 0
+		}, import_react.createElement(components.Chevron, {
+			disabled: nextMonth ? void 0 : true,
+			className: classNames[UI.Chevron],
+			orientation: props.dir === "rtl" ? "left" : "right"
+		})), displayIndex === numberOfMonths - 1 && navLayout === "after" && !props.hideNavigation && import_react.createElement(components.Nav, {
+			"data-animated-nav": props.animate ? "true" : void 0,
+			className: classNames[UI.Nav],
+			style: styles?.[UI.Nav],
+			"aria-label": labelNav(),
+			onPreviousClick: handlePreviousClick,
+			onNextClick: handleNextClick,
+			previousMonth,
+			nextMonth
+		}), import_react.createElement(components.MonthGrid, {
+			role: "grid",
+			"aria-multiselectable": mode === "multiple" || mode === "range",
+			"aria-label": labelGrid(calendarMonth.date, dateLib.options, dateLib) || void 0,
+			className: classNames[UI.MonthGrid],
+			style: styles?.[UI.MonthGrid]
+		}, !props.hideWeekdays && import_react.createElement(components.Weekdays, {
+			"data-animated-weekdays": props.animate ? "true" : void 0,
+			className: classNames[UI.Weekdays],
+			style: styles?.[UI.Weekdays]
+		}, showWeekNumber && import_react.createElement(components.WeekNumberHeader, {
+			"aria-label": labelWeekNumberHeader(dateLib.options),
+			className: classNames[UI.WeekNumberHeader],
+			style: styles?.[UI.WeekNumberHeader],
+			scope: "col"
+		}, formatWeekNumberHeader()), weekdays.map((weekday) => import_react.createElement(components.Weekday, {
+			"aria-label": labelWeekday(weekday, dateLib.options, dateLib),
+			className: classNames[UI.Weekday],
+			key: String(weekday),
+			style: styles?.[UI.Weekday],
+			scope: "col"
+		}, formatWeekdayName(weekday, dateLib.options, dateLib)))), import_react.createElement(components.Weeks, {
+			"data-animated-weeks": props.animate ? "true" : void 0,
+			className: classNames[UI.Weeks],
+			style: styles?.[UI.Weeks]
+		}, calendarMonth.weeks.map((week) => {
+			return import_react.createElement(components.Week, {
+				className: classNames[UI.Week],
+				key: week.weekNumber,
+				style: styles?.[UI.Week],
+				week
+			}, showWeekNumber && import_react.createElement(components.WeekNumber, {
+				week,
+				style: styles?.[UI.WeekNumber],
+				"aria-label": labelWeekNumber(week.weekNumber, { locale }),
+				className: classNames[UI.WeekNumber],
+				scope: "row",
+				role: "rowheader"
+			}, formatWeekNumber(week.weekNumber, dateLib)), week.days.map((day) => {
+				const { date } = day;
+				const modifiers = getModifiers(day);
+				modifiers[DayFlag.focused] = !modifiers.hidden && Boolean(focused?.isEqualTo(day));
+				modifiers[SelectionState.selected] = isSelected?.(date) || modifiers.selected;
+				if (isDateRange(selectedValue)) {
+					const { from, to } = selectedValue;
+					modifiers[SelectionState.range_start] = Boolean(from && to && dateLib.isSameDay(date, from));
+					modifiers[SelectionState.range_end] = Boolean(from && to && dateLib.isSameDay(date, to));
+					modifiers[SelectionState.range_middle] = rangeIncludesDate(selectedValue, date, true, dateLib);
+				}
+				const style = getStyleForModifiers(modifiers, styles, props.modifiersStyles);
+				const className = getClassNamesForModifiers(modifiers, classNames, props.modifiersClassNames);
+				const ariaLabel = !isInteractive && !modifiers.hidden ? labelGridcell(date, modifiers, dateLib.options, dateLib) : void 0;
+				return import_react.createElement(components.Day, {
+					key: `${day.isoDate}_${day.displayMonthId}`,
+					day,
+					modifiers,
+					className: className.join(" "),
+					style,
+					role: "gridcell",
+					"aria-selected": modifiers.selected || void 0,
+					"aria-label": ariaLabel,
+					"data-day": day.isoDate,
+					"data-month": day.outside ? day.dateMonthId : void 0,
+					"data-selected": modifiers.selected || void 0,
+					"data-disabled": modifiers.disabled || void 0,
+					"data-hidden": modifiers.hidden || void 0,
+					"data-outside": day.outside || void 0,
+					"data-focused": modifiers.focused || void 0,
+					"data-today": modifiers.today || void 0
+				}, !modifiers.hidden && isInteractive ? import_react.createElement(components.DayButton, {
+					className: classNames[UI.DayButton],
+					style: styles?.[UI.DayButton],
+					type: "button",
+					day,
+					modifiers,
+					disabled: !modifiers.focused && modifiers.disabled || void 0,
+					"aria-disabled": modifiers.focused && modifiers.disabled || void 0,
+					tabIndex: isFocusTarget(day) ? 0 : -1,
+					"aria-label": labelDayButton(date, modifiers, dateLib.options, dateLib),
+					onClick: handleDayClick(day, modifiers),
+					onBlur: handleDayBlur(day, modifiers),
+					onFocus: handleDayFocus(day, modifiers),
+					onKeyDown: handleDayKeyDown(day, modifiers),
+					onMouseEnter: handleDayMouseEnter(day, modifiers),
+					onMouseLeave: handleDayMouseLeave(day, modifiers)
+				}, formatDay(date, dateLib.options, dateLib)) : !modifiers.hidden && formatDay(day.date, dateLib.options, dateLib));
+			}));
+		}))));
+	})), props.footer && import_react.createElement(components.Footer, {
+		className: classNames[UI.Footer],
+		style: styles?.[UI.Footer],
+		role: "status",
+		"aria-live": "polite"
+	}, props.footer)));
+}
+//#endregion
+//#region src/components/ui/calendar.tsx
+function Calendar({ className, classNames, showOutsideDays = true, captionLayout = "label", buttonVariant = "ghost", formatters, components, ...props }) {
+	const defaultClassNames = getDefaultClassNames();
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DayPicker, {
+		"data-uid": "src/components/ui/calendar.tsx:24:5",
+		"data-prohibitions": "[editContent]",
+		showOutsideDays,
+		className: cn$1("bg-background group/calendar p-3 [--cell-size:2rem] [[data-slot=card-content]_&]:bg-transparent [[data-slot=popover-content]_&]:bg-transparent", String.raw`rtl:**:[.rdp-button\_next>svg]:rotate-180`, String.raw`rtl:**:[.rdp-button\_previous>svg]:rotate-180`, className),
+		captionLayout,
+		formatters: {
+			formatMonthDropdown: (date) => date.toLocaleString("default", { month: "short" }),
+			...formatters
+		},
+		classNames: {
+			root: cn$1("w-fit", defaultClassNames.root),
+			months: cn$1("relative flex flex-col gap-4 md:flex-row", defaultClassNames.months),
+			month: cn$1("flex w-full flex-col gap-4", defaultClassNames.month),
+			nav: cn$1("absolute inset-x-0 top-0 flex w-full items-center justify-between gap-1", defaultClassNames.nav),
+			button_previous: cn$1(buttonVariants({ variant: buttonVariant }), "h-[--cell-size] w-[--cell-size] select-none p-0 aria-disabled:opacity-50", defaultClassNames.button_previous),
+			button_next: cn$1(buttonVariants({ variant: buttonVariant }), "h-[--cell-size] w-[--cell-size] select-none p-0 aria-disabled:opacity-50", defaultClassNames.button_next),
+			month_caption: cn$1("flex h-[--cell-size] w-full items-center justify-center px-[--cell-size]", defaultClassNames.month_caption),
+			dropdowns: cn$1("flex h-[--cell-size] w-full items-center justify-center gap-1.5 text-sm font-medium", defaultClassNames.dropdowns),
+			dropdown_root: cn$1("has-focus:border-ring border-input shadow-xs has-focus:ring-ring/50 has-focus:ring-[3px] relative rounded-md border", defaultClassNames.dropdown_root),
+			dropdown: cn$1("absolute inset-0 opacity-0", defaultClassNames.dropdown),
+			caption_label: cn$1("select-none font-medium", captionLayout === "label" ? "text-sm" : "[&>svg]:text-muted-foreground flex h-8 items-center gap-1 rounded-md pl-2 pr-1 text-sm [&>svg]:size-3.5", defaultClassNames.caption_label),
+			table: "w-full border-collapse",
+			weekdays: cn$1("flex", defaultClassNames.weekdays),
+			weekday: cn$1("text-muted-foreground flex-1 select-none rounded-md text-[0.8rem] font-normal", defaultClassNames.weekday),
+			week: cn$1("mt-2 flex w-full", defaultClassNames.week),
+			week_number_header: cn$1("w-[--cell-size] select-none", defaultClassNames.week_number_header),
+			week_number: cn$1("text-muted-foreground select-none text-[0.8rem]", defaultClassNames.week_number),
+			day: cn$1("group/day relative aspect-square h-full w-full select-none p-0 text-center [&:first-child[data-selected=true]_button]:rounded-l-md [&:last-child[data-selected=true]_button]:rounded-r-md", defaultClassNames.day),
+			range_start: cn$1("bg-accent rounded-l-md", defaultClassNames.range_start),
+			range_middle: cn$1("rounded-none", defaultClassNames.range_middle),
+			range_end: cn$1("bg-accent rounded-r-md", defaultClassNames.range_end),
+			today: cn$1("bg-accent text-accent-foreground rounded-md data-[selected=true]:rounded-none", defaultClassNames.today),
+			outside: cn$1("text-muted-foreground aria-selected:text-muted-foreground", defaultClassNames.outside),
+			disabled: cn$1("text-muted-foreground opacity-50", defaultClassNames.disabled),
+			hidden: cn$1("invisible", defaultClassNames.hidden),
+			...classNames
+		},
+		components: {
+			Root: ({ className, rootRef, ...props }) => {
+				return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+					"data-uid": "src/components/ui/calendar.tsx:108:18",
+					"data-prohibitions": "[editContent]",
+					"data-slot": "calendar",
+					ref: rootRef,
+					className: cn$1(className),
+					...props
+				});
+			},
+			Chevron: ({ className, orientation, ...props }) => {
+				if (orientation === "left") return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChevronLeft, {
+					"data-uid": "src/components/ui/calendar.tsx:112:20",
+					"data-prohibitions": "[editContent]",
+					className: cn$1("size-4", className),
+					...props
+				});
+				if (orientation === "right") return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChevronRight, {
+					"data-uid": "src/components/ui/calendar.tsx:116:20",
+					"data-prohibitions": "[editContent]",
+					className: cn$1("size-4", className),
+					...props
+				});
+				return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChevronDown, {
+					"data-uid": "src/components/ui/calendar.tsx:119:18",
+					"data-prohibitions": "[editContent]",
+					className: cn$1("size-4", className),
+					...props
+				});
+			},
+			DayButton: CalendarDayButton,
+			WeekNumber: ({ children, ...props }) => {
+				return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("td", {
+					"data-uid": "src/components/ui/calendar.tsx:124:13",
+					"data-prohibitions": "[editContent]",
+					...props,
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+						"data-uid": "src/components/ui/calendar.tsx:125:15",
+						"data-prohibitions": "[editContent]",
+						className: "flex size-[--cell-size] items-center justify-center text-center",
+						children
+					})
+				});
+			},
+			...components
+		},
+		...props
+	});
+}
+function CalendarDayButton({ className, day, modifiers, ...props }) {
+	const defaultClassNames = getDefaultClassNames();
+	const ref = import_react.useRef(null);
+	import_react.useEffect(() => {
+		if (modifiers.focused) ref.current?.focus();
+	}, [modifiers.focused]);
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
+		"data-uid": "src/components/ui/calendar.tsx:152:5",
+		"data-prohibitions": "[editContent]",
+		ref,
+		variant: "ghost",
+		size: "icon",
+		"data-day": day.date.toLocaleDateString(),
+		"data-selected-single": modifiers.selected && !modifiers.range_start && !modifiers.range_end && !modifiers.range_middle,
+		"data-range-start": modifiers.range_start,
+		"data-range-end": modifiers.range_end,
+		"data-range-middle": modifiers.range_middle,
+		className: cn$1("data-[selected-single=true]:bg-primary data-[selected-single=true]:text-primary-foreground data-[range-middle=true]:bg-accent data-[range-middle=true]:text-accent-foreground data-[range-start=true]:bg-primary data-[range-start=true]:text-primary-foreground data-[range-end=true]:bg-primary data-[range-end=true]:text-primary-foreground group-data-[focused=true]/day:border-ring group-data-[focused=true]/day:ring-ring/50 flex aspect-square h-auto w-full min-w-[--cell-size] flex-col gap-1 font-normal leading-none data-[range-end=true]:rounded-md data-[range-middle=true]:rounded-none data-[range-start=true]:rounded-md group-data-[focused=true]/day:relative group-data-[focused=true]/day:z-10 group-data-[focused=true]/day:ring-[3px] [&>span]:text-xs [&>span]:opacity-70", defaultClassNames.day, className),
+		...props
+	});
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/@radix-ui+react-popover@1.1.15_@types+react-dom@19.2.3_@types+react@19.2.14__@types+rea_8b5332f8e883134e9d9ab2856fc4395d/node_modules/@radix-ui/react-popover/dist/index.mjs
+var POPOVER_NAME = "Popover";
+var [createPopoverContext, createPopoverScope] = createContextScope(POPOVER_NAME, [createPopperScope]);
+var usePopperScope = createPopperScope();
+var [PopoverProvider, usePopoverContext] = createPopoverContext(POPOVER_NAME);
+var Popover$1 = (props) => {
+	const { __scopePopover, children, open: openProp, defaultOpen, onOpenChange, modal = false } = props;
+	const popperScope = usePopperScope(__scopePopover);
+	const triggerRef = import_react.useRef(null);
+	const [hasCustomAnchor, setHasCustomAnchor] = import_react.useState(false);
+	const [open, setOpen] = useControllableState({
+		prop: openProp,
+		defaultProp: defaultOpen ?? false,
+		onChange: onOpenChange,
+		caller: POPOVER_NAME
+	});
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root2$3, {
+		...popperScope,
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(PopoverProvider, {
+			scope: __scopePopover,
+			contentId: useId(),
+			triggerRef,
+			open,
+			onOpenChange: setOpen,
+			onOpenToggle: import_react.useCallback(() => setOpen((prevOpen) => !prevOpen), [setOpen]),
+			hasCustomAnchor,
+			onCustomAnchorAdd: import_react.useCallback(() => setHasCustomAnchor(true), []),
+			onCustomAnchorRemove: import_react.useCallback(() => setHasCustomAnchor(false), []),
+			modal,
+			children
+		})
+	});
+};
+Popover$1.displayName = POPOVER_NAME;
+var ANCHOR_NAME = "PopoverAnchor";
+var PopoverAnchor = import_react.forwardRef((props, forwardedRef) => {
+	const { __scopePopover, ...anchorProps } = props;
+	const context = usePopoverContext(ANCHOR_NAME, __scopePopover);
+	const popperScope = usePopperScope(__scopePopover);
+	const { onCustomAnchorAdd, onCustomAnchorRemove } = context;
+	import_react.useEffect(() => {
+		onCustomAnchorAdd();
+		return () => onCustomAnchorRemove();
+	}, [onCustomAnchorAdd, onCustomAnchorRemove]);
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Anchor, {
+		...popperScope,
+		...anchorProps,
+		ref: forwardedRef
+	});
+});
+PopoverAnchor.displayName = ANCHOR_NAME;
+var TRIGGER_NAME = "PopoverTrigger";
+var PopoverTrigger$1 = import_react.forwardRef((props, forwardedRef) => {
+	const { __scopePopover, ...triggerProps } = props;
+	const context = usePopoverContext(TRIGGER_NAME, __scopePopover);
+	const popperScope = usePopperScope(__scopePopover);
+	const composedTriggerRef = useComposedRefs(forwardedRef, context.triggerRef);
+	const trigger = /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.button, {
+		type: "button",
+		"aria-haspopup": "dialog",
+		"aria-expanded": context.open,
+		"aria-controls": context.contentId,
+		"data-state": getState(context.open),
+		...triggerProps,
+		ref: composedTriggerRef,
+		onClick: composeEventHandlers(props.onClick, context.onOpenToggle)
+	});
+	return context.hasCustomAnchor ? trigger : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Anchor, {
+		asChild: true,
+		...popperScope,
+		children: trigger
+	});
+});
+PopoverTrigger$1.displayName = TRIGGER_NAME;
+var PORTAL_NAME = "PopoverPortal";
+var [PortalProvider, usePortalContext] = createPopoverContext(PORTAL_NAME, { forceMount: void 0 });
+var PopoverPortal = (props) => {
+	const { __scopePopover, forceMount, children, container } = props;
+	const context = usePopoverContext(PORTAL_NAME, __scopePopover);
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(PortalProvider, {
+		scope: __scopePopover,
+		forceMount,
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Presence, {
+			present: forceMount || context.open,
+			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Portal$3, {
+				asChild: true,
+				container,
+				children
+			})
+		})
+	});
+};
+PopoverPortal.displayName = PORTAL_NAME;
+var CONTENT_NAME = "PopoverContent";
+var PopoverContent$1 = import_react.forwardRef((props, forwardedRef) => {
+	const portalContext = usePortalContext(CONTENT_NAME, props.__scopePopover);
+	const { forceMount = portalContext.forceMount, ...contentProps } = props;
+	const context = usePopoverContext(CONTENT_NAME, props.__scopePopover);
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Presence, {
+		present: forceMount || context.open,
+		children: context.modal ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(PopoverContentModal, {
+			...contentProps,
+			ref: forwardedRef
+		}) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(PopoverContentNonModal, {
+			...contentProps,
+			ref: forwardedRef
+		})
+	});
+});
+PopoverContent$1.displayName = CONTENT_NAME;
+var Slot = /* @__PURE__ */ createSlot$1("PopoverContent.RemoveScroll");
+var PopoverContentModal = import_react.forwardRef((props, forwardedRef) => {
+	const context = usePopoverContext(CONTENT_NAME, props.__scopePopover);
+	const contentRef = import_react.useRef(null);
+	const composedRefs = useComposedRefs(forwardedRef, contentRef);
+	const isRightClickOutsideRef = import_react.useRef(false);
+	import_react.useEffect(() => {
+		const content = contentRef.current;
+		if (content) return hideOthers(content);
+	}, []);
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ReactRemoveScroll, {
+		as: Slot,
+		allowPinchZoom: true,
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(PopoverContentImpl, {
+			...props,
+			ref: composedRefs,
+			trapFocus: context.open,
+			disableOutsidePointerEvents: true,
+			onCloseAutoFocus: composeEventHandlers(props.onCloseAutoFocus, (event) => {
+				event.preventDefault();
+				if (!isRightClickOutsideRef.current) context.triggerRef.current?.focus();
+			}),
+			onPointerDownOutside: composeEventHandlers(props.onPointerDownOutside, (event) => {
+				const originalEvent = event.detail.originalEvent;
+				const ctrlLeftClick = originalEvent.button === 0 && originalEvent.ctrlKey === true;
+				isRightClickOutsideRef.current = originalEvent.button === 2 || ctrlLeftClick;
+			}, { checkForDefaultPrevented: false }),
+			onFocusOutside: composeEventHandlers(props.onFocusOutside, (event) => event.preventDefault(), { checkForDefaultPrevented: false })
+		})
+	});
+});
+var PopoverContentNonModal = import_react.forwardRef((props, forwardedRef) => {
+	const context = usePopoverContext(CONTENT_NAME, props.__scopePopover);
+	const hasInteractedOutsideRef = import_react.useRef(false);
+	const hasPointerDownOutsideRef = import_react.useRef(false);
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(PopoverContentImpl, {
+		...props,
+		ref: forwardedRef,
+		trapFocus: false,
+		disableOutsidePointerEvents: false,
+		onCloseAutoFocus: (event) => {
+			props.onCloseAutoFocus?.(event);
+			if (!event.defaultPrevented) {
+				if (!hasInteractedOutsideRef.current) context.triggerRef.current?.focus();
+				event.preventDefault();
+			}
+			hasInteractedOutsideRef.current = false;
+			hasPointerDownOutsideRef.current = false;
+		},
+		onInteractOutside: (event) => {
+			props.onInteractOutside?.(event);
+			if (!event.defaultPrevented) {
+				hasInteractedOutsideRef.current = true;
+				if (event.detail.originalEvent.type === "pointerdown") hasPointerDownOutsideRef.current = true;
+			}
+			const target = event.target;
+			if (context.triggerRef.current?.contains(target)) event.preventDefault();
+			if (event.detail.originalEvent.type === "focusin" && hasPointerDownOutsideRef.current) event.preventDefault();
+		}
+	});
+});
+var PopoverContentImpl = import_react.forwardRef((props, forwardedRef) => {
+	const { __scopePopover, trapFocus, onOpenAutoFocus, onCloseAutoFocus, disableOutsidePointerEvents, onEscapeKeyDown, onPointerDownOutside, onFocusOutside, onInteractOutside, ...contentProps } = props;
+	const context = usePopoverContext(CONTENT_NAME, __scopePopover);
+	const popperScope = usePopperScope(__scopePopover);
+	useFocusGuards();
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(FocusScope, {
+		asChild: true,
+		loop: true,
+		trapped: trapFocus,
+		onMountAutoFocus: onOpenAutoFocus,
+		onUnmountAutoFocus: onCloseAutoFocus,
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DismissableLayer, {
+			asChild: true,
+			disableOutsidePointerEvents,
+			onInteractOutside,
+			onEscapeKeyDown,
+			onPointerDownOutside,
+			onFocusOutside,
+			onDismiss: () => context.onOpenChange(false),
+			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Content$2, {
+				"data-state": getState(context.open),
+				role: "dialog",
+				id: context.contentId,
+				...popperScope,
+				...contentProps,
+				ref: forwardedRef,
+				style: {
+					...contentProps.style,
+					"--radix-popover-content-transform-origin": "var(--radix-popper-transform-origin)",
+					"--radix-popover-content-available-width": "var(--radix-popper-available-width)",
+					"--radix-popover-content-available-height": "var(--radix-popper-available-height)",
+					"--radix-popover-trigger-width": "var(--radix-popper-anchor-width)",
+					"--radix-popover-trigger-height": "var(--radix-popper-anchor-height)"
+				}
+			})
+		})
+	});
+});
+var CLOSE_NAME = "PopoverClose";
+var PopoverClose = import_react.forwardRef((props, forwardedRef) => {
+	const { __scopePopover, ...closeProps } = props;
+	const context = usePopoverContext(CLOSE_NAME, __scopePopover);
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.button, {
+		type: "button",
+		...closeProps,
+		ref: forwardedRef,
+		onClick: composeEventHandlers(props.onClick, () => context.onOpenChange(false))
+	});
+});
+PopoverClose.displayName = CLOSE_NAME;
+var ARROW_NAME = "PopoverArrow";
+var PopoverArrow = import_react.forwardRef((props, forwardedRef) => {
+	const { __scopePopover, ...arrowProps } = props;
+	const popperScope = usePopperScope(__scopePopover);
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Arrow, {
+		...popperScope,
+		...arrowProps,
+		ref: forwardedRef
+	});
+});
+PopoverArrow.displayName = ARROW_NAME;
+function getState(open) {
+	return open ? "open" : "closed";
+}
+var Root2 = Popover$1;
+var Trigger = PopoverTrigger$1;
+var Portal = PopoverPortal;
+var Content2 = PopoverContent$1;
+//#endregion
+//#region src/components/ui/popover.tsx
+var Popover = Root2;
+var PopoverTrigger = Trigger;
+var PopoverContent = import_react.forwardRef(({ className, align = "center", sideOffset = 4, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Portal, {
+	"data-uid": "src/components/ui/popover.tsx:15:3",
+	"data-prohibitions": "[editContent]",
+	children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Content2, {
+		"data-uid": "src/components/ui/popover.tsx:16:5",
+		"data-prohibitions": "[editContent]",
+		ref,
+		align,
+		sideOffset,
+		className: cn$1("z-50 w-72 rounded-md border bg-popover p-4 text-popover-foreground shadow-md outline-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 origin-[--radix-popover-content-transform-origin]", className),
+		...props
+	})
+}));
+PopoverContent.displayName = Content2.displayName;
+//#endregion
+//#region src/components/ui/date-range-picker.tsx
+function DatePickerWithRange({ className, date, setDate }) {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+		"data-uid": "src/components/ui/date-range-picker.tsx:19:5",
+		"data-prohibitions": "[editContent]",
+		className: cn$1("grid gap-2", className),
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Popover, {
+			"data-uid": "src/components/ui/date-range-picker.tsx:20:7",
+			"data-prohibitions": "[editContent]",
+			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(PopoverTrigger, {
+				"data-uid": "src/components/ui/date-range-picker.tsx:21:9",
+				"data-prohibitions": "[editContent]",
+				asChild: true,
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button$1, {
+					"data-uid": "src/components/ui/date-range-picker.tsx:22:11",
+					"data-prohibitions": "[editContent]",
+					id: "date",
+					variant: "outline",
+					className: cn$1("w-[300px] justify-start text-left font-normal bg-white", !date && "text-muted-foreground"),
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Calendar$1, {
+						"data-uid": "src/components/ui/date-range-picker.tsx:30:13",
+						"data-prohibitions": "[editContent]",
+						className: "mr-2 h-4 w-4"
+					}), date?.from ? date.to ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [
+						format(date.from, "dd 'de' MMM, y", { locale: ptBR }),
+						" -",
+						" ",
+						format(date.to, "dd 'de' MMM, y", { locale: ptBR })
+					] }) : format(date.from, "dd 'de' MMM, y", { locale: ptBR }) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+						"data-uid": "src/components/ui/date-range-picker.tsx:41:15",
+						"data-prohibitions": "[]",
+						children: "Selecione um período"
+					})]
+				})
+			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(PopoverContent, {
+				"data-uid": "src/components/ui/date-range-picker.tsx:45:9",
+				"data-prohibitions": "[]",
+				className: "w-auto p-0",
+				align: "end",
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Calendar, {
+					"data-uid": "src/components/ui/date-range-picker.tsx:46:11",
+					"data-prohibitions": "[editContent]",
+					initialFocus: true,
+					mode: "range",
+					defaultMonth: date?.from,
+					selected: date,
+					onSelect: setDate,
+					numberOfMonths: 2,
+					locale: ptBR
+				})
+			})]
+		})
+	});
+}
+//#endregion
+//#region src/hooks/use-reports.ts
+var COLORS = [
+	"hsl(var(--chart-1))",
+	"hsl(var(--chart-2))",
+	"hsl(var(--chart-3))",
+	"hsl(var(--chart-4))",
+	"hsl(var(--chart-5))"
+];
+function useReports(dateRange) {
+	const [data, setData] = (0, import_react.useState)({
+		kpis: {
+			totalSales: 0,
+			avgTicket: 0,
+			salesCount: 0
+		},
+		topProducts: [],
+		topCategories: [],
+		cashFlow: [],
+		accounts: [],
+		criticalStock: [],
+		loading: true
+	});
+	(0, import_react.useEffect)(() => {
+		async function fetchData() {
+			if (!dateRange?.from || !dateRange?.to) return;
+			setData((prev) => ({
+				...prev,
+				loading: true
+			}));
+			const startIso = startOfDay(dateRange.from).toISOString();
+			const endIso = endOfDay(dateRange.to).toISOString();
+			const [vendasRes, movsRes, crRes, cpRes, prodRes] = await Promise.all([
+				supabase.from("vendas").select("id, total, data").gte("data", startIso).lte("data", endIso),
+				supabase.from("movimentacoes_caixa").select("tipo, valor, data").gte("data", startIso).lte("data", endIso),
+				supabase.from("contas_receber").select("valor").eq("status", "pendente").gte("data_vencimento", startIso).lte("data_vencimento", endIso),
+				supabase.from("contas_pagar").select("valor").eq("status", "pendente").gte("data_vencimento", startIso).lte("data_vencimento", endIso),
+				supabase.from("produtos").select("*")
+			]);
+			const vendas = vendasRes.data || [];
+			const vendaIds = vendas.map((v) => v.id);
+			let itensVenda = [];
+			if (vendaIds.length > 0) {
+				const { data: itens } = await supabase.from("itens_venda").select("quantidade, preco_unitario, produtos(nome, categoria)").in("venda_id", vendaIds);
+				itensVenda = itens || [];
+			}
+			const totalSales = vendas.reduce((sum, v) => sum + Number(v.total), 0);
+			const salesCount = vendas.length;
+			const avgTicket = salesCount > 0 ? totalSales / salesCount : 0;
+			const prodMap = /* @__PURE__ */ new Map();
+			const catMap = /* @__PURE__ */ new Map();
+			itensVenda.forEach((i) => {
+				const nome = i.produtos?.nome || "Desconhecido";
+				const cat = i.produtos?.categoria || "Outros";
+				const qty = i.quantidade;
+				const val = qty * Number(i.preco_unitario);
+				prodMap.set(nome, (prodMap.get(nome) || 0) + qty);
+				catMap.set(cat, (catMap.get(cat) || 0) + val);
+			});
+			const topProducts = Array.from(prodMap.entries()).map(([name, quantidade]) => ({
+				name,
+				quantidade
+			})).sort((a, b) => b.quantidade - a.quantidade).slice(0, 5);
+			const topCategories = Array.from(catMap.entries()).sort((a, b) => b[1] - a[1]).slice(0, 5).map(([name, value], i) => ({
+				name,
+				value,
+				fill: COLORS[i % COLORS.length]
+			}));
+			const flowMap = /* @__PURE__ */ new Map();
+			(movsRes.data || []).forEach((m) => {
+				const d = format(new Date(m.data), "dd/MM");
+				if (!flowMap.has(d)) flowMap.set(d, {
+					data: d,
+					entradas: 0,
+					saidas: 0
+				});
+				const entry = flowMap.get(d);
+				if (m.tipo === "entrada") entry.entradas += Number(m.valor);
+				if (m.tipo === "saida") entry.saidas += Number(m.valor);
+			});
+			const cashFlow = Array.from(flowMap.values());
+			const accounts = [{
+				name: "Pendentes",
+				a_receber: (crRes.data || []).reduce((acc, curr) => acc + Number(curr.valor), 0),
+				a_pagar: (cpRes.data || []).reduce((acc, curr) => acc + Number(curr.valor), 0)
+			}];
+			const criticalStock = (prodRes.data || []).filter((p) => p.estoque !== null && p.estoque <= p.estoque_minimo).sort((a, b) => (a.estoque || 0) - (b.estoque || 0));
+			setData({
+				kpis: {
+					totalSales,
+					avgTicket,
+					salesCount
+				},
+				topProducts,
+				topCategories,
+				cashFlow,
+				accounts,
+				criticalStock,
+				loading: false
+			});
+		}
+		fetchData();
+	}, [dateRange]);
+	return data;
+}
+//#endregion
+//#region src/components/relatorios/RelatoriosKPIs.tsx
+function RelatoriosKPIs({ totalSales, avgTicket, salesCount }) {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+		"data-uid": "src/components/relatorios/RelatoriosKPIs.tsx:13:5",
+		"data-prohibitions": "[editContent]",
+		className: "grid grid-cols-1 md:grid-cols-3 gap-6",
+		children: [
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Card, {
+				"data-uid": "src/components/relatorios/RelatoriosKPIs.tsx:14:7",
+				"data-prohibitions": "[editContent]",
+				className: "shadow-sm border-emerald-100 bg-emerald-50/30",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardHeader, {
+					"data-uid": "src/components/relatorios/RelatoriosKPIs.tsx:15:9",
+					"data-prohibitions": "[]",
+					className: "flex flex-row items-center justify-between pb-2",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardTitle, {
+						"data-uid": "src/components/relatorios/RelatoriosKPIs.tsx:16:11",
+						"data-prohibitions": "[]",
+						className: "text-sm font-medium text-emerald-800",
+						children: "Total em Vendas"
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DollarSign, {
+						"data-uid": "src/components/relatorios/RelatoriosKPIs.tsx:17:11",
+						"data-prohibitions": "[editContent]",
+						className: "h-4 w-4 text-emerald-600"
+					})]
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardContent, {
+					"data-uid": "src/components/relatorios/RelatoriosKPIs.tsx:19:9",
+					"data-prohibitions": "[editContent]",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+						"data-uid": "src/components/relatorios/RelatoriosKPIs.tsx:20:11",
+						"data-prohibitions": "[editContent]",
+						className: "text-3xl font-bold text-emerald-900",
+						children: formatCurrency(totalSales)
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+						"data-uid": "src/components/relatorios/RelatoriosKPIs.tsx:21:11",
+						"data-prohibitions": "[]",
+						className: "text-xs text-emerald-600/80 font-medium mt-1",
+						children: "No período selecionado"
+					})]
+				})]
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Card, {
+				"data-uid": "src/components/relatorios/RelatoriosKPIs.tsx:25:7",
+				"data-prohibitions": "[editContent]",
+				className: "shadow-sm border-blue-100 bg-blue-50/30",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardHeader, {
+					"data-uid": "src/components/relatorios/RelatoriosKPIs.tsx:26:9",
+					"data-prohibitions": "[]",
+					className: "flex flex-row items-center justify-between pb-2",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardTitle, {
+						"data-uid": "src/components/relatorios/RelatoriosKPIs.tsx:27:11",
+						"data-prohibitions": "[]",
+						className: "text-sm font-medium text-blue-800",
+						children: "Ticket Médio"
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TrendingUp, {
+						"data-uid": "src/components/relatorios/RelatoriosKPIs.tsx:28:11",
+						"data-prohibitions": "[editContent]",
+						className: "h-4 w-4 text-blue-600"
+					})]
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardContent, {
+					"data-uid": "src/components/relatorios/RelatoriosKPIs.tsx:30:9",
+					"data-prohibitions": "[editContent]",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+						"data-uid": "src/components/relatorios/RelatoriosKPIs.tsx:31:11",
+						"data-prohibitions": "[editContent]",
+						className: "text-3xl font-bold text-blue-900",
+						children: formatCurrency(avgTicket)
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
+						"data-uid": "src/components/relatorios/RelatoriosKPIs.tsx:32:11",
+						"data-prohibitions": "[editContent]",
+						className: "text-xs text-blue-600/80 font-medium mt-1",
+						children: [
+							"Baseado em ",
+							salesCount,
+							" vendas"
+						]
+					})]
+				})]
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Card, {
+				"data-uid": "src/components/relatorios/RelatoriosKPIs.tsx:38:7",
+				"data-prohibitions": "[editContent]",
+				className: "shadow-sm border-slate-200",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardHeader, {
+					"data-uid": "src/components/relatorios/RelatoriosKPIs.tsx:39:9",
+					"data-prohibitions": "[]",
+					className: "flex flex-row items-center justify-between pb-2",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardTitle, {
+						"data-uid": "src/components/relatorios/RelatoriosKPIs.tsx:40:11",
+						"data-prohibitions": "[]",
+						className: "text-sm font-medium text-muted-foreground",
+						children: "Volume de Vendas"
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Receipt, {
+						"data-uid": "src/components/relatorios/RelatoriosKPIs.tsx:43:11",
+						"data-prohibitions": "[editContent]",
+						className: "h-4 w-4 text-primary"
+					})]
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardContent, {
+					"data-uid": "src/components/relatorios/RelatoriosKPIs.tsx:45:9",
+					"data-prohibitions": "[editContent]",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+						"data-uid": "src/components/relatorios/RelatoriosKPIs.tsx:46:11",
+						"data-prohibitions": "[editContent]",
+						className: "text-3xl font-bold",
+						children: salesCount
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+						"data-uid": "src/components/relatorios/RelatoriosKPIs.tsx:47:11",
+						"data-prohibitions": "[]",
+						className: "text-xs text-muted-foreground mt-1",
+						children: "Operações concluídas"
+					})]
+				})]
+			})
+		]
+	});
+}
+//#endregion
+//#region src/components/relatorios/ChartTopProducts.tsx
+var config$3 = { quantidade: {
+	label: "Qtd Vendida",
+	color: "hsl(var(--primary))"
+} };
+function ChartTopProducts({ data }) {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Card, {
+		"data-uid": "src/components/relatorios/ChartTopProducts.tsx:20:5",
+		"data-prohibitions": "[editContent]",
+		className: "shadow-sm border-slate-200 flex flex-col",
+		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardHeader, {
+			"data-uid": "src/components/relatorios/ChartTopProducts.tsx:21:7",
+			"data-prohibitions": "[]",
+			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardTitle, {
+				"data-uid": "src/components/relatorios/ChartTopProducts.tsx:22:9",
+				"data-prohibitions": "[]",
+				className: "text-lg",
+				children: "Produtos Mais Vendidos"
+			})
+		}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardContent, {
+			"data-uid": "src/components/relatorios/ChartTopProducts.tsx:24:7",
+			"data-prohibitions": "[editContent]",
+			className: "flex-1",
+			children: data.length === 0 ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+				"data-uid": "src/components/relatorios/ChartTopProducts.tsx:26:11",
+				"data-prohibitions": "[]",
+				className: "h-[250px] flex items-center justify-center text-muted-foreground",
+				children: "Sem dados no período."
+			}) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChartContainer, {
+				"data-uid": "src/components/relatorios/ChartTopProducts.tsx:30:11",
+				"data-prohibitions": "[]",
+				config: config$3,
+				className: "h-[250px] w-full",
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ResponsiveContainer, {
+					"data-uid": "src/components/relatorios/ChartTopProducts.tsx:31:13",
+					"data-prohibitions": "[]",
+					width: "100%",
+					height: "100%",
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(BarChart, {
+						"data-uid": "src/components/relatorios/ChartTopProducts.tsx:32:15",
+						"data-prohibitions": "[]",
+						data,
+						layout: "vertical",
+						margin: {
+							top: 0,
+							right: 10,
+							left: 10,
+							bottom: 0
+						},
+						children: [
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CartesianGrid, {
+								"data-uid": "src/components/relatorios/ChartTopProducts.tsx:37:17",
+								"data-prohibitions": "[editContent]",
+								strokeDasharray: "3 3",
+								horizontal: false,
+								stroke: "#E2E8F0"
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(XAxis, {
+								"data-uid": "src/components/relatorios/ChartTopProducts.tsx:38:17",
+								"data-prohibitions": "[editContent]",
+								type: "number",
+								hide: true
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(YAxis, {
+								"data-uid": "src/components/relatorios/ChartTopProducts.tsx:39:17",
+								"data-prohibitions": "[editContent]",
+								dataKey: "name",
+								type: "category",
+								axisLine: false,
+								tickLine: false,
+								tick: {
+									fill: "#475569",
+									fontSize: 12
+								},
+								width: 120
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChartTooltip, {
+								"data-uid": "src/components/relatorios/ChartTopProducts.tsx:47:17",
+								"data-prohibitions": "[editContent]",
+								content: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChartTooltipContent, {
+									"data-uid": "src/components/relatorios/ChartTopProducts.tsx:47:40",
+									"data-prohibitions": "[editContent]"
+								})
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Bar, {
+								"data-uid": "src/components/relatorios/ChartTopProducts.tsx:48:17",
+								"data-prohibitions": "[editContent]",
+								dataKey: "quantidade",
+								fill: "var(--color-quantidade)",
+								radius: [
+									0,
+									4,
+									4,
+									0
+								],
+								barSize: 24
+							})
+						]
+					})
+				})
+			})
+		})]
+	});
+}
+//#endregion
+//#region src/components/relatorios/ChartCategories.tsx
+var config$2 = { value: { label: "Receita" } };
+function ChartCategories({ data }) {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Card, {
+		"data-uid": "src/components/relatorios/ChartCategories.tsx:21:5",
+		"data-prohibitions": "[editContent]",
+		className: "shadow-sm border-slate-200 flex flex-col",
+		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardHeader, {
+			"data-uid": "src/components/relatorios/ChartCategories.tsx:22:7",
+			"data-prohibitions": "[]",
+			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardTitle, {
+				"data-uid": "src/components/relatorios/ChartCategories.tsx:23:9",
+				"data-prohibitions": "[]",
+				className: "text-lg",
+				children: "Receita por Categoria"
+			})
+		}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardContent, {
+			"data-uid": "src/components/relatorios/ChartCategories.tsx:25:7",
+			"data-prohibitions": "[editContent]",
+			className: "flex-1",
+			children: data.length === 0 ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+				"data-uid": "src/components/relatorios/ChartCategories.tsx:27:11",
+				"data-prohibitions": "[]",
+				className: "h-[250px] flex items-center justify-center text-muted-foreground",
+				children: "Sem dados no período."
+			}) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChartContainer, {
+				"data-uid": "src/components/relatorios/ChartCategories.tsx:31:11",
+				"data-prohibitions": "[editContent]",
+				config: config$2,
+				className: "h-[250px] w-full",
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ResponsiveContainer, {
+					"data-uid": "src/components/relatorios/ChartCategories.tsx:32:13",
+					"data-prohibitions": "[editContent]",
+					width: "100%",
+					height: "100%",
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(PieChart, {
+						"data-uid": "src/components/relatorios/ChartCategories.tsx:33:15",
+						"data-prohibitions": "[editContent]",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChartTooltip, {
+							"data-uid": "src/components/relatorios/ChartCategories.tsx:34:17",
+							"data-prohibitions": "[editContent]",
+							content: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChartTooltipContent, {
+								"data-uid": "src/components/relatorios/ChartCategories.tsx:35:28",
+								"data-prohibitions": "[editContent]",
+								formatter: (v) => formatCurrency(v)
+							})
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Pie, {
+							"data-uid": "src/components/relatorios/ChartCategories.tsx:37:17",
+							"data-prohibitions": "[editContent]",
+							data,
+							dataKey: "value",
+							nameKey: "name",
+							cx: "50%",
+							cy: "50%",
+							innerRadius: 60,
+							outerRadius: 80,
+							paddingAngle: 2,
+							children: data.map((entry, index) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Cell, {
+								"data-uid": "src/components/relatorios/ChartCategories.tsx:48:21",
+								"data-prohibitions": "[editContent]",
+								fill: entry.fill,
+								stroke: "transparent"
+							}, `cell-${index}`))
+						})]
+					})
+				})
+			})
+		})]
+	});
+}
+//#endregion
+//#region src/components/relatorios/ChartCashFlow.tsx
+var config$1 = {
+	entradas: {
+		label: "Entradas",
+		color: "hsl(var(--emerald-500))"
+	},
+	saidas: {
+		label: "Saídas",
+		color: "hsl(var(--destructive))"
+	}
+};
+function ChartCashFlow({ data }) {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Card, {
+		"data-uid": "src/components/relatorios/ChartCashFlow.tsx:21:5",
+		"data-prohibitions": "[editContent]",
+		className: "shadow-sm border-slate-200",
+		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardHeader, {
+			"data-uid": "src/components/relatorios/ChartCashFlow.tsx:22:7",
+			"data-prohibitions": "[]",
+			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardTitle, {
+				"data-uid": "src/components/relatorios/ChartCashFlow.tsx:23:9",
+				"data-prohibitions": "[]",
+				className: "text-lg",
+				children: "Fluxo de Caixa (Entradas vs Saídas)"
+			})
+		}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardContent, {
+			"data-uid": "src/components/relatorios/ChartCashFlow.tsx:25:7",
+			"data-prohibitions": "[editContent]",
+			children: data.length === 0 ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+				"data-uid": "src/components/relatorios/ChartCashFlow.tsx:27:11",
+				"data-prohibitions": "[]",
+				className: "h-[250px] flex items-center justify-center text-muted-foreground",
+				children: "Sem movimentações no período."
+			}) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChartContainer, {
+				"data-uid": "src/components/relatorios/ChartCashFlow.tsx:31:11",
+				"data-prohibitions": "[]",
+				config: config$1,
+				className: "h-[250px] w-full",
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ResponsiveContainer, {
+					"data-uid": "src/components/relatorios/ChartCashFlow.tsx:32:13",
+					"data-prohibitions": "[]",
+					width: "100%",
+					height: "100%",
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(AreaChart, {
+						"data-uid": "src/components/relatorios/ChartCashFlow.tsx:33:15",
+						"data-prohibitions": "[]",
+						data,
+						margin: {
+							top: 10,
+							right: 10,
+							left: -20,
+							bottom: 0
+						},
+						children: [
+							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("defs", {
+								"data-uid": "src/components/relatorios/ChartCashFlow.tsx:34:17",
+								"data-prohibitions": "[]",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("linearGradient", {
+									"data-uid": "src/components/relatorios/ChartCashFlow.tsx:35:19",
+									"data-prohibitions": "[]",
+									id: "colorEntradas",
+									x1: "0",
+									y1: "0",
+									x2: "0",
+									y2: "1",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("stop", {
+										"data-uid": "src/components/relatorios/ChartCashFlow.tsx:36:21",
+										"data-prohibitions": "[editContent]",
+										offset: "5%",
+										stopColor: "var(--color-entradas)",
+										stopOpacity: .3
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("stop", {
+										"data-uid": "src/components/relatorios/ChartCashFlow.tsx:37:21",
+										"data-prohibitions": "[editContent]",
+										offset: "95%",
+										stopColor: "var(--color-entradas)",
+										stopOpacity: 0
+									})]
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("linearGradient", {
+									"data-uid": "src/components/relatorios/ChartCashFlow.tsx:39:19",
+									"data-prohibitions": "[]",
+									id: "colorSaidas",
+									x1: "0",
+									y1: "0",
+									x2: "0",
+									y2: "1",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("stop", {
+										"data-uid": "src/components/relatorios/ChartCashFlow.tsx:40:21",
+										"data-prohibitions": "[editContent]",
+										offset: "5%",
+										stopColor: "var(--color-saidas)",
+										stopOpacity: .3
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("stop", {
+										"data-uid": "src/components/relatorios/ChartCashFlow.tsx:41:21",
+										"data-prohibitions": "[editContent]",
+										offset: "95%",
+										stopColor: "var(--color-saidas)",
+										stopOpacity: 0
+									})]
+								})]
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CartesianGrid, {
+								"data-uid": "src/components/relatorios/ChartCashFlow.tsx:44:17",
+								"data-prohibitions": "[editContent]",
+								strokeDasharray: "3 3",
+								vertical: false,
+								stroke: "#E2E8F0"
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(XAxis, {
+								"data-uid": "src/components/relatorios/ChartCashFlow.tsx:45:17",
+								"data-prohibitions": "[editContent]",
+								dataKey: "data",
+								axisLine: false,
+								tickLine: false,
+								tick: {
+									fill: "#64748B",
+									fontSize: 12
+								},
+								dy: 10
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(YAxis, {
+								"data-uid": "src/components/relatorios/ChartCashFlow.tsx:52:17",
+								"data-prohibitions": "[editContent]",
+								axisLine: false,
+								tickLine: false,
+								tick: {
+									fill: "#64748B",
+									fontSize: 12
+								}
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChartTooltip, {
+								"data-uid": "src/components/relatorios/ChartCashFlow.tsx:53:17",
+								"data-prohibitions": "[editContent]",
+								content: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChartTooltipContent, {
+									"data-uid": "src/components/relatorios/ChartCashFlow.tsx:53:40",
+									"data-prohibitions": "[editContent]"
+								})
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Area, {
+								"data-uid": "src/components/relatorios/ChartCashFlow.tsx:54:17",
+								"data-prohibitions": "[editContent]",
+								type: "monotone",
+								dataKey: "entradas",
+								stroke: "var(--color-entradas)",
+								strokeWidth: 2,
+								fillOpacity: 1,
+								fill: "url(#colorEntradas)"
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Area, {
+								"data-uid": "src/components/relatorios/ChartCashFlow.tsx:62:17",
+								"data-prohibitions": "[editContent]",
+								type: "monotone",
+								dataKey: "saidas",
+								stroke: "var(--color-saidas)",
+								strokeWidth: 2,
+								fillOpacity: 1,
+								fill: "url(#colorSaidas)"
+							})
+						]
+					})
+				})
+			})
+		})]
+	});
+}
+//#endregion
+//#region src/components/relatorios/ChartAccounts.tsx
+var config = {
+	a_receber: {
+		label: "A Receber",
+		color: "hsl(var(--chart-2))"
+	},
+	a_pagar: {
+		label: "A Pagar",
+		color: "hsl(var(--destructive))"
+	}
+};
+function ChartAccounts({ data }) {
+	const isEmpty = data.every((d) => d.a_receber === 0 && d.a_pagar === 0);
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Card, {
+		"data-uid": "src/components/relatorios/ChartAccounts.tsx:24:5",
+		"data-prohibitions": "[editContent]",
+		className: "shadow-sm border-slate-200",
+		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardHeader, {
+			"data-uid": "src/components/relatorios/ChartAccounts.tsx:25:7",
+			"data-prohibitions": "[]",
+			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardTitle, {
+				"data-uid": "src/components/relatorios/ChartAccounts.tsx:26:9",
+				"data-prohibitions": "[]",
+				className: "text-lg",
+				children: "Comparativo de Contas (Pendentes)"
+			})
+		}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardContent, {
+			"data-uid": "src/components/relatorios/ChartAccounts.tsx:28:7",
+			"data-prohibitions": "[editContent]",
+			children: isEmpty ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+				"data-uid": "src/components/relatorios/ChartAccounts.tsx:30:11",
+				"data-prohibitions": "[]",
+				className: "h-[250px] flex items-center justify-center text-muted-foreground",
+				children: "Nenhuma conta pendente no período."
+			}) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChartContainer, {
+				"data-uid": "src/components/relatorios/ChartAccounts.tsx:34:11",
+				"data-prohibitions": "[]",
+				config,
+				className: "h-[250px] w-full",
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ResponsiveContainer, {
+					"data-uid": "src/components/relatorios/ChartAccounts.tsx:35:13",
+					"data-prohibitions": "[]",
+					width: "100%",
+					height: "100%",
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(BarChart, {
+						"data-uid": "src/components/relatorios/ChartAccounts.tsx:36:15",
+						"data-prohibitions": "[]",
+						data,
+						margin: {
+							top: 20,
+							right: 10,
+							left: -20,
+							bottom: 0
+						},
+						children: [
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CartesianGrid, {
+								"data-uid": "src/components/relatorios/ChartAccounts.tsx:37:17",
+								"data-prohibitions": "[editContent]",
+								strokeDasharray: "3 3",
+								vertical: false,
+								stroke: "#E2E8F0"
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(XAxis, {
+								"data-uid": "src/components/relatorios/ChartAccounts.tsx:38:17",
+								"data-prohibitions": "[editContent]",
+								dataKey: "name",
+								axisLine: false,
+								tickLine: false,
+								hide: true
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(YAxis, {
+								"data-uid": "src/components/relatorios/ChartAccounts.tsx:39:17",
+								"data-prohibitions": "[editContent]",
+								axisLine: false,
+								tickLine: false,
+								tick: {
+									fill: "#64748B",
+									fontSize: 12
+								},
+								tickFormatter: (val) => `R$ ${val}`
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChartTooltip, {
+								"data-uid": "src/components/relatorios/ChartAccounts.tsx:45:17",
+								"data-prohibitions": "[editContent]",
+								content: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChartTooltipContent, {
+									"data-uid": "src/components/relatorios/ChartAccounts.tsx:46:28",
+									"data-prohibitions": "[editContent]",
+									formatter: (v) => formatCurrency(v)
+								})
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Legend, {
+								"data-uid": "src/components/relatorios/ChartAccounts.tsx:48:17",
+								"data-prohibitions": "[editContent]",
+								verticalAlign: "top",
+								height: 36,
+								iconType: "circle"
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Bar, {
+								"data-uid": "src/components/relatorios/ChartAccounts.tsx:49:17",
+								"data-prohibitions": "[editContent]",
+								dataKey: "a_receber",
+								name: "A Receber",
+								fill: "var(--color-a_receber)",
+								radius: [
+									4,
+									4,
+									0,
+									0
+								],
+								barSize: 40
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Bar, {
+								"data-uid": "src/components/relatorios/ChartAccounts.tsx:56:17",
+								"data-prohibitions": "[editContent]",
+								dataKey: "a_pagar",
+								name: "A Pagar",
+								fill: "var(--color-a_pagar)",
+								radius: [
+									4,
+									4,
+									0,
+									0
+								],
+								barSize: 40
+							})
+						]
+					})
+				})
+			})
+		})]
+	});
+}
+//#endregion
+//#region src/components/relatorios/TableCriticalStock.tsx
+function TableCriticalStock({ data }) {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Card, {
+		"data-uid": "src/components/relatorios/TableCriticalStock.tsx:19:5",
+		"data-prohibitions": "[editContent]",
+		className: "shadow-sm border-red-200",
+		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardHeader, {
+			"data-uid": "src/components/relatorios/TableCriticalStock.tsx:20:7",
+			"data-prohibitions": "[]",
+			className: "bg-red-50/50 border-b border-red-100 pb-4",
+			children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardTitle, {
+				"data-uid": "src/components/relatorios/TableCriticalStock.tsx:21:9",
+				"data-prohibitions": "[]",
+				className: "text-lg flex items-center text-red-900",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TriangleAlert, {
+					"data-uid": "src/components/relatorios/TableCriticalStock.tsx:22:11",
+					"data-prohibitions": "[editContent]",
+					className: "h-5 w-5 mr-2 text-red-600"
+				}), "Alerta de Estoque Crítico (Em Tempo Real)"]
+			})
+		}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardContent, {
+			"data-uid": "src/components/relatorios/TableCriticalStock.tsx:26:7",
+			"data-prohibitions": "[editContent]",
+			className: "p-0",
+			children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Table, {
+				"data-uid": "src/components/relatorios/TableCriticalStock.tsx:27:9",
+				"data-prohibitions": "[editContent]",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHeader, {
+					"data-uid": "src/components/relatorios/TableCriticalStock.tsx:28:11",
+					"data-prohibitions": "[]",
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TableRow, {
+						"data-uid": "src/components/relatorios/TableCriticalStock.tsx:29:13",
+						"data-prohibitions": "[]",
+						className: "bg-slate-50/50",
+						children: [
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
+								"data-uid": "src/components/relatorios/TableCriticalStock.tsx:30:15",
+								"data-prohibitions": "[]",
+								children: "Produto"
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
+								"data-uid": "src/components/relatorios/TableCriticalStock.tsx:31:15",
+								"data-prohibitions": "[]",
+								children: "Categoria"
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
+								"data-uid": "src/components/relatorios/TableCriticalStock.tsx:32:15",
+								"data-prohibitions": "[]",
+								className: "text-right",
+								children: "Estoque Mínimo"
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
+								"data-uid": "src/components/relatorios/TableCriticalStock.tsx:33:15",
+								"data-prohibitions": "[]",
+								className: "text-right",
+								children: "Estoque Atual"
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
+								"data-uid": "src/components/relatorios/TableCriticalStock.tsx:34:15",
+								"data-prohibitions": "[]",
+								className: "text-center",
+								children: "Status"
+							})
+						]
+					})
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TableBody, {
+					"data-uid": "src/components/relatorios/TableCriticalStock.tsx:37:11",
+					"data-prohibitions": "[editContent]",
+					children: [data.map((item) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TableRow, {
+						"data-uid": "src/components/relatorios/TableCriticalStock.tsx:39:15",
+						"data-prohibitions": "[editContent]",
+						children: [
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
+								"data-uid": "src/components/relatorios/TableCriticalStock.tsx:40:17",
+								"data-prohibitions": "[editContent]",
+								className: "font-medium",
+								children: item.nome
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
+								"data-uid": "src/components/relatorios/TableCriticalStock.tsx:41:17",
+								"data-prohibitions": "[editContent]",
+								children: item.categoria || "-"
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
+								"data-uid": "src/components/relatorios/TableCriticalStock.tsx:42:17",
+								"data-prohibitions": "[editContent]",
+								className: "text-right text-muted-foreground",
+								children: item.estoque_minimo
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
+								"data-uid": "src/components/relatorios/TableCriticalStock.tsx:45:17",
+								"data-prohibitions": "[editContent]",
+								className: "text-right font-bold text-red-600",
+								children: item.estoque
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
+								"data-uid": "src/components/relatorios/TableCriticalStock.tsx:46:17",
+								"data-prohibitions": "[]",
+								className: "text-center",
+								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Badge, {
+									"data-uid": "src/components/relatorios/TableCriticalStock.tsx:47:19",
+									"data-prohibitions": "[]",
+									variant: "destructive",
+									className: "bg-red-100 text-red-800 hover:bg-red-200",
+									children: "Crítico"
+								})
+							})
+						]
+					}, item.id)), data.length === 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableRow, {
+						"data-uid": "src/components/relatorios/TableCriticalStock.tsx:54:15",
+						"data-prohibitions": "[]",
+						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
+							"data-uid": "src/components/relatorios/TableCriticalStock.tsx:55:17",
+							"data-prohibitions": "[]",
+							colSpan: 5,
+							className: "text-center py-8 text-muted-foreground",
+							children: "Nenhum produto com estoque abaixo do mínimo."
+						})
+					})]
+				})]
+			})
+		})]
+	});
+}
+//#endregion
+//#region src/pages/Relatorios.tsx
+function Relatorios() {
+	const [date, setDate] = (0, import_react.useState)({
+		from: subDays(/* @__PURE__ */ new Date(), 30),
+		to: /* @__PURE__ */ new Date()
+	});
+	const { kpis, topProducts, topCategories, cashFlow, accounts, criticalStock, loading } = useReports(date);
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+		"data-uid": "src/pages/Relatorios.tsx:24:5",
+		"data-prohibitions": "[editContent]",
+		className: "space-y-6 animate-fade-in max-w-6xl mx-auto pb-10",
+		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+			"data-uid": "src/pages/Relatorios.tsx:25:7",
+			"data-prohibitions": "[]",
+			className: "flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4",
+			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				"data-uid": "src/pages/Relatorios.tsx:26:9",
+				"data-prohibitions": "[]",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("h2", {
+					"data-uid": "src/pages/Relatorios.tsx:27:11",
+					"data-prohibitions": "[]",
+					className: "text-2xl font-bold tracking-tight flex items-center gap-2",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChartPie, {
+						"data-uid": "src/pages/Relatorios.tsx:28:13",
+						"data-prohibitions": "[editContent]",
+						className: "h-6 w-6 text-primary"
+					}), "Relatórios Gerenciais"]
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+					"data-uid": "src/pages/Relatorios.tsx:31:11",
+					"data-prohibitions": "[]",
+					className: "text-sm text-muted-foreground mt-1",
+					children: "Acompanhe o desempenho do negócio e a saúde financeira."
+				})]
+			}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				"data-uid": "src/pages/Relatorios.tsx:35:9",
+				"data-prohibitions": "[]",
+				className: "flex items-center gap-3",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+					"data-uid": "src/pages/Relatorios.tsx:36:11",
+					"data-prohibitions": "[]",
+					className: "text-sm font-medium text-slate-600",
+					children: "Período:"
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DatePickerWithRange, {
+					"data-uid": "src/pages/Relatorios.tsx:37:11",
+					"data-prohibitions": "[editContent]",
+					date,
+					setDate
+				})]
+			})]
+		}), loading ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+			"data-uid": "src/pages/Relatorios.tsx:42:9",
+			"data-prohibitions": "[]",
+			className: "flex justify-center items-center h-64",
+			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(LoaderCircle, {
+				"data-uid": "src/pages/Relatorios.tsx:43:11",
+				"data-prohibitions": "[editContent]",
+				className: "h-8 w-8 animate-spin text-primary"
+			})
+		}) : /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+			"data-uid": "src/pages/Relatorios.tsx:46:9",
+			"data-prohibitions": "[]",
+			className: "space-y-6",
+			children: [
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)(RelatoriosKPIs, {
+					"data-uid": "src/pages/Relatorios.tsx:47:11",
+					"data-prohibitions": "[editContent]",
+					...kpis
+				}),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					"data-uid": "src/pages/Relatorios.tsx:49:11",
+					"data-prohibitions": "[]",
+					className: "grid grid-cols-1 lg:grid-cols-2 gap-6",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChartTopProducts, {
+						"data-uid": "src/pages/Relatorios.tsx:50:13",
+						"data-prohibitions": "[editContent]",
+						data: topProducts
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChartCategories, {
+						"data-uid": "src/pages/Relatorios.tsx:51:13",
+						"data-prohibitions": "[editContent]",
+						data: topCategories
+					})]
+				}),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					"data-uid": "src/pages/Relatorios.tsx:54:11",
+					"data-prohibitions": "[]",
+					className: "grid grid-cols-1 lg:grid-cols-2 gap-6",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChartCashFlow, {
+						"data-uid": "src/pages/Relatorios.tsx:55:13",
+						"data-prohibitions": "[editContent]",
+						data: cashFlow
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChartAccounts, {
+						"data-uid": "src/pages/Relatorios.tsx:56:13",
+						"data-prohibitions": "[editContent]",
+						data: accounts
+					})]
+				}),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCriticalStock, {
+					"data-uid": "src/pages/Relatorios.tsx:59:11",
+					"data-prohibitions": "[editContent]",
+					data: criticalStock
+				})
+			]
+		})]
 	});
 }
 //#endregion
@@ -70302,73 +80408,78 @@ function AppSidebar() {
 			label: "Controle de Estoque"
 		},
 		{
+			to: "/relatorios",
+			icon: ChartPie,
+			label: "Relatórios"
+		},
+		{
 			to: "#",
 			icon: Settings,
 			label: "Configurações"
 		}
 	];
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-		"data-uid": "src/components/Sidebar.tsx:34:5",
+		"data-uid": "src/components/Sidebar.tsx:36:5",
 		"data-prohibitions": "[editContent]",
 		className: "w-64 bg-[#1E293B] text-slate-300 flex flex-col shrink-0 h-full",
 		children: [
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				"data-uid": "src/components/Sidebar.tsx:35:7",
+				"data-uid": "src/components/Sidebar.tsx:37:7",
 				"data-prohibitions": "[]",
 				className: "h-16 flex items-center px-6 border-b border-slate-700 bg-slate-900",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Store, {
-					"data-uid": "src/components/Sidebar.tsx:36:9",
+					"data-uid": "src/components/Sidebar.tsx:38:9",
 					"data-prohibitions": "[editContent]",
 					className: "h-6 w-6 text-primary mr-3"
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-					"data-uid": "src/components/Sidebar.tsx:37:9",
+					"data-uid": "src/components/Sidebar.tsx:39:9",
 					"data-prohibitions": "[]",
 					className: "font-bold text-white text-lg tracking-wider",
 					children: "NEXUS PDV"
 				})]
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("nav", {
-				"data-uid": "src/components/Sidebar.tsx:40:7",
+				"data-uid": "src/components/Sidebar.tsx:42:7",
 				"data-prohibitions": "[editContent]",
-				className: "flex-1 py-6 px-3 space-y-1",
+				className: "flex-1 py-6 px-3 space-y-1 overflow-y-auto",
 				children: links.map((link) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Link, {
-					"data-uid": "src/components/Sidebar.tsx:42:11",
+					"data-uid": "src/components/Sidebar.tsx:44:11",
 					"data-prohibitions": "[editContent]",
 					to: link.to,
 					className: cn$1("flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-colors", location.pathname === link.to ? "bg-primary text-white shadow-md" : "hover:bg-slate-800 hover:text-white"),
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(link.icon, {
-						"data-uid": "src/components/Sidebar.tsx:52:13",
+						"data-uid": "src/components/Sidebar.tsx:54:13",
 						"data-prohibitions": "[editContent]",
 						className: "h-5 w-5"
 					}), link.label]
 				}, link.label))
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				"data-uid": "src/components/Sidebar.tsx:58:7",
+				"data-uid": "src/components/Sidebar.tsx:60:7",
 				"data-prohibitions": "[editContent]",
-				className: "p-4 border-t border-slate-700 m-3 rounded-lg bg-slate-800/50",
+				className: "p-4 border-t border-slate-700 m-3 rounded-lg bg-slate-800/50 shrink-0",
 				children: [
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-						"data-uid": "src/components/Sidebar.tsx:59:9",
+						"data-uid": "src/components/Sidebar.tsx:61:9",
 						"data-prohibitions": "[]",
 						className: "text-xs font-semibold text-slate-400 mb-1",
 						children: "Operador Caixa"
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-						"data-uid": "src/components/Sidebar.tsx:60:9",
+						"data-uid": "src/components/Sidebar.tsx:62:9",
 						"data-prohibitions": "[editContent]",
 						className: "text-sm font-bold text-white mb-4 truncate",
 						title: user?.email || "",
 						children: user?.email || "Usuário"
 					}),
-					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button, {
-						"data-uid": "src/components/Sidebar.tsx:63:9",
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button$1, {
+						"data-uid": "src/components/Sidebar.tsx:65:9",
 						"data-prohibitions": "[]",
 						variant: "destructive",
 						className: "w-full text-xs h-9 bg-red-500/20 text-red-400 hover:bg-red-500 hover:text-white border-0",
 						onClick: signOut,
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(LogOut, {
-							"data-uid": "src/components/Sidebar.tsx:68:11",
+							"data-uid": "src/components/Sidebar.tsx:70:11",
 							"data-prohibitions": "[editContent]",
 							className: "h-4 w-4 mr-2"
 						}), " Encerrar Sessão"]
@@ -71284,7 +81395,7 @@ function ReceiptView({ receipt, change, onNewSale }) {
 			"data-uid": "src/components/pdv/ReceiptView.tsx:64:7",
 			"data-prohibitions": "[]",
 			className: "mt-4 sm:justify-center",
-			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
+			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
 				"data-uid": "src/components/pdv/ReceiptView.tsx:65:9",
 				"data-prohibitions": "[]",
 				className: "w-full h-12 text-lg font-bold",
@@ -71343,7 +81454,7 @@ function CustomerSelect({ onSelect }) {
 					className: "font-semibold text-slate-700",
 					children: selected.nome
 				})]
-			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
+			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
 				"data-uid": "src/components/pdv/CustomerSelect.tsx:51:11",
 				"data-prohibitions": "[]",
 				variant: "ghost",
@@ -71584,7 +81695,7 @@ function CheckoutModal({ open, onOpenChange }) {
 									id: "PIX",
 									icon: QrCode
 								}
-							].map((m) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button, {
+							].map((m) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button$1, {
 								"data-uid": "src/components/pdv/CheckoutModal.tsx:154:19",
 								"data-prohibitions": "[editContent]",
 								variant: method === m.id ? "default" : "outline",
@@ -71665,7 +81776,7 @@ function CheckoutModal({ open, onOpenChange }) {
 								})]
 							})]
 						})]
-					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button, {
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button$1, {
 						"data-uid": "src/components/pdv/CheckoutModal.tsx:199:13",
 						"data-prohibitions": "[editContent]",
 						className: "w-full h-14 text-lg font-bold mt-8 shadow-sm",
@@ -71705,7 +81816,7 @@ function CartSidebar() {
 						"data-prohibitions": "[editContent]",
 						className: "h-5 w-5 text-primary"
 					}), " Carrinho"]
-				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
 					"data-uid": "src/components/pdv/CartSidebar.tsx:19:9",
 					"data-prohibitions": "[]",
 					variant: "ghost",
@@ -71774,7 +81885,7 @@ function CartSidebar() {
 									"data-prohibitions": "[editContent]",
 									className: "flex items-center gap-1.5",
 									children: [
-										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
 											"data-uid": "src/components/pdv/CartSidebar.tsx:53:21",
 											"data-prohibitions": "[]",
 											size: "icon",
@@ -71793,7 +81904,7 @@ function CartSidebar() {
 											className: "text-sm w-6 text-center font-semibold",
 											children: item.quantity
 										}),
-										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
 											"data-uid": "src/components/pdv/CartSidebar.tsx:62:21",
 											"data-prohibitions": "[]",
 											size: "icon",
@@ -71806,7 +81917,7 @@ function CartSidebar() {
 												className: "h-3 w-3"
 											})
 										}),
-										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
 											"data-uid": "src/components/pdv/CartSidebar.tsx:70:21",
 											"data-prohibitions": "[]",
 											size: "icon",
@@ -71861,7 +81972,7 @@ function CartSidebar() {
 							children: formatCurrency(total)
 						})]
 					}),
-					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
 						"data-uid": "src/components/pdv/CartSidebar.tsx:94:9",
 						"data-prohibitions": "[]",
 						className: "w-full h-14 text-lg font-bold shadow-sm",
@@ -72032,7 +82143,7 @@ function Login() {
 								className: "h-12 bg-slate-50"
 							})]
 						}),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
 							"data-uid": "src/pages/Login.tsx:81:13",
 							"data-prohibitions": "[editContent]",
 							type: "submit",
@@ -72106,118 +82217,127 @@ function ProtectedRoute() {
 //#endregion
 //#region src/App.tsx
 var App = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(BrowserRouter, {
-	"data-uid": "src/App.tsx:20:3",
+	"data-uid": "src/App.tsx:21:3",
 	"data-prohibitions": "[]",
 	future: {
 		v7_startTransition: false,
 		v7_relativeSplatPath: false
 	},
 	children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AuthProvider, {
-		"data-uid": "src/App.tsx:21:5",
+		"data-uid": "src/App.tsx:22:5",
 		"data-prohibitions": "[]",
 		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CartProvider, {
-			"data-uid": "src/App.tsx:22:7",
+			"data-uid": "src/App.tsx:23:7",
 			"data-prohibitions": "[]",
 			children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TooltipProvider, {
-				"data-uid": "src/App.tsx:23:9",
+				"data-uid": "src/App.tsx:24:9",
 				"data-prohibitions": "[]",
 				children: [
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Toaster$2, {
-						"data-uid": "src/App.tsx:24:11",
-						"data-prohibitions": "[editContent]"
-					}),
-					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Toaster, {
 						"data-uid": "src/App.tsx:25:11",
 						"data-prohibitions": "[editContent]"
 					}),
-					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Routes, {
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Toaster, {
 						"data-uid": "src/App.tsx:26:11",
+						"data-prohibitions": "[editContent]"
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Routes, {
+						"data-uid": "src/App.tsx:27:11",
 						"data-prohibitions": "[]",
 						children: [
 							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Route, {
-								"data-uid": "src/App.tsx:27:13",
+								"data-uid": "src/App.tsx:28:13",
 								"data-prohibitions": "[editContent]",
 								path: "/login",
 								element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Login, {
-									"data-uid": "src/App.tsx:27:43",
+									"data-uid": "src/App.tsx:28:43",
 									"data-prohibitions": "[editContent]"
 								})
 							}),
 							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Route, {
-								"data-uid": "src/App.tsx:29:13",
+								"data-uid": "src/App.tsx:30:13",
 								"data-prohibitions": "[]",
 								element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ProtectedRoute, {
-									"data-uid": "src/App.tsx:29:29",
+									"data-uid": "src/App.tsx:30:29",
 									"data-prohibitions": "[editContent]"
 								}),
 								children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Route, {
-									"data-uid": "src/App.tsx:30:15",
+									"data-uid": "src/App.tsx:31:15",
 									"data-prohibitions": "[]",
 									element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Layout, {
-										"data-uid": "src/App.tsx:30:31",
+										"data-uid": "src/App.tsx:31:31",
 										"data-prohibitions": "[editContent]"
 									}),
 									children: [
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Route, {
-											"data-uid": "src/App.tsx:31:17",
+											"data-uid": "src/App.tsx:32:17",
 											"data-prohibitions": "[editContent]",
 											path: "/",
 											element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Index, {
-												"data-uid": "src/App.tsx:31:42",
-												"data-prohibitions": "[editContent]"
-											})
-										}),
-										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Route, {
-											"data-uid": "src/App.tsx:32:17",
-											"data-prohibitions": "[editContent]",
-											path: "/caixa",
-											element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CaixaPage, {
-												"data-uid": "src/App.tsx:32:47",
+												"data-uid": "src/App.tsx:32:42",
 												"data-prohibitions": "[editContent]"
 											})
 										}),
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Route, {
 											"data-uid": "src/App.tsx:33:17",
 											"data-prohibitions": "[editContent]",
-											path: "/dashboard",
-											element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Dashboard, {
-												"data-uid": "src/App.tsx:33:51",
+											path: "/caixa",
+											element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CaixaPage, {
+												"data-uid": "src/App.tsx:33:47",
 												"data-prohibitions": "[editContent]"
 											})
 										}),
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Route, {
 											"data-uid": "src/App.tsx:34:17",
 											"data-prohibitions": "[editContent]",
-											path: "/clientes",
-											element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Clientes, {
-												"data-uid": "src/App.tsx:34:50",
+											path: "/dashboard",
+											element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Dashboard, {
+												"data-uid": "src/App.tsx:34:51",
 												"data-prohibitions": "[editContent]"
 											})
 										}),
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Route, {
 											"data-uid": "src/App.tsx:35:17",
 											"data-prohibitions": "[editContent]",
-											path: "/contas-receber",
-											element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ContasReceber, {
-												"data-uid": "src/App.tsx:35:56",
+											path: "/clientes",
+											element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Clientes, {
+												"data-uid": "src/App.tsx:35:50",
 												"data-prohibitions": "[editContent]"
 											})
 										}),
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Route, {
 											"data-uid": "src/App.tsx:36:17",
 											"data-prohibitions": "[editContent]",
-											path: "/contas-pagar",
-											element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ContasPagar, {
-												"data-uid": "src/App.tsx:36:54",
+											path: "/contas-receber",
+											element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ContasReceber, {
+												"data-uid": "src/App.tsx:36:56",
 												"data-prohibitions": "[editContent]"
 											})
 										}),
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Route, {
 											"data-uid": "src/App.tsx:37:17",
 											"data-prohibitions": "[editContent]",
+											path: "/contas-pagar",
+											element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ContasPagar, {
+												"data-uid": "src/App.tsx:37:54",
+												"data-prohibitions": "[editContent]"
+											})
+										}),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Route, {
+											"data-uid": "src/App.tsx:38:17",
+											"data-prohibitions": "[editContent]",
 											path: "/estoque",
 											element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Estoque, {
-												"data-uid": "src/App.tsx:37:49",
+												"data-uid": "src/App.tsx:38:49",
+												"data-prohibitions": "[editContent]"
+											})
+										}),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Route, {
+											"data-uid": "src/App.tsx:39:17",
+											"data-prohibitions": "[editContent]",
+											path: "/relatorios",
+											element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Relatorios, {
+												"data-uid": "src/App.tsx:39:52",
 												"data-prohibitions": "[editContent]"
 											})
 										})
@@ -72225,11 +82345,11 @@ var App = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(BrowserRouter, {
 								})
 							}),
 							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Route, {
-								"data-uid": "src/App.tsx:41:13",
+								"data-uid": "src/App.tsx:43:13",
 								"data-prohibitions": "[editContent]",
 								path: "*",
 								element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(NotFound, {
-									"data-uid": "src/App.tsx:41:38",
+									"data-uid": "src/App.tsx:43:38",
 									"data-prohibitions": "[editContent]"
 								})
 							})
@@ -72248,4 +82368,4 @@ var App = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(BrowserRouter, {
 }));
 //#endregion
 
-//# sourceMappingURL=index-BKaVoUdN.js.map
+//# sourceMappingURL=index-BlbtYBT7.js.map
