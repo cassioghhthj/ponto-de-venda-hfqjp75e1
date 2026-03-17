@@ -6,6 +6,7 @@ import Index from './pages/Index'
 import Dashboard from './pages/Dashboard'
 import ContasReceber from './pages/ContasReceber'
 import ContasPagar from './pages/ContasPagar'
+import CaixaPage from './pages/Caixa'
 import NotFound from './pages/NotFound'
 import Layout from './components/Layout'
 import Login from './pages/Login'
@@ -26,6 +27,7 @@ const App = () => (
             <Route element={<ProtectedRoute />}>
               <Route element={<Layout />}>
                 <Route path="/" element={<Index />} />
+                <Route path="/caixa" element={<CaixaPage />} />
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/contas-receber" element={<ContasReceber />} />
                 <Route path="/contas-pagar" element={<ContasPagar />} />
