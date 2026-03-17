@@ -9,6 +9,44 @@ export type Database = {
   }
   public: {
     Tables: {
+      contas_receber: {
+        Row: {
+          cliente_id: string | null
+          data_pagamento: string | null
+          data_vencimento: string
+          id: string
+          status: string
+          valor: number
+          venda_id: string
+        }
+        Insert: {
+          cliente_id?: string | null
+          data_pagamento?: string | null
+          data_vencimento: string
+          id?: string
+          status?: string
+          valor: number
+          venda_id: string
+        }
+        Update: {
+          cliente_id?: string | null
+          data_pagamento?: string | null
+          data_vencimento?: string
+          id?: string
+          status?: string
+          valor?: number
+          venda_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'contas_receber_venda_id_fkey'
+            columns: ['venda_id']
+            isOneToOne: false
+            referencedRelation: 'vendas'
+            referencedColumns: ['id']
+          },
+        ]
+      }
       itens_venda: {
         Row: {
           id: string
@@ -287,6 +325,14 @@ export const Constants = {
 // --- COLUMN TYPES (actual PostgreSQL types) ---
 // Use this to know the real database type when writing migrations.
 // "string" in TypeScript types above may be uuid, text, varchar, timestamptz, etc.
+// Table: contas_receber
+//   id: uuid (not null, default: gen_random_uuid())
+//   venda_id: uuid (not null)
+//   cliente_id: uuid (nullable)
+//   valor: numeric (not null)
+//   data_vencimento: timestamp with time zone (not null)
+//   status: text (not null, default: 'pendente'::text)
+//   data_pagamento: timestamp with time zone (nullable)
 // Table: itens_venda
 //   id: uuid (not null, default: gen_random_uuid())
 //   venda_id: uuid (nullable)
@@ -316,6 +362,9 @@ export const Constants = {
 //   status: text (nullable, default: 'Concluído'::text)
 
 // --- CONSTRAINTS ---
+// Table: contas_receber
+//   PRIMARY KEY contas_receber_pkey: PRIMARY KEY (id)
+//   FOREIGN KEY contas_receber_venda_id_fkey: FOREIGN KEY (venda_id) REFERENCES vendas(id) ON DELETE CASCADE
 // Table: itens_venda
 //   PRIMARY KEY itens_venda_pkey: PRIMARY KEY (id)
 //   FOREIGN KEY itens_venda_produto_id_fkey: FOREIGN KEY (produto_id) REFERENCES produtos(id)
@@ -330,6 +379,10 @@ export const Constants = {
 //   FOREIGN KEY vendas_user_id_fkey: FOREIGN KEY (user_id) REFERENCES users(id)
 
 // --- ROW LEVEL SECURITY POLICIES ---
+// Table: contas_receber
+//   Policy "auth_all_contas_receber" (ALL, PERMISSIVE) roles={authenticated}
+//     USING: true
+//     WITH CHECK: true
 // Table: itens_venda
 //   Policy "auth_all_itens_venda" (ALL, PERMISSIVE) roles={authenticated}
 //     USING: true

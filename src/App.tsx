@@ -5,6 +5,7 @@ import { TooltipProvider } from '@/components/ui/tooltip'
 import Index from './pages/Index'
 import Dashboard from './pages/Dashboard'
 import ContasReceber from './pages/ContasReceber'
+import ContasPagar from './pages/ContasPagar'
 import NotFound from './pages/NotFound'
 import Layout from './components/Layout'
 import Login from './pages/Login'
@@ -27,6 +28,7 @@ const App = () => (
                 <Route path="/" element={<Index />} />
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/contas-receber" element={<ContasReceber />} />
+                <Route path="/contas-pagar" element={<ContasPagar />} />
               </Route>
             </Route>
 
