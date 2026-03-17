@@ -86,6 +86,17 @@ export function CheckoutModal({ open, onOpenChange }: CheckoutModalProps) {
       const { error: itemsError } = await supabase.from('itens_venda').insert(itensVenda)
       if (itemsError) throw itemsError
 
+      const dataVencimento = new Date()
+      dataVencimento.setDate(dataVencimento.getDate() + 30)
+
+      const { error: contasError } = await (supabase as any).from('contas_receber').insert({
+        venda_id: venda.id,
+        valor: total,
+        data_vencimento: dataVencimento.toISOString(),
+        status: 'pendente',
+      })
+      if (contasError) throw contasError
+
       for (const item of items) {
         await supabase.rpc('decrement_stock', { p_id: item.id, qty: item.quantity })
       }

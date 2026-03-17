@@ -1,5 +1,13 @@
 import { Link, useLocation } from 'react-router-dom'
-import { LayoutDashboard, ShoppingCart, Package, Settings, Store, LogOut } from 'lucide-react'
+import {
+  LayoutDashboard,
+  ShoppingCart,
+  Package,
+  Settings,
+  Store,
+  LogOut,
+  ReceiptText,
+} from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { useAuth } from '@/hooks/use-auth'
 import { Button } from '@/components/ui/button'
@@ -11,6 +19,7 @@ export function AppSidebar() {
   const links = [
     { to: '/', icon: ShoppingCart, label: 'Vendas (PDV)' },
     { to: '/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
+    { to: '/contas-receber', icon: ReceiptText, label: 'Contas a Receber' },
     { to: '#', icon: Package, label: 'Produtos' },
     { to: '#', icon: Settings, label: 'Configurações' },
   ]

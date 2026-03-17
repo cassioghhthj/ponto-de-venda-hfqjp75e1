@@ -626,6 +626,10 @@ video {
   position: relative;
 }
 
+.sticky{
+  position: sticky;
+}
+
 .inset-0{
   inset: 0px;
 }
@@ -758,6 +762,10 @@ video {
 
 .z-\[1\]{
   z-index: 1;
+}
+
+.col-span-3{
+  grid-column: span 3 / span 3;
 }
 
 .col-span-full{
@@ -972,6 +980,10 @@ video {
 
 .h-4{
   height: 1rem;
+}
+
+.h-40{
+  height: 10rem;
 }
 
 .h-5{
@@ -1409,6 +1421,10 @@ video {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
+.grid-cols-4{
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
 .flex-row{
   flex-direction: row;
 }
@@ -1786,6 +1802,11 @@ video {
   background-color: hsl(var(--muted) / 0.5);
 }
 
+.bg-orange-100{
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 237 213 / var(--tw-bg-opacity, 1));
+}
+
 .bg-popover{
   background-color: hsl(var(--popover));
 }
@@ -1987,6 +2008,11 @@ video {
 .py-6{
   padding-top: 1.5rem;
   padding-bottom: 1.5rem;
+}
+
+.py-8{
+  padding-top: 2rem;
+  padding-bottom: 2rem;
 }
 
 .pb-2{
@@ -2215,6 +2241,11 @@ video {
   color: hsl(var(--destructive-foreground));
 }
 
+.text-emerald-500{
+  --tw-text-opacity: 1;
+  color: rgb(16 185 129 / var(--tw-text-opacity, 1));
+}
+
 .text-emerald-600{
   --tw-text-opacity: 1;
   color: rgb(5 150 105 / var(--tw-text-opacity, 1));
@@ -2250,6 +2281,16 @@ video {
 
 .text-muted-foreground{
   color: hsl(var(--muted-foreground));
+}
+
+.text-orange-500{
+  --tw-text-opacity: 1;
+  color: rgb(249 115 22 / var(--tw-text-opacity, 1));
+}
+
+.text-orange-800{
+  --tw-text-opacity: 1;
+  color: rgb(154 52 18 / var(--tw-text-opacity, 1));
 }
 
 .text-popover-foreground{
@@ -2738,6 +2779,11 @@ video {
 
 .hover\:bg-muted\/50:hover{
   background-color: hsl(var(--muted) / 0.5);
+}
+
+.hover\:bg-orange-200:hover{
+  --tw-bg-opacity: 1;
+  background-color: rgb(254 215 170 / var(--tw-bg-opacity, 1));
 }
 
 .hover\:bg-primary\/80:hover{
@@ -3705,6 +3751,10 @@ video {
     width: auto;
   }
 
+  .sm\:max-w-\[425px\]{
+    max-width: 425px;
+  }
+
   .sm\:max-w-sm{
     max-width: 24rem;
   }
@@ -3715,6 +3765,10 @@ video {
 
   .sm\:flex-col{
     flex-direction: column;
+  }
+
+  .sm\:items-center{
+    align-items: center;
   }
 
   .sm\:justify-end{
@@ -3788,6 +3842,10 @@ video {
 
   .md\:max-w-\[420px\]{
     max-width: 420px;
+  }
+
+  .md\:grid-cols-2{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .md\:grid-cols-3{
