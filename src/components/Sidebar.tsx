@@ -24,7 +24,7 @@ export function AppSidebar() {
     { to: '/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
     { to: '/contas-receber', icon: ReceiptText, label: 'Contas a Receber' },
     { to: '/contas-pagar', icon: CreditCard, label: 'Contas a Pagar' },
-    { to: '#', icon: Package, label: 'Produtos' },
+    { to: '/estoque', icon: Package, label: 'Controle de Estoque' },
     { to: '#', icon: Settings, label: 'Configurações' },
   ]
 

@@ -19416,6 +19416,13 @@ var SquareCheckBig = createLucideIcon("square-check-big", [["path", {
 	d: "m9 11 3 3L22 4",
 	key: "1pflzl"
 }]]);
+var SquarePen = createLucideIcon("square-pen", [["path", {
+	d: "M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7",
+	key: "1m0v6g"
+}], ["path", {
+	d: "M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z",
+	key: "ohrbg2"
+}]]);
 var Store = createLucideIcon("store", [
 	["path", {
 		d: "M15 21v-5a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v5",
@@ -68852,6 +68859,609 @@ function CaixaPage() {
 	});
 }
 //#endregion
+//#region src/components/estoque/EstoqueAtual.tsx
+function EstoqueAtual() {
+	const { user } = useAuth();
+	const [products, setProducts] = (0, import_react.useState)([]);
+	const [loading, setLoading] = (0, import_react.useState)(true);
+	const [categoryFilter, setCategoryFilter] = (0, import_react.useState)("Todas");
+	const [adjustProduct, setAdjustProduct] = (0, import_react.useState)(null);
+	const [submitting, setSubmitting] = (0, import_react.useState)(false);
+	const [form, setForm] = (0, import_react.useState)({
+		quantidade: "",
+		tipo: "",
+		motivo: ""
+	});
+	const fetchProducts = async () => {
+		setLoading(true);
+		const { data } = await supabase.from("produtos").select("*").order("nome");
+		if (data) setProducts(data);
+		setLoading(false);
+	};
+	(0, import_react.useEffect)(() => {
+		fetchProducts();
+	}, []);
+	const categories = ["Todas", ...Array.from(new Set(products.map((p) => p.categoria).filter(Boolean)))];
+	const filteredProducts = products.filter((p) => categoryFilter === "Todas" || p.categoria === categoryFilter);
+	const handleAdjust = async (e) => {
+		e.preventDefault();
+		if (!adjustProduct || !user) return;
+		setSubmitting(true);
+		const qty = parseInt(form.quantidade);
+		const newEstoque = form.tipo === "entrada" ? adjustProduct.estoque + qty : adjustProduct.estoque - qty;
+		const { error: err1 } = await supabase.from("produtos").update({ estoque: newEstoque }).eq("id", adjustProduct.id);
+		const { error: err2 } = await supabase.from("movimentacoes_estoque").insert({
+			produto_id: adjustProduct.id,
+			tipo: form.tipo,
+			quantidade: qty,
+			motivo: form.motivo,
+			user_id: user.id
+		});
+		setSubmitting(false);
+		if (err1 || err2) toast$1({
+			title: "Erro",
+			description: "Erro ao registrar ajuste de estoque.",
+			variant: "destructive"
+		});
+		else {
+			toast$1({
+				title: "Sucesso",
+				description: "Estoque ajustado com sucesso!"
+			});
+			setAdjustProduct(null);
+			fetchProducts();
+		}
+	};
+	const openAdjustDialog = (product) => {
+		setAdjustProduct(product);
+		setForm({
+			quantidade: "",
+			tipo: "entrada",
+			motivo: "ajuste"
+		});
+	};
+	if (loading) return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+		"data-uid": "src/components/estoque/EstoqueAtual.tsx:108:7",
+		"data-prohibitions": "[]",
+		className: "flex h-40 items-center justify-center",
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(LoaderCircle, {
+			"data-uid": "src/components/estoque/EstoqueAtual.tsx:109:9",
+			"data-prohibitions": "[editContent]",
+			className: "h-8 w-8 animate-spin text-primary"
+		})
+	});
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+		"data-uid": "src/components/estoque/EstoqueAtual.tsx:115:5",
+		"data-prohibitions": "[editContent]",
+		className: "space-y-4",
+		children: [
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+				"data-uid": "src/components/estoque/EstoqueAtual.tsx:116:7",
+				"data-prohibitions": "[editContent]",
+				className: "flex items-center gap-4 mb-4",
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+					"data-uid": "src/components/estoque/EstoqueAtual.tsx:117:9",
+					"data-prohibitions": "[editContent]",
+					className: "w-64",
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Select, {
+						"data-uid": "src/components/estoque/EstoqueAtual.tsx:118:11",
+						"data-prohibitions": "[editContent]",
+						value: categoryFilter,
+						onValueChange: setCategoryFilter,
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectTrigger, {
+							"data-uid": "src/components/estoque/EstoqueAtual.tsx:119:13",
+							"data-prohibitions": "[]",
+							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectValue, {
+								"data-uid": "src/components/estoque/EstoqueAtual.tsx:120:15",
+								"data-prohibitions": "[editContent]",
+								placeholder: "Filtrar Categoria"
+							})
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectContent, {
+							"data-uid": "src/components/estoque/EstoqueAtual.tsx:122:13",
+							"data-prohibitions": "[editContent]",
+							children: categories.map((cat) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectItem, {
+								"data-uid": "src/components/estoque/EstoqueAtual.tsx:124:17",
+								"data-prohibitions": "[editContent]",
+								value: cat,
+								children: cat
+							}, cat))
+						})]
+					})
+				})
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Card, {
+				"data-uid": "src/components/estoque/EstoqueAtual.tsx:133:7",
+				"data-prohibitions": "[editContent]",
+				className: "shadow-sm border-slate-200",
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardContent, {
+					"data-uid": "src/components/estoque/EstoqueAtual.tsx:134:9",
+					"data-prohibitions": "[editContent]",
+					className: "p-0",
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Table, {
+						"data-uid": "src/components/estoque/EstoqueAtual.tsx:135:11",
+						"data-prohibitions": "[editContent]",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHeader, {
+							"data-uid": "src/components/estoque/EstoqueAtual.tsx:136:13",
+							"data-prohibitions": "[]",
+							className: "bg-slate-50",
+							children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TableRow, {
+								"data-uid": "src/components/estoque/EstoqueAtual.tsx:137:15",
+								"data-prohibitions": "[]",
+								children: [
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
+										"data-uid": "src/components/estoque/EstoqueAtual.tsx:138:17",
+										"data-prohibitions": "[]",
+										children: "Nome"
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
+										"data-uid": "src/components/estoque/EstoqueAtual.tsx:139:17",
+										"data-prohibitions": "[]",
+										children: "Categoria"
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
+										"data-uid": "src/components/estoque/EstoqueAtual.tsx:140:17",
+										"data-prohibitions": "[]",
+										className: "text-center",
+										children: "Estoque Atual"
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
+										"data-uid": "src/components/estoque/EstoqueAtual.tsx:141:17",
+										"data-prohibitions": "[]",
+										className: "text-center",
+										children: "Estoque Mínimo"
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
+										"data-uid": "src/components/estoque/EstoqueAtual.tsx:142:17",
+										"data-prohibitions": "[]",
+										className: "text-right",
+										children: "Ações"
+									})
+								]
+							})
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableBody, {
+							"data-uid": "src/components/estoque/EstoqueAtual.tsx:145:13",
+							"data-prohibitions": "[editContent]",
+							children: filteredProducts.map((p) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TableRow, {
+								"data-uid": "src/components/estoque/EstoqueAtual.tsx:147:17",
+								"data-prohibitions": "[editContent]",
+								children: [
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
+										"data-uid": "src/components/estoque/EstoqueAtual.tsx:148:19",
+										"data-prohibitions": "[editContent]",
+										className: "font-medium",
+										children: p.nome
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
+										"data-uid": "src/components/estoque/EstoqueAtual.tsx:149:19",
+										"data-prohibitions": "[editContent]",
+										children: p.categoria
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
+										"data-uid": "src/components/estoque/EstoqueAtual.tsx:150:19",
+										"data-prohibitions": "[editContent]",
+										className: "text-center",
+										children: p.estoque <= p.estoque_minimo ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Badge, {
+											"data-uid": "src/components/estoque/EstoqueAtual.tsx:152:23",
+											"data-prohibitions": "[editContent]",
+											variant: "destructive",
+											className: "px-2",
+											children: p.estoque
+										}) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+											"data-uid": "src/components/estoque/EstoqueAtual.tsx:156:23",
+											"data-prohibitions": "[editContent]",
+											className: "font-semibold text-slate-700",
+											children: p.estoque
+										})
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
+										"data-uid": "src/components/estoque/EstoqueAtual.tsx:159:19",
+										"data-prohibitions": "[editContent]",
+										className: "text-center text-muted-foreground",
+										children: p.estoque_minimo
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
+										"data-uid": "src/components/estoque/EstoqueAtual.tsx:162:19",
+										"data-prohibitions": "[]",
+										className: "text-right",
+										children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button, {
+											"data-uid": "src/components/estoque/EstoqueAtual.tsx:163:21",
+											"data-prohibitions": "[]",
+											size: "sm",
+											variant: "outline",
+											onClick: () => openAdjustDialog(p),
+											children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SquarePen, {
+												"data-uid": "src/components/estoque/EstoqueAtual.tsx:164:23",
+												"data-prohibitions": "[editContent]",
+												className: "h-4 w-4 mr-2"
+											}), " Ajustar"]
+										})
+									})
+								]
+							}, p.id))
+						})]
+					})
+				})
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Dialog, {
+				"data-uid": "src/components/estoque/EstoqueAtual.tsx:174:7",
+				"data-prohibitions": "[editContent]",
+				open: !!adjustProduct,
+				onOpenChange: (open) => !open && setAdjustProduct(null),
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogContent, {
+					"data-uid": "src/components/estoque/EstoqueAtual.tsx:175:9",
+					"data-prohibitions": "[editContent]",
+					className: "sm:max-w-[425px]",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogHeader, {
+						"data-uid": "src/components/estoque/EstoqueAtual.tsx:176:11",
+						"data-prohibitions": "[]",
+						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogTitle, {
+							"data-uid": "src/components/estoque/EstoqueAtual.tsx:177:13",
+							"data-prohibitions": "[]",
+							children: "Ajuste Manual de Estoque"
+						})
+					}), adjustProduct && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("form", {
+						"data-uid": "src/components/estoque/EstoqueAtual.tsx:180:13",
+						"data-prohibitions": "[editContent]",
+						onSubmit: handleAdjust,
+						className: "space-y-4 py-4",
+						children: [
+							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								"data-uid": "src/components/estoque/EstoqueAtual.tsx:181:15",
+								"data-prohibitions": "[editContent]",
+								className: "text-sm font-medium mb-4 pb-2 border-b",
+								children: ["Produto: ", adjustProduct.nome]
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								"data-uid": "src/components/estoque/EstoqueAtual.tsx:185:15",
+								"data-prohibitions": "[]",
+								className: "grid grid-cols-2 gap-4",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									"data-uid": "src/components/estoque/EstoqueAtual.tsx:186:17",
+									"data-prohibitions": "[]",
+									className: "space-y-2",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$1, {
+										"data-uid": "src/components/estoque/EstoqueAtual.tsx:187:19",
+										"data-prohibitions": "[]",
+										children: "Tipo de Ajuste"
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Select, {
+										"data-uid": "src/components/estoque/EstoqueAtual.tsx:188:19",
+										"data-prohibitions": "[]",
+										required: true,
+										value: form.tipo,
+										onValueChange: (v) => setForm({
+											...form,
+											tipo: v
+										}),
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectTrigger, {
+											"data-uid": "src/components/estoque/EstoqueAtual.tsx:193:21",
+											"data-prohibitions": "[]",
+											children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectValue, {
+												"data-uid": "src/components/estoque/EstoqueAtual.tsx:194:23",
+												"data-prohibitions": "[editContent]"
+											})
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(SelectContent, {
+											"data-uid": "src/components/estoque/EstoqueAtual.tsx:196:21",
+											"data-prohibitions": "[]",
+											children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectItem, {
+												"data-uid": "src/components/estoque/EstoqueAtual.tsx:197:23",
+												"data-prohibitions": "[]",
+												value: "entrada",
+												children: "Entrada (+)"
+											}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectItem, {
+												"data-uid": "src/components/estoque/EstoqueAtual.tsx:198:23",
+												"data-prohibitions": "[]",
+												value: "saida",
+												children: "Saída (-)"
+											})]
+										})]
+									})]
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									"data-uid": "src/components/estoque/EstoqueAtual.tsx:202:17",
+									"data-prohibitions": "[]",
+									className: "space-y-2",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$1, {
+										"data-uid": "src/components/estoque/EstoqueAtual.tsx:203:19",
+										"data-prohibitions": "[]",
+										children: "Quantidade"
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
+										"data-uid": "src/components/estoque/EstoqueAtual.tsx:204:19",
+										"data-prohibitions": "[editContent]",
+										type: "number",
+										min: "1",
+										required: true,
+										value: form.quantidade,
+										onChange: (e) => setForm({
+											...form,
+											quantidade: e.target.value
+										})
+									})]
+								})]
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								"data-uid": "src/components/estoque/EstoqueAtual.tsx:214:15",
+								"data-prohibitions": "[]",
+								className: "space-y-2",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$1, {
+									"data-uid": "src/components/estoque/EstoqueAtual.tsx:215:17",
+									"data-prohibitions": "[]",
+									children: "Motivo"
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Select, {
+									"data-uid": "src/components/estoque/EstoqueAtual.tsx:216:17",
+									"data-prohibitions": "[]",
+									required: true,
+									value: form.motivo,
+									onValueChange: (v) => setForm({
+										...form,
+										motivo: v
+									}),
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectTrigger, {
+										"data-uid": "src/components/estoque/EstoqueAtual.tsx:221:19",
+										"data-prohibitions": "[]",
+										children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectValue, {
+											"data-uid": "src/components/estoque/EstoqueAtual.tsx:222:21",
+											"data-prohibitions": "[editContent]"
+										})
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(SelectContent, {
+										"data-uid": "src/components/estoque/EstoqueAtual.tsx:224:19",
+										"data-prohibitions": "[]",
+										children: [
+											/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectItem, {
+												"data-uid": "src/components/estoque/EstoqueAtual.tsx:225:21",
+												"data-prohibitions": "[]",
+												value: "ajuste",
+												children: "Ajuste de Inventário"
+											}),
+											/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectItem, {
+												"data-uid": "src/components/estoque/EstoqueAtual.tsx:226:21",
+												"data-prohibitions": "[]",
+												value: "devolução",
+												children: "Devolução"
+											}),
+											/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectItem, {
+												"data-uid": "src/components/estoque/EstoqueAtual.tsx:227:21",
+												"data-prohibitions": "[]",
+												value: "perda",
+												children: "Perda / Quebra"
+											})
+										]
+									})]
+								})]
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogFooter, {
+								"data-uid": "src/components/estoque/EstoqueAtual.tsx:232:15",
+								"data-prohibitions": "[editContent]",
+								className: "pt-4",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
+									"data-uid": "src/components/estoque/EstoqueAtual.tsx:233:17",
+									"data-prohibitions": "[]",
+									type: "button",
+									variant: "outline",
+									onClick: () => setAdjustProduct(null),
+									children: "Cancelar"
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button, {
+									"data-uid": "src/components/estoque/EstoqueAtual.tsx:236:17",
+									"data-prohibitions": "[editContent]",
+									type: "submit",
+									disabled: submitting,
+									children: [submitting ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(LoaderCircle, {
+										"data-uid": "src/components/estoque/EstoqueAtual.tsx:237:33",
+										"data-prohibitions": "[editContent]",
+										className: "h-4 w-4 animate-spin mr-2"
+									}) : null, " Salvar Ajuste"]
+								})]
+							})
+						]
+					})]
+				})
+			})
+		]
+	});
+}
+//#endregion
+//#region src/components/estoque/HistoricoEstoque.tsx
+function HistoricoEstoque() {
+	const [history, setHistory] = (0, import_react.useState)([]);
+	const [loading, setLoading] = (0, import_react.useState)(true);
+	(0, import_react.useEffect)(() => {
+		const fetchHistory = async () => {
+			setLoading(true);
+			const { data } = await supabase.from("movimentacoes_estoque").select("*, produto:produtos(nome), user:users(nome)").order("data", { ascending: false });
+			if (data) setHistory(data);
+			setLoading(false);
+		};
+		fetchHistory();
+	}, []);
+	if (loading) return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+		"data-uid": "src/components/estoque/HistoricoEstoque.tsx:37:7",
+		"data-prohibitions": "[]",
+		className: "flex h-40 items-center justify-center",
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(LoaderCircle, {
+			"data-uid": "src/components/estoque/HistoricoEstoque.tsx:38:9",
+			"data-prohibitions": "[editContent]",
+			className: "h-8 w-8 animate-spin text-primary"
+		})
+	});
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Card, {
+		"data-uid": "src/components/estoque/HistoricoEstoque.tsx:44:5",
+		"data-prohibitions": "[editContent]",
+		className: "shadow-sm border-slate-200",
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardContent, {
+			"data-uid": "src/components/estoque/HistoricoEstoque.tsx:45:7",
+			"data-prohibitions": "[editContent]",
+			className: "p-0",
+			children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Table, {
+				"data-uid": "src/components/estoque/HistoricoEstoque.tsx:46:9",
+				"data-prohibitions": "[editContent]",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHeader, {
+					"data-uid": "src/components/estoque/HistoricoEstoque.tsx:47:11",
+					"data-prohibitions": "[]",
+					className: "bg-slate-50",
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TableRow, {
+						"data-uid": "src/components/estoque/HistoricoEstoque.tsx:48:13",
+						"data-prohibitions": "[]",
+						children: [
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
+								"data-uid": "src/components/estoque/HistoricoEstoque.tsx:49:15",
+								"data-prohibitions": "[]",
+								children: "Data / Hora"
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
+								"data-uid": "src/components/estoque/HistoricoEstoque.tsx:50:15",
+								"data-prohibitions": "[]",
+								children: "Produto"
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
+								"data-uid": "src/components/estoque/HistoricoEstoque.tsx:51:15",
+								"data-prohibitions": "[]",
+								children: "Tipo"
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
+								"data-uid": "src/components/estoque/HistoricoEstoque.tsx:52:15",
+								"data-prohibitions": "[]",
+								className: "text-center",
+								children: "Quantidade"
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
+								"data-uid": "src/components/estoque/HistoricoEstoque.tsx:53:15",
+								"data-prohibitions": "[]",
+								children: "Motivo"
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
+								"data-uid": "src/components/estoque/HistoricoEstoque.tsx:54:15",
+								"data-prohibitions": "[]",
+								children: "Usuário"
+							})
+						]
+					})
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TableBody, {
+					"data-uid": "src/components/estoque/HistoricoEstoque.tsx:57:11",
+					"data-prohibitions": "[editContent]",
+					children: [history.map((mov) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TableRow, {
+						"data-uid": "src/components/estoque/HistoricoEstoque.tsx:59:15",
+						"data-prohibitions": "[editContent]",
+						children: [
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
+								"data-uid": "src/components/estoque/HistoricoEstoque.tsx:60:17",
+								"data-prohibitions": "[editContent]",
+								className: "text-muted-foreground whitespace-nowrap",
+								children: new Date(mov.data).toLocaleString("pt-BR")
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
+								"data-uid": "src/components/estoque/HistoricoEstoque.tsx:63:17",
+								"data-prohibitions": "[editContent]",
+								className: "font-medium",
+								children: mov.produto?.nome || "-"
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
+								"data-uid": "src/components/estoque/HistoricoEstoque.tsx:64:17",
+								"data-prohibitions": "[editContent]",
+								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Badge, {
+									"data-uid": "src/components/estoque/HistoricoEstoque.tsx:65:19",
+									"data-prohibitions": "[editContent]",
+									variant: mov.tipo === "entrada" ? "default" : "secondary",
+									className: mov.tipo === "entrada" ? "bg-emerald-100 text-emerald-800 hover:bg-emerald-200 border-0" : "bg-orange-100 text-orange-800 hover:bg-orange-200 border-0",
+									children: mov.tipo.toUpperCase()
+								})
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TableCell, {
+								"data-uid": "src/components/estoque/HistoricoEstoque.tsx:76:17",
+								"data-prohibitions": "[editContent]",
+								className: "text-center font-semibold",
+								children: [mov.tipo === "entrada" ? "+" : "-", mov.quantidade]
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
+								"data-uid": "src/components/estoque/HistoricoEstoque.tsx:80:17",
+								"data-prohibitions": "[editContent]",
+								className: "capitalize",
+								children: mov.motivo
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
+								"data-uid": "src/components/estoque/HistoricoEstoque.tsx:81:17",
+								"data-prohibitions": "[editContent]",
+								className: "text-sm text-slate-600",
+								children: mov.user?.nome || "-"
+							})
+						]
+					}, mov.id)), history.length === 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableRow, {
+						"data-uid": "src/components/estoque/HistoricoEstoque.tsx:85:15",
+						"data-prohibitions": "[]",
+						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
+							"data-uid": "src/components/estoque/HistoricoEstoque.tsx:86:17",
+							"data-prohibitions": "[]",
+							colSpan: 6,
+							className: "text-center py-8 text-muted-foreground",
+							children: "Nenhuma movimentação registrada."
+						})
+					})]
+				})]
+			})
+		})
+	});
+}
+//#endregion
+//#region src/pages/Estoque.tsx
+function Estoque() {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+		"data-uid": "src/pages/Estoque.tsx:7:5",
+		"data-prohibitions": "[]",
+		className: "space-y-6 animate-fade-in max-w-6xl mx-auto h-full flex flex-col",
+		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+			"data-uid": "src/pages/Estoque.tsx:8:7",
+			"data-prohibitions": "[]",
+			className: "flex justify-between items-center shrink-0",
+			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
+				"data-uid": "src/pages/Estoque.tsx:9:9",
+				"data-prohibitions": "[]",
+				className: "text-2xl font-bold tracking-tight",
+				children: "Controle de Estoque"
+			})
+		}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Tabs, {
+			"data-uid": "src/pages/Estoque.tsx:12:7",
+			"data-prohibitions": "[]",
+			defaultValue: "atual",
+			className: "flex-1 flex flex-col min-h-0",
+			children: [
+				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TabsList, {
+					"data-uid": "src/pages/Estoque.tsx:13:9",
+					"data-prohibitions": "[]",
+					className: "shrink-0 w-fit",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TabsTrigger, {
+						"data-uid": "src/pages/Estoque.tsx:14:11",
+						"data-prohibitions": "[]",
+						value: "atual",
+						children: "Estoque Atual"
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TabsTrigger, {
+						"data-uid": "src/pages/Estoque.tsx:15:11",
+						"data-prohibitions": "[]",
+						value: "historico",
+						children: "Histórico de Movimentações"
+					})]
+				}),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TabsContent, {
+					"data-uid": "src/pages/Estoque.tsx:18:9",
+					"data-prohibitions": "[]",
+					value: "atual",
+					className: "flex-1 overflow-auto mt-4 focus-visible:outline-none",
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(EstoqueAtual, {
+						"data-uid": "src/pages/Estoque.tsx:19:11",
+						"data-prohibitions": "[editContent]"
+					})
+				}),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TabsContent, {
+					"data-uid": "src/pages/Estoque.tsx:22:9",
+					"data-prohibitions": "[]",
+					value: "historico",
+					className: "flex-1 overflow-auto mt-4 focus-visible:outline-none",
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(HistoricoEstoque, {
+						"data-uid": "src/pages/Estoque.tsx:26:11",
+						"data-prohibitions": "[editContent]"
+					})
+				})
+			]
+		})]
+	});
+}
+//#endregion
 //#region src/pages/NotFound.tsx
 var NotFound = () => {
 	const location = useLocation();
@@ -68922,9 +69532,9 @@ function AppSidebar() {
 			label: "Contas a Pagar"
 		},
 		{
-			to: "#",
+			to: "/estoque",
 			icon: Package,
-			label: "Produtos"
+			label: "Controle de Estoque"
 		},
 		{
 			to: "#",
@@ -70579,100 +71189,109 @@ function ProtectedRoute() {
 //#endregion
 //#region src/App.tsx
 var App = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(BrowserRouter, {
-	"data-uid": "src/App.tsx:18:3",
+	"data-uid": "src/App.tsx:19:3",
 	"data-prohibitions": "[]",
 	future: {
 		v7_startTransition: false,
 		v7_relativeSplatPath: false
 	},
 	children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AuthProvider, {
-		"data-uid": "src/App.tsx:19:5",
+		"data-uid": "src/App.tsx:20:5",
 		"data-prohibitions": "[]",
 		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CartProvider, {
-			"data-uid": "src/App.tsx:20:7",
+			"data-uid": "src/App.tsx:21:7",
 			"data-prohibitions": "[]",
 			children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TooltipProvider, {
-				"data-uid": "src/App.tsx:21:9",
+				"data-uid": "src/App.tsx:22:9",
 				"data-prohibitions": "[]",
 				children: [
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Toaster$2, {
-						"data-uid": "src/App.tsx:22:11",
-						"data-prohibitions": "[editContent]"
-					}),
-					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Toaster, {
 						"data-uid": "src/App.tsx:23:11",
 						"data-prohibitions": "[editContent]"
 					}),
-					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Routes, {
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Toaster, {
 						"data-uid": "src/App.tsx:24:11",
+						"data-prohibitions": "[editContent]"
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Routes, {
+						"data-uid": "src/App.tsx:25:11",
 						"data-prohibitions": "[]",
 						children: [
 							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Route, {
-								"data-uid": "src/App.tsx:25:13",
+								"data-uid": "src/App.tsx:26:13",
 								"data-prohibitions": "[editContent]",
 								path: "/login",
 								element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Login, {
-									"data-uid": "src/App.tsx:25:43",
+									"data-uid": "src/App.tsx:26:43",
 									"data-prohibitions": "[editContent]"
 								})
 							}),
 							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Route, {
-								"data-uid": "src/App.tsx:27:13",
+								"data-uid": "src/App.tsx:28:13",
 								"data-prohibitions": "[]",
 								element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ProtectedRoute, {
-									"data-uid": "src/App.tsx:27:29",
+									"data-uid": "src/App.tsx:28:29",
 									"data-prohibitions": "[editContent]"
 								}),
 								children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Route, {
-									"data-uid": "src/App.tsx:28:15",
+									"data-uid": "src/App.tsx:29:15",
 									"data-prohibitions": "[]",
 									element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Layout, {
-										"data-uid": "src/App.tsx:28:31",
+										"data-uid": "src/App.tsx:29:31",
 										"data-prohibitions": "[editContent]"
 									}),
 									children: [
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Route, {
-											"data-uid": "src/App.tsx:29:17",
+											"data-uid": "src/App.tsx:30:17",
 											"data-prohibitions": "[editContent]",
 											path: "/",
 											element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Index, {
-												"data-uid": "src/App.tsx:29:42",
-												"data-prohibitions": "[editContent]"
-											})
-										}),
-										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Route, {
-											"data-uid": "src/App.tsx:30:17",
-											"data-prohibitions": "[editContent]",
-											path: "/caixa",
-											element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CaixaPage, {
-												"data-uid": "src/App.tsx:30:47",
+												"data-uid": "src/App.tsx:30:42",
 												"data-prohibitions": "[editContent]"
 											})
 										}),
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Route, {
 											"data-uid": "src/App.tsx:31:17",
 											"data-prohibitions": "[editContent]",
-											path: "/dashboard",
-											element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Dashboard, {
-												"data-uid": "src/App.tsx:31:51",
+											path: "/caixa",
+											element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CaixaPage, {
+												"data-uid": "src/App.tsx:31:47",
 												"data-prohibitions": "[editContent]"
 											})
 										}),
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Route, {
 											"data-uid": "src/App.tsx:32:17",
 											"data-prohibitions": "[editContent]",
-											path: "/contas-receber",
-											element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ContasReceber, {
-												"data-uid": "src/App.tsx:32:56",
+											path: "/dashboard",
+											element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Dashboard, {
+												"data-uid": "src/App.tsx:32:51",
 												"data-prohibitions": "[editContent]"
 											})
 										}),
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Route, {
 											"data-uid": "src/App.tsx:33:17",
 											"data-prohibitions": "[editContent]",
+											path: "/contas-receber",
+											element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ContasReceber, {
+												"data-uid": "src/App.tsx:33:56",
+												"data-prohibitions": "[editContent]"
+											})
+										}),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Route, {
+											"data-uid": "src/App.tsx:34:17",
+											"data-prohibitions": "[editContent]",
 											path: "/contas-pagar",
 											element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ContasPagar, {
-												"data-uid": "src/App.tsx:33:54",
+												"data-uid": "src/App.tsx:34:54",
+												"data-prohibitions": "[editContent]"
+											})
+										}),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Route, {
+											"data-uid": "src/App.tsx:35:17",
+											"data-prohibitions": "[editContent]",
+											path: "/estoque",
+											element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Estoque, {
+												"data-uid": "src/App.tsx:35:49",
 												"data-prohibitions": "[editContent]"
 											})
 										})
@@ -70680,11 +71299,11 @@ var App = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(BrowserRouter, {
 								})
 							}),
 							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Route, {
-								"data-uid": "src/App.tsx:37:13",
+								"data-uid": "src/App.tsx:39:13",
 								"data-prohibitions": "[editContent]",
 								path: "*",
 								element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(NotFound, {
-									"data-uid": "src/App.tsx:37:38",
+									"data-uid": "src/App.tsx:39:38",
 									"data-prohibitions": "[editContent]"
 								})
 							})
@@ -70703,4 +71322,4 @@ var App = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(BrowserRouter, {
 }));
 //#endregion
 
-//# sourceMappingURL=index-BMOxIGgV.js.map
+//# sourceMappingURL=index-BUdiJXG3.js.map

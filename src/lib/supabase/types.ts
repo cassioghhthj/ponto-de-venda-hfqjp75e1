@@ -9,6 +9,44 @@ export type Database = {
   }
   public: {
     Tables: {
+      caixa: {
+        Row: {
+          data_abertura: string
+          data_fechamento: string | null
+          id: string
+          saldo_final: number | null
+          saldo_inicial: number
+          status: string
+          user_id: string
+        }
+        Insert: {
+          data_abertura?: string
+          data_fechamento?: string | null
+          id?: string
+          saldo_final?: number | null
+          saldo_inicial: number
+          status?: string
+          user_id: string
+        }
+        Update: {
+          data_abertura?: string
+          data_fechamento?: string | null
+          id?: string
+          saldo_final?: number | null
+          saldo_inicial?: number
+          status?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'caixa_user_id_fkey'
+            columns: ['user_id']
+            isOneToOne: false
+            referencedRelation: 'users'
+            referencedColumns: ['id']
+          },
+        ]
+      }
       contas_pagar: {
         Row: {
           categoria: string | null
@@ -115,6 +153,41 @@ export type Database = {
             columns: ['venda_id']
             isOneToOne: false
             referencedRelation: 'vendas'
+            referencedColumns: ['id']
+          },
+        ]
+      }
+      movimentacoes_caixa: {
+        Row: {
+          caixa_id: string
+          data: string
+          descricao: string
+          id: string
+          tipo: string
+          valor: number
+        }
+        Insert: {
+          caixa_id: string
+          data?: string
+          descricao: string
+          id?: string
+          tipo: string
+          valor: number
+        }
+        Update: {
+          caixa_id?: string
+          data?: string
+          descricao?: string
+          id?: string
+          tipo?: string
+          valor?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'movimentacoes_caixa_caixa_id_fkey'
+            columns: ['caixa_id']
+            isOneToOne: false
+            referencedRelation: 'caixa'
             referencedColumns: ['id']
           },
         ]
@@ -358,6 +431,14 @@ export const Constants = {
 // --- COLUMN TYPES (actual PostgreSQL types) ---
 // Use this to know the real database type when writing migrations.
 // "string" in TypeScript types above may be uuid, text, varchar, timestamptz, etc.
+// Table: caixa
+//   id: uuid (not null, default: gen_random_uuid())
+//   user_id: uuid (not null)
+//   data_abertura: timestamp with time zone (not null, default: now())
+//   data_fechamento: timestamp with time zone (nullable)
+//   saldo_inicial: numeric (not null)
+//   saldo_final: numeric (nullable)
+//   status: text (not null, default: 'aberto'::text)
 // Table: contas_pagar
 //   id: uuid (not null, default: gen_random_uuid())
 //   descricao: text (not null)
@@ -381,6 +462,13 @@ export const Constants = {
 //   produto_id: uuid (nullable)
 //   quantidade: integer (not null)
 //   preco_unitario: numeric (not null)
+// Table: movimentacoes_caixa
+//   id: uuid (not null, default: gen_random_uuid())
+//   caixa_id: uuid (not null)
+//   tipo: text (not null)
+//   valor: numeric (not null)
+//   descricao: text (not null)
+//   data: timestamp with time zone (not null, default: now())
 // Table: produtos
 //   id: uuid (not null, default: gen_random_uuid())
 //   codigo: text (nullable)
@@ -404,6 +492,10 @@ export const Constants = {
 //   status: text (nullable, default: 'Concluído'::text)
 
 // --- CONSTRAINTS ---
+// Table: caixa
+//   PRIMARY KEY caixa_pkey: PRIMARY KEY (id)
+//   CHECK caixa_status_check: CHECK ((status = ANY (ARRAY['aberto'::text, 'fechado'::text])))
+//   FOREIGN KEY caixa_user_id_fkey: FOREIGN KEY (user_id) REFERENCES users(id)
 // Table: contas_pagar
 //   PRIMARY KEY contas_pagar_pkey: PRIMARY KEY (id)
 // Table: contas_receber
@@ -413,6 +505,10 @@ export const Constants = {
 //   PRIMARY KEY itens_venda_pkey: PRIMARY KEY (id)
 //   FOREIGN KEY itens_venda_produto_id_fkey: FOREIGN KEY (produto_id) REFERENCES produtos(id)
 //   FOREIGN KEY itens_venda_venda_id_fkey: FOREIGN KEY (venda_id) REFERENCES vendas(id) ON DELETE CASCADE
+// Table: movimentacoes_caixa
+//   FOREIGN KEY movimentacoes_caixa_caixa_id_fkey: FOREIGN KEY (caixa_id) REFERENCES caixa(id) ON DELETE CASCADE
+//   PRIMARY KEY movimentacoes_caixa_pkey: PRIMARY KEY (id)
+//   CHECK movimentacoes_caixa_tipo_check: CHECK ((tipo = ANY (ARRAY['entrada'::text, 'saida'::text])))
 // Table: produtos
 //   PRIMARY KEY produtos_pkey: PRIMARY KEY (id)
 // Table: users
@@ -423,6 +519,10 @@ export const Constants = {
 //   FOREIGN KEY vendas_user_id_fkey: FOREIGN KEY (user_id) REFERENCES users(id)
 
 // --- ROW LEVEL SECURITY POLICIES ---
+// Table: caixa
+//   Policy "auth_all_caixa" (ALL, PERMISSIVE) roles={authenticated}
+//     USING: true
+//     WITH CHECK: true
 // Table: contas_pagar
 //   Policy "auth_all_contas_pagar" (ALL, PERMISSIVE) roles={authenticated}
 //     USING: true
@@ -433,6 +533,10 @@ export const Constants = {
 //     WITH CHECK: true
 // Table: itens_venda
 //   Policy "auth_all_itens_venda" (ALL, PERMISSIVE) roles={authenticated}
+//     USING: true
+//     WITH CHECK: true
+// Table: movimentacoes_caixa
+//   Policy "auth_all_movimentacoes_caixa" (ALL, PERMISSIVE) roles={authenticated}
 //     USING: true
 //     WITH CHECK: true
 // Table: produtos
