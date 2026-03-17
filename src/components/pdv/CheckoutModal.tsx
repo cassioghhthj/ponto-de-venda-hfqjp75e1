@@ -1,9 +1,15 @@
 import { useState, useEffect } from 'react'
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogFooter,
+} from '@/components/ui/dialog'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { Banknote, CreditCard, QrCode, Loader2 } from 'lucide-react'
+import { Banknote, CreditCard, QrCode, Loader2, CheckCircle2 } from 'lucide-react'
 import { useCart } from '@/context/CartContext'
 import { formatCurrency } from '@/lib/format'
 import { toast } from '@/hooks/use-toast'
@@ -17,19 +23,40 @@ interface CheckoutModalProps {
 
 type PaymentMethod = 'Dinheiro' | 'Débito' | 'Crédito' | 'PIX' | null
 
+interface SaleRecord {
+  id: string
+  data: string
+  total: number
+  metodo_pagamento: string
+  items: {
+    nome: string
+    quantidade: number
+    preco_unitario: number
+  }[]
+}
+
 export function CheckoutModal({ open, onOpenChange }: CheckoutModalProps) {
   const { items, total, clearCart } = useCart()
   const { user } = useAuth()
   const [method, setMethod] = useState<PaymentMethod>(null)
   const [amountReceived, setAmountReceived] = useState<string>('')
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [receipt, setReceipt] = useState<SaleRecord | null>(null)
 
   useEffect(() => {
     if (open) {
       setMethod(null)
       setAmountReceived('')
+      setReceipt(null)
     }
   }, [open])
+
+  const handleOpenChange = (newOpen: boolean) => {
+    if (!newOpen && receipt) {
+      clearCart()
+    }
+    onOpenChange(newOpen)
+  }
 
   const handleConfirm = async () => {
     if (!method || !user) return
@@ -64,17 +91,27 @@ export function CheckoutModal({ open, onOpenChange }: CheckoutModalProps) {
       }
 
       toast({
-        title: 'Venda finalizada com sucesso!',
+        title: 'Venda realizada com sucesso!',
         description: `Pagamento de ${formatCurrency(total)} via ${method} registrado.`,
         className: 'bg-emerald-50 border-emerald-200 text-emerald-900',
       })
-      clearCart()
-      onOpenChange(false)
+
+      setReceipt({
+        id: venda.id,
+        data: venda.data || new Date().toISOString(),
+        total,
+        metodo_pagamento: method,
+        items: items.map((i) => ({
+          nome: i.nome,
+          quantidade: i.quantity,
+          preco_unitario: i.preco,
+        })),
+      })
     } catch (error) {
       console.error(error)
       toast({
         title: 'Erro ao processar',
-        description: 'Não foi possível salvar a venda no banco de dados.',
+        description: 'Não foi possível salvar a venda no banco de dados. Tente novamente.',
         variant: 'destructive',
       })
     } finally {
@@ -85,8 +122,75 @@ export function CheckoutModal({ open, onOpenChange }: CheckoutModalProps) {
   const numericReceived = parseFloat(amountReceived.replace(',', '.')) || 0
   const change = numericReceived > total ? numericReceived - total : 0
 
+  if (receipt) {
+    return (
+      <Dialog open={open} onOpenChange={handleOpenChange}>
+        <DialogContent className="max-w-md sm:rounded-2xl">
+          <DialogHeader className="text-center sm:text-center">
+            <div className="mx-auto w-12 h-12 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mb-4">
+              <CheckCircle2 className="w-8 h-8" />
+            </div>
+            <DialogTitle className="text-2xl font-bold text-center">Venda Concluída!</DialogTitle>
+          </DialogHeader>
+
+          <div className="bg-slate-50 p-6 rounded-lg border text-sm space-y-4 font-mono mt-2 shadow-inner">
+            <div className="text-center border-b border-dashed pb-4 mb-4 border-slate-300">
+              <h3 className="font-bold text-lg mb-1">RECIBO DE VENDA</h3>
+              <p className="text-slate-500 text-xs truncate">ID: {receipt.id}</p>
+              <p className="text-slate-500 text-xs">
+                {new Date(receipt.data).toLocaleString('pt-BR')}
+              </p>
+            </div>
+
+            <div className="space-y-3 mb-4 max-h-[40vh] overflow-y-auto pr-2">
+              {receipt.items.map((item, idx) => (
+                <div key={idx} className="flex justify-between">
+                  <div className="flex-1 pr-4">
+                    <span className="block font-semibold line-clamp-1">{item.nome}</span>
+                    <span className="text-xs text-slate-500">
+                      {item.quantidade}x {formatCurrency(item.preco_unitario)}
+                    </span>
+                  </div>
+                  <span className="font-medium">
+                    {formatCurrency(item.quantidade * item.preco_unitario)}
+                  </span>
+                </div>
+              ))}
+            </div>
+
+            <div className="border-t border-dashed pt-4 mb-2 border-slate-300">
+              <div className="flex justify-between font-bold text-xl mb-2">
+                <span>TOTAL</span>
+                <span>{formatCurrency(receipt.total)}</span>
+              </div>
+              <div className="flex justify-between text-slate-600 text-base">
+                <span>Método</span>
+                <span className="font-semibold">{receipt.metodo_pagamento}</span>
+              </div>
+              {receipt.metodo_pagamento === 'Dinheiro' && change > 0 && (
+                <div className="flex justify-between text-emerald-600 font-medium mt-1">
+                  <span>Troco</span>
+                  <span>{formatCurrency(change)}</span>
+                </div>
+              )}
+            </div>
+          </div>
+
+          <DialogFooter className="mt-4 sm:justify-center">
+            <Button
+              className="w-full h-12 text-lg font-bold"
+              onClick={() => handleOpenChange(false)}
+            >
+              Nova Venda
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+    )
+  }
+
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
+    <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogContent className="max-w-2xl sm:rounded-2xl">
         <DialogHeader>
           <DialogTitle className="text-2xl font-bold">Finalizar Venda</DialogTitle>

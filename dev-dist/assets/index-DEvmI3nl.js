@@ -19074,6 +19074,15 @@ var Banknote = createLucideIcon("banknote", [
 		key: "113zkx"
 	}]
 ]);
+var CircleCheck = createLucideIcon("circle-check", [["circle", {
+	cx: "12",
+	cy: "12",
+	r: "10",
+	key: "1mglay"
+}], ["path", {
+	d: "m9 12 2 2 4-4",
+	key: "dzmm74"
+}]]);
 var CreditCard = createLucideIcon("credit-card", [["rect", {
 	width: "20",
 	height: "14",
@@ -66656,12 +66665,18 @@ function CheckoutModal({ open, onOpenChange }) {
 	const [method, setMethod] = (0, import_react.useState)(null);
 	const [amountReceived, setAmountReceived] = (0, import_react.useState)("");
 	const [isSubmitting, setIsSubmitting] = (0, import_react.useState)(false);
+	const [receipt, setReceipt] = (0, import_react.useState)(null);
 	(0, import_react.useEffect)(() => {
 		if (open) {
 			setMethod(null);
 			setAmountReceived("");
+			setReceipt(null);
 		}
 	}, [open]);
+	const handleOpenChange = (newOpen) => {
+		if (!newOpen && receipt) clearCart();
+		onOpenChange(newOpen);
+	};
 	const handleConfirm = async () => {
 		if (!method || !user) return;
 		setIsSubmitting(true);
@@ -66686,17 +66701,26 @@ function CheckoutModal({ open, onOpenChange }) {
 				qty: item.quantity
 			});
 			toast$1({
-				title: "Venda finalizada com sucesso!",
+				title: "Venda realizada com sucesso!",
 				description: `Pagamento de ${formatCurrency(total)} via ${method} registrado.`,
 				className: "bg-emerald-50 border-emerald-200 text-emerald-900"
 			});
-			clearCart();
-			onOpenChange(false);
+			setReceipt({
+				id: venda.id,
+				data: venda.data || (/* @__PURE__ */ new Date()).toISOString(),
+				total,
+				metodo_pagamento: method,
+				items: items.map((i) => ({
+					nome: i.nome,
+					quantidade: i.quantity,
+					preco_unitario: i.preco
+				}))
+			});
 		} catch (error) {
 			console.error(error);
 			toast$1({
 				title: "Erro ao processar",
-				description: "Não foi possível salvar a venda no banco de dados.",
+				description: "Não foi possível salvar a venda no banco de dados. Tente novamente.",
 				variant: "destructive"
 			});
 		} finally {
@@ -66705,39 +66729,201 @@ function CheckoutModal({ open, onOpenChange }) {
 	};
 	const numericReceived = parseFloat(amountReceived.replace(",", ".")) || 0;
 	const change = numericReceived > total ? numericReceived - total : 0;
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Dialog, {
-		"data-uid": "src/components/pdv/CheckoutModal.tsx:89:5",
+	if (receipt) return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Dialog, {
+		"data-uid": "src/components/pdv/CheckoutModal.tsx:127:7",
 		"data-prohibitions": "[editContent]",
 		open,
-		onOpenChange,
+		onOpenChange: handleOpenChange,
 		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogContent, {
-			"data-uid": "src/components/pdv/CheckoutModal.tsx:90:7",
+			"data-uid": "src/components/pdv/CheckoutModal.tsx:128:9",
+			"data-prohibitions": "[editContent]",
+			className: "max-w-md sm:rounded-2xl",
+			children: [
+				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogHeader, {
+					"data-uid": "src/components/pdv/CheckoutModal.tsx:129:11",
+					"data-prohibitions": "[]",
+					className: "text-center sm:text-center",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+						"data-uid": "src/components/pdv/CheckoutModal.tsx:130:13",
+						"data-prohibitions": "[]",
+						className: "mx-auto w-12 h-12 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mb-4",
+						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CircleCheck, {
+							"data-uid": "src/components/pdv/CheckoutModal.tsx:131:15",
+							"data-prohibitions": "[editContent]",
+							className: "w-8 h-8"
+						})
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogTitle, {
+						"data-uid": "src/components/pdv/CheckoutModal.tsx:133:13",
+						"data-prohibitions": "[]",
+						className: "text-2xl font-bold text-center",
+						children: "Venda Concluída!"
+					})]
+				}),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					"data-uid": "src/components/pdv/CheckoutModal.tsx:136:11",
+					"data-prohibitions": "[editContent]",
+					className: "bg-slate-50 p-6 rounded-lg border text-sm space-y-4 font-mono mt-2 shadow-inner",
+					children: [
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							"data-uid": "src/components/pdv/CheckoutModal.tsx:137:13",
+							"data-prohibitions": "[editContent]",
+							className: "text-center border-b border-dashed pb-4 mb-4 border-slate-300",
+							children: [
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
+									"data-uid": "src/components/pdv/CheckoutModal.tsx:138:15",
+									"data-prohibitions": "[]",
+									className: "font-bold text-lg mb-1",
+									children: "RECIBO DE VENDA"
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
+									"data-uid": "src/components/pdv/CheckoutModal.tsx:139:15",
+									"data-prohibitions": "[editContent]",
+									className: "text-slate-500 text-xs truncate",
+									children: ["ID: ", receipt.id]
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+									"data-uid": "src/components/pdv/CheckoutModal.tsx:140:15",
+									"data-prohibitions": "[editContent]",
+									className: "text-slate-500 text-xs",
+									children: new Date(receipt.data).toLocaleString("pt-BR")
+								})
+							]
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+							"data-uid": "src/components/pdv/CheckoutModal.tsx:145:13",
+							"data-prohibitions": "[editContent]",
+							className: "space-y-3 mb-4 max-h-[40vh] overflow-y-auto pr-2",
+							children: receipt.items.map((item, idx) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								"data-uid": "src/components/pdv/CheckoutModal.tsx:147:17",
+								"data-prohibitions": "[editContent]",
+								className: "flex justify-between",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									"data-uid": "src/components/pdv/CheckoutModal.tsx:148:19",
+									"data-prohibitions": "[editContent]",
+									className: "flex-1 pr-4",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+										"data-uid": "src/components/pdv/CheckoutModal.tsx:149:21",
+										"data-prohibitions": "[editContent]",
+										className: "block font-semibold line-clamp-1",
+										children: item.nome
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+										"data-uid": "src/components/pdv/CheckoutModal.tsx:150:21",
+										"data-prohibitions": "[editContent]",
+										className: "text-xs text-slate-500",
+										children: [
+											item.quantidade,
+											"x ",
+											formatCurrency(item.preco_unitario)
+										]
+									})]
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+									"data-uid": "src/components/pdv/CheckoutModal.tsx:154:19",
+									"data-prohibitions": "[editContent]",
+									className: "font-medium",
+									children: formatCurrency(item.quantidade * item.preco_unitario)
+								})]
+							}, idx))
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							"data-uid": "src/components/pdv/CheckoutModal.tsx:161:13",
+							"data-prohibitions": "[editContent]",
+							className: "border-t border-dashed pt-4 mb-2 border-slate-300",
+							children: [
+								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									"data-uid": "src/components/pdv/CheckoutModal.tsx:162:15",
+									"data-prohibitions": "[editContent]",
+									className: "flex justify-between font-bold text-xl mb-2",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+										"data-uid": "src/components/pdv/CheckoutModal.tsx:163:17",
+										"data-prohibitions": "[]",
+										children: "TOTAL"
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+										"data-uid": "src/components/pdv/CheckoutModal.tsx:164:17",
+										"data-prohibitions": "[editContent]",
+										children: formatCurrency(receipt.total)
+									})]
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									"data-uid": "src/components/pdv/CheckoutModal.tsx:166:15",
+									"data-prohibitions": "[editContent]",
+									className: "flex justify-between text-slate-600 text-base",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+										"data-uid": "src/components/pdv/CheckoutModal.tsx:167:17",
+										"data-prohibitions": "[]",
+										children: "Método"
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+										"data-uid": "src/components/pdv/CheckoutModal.tsx:168:17",
+										"data-prohibitions": "[editContent]",
+										className: "font-semibold",
+										children: receipt.metodo_pagamento
+									})]
+								}),
+								receipt.metodo_pagamento === "Dinheiro" && change > 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									"data-uid": "src/components/pdv/CheckoutModal.tsx:171:17",
+									"data-prohibitions": "[editContent]",
+									className: "flex justify-between text-emerald-600 font-medium mt-1",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+										"data-uid": "src/components/pdv/CheckoutModal.tsx:172:19",
+										"data-prohibitions": "[]",
+										children: "Troco"
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+										"data-uid": "src/components/pdv/CheckoutModal.tsx:173:19",
+										"data-prohibitions": "[editContent]",
+										children: formatCurrency(change)
+									})]
+								})
+							]
+						})
+					]
+				}),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogFooter, {
+					"data-uid": "src/components/pdv/CheckoutModal.tsx:179:11",
+					"data-prohibitions": "[]",
+					className: "mt-4 sm:justify-center",
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
+						"data-uid": "src/components/pdv/CheckoutModal.tsx:180:13",
+						"data-prohibitions": "[]",
+						className: "w-full h-12 text-lg font-bold",
+						onClick: () => handleOpenChange(false),
+						children: "Nova Venda"
+					})
+				})
+			]
+		})
+	});
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Dialog, {
+		"data-uid": "src/components/pdv/CheckoutModal.tsx:193:5",
+		"data-prohibitions": "[editContent]",
+		open,
+		onOpenChange: handleOpenChange,
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogContent, {
+			"data-uid": "src/components/pdv/CheckoutModal.tsx:194:7",
 			"data-prohibitions": "[editContent]",
 			className: "max-w-2xl sm:rounded-2xl",
 			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogHeader, {
-				"data-uid": "src/components/pdv/CheckoutModal.tsx:91:9",
+				"data-uid": "src/components/pdv/CheckoutModal.tsx:195:9",
 				"data-prohibitions": "[]",
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogTitle, {
-					"data-uid": "src/components/pdv/CheckoutModal.tsx:92:11",
+					"data-uid": "src/components/pdv/CheckoutModal.tsx:196:11",
 					"data-prohibitions": "[]",
 					className: "text-2xl font-bold",
 					children: "Finalizar Venda"
 				})
 			}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				"data-uid": "src/components/pdv/CheckoutModal.tsx:95:9",
+				"data-uid": "src/components/pdv/CheckoutModal.tsx:199:9",
 				"data-prohibitions": "[editContent]",
 				className: "grid grid-cols-2 gap-6 py-4",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					"data-uid": "src/components/pdv/CheckoutModal.tsx:96:11",
+					"data-uid": "src/components/pdv/CheckoutModal.tsx:200:11",
 					"data-prohibitions": "[editContent]",
 					className: "space-y-4",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", {
-						"data-uid": "src/components/pdv/CheckoutModal.tsx:97:13",
+						"data-uid": "src/components/pdv/CheckoutModal.tsx:201:13",
 						"data-prohibitions": "[]",
 						className: "text-sm font-semibold text-muted-foreground uppercase tracking-wider",
 						children: "Forma de Pagamento"
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-						"data-uid": "src/components/pdv/CheckoutModal.tsx:100:13",
+						"data-uid": "src/components/pdv/CheckoutModal.tsx:204:13",
 						"data-prohibitions": "[editContent]",
 						className: "grid grid-cols-2 gap-3",
 						children: [
@@ -66758,60 +66944,60 @@ function CheckoutModal({ open, onOpenChange }) {
 								icon: QrCode
 							}
 						].map((m) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button, {
-							"data-uid": "src/components/pdv/CheckoutModal.tsx:107:17",
+							"data-uid": "src/components/pdv/CheckoutModal.tsx:211:17",
 							"data-prohibitions": "[editContent]",
 							variant: method === m.id ? "default" : "outline",
 							className: `h-24 flex flex-col gap-2 ${method === m.id ? "ring-2 ring-primary ring-offset-2" : ""}`,
 							onClick: () => setMethod(m.id),
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(m.icon, {
-								"data-uid": "src/components/pdv/CheckoutModal.tsx:113:19",
+								"data-uid": "src/components/pdv/CheckoutModal.tsx:217:19",
 								"data-prohibitions": "[editContent]",
 								className: "h-8 w-8"
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-								"data-uid": "src/components/pdv/CheckoutModal.tsx:114:19",
+								"data-uid": "src/components/pdv/CheckoutModal.tsx:218:19",
 								"data-prohibitions": "[editContent]",
 								children: m.id
 							})]
 						}, m.id))
 					})]
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					"data-uid": "src/components/pdv/CheckoutModal.tsx:120:11",
+					"data-uid": "src/components/pdv/CheckoutModal.tsx:224:11",
 					"data-prohibitions": "[editContent]",
 					className: "bg-slate-50 p-6 rounded-xl border flex flex-col justify-between",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						"data-uid": "src/components/pdv/CheckoutModal.tsx:121:13",
+						"data-uid": "src/components/pdv/CheckoutModal.tsx:225:13",
 						"data-prohibitions": "[editContent]",
 						className: "space-y-4",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							"data-uid": "src/components/pdv/CheckoutModal.tsx:122:15",
+							"data-uid": "src/components/pdv/CheckoutModal.tsx:226:15",
 							"data-prohibitions": "[editContent]",
 							className: "flex justify-between items-center text-lg",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-								"data-uid": "src/components/pdv/CheckoutModal.tsx:123:17",
+								"data-uid": "src/components/pdv/CheckoutModal.tsx:227:17",
 								"data-prohibitions": "[]",
 								className: "text-muted-foreground",
 								children: "Total a Pagar"
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-								"data-uid": "src/components/pdv/CheckoutModal.tsx:124:17",
+								"data-uid": "src/components/pdv/CheckoutModal.tsx:228:17",
 								"data-prohibitions": "[editContent]",
 								className: "font-bold text-2xl",
 								children: formatCurrency(total)
 							})]
 						}), method === "Dinheiro" && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							"data-uid": "src/components/pdv/CheckoutModal.tsx:128:17",
+							"data-uid": "src/components/pdv/CheckoutModal.tsx:232:17",
 							"data-prohibitions": "[editContent]",
 							className: "space-y-4 pt-4 border-t border-slate-200 animate-in fade-in slide-in-from-top-2",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								"data-uid": "src/components/pdv/CheckoutModal.tsx:129:19",
+								"data-uid": "src/components/pdv/CheckoutModal.tsx:233:19",
 								"data-prohibitions": "[]",
 								className: "space-y-2",
 								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label, {
-									"data-uid": "src/components/pdv/CheckoutModal.tsx:130:21",
+									"data-uid": "src/components/pdv/CheckoutModal.tsx:234:21",
 									"data-prohibitions": "[]",
 									htmlFor: "received",
 									children: "Valor Recebido"
 								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
-									"data-uid": "src/components/pdv/CheckoutModal.tsx:131:21",
+									"data-uid": "src/components/pdv/CheckoutModal.tsx:235:21",
 									"data-prohibitions": "[editContent]",
 									id: "received",
 									type: "number",
@@ -66822,28 +67008,28 @@ function CheckoutModal({ open, onOpenChange }) {
 									autoFocus: true
 								})]
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								"data-uid": "src/components/pdv/CheckoutModal.tsx:141:19",
+								"data-uid": "src/components/pdv/CheckoutModal.tsx:245:19",
 								"data-prohibitions": "[editContent]",
 								className: "flex justify-between items-center text-lg text-emerald-600 font-medium",
 								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									"data-uid": "src/components/pdv/CheckoutModal.tsx:142:21",
+									"data-uid": "src/components/pdv/CheckoutModal.tsx:246:21",
 									"data-prohibitions": "[]",
 									children: "Troco"
 								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									"data-uid": "src/components/pdv/CheckoutModal.tsx:143:21",
+									"data-uid": "src/components/pdv/CheckoutModal.tsx:247:21",
 									"data-prohibitions": "[editContent]",
 									children: formatCurrency(change)
 								})]
 							})]
 						})]
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
-						"data-uid": "src/components/pdv/CheckoutModal.tsx:149:13",
+						"data-uid": "src/components/pdv/CheckoutModal.tsx:253:13",
 						"data-prohibitions": "[editContent]",
 						className: "w-full h-14 text-lg font-bold mt-6",
 						disabled: !method || method === "Dinheiro" && numericReceived < total || isSubmitting,
 						onClick: handleConfirm,
 						children: isSubmitting ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(LoaderCircle, {
-							"data-uid": "src/components/pdv/CheckoutModal.tsx:156:31",
+							"data-uid": "src/components/pdv/CheckoutModal.tsx:260:31",
 							"data-prohibitions": "[editContent]",
 							className: "h-5 w-5 animate-spin"
 						}) : "Confirmar Pagamento"
@@ -67371,4 +67557,4 @@ var App = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(BrowserRouter, {
 }));
 //#endregion
 
-//# sourceMappingURL=index-BZtK0ebY.js.map
+//# sourceMappingURL=index-DEvmI3nl.js.map
