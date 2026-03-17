@@ -17,20 +17,23 @@ export function ProductCard({ product }: ProductCardProps) {
       className="group overflow-hidden hover:shadow-md transition-all duration-200 hover:scale-[1.02] cursor-pointer bg-white"
       onClick={() => addItem(product)}
     >
-      <div className="aspect-square bg-muted p-4 flex items-center justify-center">
+      <div className="aspect-square bg-muted p-4 flex items-center justify-center relative">
         <img
-          src={product.image}
-          alt={product.name}
+          src={product.imagem_url}
+          alt={product.nome}
           className="object-contain w-full h-full mix-blend-multiply drop-shadow-sm group-hover:scale-105 transition-transform"
         />
+        <div className="absolute top-2 right-2 bg-white/90 backdrop-blur-sm text-xs px-2 py-1 rounded font-medium shadow-sm">
+          {product.estoque} un
+        </div>
       </div>
       <CardContent className="p-4">
-        <div className="text-xs text-muted-foreground mb-1 font-mono">{product.code}</div>
+        <div className="text-xs text-muted-foreground mb-1 font-mono">{product.codigo}</div>
         <h3 className="font-semibold text-sm leading-tight line-clamp-2 h-10 mb-2">
-          {product.name}
+          {product.nome}
         </h3>
         <div className="flex items-center justify-between mt-auto">
-          <span className="font-bold text-lg text-primary">{formatCurrency(product.price)}</span>
+          <span className="font-bold text-lg text-primary">{formatCurrency(product.preco)}</span>
           <Button
             size="icon"
             variant="secondary"

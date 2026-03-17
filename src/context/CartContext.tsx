@@ -30,7 +30,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
       }
       return [...prev, { ...product, quantity: 1 }]
     })
-    toast({ title: 'Item adicionado', description: `${product.name} foi adicionado ao carrinho.` })
+    toast({ title: 'Item adicionado', description: `${product.nome} foi adicionado ao carrinho.` })
   }
 
   const removeItem = (productId: string) => {
@@ -55,9 +55,10 @@ export function CartProvider({ children }: { children: ReactNode }) {
   }
 
   const subtotal = useMemo(
-    () => items.reduce((acc, item) => acc + item.price * item.quantity, 0),
+    () => items.reduce((acc, item) => acc + item.preco * item.quantity, 0),
     [items],
   )
+
   const total = useMemo(() => Math.max(0, subtotal - discount), [subtotal, discount])
 
   const value = useMemo(

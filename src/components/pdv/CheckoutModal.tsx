@@ -3,10 +3,12 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/u
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { Banknote, CreditCard, QrCode, Smartphone } from 'lucide-react'
+import { Banknote, CreditCard, QrCode, Loader2 } from 'lucide-react'
 import { useCart } from '@/context/CartContext'
 import { formatCurrency } from '@/lib/format'
 import { toast } from '@/hooks/use-toast'
+import { useAuth } from '@/hooks/use-auth'
+import { supabase } from '@/lib/supabase/client'
 
 interface CheckoutModalProps {
   open: boolean
@@ -16,11 +18,12 @@ interface CheckoutModalProps {
 type PaymentMethod = 'Dinheiro' | 'Débito' | 'Crédito' | 'PIX' | null
 
 export function CheckoutModal({ open, onOpenChange }: CheckoutModalProps) {
-  const { total, clearCart } = useCart()
+  const { items, total, clearCart } = useCart()
+  const { user } = useAuth()
   const [method, setMethod] = useState<PaymentMethod>(null)
   const [amountReceived, setAmountReceived] = useState<string>('')
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
-  // Reset state when opened
   useEffect(() => {
     if (open) {
       setMethod(null)
@@ -28,15 +31,55 @@ export function CheckoutModal({ open, onOpenChange }: CheckoutModalProps) {
     }
   }, [open])
 
-  const handleConfirm = () => {
-    if (!method) return
-    toast({
-      title: 'Venda finalizada com sucesso!',
-      description: `Pagamento de ${formatCurrency(total)} via ${method} aprovado.`,
-      className: 'bg-emerald-50 border-emerald-200 text-emerald-900',
-    })
-    clearCart()
-    onOpenChange(false)
+  const handleConfirm = async () => {
+    if (!method || !user) return
+    setIsSubmitting(true)
+
+    try {
+      const { data: venda, error: vendaError } = await supabase
+        .from('vendas')
+        .insert({
+          user_id: user.id,
+          total,
+          metodo_pagamento: method,
+          status: 'Concluído',
+        })
+        .select()
+        .single()
+
+      if (vendaError) throw vendaError
+
+      const itensVenda = items.map((item) => ({
+        venda_id: venda.id,
+        produto_id: item.id,
+        quantidade: item.quantity,
+        preco_unitario: item.preco,
+      }))
+
+      const { error: itemsError } = await supabase.from('itens_venda').insert(itensVenda)
+      if (itemsError) throw itemsError
+
+      for (const item of items) {
+        await supabase.rpc('decrement_stock', { p_id: item.id, qty: item.quantity })
+      }
+
+      toast({
+        title: 'Venda finalizada com sucesso!',
+        description: `Pagamento de ${formatCurrency(total)} via ${method} registrado.`,
+        className: 'bg-emerald-50 border-emerald-200 text-emerald-900',
+      })
+      clearCart()
+      onOpenChange(false)
+    } catch (error) {
+      console.error(error)
+      toast({
+        title: 'Erro ao processar',
+        description: 'Não foi possível salvar a venda no banco de dados.',
+        variant: 'destructive',
+      })
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const numericReceived = parseFloat(amountReceived.replace(',', '.')) || 0
@@ -101,25 +144,16 @@ export function CheckoutModal({ open, onOpenChange }: CheckoutModalProps) {
                   </div>
                 </div>
               )}
-
-              {method === 'PIX' && (
-                <div className="pt-4 border-t flex flex-col items-center gap-2 animate-in fade-in slide-in-from-top-2">
-                  <div className="bg-white p-2 rounded-lg shadow-sm border">
-                    <QrCode className="w-32 h-32 text-slate-800" />
-                  </div>
-                  <Button variant="link" className="text-xs">
-                    Copiar Chave PIX
-                  </Button>
-                </div>
-              )}
             </div>
 
             <Button
               className="w-full h-14 text-lg font-bold mt-6"
-              disabled={!method || (method === 'Dinheiro' && numericReceived < total)}
+              disabled={
+                !method || (method === 'Dinheiro' && numericReceived < total) || isSubmitting
+              }
               onClick={handleConfirm}
             >
-              Confirmar Pagamento (Enter)
+              {isSubmitting ? <Loader2 className="h-5 w-5 animate-spin" /> : 'Confirmar Pagamento'}
             </Button>
           </div>
         </div>

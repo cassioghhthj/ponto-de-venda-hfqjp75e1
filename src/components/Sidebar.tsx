@@ -1,9 +1,12 @@
 import { Link, useLocation } from 'react-router-dom'
-import { LayoutDashboard, ShoppingCart, Package, Settings, Store } from 'lucide-react'
+import { LayoutDashboard, ShoppingCart, Package, Settings, Store, LogOut } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { useAuth } from '@/hooks/use-auth'
+import { Button } from '@/components/ui/button'
 
 export function AppSidebar() {
   const location = useLocation()
+  const { signOut, user } = useAuth()
 
   const links = [
     { to: '/', icon: ShoppingCart, label: 'Vendas (PDV)' },
@@ -39,7 +42,16 @@ export function AppSidebar() {
 
       <div className="p-4 border-t border-slate-700 m-3 rounded-lg bg-slate-800/50">
         <div className="text-xs font-semibold text-slate-400 mb-1">Operador Caixa</div>
-        <div className="text-sm font-bold text-white">João Silva</div>
+        <div className="text-sm font-bold text-white mb-4 truncate" title={user?.email || ''}>
+          {user?.email || 'Usuário'}
+        </div>
+        <Button
+          variant="destructive"
+          className="w-full text-xs h-9 bg-red-500/20 text-red-400 hover:bg-red-500 hover:text-white border-0"
+          onClick={signOut}
+        >
+          <LogOut className="h-4 w-4 mr-2" /> Encerrar Sessão
+        </Button>
       </div>
     </div>
   )

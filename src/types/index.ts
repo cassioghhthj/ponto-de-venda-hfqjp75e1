@@ -1,10 +1,11 @@
 export interface Product {
   id: string
-  code: string
-  name: string
-  price: number
-  category: string
-  image: string
+  codigo: string
+  nome: string
+  preco: number
+  categoria: string
+  imagem_url: string
+  estoque: number
 }
 
 export interface CartItem extends Product {
@@ -13,8 +14,8 @@ export interface CartItem extends Product {
 
 export interface Transaction {
   id: string
-  date: string
+  data: string
   total: number
-  method: string
-  status: 'Concluído' | 'Cancelado'
+  metodo_pagamento: string
+  status: 'Concluído' | 'Cancelado' | string
 }

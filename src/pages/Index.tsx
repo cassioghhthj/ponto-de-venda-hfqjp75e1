@@ -1,21 +1,33 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Input } from '@/components/ui/input'
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { mockProducts } from '@/data/mock'
 import { ProductCard } from '@/components/pdv/ProductCard'
-import { Search } from 'lucide-react'
+import { Search, Loader2 } from 'lucide-react'
+import { supabase } from '@/lib/supabase/client'
+import { Product } from '@/types'
 
 export default function Index() {
+  const [products, setProducts] = useState<Product[]>([])
   const [search, setSearch] = useState('')
   const [category, setCategory] = useState('Todos')
+  const [loading, setLoading] = useState(true)
 
-  const categories = ['Todos', 'Bebidas', 'Alimentos', 'Limpeza', 'Doces']
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const { data } = await supabase.from('produtos').select('*').order('nome')
+      if (data) setProducts(data)
+      setLoading(false)
+    }
+    fetchProducts()
+  }, [])
 
-  const filteredProducts = mockProducts.filter((p) => {
+  const categories = ['Todos', ...Array.from(new Set(products.map((p) => p.categoria)))]
+
+  const filteredProducts = products.filter((p) => {
     const matchesSearch =
-      p.name.toLowerCase().includes(search.toLowerCase()) || p.code.includes(search)
-    const matchesCategory = category === 'Todos' || p.category === category
-    return matchesSearch && matchesCategory
+      p.nome.toLowerCase().includes(search.toLowerCase()) || p.codigo?.includes(search)
+    const matchesCategory = category === 'Todos' || p.categoria === category
+    return matchesSearch && matchesCategory && p.estoque > 0
   })
 
   return (
@@ -39,7 +51,11 @@ export default function Index() {
         >
           <TabsList className="h-12 p-1 bg-slate-100/80 border">
             {categories.map((cat) => (
-              <TabsTrigger key={cat} value={cat} className="px-6 py-2 rounded-md font-medium">
+              <TabsTrigger
+                key={cat}
+                value={cat}
+                className="px-6 py-2 rounded-md font-medium capitalize"
+              >
                 {cat}
               </TabsTrigger>
             ))}
@@ -47,16 +63,22 @@ export default function Index() {
         </Tabs>
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 overflow-y-auto pb-4">
-        {filteredProducts.map((product) => (
-          <ProductCard key={product.id} product={product} />
-        ))}
-        {filteredProducts.length === 0 && (
-          <div className="col-span-full py-20 text-center text-muted-foreground">
-            <p className="text-lg font-medium">Nenhum produto encontrado.</p>
-          </div>
-        )}
-      </div>
+      {loading ? (
+        <div className="flex-1 flex items-center justify-center">
+          <Loader2 className="h-8 w-8 animate-spin text-primary" />
+        </div>
+      ) : (
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 overflow-y-auto pb-4">
+          {filteredProducts.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+          {filteredProducts.length === 0 && (
+            <div className="col-span-full py-20 text-center text-muted-foreground">
+              <p className="text-lg font-medium">Nenhum produto disponível encontrado.</p>
+            </div>
+          )}
+        </div>
+      )}
     </div>
   )
 }

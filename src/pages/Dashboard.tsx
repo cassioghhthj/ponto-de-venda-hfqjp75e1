@@ -1,4 +1,5 @@
-import { mockChartDataLine, mockChartDataBar, mockTransactions } from '@/data/mock'
+import { useState, useEffect } from 'react'
+import { mockChartDataLine, mockChartDataBar } from '@/data/mock'
 import { formatCurrency } from '@/lib/format'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import {
@@ -26,7 +27,9 @@ import {
   YAxis,
   ResponsiveContainer,
 } from 'recharts'
-import { Banknote, ShoppingBag, TrendingUp } from 'lucide-react'
+import { Banknote, ShoppingBag, TrendingUp, Loader2 } from 'lucide-react'
+import { supabase } from '@/lib/supabase/client'
+import { Transaction } from '@/types'
 
 const chartConfigLine = {
   sales: { label: 'Vendas', color: 'hsl(var(--chart-1))' },
@@ -36,49 +39,76 @@ const chartConfigBar = {
 } satisfies ChartConfig
 
 export default function Dashboard() {
+  const [transactions, setTransactions] = useState<Transaction[]>([])
+  const [totalSales, setTotalSales] = useState(0)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const fetchDashboardData = async () => {
+      const { data } = await supabase
+        .from('vendas')
+        .select('*')
+        .order('data', { ascending: false })
+        .limit(10)
+      if (data) {
+        setTransactions(data)
+        const total = data.reduce((acc, curr) => acc + Number(curr.total), 0)
+        setTotalSales(total)
+      }
+      setLoading(false)
+    }
+    fetchDashboardData()
+  }, [])
+
   return (
     <div className="space-y-6 animate-fade-in max-w-6xl mx-auto">
-      {/* KPIs */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <Card className="shadow-sm border-slate-200">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium text-muted-foreground">
-              Total de Vendas Hoje
+              Vendas Recentes
             </CardTitle>
             <Banknote className="h-4 w-4 text-primary" />
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold">{formatCurrency(4850.5)}</div>
-            <p className="text-xs text-emerald-600 font-medium mt-1 flex items-center">
-              <TrendingUp className="h-3 w-3 mr-1" /> +12% em relação a ontem
-            </p>
+            {loading ? (
+              <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
+            ) : (
+              <>
+                <div className="text-3xl font-bold">{formatCurrency(totalSales)}</div>
+                <p className="text-xs text-emerald-600 font-medium mt-1 flex items-center">
+                  <TrendingUp className="h-3 w-3 mr-1" /> Nas últimas 10 transações
+                </p>
+              </>
+            )}
           </CardContent>
         </Card>
         <Card className="shadow-sm border-slate-200">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium text-muted-foreground">
-              Ticket Médio
+              Ticket Médio (Aprox)
             </CardTitle>
             <TrendingUp className="h-4 w-4 text-primary" />
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold">{formatCurrency(85.2)}</div>
+            <div className="text-3xl font-bold">
+              {transactions.length > 0
+                ? formatCurrency(totalSales / transactions.length)
+                : formatCurrency(0)}
+            </div>
           </CardContent>
         </Card>
         <Card className="shadow-sm border-slate-200">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium text-muted-foreground">
-              Itens Vendidos
-            </CardTitle>
+            <CardTitle className="text-sm font-medium text-muted-foreground">Transações</CardTitle>
             <ShoppingBag className="h-4 w-4 text-primary" />
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold">1,240</div>
+            <div className="text-3xl font-bold">{transactions.length}</div>
           </CardContent>
         </Card>
       </div>
 
-      {/* Charts */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <Card className="shadow-sm border-slate-200">
           <CardHeader>
@@ -166,10 +196,9 @@ export default function Dashboard() {
         </Card>
       </div>
 
-      {/* Table */}
       <Card className="shadow-sm border-slate-200">
         <CardHeader>
-          <CardTitle>Últimas Transações</CardTitle>
+          <CardTitle>Últimas Transações Registradas</CardTitle>
         </CardHeader>
         <CardContent>
           <Table>
@@ -183,11 +212,15 @@ export default function Dashboard() {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {mockTransactions.map((trx) => (
+              {transactions.map((trx) => (
                 <TableRow key={trx.id}>
-                  <TableCell className="font-medium font-mono text-xs">{trx.id}</TableCell>
-                  <TableCell className="text-muted-foreground">{trx.date}</TableCell>
-                  <TableCell>{trx.method}</TableCell>
+                  <TableCell className="font-medium font-mono text-xs">
+                    {trx.id.split('-')[0]}
+                  </TableCell>
+                  <TableCell className="text-muted-foreground">
+                    {new Date(trx.data).toLocaleString('pt-BR')}
+                  </TableCell>
+                  <TableCell>{trx.metodo_pagamento}</TableCell>
                   <TableCell>
                     <Badge
                       variant={trx.status === 'Concluído' ? 'default' : 'destructive'}
@@ -205,6 +238,13 @@ export default function Dashboard() {
                   </TableCell>
                 </TableRow>
               ))}
+              {transactions.length === 0 && !loading && (
+                <TableRow>
+                  <TableCell colSpan={5} className="text-center py-6 text-muted-foreground">
+                    Nenhuma transação encontrada no banco de dados.
+                  </TableCell>
+                </TableRow>
+              )}
             </TableBody>
           </Table>
         </CardContent>
