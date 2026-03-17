@@ -81594,7 +81594,7 @@ function CheckoutModal({ open, onOpenChange }) {
 				description: `Pagamento via ${method} registrado.`,
 				className: "bg-emerald-50 border-emerald-200 text-emerald-900"
 			});
-			setReceipt({
+			const receiptData = {
 				id: venda.id,
 				data: venda.data || (/* @__PURE__ */ new Date()).toISOString(),
 				total,
@@ -81604,6 +81604,14 @@ function CheckoutModal({ open, onOpenChange }) {
 					quantidade: i.quantity,
 					preco_unitario: i.preco
 				}))
+			};
+			setReceipt(receiptData);
+			if (selectedCustomer?.telefone) supabase.functions.invoke("send-whatsapp-receipt", { body: {
+				telefone: selectedCustomer.telefone,
+				receipt: receiptData
+			} }).then(({ error }) => {
+				if (error) console.error("Failed to send WhatsApp receipt:", error);
+				else console.log("WhatsApp receipt processing triggered");
 			});
 		} catch (error) {
 			toast$1({
@@ -81618,16 +81626,16 @@ function CheckoutModal({ open, onOpenChange }) {
 	const numericReceived = parseFloat(amountReceived.replace(",", ".")) || 0;
 	const change = numericReceived > total ? numericReceived - total : 0;
 	if (receipt) return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Dialog, {
-		"data-uid": "src/components/pdv/CheckoutModal.tsx:120:7",
+		"data-uid": "src/components/pdv/CheckoutModal.tsx:137:7",
 		"data-prohibitions": "[]",
 		open,
 		onOpenChange: handleOpenChange,
 		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogContent, {
-			"data-uid": "src/components/pdv/CheckoutModal.tsx:121:9",
+			"data-uid": "src/components/pdv/CheckoutModal.tsx:138:9",
 			"data-prohibitions": "[]",
 			className: "max-w-md sm:rounded-2xl",
 			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ReceiptView, {
-				"data-uid": "src/components/pdv/CheckoutModal.tsx:122:11",
+				"data-uid": "src/components/pdv/CheckoutModal.tsx:139:11",
 				"data-prohibitions": "[editContent]",
 				receipt,
 				change,
@@ -81636,46 +81644,46 @@ function CheckoutModal({ open, onOpenChange }) {
 		})
 	});
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Dialog, {
-		"data-uid": "src/components/pdv/CheckoutModal.tsx:133:5",
+		"data-uid": "src/components/pdv/CheckoutModal.tsx:150:5",
 		"data-prohibitions": "[editContent]",
 		open,
 		onOpenChange: handleOpenChange,
 		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogContent, {
-			"data-uid": "src/components/pdv/CheckoutModal.tsx:134:7",
+			"data-uid": "src/components/pdv/CheckoutModal.tsx:151:7",
 			"data-prohibitions": "[editContent]",
 			className: "max-w-3xl sm:rounded-2xl",
 			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogHeader, {
-				"data-uid": "src/components/pdv/CheckoutModal.tsx:135:9",
+				"data-uid": "src/components/pdv/CheckoutModal.tsx:152:9",
 				"data-prohibitions": "[]",
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogTitle, {
-					"data-uid": "src/components/pdv/CheckoutModal.tsx:136:11",
+					"data-uid": "src/components/pdv/CheckoutModal.tsx:153:11",
 					"data-prohibitions": "[]",
 					className: "text-2xl font-bold",
 					children: "Finalizar Venda"
 				})
 			}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				"data-uid": "src/components/pdv/CheckoutModal.tsx:139:9",
+				"data-uid": "src/components/pdv/CheckoutModal.tsx:156:9",
 				"data-prohibitions": "[editContent]",
 				className: "grid grid-cols-1 md:grid-cols-2 gap-8 py-2",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					"data-uid": "src/components/pdv/CheckoutModal.tsx:140:11",
+					"data-uid": "src/components/pdv/CheckoutModal.tsx:157:11",
 					"data-prohibitions": "[editContent]",
 					className: "space-y-8",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CustomerSelect, {
-						"data-uid": "src/components/pdv/CheckoutModal.tsx:141:13",
+						"data-uid": "src/components/pdv/CheckoutModal.tsx:158:13",
 						"data-prohibitions": "[editContent]",
 						onSelect: setSelectedCustomer
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						"data-uid": "src/components/pdv/CheckoutModal.tsx:143:13",
+						"data-uid": "src/components/pdv/CheckoutModal.tsx:160:13",
 						"data-prohibitions": "[editContent]",
 						className: "space-y-4",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", {
-							"data-uid": "src/components/pdv/CheckoutModal.tsx:144:15",
+							"data-uid": "src/components/pdv/CheckoutModal.tsx:161:15",
 							"data-prohibitions": "[]",
 							className: "text-xs font-bold text-muted-foreground uppercase tracking-wider",
 							children: "Forma de Pagamento"
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-							"data-uid": "src/components/pdv/CheckoutModal.tsx:147:15",
+							"data-uid": "src/components/pdv/CheckoutModal.tsx:164:15",
 							"data-prohibitions": "[editContent]",
 							className: "grid grid-cols-2 gap-3",
 							children: [
@@ -81696,17 +81704,17 @@ function CheckoutModal({ open, onOpenChange }) {
 									icon: QrCode
 								}
 							].map((m) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button$1, {
-								"data-uid": "src/components/pdv/CheckoutModal.tsx:154:19",
+								"data-uid": "src/components/pdv/CheckoutModal.tsx:171:19",
 								"data-prohibitions": "[editContent]",
 								variant: method === m.id ? "default" : "outline",
 								className: `h-20 flex flex-col gap-2 ${method === m.id ? "ring-2 ring-primary ring-offset-2" : ""}`,
 								onClick: () => setMethod(m.id),
 								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(m.icon, {
-									"data-uid": "src/components/pdv/CheckoutModal.tsx:160:21",
+									"data-uid": "src/components/pdv/CheckoutModal.tsx:177:21",
 									"data-prohibitions": "[editContent]",
 									className: "h-6 w-6"
 								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									"data-uid": "src/components/pdv/CheckoutModal.tsx:161:21",
+									"data-uid": "src/components/pdv/CheckoutModal.tsx:178:21",
 									"data-prohibitions": "[editContent]",
 									children: m.id
 								})]
@@ -81714,44 +81722,44 @@ function CheckoutModal({ open, onOpenChange }) {
 						})]
 					})]
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					"data-uid": "src/components/pdv/CheckoutModal.tsx:168:11",
+					"data-uid": "src/components/pdv/CheckoutModal.tsx:185:11",
 					"data-prohibitions": "[editContent]",
 					className: "bg-slate-50 p-6 rounded-xl border border-slate-200 flex flex-col justify-between shadow-sm",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						"data-uid": "src/components/pdv/CheckoutModal.tsx:169:13",
+						"data-uid": "src/components/pdv/CheckoutModal.tsx:186:13",
 						"data-prohibitions": "[editContent]",
 						className: "space-y-4",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							"data-uid": "src/components/pdv/CheckoutModal.tsx:170:15",
+							"data-uid": "src/components/pdv/CheckoutModal.tsx:187:15",
 							"data-prohibitions": "[editContent]",
 							className: "flex justify-between items-center text-lg",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-								"data-uid": "src/components/pdv/CheckoutModal.tsx:171:17",
+								"data-uid": "src/components/pdv/CheckoutModal.tsx:188:17",
 								"data-prohibitions": "[]",
 								className: "text-muted-foreground font-medium",
 								children: "Total a Pagar"
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-								"data-uid": "src/components/pdv/CheckoutModal.tsx:172:17",
+								"data-uid": "src/components/pdv/CheckoutModal.tsx:189:17",
 								"data-prohibitions": "[editContent]",
 								className: "font-bold text-3xl text-slate-900",
 								children: formatCurrency(total)
 							})]
 						}), method === "Dinheiro" && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							"data-uid": "src/components/pdv/CheckoutModal.tsx:176:17",
+							"data-uid": "src/components/pdv/CheckoutModal.tsx:193:17",
 							"data-prohibitions": "[editContent]",
 							className: "space-y-4 pt-6 border-t border-slate-200 animate-in fade-in slide-in-from-top-2",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								"data-uid": "src/components/pdv/CheckoutModal.tsx:177:19",
+								"data-uid": "src/components/pdv/CheckoutModal.tsx:194:19",
 								"data-prohibitions": "[]",
 								className: "space-y-2",
 								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$1, {
-									"data-uid": "src/components/pdv/CheckoutModal.tsx:178:21",
+									"data-uid": "src/components/pdv/CheckoutModal.tsx:195:21",
 									"data-prohibitions": "[]",
 									htmlFor: "received",
 									className: "text-slate-600 font-medium",
 									children: "Valor Recebido"
 								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
-									"data-uid": "src/components/pdv/CheckoutModal.tsx:181:21",
+									"data-uid": "src/components/pdv/CheckoutModal.tsx:198:21",
 									"data-prohibitions": "[editContent]",
 									id: "received",
 									type: "number",
@@ -81762,28 +81770,28 @@ function CheckoutModal({ open, onOpenChange }) {
 									autoFocus: true
 								})]
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								"data-uid": "src/components/pdv/CheckoutModal.tsx:191:19",
+								"data-uid": "src/components/pdv/CheckoutModal.tsx:208:19",
 								"data-prohibitions": "[editContent]",
 								className: "flex justify-between items-center text-lg text-emerald-600 font-bold bg-emerald-50 p-3 rounded-lg border border-emerald-100",
 								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									"data-uid": "src/components/pdv/CheckoutModal.tsx:192:21",
+									"data-uid": "src/components/pdv/CheckoutModal.tsx:209:21",
 									"data-prohibitions": "[]",
 									children: "Troco"
 								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									"data-uid": "src/components/pdv/CheckoutModal.tsx:193:21",
+									"data-uid": "src/components/pdv/CheckoutModal.tsx:210:21",
 									"data-prohibitions": "[editContent]",
 									children: formatCurrency(change)
 								})]
 							})]
 						})]
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button$1, {
-						"data-uid": "src/components/pdv/CheckoutModal.tsx:199:13",
+						"data-uid": "src/components/pdv/CheckoutModal.tsx:216:13",
 						"data-prohibitions": "[editContent]",
 						className: "w-full h-14 text-lg font-bold mt-8 shadow-sm",
 						disabled: !method || method === "Dinheiro" && numericReceived < total || isSubmitting,
 						onClick: handleConfirm,
 						children: [isSubmitting ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(LoaderCircle, {
-							"data-uid": "src/components/pdv/CheckoutModal.tsx:206:31",
+							"data-uid": "src/components/pdv/CheckoutModal.tsx:223:31",
 							"data-prohibitions": "[editContent]",
 							className: "h-5 w-5 animate-spin mr-2"
 						}) : null, isSubmitting ? "Processando..." : "Confirmar Pagamento"]
@@ -82368,4 +82376,4 @@ var App = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(BrowserRouter, {
 }));
 //#endregion
 
-//# sourceMappingURL=index-BlbtYBT7.js.map
+//# sourceMappingURL=index-CyxFWxIm.js.map

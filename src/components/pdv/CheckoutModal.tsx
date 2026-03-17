@@ -94,7 +94,7 @@ export function CheckoutModal({ open, onOpenChange }: CheckoutModalProps) {
         className: 'bg-emerald-50 border-emerald-200 text-emerald-900',
       })
 
-      setReceipt({
+      const receiptData: SaleRecord = {
         id: venda.id,
         data: venda.data || new Date().toISOString(),
         total,
@@ -104,7 +104,24 @@ export function CheckoutModal({ open, onOpenChange }: CheckoutModalProps) {
           quantidade: i.quantity,
           preco_unitario: i.preco,
         })),
-      })
+      }
+
+      setReceipt(receiptData)
+
+      // Send WhatsApp Receipt if customer has a phone number
+      if (selectedCustomer?.telefone) {
+        supabase.functions
+          .invoke('send-whatsapp-receipt', {
+            body: { telefone: selectedCustomer.telefone, receipt: receiptData },
+          })
+          .then(({ error }) => {
+            if (error) {
+              console.error('Failed to send WhatsApp receipt:', error)
+            } else {
+              console.log('WhatsApp receipt processing triggered')
+            }
+          })
+      }
     } catch (error) {
       toast({ title: 'Erro', description: 'Falha ao salvar a venda.', variant: 'destructive' })
     } finally {
