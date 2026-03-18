@@ -3,6 +3,9 @@ export interface Product {
   codigo: string
   nome: string
   preco: number
+  preco_custo?: number
+  preco_venda?: number
+  tamanho?: string
   categoria: string
   imagem_url: string
   estoque: number
@@ -47,6 +50,7 @@ export interface SaleRecord {
   id: string
   data: string
   total: number
+  desconto?: number
   metodo_pagamento: string
   items: {
     nome: string

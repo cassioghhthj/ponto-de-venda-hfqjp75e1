@@ -3,7 +3,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/u
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { Banknote, CreditCard, QrCode, CalendarClock, Loader2 } from 'lucide-react'
+import { Banknote, CreditCard, QrCode, CalendarClock, Loader2, Tag } from 'lucide-react'
 import { useCart } from '@/context/CartContext'
 import { formatCurrency } from '@/lib/format'
 import { toast } from '@/hooks/use-toast'
@@ -21,10 +21,11 @@ interface CheckoutModalProps {
 type PaymentMethod = 'Dinheiro' | 'Débito' | 'Crédito' | 'PIX' | 'A Prazo' | null
 
 export function CheckoutModal({ open, onOpenChange }: CheckoutModalProps) {
-  const { items, total, clearCart } = useCart()
+  const { items, subtotal, total, discount, setDiscount, clearCart } = useCart()
   const { user } = useAuth()
   const [method, setMethod] = useState<PaymentMethod>(null)
   const [amountReceived, setAmountReceived] = useState<string>('')
+  const [discountInput, setDiscountInput] = useState<string>('')
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [receipt, setReceipt] = useState<SaleRecord | null>(null)
   const [selectedCustomer, setSelectedCustomer] = useState<Cliente | null>(null)
@@ -35,12 +36,19 @@ export function CheckoutModal({ open, onOpenChange }: CheckoutModalProps) {
       setAmountReceived('')
       setReceipt(null)
       setSelectedCustomer(null)
+      setDiscountInput(discount > 0 ? discount.toString() : '')
     }
-  }, [open])
+  }, [open, discount])
 
   const handleOpenChange = (newOpen: boolean) => {
     if (!newOpen && receipt) clearCart()
     onOpenChange(newOpen)
+  }
+
+  const handleDiscountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const val = e.target.value
+    setDiscountInput(val)
+    setDiscount(Number(val) || 0)
   }
 
   const handleConfirm = async () => {
@@ -48,7 +56,7 @@ export function CheckoutModal({ open, onOpenChange }: CheckoutModalProps) {
     if (method === 'A Prazo' && !selectedCustomer) {
       toast({
         title: 'Atenção',
-        description: 'Para vendas A Prazo, é obrigatório selecionar um cliente.',
+        description: 'Vendas A Prazo exigem cliente.',
         variant: 'destructive',
       })
       return
@@ -72,6 +80,7 @@ export function CheckoutModal({ open, onOpenChange }: CheckoutModalProps) {
           user_id: user.id,
           cliente_id: selectedCustomer?.id || null,
           total,
+          desconto: discount,
           metodo_pagamento: method,
           status: 'Concluído',
         })
@@ -90,34 +99,35 @@ export function CheckoutModal({ open, onOpenChange }: CheckoutModalProps) {
       const { error: itemsError } = await supabase.from('itens_venda').insert(itensVenda)
       if (itemsError) throw itemsError
 
-      const dataVencimento = new Date()
-      dataVencimento.setDate(dataVencimento.getDate() + 30)
-
-      const isPending = method === 'A Prazo'
-
-      const { error: contasError } = await (supabase as any).from('contas_receber').insert({
-        venda_id: venda.id,
-        cliente_id: selectedCustomer?.id || null,
-        valor: total,
-        data_vencimento: isPending ? dataVencimento.toISOString() : new Date().toISOString(),
-        status: isPending ? 'pendente' : 'pago',
-        data_pagamento: isPending ? null : new Date().toISOString(),
-      })
-      if (contasError) throw contasError
-
-      for (const item of items) {
-        await supabase.rpc('decrement_stock', { p_id: item.id, qty: item.quantity })
+      if (method === 'A Prazo') {
+        const d = new Date()
+        d.setDate(d.getDate() + 30)
+        await (supabase as any).from('contas_receber').insert({
+          venda_id: venda.id,
+          cliente_id: selectedCustomer?.id || null,
+          valor: total,
+          data_vencimento: d.toISOString(),
+          status: 'pendente',
+        })
+      } else {
+        await (supabase as any).from('contas_receber').insert({
+          venda_id: venda.id,
+          cliente_id: selectedCustomer?.id || null,
+          valor: total,
+          data_vencimento: new Date().toISOString(),
+          status: 'pago',
+          data_pagamento: new Date().toISOString(),
+        })
       }
 
-      toast({
-        title: 'Venda realizada com sucesso!',
-        description: `Pagamento registrado.`,
-      })
+      for (const item of items)
+        await supabase.rpc('decrement_stock', { p_id: item.id, qty: item.quantity })
 
       const receiptData: SaleRecord = {
         id: venda.id,
         data: venda.data || new Date().toISOString(),
         total,
+        desconto: discount,
         metodo_pagamento: method,
         items: items.map((i) => ({
           nome: i.nome,
@@ -126,28 +136,7 @@ export function CheckoutModal({ open, onOpenChange }: CheckoutModalProps) {
         })),
       }
       setReceipt(receiptData)
-
-      if (selectedCustomer?.telefone) {
-        supabase.functions
-          .invoke('send-whatsapp-receipt', {
-            body: { telefone: selectedCustomer.telefone, receipt: receiptData },
-          })
-          .then(({ error }) => {
-            if (error) {
-              console.error('Failed to send WhatsApp receipt:', error)
-              toast({
-                title: 'Aviso',
-                description: 'Venda concluída, mas falha ao enviar recibo por WhatsApp.',
-                variant: 'destructive',
-              })
-            } else {
-              toast({
-                title: 'Recibo Enviado',
-                description: 'Recibo enviado via WhatsApp com sucesso.',
-              })
-            }
-          })
-      }
+      toast({ title: 'Venda realizada com sucesso!' })
     } catch (error) {
       toast({ title: 'Erro', description: 'Falha ao salvar a venda.', variant: 'destructive' })
     } finally {
@@ -155,13 +144,15 @@ export function CheckoutModal({ open, onOpenChange }: CheckoutModalProps) {
     }
   }
 
-  const numericReceived = parseFloat(amountReceived.replace(',', '.')) || 0
-  const change = numericReceived > total ? numericReceived - total : 0
+  const change =
+    (parseFloat(amountReceived.replace(',', '.')) || 0) > total
+      ? (parseFloat(amountReceived.replace(',', '.')) || 0) - total
+      : 0
 
-  if (receipt) {
+  if (receipt)
     return (
       <Dialog open={open} onOpenChange={handleOpenChange}>
-        <DialogContent className="max-w-md sm:rounded-2xl bg-card">
+        <DialogContent className="max-w-md bg-card">
           <ReceiptView
             receipt={receipt}
             change={change}
@@ -170,22 +161,21 @@ export function CheckoutModal({ open, onOpenChange }: CheckoutModalProps) {
         </DialogContent>
       </Dialog>
     )
-  }
 
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
-      <DialogContent className="max-w-3xl sm:rounded-2xl bg-card">
+      <DialogContent className="max-w-4xl sm:rounded-2xl bg-card">
         <DialogHeader>
           <DialogTitle className="text-2xl font-bold">Finalizar Venda</DialogTitle>
         </DialogHeader>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 py-2">
+        <div className="grid grid-cols-1 md:grid-cols-[1.2fr_1fr] gap-8 py-2">
           <div className="space-y-8">
             <CustomerSelect onSelect={setSelectedCustomer} />
             <div className="space-y-4">
               <h4 className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
                 Forma de Pagamento
               </h4>
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-3 gap-3">
                 {[
                   { id: 'Dinheiro', icon: Banknote },
                   { id: 'Débito', icon: CreditCard },
@@ -196,39 +186,51 @@ export function CheckoutModal({ open, onOpenChange }: CheckoutModalProps) {
                   <Button
                     key={m.id}
                     variant={method === m.id ? 'default' : 'outline'}
-                    className={`h-20 flex flex-col gap-2 ${method === m.id ? 'ring-2 ring-primary ring-offset-2' : ''}`}
+                    className={`h-16 flex flex-col gap-1 ${method === m.id ? 'ring-2 ring-primary ring-offset-2' : ''}`}
                     onClick={() => setMethod(m.id as PaymentMethod)}
                   >
-                    <m.icon className="h-6 w-6" />
-                    <span>{m.id}</span>
+                    <m.icon className="h-5 w-5" /> <span>{m.id}</span>
                   </Button>
                 ))}
               </div>
             </div>
           </div>
-          <div className="bg-muted/50 p-6 rounded-xl border border-border flex flex-col justify-between shadow-sm">
-            <div className="space-y-4">
-              <div className="flex justify-between items-center text-lg">
-                <span className="text-muted-foreground font-medium">Total a Pagar</span>
-                <span className="font-bold text-3xl text-foreground">{formatCurrency(total)}</span>
+          <div className="bg-muted/50 p-6 rounded-xl border border-border flex flex-col shadow-sm">
+            <div className="space-y-5 flex-1">
+              <div className="flex justify-between items-center text-sm text-muted-foreground">
+                <span>Subtotal</span>
+                <span>{formatCurrency(subtotal)}</span>
+              </div>
+              <div className="space-y-2 pb-4 border-b border-border/50">
+                <Label htmlFor="discount" className="flex items-center gap-2">
+                  <Tag className="h-4 w-4" /> Desconto (R$)
+                </Label>
+                <Input
+                  id="discount"
+                  type="number"
+                  placeholder="0.00"
+                  value={discountInput}
+                  onChange={handleDiscountChange}
+                  className="bg-background"
+                />
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="text-muted-foreground font-medium text-lg">Total a Pagar</span>
+                <span className="font-bold text-4xl text-foreground">{formatCurrency(total)}</span>
               </div>
               {method === 'Dinheiro' && (
-                <div className="space-y-4 pt-6 border-t border-border animate-in fade-in slide-in-from-top-2">
+                <div className="space-y-4 pt-4 animate-in fade-in">
                   <div className="space-y-2">
-                    <Label htmlFor="received" className="text-foreground font-medium">
-                      Valor Recebido
-                    </Label>
+                    <Label>Valor Recebido</Label>
                     <Input
-                      id="received"
                       type="number"
-                      placeholder="0.00"
-                      className="text-xl h-14 font-semibold text-foreground bg-background"
+                      className="text-xl h-12 font-semibold bg-background"
                       value={amountReceived}
                       onChange={(e) => setAmountReceived(e.target.value)}
                       autoFocus
                     />
                   </div>
-                  <div className="flex justify-between items-center text-lg text-emerald-600 dark:text-emerald-400 font-bold bg-emerald-50 dark:bg-emerald-950/30 p-3 rounded-lg border border-emerald-100 dark:border-emerald-900">
+                  <div className="flex justify-between items-center text-lg text-emerald-600 font-bold bg-emerald-50 p-3 rounded-lg border border-emerald-100">
                     <span>Troco</span>
                     <span>{formatCurrency(change)}</span>
                   </div>
@@ -236,14 +238,17 @@ export function CheckoutModal({ open, onOpenChange }: CheckoutModalProps) {
               )}
             </div>
             <Button
-              className="w-full h-14 text-lg font-bold mt-8 shadow-sm"
+              className="w-full h-14 text-lg font-bold mt-8"
               disabled={
-                !method || (method === 'Dinheiro' && numericReceived < total) || isSubmitting
+                !method ||
+                (method === 'Dinheiro' &&
+                  (parseFloat(amountReceived.replace(',', '.')) || 0) < total) ||
+                isSubmitting
               }
               onClick={handleConfirm}
             >
-              {isSubmitting && <Loader2 className="h-5 w-5 animate-spin mr-2" />}
-              {isSubmitting ? 'Processando...' : 'Confirmar Pagamento'}
+              {isSubmitting && <Loader2 className="h-5 w-5 animate-spin mr-2" />} Confirmar
+              Pagamento
             </Button>
           </div>
         </div>

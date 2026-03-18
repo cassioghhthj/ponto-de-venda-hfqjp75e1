@@ -30,8 +30,9 @@ import {
   DialogFooter,
 } from '@/components/ui/dialog'
 import { toast } from '@/hooks/use-toast'
-import { Loader2, PenBox, Plus, Edit } from 'lucide-react'
+import { Loader2, PenBox, Plus, Edit, UploadCloud } from 'lucide-react'
 import { ProdutoFormModal } from './ProdutoFormModal'
+import { ImportProductsModal } from './ImportProductsModal'
 import { formatCurrency } from '@/lib/format'
 
 export default function EstoqueAtual() {
@@ -45,6 +46,7 @@ export default function EstoqueAtual() {
   const [form, setForm] = useState({ quantidade: '', tipo: 'entrada', motivo: 'ajuste' })
 
   const [formOpen, setFormOpen] = useState(false)
+  const [importOpen, setImportOpen] = useState(false)
   const [editingProduct, setEditingProduct] = useState<Product | null>(null)
 
   const fetchProducts = async () => {
@@ -86,11 +88,7 @@ export default function EstoqueAtual() {
     })
     setSubmitting(false)
     if (err1 || err2)
-      toast({
-        title: 'Erro',
-        description: 'Erro ao registrar ajuste de estoque.',
-        variant: 'destructive',
-      })
+      toast({ title: 'Erro', description: 'Erro ao registrar ajuste.', variant: 'destructive' })
     else {
       toast({ title: 'Sucesso', description: 'Estoque ajustado com sucesso!' })
       setAdjustProduct(null)
@@ -107,8 +105,8 @@ export default function EstoqueAtual() {
 
   return (
     <div className="space-y-4">
-      <div className="flex items-center justify-between mb-4 gap-4">
-        <div className="w-64">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 gap-4">
+        <div className="w-full sm:w-64 shrink-0">
           <Select value={categoryFilter} onValueChange={setCategoryFilter}>
             <SelectTrigger>
               <SelectValue placeholder="Filtrar Categoria" />
@@ -122,14 +120,24 @@ export default function EstoqueAtual() {
             </SelectContent>
           </Select>
         </div>
-        <Button
-          onClick={() => {
-            setEditingProduct(null)
-            setFormOpen(true)
-          }}
-        >
-          <Plus className="h-4 w-4 mr-2" /> Novo Produto
-        </Button>
+        <div className="flex gap-2 w-full sm:w-auto">
+          <Button
+            variant="outline"
+            onClick={() => setImportOpen(true)}
+            className="w-full sm:w-auto"
+          >
+            <UploadCloud className="h-4 w-4 mr-2" /> Importar CSV
+          </Button>
+          <Button
+            onClick={() => {
+              setEditingProduct(null)
+              setFormOpen(true)
+            }}
+            className="w-full sm:w-auto"
+          >
+            <Plus className="h-4 w-4 mr-2" /> Novo Produto
+          </Button>
+        </div>
       </div>
 
       <Card className="shadow-sm border-border bg-card">
@@ -139,10 +147,9 @@ export default function EstoqueAtual() {
               <TableRow>
                 <TableHead>Código</TableHead>
                 <TableHead>Nome</TableHead>
-                <TableHead>Categoria</TableHead>
-                <TableHead>Preço</TableHead>
+                <TableHead>Tam.</TableHead>
+                <TableHead>Preço Venda</TableHead>
                 <TableHead className="text-center">Estoque Atual</TableHead>
-                <TableHead className="text-center">Est. Mínimo</TableHead>
                 <TableHead className="text-right">Ações</TableHead>
               </TableRow>
             </TableHeader>
@@ -151,8 +158,8 @@ export default function EstoqueAtual() {
                 <TableRow key={p.id}>
                   <TableCell className="font-mono text-xs">{p.codigo || '-'}</TableCell>
                   <TableCell className="font-medium">{p.nome}</TableCell>
-                  <TableCell>{p.categoria || '-'}</TableCell>
-                  <TableCell>{formatCurrency(p.preco)}</TableCell>
+                  <TableCell>{p.tamanho || '-'}</TableCell>
+                  <TableCell>{formatCurrency(p.preco_venda || p.preco)}</TableCell>
                   <TableCell className="text-center">
                     {p.estoque <= p.estoque_minimo ? (
                       <Badge variant="destructive" className="px-2">
@@ -162,14 +169,10 @@ export default function EstoqueAtual() {
                       <span className="font-semibold text-foreground">{p.estoque}</span>
                     )}
                   </TableCell>
-                  <TableCell className="text-center text-muted-foreground">
-                    {p.estoque_minimo}
-                  </TableCell>
                   <TableCell className="text-right space-x-2">
                     <Button
                       size="icon"
                       variant="ghost"
-                      title="Editar Produto"
                       onClick={() => {
                         setEditingProduct(p)
                         setFormOpen(true)
@@ -192,7 +195,7 @@ export default function EstoqueAtual() {
               ))}
               {filteredProducts.length === 0 && (
                 <TableRow>
-                  <TableCell colSpan={7} className="text-center py-8 text-muted-foreground">
+                  <TableCell colSpan={6} className="text-center py-8 text-muted-foreground">
                     Nenhum produto encontrado.
                   </TableCell>
                 </TableRow>
@@ -240,30 +243,12 @@ export default function EstoqueAtual() {
                   />
                 </div>
               </div>
-              <div className="space-y-2">
-                <Label>Motivo</Label>
-                <Select
-                  required
-                  value={form.motivo}
-                  onValueChange={(v) => setForm({ ...form, motivo: v })}
-                >
-                  <SelectTrigger>
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="ajuste">Ajuste de Inventário</SelectItem>
-                    <SelectItem value="devolução">Devolução</SelectItem>
-                    <SelectItem value="perda">Perda / Quebra</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
               <DialogFooter className="pt-4">
                 <Button type="button" variant="outline" onClick={() => setAdjustProduct(null)}>
                   Cancelar
                 </Button>
                 <Button type="submit" disabled={submitting}>
                   {submitting ? <Loader2 className="h-4 w-4 animate-spin mr-2" /> : null} Salvar
-                  Ajuste
                 </Button>
               </DialogFooter>
             </form>
@@ -274,6 +259,11 @@ export default function EstoqueAtual() {
         open={formOpen}
         onClose={() => setFormOpen(false)}
         product={editingProduct}
+        onSuccess={fetchProducts}
+      />
+      <ImportProductsModal
+        open={importOpen}
+        onClose={() => setImportOpen(false)}
         onSuccess={fetchProducts}
       />
     </div>

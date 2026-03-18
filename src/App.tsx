@@ -17,35 +17,38 @@ import Login from './pages/Login'
 import { CartProvider } from './context/CartContext'
 import { AuthProvider } from './hooks/use-auth'
 import { ProtectedRoute } from './components/ProtectedRoute'
+import { SidebarProvider } from './context/SidebarContext'
 
 const App = () => (
   <ThemeProvider defaultTheme="system" storageKey="nexus-theme">
     <BrowserRouter future={{ v7_startTransition: false, v7_relativeSplatPath: false }}>
       <AuthProvider>
-        <CartProvider>
-          <TooltipProvider>
-            <Toaster />
-            <Sonner />
-            <Routes>
-              <Route path="/login" element={<Login />} />
+        <SidebarProvider>
+          <CartProvider>
+            <TooltipProvider>
+              <Toaster />
+              <Sonner />
+              <Routes>
+                <Route path="/login" element={<Login />} />
 
-              <Route element={<ProtectedRoute />}>
-                <Route element={<Layout />}>
-                  <Route path="/" element={<Index />} />
-                  <Route path="/caixa" element={<CaixaPage />} />
-                  <Route path="/dashboard" element={<Dashboard />} />
-                  <Route path="/clientes" element={<Clientes />} />
-                  <Route path="/contas-receber" element={<ContasReceber />} />
-                  <Route path="/contas-pagar" element={<ContasPagar />} />
-                  <Route path="/estoque" element={<Estoque />} />
-                  <Route path="/relatorios" element={<Relatorios />} />
+                <Route element={<ProtectedRoute />}>
+                  <Route element={<Layout />}>
+                    <Route path="/" element={<Index />} />
+                    <Route path="/caixa" element={<CaixaPage />} />
+                    <Route path="/dashboard" element={<Dashboard />} />
+                    <Route path="/clientes" element={<Clientes />} />
+                    <Route path="/contas-receber" element={<ContasReceber />} />
+                    <Route path="/contas-pagar" element={<ContasPagar />} />
+                    <Route path="/estoque" element={<Estoque />} />
+                    <Route path="/relatorios" element={<Relatorios />} />
+                  </Route>
                 </Route>
-              </Route>
 
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </TooltipProvider>
-        </CartProvider>
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </TooltipProvider>
+          </CartProvider>
+        </SidebarProvider>
       </AuthProvider>
     </BrowserRouter>
   </ThemeProvider>

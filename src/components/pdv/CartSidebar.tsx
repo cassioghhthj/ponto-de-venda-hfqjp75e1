@@ -5,13 +5,36 @@ import { ScrollArea } from '@/components/ui/scroll-area'
 import { Minus, Plus, Trash2, ShoppingCart } from 'lucide-react'
 import { CheckoutModal } from './CheckoutModal'
 import { useState } from 'react'
+import { supabase } from '@/lib/supabase/client'
+import { useAuth } from '@/hooks/use-auth'
+import { toast } from '@/hooks/use-toast'
 
 export function CartSidebar() {
-  const { items, subtotal, total, updateQuantity, removeItem, clearCart } = useCart()
+  const { items, subtotal, discount, total, updateQuantity, removeItem, clearCart } = useCart()
+  const { user } = useAuth()
   const [isCheckoutOpen, setCheckoutOpen] = useState(false)
 
+  const handleCheckoutClick = async () => {
+    if (!user) return
+    const { data } = await supabase
+      .from('caixa')
+      .select('id')
+      .eq('user_id', user.id)
+      .eq('status', 'aberto')
+
+    if (!data || data.length === 0) {
+      toast({
+        title: 'Venda bloqueada',
+        description: 'O caixa deve estar aberto para realizar vendas.',
+        variant: 'destructive',
+      })
+      return
+    }
+    setCheckoutOpen(true)
+  }
+
   return (
-    <div className="w-80 bg-background border-l border-border shadow-xl flex flex-col h-full shrink-0 z-20">
+    <div className="w-80 bg-background border-l border-border shadow-xl flex flex-col h-full shrink-0 z-20 transition-all duration-300">
       <div className="p-4 border-b border-border bg-muted/30 flex items-center justify-between">
         <h2 className="font-bold flex items-center gap-2 text-lg text-foreground">
           <ShoppingCart className="h-5 w-5 text-primary" /> Carrinho
@@ -49,8 +72,15 @@ export function CartSidebar() {
                   <h4 className="text-sm font-semibold line-clamp-2 leading-tight mb-1 text-foreground">
                     {item.nome}
                   </h4>
-                  <div className="text-primary font-bold text-sm mb-2">
-                    {formatCurrency(item.preco)}
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="text-primary font-bold text-sm">
+                      {formatCurrency(item.preco)}
+                    </span>
+                    {item.tamanho && (
+                      <span className="text-xs bg-muted px-1.5 rounded text-muted-foreground">
+                        {item.tamanho}
+                      </span>
+                    )}
                   </div>
                   <div className="flex items-center gap-1.5">
                     <Button
@@ -92,14 +122,20 @@ export function CartSidebar() {
           <span>Subtotal</span>
           <span className="font-medium text-foreground">{formatCurrency(subtotal)}</span>
         </div>
-        <div className="flex justify-between text-xl font-bold items-center">
+        {discount > 0 && (
+          <div className="flex justify-between text-sm text-emerald-600 font-medium">
+            <span>Desconto</span>
+            <span>-{formatCurrency(discount)}</span>
+          </div>
+        )}
+        <div className="flex justify-between text-xl font-bold items-center border-t pt-2 border-border/50">
           <span className="text-foreground">Total</span>
           <span className="text-primary text-2xl">{formatCurrency(total)}</span>
         </div>
         <Button
           className="w-full h-14 text-lg font-bold shadow-sm"
           disabled={items.length === 0}
-          onClick={() => setCheckoutOpen(true)}
+          onClick={handleCheckoutClick}
         >
           Finalizar Venda
         </Button>

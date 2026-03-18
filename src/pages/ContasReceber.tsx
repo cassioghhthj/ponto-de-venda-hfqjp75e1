@@ -23,7 +23,8 @@ import { Label } from '@/components/ui/label'
 import { supabase } from '@/lib/supabase/client'
 import { formatCurrency } from '@/lib/format'
 import { toast } from '@/hooks/use-toast'
-import { Loader2, DollarSign, Wallet } from 'lucide-react'
+import { Loader2, DollarSign, Wallet, FileText, Search } from 'lucide-react'
+import { PrintableReport } from '@/components/contas-receber/PrintableReport'
 
 interface ContaReceber {
   id: string
@@ -32,15 +33,17 @@ interface ContaReceber {
   data_vencimento: string
   status: string
   data_pagamento: string | null
-  venda?: {
-    data: string
-  }
+  venda?: { data: string }
+  cliente?: { nome: string }
 }
 
 export default function ContasReceber() {
   const [contas, setContas] = useState<ContaReceber[]>([])
   const [loading, setLoading] = useState(true)
   const [filter, setFilter] = useState('Todos')
+  const [clientSearch, setClientSearch] = useState('')
+  const [startDate, setStartDate] = useState('')
+  const [endDate, setEndDate] = useState('')
 
   const [payingConta, setPayingConta] = useState<ContaReceber | null>(null)
   const [paymentDate, setPaymentDate] = useState(new Date().toISOString().split('T')[0])
@@ -50,7 +53,7 @@ export default function ContasReceber() {
     setLoading(true)
     const { data, error } = await (supabase as any)
       .from('contas_receber')
-      .select('*, venda:vendas(data)')
+      .select('*, venda:vendas(data), cliente:clientes(nome)')
       .order('data_vencimento', { ascending: true })
     if (error)
       toast({ title: 'Erro', description: 'Erro ao carregar contas.', variant: 'destructive' })
@@ -75,64 +78,112 @@ export default function ContasReceber() {
     if (error)
       toast({ title: 'Erro', description: 'Erro ao registrar pagamento.', variant: 'destructive' })
     else {
-      toast({ title: 'Sucesso', description: 'Pagamento registrado com sucesso!' })
+      toast({ title: 'Sucesso', description: 'Pagamento registrado!' })
       setPayingConta(null)
       fetchContas()
     }
   }
 
   const filteredContas = contas.filter((c) => {
-    if (filter === 'Pendentes') return c.status === 'pendente'
-    if (filter === 'Pagos') return c.status === 'pago'
-    return true
+    const matchStatus =
+      filter === 'Todos' ||
+      (filter === 'Pendentes' && c.status === 'pendente') ||
+      (filter === 'Pagos' && c.status === 'pago')
+    const matchClient =
+      !clientSearch || (c.cliente?.nome || '').toLowerCase().includes(clientSearch.toLowerCase())
+    const matchDate =
+      (!startDate || c.data_vencimento >= startDate) && (!endDate || c.data_vencimento <= endDate)
+    return matchStatus && matchClient && matchDate
   })
 
-  const totalAReceber = contas
+  const totalAReceber = filteredContas
     .filter((c) => c.status === 'pendente')
     .reduce((acc, curr) => acc + Number(curr.valor), 0)
-  const totalRecebido = contas
+  const totalRecebido = filteredContas
     .filter((c) => c.status === 'pago')
     .reduce((acc, curr) => acc + Number(curr.valor), 0)
 
   return (
     <div className="space-y-6 animate-fade-in max-w-6xl mx-auto h-full flex flex-col">
+      <PrintableReport
+        contas={filteredContas}
+        clientName={clientSearch}
+        startDate={startDate}
+        endDate={endDate}
+      />
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 shrink-0">
-        <Card className="shadow-sm border-orange-200 dark:border-orange-900 bg-orange-50/30 dark:bg-orange-950/20">
+        <Card className="shadow-sm border-orange-200 bg-orange-50/30">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium text-orange-800 dark:text-orange-400">
-              Total a Receber
+            <CardTitle className="text-sm font-medium text-orange-800">
+              Total a Receber (Filtrado)
             </CardTitle>
             <DollarSign className="h-4 w-4 text-orange-500" />
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold text-orange-900 dark:text-orange-300">
+            <div className="text-3xl font-bold text-orange-900">
               {formatCurrency(totalAReceber)}
             </div>
           </CardContent>
         </Card>
-        <Card className="shadow-sm border-emerald-200 dark:border-emerald-900 bg-emerald-50/30 dark:bg-emerald-950/20">
+        <Card className="shadow-sm border-emerald-200 bg-emerald-50/30">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium text-emerald-800 dark:text-emerald-400">
-              Total Recebido
+            <CardTitle className="text-sm font-medium text-emerald-800">
+              Total Recebido (Filtrado)
             </CardTitle>
             <Wallet className="h-4 w-4 text-emerald-500" />
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold text-emerald-900 dark:text-emerald-300">
+            <div className="text-3xl font-bold text-emerald-900">
               {formatCurrency(totalRecebido)}
             </div>
           </CardContent>
         </Card>
       </div>
 
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 shrink-0">
-        <Tabs value={filter} onValueChange={setFilter}>
-          <TabsList>
-            <TabsTrigger value="Todos">Todos</TabsTrigger>
-            <TabsTrigger value="Pendentes">Pendentes</TabsTrigger>
-            <TabsTrigger value="Pagos">Pagos</TabsTrigger>
-          </TabsList>
-        </Tabs>
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 shrink-0 bg-muted/50 p-4 rounded-xl border border-border">
+        <div className="flex flex-wrap gap-4 items-center w-full md:w-auto">
+          <Tabs value={filter} onValueChange={setFilter}>
+            <TabsList>
+              <TabsTrigger value="Todos">Todos</TabsTrigger>
+              <TabsTrigger value="Pendentes">Pendentes</TabsTrigger>
+              <TabsTrigger value="Pagos">Pagos</TabsTrigger>
+            </TabsList>
+          </Tabs>
+          <div className="relative w-full md:w-64">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+            <Input
+              placeholder="Buscar cliente..."
+              className="pl-9 bg-background h-9"
+              value={clientSearch}
+              onChange={(e) => setClientSearch(e.target.value)}
+            />
+          </div>
+          <div className="flex items-center gap-2">
+            <Input
+              type="date"
+              className="h-9 w-auto text-sm"
+              value={startDate}
+              onChange={(e) => setStartDate(e.target.value)}
+              title="Data Inicial"
+            />
+            <span className="text-muted-foreground">até</span>
+            <Input
+              type="date"
+              className="h-9 w-auto text-sm"
+              value={endDate}
+              onChange={(e) => setEndDate(e.target.value)}
+              title="Data Final"
+            />
+          </div>
+        </div>
+        <Button
+          variant="outline"
+          className="shrink-0 w-full md:w-auto"
+          onClick={() => window.print()}
+        >
+          <FileText className="h-4 w-4 mr-2" /> Relatório PDF
+        </Button>
       </div>
 
       <Card className="shadow-sm border-border flex-1 flex flex-col min-h-0 bg-card">
@@ -143,9 +194,9 @@ export default function ContasReceber() {
             </div>
           ) : (
             <Table>
-              <TableHeader className="sticky top-0 bg-muted/80 z-10 backdrop-blur-md">
+              <TableHeader className="sticky top-0 bg-muted/90 z-10 backdrop-blur-md">
                 <TableRow>
-                  <TableHead>ID Venda</TableHead>
+                  <TableHead>Cliente</TableHead>
                   <TableHead>Data Venda</TableHead>
                   <TableHead>Vencimento</TableHead>
                   <TableHead>Valor</TableHead>
@@ -156,8 +207,8 @@ export default function ContasReceber() {
               <TableBody>
                 {filteredContas.map((conta) => (
                   <TableRow key={conta.id}>
-                    <TableCell className="font-mono text-xs">
-                      {conta.venda_id.split('-')[0]}
+                    <TableCell className="font-medium text-foreground">
+                      {conta.cliente?.nome || '-'}
                     </TableCell>
                     <TableCell>
                       {conta.venda?.data
@@ -173,8 +224,8 @@ export default function ContasReceber() {
                         variant={conta.status === 'pago' ? 'default' : 'secondary'}
                         className={
                           conta.status === 'pago'
-                            ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-300 border-0'
-                            : 'bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-300 border-0'
+                            ? 'bg-emerald-100 text-emerald-800 border-0'
+                            : 'bg-orange-100 text-orange-800 border-0'
                         }
                       >
                         {conta.status === 'pago' ? 'Pago' : 'Pendente'}

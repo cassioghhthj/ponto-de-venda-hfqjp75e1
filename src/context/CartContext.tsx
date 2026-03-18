@@ -41,7 +41,11 @@ export function CartProvider({ children }: { children: ReactNode }) {
         )
       }
       toast({ title: 'Item adicionado', description: `${product.nome} adicionado ao carrinho.` })
-      return [...prev, { ...product, quantity: 1 }]
+
+      // Ensure we use preco_venda if available, fallback to preco
+      const priceToUse = product.preco_venda || product.preco
+
+      return [...prev, { ...product, preco: priceToUse, quantity: 1 }]
     })
   }
 

@@ -16,6 +16,13 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
 import { supabase } from '@/lib/supabase/client'
 import { toast } from '@/hooks/use-toast'
 import { Product } from '@/types'
@@ -26,10 +33,12 @@ import * as z from 'zod'
 
 const schema = z.object({
   nome: z.string().min(2, 'O nome é obrigatório'),
-  codigo: z.string().min(1, 'Código (SKU) é obrigatório'),
-  preco: z.coerce.number().min(0.01, 'Preço deve ser maior que 0'),
+  codigo: z.string().min(1, 'Código é obrigatório'),
+  preco_custo: z.coerce.number().min(0, 'Custo inválido'),
+  preco_venda: z.coerce.number().min(0.01, 'Preço de venda deve ser maior que 0'),
   estoque: z.coerce.number().min(0, 'Estoque não pode ser negativo'),
   estoque_minimo: z.coerce.number().min(0, 'Estoque mínimo inválido'),
+  tamanho: z.string().optional(),
   categoria: z.string().optional(),
 })
 
@@ -40,10 +49,21 @@ interface Props {
   onSuccess: () => void
 }
 
+const TAMANHOS = ['10', '12', '14', '16', 'P', 'M', 'G', 'GG', 'EG', 'Único']
+
 export function ProdutoFormModal({ open, onClose, product, onSuccess }: Props) {
   const form = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
-    defaultValues: { nome: '', codigo: '', preco: 0, estoque: 0, estoque_minimo: 0, categoria: '' },
+    defaultValues: {
+      nome: '',
+      codigo: '',
+      preco_custo: 0,
+      preco_venda: 0,
+      estoque: 0,
+      estoque_minimo: 0,
+      categoria: '',
+      tamanho: '',
+    },
   })
 
   useEffect(() => {
@@ -51,13 +71,24 @@ export function ProdutoFormModal({ open, onClose, product, onSuccess }: Props) {
       form.reset({
         nome: product.nome,
         codigo: product.codigo || '',
-        preco: product.preco,
+        preco_custo: product.preco_custo || 0,
+        preco_venda: product.preco_venda || product.preco || 0,
         estoque: product.estoque,
         estoque_minimo: product.estoque_minimo,
         categoria: product.categoria || '',
+        tamanho: product.tamanho || '',
       })
     } else if (open) {
-      form.reset({ nome: '', codigo: '', preco: 0, estoque: 0, estoque_minimo: 0, categoria: '' })
+      form.reset({
+        nome: '',
+        codigo: '',
+        preco_custo: 0,
+        preco_venda: 0,
+        estoque: 0,
+        estoque_minimo: 0,
+        categoria: '',
+        tamanho: '',
+      })
     }
   }, [product, open, form])
 
@@ -73,27 +104,26 @@ export function ProdutoFormModal({ open, onClose, product, onSuccess }: Props) {
 
     const payload = {
       ...data,
+      preco: data.preco_venda, // Keep sync for backward compatibility
       categoria: data.categoria || null,
+      tamanho: data.tamanho || null,
     }
 
-    if (product) {
-      const { error } = await supabase.from('produtos').update(payload).eq('id', product.id)
-      if (error)
-        toast({ title: 'Erro', description: 'Não foi possível atualizar.', variant: 'destructive' })
-      else {
-        toast({ title: 'Sucesso', description: 'Produto atualizado.' })
-        onSuccess()
-        onClose()
-      }
+    const request = product
+      ? supabase.from('produtos').update(payload).eq('id', product.id)
+      : supabase.from('produtos').insert(payload)
+
+    const { error } = await request
+    if (error) {
+      toast({
+        title: 'Erro',
+        description: 'Não foi possível salvar o produto.',
+        variant: 'destructive',
+      })
     } else {
-      const { error } = await supabase.from('produtos').insert(payload)
-      if (error)
-        toast({ title: 'Erro', description: 'Não foi possível cadastrar.', variant: 'destructive' })
-      else {
-        toast({ title: 'Sucesso', description: 'Produto cadastrado com sucesso.' })
-        onSuccess()
-        onClose()
-      }
+      toast({ title: 'Sucesso', description: 'Produto salvo com sucesso.' })
+      onSuccess()
+      onClose()
     }
   }
 
@@ -101,12 +131,12 @@ export function ProdutoFormModal({ open, onClose, product, onSuccess }: Props) {
 
   return (
     <Dialog open={open} onOpenChange={(o) => !o && onClose()}>
-      <DialogContent className="sm:max-w-[425px] bg-card text-card-foreground">
+      <DialogContent className="sm:max-w-[500px] bg-card text-card-foreground">
         <DialogHeader>
           <DialogTitle>{product ? 'Editar Produto' : 'Novo Produto'}</DialogTitle>
         </DialogHeader>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 py-4">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 py-2">
             <FormField
               control={form.control}
               name="nome"
@@ -151,10 +181,10 @@ export function ProdutoFormModal({ open, onClose, product, onSuccess }: Props) {
             <div className="grid grid-cols-3 gap-4">
               <FormField
                 control={form.control}
-                name="preco"
+                name="preco_custo"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Preço (R$) *</FormLabel>
+                    <FormLabel>Preço Custo</FormLabel>
                     <FormControl>
                       <Input type="number" step="0.01" {...field} />
                     </FormControl>
@@ -162,6 +192,42 @@ export function ProdutoFormModal({ open, onClose, product, onSuccess }: Props) {
                   </FormItem>
                 )}
               />
+              <FormField
+                control={form.control}
+                name="preco_venda"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Preço Venda *</FormLabel>
+                    <FormControl>
+                      <Input type="number" step="0.01" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="tamanho"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Tamanho</FormLabel>
+                    <Select value={field.value || ''} onValueChange={field.onChange}>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Selecione..." />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {TAMANHOS.map((t) => (
+                          <SelectItem key={t} value={t}>
+                            {t}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </FormItem>
+                )}
+              />
+            </div>
+            <div className="grid grid-cols-2 gap-4">
               <FormField
                 control={form.control}
                 name="estoque"
@@ -180,7 +246,7 @@ export function ProdutoFormModal({ open, onClose, product, onSuccess }: Props) {
                 name="estoque_minimo"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Est. Min.</FormLabel>
+                    <FormLabel>Estoque Mínimo</FormLabel>
                     <FormControl>
                       <Input type="number" {...field} />
                     </FormControl>
