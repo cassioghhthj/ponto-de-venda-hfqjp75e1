@@ -2,14 +2,11 @@ import { useState } from 'react'
 import { DateRange } from 'react-day-picker'
 import { subDays } from 'date-fns'
 import { DatePickerWithRange } from '@/components/ui/date-range-picker'
-import { useReports } from '@/hooks/use-reports'
-import { Loader2, PieChart } from 'lucide-react'
-import { RelatoriosKPIs } from '@/components/relatorios/RelatoriosKPIs'
-import { ChartTopProducts } from '@/components/relatorios/ChartTopProducts'
-import { ChartCategories } from '@/components/relatorios/ChartCategories'
-import { ChartCashFlow } from '@/components/relatorios/ChartCashFlow'
-import { ChartAccounts } from '@/components/relatorios/ChartAccounts'
-import { TableCriticalStock } from '@/components/relatorios/TableCriticalStock'
+import { PieChart, Tags, Activity } from 'lucide-react'
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
+import { TabVisaoGeral } from '@/components/relatorios/TabVisaoGeral'
+import { TabCmv } from '@/components/relatorios/TabCmv'
+import { TabEtiquetas } from '@/components/relatorios/TabEtiquetas'
 
 export default function Relatorios() {
   const [date, setDate] = useState<DateRange | undefined>({
@@ -17,48 +14,49 @@ export default function Relatorios() {
     to: new Date(),
   })
 
-  const { kpis, topProducts, topCategories, cashFlow, accounts, criticalStock, loading } =
-    useReports(date)
-
   return (
-    <div className="space-y-6 animate-fade-in max-w-6xl mx-auto pb-10">
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+    <div className="space-y-6 animate-fade-in max-w-6xl mx-auto pb-10 flex flex-col h-full">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 shrink-0">
         <div>
           <h2 className="text-2xl font-bold tracking-tight flex items-center gap-2">
             <PieChart className="h-6 w-6 text-primary" />
-            Relatórios Gerenciais
+            Relatórios e Análises
           </h2>
           <p className="text-sm text-muted-foreground mt-1">
             Acompanhe o desempenho do negócio e a saúde financeira.
           </p>
         </div>
         <div className="flex items-center gap-3">
-          <span className="text-sm font-medium text-slate-600">Período:</span>
+          <span className="text-sm font-medium text-slate-600 dark:text-slate-300">Período:</span>
           <DatePickerWithRange date={date} setDate={setDate} />
         </div>
       </div>
 
-      {loading ? (
-        <div className="flex justify-center items-center h-64">
-          <Loader2 className="h-8 w-8 animate-spin text-primary" />
-        </div>
-      ) : (
-        <div className="space-y-6">
-          <RelatoriosKPIs {...kpis} />
+      <Tabs defaultValue="geral" className="flex-1 flex flex-col min-h-0">
+        <TabsList className="shrink-0 w-fit mb-4">
+          <TabsTrigger value="geral" className="gap-2">
+            <PieChart className="h-4 w-4" /> Visão Geral
+          </TabsTrigger>
+          <TabsTrigger value="cmv" className="gap-2">
+            <Activity className="h-4 w-4" /> Relatório CMV
+          </TabsTrigger>
+          <TabsTrigger value="etiquetas" className="gap-2">
+            <Tags className="h-4 w-4" /> Etiquetas
+          </TabsTrigger>
+        </TabsList>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <ChartTopProducts data={topProducts} />
-            <ChartCategories data={topCategories} />
-          </div>
+        <TabsContent value="geral" className="flex-1 focus-visible:outline-none">
+          <TabVisaoGeral date={date} />
+        </TabsContent>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <ChartCashFlow data={cashFlow} />
-            <ChartAccounts data={accounts} />
-          </div>
+        <TabsContent value="cmv" className="flex-1 focus-visible:outline-none">
+          <TabCmv date={date} />
+        </TabsContent>
 
-          <TableCriticalStock data={criticalStock} />
-        </div>
-      )}
+        <TabsContent value="etiquetas" className="flex-1 focus-visible:outline-none">
+          <TabEtiquetas />
+        </TabsContent>
+      </Tabs>
     </div>
   )
 }

@@ -6,7 +6,7 @@
 
 @layer base {
   :root {
-    --background: 210 40% 98%; /* #F8FAFC */
+    --background: 210 40% 98%;
     --foreground: 222.2 84% 4.9%;
 
     --card: 0 0% 100%;
@@ -15,7 +15,7 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 202 100% 50%; /* #00A3FF */
+    --primary: 202 100% 50%;
     --primary-foreground: 210 40% 98%;
 
     --secondary: 210 40% 96.1%;
@@ -27,7 +27,7 @@
     --accent: 210 40% 96.1%;
     --accent-foreground: 222.2 47.4% 11.2%;
 
-    --destructive: 0 84.2% 60.2%; /* #EF4444 */
+    --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
     --border: 214.3 31.8% 91.4%;
@@ -46,7 +46,7 @@
     --sidebar-ring: 202 100% 50%;
 
     --chart-1: 202 100% 50%;
-    --chart-2: 152 69% 51%; /* Emerald/Green */
+    --chart-2: 152 69% 51%;
     --chart-3: 209 100% 32%;
     --chart-4: 42 100% 50%;
     --chart-5: 33 100% 50%;
@@ -121,5 +121,54 @@
   }
   .animate-slide-in-right {
     animation: slide-in-right 0.3s ease-out forwards;
+  }
+}
+
+@media print {
+  @page {
+    margin: 0;
+    size: 80mm auto;
+  }
+  body {
+    background: white;
+    color: black;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  #root {
+    display: none !important;
+  }
+  [data-radix-portal] {
+    display: block !important;
+    position: static !important;
+  }
+  /* Hide radix dialog overlays */
+  [data-state='open'] > div[class*='bg-black'] {
+    display: none !important;
+  }
+
+  .fixed,
+  .absolute {
+    position: static !important;
+    transform: none !important;
+    inset: auto !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+
+  .thermal-receipt {
+    width: 80mm;
+    margin: 0 auto;
+    padding: 10px 15px;
+    font-family: monospace;
+    font-size: 12px;
+    color: black;
+    background: white;
+    border: none;
+    box-shadow: none;
+  }
+  .thermal-receipt * {
+    color: black !important;
   }
 }

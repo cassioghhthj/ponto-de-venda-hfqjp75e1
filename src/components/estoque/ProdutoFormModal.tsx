@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import {
   Dialog,
   DialogContent,
@@ -52,6 +52,7 @@ interface Props {
 const TAMANHOS = ['10', '12', '14', '16', 'P', 'M', 'G', 'GG', 'EG', 'Único']
 
 export function ProdutoFormModal({ open, onClose, product, onSuccess }: Props) {
+  const [categorias, setCategorias] = useState<string[]>([])
   const form = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
     defaultValues: {
@@ -65,6 +66,16 @@ export function ProdutoFormModal({ open, onClose, product, onSuccess }: Props) {
       tamanho: '',
     },
   })
+
+  useEffect(() => {
+    supabase
+      .from('categorias')
+      .select('nome')
+      .order('nome')
+      .then(({ data }) => {
+        if (data) setCategorias(data.map((c) => c.nome))
+      })
+  }, [open])
 
   useEffect(() => {
     if (product && open) {
@@ -95,7 +106,6 @@ export function ProdutoFormModal({ open, onClose, product, onSuccess }: Props) {
   const onSubmit = async (data: z.infer<typeof schema>) => {
     let query = supabase.from('produtos').select('id').eq('codigo', data.codigo)
     if (product) query = query.neq('id', product.id)
-
     const { data: existing } = await query
     if (existing && existing.length > 0) {
       form.setError('codigo', { message: 'Este código já está em uso' })
@@ -104,24 +114,19 @@ export function ProdutoFormModal({ open, onClose, product, onSuccess }: Props) {
 
     const payload = {
       ...data,
-      preco: data.preco_venda, // Keep sync for backward compatibility
+      preco: data.preco_venda,
       categoria: data.categoria || null,
       tamanho: data.tamanho || null,
     }
-
     const request = product
       ? supabase.from('produtos').update(payload).eq('id', product.id)
       : supabase.from('produtos').insert(payload)
-
     const { error } = await request
-    if (error) {
-      toast({
-        title: 'Erro',
-        description: 'Não foi possível salvar o produto.',
-        variant: 'destructive',
-      })
-    } else {
-      toast({ title: 'Sucesso', description: 'Produto salvo com sucesso.' })
+
+    if (error)
+      toast({ title: 'Erro', description: 'Não foi possível salvar.', variant: 'destructive' })
+    else {
+      toast({ title: 'Sucesso', description: 'Produto salvo.' })
       onSuccess()
       onClose()
     }
@@ -131,7 +136,7 @@ export function ProdutoFormModal({ open, onClose, product, onSuccess }: Props) {
 
   return (
     <Dialog open={open} onOpenChange={(o) => !o && onClose()}>
-      <DialogContent className="sm:max-w-[500px] bg-card text-card-foreground">
+      <DialogContent className="sm:max-w-[500px] bg-card">
         <DialogHeader>
           <DialogTitle>{product ? 'Editar Produto' : 'Novo Produto'}</DialogTitle>
         </DialogHeader>
@@ -170,9 +175,18 @@ export function ProdutoFormModal({ open, onClose, product, onSuccess }: Props) {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Categoria</FormLabel>
-                    <FormControl>
-                      <Input {...field} />
-                    </FormControl>
+                    <Select value={field.value || ''} onValueChange={field.onChange}>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Selecione..." />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {categorias.map((c) => (
+                          <SelectItem key={c} value={c}>
+                            {c}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
                     <FormMessage />
                   </FormItem>
                 )}

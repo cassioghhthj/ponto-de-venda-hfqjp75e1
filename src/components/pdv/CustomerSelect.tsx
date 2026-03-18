@@ -4,7 +4,8 @@ import { Label } from '@/components/ui/label'
 import { Button } from '@/components/ui/button'
 import { Cliente } from '@/types'
 import { supabase } from '@/lib/supabase/client'
-import { Search, X, User } from 'lucide-react'
+import { Search, X, User, Plus } from 'lucide-react'
+import { ClienteFormModal } from '../clientes/ClienteFormModal'
 
 interface Props {
   onSelect: (c: Cliente | null) => void
@@ -15,13 +16,15 @@ export function CustomerSelect({ onSelect }: Props) {
   const [search, setSearch] = useState('')
   const [open, setOpen] = useState(false)
   const [selected, setSelected] = useState<Cliente | null>(null)
+  const [modalOpen, setModalOpen] = useState(false)
+
+  const fetchClientes = async () => {
+    const { data } = await supabase.from('clientes').select('*').order('nome')
+    setClientes(data || [])
+  }
 
   useEffect(() => {
-    supabase
-      .from('clientes')
-      .select('*')
-      .order('nome')
-      .then(({ data }) => setClientes(data || []))
+    fetchClientes()
   }, [])
 
   const handleSelect = (c: Cliente | null) => {
@@ -64,9 +67,19 @@ export function CustomerSelect({ onSelect }: Props) {
 
   return (
     <div className="space-y-2 relative">
-      <Label className="text-muted-foreground uppercase text-xs font-bold tracking-wider">
-        Vincular Cliente (Opcional)
-      </Label>
+      <div className="flex items-center justify-between">
+        <Label className="text-muted-foreground uppercase text-xs font-bold tracking-wider">
+          Vincular Cliente (Opcional)
+        </Label>
+        <Button
+          variant="ghost"
+          size="sm"
+          className="h-6 text-xs px-2 text-primary hover:text-primary/80"
+          onClick={() => setModalOpen(true)}
+        >
+          <Plus className="h-3 w-3 mr-1" /> Novo
+        </Button>
+      </div>
       <div className="relative">
         <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
         <Input
@@ -101,6 +114,16 @@ export function CustomerSelect({ onSelect }: Props) {
           )}
         </div>
       )}
+
+      <ClienteFormModal
+        open={modalOpen}
+        onClose={() => setModalOpen(false)}
+        cliente={null}
+        onSuccess={(cliente) => {
+          fetchClientes()
+          if (cliente) handleSelect(cliente)
+        }}
+      />
     </div>
   )
 }

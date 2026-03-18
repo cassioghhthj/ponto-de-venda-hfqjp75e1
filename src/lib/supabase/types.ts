@@ -140,6 +140,13 @@ export type Database = {
         }
         Relationships: [
           {
+            foreignKeyName: 'contas_receber_cliente_id_fkey'
+            columns: ['cliente_id']
+            isOneToOne: false
+            referencedRelation: 'clientes'
+            referencedColumns: ['id']
+          },
+          {
             foreignKeyName: 'contas_receber_venda_id_fkey'
             columns: ['venda_id']
             isOneToOne: false
@@ -623,6 +630,7 @@ export const Constants = {
 // Table: contas_pagar
 //   PRIMARY KEY contas_pagar_pkey: PRIMARY KEY (id)
 // Table: contas_receber
+//   FOREIGN KEY contas_receber_cliente_id_fkey: FOREIGN KEY (cliente_id) REFERENCES clientes(id) ON DELETE SET NULL
 //   PRIMARY KEY contas_receber_pkey: PRIMARY KEY (id)
 //   FOREIGN KEY contas_receber_venda_id_fkey: FOREIGN KEY (venda_id) REFERENCES vendas(id) ON DELETE CASCADE
 // Table: itens_venda

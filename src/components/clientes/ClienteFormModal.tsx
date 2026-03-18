@@ -42,7 +42,7 @@ interface Props {
   open: boolean
   onClose: () => void
   cliente: Cliente | null
-  onSuccess: () => void
+  onSuccess: (cliente?: Cliente) => void
 }
 
 export function ClienteFormModal({ open, onClose, cliente, onSuccess }: Props) {
@@ -77,21 +77,32 @@ export function ClienteFormModal({ open, onClose, cliente, onSuccess }: Props) {
     }
 
     if (cliente) {
-      const { error } = await supabase.from('clientes').update(payload).eq('id', cliente.id)
+      const { data: updated, error } = await supabase
+        .from('clientes')
+        .update(payload)
+        .eq('id', cliente.id)
+        .select()
+        .single()
+
       if (error)
         toast({ title: 'Erro', description: 'Não foi possível atualizar.', variant: 'destructive' })
       else {
         toast({ title: 'Sucesso', description: 'Cliente atualizado.' })
-        onSuccess()
+        onSuccess(updated as Cliente)
         onClose()
       }
     } else {
-      const { error } = await supabase.from('clientes').insert(payload)
+      const { data: inserted, error } = await supabase
+        .from('clientes')
+        .insert(payload)
+        .select()
+        .single()
+
       if (error)
         toast({ title: 'Erro', description: 'Não foi possível cadastrar.', variant: 'destructive' })
       else {
         toast({ title: 'Sucesso', description: 'Cliente cadastrado com sucesso.' })
-        onSuccess()
+        onSuccess(inserted as Cliente)
         onClose()
       }
     }

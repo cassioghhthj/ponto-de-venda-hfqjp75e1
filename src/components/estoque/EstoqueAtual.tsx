@@ -30,14 +30,16 @@ import {
   DialogFooter,
 } from '@/components/ui/dialog'
 import { toast } from '@/hooks/use-toast'
-import { Loader2, PenBox, Plus, Edit, UploadCloud } from 'lucide-react'
+import { Loader2, PenBox, Plus, Edit, UploadCloud, Tags } from 'lucide-react'
 import { ProdutoFormModal } from './ProdutoFormModal'
 import { ImportProductsModal } from './ImportProductsModal'
+import { CategoriaFormModal } from './CategoriaFormModal'
 import { formatCurrency } from '@/lib/format'
 
 export default function EstoqueAtual() {
   const { user } = useAuth()
   const [products, setProducts] = useState<Product[]>([])
+  const [categories, setCategories] = useState<string[]>([])
   const [loading, setLoading] = useState(true)
   const [categoryFilter, setCategoryFilter] = useState('Todas')
 
@@ -47,23 +49,34 @@ export default function EstoqueAtual() {
 
   const [formOpen, setFormOpen] = useState(false)
   const [importOpen, setImportOpen] = useState(false)
+  const [catModalOpen, setCatModalOpen] = useState(false)
   const [editingProduct, setEditingProduct] = useState<Product | null>(null)
 
-  const fetchProducts = async () => {
+  const fetchData = async () => {
     setLoading(true)
-    const { data } = await supabase.from('produtos').select('*').order('nome')
-    if (data) setProducts(data as Product[])
+    const [prodRes, catRes] = await Promise.all([
+      supabase.from('produtos').select('*').order('nome'),
+      supabase.from('categorias').select('nome').order('nome'),
+    ])
+    if (prodRes.data) setProducts(prodRes.data as Product[])
+    if (catRes.data) {
+      setCategories(['Todas', ...catRes.data.map((c) => c.nome)])
+    } else {
+      // Fallback if no table data yet
+      setCategories([
+        'Todas',
+        ...(Array.from(
+          new Set((prodRes.data || []).map((p) => p.categoria).filter(Boolean)),
+        ) as string[]),
+      ])
+    }
     setLoading(false)
   }
 
   useEffect(() => {
-    fetchProducts()
+    fetchData()
   }, [])
 
-  const categories = [
-    'Todas',
-    ...Array.from(new Set(products.map((p) => p.categoria).filter(Boolean))),
-  ]
   const filteredProducts = products.filter(
     (p) => categoryFilter === 'Todas' || p.categoria === categoryFilter,
   )
@@ -92,7 +105,7 @@ export default function EstoqueAtual() {
     else {
       toast({ title: 'Sucesso', description: 'Estoque ajustado com sucesso!' })
       setAdjustProduct(null)
-      fetchProducts()
+      fetchData()
     }
   }
 
@@ -120,11 +133,18 @@ export default function EstoqueAtual() {
             </SelectContent>
           </Select>
         </div>
-        <div className="flex gap-2 w-full sm:w-auto">
+        <div className="flex flex-wrap gap-2 w-full sm:w-auto">
+          <Button
+            variant="outline"
+            onClick={() => setCatModalOpen(true)}
+            className="flex-1 sm:flex-none"
+          >
+            <Tags className="h-4 w-4 mr-2" /> Nova Categoria
+          </Button>
           <Button
             variant="outline"
             onClick={() => setImportOpen(true)}
-            className="w-full sm:w-auto"
+            className="flex-1 sm:flex-none"
           >
             <UploadCloud className="h-4 w-4 mr-2" /> Importar CSV
           </Button>
@@ -133,7 +153,7 @@ export default function EstoqueAtual() {
               setEditingProduct(null)
               setFormOpen(true)
             }}
-            className="w-full sm:w-auto"
+            className="flex-1 sm:flex-none"
           >
             <Plus className="h-4 w-4 mr-2" /> Novo Produto
           </Button>
@@ -259,12 +279,17 @@ export default function EstoqueAtual() {
         open={formOpen}
         onClose={() => setFormOpen(false)}
         product={editingProduct}
-        onSuccess={fetchProducts}
+        onSuccess={fetchData}
       />
       <ImportProductsModal
         open={importOpen}
         onClose={() => setImportOpen(false)}
-        onSuccess={fetchProducts}
+        onSuccess={fetchData}
+      />
+      <CategoriaFormModal
+        open={catModalOpen}
+        onClose={() => setCatModalOpen(false)}
+        onSuccess={fetchData}
       />
     </div>
   )
