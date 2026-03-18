@@ -19293,6 +19293,22 @@ var History = createLucideIcon("history", [
 		key: "1fdv2h"
 	}]
 ]);
+var Info = createLucideIcon("info", [
+	["circle", {
+		cx: "12",
+		cy: "12",
+		r: "10",
+		key: "1mglay"
+	}],
+	["path", {
+		d: "M12 16v-4",
+		key: "1dtifu"
+	}],
+	["path", {
+		d: "M12 8h.01",
+		key: "e9boi3"
+	}]
+]);
 var LayoutDashboard = createLucideIcon("layout-dashboard", [
 	["rect", {
 		width: "7",
@@ -67752,13 +67768,23 @@ function ContasReceber() {
 	});
 	const totalAReceber = filteredContas.filter((c) => c.status === "pendente").reduce((acc, curr) => acc + Number(curr.valor), 0);
 	const totalRecebido = filteredContas.filter((c) => c.status === "pago").reduce((acc, curr) => acc + Number(curr.valor), 0);
+	const debtsByCustomer = (0, import_react.useMemo)(() => {
+		const debts = {};
+		filteredContas.forEach((c) => {
+			if (c.status === "pendente" && c.cliente?.nome) debts[c.cliente.nome] = (debts[c.cliente.nome] || 0) + Number(c.valor);
+		});
+		return Object.entries(debts).map(([nome, valor]) => ({
+			nome,
+			valor
+		})).sort((a, b) => b.valor - a.valor);
+	}, [filteredContas]);
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-		"data-uid": "src/pages/ContasReceber.tsx:107:5",
+		"data-uid": "src/pages/ContasReceber.tsx:119:5",
 		"data-prohibitions": "[editContent]",
-		className: "space-y-6 animate-fade-in max-w-6xl mx-auto h-full flex flex-col",
+		className: "space-y-6 animate-fade-in max-w-[1400px] mx-auto h-full flex flex-col",
 		children: [
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(PrintableReport, {
-				"data-uid": "src/pages/ContasReceber.tsx:108:7",
+				"data-uid": "src/pages/ContasReceber.tsx:120:7",
 				"data-prohibitions": "[editContent]",
 				contas: filteredContas,
 				clientName: clientSearch,
@@ -67766,60 +67792,60 @@ function ContasReceber() {
 				endDate
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				"data-uid": "src/pages/ContasReceber.tsx:115:7",
+				"data-uid": "src/pages/ContasReceber.tsx:127:7",
 				"data-prohibitions": "[editContent]",
 				className: "grid grid-cols-1 md:grid-cols-2 gap-6 shrink-0",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Card, {
-					"data-uid": "src/pages/ContasReceber.tsx:116:9",
+					"data-uid": "src/pages/ContasReceber.tsx:128:9",
 					"data-prohibitions": "[editContent]",
 					className: "shadow-sm border-orange-200 bg-orange-50/30",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardHeader, {
-						"data-uid": "src/pages/ContasReceber.tsx:117:11",
+						"data-uid": "src/pages/ContasReceber.tsx:129:11",
 						"data-prohibitions": "[]",
 						className: "flex flex-row items-center justify-between pb-2",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardTitle, {
-							"data-uid": "src/pages/ContasReceber.tsx:118:13",
+							"data-uid": "src/pages/ContasReceber.tsx:130:13",
 							"data-prohibitions": "[]",
 							className: "text-sm font-medium text-orange-800",
 							children: "Total a Receber (Filtrado)"
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DollarSign, {
-							"data-uid": "src/pages/ContasReceber.tsx:121:13",
+							"data-uid": "src/pages/ContasReceber.tsx:133:13",
 							"data-prohibitions": "[editContent]",
 							className: "h-4 w-4 text-orange-500"
 						})]
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardContent, {
-						"data-uid": "src/pages/ContasReceber.tsx:123:11",
+						"data-uid": "src/pages/ContasReceber.tsx:135:11",
 						"data-prohibitions": "[editContent]",
 						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-							"data-uid": "src/pages/ContasReceber.tsx:124:13",
+							"data-uid": "src/pages/ContasReceber.tsx:136:13",
 							"data-prohibitions": "[editContent]",
 							className: "text-3xl font-bold text-orange-900",
 							children: formatCurrency(totalAReceber)
 						})
 					})]
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Card, {
-					"data-uid": "src/pages/ContasReceber.tsx:129:9",
+					"data-uid": "src/pages/ContasReceber.tsx:141:9",
 					"data-prohibitions": "[editContent]",
 					className: "shadow-sm border-emerald-200 bg-emerald-50/30",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardHeader, {
-						"data-uid": "src/pages/ContasReceber.tsx:130:11",
+						"data-uid": "src/pages/ContasReceber.tsx:142:11",
 						"data-prohibitions": "[]",
 						className: "flex flex-row items-center justify-between pb-2",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardTitle, {
-							"data-uid": "src/pages/ContasReceber.tsx:131:13",
+							"data-uid": "src/pages/ContasReceber.tsx:143:13",
 							"data-prohibitions": "[]",
 							className: "text-sm font-medium text-emerald-800",
 							children: "Total Recebido (Filtrado)"
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Wallet, {
-							"data-uid": "src/pages/ContasReceber.tsx:134:13",
+							"data-uid": "src/pages/ContasReceber.tsx:146:13",
 							"data-prohibitions": "[editContent]",
 							className: "h-4 w-4 text-emerald-500"
 						})]
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardContent, {
-						"data-uid": "src/pages/ContasReceber.tsx:136:11",
+						"data-uid": "src/pages/ContasReceber.tsx:148:11",
 						"data-prohibitions": "[editContent]",
 						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-							"data-uid": "src/pages/ContasReceber.tsx:137:13",
+							"data-uid": "src/pages/ContasReceber.tsx:149:13",
 							"data-prohibitions": "[editContent]",
 							className: "text-3xl font-bold text-emerald-900",
 							children: formatCurrency(totalRecebido)
@@ -67828,37 +67854,37 @@ function ContasReceber() {
 				})]
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				"data-uid": "src/pages/ContasReceber.tsx:144:7",
+				"data-uid": "src/pages/ContasReceber.tsx:156:7",
 				"data-prohibitions": "[]",
 				className: "flex flex-col md:flex-row justify-between items-start md:items-center gap-4 shrink-0 bg-muted/50 p-4 rounded-xl border border-border",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					"data-uid": "src/pages/ContasReceber.tsx:145:9",
+					"data-uid": "src/pages/ContasReceber.tsx:157:9",
 					"data-prohibitions": "[]",
 					className: "flex flex-wrap gap-4 items-center w-full md:w-auto",
 					children: [
 						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Tabs, {
-							"data-uid": "src/pages/ContasReceber.tsx:146:11",
+							"data-uid": "src/pages/ContasReceber.tsx:158:11",
 							"data-prohibitions": "[]",
 							value: filter,
 							onValueChange: setFilter,
 							children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TabsList, {
-								"data-uid": "src/pages/ContasReceber.tsx:147:13",
+								"data-uid": "src/pages/ContasReceber.tsx:159:13",
 								"data-prohibitions": "[]",
 								children: [
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TabsTrigger, {
-										"data-uid": "src/pages/ContasReceber.tsx:148:15",
+										"data-uid": "src/pages/ContasReceber.tsx:160:15",
 										"data-prohibitions": "[]",
 										value: "Todos",
 										children: "Todos"
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TabsTrigger, {
-										"data-uid": "src/pages/ContasReceber.tsx:149:15",
+										"data-uid": "src/pages/ContasReceber.tsx:161:15",
 										"data-prohibitions": "[]",
 										value: "Pendentes",
 										children: "Pendentes"
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TabsTrigger, {
-										"data-uid": "src/pages/ContasReceber.tsx:150:15",
+										"data-uid": "src/pages/ContasReceber.tsx:162:15",
 										"data-prohibitions": "[]",
 										value: "Pagos",
 										children: "Pagos"
@@ -67867,15 +67893,15 @@ function ContasReceber() {
 							})
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							"data-uid": "src/pages/ContasReceber.tsx:153:11",
+							"data-uid": "src/pages/ContasReceber.tsx:165:11",
 							"data-prohibitions": "[]",
 							className: "relative w-full md:w-64",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Search, {
-								"data-uid": "src/pages/ContasReceber.tsx:154:13",
+								"data-uid": "src/pages/ContasReceber.tsx:166:13",
 								"data-prohibitions": "[editContent]",
 								className: "absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground"
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
-								"data-uid": "src/pages/ContasReceber.tsx:155:13",
+								"data-uid": "src/pages/ContasReceber.tsx:167:13",
 								"data-prohibitions": "[editContent]",
 								placeholder: "Buscar cliente...",
 								className: "pl-9 bg-background h-9",
@@ -67884,12 +67910,12 @@ function ContasReceber() {
 							})]
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							"data-uid": "src/pages/ContasReceber.tsx:162:11",
+							"data-uid": "src/pages/ContasReceber.tsx:174:11",
 							"data-prohibitions": "[]",
 							className: "flex items-center gap-2",
 							children: [
 								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
-									"data-uid": "src/pages/ContasReceber.tsx:163:13",
+									"data-uid": "src/pages/ContasReceber.tsx:175:13",
 									"data-prohibitions": "[editContent]",
 									type: "date",
 									className: "h-9 w-auto text-sm",
@@ -67898,13 +67924,13 @@ function ContasReceber() {
 									title: "Data Inicial"
 								}),
 								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									"data-uid": "src/pages/ContasReceber.tsx:170:13",
+									"data-uid": "src/pages/ContasReceber.tsx:182:13",
 									"data-prohibitions": "[]",
 									className: "text-muted-foreground",
 									children: "até"
 								}),
 								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
-									"data-uid": "src/pages/ContasReceber.tsx:171:13",
+									"data-uid": "src/pages/ContasReceber.tsx:183:13",
 									"data-prohibitions": "[editContent]",
 									type: "date",
 									className: "h-9 w-auto text-sm",
@@ -67916,186 +67942,265 @@ function ContasReceber() {
 						})
 					]
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button$1, {
-					"data-uid": "src/pages/ContasReceber.tsx:180:9",
+					"data-uid": "src/pages/ContasReceber.tsx:192:9",
 					"data-prohibitions": "[]",
 					variant: "outline",
-					className: "shrink-0 w-full md:w-auto",
+					className: "shrink-0 w-full md:w-auto bg-background",
 					onClick: () => window.print(),
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FileText, {
-						"data-uid": "src/pages/ContasReceber.tsx:185:11",
+						"data-uid": "src/pages/ContasReceber.tsx:197:11",
 						"data-prohibitions": "[editContent]",
 						className: "h-4 w-4 mr-2"
-					}), " Relatório PDF"]
+					}), " Gerar Relatório PDF"]
 				})]
 			}),
-			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Card, {
-				"data-uid": "src/pages/ContasReceber.tsx:189:7",
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				"data-uid": "src/pages/ContasReceber.tsx:201:7",
 				"data-prohibitions": "[editContent]",
-				className: "shadow-sm border-border flex-1 flex flex-col min-h-0 bg-card",
-				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardContent, {
-					"data-uid": "src/pages/ContasReceber.tsx:190:9",
+				className: "flex-1 min-h-0 grid grid-cols-1 lg:grid-cols-3 gap-6",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Card, {
+					"data-uid": "src/pages/ContasReceber.tsx:202:9",
 					"data-prohibitions": "[editContent]",
-					className: "p-0 flex-1 overflow-auto",
-					children: loading ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-						"data-uid": "src/pages/ContasReceber.tsx:192:13",
-						"data-prohibitions": "[]",
-						className: "flex h-40 items-center justify-center",
-						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(LoaderCircle, {
-							"data-uid": "src/pages/ContasReceber.tsx:193:15",
-							"data-prohibitions": "[editContent]",
-							className: "h-8 w-8 animate-spin text-primary"
-						})
-					}) : /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Table, {
-						"data-uid": "src/pages/ContasReceber.tsx:196:13",
+					className: "lg:col-span-2 shadow-sm border-border flex flex-col min-h-0 bg-card",
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardContent, {
+						"data-uid": "src/pages/ContasReceber.tsx:203:11",
 						"data-prohibitions": "[editContent]",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHeader, {
-							"data-uid": "src/pages/ContasReceber.tsx:197:15",
+						className: "p-0 flex-1 overflow-auto",
+						children: loading ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+							"data-uid": "src/pages/ContasReceber.tsx:205:15",
 							"data-prohibitions": "[]",
-							className: "sticky top-0 bg-muted/90 z-10 backdrop-blur-md",
-							children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TableRow, {
-								"data-uid": "src/pages/ContasReceber.tsx:198:17",
-								"data-prohibitions": "[]",
-								children: [
-									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
-										"data-uid": "src/pages/ContasReceber.tsx:199:19",
-										"data-prohibitions": "[]",
-										children: "Cliente"
-									}),
-									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
-										"data-uid": "src/pages/ContasReceber.tsx:200:19",
-										"data-prohibitions": "[]",
-										children: "Data Venda"
-									}),
-									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
-										"data-uid": "src/pages/ContasReceber.tsx:201:19",
-										"data-prohibitions": "[]",
-										children: "Vencimento"
-									}),
-									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
-										"data-uid": "src/pages/ContasReceber.tsx:202:19",
-										"data-prohibitions": "[]",
-										children: "Valor"
-									}),
-									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
-										"data-uid": "src/pages/ContasReceber.tsx:203:19",
-										"data-prohibitions": "[]",
-										children: "Status"
-									}),
-									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
-										"data-uid": "src/pages/ContasReceber.tsx:204:19",
-										"data-prohibitions": "[]",
-										className: "text-right",
-										children: "Ação"
-									})
-								]
-							})
-						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TableBody, {
-							"data-uid": "src/pages/ContasReceber.tsx:207:15",
-							"data-prohibitions": "[editContent]",
-							children: [filteredContas.map((conta) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TableRow, {
-								"data-uid": "src/pages/ContasReceber.tsx:209:19",
+							className: "flex h-40 items-center justify-center",
+							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(LoaderCircle, {
+								"data-uid": "src/pages/ContasReceber.tsx:206:17",
 								"data-prohibitions": "[editContent]",
-								children: [
-									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-										"data-uid": "src/pages/ContasReceber.tsx:210:21",
-										"data-prohibitions": "[editContent]",
-										className: "font-medium text-foreground",
-										children: conta.cliente?.nome || "-"
-									}),
-									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-										"data-uid": "src/pages/ContasReceber.tsx:213:21",
-										"data-prohibitions": "[editContent]",
-										children: conta.venda?.data ? new Date(conta.venda.data).toLocaleDateString("pt-BR") : "-"
-									}),
-									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-										"data-uid": "src/pages/ContasReceber.tsx:218:21",
-										"data-prohibitions": "[editContent]",
-										children: new Date(conta.data_vencimento).toLocaleDateString("pt-BR")
-									}),
-									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-										"data-uid": "src/pages/ContasReceber.tsx:221:21",
-										"data-prohibitions": "[editContent]",
-										className: "font-medium",
-										children: formatCurrency(conta.valor)
-									}),
-									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-										"data-uid": "src/pages/ContasReceber.tsx:222:21",
-										"data-prohibitions": "[editContent]",
-										children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Badge, {
+								className: "h-8 w-8 animate-spin text-primary"
+							})
+						}) : /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Table, {
+							"data-uid": "src/pages/ContasReceber.tsx:209:15",
+							"data-prohibitions": "[editContent]",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHeader, {
+								"data-uid": "src/pages/ContasReceber.tsx:210:17",
+								"data-prohibitions": "[]",
+								className: "sticky top-0 bg-muted/90 z-10 backdrop-blur-md",
+								children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TableRow, {
+									"data-uid": "src/pages/ContasReceber.tsx:211:19",
+									"data-prohibitions": "[]",
+									children: [
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
+											"data-uid": "src/pages/ContasReceber.tsx:212:21",
+											"data-prohibitions": "[]",
+											children: "Cliente"
+										}),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
+											"data-uid": "src/pages/ContasReceber.tsx:213:21",
+											"data-prohibitions": "[]",
+											children: "Data Venda"
+										}),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
+											"data-uid": "src/pages/ContasReceber.tsx:214:21",
+											"data-prohibitions": "[]",
+											children: "Vencimento"
+										}),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
+											"data-uid": "src/pages/ContasReceber.tsx:215:21",
+											"data-prohibitions": "[]",
+											children: "Valor"
+										}),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
+											"data-uid": "src/pages/ContasReceber.tsx:216:21",
+											"data-prohibitions": "[]",
+											children: "Status"
+										}),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
+											"data-uid": "src/pages/ContasReceber.tsx:217:21",
+											"data-prohibitions": "[]",
+											className: "text-right",
+											children: "Ação"
+										})
+									]
+								})
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TableBody, {
+								"data-uid": "src/pages/ContasReceber.tsx:220:17",
+								"data-prohibitions": "[editContent]",
+								children: [filteredContas.map((conta) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TableRow, {
+									"data-uid": "src/pages/ContasReceber.tsx:222:21",
+									"data-prohibitions": "[editContent]",
+									children: [
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
 											"data-uid": "src/pages/ContasReceber.tsx:223:23",
 											"data-prohibitions": "[editContent]",
-											variant: conta.status === "pago" ? "default" : "secondary",
-											className: conta.status === "pago" ? "bg-emerald-100 text-emerald-800 border-0" : "bg-orange-100 text-orange-800 border-0",
-											children: conta.status === "pago" ? "Pago" : "Pendente"
+											className: "font-medium text-foreground",
+											children: conta.cliente?.nome || "-"
+										}),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
+											"data-uid": "src/pages/ContasReceber.tsx:226:23",
+											"data-prohibitions": "[editContent]",
+											children: conta.venda?.data ? new Date(conta.venda.data).toLocaleDateString("pt-BR") : "-"
+										}),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
+											"data-uid": "src/pages/ContasReceber.tsx:231:23",
+											"data-prohibitions": "[editContent]",
+											children: new Date(conta.data_vencimento).toLocaleDateString("pt-BR")
+										}),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
+											"data-uid": "src/pages/ContasReceber.tsx:234:23",
+											"data-prohibitions": "[editContent]",
+											className: "font-medium",
+											children: formatCurrency(conta.valor)
+										}),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
+											"data-uid": "src/pages/ContasReceber.tsx:235:23",
+											"data-prohibitions": "[editContent]",
+											children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Badge, {
+												"data-uid": "src/pages/ContasReceber.tsx:236:25",
+												"data-prohibitions": "[editContent]",
+												variant: conta.status === "pago" ? "default" : "secondary",
+												className: conta.status === "pago" ? "bg-emerald-100 text-emerald-800 border-0" : "bg-orange-100 text-orange-800 border-0",
+												children: conta.status === "pago" ? "Pago" : "Pendente"
+											})
+										}),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
+											"data-uid": "src/pages/ContasReceber.tsx:247:23",
+											"data-prohibitions": "[editContent]",
+											className: "text-right",
+											children: conta.status === "pendente" && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
+												"data-uid": "src/pages/ContasReceber.tsx:249:27",
+												"data-prohibitions": "[]",
+												size: "sm",
+												variant: "outline",
+												onClick: () => {
+													setPayingConta(conta);
+													setPaymentDate((/* @__PURE__ */ new Date()).toISOString().split("T")[0]);
+												},
+												children: "Registrar Pagamento"
+											})
 										})
-									}),
-									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-										"data-uid": "src/pages/ContasReceber.tsx:234:21",
-										"data-prohibitions": "[editContent]",
-										className: "text-right",
-										children: conta.status === "pendente" && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
-											"data-uid": "src/pages/ContasReceber.tsx:236:25",
-											"data-prohibitions": "[]",
-											size: "sm",
-											variant: "outline",
-											onClick: () => {
-												setPayingConta(conta);
-												setPaymentDate((/* @__PURE__ */ new Date()).toISOString().split("T")[0]);
-											},
-											children: "Registrar Pagamento"
-										})
-									})
-								]
-							}, conta.id)), filteredContas.length === 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableRow, {
-								"data-uid": "src/pages/ContasReceber.tsx:251:19",
-								"data-prohibitions": "[]",
-								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-									"data-uid": "src/pages/ContasReceber.tsx:252:21",
+									]
+								}, conta.id)), filteredContas.length === 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableRow, {
+									"data-uid": "src/pages/ContasReceber.tsx:264:21",
 									"data-prohibitions": "[]",
-									colSpan: 6,
-									className: "text-center py-8 text-muted-foreground",
-									children: "Nenhuma conta encontrada."
-								})
+									children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
+										"data-uid": "src/pages/ContasReceber.tsx:265:23",
+										"data-prohibitions": "[]",
+										colSpan: 6,
+										className: "text-center py-8 text-muted-foreground",
+										children: "Nenhuma conta encontrada."
+									})
+								})]
 							})]
-						})]
+						})
 					})
-				})
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Card, {
+					"data-uid": "src/pages/ContasReceber.tsx:276:9",
+					"data-prohibitions": "[editContent]",
+					className: "lg:col-span-1 shadow-sm border-border flex flex-col h-full bg-card max-h-[500px] lg:max-h-none",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardHeader, {
+						"data-uid": "src/pages/ContasReceber.tsx:277:11",
+						"data-prohibitions": "[]",
+						className: "bg-muted/30 border-b border-border py-3",
+						children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardTitle, {
+							"data-uid": "src/pages/ContasReceber.tsx:278:13",
+							"data-prohibitions": "[]",
+							className: "text-base font-semibold flex items-center gap-2",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Users, {
+								"data-uid": "src/pages/ContasReceber.tsx:279:15",
+								"data-prohibitions": "[editContent]",
+								className: "h-4 w-4 text-primary"
+							}), " Resumo de Devedores"]
+						})
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardContent, {
+						"data-uid": "src/pages/ContasReceber.tsx:282:11",
+						"data-prohibitions": "[editContent]",
+						className: "flex-1 overflow-auto p-0",
+						children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Table, {
+							"data-uid": "src/pages/ContasReceber.tsx:283:13",
+							"data-prohibitions": "[editContent]",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHeader, {
+								"data-uid": "src/pages/ContasReceber.tsx:284:15",
+								"data-prohibitions": "[]",
+								className: "sticky top-0 bg-background z-10 shadow-sm",
+								children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TableRow, {
+									"data-uid": "src/pages/ContasReceber.tsx:285:17",
+									"data-prohibitions": "[]",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
+										"data-uid": "src/pages/ContasReceber.tsx:286:19",
+										"data-prohibitions": "[]",
+										children: "Cliente"
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
+										"data-uid": "src/pages/ContasReceber.tsx:287:19",
+										"data-prohibitions": "[]",
+										className: "text-right",
+										children: "Total Pendente"
+									})]
+								})
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TableBody, {
+								"data-uid": "src/pages/ContasReceber.tsx:290:15",
+								"data-prohibitions": "[editContent]",
+								children: [debtsByCustomer.map((d) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TableRow, {
+									"data-uid": "src/pages/ContasReceber.tsx:292:19",
+									"data-prohibitions": "[editContent]",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
+										"data-uid": "src/pages/ContasReceber.tsx:293:21",
+										"data-prohibitions": "[editContent]",
+										className: "font-medium text-sm",
+										children: d.nome
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
+										"data-uid": "src/pages/ContasReceber.tsx:294:21",
+										"data-prohibitions": "[editContent]",
+										className: "text-right font-bold text-orange-600 dark:text-orange-400",
+										children: formatCurrency(d.valor)
+									})]
+								}, d.nome)), debtsByCustomer.length === 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableRow, {
+									"data-uid": "src/pages/ContasReceber.tsx:300:19",
+									"data-prohibitions": "[]",
+									children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
+										"data-uid": "src/pages/ContasReceber.tsx:301:21",
+										"data-prohibitions": "[]",
+										colSpan: 2,
+										className: "text-center text-muted-foreground py-8",
+										children: "Nenhuma dívida pendente."
+									})
+								})]
+							})]
+						})
+					})]
+				})]
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Dialog, {
-				"data-uid": "src/pages/ContasReceber.tsx:263:7",
+				"data-uid": "src/pages/ContasReceber.tsx:312:7",
 				"data-prohibitions": "[editContent]",
 				open: !!payingConta,
 				onOpenChange: (open) => !open && setPayingConta(null),
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogContent, {
-					"data-uid": "src/pages/ContasReceber.tsx:264:9",
+					"data-uid": "src/pages/ContasReceber.tsx:313:9",
 					"data-prohibitions": "[editContent]",
 					className: "sm:max-w-[425px]",
 					children: [
 						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogHeader, {
-							"data-uid": "src/pages/ContasReceber.tsx:265:11",
+							"data-uid": "src/pages/ContasReceber.tsx:314:11",
 							"data-prohibitions": "[]",
 							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogTitle, {
-								"data-uid": "src/pages/ContasReceber.tsx:266:13",
+								"data-uid": "src/pages/ContasReceber.tsx:315:13",
 								"data-prohibitions": "[]",
 								children: "Registrar Pagamento"
 							})
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-							"data-uid": "src/pages/ContasReceber.tsx:268:11",
+							"data-uid": "src/pages/ContasReceber.tsx:317:11",
 							"data-prohibitions": "[]",
 							className: "grid gap-4 py-4",
 							children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								"data-uid": "src/pages/ContasReceber.tsx:269:13",
+								"data-uid": "src/pages/ContasReceber.tsx:318:13",
 								"data-prohibitions": "[]",
 								className: "grid grid-cols-4 items-center gap-4",
 								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$1, {
-									"data-uid": "src/pages/ContasReceber.tsx:270:15",
+									"data-uid": "src/pages/ContasReceber.tsx:319:15",
 									"data-prohibitions": "[]",
 									htmlFor: "data",
 									className: "text-right",
 									children: "Data"
 								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
-									"data-uid": "src/pages/ContasReceber.tsx:273:15",
+									"data-uid": "src/pages/ContasReceber.tsx:322:15",
 									"data-prohibitions": "[editContent]",
 									id: "data",
 									type: "date",
@@ -68106,22 +68211,22 @@ function ContasReceber() {
 							})
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogFooter, {
-							"data-uid": "src/pages/ContasReceber.tsx:282:11",
+							"data-uid": "src/pages/ContasReceber.tsx:331:11",
 							"data-prohibitions": "[editContent]",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
-								"data-uid": "src/pages/ContasReceber.tsx:283:13",
+								"data-uid": "src/pages/ContasReceber.tsx:332:13",
 								"data-prohibitions": "[]",
 								variant: "outline",
 								onClick: () => setPayingConta(null),
 								disabled: submitting,
 								children: "Cancelar"
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button$1, {
-								"data-uid": "src/pages/ContasReceber.tsx:286:13",
+								"data-uid": "src/pages/ContasReceber.tsx:335:13",
 								"data-prohibitions": "[editContent]",
 								onClick: handlePay,
 								disabled: submitting,
 								children: [submitting && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(LoaderCircle, {
-									"data-uid": "src/pages/ContasReceber.tsx:287:30",
+									"data-uid": "src/pages/ContasReceber.tsx:336:30",
 									"data-prohibitions": "[editContent]",
 									className: "h-4 w-4 animate-spin mr-2"
 								}), " Confirmar"]
@@ -77106,7 +77211,7 @@ function ImportProductsModal({ open, onClose, onSuccess }) {
 			const rows = (await file.text()).split("\n").filter((r) => r.trim().length > 0);
 			if (rows.length < 2) throw new Error("Arquivo vazio ou sem dados válidos.");
 			const itemsToInsert = rows.slice(1).map((row) => {
-				const cols = row.split(/[,;]/).map((c) => c.trim());
+				const cols = row.split(/[,;]/).map((c) => c.trim().replace(/^"|"$/g, ""));
 				const nome = cols[0];
 				if (!nome) return null;
 				const preco_custo = parseFloat(cols[3]?.replace(",", ".") || "0");
@@ -77149,78 +77254,97 @@ function ImportProductsModal({ open, onClose, onSuccess }) {
 		}
 	};
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Dialog, {
-		"data-uid": "src/components/estoque/ImportProductsModal.tsx:91:5",
+		"data-uid": "src/components/estoque/ImportProductsModal.tsx:92:5",
 		"data-prohibitions": "[editContent]",
 		open,
 		onOpenChange: (o) => !o && onClose(),
 		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogContent, {
-			"data-uid": "src/components/estoque/ImportProductsModal.tsx:92:7",
+			"data-uid": "src/components/estoque/ImportProductsModal.tsx:93:7",
 			"data-prohibitions": "[editContent]",
 			children: [
 				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogHeader, {
-					"data-uid": "src/components/estoque/ImportProductsModal.tsx:93:9",
+					"data-uid": "src/components/estoque/ImportProductsModal.tsx:94:9",
 					"data-prohibitions": "[]",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogTitle, {
-						"data-uid": "src/components/estoque/ImportProductsModal.tsx:94:11",
+						"data-uid": "src/components/estoque/ImportProductsModal.tsx:95:11",
 						"data-prohibitions": "[]",
 						children: "Importar Produtos em Lote"
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogDescription, {
-						"data-uid": "src/components/estoque/ImportProductsModal.tsx:95:11",
+						"data-uid": "src/components/estoque/ImportProductsModal.tsx:96:11",
 						"data-prohibitions": "[]",
-						children: "Faça upload de um arquivo CSV (separado por vírgula ou ponto-e-vírgula)."
+						children: "Faça upload de um arquivo CSV. Para planilhas do Excel, clique em \"Salvar Como\" e escolha o formato \"CSV (UTF-8) delimitado por vírgulas\"."
 					})]
 				}),
 				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					"data-uid": "src/components/estoque/ImportProductsModal.tsx:99:9",
+					"data-uid": "src/components/estoque/ImportProductsModal.tsx:101:9",
 					"data-prohibitions": "[]",
 					className: "space-y-4 py-4",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						"data-uid": "src/components/estoque/ImportProductsModal.tsx:100:11",
+						"data-uid": "src/components/estoque/ImportProductsModal.tsx:102:11",
 						"data-prohibitions": "[]",
-						className: "text-sm bg-muted p-3 rounded-md border border-border",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-							"data-uid": "src/components/estoque/ImportProductsModal.tsx:101:13",
-							"data-prohibitions": "[]",
-							className: "font-semibold mb-1",
-							children: "Formato de Colunas Esperado:"
-						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-							"data-uid": "src/components/estoque/ImportProductsModal.tsx:102:13",
-							"data-prohibitions": "[]",
-							className: "text-muted-foreground font-mono text-xs",
-							children: "Nome, Codigo, Categoria, Preco_Custo, Preco_Venda, Estoque, Tamanho"
-						})]
-					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
-						"data-uid": "src/components/estoque/ImportProductsModal.tsx:106:11",
-						"data-prohibitions": "[editContent]",
-						type: "file",
-						accept: ".csv",
-						onChange: (e) => setFile(e.target.files?.[0] || null)
+						className: "text-sm bg-muted p-4 rounded-md border border-border",
+						children: [
+							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
+								"data-uid": "src/components/estoque/ImportProductsModal.tsx:103:13",
+								"data-prohibitions": "[]",
+								className: "font-semibold mb-2 flex items-center gap-2",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Info, {
+									"data-uid": "src/components/estoque/ImportProductsModal.tsx:104:15",
+									"data-prohibitions": "[editContent]",
+									className: "h-4 w-4 text-primary"
+								}), " Colunas Esperadas (nessa ordem):"]
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+								"data-uid": "src/components/estoque/ImportProductsModal.tsx:106:13",
+								"data-prohibitions": "[]",
+								className: "text-muted-foreground font-mono text-xs bg-background p-2 rounded border border-border",
+								children: "Nome, Codigo, Categoria, Preco_Custo, Preco_Venda, Estoque, Tamanho"
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+								"data-uid": "src/components/estoque/ImportProductsModal.tsx:109:13",
+								"data-prohibitions": "[]",
+								className: "text-xs text-muted-foreground mt-3 italic",
+								children: "* A primeira linha será ignorada (cabeçalho). Produtos com nomes idênticos aos existentes no sistema serão pulados para evitar duplicações."
+							})
+						]
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+						"data-uid": "src/components/estoque/ImportProductsModal.tsx:114:11",
+						"data-prohibitions": "[]",
+						className: "space-y-2",
+						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
+							"data-uid": "src/components/estoque/ImportProductsModal.tsx:115:13",
+							"data-prohibitions": "[editContent]",
+							type: "file",
+							accept: ".csv",
+							onChange: (e) => setFile(e.target.files?.[0] || null),
+							className: "cursor-pointer"
+						})
 					})]
 				}),
 				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogFooter, {
-					"data-uid": "src/components/estoque/ImportProductsModal.tsx:108:9",
+					"data-uid": "src/components/estoque/ImportProductsModal.tsx:123:9",
 					"data-prohibitions": "[editContent]",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
-						"data-uid": "src/components/estoque/ImportProductsModal.tsx:109:11",
+						"data-uid": "src/components/estoque/ImportProductsModal.tsx:124:11",
 						"data-prohibitions": "[]",
 						variant: "outline",
 						onClick: onClose,
 						disabled: loading,
 						children: "Cancelar"
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button$1, {
-						"data-uid": "src/components/estoque/ImportProductsModal.tsx:112:11",
+						"data-uid": "src/components/estoque/ImportProductsModal.tsx:127:11",
 						"data-prohibitions": "[editContent]",
 						onClick: handleImport,
 						disabled: !file || loading,
 						children: [loading ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(LoaderCircle, {
-							"data-uid": "src/components/estoque/ImportProductsModal.tsx:114:15",
+							"data-uid": "src/components/estoque/ImportProductsModal.tsx:129:15",
 							"data-prohibitions": "[editContent]",
 							className: "mr-2 h-4 w-4 animate-spin"
 						}) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CloudUpload, {
-							"data-uid": "src/components/estoque/ImportProductsModal.tsx:116:15",
+							"data-uid": "src/components/estoque/ImportProductsModal.tsx:131:15",
 							"data-prohibitions": "[editContent]",
 							className: "mr-2 h-4 w-4"
-						}), "Importar CSV"]
+						}), "Iniciar Importação"]
 					})]
 				})
 			]
@@ -88607,7 +88731,7 @@ function CheckoutModal({ open, onOpenChange }) {
 		if (method === "A Prazo" && !selectedCustomer) {
 			toast$1({
 				title: "Atenção",
-				description: "Vendas A Prazo exigem cliente.",
+				description: "Vendas A Prazo exigem cliente associado.",
 				variant: "destructive"
 			});
 			return;
@@ -88623,6 +88747,16 @@ function CheckoutModal({ open, onOpenChange }) {
 		}
 		setIsSubmitting(true);
 		try {
+			const { data: caixa, error: caixaError } = await supabase.from("caixa").select("id").eq("user_id", user.id).eq("status", "aberto").maybeSingle();
+			if (caixaError || !caixa) {
+				toast$1({
+					title: "Caixa Fechado",
+					description: "Abra o caixa antes de realizar uma venda.",
+					variant: "destructive"
+				});
+				setIsSubmitting(false);
+				return;
+			}
 			const { data: venda, error: vendaError } = await supabase.from("vendas").insert({
 				user_id: user.id,
 				cliente_id: selectedCustomer?.id || null,
@@ -88687,16 +88821,16 @@ function CheckoutModal({ open, onOpenChange }) {
 	};
 	const change = (parseFloat(amountReceived.replace(",", ".")) || 0) > total ? (parseFloat(amountReceived.replace(",", ".")) || 0) - total : 0;
 	if (receipt) return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Dialog, {
-		"data-uid": "src/components/pdv/CheckoutModal.tsx:154:7",
+		"data-uid": "src/components/pdv/CheckoutModal.tsx:173:7",
 		"data-prohibitions": "[]",
 		open,
 		onOpenChange: handleOpenChange,
 		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogContent, {
-			"data-uid": "src/components/pdv/CheckoutModal.tsx:155:9",
+			"data-uid": "src/components/pdv/CheckoutModal.tsx:174:9",
 			"data-prohibitions": "[]",
 			className: "max-w-md bg-card",
 			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ReceiptView, {
-				"data-uid": "src/components/pdv/CheckoutModal.tsx:156:11",
+				"data-uid": "src/components/pdv/CheckoutModal.tsx:175:11",
 				"data-prohibitions": "[editContent]",
 				receipt,
 				change,
@@ -88705,46 +88839,46 @@ function CheckoutModal({ open, onOpenChange }) {
 		})
 	});
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Dialog, {
-		"data-uid": "src/components/pdv/CheckoutModal.tsx:166:5",
+		"data-uid": "src/components/pdv/CheckoutModal.tsx:185:5",
 		"data-prohibitions": "[editContent]",
 		open,
 		onOpenChange: handleOpenChange,
 		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogContent, {
-			"data-uid": "src/components/pdv/CheckoutModal.tsx:167:7",
+			"data-uid": "src/components/pdv/CheckoutModal.tsx:186:7",
 			"data-prohibitions": "[editContent]",
 			className: "max-w-4xl sm:rounded-2xl bg-card",
 			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogHeader, {
-				"data-uid": "src/components/pdv/CheckoutModal.tsx:168:9",
+				"data-uid": "src/components/pdv/CheckoutModal.tsx:187:9",
 				"data-prohibitions": "[]",
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogTitle, {
-					"data-uid": "src/components/pdv/CheckoutModal.tsx:169:11",
+					"data-uid": "src/components/pdv/CheckoutModal.tsx:188:11",
 					"data-prohibitions": "[]",
 					className: "text-2xl font-bold",
 					children: "Finalizar Venda"
 				})
 			}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				"data-uid": "src/components/pdv/CheckoutModal.tsx:171:9",
+				"data-uid": "src/components/pdv/CheckoutModal.tsx:190:9",
 				"data-prohibitions": "[editContent]",
 				className: "grid grid-cols-1 md:grid-cols-[1.2fr_1fr] gap-8 py-2",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					"data-uid": "src/components/pdv/CheckoutModal.tsx:172:11",
+					"data-uid": "src/components/pdv/CheckoutModal.tsx:191:11",
 					"data-prohibitions": "[editContent]",
 					className: "space-y-8",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CustomerSelect, {
-						"data-uid": "src/components/pdv/CheckoutModal.tsx:173:13",
+						"data-uid": "src/components/pdv/CheckoutModal.tsx:192:13",
 						"data-prohibitions": "[editContent]",
 						onSelect: setSelectedCustomer
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						"data-uid": "src/components/pdv/CheckoutModal.tsx:174:13",
+						"data-uid": "src/components/pdv/CheckoutModal.tsx:193:13",
 						"data-prohibitions": "[editContent]",
 						className: "space-y-4",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", {
-							"data-uid": "src/components/pdv/CheckoutModal.tsx:175:15",
+							"data-uid": "src/components/pdv/CheckoutModal.tsx:194:15",
 							"data-prohibitions": "[]",
 							className: "text-xs font-bold text-muted-foreground uppercase tracking-wider",
 							children: "Forma de Pagamento"
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-							"data-uid": "src/components/pdv/CheckoutModal.tsx:178:15",
+							"data-uid": "src/components/pdv/CheckoutModal.tsx:197:15",
 							"data-prohibitions": "[editContent]",
 							className: "grid grid-cols-3 gap-3",
 							children: [
@@ -88769,20 +88903,20 @@ function CheckoutModal({ open, onOpenChange }) {
 									icon: CalendarClock
 								}
 							].map((m) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button$1, {
-								"data-uid": "src/components/pdv/CheckoutModal.tsx:186:19",
+								"data-uid": "src/components/pdv/CheckoutModal.tsx:205:19",
 								"data-prohibitions": "[editContent]",
 								variant: method === m.id ? "default" : "outline",
 								className: `h-16 flex flex-col gap-1 ${method === m.id ? "ring-2 ring-primary ring-offset-2" : ""}`,
 								onClick: () => setMethod(m.id),
 								children: [
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(m.icon, {
-										"data-uid": "src/components/pdv/CheckoutModal.tsx:192:21",
+										"data-uid": "src/components/pdv/CheckoutModal.tsx:211:21",
 										"data-prohibitions": "[editContent]",
 										className: "h-5 w-5"
 									}),
 									" ",
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-										"data-uid": "src/components/pdv/CheckoutModal.tsx:192:52",
+										"data-uid": "src/components/pdv/CheckoutModal.tsx:211:52",
 										"data-prohibitions": "[editContent]",
 										children: m.id
 									})
@@ -88791,83 +88925,85 @@ function CheckoutModal({ open, onOpenChange }) {
 						})]
 					})]
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					"data-uid": "src/components/pdv/CheckoutModal.tsx:198:11",
+					"data-uid": "src/components/pdv/CheckoutModal.tsx:217:11",
 					"data-prohibitions": "[editContent]",
 					className: "bg-muted/50 p-6 rounded-xl border border-border flex flex-col shadow-sm",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						"data-uid": "src/components/pdv/CheckoutModal.tsx:199:13",
+						"data-uid": "src/components/pdv/CheckoutModal.tsx:218:13",
 						"data-prohibitions": "[editContent]",
 						className: "space-y-5 flex-1",
 						children: [
 							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								"data-uid": "src/components/pdv/CheckoutModal.tsx:200:15",
+								"data-uid": "src/components/pdv/CheckoutModal.tsx:219:15",
 								"data-prohibitions": "[editContent]",
 								className: "flex justify-between items-center text-sm text-muted-foreground",
 								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									"data-uid": "src/components/pdv/CheckoutModal.tsx:201:17",
+									"data-uid": "src/components/pdv/CheckoutModal.tsx:220:17",
 									"data-prohibitions": "[]",
-									children: "Subtotal"
+									children: "Subtotal dos Itens"
 								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									"data-uid": "src/components/pdv/CheckoutModal.tsx:202:17",
+									"data-uid": "src/components/pdv/CheckoutModal.tsx:221:17",
 									"data-prohibitions": "[editContent]",
 									children: formatCurrency(subtotal)
 								})]
 							}),
 							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								"data-uid": "src/components/pdv/CheckoutModal.tsx:204:15",
+								"data-uid": "src/components/pdv/CheckoutModal.tsx:223:15",
 								"data-prohibitions": "[]",
 								className: "space-y-2 pb-4 border-b border-border/50",
 								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Label$1, {
-									"data-uid": "src/components/pdv/CheckoutModal.tsx:205:17",
+									"data-uid": "src/components/pdv/CheckoutModal.tsx:224:17",
 									"data-prohibitions": "[]",
 									htmlFor: "discount",
 									className: "flex items-center gap-2",
 									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Tag, {
-										"data-uid": "src/components/pdv/CheckoutModal.tsx:206:19",
+										"data-uid": "src/components/pdv/CheckoutModal.tsx:225:19",
 										"data-prohibitions": "[editContent]",
 										className: "h-4 w-4"
-									}), " Desconto (R$)"]
+									}), " Desconto Aplicado (R$)"]
 								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
-									"data-uid": "src/components/pdv/CheckoutModal.tsx:208:17",
+									"data-uid": "src/components/pdv/CheckoutModal.tsx:227:17",
 									"data-prohibitions": "[editContent]",
 									id: "discount",
 									type: "number",
 									placeholder: "0.00",
+									min: "0",
+									max: subtotal,
 									value: discountInput,
 									onChange: handleDiscountChange,
-									className: "bg-background"
+									className: "bg-background font-medium"
 								})]
 							}),
 							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								"data-uid": "src/components/pdv/CheckoutModal.tsx:217:15",
+								"data-uid": "src/components/pdv/CheckoutModal.tsx:238:15",
 								"data-prohibitions": "[editContent]",
 								className: "flex justify-between items-center",
 								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									"data-uid": "src/components/pdv/CheckoutModal.tsx:218:17",
+									"data-uid": "src/components/pdv/CheckoutModal.tsx:239:17",
 									"data-prohibitions": "[]",
 									className: "text-muted-foreground font-medium text-lg",
 									children: "Total a Pagar"
 								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									"data-uid": "src/components/pdv/CheckoutModal.tsx:219:17",
+									"data-uid": "src/components/pdv/CheckoutModal.tsx:240:17",
 									"data-prohibitions": "[editContent]",
 									className: "font-bold text-4xl text-foreground",
 									children: formatCurrency(total)
 								})]
 							}),
 							method === "Dinheiro" && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								"data-uid": "src/components/pdv/CheckoutModal.tsx:222:17",
+								"data-uid": "src/components/pdv/CheckoutModal.tsx:243:17",
 								"data-prohibitions": "[editContent]",
 								className: "space-y-4 pt-4 animate-in fade-in",
 								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-									"data-uid": "src/components/pdv/CheckoutModal.tsx:223:19",
+									"data-uid": "src/components/pdv/CheckoutModal.tsx:244:19",
 									"data-prohibitions": "[]",
 									className: "space-y-2",
 									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$1, {
-										"data-uid": "src/components/pdv/CheckoutModal.tsx:224:21",
+										"data-uid": "src/components/pdv/CheckoutModal.tsx:245:21",
 										"data-prohibitions": "[]",
-										children: "Valor Recebido"
+										children: "Valor Recebido (R$)"
 									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
-										"data-uid": "src/components/pdv/CheckoutModal.tsx:225:21",
+										"data-uid": "src/components/pdv/CheckoutModal.tsx:246:21",
 										"data-prohibitions": "[editContent]",
 										type: "number",
 										className: "text-xl h-12 font-semibold bg-background",
@@ -88876,15 +89012,15 @@ function CheckoutModal({ open, onOpenChange }) {
 										autoFocus: true
 									})]
 								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-									"data-uid": "src/components/pdv/CheckoutModal.tsx:233:19",
+									"data-uid": "src/components/pdv/CheckoutModal.tsx:254:19",
 									"data-prohibitions": "[editContent]",
-									className: "flex justify-between items-center text-lg text-emerald-600 font-bold bg-emerald-50 p-3 rounded-lg border border-emerald-100",
+									className: "flex justify-between items-center text-lg text-emerald-600 font-bold bg-emerald-50 dark:bg-emerald-900/20 p-3 rounded-lg border border-emerald-100 dark:border-emerald-900/50",
 									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-										"data-uid": "src/components/pdv/CheckoutModal.tsx:234:21",
+										"data-uid": "src/components/pdv/CheckoutModal.tsx:255:21",
 										"data-prohibitions": "[]",
 										children: "Troco"
 									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-										"data-uid": "src/components/pdv/CheckoutModal.tsx:235:21",
+										"data-uid": "src/components/pdv/CheckoutModal.tsx:256:21",
 										"data-prohibitions": "[editContent]",
 										children: formatCurrency(change)
 									})]
@@ -88892,13 +89028,13 @@ function CheckoutModal({ open, onOpenChange }) {
 							})
 						]
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button$1, {
-						"data-uid": "src/components/pdv/CheckoutModal.tsx:240:13",
+						"data-uid": "src/components/pdv/CheckoutModal.tsx:261:13",
 						"data-prohibitions": "[editContent]",
 						className: "w-full h-14 text-lg font-bold mt-8",
 						disabled: !method || method === "Dinheiro" && (parseFloat(amountReceived.replace(",", ".")) || 0) < total || isSubmitting,
 						onClick: handleConfirm,
 						children: [isSubmitting && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(LoaderCircle, {
-							"data-uid": "src/components/pdv/CheckoutModal.tsx:250:32",
+							"data-uid": "src/components/pdv/CheckoutModal.tsx:271:32",
 							"data-prohibitions": "[editContent]",
 							className: "h-5 w-5 animate-spin mr-2"
 						}), " Confirmar Pagamento"]
@@ -89532,4 +89668,4 @@ var App = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ThemeProvider, {
 }));
 //#endregion
 
-//# sourceMappingURL=index-COGeCX_d.js.map
+//# sourceMappingURL=index-Bf8U3X8J.js.map

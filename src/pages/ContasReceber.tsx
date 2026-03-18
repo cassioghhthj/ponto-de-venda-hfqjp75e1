@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import {
   Table,
@@ -23,7 +23,7 @@ import { Label } from '@/components/ui/label'
 import { supabase } from '@/lib/supabase/client'
 import { formatCurrency } from '@/lib/format'
 import { toast } from '@/hooks/use-toast'
-import { Loader2, DollarSign, Wallet, FileText, Search } from 'lucide-react'
+import { Loader2, DollarSign, Wallet, FileText, Search, Users } from 'lucide-react'
 import { PrintableReport } from '@/components/contas-receber/PrintableReport'
 
 interface ContaReceber {
@@ -103,8 +103,20 @@ export default function ContasReceber() {
     .filter((c) => c.status === 'pago')
     .reduce((acc, curr) => acc + Number(curr.valor), 0)
 
+  const debtsByCustomer = useMemo(() => {
+    const debts: Record<string, number> = {}
+    filteredContas.forEach((c) => {
+      if (c.status === 'pendente' && c.cliente?.nome) {
+        debts[c.cliente.nome] = (debts[c.cliente.nome] || 0) + Number(c.valor)
+      }
+    })
+    return Object.entries(debts)
+      .map(([nome, valor]) => ({ nome, valor }))
+      .sort((a, b) => b.valor - a.valor)
+  }, [filteredContas])
+
   return (
-    <div className="space-y-6 animate-fade-in max-w-6xl mx-auto h-full flex flex-col">
+    <div className="space-y-6 animate-fade-in max-w-[1400px] mx-auto h-full flex flex-col">
       <PrintableReport
         contas={filteredContas}
         clientName={clientSearch}
@@ -179,86 +191,123 @@ export default function ContasReceber() {
         </div>
         <Button
           variant="outline"
-          className="shrink-0 w-full md:w-auto"
+          className="shrink-0 w-full md:w-auto bg-background"
           onClick={() => window.print()}
         >
-          <FileText className="h-4 w-4 mr-2" /> Relatório PDF
+          <FileText className="h-4 w-4 mr-2" /> Gerar Relatório PDF
         </Button>
       </div>
 
-      <Card className="shadow-sm border-border flex-1 flex flex-col min-h-0 bg-card">
-        <CardContent className="p-0 flex-1 overflow-auto">
-          {loading ? (
-            <div className="flex h-40 items-center justify-center">
-              <Loader2 className="h-8 w-8 animate-spin text-primary" />
-            </div>
-          ) : (
+      <div className="flex-1 min-h-0 grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <Card className="lg:col-span-2 shadow-sm border-border flex flex-col min-h-0 bg-card">
+          <CardContent className="p-0 flex-1 overflow-auto">
+            {loading ? (
+              <div className="flex h-40 items-center justify-center">
+                <Loader2 className="h-8 w-8 animate-spin text-primary" />
+              </div>
+            ) : (
+              <Table>
+                <TableHeader className="sticky top-0 bg-muted/90 z-10 backdrop-blur-md">
+                  <TableRow>
+                    <TableHead>Cliente</TableHead>
+                    <TableHead>Data Venda</TableHead>
+                    <TableHead>Vencimento</TableHead>
+                    <TableHead>Valor</TableHead>
+                    <TableHead>Status</TableHead>
+                    <TableHead className="text-right">Ação</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {filteredContas.map((conta) => (
+                    <TableRow key={conta.id}>
+                      <TableCell className="font-medium text-foreground">
+                        {conta.cliente?.nome || '-'}
+                      </TableCell>
+                      <TableCell>
+                        {conta.venda?.data
+                          ? new Date(conta.venda.data).toLocaleDateString('pt-BR')
+                          : '-'}
+                      </TableCell>
+                      <TableCell>
+                        {new Date(conta.data_vencimento).toLocaleDateString('pt-BR')}
+                      </TableCell>
+                      <TableCell className="font-medium">{formatCurrency(conta.valor)}</TableCell>
+                      <TableCell>
+                        <Badge
+                          variant={conta.status === 'pago' ? 'default' : 'secondary'}
+                          className={
+                            conta.status === 'pago'
+                              ? 'bg-emerald-100 text-emerald-800 border-0'
+                              : 'bg-orange-100 text-orange-800 border-0'
+                          }
+                        >
+                          {conta.status === 'pago' ? 'Pago' : 'Pendente'}
+                        </Badge>
+                      </TableCell>
+                      <TableCell className="text-right">
+                        {conta.status === 'pendente' && (
+                          <Button
+                            size="sm"
+                            variant="outline"
+                            onClick={() => {
+                              setPayingConta(conta)
+                              setPaymentDate(new Date().toISOString().split('T')[0])
+                            }}
+                          >
+                            Registrar Pagamento
+                          </Button>
+                        )}
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                  {filteredContas.length === 0 && (
+                    <TableRow>
+                      <TableCell colSpan={6} className="text-center py-8 text-muted-foreground">
+                        Nenhuma conta encontrada.
+                      </TableCell>
+                    </TableRow>
+                  )}
+                </TableBody>
+              </Table>
+            )}
+          </CardContent>
+        </Card>
+
+        <Card className="lg:col-span-1 shadow-sm border-border flex flex-col h-full bg-card max-h-[500px] lg:max-h-none">
+          <CardHeader className="bg-muted/30 border-b border-border py-3">
+            <CardTitle className="text-base font-semibold flex items-center gap-2">
+              <Users className="h-4 w-4 text-primary" /> Resumo de Devedores
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="flex-1 overflow-auto p-0">
             <Table>
-              <TableHeader className="sticky top-0 bg-muted/90 z-10 backdrop-blur-md">
+              <TableHeader className="sticky top-0 bg-background z-10 shadow-sm">
                 <TableRow>
                   <TableHead>Cliente</TableHead>
-                  <TableHead>Data Venda</TableHead>
-                  <TableHead>Vencimento</TableHead>
-                  <TableHead>Valor</TableHead>
-                  <TableHead>Status</TableHead>
-                  <TableHead className="text-right">Ação</TableHead>
+                  <TableHead className="text-right">Total Pendente</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {filteredContas.map((conta) => (
-                  <TableRow key={conta.id}>
-                    <TableCell className="font-medium text-foreground">
-                      {conta.cliente?.nome || '-'}
-                    </TableCell>
-                    <TableCell>
-                      {conta.venda?.data
-                        ? new Date(conta.venda.data).toLocaleDateString('pt-BR')
-                        : '-'}
-                    </TableCell>
-                    <TableCell>
-                      {new Date(conta.data_vencimento).toLocaleDateString('pt-BR')}
-                    </TableCell>
-                    <TableCell className="font-medium">{formatCurrency(conta.valor)}</TableCell>
-                    <TableCell>
-                      <Badge
-                        variant={conta.status === 'pago' ? 'default' : 'secondary'}
-                        className={
-                          conta.status === 'pago'
-                            ? 'bg-emerald-100 text-emerald-800 border-0'
-                            : 'bg-orange-100 text-orange-800 border-0'
-                        }
-                      >
-                        {conta.status === 'pago' ? 'Pago' : 'Pendente'}
-                      </Badge>
-                    </TableCell>
-                    <TableCell className="text-right">
-                      {conta.status === 'pendente' && (
-                        <Button
-                          size="sm"
-                          variant="outline"
-                          onClick={() => {
-                            setPayingConta(conta)
-                            setPaymentDate(new Date().toISOString().split('T')[0])
-                          }}
-                        >
-                          Registrar Pagamento
-                        </Button>
-                      )}
+                {debtsByCustomer.map((d) => (
+                  <TableRow key={d.nome}>
+                    <TableCell className="font-medium text-sm">{d.nome}</TableCell>
+                    <TableCell className="text-right font-bold text-orange-600 dark:text-orange-400">
+                      {formatCurrency(d.valor)}
                     </TableCell>
                   </TableRow>
                 ))}
-                {filteredContas.length === 0 && (
+                {debtsByCustomer.length === 0 && (
                   <TableRow>
-                    <TableCell colSpan={6} className="text-center py-8 text-muted-foreground">
-                      Nenhuma conta encontrada.
+                    <TableCell colSpan={2} className="text-center text-muted-foreground py-8">
+                      Nenhuma dívida pendente.
                     </TableCell>
                   </TableRow>
                 )}
               </TableBody>
             </Table>
-          )}
-        </CardContent>
-      </Card>
+          </CardContent>
+        </Card>
+      </div>
 
       <Dialog open={!!payingConta} onOpenChange={(open) => !open && setPayingConta(null)}>
         <DialogContent className="sm:max-w-[425px]">

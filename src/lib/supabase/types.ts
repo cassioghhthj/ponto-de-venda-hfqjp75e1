@@ -278,6 +278,9 @@ export type Database = {
           imagem_url: string | null
           nome: string
           preco: number
+          preco_custo: number | null
+          preco_venda: number | null
+          tamanho: string | null
         }
         Insert: {
           categoria?: string | null
@@ -289,6 +292,9 @@ export type Database = {
           imagem_url?: string | null
           nome: string
           preco: number
+          preco_custo?: number | null
+          preco_venda?: number | null
+          tamanho?: string | null
         }
         Update: {
           categoria?: string | null
@@ -300,6 +306,9 @@ export type Database = {
           imagem_url?: string | null
           nome?: string
           preco?: number
+          preco_custo?: number | null
+          preco_venda?: number | null
+          tamanho?: string | null
         }
         Relationships: []
       }
@@ -328,6 +337,7 @@ export type Database = {
         Row: {
           cliente_id: string | null
           data: string | null
+          desconto: number | null
           id: string
           metodo_pagamento: string | null
           status: string | null
@@ -337,6 +347,7 @@ export type Database = {
         Insert: {
           cliente_id?: string | null
           data?: string | null
+          desconto?: number | null
           id?: string
           metodo_pagamento?: string | null
           status?: string | null
@@ -346,6 +357,7 @@ export type Database = {
         Update: {
           cliente_id?: string | null
           data?: string | null
+          desconto?: number | null
           id?: string
           metodo_pagamento?: string | null
           status?: string | null
@@ -583,6 +595,9 @@ export const Constants = {
 //   imagem_url: text (nullable)
 //   categoria: text (nullable)
 //   estoque_minimo: integer (not null, default: 0)
+//   preco_custo: numeric (nullable, default: 0)
+//   preco_venda: numeric (nullable, default: 0)
+//   tamanho: text (nullable)
 // Table: users
 //   id: uuid (not null)
 //   email: text (nullable)
@@ -596,6 +611,7 @@ export const Constants = {
 //   metodo_pagamento: text (nullable)
 //   status: text (nullable, default: 'Concluído'::text)
 //   cliente_id: uuid (nullable)
+//   desconto: numeric (nullable, default: 0)
 
 // --- CONSTRAINTS ---
 // Table: caixa

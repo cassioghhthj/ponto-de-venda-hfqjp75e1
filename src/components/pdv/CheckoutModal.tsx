@@ -56,7 +56,7 @@ export function CheckoutModal({ open, onOpenChange }: CheckoutModalProps) {
     if (method === 'A Prazo' && !selectedCustomer) {
       toast({
         title: 'Atenção',
-        description: 'Vendas A Prazo exigem cliente.',
+        description: 'Vendas A Prazo exigem cliente associado.',
         variant: 'destructive',
       })
       return
@@ -74,6 +74,24 @@ export function CheckoutModal({ open, onOpenChange }: CheckoutModalProps) {
     setIsSubmitting(true)
 
     try {
+      // Security Validation: Ensure the user actually has an open cashier session
+      const { data: caixa, error: caixaError } = await supabase
+        .from('caixa')
+        .select('id')
+        .eq('user_id', user.id)
+        .eq('status', 'aberto')
+        .maybeSingle()
+
+      if (caixaError || !caixa) {
+        toast({
+          title: 'Caixa Fechado',
+          description: 'Abra o caixa antes de realizar uma venda.',
+          variant: 'destructive',
+        })
+        setIsSubmitting(false)
+        return
+      }
+
       const { data: venda, error: vendaError } = await supabase
         .from('vendas')
         .insert({
@@ -120,8 +138,9 @@ export function CheckoutModal({ open, onOpenChange }: CheckoutModalProps) {
         })
       }
 
-      for (const item of items)
+      for (const item of items) {
         await supabase.rpc('decrement_stock', { p_id: item.id, qty: item.quantity })
+      }
 
       const receiptData: SaleRecord = {
         id: venda.id,
@@ -198,20 +217,22 @@ export function CheckoutModal({ open, onOpenChange }: CheckoutModalProps) {
           <div className="bg-muted/50 p-6 rounded-xl border border-border flex flex-col shadow-sm">
             <div className="space-y-5 flex-1">
               <div className="flex justify-between items-center text-sm text-muted-foreground">
-                <span>Subtotal</span>
+                <span>Subtotal dos Itens</span>
                 <span>{formatCurrency(subtotal)}</span>
               </div>
               <div className="space-y-2 pb-4 border-b border-border/50">
                 <Label htmlFor="discount" className="flex items-center gap-2">
-                  <Tag className="h-4 w-4" /> Desconto (R$)
+                  <Tag className="h-4 w-4" /> Desconto Aplicado (R$)
                 </Label>
                 <Input
                   id="discount"
                   type="number"
                   placeholder="0.00"
+                  min="0"
+                  max={subtotal}
                   value={discountInput}
                   onChange={handleDiscountChange}
-                  className="bg-background"
+                  className="bg-background font-medium"
                 />
               </div>
               <div className="flex justify-between items-center">
@@ -221,7 +242,7 @@ export function CheckoutModal({ open, onOpenChange }: CheckoutModalProps) {
               {method === 'Dinheiro' && (
                 <div className="space-y-4 pt-4 animate-in fade-in">
                   <div className="space-y-2">
-                    <Label>Valor Recebido</Label>
+                    <Label>Valor Recebido (R$)</Label>
                     <Input
                       type="number"
                       className="text-xl h-12 font-semibold bg-background"
@@ -230,7 +251,7 @@ export function CheckoutModal({ open, onOpenChange }: CheckoutModalProps) {
                       autoFocus
                     />
                   </div>
-                  <div className="flex justify-between items-center text-lg text-emerald-600 font-bold bg-emerald-50 p-3 rounded-lg border border-emerald-100">
+                  <div className="flex justify-between items-center text-lg text-emerald-600 font-bold bg-emerald-50 dark:bg-emerald-900/20 p-3 rounded-lg border border-emerald-100 dark:border-emerald-900/50">
                     <span>Troco</span>
                     <span>{formatCurrency(change)}</span>
                   </div>

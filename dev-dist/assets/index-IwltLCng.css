@@ -907,6 +907,10 @@ video {
   margin-top: 6rem;
 }
 
+.mt-3{
+  margin-top: 0.75rem;
+}
+
 .mt-4{
   margin-top: 1rem;
 }
@@ -1101,6 +1105,10 @@ video {
 
 .max-h-\[40vh\]{
   max-height: 40vh;
+}
+
+.max-h-\[500px\]{
+  max-height: 500px;
 }
 
 .max-h-\[var\(--radix-dropdown-menu-content-available-height\)\]{
@@ -1307,6 +1315,10 @@ video {
 
 .max-w-\[--skeleton-width\]{
   max-width: var(--skeleton-width);
+}
+
+.max-w-\[1400px\]{
+  max-width: 1400px;
 }
 
 .max-w-lg{
@@ -2398,6 +2410,10 @@ video {
   text-transform: capitalize;
 }
 
+.italic{
+  font-style: italic;
+}
+
 .tabular-nums{
   --tw-numeric-spacing: tabular-nums;
   font-variant-numeric: var(--tw-ordinal) var(--tw-slashed-zero) var(--tw-numeric-figure) var(--tw-numeric-spacing) var(--tw-numeric-fraction);
@@ -2526,6 +2542,11 @@ video {
 .text-orange-500{
   --tw-text-opacity: 1;
   color: rgb(249 115 22 / var(--tw-text-opacity, 1));
+}
+
+.text-orange-600{
+  --tw-text-opacity: 1;
+  color: rgb(234 88 12 / var(--tw-text-opacity, 1));
 }
 
 .text-orange-800{
@@ -3994,6 +4015,10 @@ video {
   border-color: rgb(6 78 59 / var(--tw-border-opacity, 1));
 }
 
+.dark\:border-emerald-900\/50:is(.dark *){
+  border-color: rgb(6 78 59 / 0.5);
+}
+
 .dark\:border-red-900:is(.dark *){
   --tw-border-opacity: 1;
   border-color: rgb(127 29 29 / var(--tw-border-opacity, 1));
@@ -4010,6 +4035,10 @@ video {
 .dark\:bg-emerald-900:is(.dark *){
   --tw-bg-opacity: 1;
   background-color: rgb(6 78 59 / var(--tw-bg-opacity, 1));
+}
+
+.dark\:bg-emerald-900\/20:is(.dark *){
+  background-color: rgb(6 78 59 / 0.2);
 }
 
 .dark\:bg-emerald-900\/50:is(.dark *){
@@ -4061,6 +4090,11 @@ video {
 .dark\:text-emerald-500:is(.dark *){
   --tw-text-opacity: 1;
   color: rgb(16 185 129 / var(--tw-text-opacity, 1));
+}
+
+.dark\:text-orange-400:is(.dark *){
+  --tw-text-opacity: 1;
+  color: rgb(251 146 60 / var(--tw-text-opacity, 1));
 }
 
 .dark\:text-red-300:is(.dark *){
@@ -4285,8 +4319,24 @@ video {
 
 @media (min-width: 1024px){
 
+  .lg\:col-span-1{
+    grid-column: span 1 / span 1;
+  }
+
+  .lg\:col-span-2{
+    grid-column: span 2 / span 2;
+  }
+
+  .lg\:max-h-none{
+    max-height: none;
+  }
+
   .lg\:grid-cols-2{
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .lg\:grid-cols-3{
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .lg\:grid-cols-4{

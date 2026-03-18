@@ -11,7 +11,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { toast } from '@/hooks/use-toast'
 import { supabase } from '@/lib/supabase/client'
-import { Loader2, UploadCloud } from 'lucide-react'
+import { Loader2, UploadCloud, Info } from 'lucide-react'
 
 interface Props {
   open: boolean
@@ -35,7 +35,8 @@ export function ImportProductsModal({ open, onClose, onSuccess }: Props) {
       const itemsToInsert = rows
         .slice(1)
         .map((row) => {
-          const cols = row.split(/[,;]/).map((c) => c.trim())
+          // Simple split, handles comma or semicolon
+          const cols = row.split(/[,;]/).map((c) => c.trim().replace(/^"|"$/g, ''))
           const nome = cols[0]
           if (!nome) return null
 
@@ -93,17 +94,31 @@ export function ImportProductsModal({ open, onClose, onSuccess }: Props) {
         <DialogHeader>
           <DialogTitle>Importar Produtos em Lote</DialogTitle>
           <DialogDescription>
-            Faça upload de um arquivo CSV (separado por vírgula ou ponto-e-vírgula).
+            Faça upload de um arquivo CSV. Para planilhas do Excel, clique em "Salvar Como" e
+            escolha o formato "CSV (UTF-8) delimitado por vírgulas".
           </DialogDescription>
         </DialogHeader>
         <div className="space-y-4 py-4">
-          <div className="text-sm bg-muted p-3 rounded-md border border-border">
-            <p className="font-semibold mb-1">Formato de Colunas Esperado:</p>
-            <p className="text-muted-foreground font-mono text-xs">
+          <div className="text-sm bg-muted p-4 rounded-md border border-border">
+            <p className="font-semibold mb-2 flex items-center gap-2">
+              <Info className="h-4 w-4 text-primary" /> Colunas Esperadas (nessa ordem):
+            </p>
+            <p className="text-muted-foreground font-mono text-xs bg-background p-2 rounded border border-border">
               Nome, Codigo, Categoria, Preco_Custo, Preco_Venda, Estoque, Tamanho
             </p>
+            <p className="text-xs text-muted-foreground mt-3 italic">
+              * A primeira linha será ignorada (cabeçalho). Produtos com nomes idênticos aos
+              existentes no sistema serão pulados para evitar duplicações.
+            </p>
           </div>
-          <Input type="file" accept=".csv" onChange={(e) => setFile(e.target.files?.[0] || null)} />
+          <div className="space-y-2">
+            <Input
+              type="file"
+              accept=".csv"
+              onChange={(e) => setFile(e.target.files?.[0] || null)}
+              className="cursor-pointer"
+            />
+          </div>
         </div>
         <DialogFooter>
           <Button variant="outline" onClick={onClose} disabled={loading}>
@@ -115,7 +130,7 @@ export function ImportProductsModal({ open, onClose, onSuccess }: Props) {
             ) : (
               <UploadCloud className="mr-2 h-4 w-4" />
             )}
-            Importar CSV
+            Iniciar Importação
           </Button>
         </DialogFooter>
       </DialogContent>
