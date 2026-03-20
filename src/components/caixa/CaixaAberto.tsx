@@ -29,7 +29,16 @@ import {
 } from '@/components/ui/select'
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
 import { Badge } from '@/components/ui/badge'
-import { Wallet, TrendingUp, ArrowDownRight, CheckSquare, Plus, Printer } from 'lucide-react'
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
+import {
+  Wallet,
+  TrendingUp,
+  ArrowDownRight,
+  CheckSquare,
+  Plus,
+  Printer,
+  Calendar,
+} from 'lucide-react'
 
 interface Props {
   caixa: CaixaRecord
@@ -131,6 +140,18 @@ export default function CaixaAberto({
 
   return (
     <div className="space-y-6">
+      <Alert className="print:hidden bg-muted/50 w-full">
+        <Calendar className="h-4 w-4 text-primary" />
+        <AlertTitle className="text-foreground">Caixa Aberto</AlertTitle>
+        <AlertDescription className="text-muted-foreground">
+          A data de abertura do caixa atual é{' '}
+          <strong className="text-foreground">
+            {new Date(caixa.data_abertura).toLocaleString('pt-BR')}
+          </strong>
+          .
+        </AlertDescription>
+      </Alert>
+
       <div className="print:hidden grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <Card className="border-border">
           <CardHeader className="pb-2 flex flex-row items-center justify-between">

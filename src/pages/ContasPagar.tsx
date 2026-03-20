@@ -81,6 +81,33 @@ export default function ContasPagar() {
   const handlePayConfirm = async () => {
     if (!payingConta || !user) return
     setPayingSubmitting(true)
+
+    const { data: caixa } = await supabase
+      .from('caixa')
+      .select('id, data_abertura')
+      .eq('user_id', user.id)
+      .eq('status', 'aberto')
+      .maybeSingle()
+
+    if (caixa) {
+      const caixaDateObj = new Date(caixa.data_abertura)
+      const year = caixaDateObj.getFullYear()
+      const month = String(caixaDateObj.getMonth() + 1).padStart(2, '0')
+      const day = String(caixaDateObj.getDate()).padStart(2, '0')
+      const formattedCaixaDate = `${year}-${month}-${day}`
+
+      if (paymentDate > formattedCaixaDate) {
+        toast({
+          title: 'Erro',
+          description:
+            'Operação Bloqueada: A data do lançamento não pode ser posterior à data de abertura do caixa atual.',
+          variant: 'destructive',
+        })
+        setPayingSubmitting(false)
+        return
+      }
+    }
+
     const dateObj = new Date(paymentDate)
     dateObj.setHours(12, 0, 0, 0)
 
@@ -99,21 +126,13 @@ export default function ContasPagar() {
       return
     }
 
-    if (paymentMethod === 'Dinheiro') {
-      const { data: caixa } = await supabase
-        .from('caixa')
-        .select('id')
-        .eq('user_id', user.id)
-        .eq('status', 'aberto')
-        .maybeSingle()
-      if (caixa) {
-        await supabase.from('movimentacoes_caixa').insert({
-          caixa_id: caixa.id,
-          tipo: 'saida',
-          valor: payingConta.valor,
-          descricao: `[Auto] Pagamento de conta - ${payingConta.id.split('-')[0]}`,
-        })
-      }
+    if (paymentMethod === 'Dinheiro' && caixa) {
+      await supabase.from('movimentacoes_caixa').insert({
+        caixa_id: caixa.id,
+        tipo: 'saida',
+        valor: payingConta.valor,
+        descricao: `[Auto] Pagamento de conta - ${payingConta.id.split('-')[0]}`,
+      })
     }
 
     setPayingSubmitting(false)
