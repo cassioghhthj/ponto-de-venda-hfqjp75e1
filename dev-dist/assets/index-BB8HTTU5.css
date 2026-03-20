@@ -1247,6 +1247,10 @@ video {
   width: 300px;
 }
 
+.w-\[60px\]{
+  width: 60px;
+}
+
 .w-auto{
   width: auto;
 }
@@ -3017,7 +3021,7 @@ video {
 
 @media print {
   @page {
-    margin: 1.5cm;
+    margin: 0;
   }
   body {
     background: white !important;
@@ -3039,7 +3043,7 @@ video {
     display: block !important;
     position: static !important;
   }
-  /* Hide radix dialog overlays */
+
   [data-state='open'] > div[class*='bg-black'] {
     display: none !important;
   }
@@ -3050,7 +3054,11 @@ video {
     transform: none !important;
     inset: auto !important;
   }
-  .no-print {
+
+  .no-print,
+  aside,
+  header,
+  nav {
     display: none !important;
   }
 
@@ -3067,6 +3075,66 @@ video {
   }
   .thermal-receipt * {
     color: black !important;
+  }
+
+  .print-only {
+    display: block !important;
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 100vw !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: white !important;
+    z-index: 99999 !important;
+  }
+
+  .pimaco-a4251-sheet {
+    width: 210mm;
+    height: 297mm;
+    padding-top: 10.7mm;
+    padding-left: 4.5mm;
+    display: grid;
+    grid-template-columns: repeat(5, 38.2mm);
+    grid-template-rows: repeat(13, 21.2mm);
+    page-break-after: always;
+    box-sizing: border-box;
+    background: white;
+  }
+
+  .pimaco-label {
+    width: 38.2mm;
+    height: 21.2mm;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 2mm;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+
+  .pimaco-label-name {
+    font-size: 7pt;
+    font-weight: bold;
+    line-height: 1.1;
+    max-height: 15.4pt;
+    overflow: hidden;
+    color: black !important;
+  }
+
+  .pimaco-label-price {
+    font-size: 10pt;
+    font-weight: bold;
+    margin-top: 1mm;
+    color: black !important;
+  }
+}
+
+@media screen {
+  .print-only {
+    display: none !important;
   }
 }
 

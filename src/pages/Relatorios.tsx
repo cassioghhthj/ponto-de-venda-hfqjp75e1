@@ -2,11 +2,10 @@ import { useState } from 'react'
 import { DateRange } from 'react-day-picker'
 import { subDays } from 'date-fns'
 import { DatePickerWithRange } from '@/components/ui/date-range-picker'
-import { PieChart, Tags, Activity } from 'lucide-react'
+import { PieChart, Activity } from 'lucide-react'
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
 import { TabVisaoGeral } from '@/components/relatorios/TabVisaoGeral'
 import { TabCmv } from '@/components/relatorios/TabCmv'
-import { TabEtiquetas } from '@/components/relatorios/TabEtiquetas'
 
 export default function Relatorios() {
   const [date, setDate] = useState<DateRange | undefined>({
@@ -40,9 +39,6 @@ export default function Relatorios() {
           <TabsTrigger value="cmv" className="gap-2">
             <Activity className="h-4 w-4" /> Relatório CMV
           </TabsTrigger>
-          <TabsTrigger value="etiquetas" className="gap-2">
-            <Tags className="h-4 w-4" /> Etiquetas
-          </TabsTrigger>
         </TabsList>
 
         <TabsContent value="geral" className="flex-1 focus-visible:outline-none">
@@ -51,10 +47,6 @@ export default function Relatorios() {
 
         <TabsContent value="cmv" className="flex-1 focus-visible:outline-none">
           <TabCmv date={date} />
-        </TabsContent>
-
-        <TabsContent value="etiquetas" className="flex-1 focus-visible:outline-none">
-          <TabEtiquetas />
         </TabsContent>
       </Tabs>
     </div>

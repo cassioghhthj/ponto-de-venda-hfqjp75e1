@@ -1,6 +1,8 @@
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
 import EstoqueAtual from '@/components/estoque/EstoqueAtual'
 import HistoricoEstoque from '@/components/estoque/HistoricoEstoque'
+import EstoqueEtiquetas from '@/components/estoque/EstoqueEtiquetas'
+import { Tags } from 'lucide-react'
 
 export default function Estoque() {
   return (
@@ -13,6 +15,9 @@ export default function Estoque() {
         <TabsList className="shrink-0 w-fit">
           <TabsTrigger value="atual">Estoque Atual</TabsTrigger>
           <TabsTrigger value="historico">Histórico de Movimentações</TabsTrigger>
+          <TabsTrigger value="etiquetas" className="gap-2">
+            <Tags className="h-4 w-4" /> Etiquetas (A4251)
+          </TabsTrigger>
         </TabsList>
 
         <TabsContent value="atual" className="flex-1 overflow-auto mt-4 focus-visible:outline-none">
@@ -24,6 +29,13 @@ export default function Estoque() {
           className="flex-1 overflow-auto mt-4 focus-visible:outline-none"
         >
           <HistoricoEstoque />
+        </TabsContent>
+
+        <TabsContent
+          value="etiquetas"
+          className="flex-1 overflow-hidden mt-4 focus-visible:outline-none flex flex-col"
+        >
+          <EstoqueEtiquetas />
         </TabsContent>
       </Tabs>
     </div>
