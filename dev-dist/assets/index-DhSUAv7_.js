@@ -19425,6 +19425,32 @@ var PackageOpen = createLucideIcon("package-open", [
 		key: "12ttoo"
 	}]
 ]);
+var PackageX = createLucideIcon("package-x", [
+	["path", {
+		d: "M12 22V12",
+		key: "d0xqtd"
+	}],
+	["path", {
+		d: "m16.5 14.5 5 5",
+		key: "ozpm51"
+	}],
+	["path", {
+		d: "m16.5 19.5 5-5",
+		key: "syf6b9"
+	}],
+	["path", {
+		d: "M21 10.5V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.729l7 4a2 2 0 0 0 2 .001l.13-.074",
+		key: "isw6gs"
+	}],
+	["path", {
+		d: "M3.29 7 12 12l8.71-5",
+		key: "19ckod"
+	}],
+	["path", {
+		d: "m7.5 4.27 8.997 5.148",
+		key: "9yrvtv"
+	}]
+]);
 var Package = createLucideIcon("package", [
 	["path", {
 		d: "M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z",
@@ -25153,75 +25179,6 @@ var TabsContent = import_react.forwardRef(({ className, ...props }, ref) => /* @
 }));
 TabsContent.displayName = Content$1.displayName;
 //#endregion
-//#region src/components/ui/card.tsx
-var Card = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-	"data-uid": "src/components/ui/card.tsx:8:5",
-	"data-prohibitions": "[editContent]",
-	ref,
-	className: cn$1("rounded-lg border bg-card text-card-foreground shadow-sm", className),
-	...props
-}));
-Card.displayName = "Card";
-var CardHeader = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-	"data-uid": "src/components/ui/card.tsx:19:5",
-	"data-prohibitions": "[editContent]",
-	ref,
-	className: cn$1("flex flex-col space-y-1.5 p-6", className),
-	...props
-}));
-CardHeader.displayName = "CardHeader";
-var CardTitle = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-	"data-uid": "src/components/ui/card.tsx:26:5",
-	"data-prohibitions": "[editContent]",
-	ref,
-	className: cn$1("text-2xl font-semibold leading-none tracking-tight", className),
-	...props
-}));
-CardTitle.displayName = "CardTitle";
-var CardDescription = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-	"data-uid": "src/components/ui/card.tsx:37:5",
-	"data-prohibitions": "[editContent]",
-	ref,
-	className: cn$1("text-sm text-muted-foreground", className),
-	...props
-}));
-CardDescription.displayName = "CardDescription";
-var CardContent = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-	"data-uid": "src/components/ui/card.tsx:44:5",
-	"data-prohibitions": "[editContent]",
-	ref,
-	className: cn$1("p-6 pt-0", className),
-	...props
-}));
-CardContent.displayName = "CardContent";
-var CardFooter = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-	"data-uid": "src/components/ui/card.tsx:51:5",
-	"data-prohibitions": "[editContent]",
-	ref,
-	className: cn$1("flex items-center p-6 pt-0", className),
-	...props
-}));
-CardFooter.displayName = "CardFooter";
-//#endregion
-//#region src/components/ui/badge.tsx
-var badgeVariants = cva("inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2", {
-	variants: { variant: {
-		default: "border-transparent bg-primary text-primary-foreground hover:bg-primary/80",
-		secondary: "border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80",
-		destructive: "border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80",
-		outline: "text-foreground"
-	} },
-	defaultVariants: { variant: "default" }
-});
-function Badge({ className, variant, ...props }) {
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-		"data-uid": "src/components/ui/badge.tsx:30:10",
-		"data-prohibitions": "[editContent]",
-		className: cn$1(badgeVariants({ variant }), className),
-		...props
-	});
-}
-//#endregion
 //#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/@radix-ui+react-slot@1.2.4_@types+react@19.2.14_react@19.2.4/node_modules/@radix-ui/react-slot/dist/index.mjs
 var REACT_LAZY_TYPE = Symbol.for("react.lazy");
 var use = import_react[" use ".trim().toString()];
@@ -25454,78 +25411,95 @@ function useCart() {
 	return context;
 }
 //#endregion
-//#region src/components/pdv/ProductCard.tsx
-function ProductCard({ product }) {
+//#region src/components/pdv/ProductRow.tsx
+function ProductRow({ product }) {
 	const { addItem } = useCart();
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Card, {
-		"data-uid": "src/components/pdv/ProductCard.tsx:13:5",
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+		"data-uid": "src/components/pdv/ProductRow.tsx:11:5",
 		"data-prohibitions": "[editContent]",
-		className: "overflow-hidden flex flex-col hover:border-primary/50 transition-colors bg-card group relative",
-		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-			"data-uid": "src/components/pdv/ProductCard.tsx:14:7",
-			"data-prohibitions": "[editContent]",
-			className: "aspect-square bg-muted/30 p-4 flex items-center justify-center relative",
-			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
-				"data-uid": "src/components/pdv/ProductCard.tsx:15:9",
+		className: "flex items-center p-3 sm:p-4 bg-card border border-border rounded-xl shadow-sm hover:border-primary/50 transition-colors group relative w-full",
+		children: [
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				"data-uid": "src/components/pdv/ProductRow.tsx:12:7",
 				"data-prohibitions": "[editContent]",
-				src: product.imagem_url || `https://img.usecurling.com/p/200/200?q=${encodeURIComponent(product.nome)}`,
-				alt: product.nome,
-				className: "object-contain h-full w-full mix-blend-multiply dark:mix-blend-normal group-hover:scale-105 transition-transform duration-300"
-			}), product.estoque <= 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-				"data-uid": "src/components/pdv/ProductCard.tsx:24:11",
-				"data-prohibitions": "[]",
-				className: "absolute inset-0 bg-background/80 backdrop-blur-[2px] flex items-center justify-center z-10",
-				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Badge, {
-					"data-uid": "src/components/pdv/ProductCard.tsx:25:13",
+				className: "relative h-14 w-14 sm:h-16 sm:w-16 shrink-0 bg-muted/30 rounded-lg overflow-hidden flex items-center justify-center mr-3 sm:mr-4",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
+					"data-uid": "src/components/pdv/ProductRow.tsx:13:9",
+					"data-prohibitions": "[editContent]",
+					src: product.imagem_url || `https://img.usecurling.com/p/200/200?q=${encodeURIComponent(product.nome)}`,
+					alt: product.nome,
+					className: "object-contain h-full w-full mix-blend-multiply dark:mix-blend-normal group-hover:scale-105 transition-transform duration-300"
+				}), product.estoque <= 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+					"data-uid": "src/components/pdv/ProductRow.tsx:22:11",
 					"data-prohibitions": "[]",
-					variant: "destructive",
-					className: "text-sm px-3 py-1",
-					children: "Esgotado"
-				})
-			})]
-		}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardContent, {
-			"data-uid": "src/components/pdv/ProductCard.tsx:31:7",
-			"data-prohibitions": "[editContent]",
-			className: "p-4 flex-1 flex flex-col justify-between",
-			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				"data-uid": "src/components/pdv/ProductCard.tsx:32:9",
-				"data-prohibitions": "[editContent]",
-				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-					"data-uid": "src/components/pdv/ProductCard.tsx:33:11",
-					"data-prohibitions": "[editContent]",
-					className: "text-xs text-muted-foreground mb-1",
-					children: product.categoria || "Sem categoria"
-				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
-					"data-uid": "src/components/pdv/ProductCard.tsx:36:11",
-					"data-prohibitions": "[editContent]",
-					className: "font-semibold line-clamp-2 text-sm leading-tight mb-2 text-foreground",
-					children: product.nome
-				})]
-			}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				"data-uid": "src/components/pdv/ProductCard.tsx:40:9",
-				"data-prohibitions": "[editContent]",
-				className: "flex items-center justify-between mt-2",
-				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-					"data-uid": "src/components/pdv/ProductCard.tsx:41:11",
-					"data-prohibitions": "[editContent]",
-					className: "font-bold text-primary",
-					children: formatCurrency(product.preco)
-				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
-					"data-uid": "src/components/pdv/ProductCard.tsx:42:11",
-					"data-prohibitions": "[]",
-					size: "icon",
-					variant: "secondary",
-					className: "h-8 w-8 rounded-full",
-					onClick: () => addItem(product),
-					disabled: product.estoque <= 0,
-					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Plus, {
-						"data-uid": "src/components/pdv/ProductCard.tsx:49:13",
-						"data-prohibitions": "[editContent]",
-						className: "h-4 w-4"
+					className: "absolute inset-0 bg-background/80 backdrop-blur-[2px] flex items-center justify-center z-10",
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+						"data-uid": "src/components/pdv/ProductRow.tsx:23:13",
+						"data-prohibitions": "[]",
+						className: "text-[10px] font-bold text-destructive px-1 text-center leading-tight",
+						children: "ESGOTADO"
 					})
 				})]
-			})]
-		})]
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				"data-uid": "src/components/pdv/ProductRow.tsx:30:7",
+				"data-prohibitions": "[editContent]",
+				className: "flex-1 min-w-0 mr-3",
+				children: [
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+						"data-uid": "src/components/pdv/ProductRow.tsx:31:9",
+						"data-prohibitions": "[editContent]",
+						className: "text-[10px] sm:text-xs font-medium text-muted-foreground mb-0.5 uppercase tracking-wider line-clamp-1",
+						children: product.categoria || "Sem categoria"
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
+						"data-uid": "src/components/pdv/ProductRow.tsx:34:9",
+						"data-prohibitions": "[editContent]",
+						className: "font-semibold text-sm sm:text-base leading-tight text-foreground truncate",
+						children: product.nome
+					}),
+					product.estoque > 0 && product.estoque <= 5 && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						"data-uid": "src/components/pdv/ProductRow.tsx:38:11",
+						"data-prohibitions": "[editContent]",
+						className: "text-[10px] sm:text-xs text-orange-500 mt-1 font-medium",
+						children: [
+							"Restam ",
+							product.estoque,
+							" na loja"
+						]
+					})
+				]
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				"data-uid": "src/components/pdv/ProductRow.tsx:44:7",
+				"data-prohibitions": "[editContent]",
+				className: "flex items-center gap-3 sm:gap-6 shrink-0",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+					"data-uid": "src/components/pdv/ProductRow.tsx:45:9",
+					"data-prohibitions": "[editContent]",
+					className: "text-right flex flex-col",
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+						"data-uid": "src/components/pdv/ProductRow.tsx:46:11",
+						"data-prohibitions": "[editContent]",
+						className: "font-bold text-sm sm:text-lg text-primary leading-none",
+						children: formatCurrency(product.preco_venda || product.preco)
+					})
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
+					"data-uid": "src/components/pdv/ProductRow.tsx:51:9",
+					"data-prohibitions": "[]",
+					size: "icon",
+					className: "h-11 w-11 sm:h-12 sm:w-12 rounded-full shrink-0 shadow-sm",
+					onClick: () => addItem(product),
+					disabled: product.estoque <= 0,
+					"aria-label": `Adicionar ${product.nome} ao carrinho`,
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Plus, {
+						"data-uid": "src/components/pdv/ProductRow.tsx:58:11",
+						"data-prohibitions": "[editContent]",
+						className: "h-5 w-5 sm:h-6 sm:w-6"
+					})
+				})]
+			})
+		]
 	});
 }
 //#endregion
@@ -39219,15 +39193,15 @@ function Index() {
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 		"data-uid": "src/pages/Index.tsx:37:5",
 		"data-prohibitions": "[editContent]",
-		className: "h-full flex flex-col animate-fade-in",
+		className: "h-full flex flex-col animate-fade-in w-full max-w-4xl mx-auto",
 		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 			"data-uid": "src/pages/Index.tsx:38:7",
 			"data-prohibitions": "[editContent]",
-			className: "flex flex-col sm:flex-row gap-4 justify-between items-center mb-6",
+			className: "flex flex-col sm:flex-row gap-4 justify-between items-start sm:items-center mb-6 shrink-0",
 			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 				"data-uid": "src/pages/Index.tsx:39:9",
 				"data-prohibitions": "[]",
-				className: "relative w-full sm:max-w-sm",
+				className: "relative w-full sm:max-w-md",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Search, {
 					"data-uid": "src/pages/Index.tsx:40:11",
 					"data-prohibitions": "[editContent]",
@@ -39236,7 +39210,7 @@ function Index() {
 					"data-uid": "src/pages/Index.tsx:41:11",
 					"data-prohibitions": "[editContent]",
 					placeholder: "Buscar por nome ou código...",
-					className: "pl-10 h-12 text-base shadow-sm border-border bg-background",
+					className: "pl-10 h-12 text-base shadow-sm border-border bg-background rounded-xl",
 					value: search,
 					onChange: (e) => setSearch(e.target.value),
 					autoFocus: true
@@ -39245,17 +39219,17 @@ function Index() {
 				"data-uid": "src/pages/Index.tsx:50:9",
 				"data-prohibitions": "[editContent]",
 				defaultValue: "Todos",
-				className: "w-full sm:w-auto overflow-x-auto",
+				className: "w-full sm:w-auto overflow-x-auto pb-1 sm:pb-0",
 				onValueChange: setCategory,
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TabsList, {
 					"data-uid": "src/pages/Index.tsx:55:11",
 					"data-prohibitions": "[editContent]",
-					className: "h-12 p-1 bg-muted/50 border border-border",
+					className: "h-12 p-1 bg-muted/50 border border-border rounded-xl",
 					children: categories.map((cat) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TabsTrigger, {
 						"data-uid": "src/pages/Index.tsx:57:15",
 						"data-prohibitions": "[editContent]",
 						value: cat,
-						className: "px-6 py-2 rounded-md font-medium capitalize",
+						className: "px-5 py-2 rounded-lg font-medium capitalize",
 						children: cat
 					}, cat))
 				})
@@ -39272,25 +39246,88 @@ function Index() {
 		}) : /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 			"data-uid": "src/pages/Index.tsx:74:9",
 			"data-prohibitions": "[editContent]",
-			className: "grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 overflow-y-auto pb-4",
-			children: [filteredProducts.map((product) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ProductCard, {
+			className: "flex flex-col gap-3 overflow-y-auto pb-4 px-1 min-h-0",
+			children: [filteredProducts.map((product) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ProductRow, {
 				"data-uid": "src/pages/Index.tsx:76:13",
 				"data-prohibitions": "[editContent]",
 				product
-			}, product.id)), filteredProducts.length === 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+			}, product.id)), filteredProducts.length === 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 				"data-uid": "src/pages/Index.tsx:79:13",
 				"data-prohibitions": "[]",
-				className: "col-span-full py-20 text-center text-muted-foreground",
-				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-					"data-uid": "src/pages/Index.tsx:80:15",
-					"data-prohibitions": "[]",
-					className: "text-lg font-medium",
-					children: "Nenhum produto disponível encontrado."
-				})
+				className: "py-20 text-center text-muted-foreground flex flex-col items-center justify-center bg-muted/20 rounded-2xl border border-dashed border-border mt-4",
+				children: [
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(PackageX, {
+						"data-uid": "src/pages/Index.tsx:80:15",
+						"data-prohibitions": "[editContent]",
+						className: "h-12 w-12 text-muted-foreground/50 mb-3"
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+						"data-uid": "src/pages/Index.tsx:81:15",
+						"data-prohibitions": "[]",
+						className: "text-lg font-medium text-foreground",
+						children: "Nenhum produto encontrado"
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+						"data-uid": "src/pages/Index.tsx:82:15",
+						"data-prohibitions": "[]",
+						className: "text-sm",
+						children: "Tente ajustar a sua busca ou filtros."
+					})
+				]
 			})]
 		})]
 	});
 }
+//#endregion
+//#region src/components/ui/card.tsx
+var Card = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+	"data-uid": "src/components/ui/card.tsx:8:5",
+	"data-prohibitions": "[editContent]",
+	ref,
+	className: cn$1("rounded-lg border bg-card text-card-foreground shadow-sm", className),
+	...props
+}));
+Card.displayName = "Card";
+var CardHeader = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+	"data-uid": "src/components/ui/card.tsx:19:5",
+	"data-prohibitions": "[editContent]",
+	ref,
+	className: cn$1("flex flex-col space-y-1.5 p-6", className),
+	...props
+}));
+CardHeader.displayName = "CardHeader";
+var CardTitle = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+	"data-uid": "src/components/ui/card.tsx:26:5",
+	"data-prohibitions": "[editContent]",
+	ref,
+	className: cn$1("text-2xl font-semibold leading-none tracking-tight", className),
+	...props
+}));
+CardTitle.displayName = "CardTitle";
+var CardDescription = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+	"data-uid": "src/components/ui/card.tsx:37:5",
+	"data-prohibitions": "[editContent]",
+	ref,
+	className: cn$1("text-sm text-muted-foreground", className),
+	...props
+}));
+CardDescription.displayName = "CardDescription";
+var CardContent = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+	"data-uid": "src/components/ui/card.tsx:44:5",
+	"data-prohibitions": "[editContent]",
+	ref,
+	className: cn$1("p-6 pt-0", className),
+	...props
+}));
+CardContent.displayName = "CardContent";
+var CardFooter = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+	"data-uid": "src/components/ui/card.tsx:51:5",
+	"data-prohibitions": "[editContent]",
+	ref,
+	className: cn$1("flex items-center p-6 pt-0", className),
+	...props
+}));
+CardFooter.displayName = "CardFooter";
 //#endregion
 //#region src/components/ui/table.tsx
 var Table = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
@@ -39362,6 +39399,25 @@ var TableCaption = import_react.forwardRef(({ className, ...props }, ref) => /* 
 	...props
 }));
 TableCaption.displayName = "TableCaption";
+//#endregion
+//#region src/components/ui/badge.tsx
+var badgeVariants = cva("inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2", {
+	variants: { variant: {
+		default: "border-transparent bg-primary text-primary-foreground hover:bg-primary/80",
+		secondary: "border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80",
+		destructive: "border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80",
+		outline: "text-foreground"
+	} },
+	defaultVariants: { variant: "default" }
+});
+function Badge({ className, variant, ...props }) {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+		"data-uid": "src/components/ui/badge.tsx:30:10",
+		"data-prohibitions": "[editContent]",
+		className: cn$1(badgeVariants({ variant }), className),
+		...props
+	});
+}
 //#endregion
 //#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/lodash@4.17.23/node_modules/lodash/isArray.js
 var require_isArray = /* @__PURE__ */ __commonJSMin(((exports, module) => {
@@ -88336,28 +88392,28 @@ function AppSidebar() {
 					"data-prohibitions": "[editContent]",
 					className: cn$1("h-6 w-6 text-primary shrink-0", !collapsed && "mr-3")
 				}), !collapsed && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-					"data-uid": "src/components/Sidebar.tsx:60:24",
+					"data-uid": "src/components/Sidebar.tsx:61:11",
 					"data-prohibitions": "[]",
 					className: "font-bold text-lg tracking-wider truncate",
-					children: "NEXUS PDV"
+					children: "CHARME PDV"
 				})]
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("nav", {
-				"data-uid": "src/components/Sidebar.tsx:63:7",
+				"data-uid": "src/components/Sidebar.tsx:65:7",
 				"data-prohibitions": "[editContent]",
 				className: "flex-1 py-6 px-3 space-y-1 overflow-y-auto overflow-x-hidden",
 				children: links.map((link) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Link, {
-					"data-uid": "src/components/Sidebar.tsx:65:11",
+					"data-uid": "src/components/Sidebar.tsx:67:11",
 					"data-prohibitions": "[editContent]",
 					to: link.to,
 					title: collapsed ? link.label : void 0,
 					className: cn$1("flex items-center gap-3 py-3 rounded-lg text-sm font-medium transition-colors", collapsed ? "justify-center px-0" : "px-4", location.pathname === link.to ? "bg-sidebar-primary text-sidebar-primary-foreground shadow-sm" : "hover:bg-sidebar-accent hover:text-sidebar-accent-foreground text-sidebar-foreground/80"),
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(link.icon, {
-						"data-uid": "src/components/Sidebar.tsx:77:13",
+						"data-uid": "src/components/Sidebar.tsx:79:13",
 						"data-prohibitions": "[editContent]",
 						className: "h-5 w-5 shrink-0"
 					}), !collapsed && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-						"data-uid": "src/components/Sidebar.tsx:78:28",
+						"data-uid": "src/components/Sidebar.tsx:80:28",
 						"data-prohibitions": "[editContent]",
 						className: "truncate",
 						children: link.label
@@ -88365,33 +88421,33 @@ function AppSidebar() {
 				}, link.label))
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				"data-uid": "src/components/Sidebar.tsx:83:7",
+				"data-uid": "src/components/Sidebar.tsx:85:7",
 				"data-prohibitions": "[editContent]",
 				className: cn$1("p-4 border-t border-sidebar-border m-3 rounded-lg bg-sidebar-accent/50 shrink-0 overflow-hidden transition-all", collapsed ? "p-2 flex flex-col items-center gap-2" : ""),
 				children: [!collapsed && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-					"data-uid": "src/components/Sidebar.tsx:91:13",
+					"data-uid": "src/components/Sidebar.tsx:93:13",
 					"data-prohibitions": "[]",
 					className: "text-xs font-semibold text-sidebar-foreground/60 mb-1",
 					children: "Operador Caixa"
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-					"data-uid": "src/components/Sidebar.tsx:94:13",
+					"data-uid": "src/components/Sidebar.tsx:96:13",
 					"data-prohibitions": "[editContent]",
 					className: "text-sm font-bold mb-4 truncate",
 					title: user?.email || "",
 					children: user?.email || "Usuário"
 				})] }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button$1, {
-					"data-uid": "src/components/Sidebar.tsx:99:9",
+					"data-uid": "src/components/Sidebar.tsx:101:9",
 					"data-prohibitions": "[editContent]",
 					variant: "destructive",
 					className: cn$1("bg-destructive/10 text-destructive hover:bg-destructive hover:text-destructive-foreground border-0", collapsed ? "h-10 w-10 p-0 rounded-full" : "w-full text-xs h-9"),
 					onClick: signOut,
 					title: collapsed ? "Sair" : void 0,
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(LogOut, {
-						"data-uid": "src/components/Sidebar.tsx:108:11",
+						"data-uid": "src/components/Sidebar.tsx:110:11",
 						"data-prohibitions": "[editContent]",
 						className: cn$1(collapsed ? "h-5 w-5" : "h-4 w-4 mr-2")
 					}), !collapsed && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-						"data-uid": "src/components/Sidebar.tsx:109:26",
+						"data-uid": "src/components/Sidebar.tsx:111:26",
 						"data-prohibitions": "[]",
 						children: "Encerrar Sessão"
 					})]
@@ -90218,7 +90274,7 @@ function Login() {
 						"data-uid": "src/pages/Login.tsx:42:11",
 						"data-prohibitions": "[]",
 						className: "text-3xl font-bold tracking-tight text-slate-900",
-						children: "NEXUS PDV"
+						children: "CHARME PDV"
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardDescription, {
 						"data-uid": "src/pages/Login.tsx:45:11",
@@ -90363,7 +90419,7 @@ var App = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ThemeProvider, {
 	"data-uid": "src/App.tsx:23:3",
 	"data-prohibitions": "[]",
 	defaultTheme: "system",
-	storageKey: "nexus-theme",
+	storageKey: "charme-theme",
 	children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(BrowserRouter, {
 		"data-uid": "src/App.tsx:24:5",
 		"data-prohibitions": "[]",
@@ -90521,4 +90577,4 @@ var App = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ThemeProvider, {
 }));
 //#endregion
 
-//# sourceMappingURL=index-DsDpkwG2.js.map
+//# sourceMappingURL=index-DhSUAv7_.js.map

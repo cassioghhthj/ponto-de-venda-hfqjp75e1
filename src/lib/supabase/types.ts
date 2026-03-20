@@ -47,6 +47,24 @@ export type Database = {
           },
         ]
       }
+      categorias: {
+        Row: {
+          created_at: string
+          id: string
+          nome: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          nome: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          nome?: string
+        }
+        Relationships: []
+      }
       clientes: {
         Row: {
           cpf: string | null
@@ -546,6 +564,10 @@ export const Constants = {
 //   saldo_inicial: numeric (not null)
 //   saldo_final: numeric (nullable)
 //   status: text (not null, default: 'aberto'::text)
+// Table: categorias
+//   id: uuid (not null, default: gen_random_uuid())
+//   nome: text (not null)
+//   created_at: timestamp with time zone (not null, default: now())
 // Table: clientes
 //   id: uuid (not null, default: gen_random_uuid())
 //   nome: text (not null)
@@ -625,6 +647,9 @@ export const Constants = {
 //   PRIMARY KEY caixa_pkey: PRIMARY KEY (id)
 //   CHECK caixa_status_check: CHECK ((status = ANY (ARRAY['aberto'::text, 'fechado'::text])))
 //   FOREIGN KEY caixa_user_id_fkey: FOREIGN KEY (user_id) REFERENCES users(id)
+// Table: categorias
+//   UNIQUE categorias_nome_key: UNIQUE (nome)
+//   PRIMARY KEY categorias_pkey: PRIMARY KEY (id)
 // Table: clientes
 //   PRIMARY KEY clientes_pkey: PRIMARY KEY (id)
 // Table: contas_pagar
@@ -659,6 +684,10 @@ export const Constants = {
 // --- ROW LEVEL SECURITY POLICIES ---
 // Table: caixa
 //   Policy "auth_all_caixa" (ALL, PERMISSIVE) roles={authenticated}
+//     USING: true
+//     WITH CHECK: true
+// Table: categorias
+//   Policy "auth_all_categorias" (ALL, PERMISSIVE) roles={authenticated}
 //     USING: true
 //     WITH CHECK: true
 // Table: clientes
@@ -737,3 +766,7 @@ export const Constants = {
 //   END;
 //   $function$
 //
+
+// --- INDEXES ---
+// Table: categorias
+//   CREATE UNIQUE INDEX categorias_nome_key ON public.categorias USING btree (nome)

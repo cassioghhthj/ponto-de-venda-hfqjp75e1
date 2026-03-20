@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
 import { Input } from '@/components/ui/input'
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { ProductCard } from '@/components/pdv/ProductCard'
-import { Search, Loader2 } from 'lucide-react'
+import { ProductRow } from '@/components/pdv/ProductRow'
+import { Search, Loader2, PackageX } from 'lucide-react'
 import { supabase } from '@/lib/supabase/client'
 import { Product } from '@/types'
 
@@ -34,13 +34,13 @@ export default function Index() {
   })
 
   return (
-    <div className="h-full flex flex-col animate-fade-in">
-      <div className="flex flex-col sm:flex-row gap-4 justify-between items-center mb-6">
-        <div className="relative w-full sm:max-w-sm">
+    <div className="h-full flex flex-col animate-fade-in w-full max-w-4xl mx-auto">
+      <div className="flex flex-col sm:flex-row gap-4 justify-between items-start sm:items-center mb-6 shrink-0">
+        <div className="relative w-full sm:max-w-md">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
           <Input
             placeholder="Buscar por nome ou código..."
-            className="pl-10 h-12 text-base shadow-sm border-border bg-background"
+            className="pl-10 h-12 text-base shadow-sm border-border bg-background rounded-xl"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             autoFocus
@@ -49,15 +49,15 @@ export default function Index() {
 
         <Tabs
           defaultValue="Todos"
-          className="w-full sm:w-auto overflow-x-auto"
+          className="w-full sm:w-auto overflow-x-auto pb-1 sm:pb-0"
           onValueChange={setCategory}
         >
-          <TabsList className="h-12 p-1 bg-muted/50 border border-border">
+          <TabsList className="h-12 p-1 bg-muted/50 border border-border rounded-xl">
             {categories.map((cat) => (
               <TabsTrigger
                 key={cat}
                 value={cat}
-                className="px-6 py-2 rounded-md font-medium capitalize"
+                className="px-5 py-2 rounded-lg font-medium capitalize"
               >
                 {cat}
               </TabsTrigger>
@@ -71,13 +71,15 @@ export default function Index() {
           <Loader2 className="h-8 w-8 animate-spin text-primary" />
         </div>
       ) : (
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 overflow-y-auto pb-4">
+        <div className="flex flex-col gap-3 overflow-y-auto pb-4 px-1 min-h-0">
           {filteredProducts.map((product) => (
-            <ProductCard key={product.id} product={product} />
+            <ProductRow key={product.id} product={product} />
           ))}
           {filteredProducts.length === 0 && (
-            <div className="col-span-full py-20 text-center text-muted-foreground">
-              <p className="text-lg font-medium">Nenhum produto disponível encontrado.</p>
+            <div className="py-20 text-center text-muted-foreground flex flex-col items-center justify-center bg-muted/20 rounded-2xl border border-dashed border-border mt-4">
+              <PackageX className="h-12 w-12 text-muted-foreground/50 mb-3" />
+              <p className="text-lg font-medium text-foreground">Nenhum produto encontrado</p>
+              <p className="text-sm">Tente ajustar a sua busca ou filtros.</p>
             </div>
           )}
         </div>

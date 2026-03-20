@@ -40,7 +40,7 @@ export default function Login() {
             <Store className="h-8 w-8 text-primary" />
           </div>
           <CardTitle className="text-3xl font-bold tracking-tight text-slate-900">
-            NEXUS PDV
+            CHARME PDV
           </CardTitle>
           <CardDescription className="text-base">
             Acesse o sistema com suas credenciais

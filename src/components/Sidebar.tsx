@@ -57,7 +57,9 @@ export function AppSidebar() {
         )}
       >
         <Store className={cn('h-6 w-6 text-primary shrink-0', !collapsed && 'mr-3')} />
-        {!collapsed && <span className="font-bold text-lg tracking-wider truncate">NEXUS PDV</span>}
+        {!collapsed && (
+          <span className="font-bold text-lg tracking-wider truncate">CHARME PDV</span>
+        )}
       </div>
 
       <nav className="flex-1 py-6 px-3 space-y-1 overflow-y-auto overflow-x-hidden">

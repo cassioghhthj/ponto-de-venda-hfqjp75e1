@@ -20,7 +20,7 @@ import { ProtectedRoute } from './components/ProtectedRoute'
 import { SidebarProvider } from './context/SidebarContext'
 
 const App = () => (
-  <ThemeProvider defaultTheme="system" storageKey="nexus-theme">
+  <ThemeProvider defaultTheme="system" storageKey="charme-theme">
     <BrowserRouter future={{ v7_startTransition: false, v7_relativeSplatPath: false }}>
       <AuthProvider>
         <SidebarProvider>
