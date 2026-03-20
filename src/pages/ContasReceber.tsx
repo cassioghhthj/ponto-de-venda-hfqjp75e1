@@ -143,12 +143,12 @@ export default function ContasReceber() {
         .maybeSingle()
 
       if (caixa) {
-        await supabase.from('movimentacoes_caixa').insert({
-          caixa_id: caixa.id,
-          tipo: 'saida',
-          valor: conta.valor,
-          descricao: `[Auto] Estorno de recebimento - ${conta.id.split('-')[0]}`,
-        })
+        // Delete the auto-generated movement
+        await supabase
+          .from('movimentacoes_caixa')
+          .delete()
+          .eq('caixa_id', caixa.id)
+          .eq('descricao', `[Auto] Recebimento de conta - ${conta.id.split('-')[0]}`)
       }
     }
 

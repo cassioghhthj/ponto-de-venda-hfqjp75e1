@@ -396,53 +396,106 @@ export default function CaixaAberto({
       </Dialog>
 
       <Dialog open={closeOpen} onOpenChange={setCloseOpen}>
-        <DialogContent className="max-w-2xl print:hidden">
+        <DialogContent className="max-w-3xl print:hidden">
           <DialogHeader>
             <DialogTitle>Fechamento de Caixa - CHARME PDV</DialogTitle>
           </DialogHeader>
-          <div className="grid grid-cols-2 gap-6 py-4">
-            <div className="space-y-4 border-r pr-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 py-4">
+            <div className="space-y-6 md:border-r pr-0 md:pr-8">
               <div>
-                <h4 className="font-semibold text-sm text-muted-foreground mb-2">
+                <h4 className="font-semibold text-sm text-emerald-700 dark:text-emerald-400 mb-3 border-b pb-1">
                   Entradas (Dinheiro)
                 </h4>
-                <div className="flex justify-between text-sm">
-                  <span>Saldo Inicial:</span> <span>{formatCurrency(totals.saldoInicial)}</span>
-                </div>
-                <div className="flex justify-between text-sm">
-                  <span>Vendas:</span> <span>{formatCurrency(totals.vDinheiro)}</span>
-                </div>
-                <div className="flex justify-between text-sm">
-                  <span>Recebimentos:</span> <span>{formatCurrency(totals.rDinheiro)}</span>
-                </div>
-                <div className="flex justify-between text-sm">
-                  <span>Suprimentos:</span> <span>{formatCurrency(totals.supManuais)}</span>
+                <div className="space-y-1.5">
+                  <div className="flex justify-between text-sm">
+                    <span className="text-muted-foreground">Saldo Inicial:</span>{' '}
+                    <span className="font-medium">{formatCurrency(totals.saldoInicial)}</span>
+                  </div>
+                  <div className="flex justify-between text-sm">
+                    <span className="text-muted-foreground">Vendas:</span>{' '}
+                    <span className="font-medium">{formatCurrency(totals.vDinheiro)}</span>
+                  </div>
+                  <div className="flex justify-between text-sm">
+                    <span className="text-muted-foreground">Recebimentos:</span>{' '}
+                    <span className="font-medium">{formatCurrency(totals.rDinheiro)}</span>
+                  </div>
+                  <div className="flex justify-between text-sm">
+                    <span className="text-muted-foreground">Suprimentos:</span>{' '}
+                    <span className="font-medium">{formatCurrency(totals.supManuais)}</span>
+                  </div>
                 </div>
               </div>
               <div>
-                <h4 className="font-semibold text-sm text-muted-foreground mb-2">
+                <h4 className="font-semibold text-sm text-red-700 dark:text-red-400 mb-3 border-b pb-1">
                   Saídas (Dinheiro)
                 </h4>
-                <div className="flex justify-between text-sm">
-                  <span>Pagamentos:</span> <span>{formatCurrency(totals.pDinheiro)}</span>
+                <div className="space-y-1.5">
+                  <div className="flex justify-between text-sm">
+                    <span className="text-muted-foreground">Pagamentos:</span>{' '}
+                    <span className="font-medium">{formatCurrency(totals.pDinheiro)}</span>
+                  </div>
+                  <div className="flex justify-between text-sm">
+                    <span className="text-muted-foreground">Sangrias:</span>{' '}
+                    <span className="font-medium">{formatCurrency(totals.sangManuais)}</span>
+                  </div>
                 </div>
-                <div className="flex justify-between text-sm">
-                  <span>Sangrias:</span> <span>{formatCurrency(totals.sangManuais)}</span>
+              </div>
+              <div className="pt-2">
+                <h4 className="font-semibold text-sm text-blue-700 dark:text-blue-400 mb-3 border-b pb-1">
+                  Outros Métodos (Não afetam gaveta)
+                </h4>
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-1.5">
+                    <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                      Cartão
+                    </p>
+                    <div className="flex justify-between text-sm">
+                      <span className="text-muted-foreground">Vendas:</span>{' '}
+                      <span className="font-medium">{formatCurrency(totals.vCartao)}</span>
+                    </div>
+                    <div className="flex justify-between text-sm">
+                      <span className="text-muted-foreground">Receb.:</span>{' '}
+                      <span className="font-medium">{formatCurrency(totals.rCartao)}</span>
+                    </div>
+                  </div>
+                  <div className="space-y-1.5">
+                    <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                      Pix
+                    </p>
+                    <div className="flex justify-between text-sm">
+                      <span className="text-muted-foreground">Vendas:</span>{' '}
+                      <span className="font-medium">{formatCurrency(totals.vPix)}</span>
+                    </div>
+                    <div className="flex justify-between text-sm">
+                      <span className="text-muted-foreground">Receb.:</span>{' '}
+                      <span className="font-medium">{formatCurrency(totals.rPix)}</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-            <div className="flex flex-col justify-center text-center space-y-4">
-              <p className="text-muted-foreground font-medium">Total Calculado na Gaveta</p>
-              <p className="text-5xl font-black text-emerald-600">{formatCurrency(totals.atual)}</p>
-              <p className="text-xs text-muted-foreground">
-                Confira o valor físico antes de confirmar.
+            <div className="flex flex-col justify-center items-center text-center space-y-6 bg-muted/30 p-8 rounded-2xl border border-border">
+              <div>
+                <p className="text-muted-foreground font-semibold uppercase tracking-wider text-xs mb-2">
+                  Total Calculado na Gaveta
+                </p>
+                <p className="text-5xl font-black text-emerald-600 dark:text-emerald-400">
+                  {formatCurrency(totals.atual)}
+                </p>
+              </div>
+              <p className="text-sm text-muted-foreground max-w-[250px]">
+                Confira o valor físico na gaveta antes de confirmar o fechamento.
               </p>
-              <Button variant="outline" onClick={() => window.print()} className="mt-4">
+              <Button
+                variant="outline"
+                onClick={() => window.print()}
+                className="mt-4 w-full max-w-[200px] bg-background"
+              >
                 <Printer className="mr-2 h-4 w-4" /> Imprimir Resumo
               </Button>
             </div>
           </div>
-          <DialogFooter className="border-t pt-4">
+          <DialogFooter className="border-t pt-4 mt-2">
             <Button variant="outline" onClick={() => setCloseOpen(false)}>
               Cancelar
             </Button>

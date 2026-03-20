@@ -27,6 +27,7 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
 import {
   Select,
   SelectContent,
@@ -38,7 +39,7 @@ import { supabase } from '@/lib/supabase/client'
 import { formatCurrency } from '@/lib/format'
 import { toast } from '@/hooks/use-toast'
 import { useAuth } from '@/hooks/use-auth'
-import { Loader2, DollarSign, Wallet, Plus, Search, FileText } from 'lucide-react'
+import { Loader2, DollarSign, Wallet, Plus, Search, FileText, Undo2 } from 'lucide-react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
@@ -149,6 +150,40 @@ export default function ContasPagar() {
     fetchContas()
   }
 
+  const handleRevert = async (conta: ContaPagar) => {
+    if (!user || !confirm('Deseja realmente reverter este pagamento?')) return
+
+    const { error } = await supabase
+      .from('contas_pagar')
+      .update({ status: 'pendente', data_pagamento: null, metodo_pagamento: null })
+      .eq('id', conta.id)
+
+    if (error) {
+      toast({ title: 'Erro', description: 'Erro ao reverter pagamento.', variant: 'destructive' })
+      return
+    }
+
+    if (conta.metodo_pagamento === 'Dinheiro') {
+      const { data: caixa } = await supabase
+        .from('caixa')
+        .select('id')
+        .eq('user_id', user.id)
+        .eq('status', 'aberto')
+        .maybeSingle()
+
+      if (caixa) {
+        await supabase
+          .from('movimentacoes_caixa')
+          .delete()
+          .eq('caixa_id', caixa.id)
+          .eq('descricao', `[Auto] Pagamento de conta - ${conta.id.split('-')[0]}`)
+      }
+    }
+
+    toast({ title: 'Sucesso', description: 'Pagamento revertido!' })
+    fetchContas()
+  }
+
   const onSubmit = async (data: z.infer<typeof despesaSchema>) => {
     const { error } = await supabase.from('contas_pagar').insert({
       descricao: data.descricao,
@@ -239,7 +274,7 @@ export default function ContasPagar() {
             className="bg-background flex-1 sm:flex-none"
             onClick={() => window.print()}
           >
-            <FileText className="h-4 w-4 mr-2" /> Relatório PDF
+            <FileText className="h-4 w-4 mr-2" /> Gerar Relatório PDF
           </Button>
           <Button onClick={() => setIsModalOpen(true)} className="flex-1 sm:flex-none">
             <Plus className="h-4 w-4 mr-2" /> Nova Despesa
@@ -290,8 +325,8 @@ export default function ContasPagar() {
                     <TableCell className="text-sm text-muted-foreground">
                       {conta.metodo_pagamento || '-'}
                     </TableCell>
-                    <TableCell className="text-right">
-                      {conta.status === 'pendente' && (
+                    <TableCell className="text-right space-x-2">
+                      {conta.status === 'pendente' ? (
                         <Button
                           size="sm"
                           variant="outline"
@@ -302,6 +337,15 @@ export default function ContasPagar() {
                           }}
                         >
                           Pagar
+                        </Button>
+                      ) : (
+                        <Button
+                          size="sm"
+                          variant="ghost"
+                          className="text-destructive hover:bg-destructive/10"
+                          onClick={() => handleRevert(conta)}
+                        >
+                          <Undo2 className="h-4 w-4 mr-1" /> Reverter
                         </Button>
                       )}
                     </TableCell>
@@ -320,8 +364,11 @@ export default function ContasPagar() {
           </DialogHeader>
           <div className="grid gap-4 py-4">
             <div className="grid grid-cols-4 items-center gap-4">
-              <Label className="text-right">Data</Label>
+              <Label htmlFor="date" className="text-right">
+                Data
+              </Label>
               <Input
+                id="date"
                 type="date"
                 className="col-span-3"
                 value={paymentDate}

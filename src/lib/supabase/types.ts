@@ -103,6 +103,7 @@ export type Database = {
           descricao: string
           fornecedor: string | null
           id: string
+          metodo_pagamento: string | null
           status: string
           valor: number
         }
@@ -113,6 +114,7 @@ export type Database = {
           descricao: string
           fornecedor?: string | null
           id?: string
+          metodo_pagamento?: string | null
           status?: string
           valor: number
         }
@@ -123,6 +125,7 @@ export type Database = {
           descricao?: string
           fornecedor?: string | null
           id?: string
+          metodo_pagamento?: string | null
           status?: string
           valor?: number
         }
@@ -134,6 +137,7 @@ export type Database = {
           data_pagamento: string | null
           data_vencimento: string
           id: string
+          metodo_pagamento: string | null
           status: string
           valor: number
           venda_id: string
@@ -143,6 +147,7 @@ export type Database = {
           data_pagamento?: string | null
           data_vencimento: string
           id?: string
+          metodo_pagamento?: string | null
           status?: string
           valor: number
           venda_id: string
@@ -152,6 +157,7 @@ export type Database = {
           data_pagamento?: string | null
           data_vencimento?: string
           id?: string
+          metodo_pagamento?: string | null
           status?: string
           valor?: number
           venda_id?: string
@@ -585,6 +591,7 @@ export const Constants = {
 //   status: text (not null, default: 'pendente'::text)
 //   data_pagamento: timestamp with time zone (nullable)
 //   fornecedor: text (nullable)
+//   metodo_pagamento: text (nullable)
 // Table: contas_receber
 //   id: uuid (not null, default: gen_random_uuid())
 //   venda_id: uuid (not null)
@@ -593,6 +600,7 @@ export const Constants = {
 //   data_vencimento: timestamp with time zone (not null)
 //   status: text (not null, default: 'pendente'::text)
 //   data_pagamento: timestamp with time zone (nullable)
+//   metodo_pagamento: text (nullable)
 // Table: itens_venda
 //   id: uuid (not null, default: gen_random_uuid())
 //   venda_id: uuid (nullable)

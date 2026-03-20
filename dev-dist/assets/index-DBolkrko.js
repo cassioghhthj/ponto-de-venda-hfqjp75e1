@@ -53720,7 +53720,7 @@ var getAttrsOfCartesianLabel = function getAttrsOfCartesianLabel(props) {
 var isPolar = function isPolar(viewBox) {
 	return "cx" in viewBox && isNumber(viewBox.cx);
 };
-function Label$4(_ref4) {
+function Label$3(_ref4) {
 	var _ref4$offset = _ref4.offset, offset = _ref4$offset === void 0 ? 5 : _ref4$offset, restProps = _objectWithoutProperties$12(_ref4, _excluded$12);
 	var props = _objectSpread$27({ offset }, restProps);
 	var viewBox = props.viewBox, position = props.position, value = props.value, children = props.children, content = props.content, _props$className = props.className, className = _props$className === void 0 ? "" : _props$className, textBreakAll = props.textBreakAll;
@@ -53737,7 +53737,7 @@ function Label$4(_ref4) {
 	var positionAttrs = isPolarLabel ? getAttrsOfPolarLabel(props) : getAttrsOfCartesianLabel(props);
 	return /* @__PURE__ */ import_react.createElement(Text, _extends$23({ className: clsx("recharts-label", className) }, attrs, positionAttrs, { breakAll: textBreakAll }), label);
 }
-Label$4.displayName = "Label";
+Label$3.displayName = "Label";
 var parseViewBox = function parseViewBox(props) {
 	var cx = props.cx, cy = props.cy, angle = props.angle, startAngle = props.startAngle, endAngle = props.endAngle, r = props.r, radius = props.radius, innerRadius = props.innerRadius, outerRadius = props.outerRadius, x = props.x, y = props.y, top = props.top, left = props.left, width = props.width, height = props.height, clockWise = props.clockWise, labelViewBox = props.labelViewBox;
 	if (labelViewBox) return labelViewBox;
@@ -53775,32 +53775,32 @@ var parseViewBox = function parseViewBox(props) {
 };
 var parseLabel = function parseLabel(label, viewBox) {
 	if (!label) return null;
-	if (label === true) return /* @__PURE__ */ import_react.createElement(Label$4, {
+	if (label === true) return /* @__PURE__ */ import_react.createElement(Label$3, {
 		key: "label-implicit",
 		viewBox
 	});
-	if (isNumOrStr(label)) return /* @__PURE__ */ import_react.createElement(Label$4, {
+	if (isNumOrStr(label)) return /* @__PURE__ */ import_react.createElement(Label$3, {
 		key: "label-implicit",
 		viewBox,
 		value: label
 	});
 	if (/* @__PURE__ */ (0, import_react.isValidElement)(label)) {
-		if (label.type === Label$4) return /* @__PURE__ */ (0, import_react.cloneElement)(label, {
+		if (label.type === Label$3) return /* @__PURE__ */ (0, import_react.cloneElement)(label, {
 			key: "label-implicit",
 			viewBox
 		});
-		return /* @__PURE__ */ import_react.createElement(Label$4, {
+		return /* @__PURE__ */ import_react.createElement(Label$3, {
 			key: "label-implicit",
 			content: label,
 			viewBox
 		});
 	}
-	if ((0, import_isFunction.default)(label)) return /* @__PURE__ */ import_react.createElement(Label$4, {
+	if ((0, import_isFunction.default)(label)) return /* @__PURE__ */ import_react.createElement(Label$3, {
 		key: "label-implicit",
 		content: label,
 		viewBox
 	});
-	if ((0, import_isObject.default)(label)) return /* @__PURE__ */ import_react.createElement(Label$4, _extends$23({ viewBox }, label, { key: "label-implicit" }));
+	if ((0, import_isObject.default)(label)) return /* @__PURE__ */ import_react.createElement(Label$3, _extends$23({ viewBox }, label, { key: "label-implicit" }));
 	return null;
 };
 var renderCallByParent$1 = function renderCallByParent(parentProps, viewBox) {
@@ -53808,7 +53808,7 @@ var renderCallByParent$1 = function renderCallByParent(parentProps, viewBox) {
 	if (!parentProps || !parentProps.children && checkPropsLabel && !parentProps.label) return null;
 	var children = parentProps.children;
 	var parentViewBox = parseViewBox(parentProps);
-	var explicitChildren = findAllByType(children, Label$4).map(function(child, index) {
+	var explicitChildren = findAllByType(children, Label$3).map(function(child, index) {
 		return /* @__PURE__ */ (0, import_react.cloneElement)(child, {
 			viewBox: viewBox || parentViewBox,
 			key: "label-".concat(index)
@@ -53817,8 +53817,8 @@ var renderCallByParent$1 = function renderCallByParent(parentProps, viewBox) {
 	if (!checkPropsLabel) return explicitChildren;
 	return [parseLabel(parentProps.label, viewBox || parentViewBox)].concat(_toConsumableArray$7(explicitChildren));
 };
-Label$4.parseViewBox = parseViewBox;
-Label$4.renderCallByParent = renderCallByParent$1;
+Label$3.parseViewBox = parseViewBox;
+Label$3.renderCallByParent = renderCallByParent$1;
 //#endregion
 //#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/recharts@2.15.4_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/recharts/es6/component/LabelList.js
 var import_last = /* @__PURE__ */ __toESM((/* @__PURE__ */ __commonJSMin(((exports, module) => {
@@ -53972,11 +53972,11 @@ function LabelList(_ref) {
 	return /* @__PURE__ */ import_react.createElement(Layer, { className: "recharts-label-list" }, data.map(function(entry, index) {
 		var value = (0, import_isNil.default)(dataKey) ? valueAccessor(entry, index) : getValueByDataKey(entry && entry.payload, dataKey);
 		var idProps = (0, import_isNil.default)(id) ? {} : { id: "".concat(id, "-").concat(index) };
-		return /* @__PURE__ */ import_react.createElement(Label$4, _extends$22({}, filterProps(entry, true), others, idProps, {
+		return /* @__PURE__ */ import_react.createElement(Label$3, _extends$22({}, filterProps(entry, true), others, idProps, {
 			parentViewBox: entry.parentViewBox,
 			value,
 			textBreakAll,
-			viewBox: Label$4.parseViewBox((0, import_isNil.default)(clockWise) ? entry : _objectSpread$26(_objectSpread$26({}, entry), {}, { clockWise })),
+			viewBox: Label$3.parseViewBox((0, import_isNil.default)(clockWise) ? entry : _objectSpread$26(_objectSpread$26({}, entry), {}, { clockWise })),
 			key: "label-".concat(index),
 			index
 		}));
@@ -57312,7 +57312,7 @@ var PolarRadiusAxis = /* @__PURE__ */ function(_PureComponent) {
 			value: function render() {
 				var _this$props5 = this.props, ticks = _this$props5.ticks, axisLine = _this$props5.axisLine, tick = _this$props5.tick;
 				if (!ticks || !ticks.length) return null;
-				return /* @__PURE__ */ import_react.createElement(Layer, { className: clsx("recharts-polar-radius-axis", this.props.className) }, axisLine && this.renderAxisLine(), tick && this.renderTicks(), Label$4.renderCallByParent(this.props, this.getViewBox()));
+				return /* @__PURE__ */ import_react.createElement(Layer, { className: clsx("recharts-polar-radius-axis", this.props.className) }, axisLine && this.renderAxisLine(), tick && this.renderTicks(), Label$3.renderCallByParent(this.props, this.getViewBox()));
 			}
 		}
 	], [{
@@ -58414,7 +58414,7 @@ var Pie = /* @__PURE__ */ function(_PureComponent) {
 					ref: function ref(_ref3) {
 						_this5.pieRef = _ref3;
 					}
-				}, this.renderSectors(), label && this.renderLabels(sectors), Label$4.renderCallByParent(this.props, null, false), (!isAnimationActive || isAnimationFinished) && LabelList.renderCallByParent(this.props, sectors, false));
+				}, this.renderSectors(), label && this.renderLabels(sectors), Label$3.renderCallByParent(this.props, null, false), (!isAnimationActive || isAnimationFinished) && LabelList.renderCallByParent(this.props, sectors, false));
 			}
 		}
 	], [
@@ -60973,7 +60973,7 @@ function ReferenceLineImpl(props) {
 		x2,
 		y2
 	});
-	return /* @__PURE__ */ import_react.createElement(Layer, { className: clsx("recharts-reference-line", className) }, renderLine(shape, lineProps), Label$4.renderCallByParent(props, rectWithCoords({
+	return /* @__PURE__ */ import_react.createElement(Layer, { className: clsx("recharts-reference-line", className) }, renderLine(shape, lineProps), Label$3.renderCallByParent(props, rectWithCoords({
 		x1,
 		y1,
 		x2,
@@ -61170,7 +61170,7 @@ var ReferenceDot = /* @__PURE__ */ function(_React$Component) {
 				cx,
 				cy
 			});
-			return /* @__PURE__ */ import_react.createElement(Layer, { className: clsx("recharts-reference-dot", className) }, ReferenceDot.renderDot(shape, dotProps), Label$4.renderCallByParent(this.props, {
+			return /* @__PURE__ */ import_react.createElement(Layer, { className: clsx("recharts-reference-dot", className) }, ReferenceDot.renderDot(shape, dotProps), Label$3.renderCallByParent(this.props, {
 				x: cx - r,
 				y: cy - r,
 				width: 2 * r,
@@ -61370,7 +61370,7 @@ var ReferenceArea = /* @__PURE__ */ function(_React$Component) {
 			var rect = getRect(hasX1, hasX2, hasY1, hasY2, this.props);
 			if (!rect && !shape) return null;
 			var clipPath = ifOverflowMatches(this.props, "hidden") ? "url(#".concat(clipPathId, ")") : void 0;
-			return /* @__PURE__ */ import_react.createElement(Layer, { className: clsx("recharts-reference-area", className) }, ReferenceArea.renderRect(shape, _objectSpread$6(_objectSpread$6({ clipPath }, filterProps(this.props, true)), rect)), Label$4.renderCallByParent(this.props, rect));
+			return /* @__PURE__ */ import_react.createElement(Layer, { className: clsx("recharts-reference-area", className) }, ReferenceArea.renderRect(shape, _objectSpread$6(_objectSpread$6({ clipPath }, filterProps(this.props, true)), rect)), Label$3.renderCallByParent(this.props, rect));
 		}
 	}]);
 }(import_react.Component);
@@ -61978,7 +61978,7 @@ var CartesianAxis = /* @__PURE__ */ function(_Component) {
 					ref: function ref(_ref2) {
 						_this3.layerReference = _ref2;
 					}
-				}, axisLine && this.renderAxisLine(), this.renderTicks(finalTicks, this.state.fontSize, this.state.letterSpacing), Label$4.renderCallByParent(this.props));
+				}, axisLine && this.renderAxisLine(), this.renderTicks(finalTicks, this.state.fontSize, this.state.letterSpacing), Label$3.renderCallByParent(this.props));
 			}
 		}
 	], [{
@@ -67603,7 +67603,7 @@ var Primitive = [
 //#endregion
 //#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/@radix-ui+react-label@2.1.8_@types+react-dom@19.2.3_@types+react@19.2.14__@types+react@_55fa612a976b7bdfbf4dcdd93d861aab/node_modules/@radix-ui/react-label/dist/index.mjs
 var NAME = "Label";
-var Label$3 = import_react.forwardRef((props, forwardedRef) => {
+var Label$2 = import_react.forwardRef((props, forwardedRef) => {
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.label, {
 		...props,
 		ref: forwardedRef,
@@ -67614,19 +67614,19 @@ var Label$3 = import_react.forwardRef((props, forwardedRef) => {
 		}
 	});
 });
-Label$3.displayName = NAME;
-var Root$2 = Label$3;
+Label$2.displayName = NAME;
+var Root$2 = Label$2;
 //#endregion
 //#region src/components/ui/label.tsx
 var labelVariants = cva("text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70");
-var Label$2 = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root$2, {
+var Label$1 = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root$2, {
 	"data-uid": "src/components/ui/label.tsx:16:3",
 	"data-prohibitions": "[editContent]",
 	ref,
 	className: cn$1(labelVariants(), className),
 	...props
 }));
-Label$2.displayName = Root$2.displayName;
+Label$1.displayName = Root$2.displayName;
 //#endregion
 //#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/@radix-ui+number@1.1.1/node_modules/@radix-ui/number/dist/index.mjs
 function clamp(value, [min, max]) {
@@ -68591,7 +68591,7 @@ var Icon = SelectIcon;
 var Portal$1 = SelectPortal;
 var Content2$1 = SelectContent$1;
 var Viewport$1 = SelectViewport;
-var Label$1 = SelectLabel$1;
+var Label = SelectLabel$1;
 var Item = SelectItem$1;
 var ItemText = SelectItemText;
 var ItemIndicator = SelectItemIndicator;
@@ -68675,14 +68675,14 @@ var SelectContent = import_react.forwardRef(({ className, children, position = "
 	})
 }));
 SelectContent.displayName = Content2$1.displayName;
-var SelectLabel = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$1, {
+var SelectLabel = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label, {
 	"data-uid": "src/components/ui/select.tsx:98:3",
 	"data-prohibitions": "[editContent]",
 	ref,
 	className: cn$1("py-1.5 pl-8 pr-2 text-sm font-semibold", className),
 	...props
 }));
-SelectLabel.displayName = Label$1.displayName;
+SelectLabel.displayName = Label.displayName;
 var SelectItem = import_react.forwardRef(({ className, children, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Item, {
 	"data-uid": "src/components/ui/select.tsx:110:3",
 	"data-prohibitions": "[editContent]",
@@ -69051,12 +69051,7 @@ function ContasReceber() {
 		}
 		if (conta.metodo_pagamento === "Dinheiro") {
 			const { data: caixa } = await supabase.from("caixa").select("id").eq("user_id", user.id).eq("status", "aberto").maybeSingle();
-			if (caixa) await supabase.from("movimentacoes_caixa").insert({
-				caixa_id: caixa.id,
-				tipo: "saida",
-				valor: conta.valor,
-				descricao: `[Auto] Estorno de recebimento - ${conta.id.split("-")[0]}`
-			});
+			if (caixa) await supabase.from("movimentacoes_caixa").delete().eq("caixa_id", caixa.id).eq("descricao", `[Auto] Recebimento de conta - ${conta.id.split("-")[0]}`);
 		}
 		toast$1({
 			title: "Sucesso",
@@ -69501,7 +69496,7 @@ function ContasReceber() {
 								"data-uid": "src/pages/ContasReceber.tsx:391:13",
 								"data-prohibitions": "[]",
 								className: "grid grid-cols-4 items-center gap-4",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$2, {
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$1, {
 									"data-uid": "src/pages/ContasReceber.tsx:392:15",
 									"data-prohibitions": "[]",
 									htmlFor: "data",
@@ -69520,7 +69515,7 @@ function ContasReceber() {
 								"data-uid": "src/pages/ContasReceber.tsx:403:13",
 								"data-prohibitions": "[]",
 								className: "grid grid-cols-4 items-center gap-4",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$2, {
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$1, {
 									"data-uid": "src/pages/ContasReceber.tsx:404:15",
 									"data-prohibitions": "[]",
 									className: "text-right",
@@ -71513,7 +71508,7 @@ var FormItem = import_react.forwardRef(({ className, ...props }, ref) => {
 FormItem.displayName = "FormItem";
 var FormLabel = import_react.forwardRef(({ className, ...props }, ref) => {
 	const { error, formItemId } = useFormField();
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$2, {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$1, {
 		"data-uid": "src/components/ui/form.tsx:90:5",
 		"data-prohibitions": "[editContent]",
 		ref,
@@ -75696,6 +75691,31 @@ function ContasPagar() {
 		setPayingConta(null);
 		fetchContas();
 	};
+	const handleRevert = async (conta) => {
+		if (!user || !confirm("Deseja realmente reverter este pagamento?")) return;
+		const { error } = await supabase.from("contas_pagar").update({
+			status: "pendente",
+			data_pagamento: null,
+			metodo_pagamento: null
+		}).eq("id", conta.id);
+		if (error) {
+			toast$1({
+				title: "Erro",
+				description: "Erro ao reverter pagamento.",
+				variant: "destructive"
+			});
+			return;
+		}
+		if (conta.metodo_pagamento === "Dinheiro") {
+			const { data: caixa } = await supabase.from("caixa").select("id").eq("user_id", user.id).eq("status", "aberto").maybeSingle();
+			if (caixa) await supabase.from("movimentacoes_caixa").delete().eq("caixa_id", caixa.id).eq("descricao", `[Auto] Pagamento de conta - ${conta.id.split("-")[0]}`);
+		}
+		toast$1({
+			title: "Sucesso",
+			description: "Pagamento revertido!"
+		});
+		fetchContas();
+	};
 	const onSubmit = async (data) => {
 		const { error } = await supabase.from("contas_pagar").insert({
 			descricao: data.descricao,
@@ -75728,72 +75748,72 @@ function ContasPagar() {
 	const totalAPagar = contas.filter((c) => c.status === "pendente").reduce((acc, curr) => acc + Number(curr.valor), 0);
 	const totalPago = contas.filter((c) => c.status === "pago").reduce((acc, curr) => acc + Number(curr.valor), 0);
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-		"data-uid": "src/pages/ContasPagar.tsx:189:5",
+		"data-uid": "src/pages/ContasPagar.tsx:224:5",
 		"data-prohibitions": "[editContent]",
 		className: "space-y-6 animate-fade-in max-w-6xl mx-auto h-full flex flex-col print:block print:h-auto print:max-w-none print:m-0 print:p-0 print:space-y-0",
 		children: [
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(PrintableReportPagar, {
-				"data-uid": "src/pages/ContasPagar.tsx:190:7",
+				"data-uid": "src/pages/ContasPagar.tsx:225:7",
 				"data-prohibitions": "[editContent]",
 				contas: filteredContas,
 				searchCategoria,
 				filter
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				"data-uid": "src/pages/ContasPagar.tsx:196:7",
+				"data-uid": "src/pages/ContasPagar.tsx:231:7",
 				"data-prohibitions": "[editContent]",
 				className: "print:hidden grid grid-cols-1 md:grid-cols-2 gap-6 shrink-0",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Card, {
-					"data-uid": "src/pages/ContasPagar.tsx:197:9",
+					"data-uid": "src/pages/ContasPagar.tsx:232:9",
 					"data-prohibitions": "[editContent]",
 					className: "shadow-sm border-red-200 bg-red-50/30",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardHeader, {
-						"data-uid": "src/pages/ContasPagar.tsx:198:11",
+						"data-uid": "src/pages/ContasPagar.tsx:233:11",
 						"data-prohibitions": "[]",
 						className: "flex flex-row items-center justify-between pb-2",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardTitle, {
-							"data-uid": "src/pages/ContasPagar.tsx:199:13",
+							"data-uid": "src/pages/ContasPagar.tsx:234:13",
 							"data-prohibitions": "[]",
 							className: "text-sm font-medium text-red-800",
 							children: "Total a Pagar"
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DollarSign, {
-							"data-uid": "src/pages/ContasPagar.tsx:200:13",
+							"data-uid": "src/pages/ContasPagar.tsx:235:13",
 							"data-prohibitions": "[editContent]",
 							className: "h-4 w-4 text-red-500"
 						})]
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardContent, {
-						"data-uid": "src/pages/ContasPagar.tsx:202:11",
+						"data-uid": "src/pages/ContasPagar.tsx:237:11",
 						"data-prohibitions": "[editContent]",
 						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-							"data-uid": "src/pages/ContasPagar.tsx:203:13",
+							"data-uid": "src/pages/ContasPagar.tsx:238:13",
 							"data-prohibitions": "[editContent]",
 							className: "text-3xl font-bold text-red-900",
 							children: formatCurrency(totalAPagar)
 						})
 					})]
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Card, {
-					"data-uid": "src/pages/ContasPagar.tsx:206:9",
+					"data-uid": "src/pages/ContasPagar.tsx:241:9",
 					"data-prohibitions": "[editContent]",
 					className: "shadow-sm border-emerald-200 bg-emerald-50/30",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardHeader, {
-						"data-uid": "src/pages/ContasPagar.tsx:207:11",
+						"data-uid": "src/pages/ContasPagar.tsx:242:11",
 						"data-prohibitions": "[]",
 						className: "flex flex-row items-center justify-between pb-2",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardTitle, {
-							"data-uid": "src/pages/ContasPagar.tsx:208:13",
+							"data-uid": "src/pages/ContasPagar.tsx:243:13",
 							"data-prohibitions": "[]",
 							className: "text-sm font-medium text-emerald-800",
 							children: "Total Pago"
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Wallet, {
-							"data-uid": "src/pages/ContasPagar.tsx:209:13",
+							"data-uid": "src/pages/ContasPagar.tsx:244:13",
 							"data-prohibitions": "[editContent]",
 							className: "h-4 w-4 text-emerald-500"
 						})]
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardContent, {
-						"data-uid": "src/pages/ContasPagar.tsx:211:11",
+						"data-uid": "src/pages/ContasPagar.tsx:246:11",
 						"data-prohibitions": "[editContent]",
 						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-							"data-uid": "src/pages/ContasPagar.tsx:212:13",
+							"data-uid": "src/pages/ContasPagar.tsx:247:13",
 							"data-prohibitions": "[editContent]",
 							className: "text-3xl font-bold text-emerald-900",
 							children: formatCurrency(totalPago)
@@ -75802,36 +75822,36 @@ function ContasPagar() {
 				})]
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				"data-uid": "src/pages/ContasPagar.tsx:217:7",
+				"data-uid": "src/pages/ContasPagar.tsx:252:7",
 				"data-prohibitions": "[]",
 				className: "print:hidden flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 shrink-0 bg-muted/50 p-4 rounded-xl border border-border",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					"data-uid": "src/pages/ContasPagar.tsx:218:9",
+					"data-uid": "src/pages/ContasPagar.tsx:253:9",
 					"data-prohibitions": "[]",
 					className: "flex flex-wrap items-center gap-4",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Tabs, {
-						"data-uid": "src/pages/ContasPagar.tsx:219:11",
+						"data-uid": "src/pages/ContasPagar.tsx:254:11",
 						"data-prohibitions": "[]",
 						value: filter,
 						onValueChange: setFilter,
 						children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TabsList, {
-							"data-uid": "src/pages/ContasPagar.tsx:220:13",
+							"data-uid": "src/pages/ContasPagar.tsx:255:13",
 							"data-prohibitions": "[]",
 							children: [
 								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TabsTrigger, {
-									"data-uid": "src/pages/ContasPagar.tsx:221:15",
+									"data-uid": "src/pages/ContasPagar.tsx:256:15",
 									"data-prohibitions": "[]",
 									value: "Todos",
 									children: "Todos"
 								}),
 								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TabsTrigger, {
-									"data-uid": "src/pages/ContasPagar.tsx:222:15",
+									"data-uid": "src/pages/ContasPagar.tsx:257:15",
 									"data-prohibitions": "[]",
 									value: "Pendentes",
 									children: "Pendentes"
 								}),
 								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TabsTrigger, {
-									"data-uid": "src/pages/ContasPagar.tsx:223:15",
+									"data-uid": "src/pages/ContasPagar.tsx:258:15",
 									"data-prohibitions": "[]",
 									value: "Pagos",
 									children: "Pagos"
@@ -75839,15 +75859,15 @@ function ContasPagar() {
 							]
 						})
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						"data-uid": "src/pages/ContasPagar.tsx:226:11",
+						"data-uid": "src/pages/ContasPagar.tsx:261:11",
 						"data-prohibitions": "[]",
 						className: "relative w-48",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Search, {
-							"data-uid": "src/pages/ContasPagar.tsx:227:13",
+							"data-uid": "src/pages/ContasPagar.tsx:262:13",
 							"data-prohibitions": "[editContent]",
 							className: "absolute left-2.5 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground"
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
-							"data-uid": "src/pages/ContasPagar.tsx:228:13",
+							"data-uid": "src/pages/ContasPagar.tsx:263:13",
 							"data-prohibitions": "[editContent]",
 							placeholder: "Filtrar categoria",
 							className: "pl-8 h-9 bg-background",
@@ -75856,27 +75876,27 @@ function ContasPagar() {
 						})]
 					})]
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					"data-uid": "src/pages/ContasPagar.tsx:236:9",
+					"data-uid": "src/pages/ContasPagar.tsx:271:9",
 					"data-prohibitions": "[]",
 					className: "flex gap-2 w-full sm:w-auto",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button$1, {
-						"data-uid": "src/pages/ContasPagar.tsx:237:11",
+						"data-uid": "src/pages/ContasPagar.tsx:272:11",
 						"data-prohibitions": "[]",
 						variant: "outline",
 						className: "bg-background flex-1 sm:flex-none",
 						onClick: () => window.print(),
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FileText, {
-							"data-uid": "src/pages/ContasPagar.tsx:242:13",
+							"data-uid": "src/pages/ContasPagar.tsx:277:13",
 							"data-prohibitions": "[editContent]",
 							className: "h-4 w-4 mr-2"
-						}), " Relatório PDF"]
+						}), " Gerar Relatório PDF"]
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button$1, {
-						"data-uid": "src/pages/ContasPagar.tsx:244:11",
+						"data-uid": "src/pages/ContasPagar.tsx:279:11",
 						"data-prohibitions": "[]",
 						onClick: () => setIsModalOpen(true),
 						className: "flex-1 sm:flex-none",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Plus, {
-							"data-uid": "src/pages/ContasPagar.tsx:245:13",
+							"data-uid": "src/pages/ContasPagar.tsx:280:13",
 							"data-prohibitions": "[editContent]",
 							className: "h-4 w-4 mr-2"
 						}), " Nova Despesa"]
@@ -75884,65 +75904,65 @@ function ContasPagar() {
 				})]
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Card, {
-				"data-uid": "src/pages/ContasPagar.tsx:250:7",
+				"data-uid": "src/pages/ContasPagar.tsx:285:7",
 				"data-prohibitions": "[editContent]",
 				className: "print:hidden shadow-sm border-border flex-1 flex flex-col min-h-0 bg-card",
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardContent, {
-					"data-uid": "src/pages/ContasPagar.tsx:251:9",
+					"data-uid": "src/pages/ContasPagar.tsx:286:9",
 					"data-prohibitions": "[editContent]",
 					className: "p-0 flex-1 overflow-auto",
 					children: loading ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-						"data-uid": "src/pages/ContasPagar.tsx:253:13",
+						"data-uid": "src/pages/ContasPagar.tsx:288:13",
 						"data-prohibitions": "[]",
 						className: "flex h-40 items-center justify-center",
 						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(LoaderCircle, {
-							"data-uid": "src/pages/ContasPagar.tsx:254:15",
+							"data-uid": "src/pages/ContasPagar.tsx:289:15",
 							"data-prohibitions": "[editContent]",
 							className: "h-8 w-8 animate-spin text-primary"
 						})
 					}) : /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Table, {
-						"data-uid": "src/pages/ContasPagar.tsx:257:13",
+						"data-uid": "src/pages/ContasPagar.tsx:292:13",
 						"data-prohibitions": "[editContent]",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHeader, {
-							"data-uid": "src/pages/ContasPagar.tsx:258:15",
+							"data-uid": "src/pages/ContasPagar.tsx:293:15",
 							"data-prohibitions": "[]",
 							className: "sticky top-0 bg-muted/80 z-10 backdrop-blur-md",
 							children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TableRow, {
-								"data-uid": "src/pages/ContasPagar.tsx:259:17",
+								"data-uid": "src/pages/ContasPagar.tsx:294:17",
 								"data-prohibitions": "[]",
 								children: [
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
-										"data-uid": "src/pages/ContasPagar.tsx:260:19",
+										"data-uid": "src/pages/ContasPagar.tsx:295:19",
 										"data-prohibitions": "[]",
 										children: "Descrição"
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
-										"data-uid": "src/pages/ContasPagar.tsx:261:19",
+										"data-uid": "src/pages/ContasPagar.tsx:296:19",
 										"data-prohibitions": "[]",
 										children: "Vencimento"
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
-										"data-uid": "src/pages/ContasPagar.tsx:262:19",
+										"data-uid": "src/pages/ContasPagar.tsx:297:19",
 										"data-prohibitions": "[]",
 										children: "Categoria"
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
-										"data-uid": "src/pages/ContasPagar.tsx:263:19",
+										"data-uid": "src/pages/ContasPagar.tsx:298:19",
 										"data-prohibitions": "[]",
 										children: "Valor"
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
-										"data-uid": "src/pages/ContasPagar.tsx:264:19",
+										"data-uid": "src/pages/ContasPagar.tsx:299:19",
 										"data-prohibitions": "[]",
 										children: "Status"
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
-										"data-uid": "src/pages/ContasPagar.tsx:265:19",
+										"data-uid": "src/pages/ContasPagar.tsx:300:19",
 										"data-prohibitions": "[]",
 										children: "Método"
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
-										"data-uid": "src/pages/ContasPagar.tsx:266:19",
+										"data-uid": "src/pages/ContasPagar.tsx:301:19",
 										"data-prohibitions": "[]",
 										className: "text-right",
 										children: "Ação"
@@ -75950,39 +75970,39 @@ function ContasPagar() {
 								]
 							})
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableBody, {
-							"data-uid": "src/pages/ContasPagar.tsx:269:15",
+							"data-uid": "src/pages/ContasPagar.tsx:304:15",
 							"data-prohibitions": "[editContent]",
 							children: filteredContas.map((conta) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TableRow, {
-								"data-uid": "src/pages/ContasPagar.tsx:271:19",
+								"data-uid": "src/pages/ContasPagar.tsx:306:19",
 								"data-prohibitions": "[editContent]",
 								children: [
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-										"data-uid": "src/pages/ContasPagar.tsx:272:21",
+										"data-uid": "src/pages/ContasPagar.tsx:307:21",
 										"data-prohibitions": "[editContent]",
 										className: "font-medium",
 										children: conta.descricao
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-										"data-uid": "src/pages/ContasPagar.tsx:273:21",
+										"data-uid": "src/pages/ContasPagar.tsx:308:21",
 										"data-prohibitions": "[editContent]",
 										children: new Date(conta.data_vencimento).toLocaleDateString("pt-BR")
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-										"data-uid": "src/pages/ContasPagar.tsx:276:21",
+										"data-uid": "src/pages/ContasPagar.tsx:311:21",
 										"data-prohibitions": "[editContent]",
 										children: conta.categoria || "-"
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-										"data-uid": "src/pages/ContasPagar.tsx:277:21",
+										"data-uid": "src/pages/ContasPagar.tsx:312:21",
 										"data-prohibitions": "[editContent]",
 										className: "font-semibold",
 										children: formatCurrency(conta.valor)
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-										"data-uid": "src/pages/ContasPagar.tsx:278:21",
+										"data-uid": "src/pages/ContasPagar.tsx:313:21",
 										"data-prohibitions": "[editContent]",
 										children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Badge, {
-											"data-uid": "src/pages/ContasPagar.tsx:279:23",
+											"data-uid": "src/pages/ContasPagar.tsx:314:23",
 											"data-prohibitions": "[editContent]",
 											variant: conta.status === "pago" ? "default" : "secondary",
 											className: conta.status === "pago" ? "bg-emerald-100 text-emerald-800" : "bg-red-100 text-red-800",
@@ -75990,17 +76010,17 @@ function ContasPagar() {
 										})
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-										"data-uid": "src/pages/ContasPagar.tsx:290:21",
+										"data-uid": "src/pages/ContasPagar.tsx:325:21",
 										"data-prohibitions": "[editContent]",
 										className: "text-sm text-muted-foreground",
 										children: conta.metodo_pagamento || "-"
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-										"data-uid": "src/pages/ContasPagar.tsx:293:21",
+										"data-uid": "src/pages/ContasPagar.tsx:328:21",
 										"data-prohibitions": "[editContent]",
-										className: "text-right",
-										children: conta.status === "pendente" && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
-											"data-uid": "src/pages/ContasPagar.tsx:295:25",
+										className: "text-right space-x-2",
+										children: conta.status === "pendente" ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
+											"data-uid": "src/pages/ContasPagar.tsx:330:25",
 											"data-prohibitions": "[]",
 											size: "sm",
 											variant: "outline",
@@ -76010,6 +76030,18 @@ function ContasPagar() {
 												setPaymentMethod("Dinheiro");
 											},
 											children: "Pagar"
+										}) : /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button$1, {
+											"data-uid": "src/pages/ContasPagar.tsx:342:25",
+											"data-prohibitions": "[]",
+											size: "sm",
+											variant: "ghost",
+											className: "text-destructive hover:bg-destructive/10",
+											onClick: () => handleRevert(conta),
+											children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Undo2, {
+												"data-uid": "src/pages/ContasPagar.tsx:348:27",
+												"data-prohibitions": "[editContent]",
+												className: "h-4 w-4 mr-1"
+											}), " Reverter"]
 										})
 									})
 								]
@@ -76019,86 +76051,88 @@ function ContasPagar() {
 				})
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Dialog, {
-				"data-uid": "src/pages/ContasPagar.tsx:316:7",
+				"data-uid": "src/pages/ContasPagar.tsx:360:7",
 				"data-prohibitions": "[editContent]",
 				open: !!payingConta,
 				onOpenChange: (open) => !open && setPayingConta(null),
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogContent, {
-					"data-uid": "src/pages/ContasPagar.tsx:317:9",
+					"data-uid": "src/pages/ContasPagar.tsx:361:9",
 					"data-prohibitions": "[editContent]",
 					className: "sm:max-w-[425px]",
 					children: [
 						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogHeader, {
-							"data-uid": "src/pages/ContasPagar.tsx:318:11",
+							"data-uid": "src/pages/ContasPagar.tsx:362:11",
 							"data-prohibitions": "[]",
 							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogTitle, {
-								"data-uid": "src/pages/ContasPagar.tsx:319:13",
+								"data-uid": "src/pages/ContasPagar.tsx:363:13",
 								"data-prohibitions": "[]",
 								children: "Registrar Pagamento"
 							})
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							"data-uid": "src/pages/ContasPagar.tsx:321:11",
+							"data-uid": "src/pages/ContasPagar.tsx:365:11",
 							"data-prohibitions": "[]",
 							className: "grid gap-4 py-4",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								"data-uid": "src/pages/ContasPagar.tsx:322:13",
+								"data-uid": "src/pages/ContasPagar.tsx:366:13",
 								"data-prohibitions": "[]",
 								className: "grid grid-cols-4 items-center gap-4",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label, {
-									"data-uid": "src/pages/ContasPagar.tsx:323:15",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$1, {
+									"data-uid": "src/pages/ContasPagar.tsx:367:15",
 									"data-prohibitions": "[]",
+									htmlFor: "date",
 									className: "text-right",
 									children: "Data"
 								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
-									"data-uid": "src/pages/ContasPagar.tsx:324:15",
+									"data-uid": "src/pages/ContasPagar.tsx:370:15",
 									"data-prohibitions": "[editContent]",
+									id: "date",
 									type: "date",
 									className: "col-span-3",
 									value: paymentDate,
 									onChange: (e) => setPaymentDate(e.target.value)
 								})]
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								"data-uid": "src/pages/ContasPagar.tsx:331:13",
+								"data-uid": "src/pages/ContasPagar.tsx:378:13",
 								"data-prohibitions": "[]",
 								className: "grid grid-cols-4 items-center gap-4",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label, {
-									"data-uid": "src/pages/ContasPagar.tsx:332:15",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$1, {
+									"data-uid": "src/pages/ContasPagar.tsx:379:15",
 									"data-prohibitions": "[]",
 									className: "text-right",
 									children: "Método"
 								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Select$1, {
-									"data-uid": "src/pages/ContasPagar.tsx:333:15",
+									"data-uid": "src/pages/ContasPagar.tsx:380:15",
 									"data-prohibitions": "[]",
 									value: paymentMethod,
 									onValueChange: setPaymentMethod,
 									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectTrigger, {
-										"data-uid": "src/pages/ContasPagar.tsx:334:17",
+										"data-uid": "src/pages/ContasPagar.tsx:381:17",
 										"data-prohibitions": "[]",
 										className: "col-span-3",
 										children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectValue, {
-											"data-uid": "src/pages/ContasPagar.tsx:335:19",
+											"data-uid": "src/pages/ContasPagar.tsx:382:19",
 											"data-prohibitions": "[editContent]",
 											placeholder: "Selecione..."
 										})
 									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(SelectContent, {
-										"data-uid": "src/pages/ContasPagar.tsx:337:17",
+										"data-uid": "src/pages/ContasPagar.tsx:384:17",
 										"data-prohibitions": "[]",
 										children: [
 											/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectItem, {
-												"data-uid": "src/pages/ContasPagar.tsx:338:19",
+												"data-uid": "src/pages/ContasPagar.tsx:385:19",
 												"data-prohibitions": "[]",
 												value: "Dinheiro",
 												children: "Dinheiro"
 											}),
 											/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectItem, {
-												"data-uid": "src/pages/ContasPagar.tsx:339:19",
+												"data-uid": "src/pages/ContasPagar.tsx:386:19",
 												"data-prohibitions": "[]",
 												value: "Cartão",
 												children: "Cartão"
 											}),
 											/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectItem, {
-												"data-uid": "src/pages/ContasPagar.tsx:340:19",
+												"data-uid": "src/pages/ContasPagar.tsx:387:19",
 												"data-prohibitions": "[]",
 												value: "Pix",
 												children: "Pix"
@@ -76109,22 +76143,22 @@ function ContasPagar() {
 							})]
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogFooter, {
-							"data-uid": "src/pages/ContasPagar.tsx:345:11",
+							"data-uid": "src/pages/ContasPagar.tsx:392:11",
 							"data-prohibitions": "[editContent]",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
-								"data-uid": "src/pages/ContasPagar.tsx:346:13",
+								"data-uid": "src/pages/ContasPagar.tsx:393:13",
 								"data-prohibitions": "[]",
 								variant: "outline",
 								onClick: () => setPayingConta(null),
 								disabled: payingSubmitting,
 								children: "Cancelar"
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button$1, {
-								"data-uid": "src/pages/ContasPagar.tsx:353:13",
+								"data-uid": "src/pages/ContasPagar.tsx:400:13",
 								"data-prohibitions": "[editContent]",
 								onClick: handlePayConfirm,
 								disabled: payingSubmitting,
 								children: [payingSubmitting && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(LoaderCircle, {
-									"data-uid": "src/pages/ContasPagar.tsx:354:36",
+									"data-uid": "src/pages/ContasPagar.tsx:401:36",
 									"data-prohibitions": "[editContent]",
 									className: "h-4 w-4 animate-spin mr-2"
 								}), " Confirmar"]
@@ -76134,85 +76168,85 @@ function ContasPagar() {
 				})
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Dialog, {
-				"data-uid": "src/pages/ContasPagar.tsx:360:7",
+				"data-uid": "src/pages/ContasPagar.tsx:407:7",
 				"data-prohibitions": "[]",
 				open: isModalOpen,
 				onOpenChange: setIsModalOpen,
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogContent, {
-					"data-uid": "src/pages/ContasPagar.tsx:361:9",
+					"data-uid": "src/pages/ContasPagar.tsx:408:9",
 					"data-prohibitions": "[]",
 					className: "sm:max-w-[425px] bg-card",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogHeader, {
-						"data-uid": "src/pages/ContasPagar.tsx:362:11",
+						"data-uid": "src/pages/ContasPagar.tsx:409:11",
 						"data-prohibitions": "[]",
 						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogTitle, {
-							"data-uid": "src/pages/ContasPagar.tsx:363:13",
+							"data-uid": "src/pages/ContasPagar.tsx:410:13",
 							"data-prohibitions": "[]",
 							children: "Adicionar Nova Despesa"
 						})
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Form, {
-						"data-uid": "src/pages/ContasPagar.tsx:365:11",
+						"data-uid": "src/pages/ContasPagar.tsx:412:11",
 						"data-prohibitions": "[]",
 						...form,
 						children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("form", {
-							"data-uid": "src/pages/ContasPagar.tsx:366:13",
+							"data-uid": "src/pages/ContasPagar.tsx:413:13",
 							"data-prohibitions": "[]",
 							onSubmit: form.handleSubmit(onSubmit),
 							className: "space-y-4 py-4",
 							children: [
 								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormField, {
-									"data-uid": "src/pages/ContasPagar.tsx:367:15",
+									"data-uid": "src/pages/ContasPagar.tsx:414:15",
 									"data-prohibitions": "[editContent]",
 									control: form.control,
 									name: "descricao",
 									render: ({ field }) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(FormItem, {
-										"data-uid": "src/pages/ContasPagar.tsx:371:19",
+										"data-uid": "src/pages/ContasPagar.tsx:418:19",
 										"data-prohibitions": "[]",
 										children: [
 											/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormLabel, {
-												"data-uid": "src/pages/ContasPagar.tsx:372:21",
+												"data-uid": "src/pages/ContasPagar.tsx:419:21",
 												"data-prohibitions": "[]",
 												children: "Descrição *"
 											}),
 											/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormControl, {
-												"data-uid": "src/pages/ContasPagar.tsx:373:21",
+												"data-uid": "src/pages/ContasPagar.tsx:420:21",
 												"data-prohibitions": "[]",
 												children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
-													"data-uid": "src/pages/ContasPagar.tsx:374:23",
+													"data-uid": "src/pages/ContasPagar.tsx:421:23",
 													"data-prohibitions": "[editContent]",
 													...field
 												})
 											}),
 											/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormMessage, {
-												"data-uid": "src/pages/ContasPagar.tsx:376:21",
+												"data-uid": "src/pages/ContasPagar.tsx:423:21",
 												"data-prohibitions": "[editContent]"
 											})
 										]
 									})
 								}),
 								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-									"data-uid": "src/pages/ContasPagar.tsx:380:15",
+									"data-uid": "src/pages/ContasPagar.tsx:427:15",
 									"data-prohibitions": "[]",
 									className: "grid grid-cols-2 gap-4",
 									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormField, {
-										"data-uid": "src/pages/ContasPagar.tsx:381:17",
+										"data-uid": "src/pages/ContasPagar.tsx:428:17",
 										"data-prohibitions": "[editContent]",
 										control: form.control,
 										name: "valor",
 										render: ({ field }) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(FormItem, {
-											"data-uid": "src/pages/ContasPagar.tsx:385:21",
+											"data-uid": "src/pages/ContasPagar.tsx:432:21",
 											"data-prohibitions": "[]",
 											children: [
 												/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormLabel, {
-													"data-uid": "src/pages/ContasPagar.tsx:386:23",
+													"data-uid": "src/pages/ContasPagar.tsx:433:23",
 													"data-prohibitions": "[]",
 													children: "Valor *"
 												}),
 												/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormControl, {
-													"data-uid": "src/pages/ContasPagar.tsx:387:23",
+													"data-uid": "src/pages/ContasPagar.tsx:434:23",
 													"data-prohibitions": "[]",
 													children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
-														"data-uid": "src/pages/ContasPagar.tsx:388:25",
+														"data-uid": "src/pages/ContasPagar.tsx:435:25",
 														"data-prohibitions": "[editContent]",
 														type: "number",
 														step: "0.01",
@@ -76220,37 +76254,37 @@ function ContasPagar() {
 													})
 												}),
 												/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormMessage, {
-													"data-uid": "src/pages/ContasPagar.tsx:390:23",
+													"data-uid": "src/pages/ContasPagar.tsx:437:23",
 													"data-prohibitions": "[editContent]"
 												})
 											]
 										})
 									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormField, {
-										"data-uid": "src/pages/ContasPagar.tsx:394:17",
+										"data-uid": "src/pages/ContasPagar.tsx:441:17",
 										"data-prohibitions": "[editContent]",
 										control: form.control,
 										name: "data_vencimento",
 										render: ({ field }) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(FormItem, {
-											"data-uid": "src/pages/ContasPagar.tsx:398:21",
+											"data-uid": "src/pages/ContasPagar.tsx:445:21",
 											"data-prohibitions": "[]",
 											children: [
 												/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormLabel, {
-													"data-uid": "src/pages/ContasPagar.tsx:399:23",
+													"data-uid": "src/pages/ContasPagar.tsx:446:23",
 													"data-prohibitions": "[]",
 													children: "Vencimento *"
 												}),
 												/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormControl, {
-													"data-uid": "src/pages/ContasPagar.tsx:400:23",
+													"data-uid": "src/pages/ContasPagar.tsx:447:23",
 													"data-prohibitions": "[]",
 													children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
-														"data-uid": "src/pages/ContasPagar.tsx:401:25",
+														"data-uid": "src/pages/ContasPagar.tsx:448:25",
 														"data-prohibitions": "[editContent]",
 														type: "date",
 														...field
 													})
 												}),
 												/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormMessage, {
-													"data-uid": "src/pages/ContasPagar.tsx:403:23",
+													"data-uid": "src/pages/ContasPagar.tsx:450:23",
 													"data-prohibitions": "[editContent]"
 												})
 											]
@@ -76258,65 +76292,65 @@ function ContasPagar() {
 									})]
 								}),
 								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-									"data-uid": "src/pages/ContasPagar.tsx:408:15",
+									"data-uid": "src/pages/ContasPagar.tsx:455:15",
 									"data-prohibitions": "[]",
 									className: "grid grid-cols-2 gap-4",
 									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormField, {
-										"data-uid": "src/pages/ContasPagar.tsx:409:17",
+										"data-uid": "src/pages/ContasPagar.tsx:456:17",
 										"data-prohibitions": "[editContent]",
 										control: form.control,
 										name: "categoria",
 										render: ({ field }) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(FormItem, {
-											"data-uid": "src/pages/ContasPagar.tsx:413:21",
+											"data-uid": "src/pages/ContasPagar.tsx:460:21",
 											"data-prohibitions": "[]",
 											children: [
 												/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormLabel, {
-													"data-uid": "src/pages/ContasPagar.tsx:414:23",
+													"data-uid": "src/pages/ContasPagar.tsx:461:23",
 													"data-prohibitions": "[]",
 													children: "Categoria"
 												}),
 												/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormControl, {
-													"data-uid": "src/pages/ContasPagar.tsx:415:23",
+													"data-uid": "src/pages/ContasPagar.tsx:462:23",
 													"data-prohibitions": "[]",
 													children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
-														"data-uid": "src/pages/ContasPagar.tsx:416:25",
+														"data-uid": "src/pages/ContasPagar.tsx:463:25",
 														"data-prohibitions": "[editContent]",
 														placeholder: "Ex: Energia",
 														...field
 													})
 												}),
 												/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormMessage, {
-													"data-uid": "src/pages/ContasPagar.tsx:418:23",
+													"data-uid": "src/pages/ContasPagar.tsx:465:23",
 													"data-prohibitions": "[editContent]"
 												})
 											]
 										})
 									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormField, {
-										"data-uid": "src/pages/ContasPagar.tsx:422:17",
+										"data-uid": "src/pages/ContasPagar.tsx:469:17",
 										"data-prohibitions": "[editContent]",
 										control: form.control,
 										name: "fornecedor",
 										render: ({ field }) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(FormItem, {
-											"data-uid": "src/pages/ContasPagar.tsx:426:21",
+											"data-uid": "src/pages/ContasPagar.tsx:473:21",
 											"data-prohibitions": "[]",
 											children: [
 												/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormLabel, {
-													"data-uid": "src/pages/ContasPagar.tsx:427:23",
+													"data-uid": "src/pages/ContasPagar.tsx:474:23",
 													"data-prohibitions": "[]",
 													children: "Fornecedor"
 												}),
 												/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormControl, {
-													"data-uid": "src/pages/ContasPagar.tsx:428:23",
+													"data-uid": "src/pages/ContasPagar.tsx:475:23",
 													"data-prohibitions": "[]",
 													children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
-														"data-uid": "src/pages/ContasPagar.tsx:429:25",
+														"data-uid": "src/pages/ContasPagar.tsx:476:25",
 														"data-prohibitions": "[editContent]",
 														placeholder: "Ex: Enel",
 														...field
 													})
 												}),
 												/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormMessage, {
-													"data-uid": "src/pages/ContasPagar.tsx:431:23",
+													"data-uid": "src/pages/ContasPagar.tsx:478:23",
 													"data-prohibitions": "[editContent]"
 												})
 											]
@@ -76324,18 +76358,18 @@ function ContasPagar() {
 									})]
 								}),
 								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogFooter, {
-									"data-uid": "src/pages/ContasPagar.tsx:436:15",
+									"data-uid": "src/pages/ContasPagar.tsx:483:15",
 									"data-prohibitions": "[]",
 									className: "pt-4",
 									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
-										"data-uid": "src/pages/ContasPagar.tsx:437:17",
+										"data-uid": "src/pages/ContasPagar.tsx:484:17",
 										"data-prohibitions": "[]",
 										type: "button",
 										variant: "outline",
 										onClick: () => setIsModalOpen(false),
 										children: "Cancelar"
 									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
-										"data-uid": "src/pages/ContasPagar.tsx:440:17",
+										"data-uid": "src/pages/ContasPagar.tsx:487:17",
 										"data-prohibitions": "[]",
 										type: "submit",
 										disabled: form.formState.isSubmitting,
@@ -77116,7 +77150,7 @@ function CaixaAberto({ caixa, movements, sales, recebimentos, pagamentos, onFech
 									"data-uid": "src/components/caixa/CaixaAberto.tsx:358:15",
 									"data-prohibitions": "[]",
 									className: "space-y-2",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$2, {
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$1, {
 										"data-uid": "src/components/caixa/CaixaAberto.tsx:359:17",
 										"data-prohibitions": "[]",
 										children: "Tipo"
@@ -77155,7 +77189,7 @@ function CaixaAberto({ caixa, movements, sales, recebimentos, pagamentos, onFech
 									"data-uid": "src/components/caixa/CaixaAberto.tsx:370:15",
 									"data-prohibitions": "[]",
 									className: "space-y-2",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$2, {
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$1, {
 										"data-uid": "src/components/caixa/CaixaAberto.tsx:371:17",
 										"data-prohibitions": "[]",
 										children: "Valor"
@@ -77175,7 +77209,7 @@ function CaixaAberto({ caixa, movements, sales, recebimentos, pagamentos, onFech
 								"data-uid": "src/components/caixa/CaixaAberto.tsx:380:13",
 								"data-prohibitions": "[]",
 								className: "space-y-2",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$2, {
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$1, {
 									"data-uid": "src/components/caixa/CaixaAberto.tsx:381:15",
 									"data-prohibitions": "[]",
 									children: "Descrição"
@@ -77218,7 +77252,7 @@ function CaixaAberto({ caixa, movements, sales, recebimentos, pagamentos, onFech
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogContent, {
 					"data-uid": "src/components/caixa/CaixaAberto.tsx:399:9",
 					"data-prohibitions": "[editContent]",
-					className: "max-w-2xl print:hidden",
+					className: "max-w-3xl print:hidden",
 					children: [
 						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogHeader, {
 							"data-uid": "src/components/caixa/CaixaAberto.tsx:400:11",
@@ -77232,173 +77266,316 @@ function CaixaAberto({ caixa, movements, sales, recebimentos, pagamentos, onFech
 						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 							"data-uid": "src/components/caixa/CaixaAberto.tsx:403:11",
 							"data-prohibitions": "[editContent]",
-							className: "grid grid-cols-2 gap-6 py-4",
+							className: "grid grid-cols-1 md:grid-cols-2 gap-8 py-4",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 								"data-uid": "src/components/caixa/CaixaAberto.tsx:404:13",
 								"data-prohibitions": "[editContent]",
-								className: "space-y-4 border-r pr-6",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-									"data-uid": "src/components/caixa/CaixaAberto.tsx:405:15",
-									"data-prohibitions": "[editContent]",
-									children: [
-										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", {
+								className: "space-y-6 md:border-r pr-0 md:pr-8",
+								children: [
+									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+										"data-uid": "src/components/caixa/CaixaAberto.tsx:405:15",
+										"data-prohibitions": "[editContent]",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", {
 											"data-uid": "src/components/caixa/CaixaAberto.tsx:406:17",
 											"data-prohibitions": "[]",
-											className: "font-semibold text-sm text-muted-foreground mb-2",
+											className: "font-semibold text-sm text-emerald-700 dark:text-emerald-400 mb-3 border-b pb-1",
 											children: "Entradas (Dinheiro)"
-										}),
-										/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 											"data-uid": "src/components/caixa/CaixaAberto.tsx:409:17",
 											"data-prohibitions": "[editContent]",
-											className: "flex justify-between text-sm",
+											className: "space-y-1.5",
 											children: [
-												/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+												/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 													"data-uid": "src/components/caixa/CaixaAberto.tsx:410:19",
-													"data-prohibitions": "[]",
-													children: "Saldo Inicial:"
-												}),
-												" ",
-												/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-													"data-uid": "src/components/caixa/CaixaAberto.tsx:410:47",
 													"data-prohibitions": "[editContent]",
-													children: formatCurrency(totals.saldoInicial)
+													className: "flex justify-between text-sm",
+													children: [
+														/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+															"data-uid": "src/components/caixa/CaixaAberto.tsx:411:21",
+															"data-prohibitions": "[]",
+															className: "text-muted-foreground",
+															children: "Saldo Inicial:"
+														}),
+														" ",
+														/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+															"data-uid": "src/components/caixa/CaixaAberto.tsx:412:21",
+															"data-prohibitions": "[editContent]",
+															className: "font-medium",
+															children: formatCurrency(totals.saldoInicial)
+														})
+													]
+												}),
+												/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+													"data-uid": "src/components/caixa/CaixaAberto.tsx:414:19",
+													"data-prohibitions": "[editContent]",
+													className: "flex justify-between text-sm",
+													children: [
+														/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+															"data-uid": "src/components/caixa/CaixaAberto.tsx:415:21",
+															"data-prohibitions": "[]",
+															className: "text-muted-foreground",
+															children: "Vendas:"
+														}),
+														" ",
+														/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+															"data-uid": "src/components/caixa/CaixaAberto.tsx:416:21",
+															"data-prohibitions": "[editContent]",
+															className: "font-medium",
+															children: formatCurrency(totals.vDinheiro)
+														})
+													]
+												}),
+												/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+													"data-uid": "src/components/caixa/CaixaAberto.tsx:418:19",
+													"data-prohibitions": "[editContent]",
+													className: "flex justify-between text-sm",
+													children: [
+														/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+															"data-uid": "src/components/caixa/CaixaAberto.tsx:419:21",
+															"data-prohibitions": "[]",
+															className: "text-muted-foreground",
+															children: "Recebimentos:"
+														}),
+														" ",
+														/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+															"data-uid": "src/components/caixa/CaixaAberto.tsx:420:21",
+															"data-prohibitions": "[editContent]",
+															className: "font-medium",
+															children: formatCurrency(totals.rDinheiro)
+														})
+													]
+												}),
+												/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+													"data-uid": "src/components/caixa/CaixaAberto.tsx:422:19",
+													"data-prohibitions": "[editContent]",
+													className: "flex justify-between text-sm",
+													children: [
+														/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+															"data-uid": "src/components/caixa/CaixaAberto.tsx:423:21",
+															"data-prohibitions": "[]",
+															className: "text-muted-foreground",
+															children: "Suprimentos:"
+														}),
+														" ",
+														/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+															"data-uid": "src/components/caixa/CaixaAberto.tsx:424:21",
+															"data-prohibitions": "[editContent]",
+															className: "font-medium",
+															children: formatCurrency(totals.supManuais)
+														})
+													]
 												})
 											]
-										}),
-										/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-											"data-uid": "src/components/caixa/CaixaAberto.tsx:412:17",
-											"data-prohibitions": "[editContent]",
-											className: "flex justify-between text-sm",
-											children: [
-												/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-													"data-uid": "src/components/caixa/CaixaAberto.tsx:413:19",
-													"data-prohibitions": "[]",
-													children: "Vendas:"
-												}),
-												" ",
-												/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-													"data-uid": "src/components/caixa/CaixaAberto.tsx:413:40",
-													"data-prohibitions": "[editContent]",
-													children: formatCurrency(totals.vDinheiro)
-												})
-											]
-										}),
-										/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-											"data-uid": "src/components/caixa/CaixaAberto.tsx:415:17",
-											"data-prohibitions": "[editContent]",
-											className: "flex justify-between text-sm",
-											children: [
-												/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-													"data-uid": "src/components/caixa/CaixaAberto.tsx:416:19",
-													"data-prohibitions": "[]",
-													children: "Recebimentos:"
-												}),
-												" ",
-												/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-													"data-uid": "src/components/caixa/CaixaAberto.tsx:416:46",
-													"data-prohibitions": "[editContent]",
-													children: formatCurrency(totals.rDinheiro)
-												})
-											]
-										}),
-										/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-											"data-uid": "src/components/caixa/CaixaAberto.tsx:418:17",
-											"data-prohibitions": "[editContent]",
-											className: "flex justify-between text-sm",
-											children: [
-												/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-													"data-uid": "src/components/caixa/CaixaAberto.tsx:419:19",
-													"data-prohibitions": "[]",
-													children: "Suprimentos:"
-												}),
-												" ",
-												/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-													"data-uid": "src/components/caixa/CaixaAberto.tsx:419:45",
-													"data-prohibitions": "[editContent]",
-													children: formatCurrency(totals.supManuais)
-												})
-											]
-										})
-									]
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-									"data-uid": "src/components/caixa/CaixaAberto.tsx:422:15",
-									"data-prohibitions": "[editContent]",
-									children: [
-										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", {
-											"data-uid": "src/components/caixa/CaixaAberto.tsx:423:17",
-											"data-prohibitions": "[]",
-											className: "font-semibold text-sm text-muted-foreground mb-2",
-											children: "Saídas (Dinheiro)"
-										}),
-										/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-											"data-uid": "src/components/caixa/CaixaAberto.tsx:426:17",
-											"data-prohibitions": "[editContent]",
-											className: "flex justify-between text-sm",
-											children: [
-												/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-													"data-uid": "src/components/caixa/CaixaAberto.tsx:427:19",
-													"data-prohibitions": "[]",
-													children: "Pagamentos:"
-												}),
-												" ",
-												/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-													"data-uid": "src/components/caixa/CaixaAberto.tsx:427:44",
-													"data-prohibitions": "[editContent]",
-													children: formatCurrency(totals.pDinheiro)
-												})
-											]
-										}),
-										/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-											"data-uid": "src/components/caixa/CaixaAberto.tsx:429:17",
-											"data-prohibitions": "[editContent]",
-											className: "flex justify-between text-sm",
-											children: [
-												/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-													"data-uid": "src/components/caixa/CaixaAberto.tsx:430:19",
-													"data-prohibitions": "[]",
-													children: "Sangrias:"
-												}),
-												" ",
-												/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-													"data-uid": "src/components/caixa/CaixaAberto.tsx:430:42",
-													"data-prohibitions": "[editContent]",
-													children: formatCurrency(totals.sangManuais)
-												})
-											]
-										})
-									]
-								})]
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								"data-uid": "src/components/caixa/CaixaAberto.tsx:434:13",
-								"data-prohibitions": "[editContent]",
-								className: "flex flex-col justify-center text-center space-y-4",
-								children: [
-									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-										"data-uid": "src/components/caixa/CaixaAberto.tsx:435:15",
-										"data-prohibitions": "[]",
-										className: "text-muted-foreground font-medium",
-										children: "Total Calculado na Gaveta"
+										})]
 									}),
-									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-										"data-uid": "src/components/caixa/CaixaAberto.tsx:436:15",
+									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+										"data-uid": "src/components/caixa/CaixaAberto.tsx:428:15",
 										"data-prohibitions": "[editContent]",
-										className: "text-5xl font-black text-emerald-600",
-										children: formatCurrency(totals.atual)
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", {
+											"data-uid": "src/components/caixa/CaixaAberto.tsx:429:17",
+											"data-prohibitions": "[]",
+											className: "font-semibold text-sm text-red-700 dark:text-red-400 mb-3 border-b pb-1",
+											children: "Saídas (Dinheiro)"
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+											"data-uid": "src/components/caixa/CaixaAberto.tsx:432:17",
+											"data-prohibitions": "[editContent]",
+											className: "space-y-1.5",
+											children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+												"data-uid": "src/components/caixa/CaixaAberto.tsx:433:19",
+												"data-prohibitions": "[editContent]",
+												className: "flex justify-between text-sm",
+												children: [
+													/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+														"data-uid": "src/components/caixa/CaixaAberto.tsx:434:21",
+														"data-prohibitions": "[]",
+														className: "text-muted-foreground",
+														children: "Pagamentos:"
+													}),
+													" ",
+													/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+														"data-uid": "src/components/caixa/CaixaAberto.tsx:435:21",
+														"data-prohibitions": "[editContent]",
+														className: "font-medium",
+														children: formatCurrency(totals.pDinheiro)
+													})
+												]
+											}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+												"data-uid": "src/components/caixa/CaixaAberto.tsx:437:19",
+												"data-prohibitions": "[editContent]",
+												className: "flex justify-between text-sm",
+												children: [
+													/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+														"data-uid": "src/components/caixa/CaixaAberto.tsx:438:21",
+														"data-prohibitions": "[]",
+														className: "text-muted-foreground",
+														children: "Sangrias:"
+													}),
+													" ",
+													/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+														"data-uid": "src/components/caixa/CaixaAberto.tsx:439:21",
+														"data-prohibitions": "[editContent]",
+														className: "font-medium",
+														children: formatCurrency(totals.sangManuais)
+													})
+												]
+											})]
+										})]
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+										"data-uid": "src/components/caixa/CaixaAberto.tsx:443:15",
+										"data-prohibitions": "[editContent]",
+										className: "pt-2",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", {
+											"data-uid": "src/components/caixa/CaixaAberto.tsx:444:17",
+											"data-prohibitions": "[]",
+											className: "font-semibold text-sm text-blue-700 dark:text-blue-400 mb-3 border-b pb-1",
+											children: "Outros Métodos (Não afetam gaveta)"
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+											"data-uid": "src/components/caixa/CaixaAberto.tsx:447:17",
+											"data-prohibitions": "[editContent]",
+											className: "grid grid-cols-2 gap-4",
+											children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+												"data-uid": "src/components/caixa/CaixaAberto.tsx:448:19",
+												"data-prohibitions": "[editContent]",
+												className: "space-y-1.5",
+												children: [
+													/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+														"data-uid": "src/components/caixa/CaixaAberto.tsx:449:21",
+														"data-prohibitions": "[]",
+														className: "text-xs font-semibold text-muted-foreground uppercase tracking-wider",
+														children: "Cartão"
+													}),
+													/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+														"data-uid": "src/components/caixa/CaixaAberto.tsx:452:21",
+														"data-prohibitions": "[editContent]",
+														className: "flex justify-between text-sm",
+														children: [
+															/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+																"data-uid": "src/components/caixa/CaixaAberto.tsx:453:23",
+																"data-prohibitions": "[]",
+																className: "text-muted-foreground",
+																children: "Vendas:"
+															}),
+															" ",
+															/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+																"data-uid": "src/components/caixa/CaixaAberto.tsx:454:23",
+																"data-prohibitions": "[editContent]",
+																className: "font-medium",
+																children: formatCurrency(totals.vCartao)
+															})
+														]
+													}),
+													/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+														"data-uid": "src/components/caixa/CaixaAberto.tsx:456:21",
+														"data-prohibitions": "[editContent]",
+														className: "flex justify-between text-sm",
+														children: [
+															/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+																"data-uid": "src/components/caixa/CaixaAberto.tsx:457:23",
+																"data-prohibitions": "[]",
+																className: "text-muted-foreground",
+																children: "Receb.:"
+															}),
+															" ",
+															/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+																"data-uid": "src/components/caixa/CaixaAberto.tsx:458:23",
+																"data-prohibitions": "[editContent]",
+																className: "font-medium",
+																children: formatCurrency(totals.rCartao)
+															})
+														]
+													})
+												]
+											}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+												"data-uid": "src/components/caixa/CaixaAberto.tsx:461:19",
+												"data-prohibitions": "[editContent]",
+												className: "space-y-1.5",
+												children: [
+													/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+														"data-uid": "src/components/caixa/CaixaAberto.tsx:462:21",
+														"data-prohibitions": "[]",
+														className: "text-xs font-semibold text-muted-foreground uppercase tracking-wider",
+														children: "Pix"
+													}),
+													/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+														"data-uid": "src/components/caixa/CaixaAberto.tsx:465:21",
+														"data-prohibitions": "[editContent]",
+														className: "flex justify-between text-sm",
+														children: [
+															/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+																"data-uid": "src/components/caixa/CaixaAberto.tsx:466:23",
+																"data-prohibitions": "[]",
+																className: "text-muted-foreground",
+																children: "Vendas:"
+															}),
+															" ",
+															/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+																"data-uid": "src/components/caixa/CaixaAberto.tsx:467:23",
+																"data-prohibitions": "[editContent]",
+																className: "font-medium",
+																children: formatCurrency(totals.vPix)
+															})
+														]
+													}),
+													/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+														"data-uid": "src/components/caixa/CaixaAberto.tsx:469:21",
+														"data-prohibitions": "[editContent]",
+														className: "flex justify-between text-sm",
+														children: [
+															/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+																"data-uid": "src/components/caixa/CaixaAberto.tsx:470:23",
+																"data-prohibitions": "[]",
+																className: "text-muted-foreground",
+																children: "Receb.:"
+															}),
+															" ",
+															/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+																"data-uid": "src/components/caixa/CaixaAberto.tsx:471:23",
+																"data-prohibitions": "[editContent]",
+																className: "font-medium",
+																children: formatCurrency(totals.rPix)
+															})
+														]
+													})
+												]
+											})]
+										})]
+									})
+								]
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								"data-uid": "src/components/caixa/CaixaAberto.tsx:477:13",
+								"data-prohibitions": "[editContent]",
+								className: "flex flex-col justify-center items-center text-center space-y-6 bg-muted/30 p-8 rounded-2xl border border-border",
+								children: [
+									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+										"data-uid": "src/components/caixa/CaixaAberto.tsx:478:15",
+										"data-prohibitions": "[editContent]",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+											"data-uid": "src/components/caixa/CaixaAberto.tsx:479:17",
+											"data-prohibitions": "[]",
+											className: "text-muted-foreground font-semibold uppercase tracking-wider text-xs mb-2",
+											children: "Total Calculado na Gaveta"
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+											"data-uid": "src/components/caixa/CaixaAberto.tsx:482:17",
+											"data-prohibitions": "[editContent]",
+											className: "text-5xl font-black text-emerald-600 dark:text-emerald-400",
+											children: formatCurrency(totals.atual)
+										})]
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-										"data-uid": "src/components/caixa/CaixaAberto.tsx:437:15",
+										"data-uid": "src/components/caixa/CaixaAberto.tsx:486:15",
 										"data-prohibitions": "[]",
-										className: "text-xs text-muted-foreground",
-										children: "Confira o valor físico antes de confirmar."
+										className: "text-sm text-muted-foreground max-w-[250px]",
+										children: "Confira o valor físico na gaveta antes de confirmar o fechamento."
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button$1, {
-										"data-uid": "src/components/caixa/CaixaAberto.tsx:440:15",
+										"data-uid": "src/components/caixa/CaixaAberto.tsx:489:15",
 										"data-prohibitions": "[]",
 										variant: "outline",
 										onClick: () => window.print(),
-										className: "mt-4",
+										className: "mt-4 w-full max-w-[200px] bg-background",
 										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Printer, {
-											"data-uid": "src/components/caixa/CaixaAberto.tsx:441:17",
+											"data-uid": "src/components/caixa/CaixaAberto.tsx:494:17",
 											"data-prohibitions": "[editContent]",
 											className: "mr-2 h-4 w-4"
 										}), " Imprimir Resumo"]
@@ -77407,17 +77584,17 @@ function CaixaAberto({ caixa, movements, sales, recebimentos, pagamentos, onFech
 							})]
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogFooter, {
-							"data-uid": "src/components/caixa/CaixaAberto.tsx:445:11",
+							"data-uid": "src/components/caixa/CaixaAberto.tsx:498:11",
 							"data-prohibitions": "[]",
-							className: "border-t pt-4",
+							className: "border-t pt-4 mt-2",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
-								"data-uid": "src/components/caixa/CaixaAberto.tsx:446:13",
+								"data-uid": "src/components/caixa/CaixaAberto.tsx:499:13",
 								"data-prohibitions": "[]",
 								variant: "outline",
 								onClick: () => setCloseOpen(false),
 								children: "Cancelar"
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
-								"data-uid": "src/components/caixa/CaixaAberto.tsx:449:13",
+								"data-uid": "src/components/caixa/CaixaAberto.tsx:502:13",
 								"data-prohibitions": "[]",
 								variant: "destructive",
 								onClick: () => onFechar(totals.atual),
@@ -77514,7 +77691,7 @@ function CaixaFechado({ onAbrir }) {
 							"data-uid": "src/components/caixa/CaixaFechado.tsx:50:13",
 							"data-prohibitions": "[]",
 							className: "space-y-2 text-left",
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$2, {
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$1, {
 								"data-uid": "src/components/caixa/CaixaFechado.tsx:51:15",
 								"data-prohibitions": "[]",
 								children: "Saldo Inicial (Troco em Gaveta)"
@@ -78481,7 +78658,7 @@ function CategoriaFormModal({ open, onClose, onSuccess }) {
 					"data-uid": "src/components/estoque/CategoriaFormModal.tsx:59:11",
 					"data-prohibitions": "[]",
 					className: "space-y-2",
-					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$2, {
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$1, {
 						"data-uid": "src/components/estoque/CategoriaFormModal.tsx:60:13",
 						"data-prohibitions": "[]",
 						htmlFor: "nome",
@@ -78867,7 +79044,7 @@ function EstoqueAtual() {
 									"data-uid": "src/components/estoque/EstoqueAtual.tsx:239:17",
 									"data-prohibitions": "[]",
 									className: "space-y-2",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$2, {
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$1, {
 										"data-uid": "src/components/estoque/EstoqueAtual.tsx:240:19",
 										"data-prohibitions": "[]",
 										children: "Tipo de Ajuste"
@@ -78907,7 +79084,7 @@ function EstoqueAtual() {
 									"data-uid": "src/components/estoque/EstoqueAtual.tsx:255:17",
 									"data-prohibitions": "[]",
 									className: "space-y-2",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$2, {
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$1, {
 										"data-uid": "src/components/estoque/EstoqueAtual.tsx:256:19",
 										"data-prohibitions": "[]",
 										children: "Quantidade"
@@ -90389,7 +90566,7 @@ function CustomerSelect({ onSelect }) {
 		"data-uid": "src/components/pdv/CustomerSelect.tsx:43:7",
 		"data-prohibitions": "[editContent]",
 		className: "space-y-2",
-		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$2, {
+		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$1, {
 			"data-uid": "src/components/pdv/CustomerSelect.tsx:44:9",
 			"data-prohibitions": "[]",
 			className: "text-muted-foreground uppercase text-xs font-bold tracking-wider",
@@ -90442,7 +90619,7 @@ function CustomerSelect({ onSelect }) {
 				"data-uid": "src/components/pdv/CustomerSelect.tsx:70:7",
 				"data-prohibitions": "[]",
 				className: "flex items-center justify-between",
-				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$2, {
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$1, {
 					"data-uid": "src/components/pdv/CustomerSelect.tsx:71:9",
 					"data-prohibitions": "[]",
 					className: "text-muted-foreground uppercase text-xs font-bold tracking-wider",
@@ -90778,7 +90955,7 @@ function CheckoutModal({ open, onOpenChange }) {
 								"data-uid": "src/components/pdv/CheckoutModal.tsx:223:15",
 								"data-prohibitions": "[]",
 								className: "space-y-2 pb-4 border-b border-border/50",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Label$2, {
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Label$1, {
 									"data-uid": "src/components/pdv/CheckoutModal.tsx:224:17",
 									"data-prohibitions": "[]",
 									htmlFor: "discount",
@@ -90825,7 +91002,7 @@ function CheckoutModal({ open, onOpenChange }) {
 									"data-uid": "src/components/pdv/CheckoutModal.tsx:244:19",
 									"data-prohibitions": "[]",
 									className: "space-y-2",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$2, {
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$1, {
 										"data-uid": "src/components/pdv/CheckoutModal.tsx:245:21",
 										"data-prohibitions": "[]",
 										children: "Valor Recebido (R$)"
@@ -91215,7 +91392,7 @@ function Login() {
 							"data-uid": "src/pages/Login.tsx:51:13",
 							"data-prohibitions": "[]",
 							className: "space-y-2",
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$2, {
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$1, {
 								"data-uid": "src/pages/Login.tsx:52:15",
 								"data-prohibitions": "[]",
 								htmlFor: "email",
@@ -91241,7 +91418,7 @@ function Login() {
 								"data-uid": "src/pages/Login.tsx:66:15",
 								"data-prohibitions": "[]",
 								className: "flex items-center justify-between",
-								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$2, {
+								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$1, {
 									"data-uid": "src/pages/Login.tsx:67:17",
 									"data-prohibitions": "[]",
 									htmlFor: "password",
@@ -91495,4 +91672,4 @@ var App = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ThemeProvider, {
 }));
 //#endregion
 
-//# sourceMappingURL=index-BoyxC61H.js.map
+//# sourceMappingURL=index-DBolkrko.js.map
