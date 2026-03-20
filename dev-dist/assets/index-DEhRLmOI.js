@@ -67627,49 +67627,51 @@ function PrintableReport({ contas, clientName, startDate, endDate }) {
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 		"data-uid": "src/components/contas-receber/PrintableReport.tsx:7:5",
 		"data-prohibitions": "[editContent]",
-		className: "hidden print:block fixed inset-0 bg-white z-[9999] p-8 text-black print:overflow-visible",
+		className: "hidden print:block bg-white text-black w-full print:overflow-visible mx-auto max-w-[210mm]",
 		children: [
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 				"data-uid": "src/components/contas-receber/PrintableReport.tsx:8:7",
 				"data-prohibitions": "[editContent]",
-				className: "mb-8 border-b-2 border-black pb-4",
+				className: "mb-6 border-b-2 border-black pb-4",
 				children: [
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h1", {
 						"data-uid": "src/components/contas-receber/PrintableReport.tsx:9:9",
 						"data-prohibitions": "[]",
-						className: "text-3xl font-bold mb-2",
-						children: "Relatório de Carteira - Contas a Receber"
+						className: "text-2xl font-bold uppercase tracking-tight",
+						children: "CHARME PDV - Relatório de Contas a Receber"
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
-						"data-uid": "src/components/contas-receber/PrintableReport.tsx:10:9",
+						"data-uid": "src/components/contas-receber/PrintableReport.tsx:12:9",
 						"data-prohibitions": "[editContent]",
-						className: "text-gray-600",
+						className: "text-sm text-gray-600 mt-1",
 						children: ["Gerado em: ", (/* @__PURE__ */ new Date()).toLocaleString("pt-BR")]
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						"data-uid": "src/components/contas-receber/PrintableReport.tsx:12:9",
+						"data-uid": "src/components/contas-receber/PrintableReport.tsx:16:9",
 						"data-prohibitions": "[editContent]",
-						className: "mt-4 grid grid-cols-2 gap-4 text-sm",
+						className: "mt-4 grid grid-cols-2 gap-4 text-sm bg-gray-50 p-3 rounded border border-gray-200",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							"data-uid": "src/components/contas-receber/PrintableReport.tsx:13:11",
+							"data-uid": "src/components/contas-receber/PrintableReport.tsx:17:11",
 							"data-prohibitions": "[editContent]",
 							children: [
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("strong", {
-									"data-uid": "src/components/contas-receber/PrintableReport.tsx:14:13",
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+									"data-uid": "src/components/contas-receber/PrintableReport.tsx:18:13",
 									"data-prohibitions": "[]",
-									children: "Cliente:"
+									className: "font-semibold",
+									children: "Filtro de Cliente:"
 								}),
 								" ",
-								clientName || "Todos"
+								clientName || "Todos os clientes"
 							]
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							"data-uid": "src/components/contas-receber/PrintableReport.tsx:16:11",
+							"data-uid": "src/components/contas-receber/PrintableReport.tsx:21:11",
 							"data-prohibitions": "[editContent]",
 							children: [
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("strong", {
-									"data-uid": "src/components/contas-receber/PrintableReport.tsx:17:13",
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+									"data-uid": "src/components/contas-receber/PrintableReport.tsx:22:13",
 									"data-prohibitions": "[]",
-									children: "Período:"
+									className: "font-semibold",
+									children: "Período de Vencimento:"
 								}),
 								" ",
 								startDate ? new Date(startDate).toLocaleDateString("pt-BR") : "Início",
@@ -67682,118 +67684,118 @@ function PrintableReport({ contas, clientName, startDate, endDate }) {
 				]
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("table", {
-				"data-uid": "src/components/contas-receber/PrintableReport.tsx:24:7",
+				"data-uid": "src/components/contas-receber/PrintableReport.tsx:29:7",
 				"data-prohibitions": "[editContent]",
 				className: "w-full text-left border-collapse mb-8 text-sm",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("thead", {
-					"data-uid": "src/components/contas-receber/PrintableReport.tsx:25:9",
+					"data-uid": "src/components/contas-receber/PrintableReport.tsx:30:9",
 					"data-prohibitions": "[]",
 					children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("tr", {
-						"data-uid": "src/components/contas-receber/PrintableReport.tsx:26:11",
+						"data-uid": "src/components/contas-receber/PrintableReport.tsx:31:11",
 						"data-prohibitions": "[]",
-						className: "bg-gray-100",
+						className: "bg-gray-100 border-b-2 border-black",
 						children: [
 							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("th", {
-								"data-uid": "src/components/contas-receber/PrintableReport.tsx:27:13",
+								"data-uid": "src/components/contas-receber/PrintableReport.tsx:32:13",
 								"data-prohibitions": "[]",
-								className: "py-2 px-2 border-b border-gray-300",
+								className: "py-2 px-3 font-semibold border-b border-gray-300",
 								children: "Cliente"
 							}),
 							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("th", {
-								"data-uid": "src/components/contas-receber/PrintableReport.tsx:28:13",
+								"data-uid": "src/components/contas-receber/PrintableReport.tsx:33:13",
 								"data-prohibitions": "[]",
-								className: "py-2 px-2 border-b border-gray-300",
-								children: "Venda"
+								className: "py-2 px-3 font-semibold border-b border-gray-300",
+								children: "Data Venda"
 							}),
 							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("th", {
-								"data-uid": "src/components/contas-receber/PrintableReport.tsx:29:13",
+								"data-uid": "src/components/contas-receber/PrintableReport.tsx:34:13",
 								"data-prohibitions": "[]",
-								className: "py-2 px-2 border-b border-gray-300",
+								className: "py-2 px-3 font-semibold border-b border-gray-300",
 								children: "Vencimento"
 							}),
 							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("th", {
-								"data-uid": "src/components/contas-receber/PrintableReport.tsx:30:13",
+								"data-uid": "src/components/contas-receber/PrintableReport.tsx:35:13",
 								"data-prohibitions": "[]",
-								className: "py-2 px-2 border-b border-gray-300",
+								className: "py-2 px-3 font-semibold border-b border-gray-300",
 								children: "Status"
 							}),
 							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("th", {
-								"data-uid": "src/components/contas-receber/PrintableReport.tsx:31:13",
+								"data-uid": "src/components/contas-receber/PrintableReport.tsx:36:13",
 								"data-prohibitions": "[]",
-								className: "py-2 px-2 border-b border-gray-300 text-right",
+								className: "py-2 px-3 font-semibold border-b border-gray-300 text-right",
 								children: "Valor"
 							})
 						]
 					})
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("tbody", {
-					"data-uid": "src/components/contas-receber/PrintableReport.tsx:34:9",
+					"data-uid": "src/components/contas-receber/PrintableReport.tsx:39:9",
 					"data-prohibitions": "[editContent]",
 					children: contas.length > 0 ? contas.map((c) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("tr", {
-						"data-uid": "src/components/contas-receber/PrintableReport.tsx:37:15",
+						"data-uid": "src/components/contas-receber/PrintableReport.tsx:42:15",
 						"data-prohibitions": "[editContent]",
-						className: "border-b border-gray-200",
+						className: "border-b border-gray-200 print:break-inside-avoid",
 						children: [
 							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("td", {
-								"data-uid": "src/components/contas-receber/PrintableReport.tsx:38:17",
+								"data-uid": "src/components/contas-receber/PrintableReport.tsx:43:17",
 								"data-prohibitions": "[editContent]",
-								className: "py-2 px-2",
+								className: "py-2 px-3",
 								children: c.cliente?.nome || "Sem Cliente"
 							}),
 							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("td", {
-								"data-uid": "src/components/contas-receber/PrintableReport.tsx:39:17",
+								"data-uid": "src/components/contas-receber/PrintableReport.tsx:44:17",
 								"data-prohibitions": "[editContent]",
-								className: "py-2 px-2",
-								children: new Date(c.venda?.data || c.data_vencimento).toLocaleDateString("pt-BR")
+								className: "py-2 px-3",
+								children: c.venda?.data ? new Date(c.venda.data).toLocaleDateString("pt-BR") : new Date(c.data_vencimento).toLocaleDateString("pt-BR")
 							}),
 							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("td", {
-								"data-uid": "src/components/contas-receber/PrintableReport.tsx:42:17",
+								"data-uid": "src/components/contas-receber/PrintableReport.tsx:49:17",
 								"data-prohibitions": "[editContent]",
-								className: "py-2 px-2 font-medium",
+								className: "py-2 px-3 font-medium",
 								children: new Date(c.data_vencimento).toLocaleDateString("pt-BR")
 							}),
 							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("td", {
-								"data-uid": "src/components/contas-receber/PrintableReport.tsx:45:17",
+								"data-uid": "src/components/contas-receber/PrintableReport.tsx:52:17",
 								"data-prohibitions": "[editContent]",
-								className: "py-2 px-2 capitalize",
+								className: "py-2 px-3 capitalize",
 								children: c.status
 							}),
 							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("td", {
-								"data-uid": "src/components/contas-receber/PrintableReport.tsx:46:17",
+								"data-uid": "src/components/contas-receber/PrintableReport.tsx:53:17",
 								"data-prohibitions": "[editContent]",
-								className: "py-2 px-2 text-right",
+								className: "py-2 px-3 text-right font-medium",
 								children: formatCurrency(c.valor)
 							})
 						]
 					}, c.id)) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)("tr", {
-						"data-uid": "src/components/contas-receber/PrintableReport.tsx:50:13",
+						"data-uid": "src/components/contas-receber/PrintableReport.tsx:57:13",
 						"data-prohibitions": "[]",
 						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("td", {
-							"data-uid": "src/components/contas-receber/PrintableReport.tsx:51:15",
+							"data-uid": "src/components/contas-receber/PrintableReport.tsx:58:15",
 							"data-prohibitions": "[]",
 							colSpan: 5,
-							className: "py-4 text-center",
-							children: "Nenhum registro encontrado."
+							className: "py-6 text-center text-gray-500 italic",
+							children: "Nenhum registro encontrado para os filtros atuais."
 						})
 					})
 				})]
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-				"data-uid": "src/components/contas-receber/PrintableReport.tsx:59:7",
+				"data-uid": "src/components/contas-receber/PrintableReport.tsx:66:7",
 				"data-prohibitions": "[editContent]",
-				className: "flex justify-end border-t-2 border-black pt-4",
+				className: "flex justify-end border-t-2 border-black pt-4 print:break-inside-avoid",
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					"data-uid": "src/components/contas-receber/PrintableReport.tsx:60:9",
+					"data-uid": "src/components/contas-receber/PrintableReport.tsx:67:9",
 					"data-prohibitions": "[editContent]",
-					className: "text-right",
-					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-						"data-uid": "src/components/contas-receber/PrintableReport.tsx:61:11",
+					className: "text-right bg-gray-50 p-4 rounded border border-gray-200 w-64",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+						"data-uid": "src/components/contas-receber/PrintableReport.tsx:68:11",
 						"data-prohibitions": "[]",
-						className: "text-lg text-gray-600 mr-4",
-						children: "Total do Relatório:"
-					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-						"data-uid": "src/components/contas-receber/PrintableReport.tsx:62:11",
+						className: "text-sm font-semibold text-gray-600 uppercase tracking-wider mb-1",
+						children: "Total do Relatório"
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+						"data-uid": "src/components/contas-receber/PrintableReport.tsx:71:11",
 						"data-prohibitions": "[editContent]",
-						className: "text-2xl font-bold",
+						className: "text-2xl font-bold text-black",
 						children: formatCurrency(total)
 					})]
 				})
@@ -67872,7 +67874,7 @@ function ContasReceber() {
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 		"data-uid": "src/pages/ContasReceber.tsx:119:5",
 		"data-prohibitions": "[editContent]",
-		className: "space-y-6 animate-fade-in max-w-[1400px] mx-auto h-full flex flex-col",
+		className: "space-y-6 animate-fade-in max-w-[1400px] mx-auto h-full flex flex-col print:block print:h-auto print:max-w-none print:m-0 print:p-0 print:space-y-0",
 		children: [
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(PrintableReport, {
 				"data-uid": "src/pages/ContasReceber.tsx:120:7",
@@ -67885,7 +67887,7 @@ function ContasReceber() {
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 				"data-uid": "src/pages/ContasReceber.tsx:127:7",
 				"data-prohibitions": "[editContent]",
-				className: "grid grid-cols-1 md:grid-cols-2 gap-6 shrink-0",
+				className: "print:hidden grid grid-cols-1 md:grid-cols-2 gap-6 shrink-0",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Card, {
 					"data-uid": "src/pages/ContasReceber.tsx:128:9",
 					"data-prohibitions": "[editContent]",
@@ -67947,7 +67949,7 @@ function ContasReceber() {
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 				"data-uid": "src/pages/ContasReceber.tsx:156:7",
 				"data-prohibitions": "[]",
-				className: "flex flex-col md:flex-row justify-between items-start md:items-center gap-4 shrink-0 bg-muted/50 p-4 rounded-xl border border-border",
+				className: "print:hidden flex flex-col md:flex-row justify-between items-start md:items-center gap-4 shrink-0 bg-muted/50 p-4 rounded-xl border border-border",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 					"data-uid": "src/pages/ContasReceber.tsx:157:9",
 					"data-prohibitions": "[]",
@@ -68048,7 +68050,7 @@ function ContasReceber() {
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 				"data-uid": "src/pages/ContasReceber.tsx:201:7",
 				"data-prohibitions": "[editContent]",
-				className: "flex-1 min-h-0 grid grid-cols-1 lg:grid-cols-3 gap-6",
+				className: "print:hidden flex-1 min-h-0 grid grid-cols-1 lg:grid-cols-3 gap-6",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Card, {
 					"data-uid": "src/pages/ContasReceber.tsx:202:9",
 					"data-prohibitions": "[editContent]",
@@ -88321,7 +88323,7 @@ function AppSidebar() {
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 		"data-uid": "src/components/Sidebar.tsx:38:5",
 		"data-prohibitions": "[editContent]",
-		className: cn$1("bg-sidebar border-r border-sidebar-border text-sidebar-foreground flex flex-col shrink-0 h-full transition-all duration-300 relative", collapsed ? "w-20" : "w-64"),
+		className: cn$1("bg-sidebar border-r border-sidebar-border text-sidebar-foreground flex flex-col shrink-0 h-full transition-all duration-300 relative print:hidden", collapsed ? "w-20" : "w-64"),
 		children: [
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
 				"data-uid": "src/components/Sidebar.tsx:44:7",
@@ -88434,7 +88436,7 @@ function Header() {
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("header", {
 		"data-uid": "src/components/Header.tsx:35:5",
 		"data-prohibitions": "[editContent]",
-		className: "h-16 bg-background border-b border-border flex items-center justify-between px-6 shrink-0 shadow-sm z-10 relative",
+		className: "h-16 bg-background border-b border-border flex items-center justify-between px-6 shrink-0 shadow-sm z-10 relative print:hidden",
 		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 			"data-uid": "src/components/Header.tsx:36:7",
 			"data-prohibitions": "[editContent]",
@@ -89932,7 +89934,7 @@ function CartSidebar() {
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 		"data-uid": "src/components/pdv/CartSidebar.tsx:37:5",
 		"data-prohibitions": "[editContent]",
-		className: "w-80 bg-background border-l border-border shadow-xl flex flex-col h-full shrink-0 z-20 transition-all duration-300",
+		className: "w-80 bg-background border-l border-border shadow-xl flex flex-col h-full shrink-0 z-20 transition-all duration-300 print:hidden",
 		children: [
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 				"data-uid": "src/components/pdv/CartSidebar.tsx:38:7",
@@ -90154,7 +90156,7 @@ function Layout() {
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 		"data-uid": "src/components/Layout.tsx:11:5",
 		"data-prohibitions": "[editContent]",
-		className: "flex h-screen w-full bg-background overflow-hidden font-sans text-slate-900",
+		className: "flex h-screen w-full bg-background overflow-hidden font-sans text-slate-900 print:block print:h-auto print:overflow-visible",
 		children: [
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(AppSidebar, {
 				"data-uid": "src/components/Layout.tsx:12:7",
@@ -90163,14 +90165,14 @@ function Layout() {
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 				"data-uid": "src/components/Layout.tsx:14:7",
 				"data-prohibitions": "[]",
-				className: "flex flex-col flex-1 min-w-0 transition-all duration-300",
+				className: "flex flex-col flex-1 min-w-0 transition-all duration-300 print:block print:overflow-visible print:h-auto",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Header, {
 					"data-uid": "src/components/Layout.tsx:15:9",
 					"data-prohibitions": "[editContent]"
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("main", {
 					"data-uid": "src/components/Layout.tsx:16:9",
 					"data-prohibitions": "[]",
-					className: "flex-1 overflow-auto p-4 sm:p-6 pb-24 sm:pb-6 relative",
+					className: "flex-1 overflow-auto p-4 sm:p-6 pb-24 sm:pb-6 relative print:p-0 print:overflow-visible print:block print:h-auto",
 					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Outlet, {
 						"data-uid": "src/components/Layout.tsx:17:11",
 						"data-prohibitions": "[editContent]"
@@ -90534,4 +90536,4 @@ var App = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ThemeProvider, {
 }));
 //#endregion
 
-//# sourceMappingURL=index-08A-i9s0.js.map
+//# sourceMappingURL=index-DEhRLmOI.js.map

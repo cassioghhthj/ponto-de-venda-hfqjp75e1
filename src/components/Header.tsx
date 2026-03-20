@@ -32,7 +32,7 @@ export function Header() {
   }
 
   return (
-    <header className="h-16 bg-background border-b border-border flex items-center justify-between px-6 shrink-0 shadow-sm z-10 relative">
+    <header className="h-16 bg-background border-b border-border flex items-center justify-between px-6 shrink-0 shadow-sm z-10 relative print:hidden">
       <div className="flex items-center gap-4">
         <h1 className="text-lg font-bold text-foreground tracking-tight">{getTitle()}</h1>
         <div className="h-6 w-[2px] bg-border hidden sm:block"></div>

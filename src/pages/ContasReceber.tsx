@@ -116,7 +116,7 @@ export default function ContasReceber() {
   }, [filteredContas])
 
   return (
-    <div className="space-y-6 animate-fade-in max-w-[1400px] mx-auto h-full flex flex-col">
+    <div className="space-y-6 animate-fade-in max-w-[1400px] mx-auto h-full flex flex-col print:block print:h-auto print:max-w-none print:m-0 print:p-0 print:space-y-0">
       <PrintableReport
         contas={filteredContas}
         clientName={clientSearch}
@@ -124,7 +124,7 @@ export default function ContasReceber() {
         endDate={endDate}
       />
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 shrink-0">
+      <div className="print:hidden grid grid-cols-1 md:grid-cols-2 gap-6 shrink-0">
         <Card className="shadow-sm border-orange-200 bg-orange-50/30">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium text-orange-800">
@@ -153,7 +153,7 @@ export default function ContasReceber() {
         </Card>
       </div>
 
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 shrink-0 bg-muted/50 p-4 rounded-xl border border-border">
+      <div className="print:hidden flex flex-col md:flex-row justify-between items-start md:items-center gap-4 shrink-0 bg-muted/50 p-4 rounded-xl border border-border">
         <div className="flex flex-wrap gap-4 items-center w-full md:w-auto">
           <Tabs value={filter} onValueChange={setFilter}>
             <TabsList>
@@ -198,7 +198,7 @@ export default function ContasReceber() {
         </Button>
       </div>
 
-      <div className="flex-1 min-h-0 grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="print:hidden flex-1 min-h-0 grid grid-cols-1 lg:grid-cols-3 gap-6">
         <Card className="lg:col-span-2 shadow-sm border-border flex flex-col min-h-0 bg-card">
           <CardContent className="p-0 flex-1 overflow-auto">
             {loading ? (

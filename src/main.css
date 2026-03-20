@@ -126,18 +126,24 @@
 
 @media print {
   @page {
-    margin: 0;
-    size: 80mm auto;
+    margin: 1.5cm;
   }
   body {
-    background: white;
-    color: black;
+    background: white !important;
+    color: black !important;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }
+
+  html,
+  body,
   #root {
-    display: none !important;
+    display: block !important;
+    height: auto !important;
+    overflow: visible !important;
+    position: static !important;
   }
+
   [data-radix-portal] {
     display: block !important;
     position: static !important;

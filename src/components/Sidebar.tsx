@@ -37,7 +37,7 @@ export function AppSidebar() {
   return (
     <div
       className={cn(
-        'bg-sidebar border-r border-sidebar-border text-sidebar-foreground flex flex-col shrink-0 h-full transition-all duration-300 relative',
+        'bg-sidebar border-r border-sidebar-border text-sidebar-foreground flex flex-col shrink-0 h-full transition-all duration-300 relative print:hidden',
         collapsed ? 'w-20' : 'w-64',
       )}
     >

@@ -34,7 +34,7 @@ export function CartSidebar() {
   }
 
   return (
-    <div className="w-80 bg-background border-l border-border shadow-xl flex flex-col h-full shrink-0 z-20 transition-all duration-300">
+    <div className="w-80 bg-background border-l border-border shadow-xl flex flex-col h-full shrink-0 z-20 transition-all duration-300 print:hidden">
       <div className="p-4 border-b border-border bg-muted/30 flex items-center justify-between">
         <h2 className="font-bold flex items-center gap-2 text-lg text-foreground">
           <ShoppingCart className="h-5 w-5 text-primary" /> Carrinho
