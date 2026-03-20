@@ -18142,7 +18142,7 @@ function handleAndDispatchCustomEvent$1(name, handler, detail, { discrete }) {
 	if (discrete) dispatchDiscreteCustomEvent(target, event);
 	else target.dispatchEvent(event);
 }
-var Root$7 = DismissableLayer;
+var Root$8 = DismissableLayer;
 var Branch = DismissableLayerBranch;
 //#endregion
 //#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/@radix-ui+react-use-layout-effect@1.1.1_@types+react@19.2.14_react@19.2.4/node_modules/@radix-ui/react-use-layout-effect/dist/index.mjs
@@ -18342,7 +18342,7 @@ var VisuallyHidden = import_react.forwardRef((props, forwardedRef) => {
 	});
 });
 VisuallyHidden.displayName = NAME$2;
-var Root$6 = VisuallyHidden;
+var Root$7 = VisuallyHidden;
 //#endregion
 //#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/@radix-ui+react-toast@1.2.15_@types+react-dom@19.2.3_@types+react@19.2.14__@types+react_4581e89c6ba13e4159ce65546c8b2a16/node_modules/@radix-ui/react-toast/dist/index.mjs
 var PROVIDER_NAME$1 = "ToastProvider";
@@ -18642,7 +18642,7 @@ var ToastImpl = import_react.forwardRef((props, forwardedRef) => {
 		onClose: handleClose,
 		children: import_react_dom.createPortal(/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Collection$2.ItemSlot, {
 			scope: __scopeToast,
-			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root$7, {
+			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root$8, {
 				asChild: true,
 				onEscapeKeyDown: composeEventHandlers(onEscapeKeyDown, () => {
 					if (!context.isFocusedToastEscapeKeyDownRef.current) handleClose();
@@ -24019,7 +24019,7 @@ var Arrow$1 = import_react.forwardRef((props, forwardedRef) => {
 	});
 });
 Arrow$1.displayName = NAME$1;
-var Root$5 = Arrow$1;
+var Root$6 = Arrow$1;
 //#endregion
 //#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/@radix-ui+react-use-size@1.1.1_@types+react@19.2.14_react@19.2.4/node_modules/@radix-ui/react-use-size/dist/index.mjs
 function useSize(element) {
@@ -24240,7 +24240,7 @@ var PopperArrow = import_react.forwardRef(function PopperArrow2(props, forwarded
 			}[contentContext.placedSide],
 			visibility: contentContext.shouldHideArrow ? "hidden" : void 0
 		},
-		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root$5, {
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root$6, {
 			...arrowProps,
 			ref: forwardedRef,
 			style: {
@@ -24624,7 +24624,7 @@ var TooltipContentImpl = import_react.forwardRef((props, forwardedRef) => {
 			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Slottable, { children }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(VisuallyHiddenContentContextProvider, {
 				scope: __scopeTooltip,
 				isInside: true,
-				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root$6, {
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root$7, {
 					id: context.contentId,
 					role: "tooltip",
 					children: ariaLabel || children
@@ -25029,7 +25029,7 @@ function focusFirst$1(candidates, preventScroll = false) {
 function wrapArray$1(array, startIndex) {
 	return array.map((_, index) => array[(startIndex + index) % array.length]);
 }
-var Root$4 = RovingFocusGroup;
+var Root$5 = RovingFocusGroup;
 var Item$1 = RovingFocusGroupItem;
 //#endregion
 //#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/@radix-ui+react-tabs@1.1.13_@types+react-dom@19.2.3_@types+react@19.2.14__@types+react@_2ad0945e3cb98dc5bbfaaf29c105e977/node_modules/@radix-ui/react-tabs/dist/index.mjs
@@ -25068,7 +25068,7 @@ var TabsList$1 = import_react.forwardRef((props, forwardedRef) => {
 	const { __scopeTabs, loop = true, ...listProps } = props;
 	const context = useTabsContext(TAB_LIST_NAME, __scopeTabs);
 	const rovingFocusGroupScope = useRovingFocusGroupScope(__scopeTabs);
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root$4, {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root$5, {
 		asChild: true,
 		...rovingFocusGroupScope,
 		orientation: context.orientation,
@@ -67261,7 +67261,7 @@ var DialogTrigger$1 = import_react.forwardRef((props, forwardedRef) => {
 		"aria-haspopup": "dialog",
 		"aria-expanded": context.open,
 		"aria-controls": context.contentId,
-		"data-state": getState$2(context.open),
+		"data-state": getState$3(context.open),
 		...triggerProps,
 		ref: composedTriggerRef,
 		onClick: composeEventHandlers(props.onClick, context.onOpenToggle)
@@ -67310,7 +67310,7 @@ var DialogOverlayImpl = import_react.forwardRef((props, forwardedRef) => {
 		allowPinchZoom: true,
 		shards: [context.contentRef],
 		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.div, {
-			"data-state": getState$2(context.open),
+			"data-state": getState$3(context.open),
 			...overlayProps,
 			ref: forwardedRef,
 			style: {
@@ -67409,7 +67409,7 @@ var DialogContentImpl = import_react.forwardRef((props, forwardedRef) => {
 			id: context.contentId,
 			"aria-describedby": context.descriptionId,
 			"aria-labelledby": context.titleId,
-			"data-state": getState$2(context.open),
+			"data-state": getState$3(context.open),
 			...contentProps,
 			ref: composedRefs,
 			onDismiss: () => context.onOpenChange(false)
@@ -67453,7 +67453,7 @@ var DialogClose$1 = import_react.forwardRef((props, forwardedRef) => {
 	});
 });
 DialogClose$1.displayName = CLOSE_NAME$1;
-function getState$2(open) {
+function getState$3(open) {
 	return open ? "open" : "closed";
 }
 var TITLE_WARNING_NAME = "DialogTitleWarning";
@@ -67491,7 +67491,7 @@ var DescriptionWarning = ({ contentRef, descriptionId }) => {
 	]);
 	return null;
 };
-var Root$3 = Dialog$1;
+var Root$4 = Dialog$1;
 var Portal$2 = DialogPortal$1;
 var Overlay = DialogOverlay$1;
 var Content = DialogContent$1;
@@ -67500,7 +67500,7 @@ var Description = DialogDescription$1;
 var Close = DialogClose$1;
 //#endregion
 //#region src/components/ui/dialog.tsx
-var Dialog = Root$3;
+var Dialog = Root$4;
 var DialogPortal = Portal$2;
 var DialogOverlay = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Overlay, {
 	"data-uid": "src/components/ui/dialog.tsx:20:3",
@@ -67622,18 +67622,18 @@ var Label$2 = import_react.forwardRef((props, forwardedRef) => {
 	});
 });
 Label$2.displayName = NAME;
-var Root$2 = Label$2;
+var Root$3 = Label$2;
 //#endregion
 //#region src/components/ui/label.tsx
 var labelVariants = cva("text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70");
-var Label$1 = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root$2, {
+var Label$1 = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root$3, {
 	"data-uid": "src/components/ui/label.tsx:16:3",
 	"data-prohibitions": "[editContent]",
 	ref,
 	className: cn$1(labelVariants(), className),
 	...props
 }));
-Label$1.displayName = Root$2.displayName;
+Label$1.displayName = Root$3.displayName;
 //#endregion
 //#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/@radix-ui+number@1.1.1/node_modules/@radix-ui/number/dist/index.mjs
 function clamp(value, [min, max]) {
@@ -68524,7 +68524,7 @@ var SelectArrow = import_react.forwardRef((props, forwardedRef) => {
 	}) : null;
 });
 SelectArrow.displayName = ARROW_NAME$1;
-var BUBBLE_INPUT_NAME$1 = "SelectBubbleInput";
+var BUBBLE_INPUT_NAME$2 = "SelectBubbleInput";
 var SelectBubbleInput = import_react.forwardRef(({ __scopeSelect, value, ...props }, forwardedRef) => {
 	const ref = import_react.useRef(null);
 	const composedRefs = useComposedRefs(forwardedRef, ref);
@@ -68550,7 +68550,7 @@ var SelectBubbleInput = import_react.forwardRef(({ __scopeSelect, value, ...prop
 		defaultValue: value
 	});
 });
-SelectBubbleInput.displayName = BUBBLE_INPUT_NAME$1;
+SelectBubbleInput.displayName = BUBBLE_INPUT_NAME$2;
 function shouldShowPlaceholder(value) {
 	return value === "" || value === void 0;
 }
@@ -79525,7 +79525,7 @@ var CheckboxTrigger = import_react.forwardRef(({ __scopeCheckbox, onKeyDown, onC
 		role: "checkbox",
 		"aria-checked": isIndeterminate(checked) ? "mixed" : checked,
 		"aria-required": required,
-		"data-state": getState$1(checked),
+		"data-state": getState$2(checked),
 		"data-disabled": disabled ? "" : void 0,
 		disabled,
 		value,
@@ -79571,7 +79571,7 @@ var CheckboxIndicator = import_react.forwardRef((props, forwardedRef) => {
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Presence, {
 		present: forceMount || isIndeterminate(context.checked) || context.checked === true,
 		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.span, {
-			"data-state": getState$1(context.checked),
+			"data-state": getState$2(context.checked),
 			"data-disabled": context.disabled ? "" : void 0,
 			...indicatorProps,
 			ref: forwardedRef,
@@ -79583,9 +79583,9 @@ var CheckboxIndicator = import_react.forwardRef((props, forwardedRef) => {
 	});
 });
 CheckboxIndicator.displayName = INDICATOR_NAME;
-var BUBBLE_INPUT_NAME = "CheckboxBubbleInput";
+var BUBBLE_INPUT_NAME$1 = "CheckboxBubbleInput";
 var CheckboxBubbleInput = import_react.forwardRef(({ __scopeCheckbox, ...props }, forwardedRef) => {
-	const { control, hasConsumerStoppedPropagationRef, checked, defaultChecked, required, disabled, name, value, form, bubbleInput, setBubbleInput } = useCheckboxContext(BUBBLE_INPUT_NAME, __scopeCheckbox);
+	const { control, hasConsumerStoppedPropagationRef, checked, defaultChecked, required, disabled, name, value, form, bubbleInput, setBubbleInput } = useCheckboxContext(BUBBLE_INPUT_NAME$1, __scopeCheckbox);
 	const composedRefs = useComposedRefs(forwardedRef, setBubbleInput);
 	const prevChecked = usePrevious(checked);
 	const controlSize = useSize(control);
@@ -79631,14 +79631,14 @@ var CheckboxBubbleInput = import_react.forwardRef(({ __scopeCheckbox, ...props }
 		}
 	});
 });
-CheckboxBubbleInput.displayName = BUBBLE_INPUT_NAME;
+CheckboxBubbleInput.displayName = BUBBLE_INPUT_NAME$1;
 function isFunction(value) {
 	return typeof value === "function";
 }
 function isIndeterminate(checked) {
 	return checked === "indeterminate";
 }
-function getState$1(checked) {
+function getState$2(checked) {
 	return isIndeterminate(checked) ? "indeterminate" : checked ? "checked" : "unchecked";
 }
 //#endregion
@@ -79662,12 +79662,137 @@ var Checkbox = import_react.forwardRef(({ className, ...props }, ref) => /* @__P
 }));
 Checkbox.displayName = Checkbox$1.displayName;
 //#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/@radix-ui+react-switch@1.2.6_@types+react-dom@19.2.3_@types+react@19.2.14__@types+react_e3738c514c10df2ef7e24af5ee461853/node_modules/@radix-ui/react-switch/dist/index.mjs
+var SWITCH_NAME = "Switch";
+var [createSwitchContext, createSwitchScope] = createContextScope(SWITCH_NAME);
+var [SwitchProvider, useSwitchContext] = createSwitchContext(SWITCH_NAME);
+var Switch$1 = import_react.forwardRef((props, forwardedRef) => {
+	const { __scopeSwitch, name, checked: checkedProp, defaultChecked, required, disabled, value = "on", onCheckedChange, form, ...switchProps } = props;
+	const [button, setButton] = import_react.useState(null);
+	const composedRefs = useComposedRefs(forwardedRef, (node) => setButton(node));
+	const hasConsumerStoppedPropagationRef = import_react.useRef(false);
+	const isFormControl = button ? form || !!button.closest("form") : true;
+	const [checked, setChecked] = useControllableState({
+		prop: checkedProp,
+		defaultProp: defaultChecked ?? false,
+		onChange: onCheckedChange,
+		caller: SWITCH_NAME
+	});
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(SwitchProvider, {
+		scope: __scopeSwitch,
+		checked,
+		disabled,
+		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.button, {
+			type: "button",
+			role: "switch",
+			"aria-checked": checked,
+			"aria-required": required,
+			"data-state": getState$1(checked),
+			"data-disabled": disabled ? "" : void 0,
+			disabled,
+			value,
+			...switchProps,
+			ref: composedRefs,
+			onClick: composeEventHandlers(props.onClick, (event) => {
+				setChecked((prevChecked) => !prevChecked);
+				if (isFormControl) {
+					hasConsumerStoppedPropagationRef.current = event.isPropagationStopped();
+					if (!hasConsumerStoppedPropagationRef.current) event.stopPropagation();
+				}
+			})
+		}), isFormControl && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SwitchBubbleInput, {
+			control: button,
+			bubbles: !hasConsumerStoppedPropagationRef.current,
+			name,
+			value,
+			checked,
+			required,
+			disabled,
+			form,
+			style: { transform: "translateX(-100%)" }
+		})]
+	});
+});
+Switch$1.displayName = SWITCH_NAME;
+var THUMB_NAME$1 = "SwitchThumb";
+var SwitchThumb = import_react.forwardRef((props, forwardedRef) => {
+	const { __scopeSwitch, ...thumbProps } = props;
+	const context = useSwitchContext(THUMB_NAME$1, __scopeSwitch);
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.span, {
+		"data-state": getState$1(context.checked),
+		"data-disabled": context.disabled ? "" : void 0,
+		...thumbProps,
+		ref: forwardedRef
+	});
+});
+SwitchThumb.displayName = THUMB_NAME$1;
+var BUBBLE_INPUT_NAME = "SwitchBubbleInput";
+var SwitchBubbleInput = import_react.forwardRef(({ __scopeSwitch, control, checked, bubbles = true, ...props }, forwardedRef) => {
+	const ref = import_react.useRef(null);
+	const composedRefs = useComposedRefs(ref, forwardedRef);
+	const prevChecked = usePrevious(checked);
+	const controlSize = useSize(control);
+	import_react.useEffect(() => {
+		const input = ref.current;
+		if (!input) return;
+		const inputProto = window.HTMLInputElement.prototype;
+		const setChecked = Object.getOwnPropertyDescriptor(inputProto, "checked").set;
+		if (prevChecked !== checked && setChecked) {
+			const event = new Event("click", { bubbles });
+			setChecked.call(input, checked);
+			input.dispatchEvent(event);
+		}
+	}, [
+		prevChecked,
+		checked,
+		bubbles
+	]);
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
+		type: "checkbox",
+		"aria-hidden": true,
+		defaultChecked: checked,
+		...props,
+		tabIndex: -1,
+		ref: composedRefs,
+		style: {
+			...props.style,
+			...controlSize,
+			position: "absolute",
+			pointerEvents: "none",
+			opacity: 0,
+			margin: 0
+		}
+	});
+});
+SwitchBubbleInput.displayName = BUBBLE_INPUT_NAME;
+function getState$1(checked) {
+	return checked ? "checked" : "unchecked";
+}
+var Root$2 = Switch$1;
+var Thumb = SwitchThumb;
+//#endregion
+//#region src/components/ui/switch.tsx
+var Switch = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root$2, {
+	"data-uid": "src/components/ui/switch.tsx:11:3",
+	"data-prohibitions": "[editContent]",
+	className: cn$1("peer inline-flex h-6 w-11 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=unchecked]:bg-input", className),
+	...props,
+	ref,
+	children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Thumb, {
+		"data-uid": "src/components/ui/switch.tsx:19:5",
+		"data-prohibitions": "[editContent]",
+		className: cn$1("pointer-events-none block h-5 w-5 rounded-full bg-background shadow-lg ring-0 transition-transform data-[state=checked]:translate-x-5 data-[state=unchecked]:translate-x-0")
+	})
+}));
+Switch.displayName = Root$2.displayName;
+//#endregion
 //#region src/components/estoque/EstoqueEtiquetas.tsx
 function EstoqueEtiquetas() {
 	const [products, setProducts] = (0, import_react.useState)([]);
 	const [search, setSearch] = (0, import_react.useState)("");
 	const [loading, setLoading] = (0, import_react.useState)(true);
 	const [selectedIds, setSelectedIds] = (0, import_react.useState)(/* @__PURE__ */ new Set());
+	const [useStockQuantity, setUseStockQuantity] = (0, import_react.useState)(false);
 	(0, import_react.useEffect)(() => {
 		supabase.from("produtos").select("*").order("nome").then(({ data }) => {
 			setProducts(data || []);
@@ -79678,215 +79803,268 @@ function EstoqueEtiquetas() {
 		return products.filter((p) => p.nome.toLowerCase().includes(search.toLowerCase()) || p.codigo?.includes(search));
 	}, [products, search]);
 	const handleSelectAll = (checked) => {
-		if (checked) {
-			const newSelected = new Set(selectedIds);
-			filteredProducts.forEach((p) => newSelected.add(p.id));
-			setSelectedIds(newSelected);
-		} else {
-			const newSelected = new Set(selectedIds);
-			filteredProducts.forEach((p) => newSelected.delete(p.id));
-			setSelectedIds(newSelected);
-		}
+		const newSelected = new Set(selectedIds);
+		filteredProducts.forEach((p) => checked ? newSelected.add(p.id) : newSelected.delete(p.id));
+		setSelectedIds(newSelected);
 	};
 	const handleSelectProduct = (id, checked) => {
 		const newSelected = new Set(selectedIds);
-		if (checked) newSelected.add(id);
-		else newSelected.delete(id);
+		checked ? newSelected.add(id) : newSelected.delete(id);
 		setSelectedIds(newSelected);
 	};
 	const isAllVisibleSelected = filteredProducts.length > 0 && filteredProducts.every((p) => selectedIds.has(p.id));
-	const handlePrint = () => {
-		window.print();
-	};
-	const selectedProductsList = products.filter((p) => selectedIds.has(p.id));
-	const chunks = [];
-	for (let i = 0; i < selectedProductsList.length; i += 65) chunks.push(selectedProductsList.slice(i, i + 65));
+	const labelsToPrint = (0, import_react.useMemo)(() => {
+		return products.filter((p) => selectedIds.has(p.id)).flatMap((p) => Array(useStockQuantity ? Math.max(0, p.estoque || 0) : 1).fill(p));
+	}, [
+		products,
+		selectedIds,
+		useStockQuantity
+	]);
+	const chunks = (0, import_react.useMemo)(() => Array.from({ length: Math.ceil(labelsToPrint.length / 65) }, (_, i) => labelsToPrint.slice(i * 65, (i + 1) * 65)), [labelsToPrint]);
 	if (loading) return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-		"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:81:7",
+		"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:76:7",
 		"data-prohibitions": "[]",
 		className: "flex justify-center py-12 h-full items-center",
 		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(LoaderCircle, {
-			"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:82:9",
+			"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:77:9",
 			"data-prohibitions": "[editContent]",
 			className: "h-8 w-8 animate-spin text-primary"
 		})
 	});
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-		"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:88:7",
-		"data-prohibitions": "[editContent]",
-		className: "no-print space-y-4 h-full flex flex-col min-h-0 animate-fade-in",
-		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-			"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:89:9",
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [
+		/* @__PURE__ */ (0, import_jsx_runtime.jsx)("style", {
+			"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:83:7",
 			"data-prohibitions": "[editContent]",
-			className: "flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 shrink-0",
+			dangerouslySetInnerHTML: { __html: `
+        @media print{
+          @page{size:A4;margin:0}
+          body{margin:0;padding:0}
+          body *{display:none!important}
+          .print-only,.print-only *{display:block!important}
+          .print-only{position:absolute;left:0;top:0;width:100%;margin:0;padding:0;background:#fff}
+          .pimaco-a4251-sheet{display:grid!important;grid-template-columns:repeat(5,38.2mm)!important;grid-template-rows:repeat(13,21.2mm)!important;justify-content:space-between!important;padding:10.7mm 4mm!important;width:210mm!important;height:297mm!important;box-sizing:border-box!important;page-break-after:always!important;gap:0!important}
+          .pimaco-label{display:flex!important;flex-direction:column!important;justify-content:center!important;align-items:center!important;width:38.2mm!important;height:21.2mm!important;padding:1.5mm!important;box-sizing:border-box!important;text-align:center!important;overflow:hidden!important}
+          .pimaco-label-name,.pimaco-label-price{display:block!important}
+          .pimaco-label-name{font-size:7.5pt!important;font-weight:600!important;line-height:1.1!important;max-height:16.5pt!important;overflow:hidden!important;word-break:break-word!important}
+          .pimaco-label-price{font-size:9.5pt!important;font-weight:800!important;margin-top:1mm!important}
+        }
+        @media screen{.print-only{display:none}}
+      ` }
+		}),
+		/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+			"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:103:7",
+			"data-prohibitions": "[editContent]",
+			className: "no-print space-y-4 h-full flex flex-col min-h-0 animate-fade-in",
 			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:90:11",
-				"data-prohibitions": "[]",
-				className: "relative w-full sm:w-72",
-				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Search, {
-					"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:91:13",
-					"data-prohibitions": "[editContent]",
-					className: "absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground"
-				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
-					"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:92:13",
-					"data-prohibitions": "[editContent]",
-					placeholder: "Buscar produto...",
-					className: "pl-9 bg-background",
-					value: search,
-					onChange: (e) => setSearch(e.target.value)
-				})]
-			}), selectedIds.size > 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button$1, {
-				"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:100:13",
+				"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:104:9",
 				"data-prohibitions": "[editContent]",
-				onClick: handlePrint,
-				className: "w-full sm:w-auto",
-				children: [
-					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Printer, {
-						"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:101:15",
-						"data-prohibitions": "[editContent]",
-						className: "h-4 w-4 mr-2"
-					}),
-					"Imprimir Etiquetas (",
-					selectedIds.size,
-					")"
-				]
-			})]
-		}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Card, {
-			"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:107:9",
-			"data-prohibitions": "[editContent]",
-			className: "shadow-sm bg-card border-border flex-1 flex flex-col min-h-0",
-			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardHeader, {
-				"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:108:11",
-				"data-prohibitions": "[]",
-				className: "py-4 shrink-0 border-b border-border",
-				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardTitle, {
-					"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:109:13",
+				className: "flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 shrink-0",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:105:11",
 					"data-prohibitions": "[]",
-					className: "text-lg",
-					children: "Seleção de Produtos para Etiquetas"
-				})
-			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardContent, {
-				"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:111:11",
-				"data-prohibitions": "[editContent]",
-				className: "p-0 flex-1 overflow-auto",
-				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Table, {
-					"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:112:13",
-					"data-prohibitions": "[editContent]",
-					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHeader, {
-						"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:113:15",
-						"data-prohibitions": "[]",
-						className: "bg-muted/50 sticky top-0 z-10 shadow-sm",
-						children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TableRow, {
-							"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:114:17",
-							"data-prohibitions": "[]",
-							children: [
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
-									"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:115:19",
-									"data-prohibitions": "[]",
-									className: "w-[60px] text-center px-4",
-									children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Checkbox, {
-										"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:116:21",
-										"data-prohibitions": "[editContent]",
-										checked: isAllVisibleSelected,
-										onCheckedChange: handleSelectAll,
-										"aria-label": "Selecionar todos"
-									})
-								}),
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
-									"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:122:19",
-									"data-prohibitions": "[]",
-									children: "Código"
-								}),
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
-									"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:123:19",
-									"data-prohibitions": "[]",
-									children: "Produto"
-								}),
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
-									"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:124:19",
-									"data-prohibitions": "[]",
-									children: "Preço"
-								})
-							]
-						})
-					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TableBody, {
-						"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:127:15",
+					className: "relative w-full sm:w-72",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Search, {
+						"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:106:13",
 						"data-prohibitions": "[editContent]",
-						children: [filteredProducts.map((p) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TableRow, {
-							"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:129:19",
-							"data-prohibitions": "[editContent]",
-							children: [
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-									"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:130:21",
-									"data-prohibitions": "[]",
-									className: "text-center px-4",
-									children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Checkbox, {
-										"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:131:23",
-										"data-prohibitions": "[editContent]",
-										checked: selectedIds.has(p.id),
-										onCheckedChange: (checked) => handleSelectProduct(p.id, checked),
-										"aria-label": `Selecionar ${p.nome}`
-									})
-								}),
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-									"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:137:21",
-									"data-prohibitions": "[editContent]",
-									className: "font-mono text-xs",
-									children: p.codigo || "-"
-								}),
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-									"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:138:21",
-									"data-prohibitions": "[editContent]",
-									className: "font-medium",
-									children: p.nome
-								}),
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-									"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:139:21",
-									"data-prohibitions": "[editContent]",
-									children: formatCurrency(p.preco_venda || p.preco)
-								})
-							]
-						}, p.id)), filteredProducts.length === 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableRow, {
-							"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:143:19",
-							"data-prohibitions": "[]",
-							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-								"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:144:21",
-								"data-prohibitions": "[]",
-								colSpan: 4,
-								className: "text-center py-8 text-muted-foreground",
-								children: "Nenhum produto encontrado."
-							})
-						})]
+						className: "absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground"
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
+						"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:107:13",
+						"data-prohibitions": "[editContent]",
+						placeholder: "Buscar produto...",
+						className: "pl-9 bg-background h-10",
+						value: search,
+						onChange: (e) => setSearch(e.target.value)
 					})]
-				})
-			})]
-		})]
-	}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-		"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:155:7",
-		"data-prohibitions": "[editContent]",
-		className: "print-only",
-		children: chunks.map((chunk, index) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-			"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:157:11",
-			"data-prohibitions": "[editContent]",
-			className: "pimaco-a4251-sheet",
-			children: chunk.map((p, i) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:159:15",
-				"data-prohibitions": "[editContent]",
-				className: "pimaco-label",
-				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-					"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:160:17",
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:114:11",
 					"data-prohibitions": "[editContent]",
-					className: "pimaco-label-name",
-					children: p.nome
-				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-					"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:161:17",
-					"data-prohibitions": "[editContent]",
-					className: "pimaco-label-price",
-					children: formatCurrency(p.preco_venda || p.preco)
+					className: "flex flex-col sm:flex-row items-start sm:items-center gap-4 w-full sm:w-auto",
+					children: [selectedIds.size > 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:116:15",
+						"data-prohibitions": "[]",
+						className: "flex items-center space-x-2 bg-card border border-border px-3 py-2 rounded-md shadow-sm h-10",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Switch, {
+							"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:117:17",
+							"data-prohibitions": "[editContent]",
+							id: "use-stock",
+							checked: useStockQuantity,
+							onCheckedChange: setUseStockQuantity
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$1, {
+							"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:122:17",
+							"data-prohibitions": "[]",
+							htmlFor: "use-stock",
+							className: "text-sm font-medium cursor-pointer",
+							children: "Usar qtd. estoque"
+						})]
+					}), selectedIds.size > 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button$1, {
+						"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:128:15",
+						"data-prohibitions": "[editContent]",
+						onClick: () => window.print(),
+						className: "w-full sm:w-auto h-10",
+						children: [
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Printer, {
+								"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:129:17",
+								"data-prohibitions": "[editContent]",
+								className: "h-4 w-4 mr-2"
+							}),
+							"Imprimir Etiquetas (",
+							labelsToPrint.length,
+							")"
+						]
+					})]
 				})]
-			}, `${p.id}-${i}`))
-		}, index))
-	})] });
+			}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Card, {
+				"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:136:9",
+				"data-prohibitions": "[editContent]",
+				className: "shadow-sm bg-card border-border flex-1 flex flex-col min-h-0",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardHeader, {
+					"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:137:11",
+					"data-prohibitions": "[]",
+					className: "py-4 shrink-0 border-b border-border",
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardTitle, {
+						"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:138:13",
+						"data-prohibitions": "[]",
+						className: "text-lg",
+						children: "Seleção de Produtos para Etiquetas"
+					})
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardContent, {
+					"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:140:11",
+					"data-prohibitions": "[editContent]",
+					className: "p-0 flex-1 overflow-auto",
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Table, {
+						"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:141:13",
+						"data-prohibitions": "[editContent]",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHeader, {
+							"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:142:15",
+							"data-prohibitions": "[]",
+							className: "bg-muted/50 sticky top-0 z-10 shadow-sm",
+							children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TableRow, {
+								"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:143:17",
+								"data-prohibitions": "[]",
+								children: [
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
+										"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:144:19",
+										"data-prohibitions": "[]",
+										className: "w-[60px] text-center px-4",
+										children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Checkbox, {
+											"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:145:21",
+											"data-prohibitions": "[editContent]",
+											checked: isAllVisibleSelected,
+											onCheckedChange: handleSelectAll,
+											"aria-label": "Selecionar todos"
+										})
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
+										"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:151:19",
+										"data-prohibitions": "[]",
+										children: "Código"
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
+										"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:152:19",
+										"data-prohibitions": "[]",
+										children: "Produto"
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
+										"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:153:19",
+										"data-prohibitions": "[]",
+										className: "text-center",
+										children: "Estoque"
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
+										"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:154:19",
+										"data-prohibitions": "[]",
+										className: "text-right",
+										children: "Preço"
+									})
+								]
+							})
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TableBody, {
+							"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:157:15",
+							"data-prohibitions": "[editContent]",
+							children: [filteredProducts.map((p) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TableRow, {
+								"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:159:19",
+								"data-prohibitions": "[editContent]",
+								children: [
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
+										"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:160:21",
+										"data-prohibitions": "[]",
+										className: "text-center px-4",
+										children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Checkbox, {
+											"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:161:23",
+											"data-prohibitions": "[editContent]",
+											checked: selectedIds.has(p.id),
+											onCheckedChange: (checked) => handleSelectProduct(p.id, checked),
+											"aria-label": `Selecionar ${p.nome}`
+										})
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
+										"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:167:21",
+										"data-prohibitions": "[editContent]",
+										className: "font-mono text-xs",
+										children: p.codigo || "-"
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
+										"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:168:21",
+										"data-prohibitions": "[editContent]",
+										className: "font-medium",
+										children: p.nome
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
+										"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:169:21",
+										"data-prohibitions": "[editContent]",
+										className: "text-center",
+										children: p.estoque || 0
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
+										"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:170:21",
+										"data-prohibitions": "[editContent]",
+										className: "text-right",
+										children: formatCurrency(p.preco_venda || p.preco)
+									})
+								]
+							}, p.id)), filteredProducts.length === 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableRow, {
+								"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:176:19",
+								"data-prohibitions": "[]",
+								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
+									"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:177:21",
+									"data-prohibitions": "[]",
+									colSpan: 5,
+									className: "text-center py-8 text-muted-foreground",
+									children: "Nenhum produto encontrado."
+								})
+							})]
+						})]
+					})
+				})]
+			})]
+		}),
+		/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+			"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:188:7",
+			"data-prohibitions": "[editContent]",
+			className: "print-only",
+			children: chunks.map((chunk, index) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+				"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:190:11",
+				"data-prohibitions": "[editContent]",
+				className: "pimaco-a4251-sheet",
+				children: chunk.map((p, i) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:192:15",
+					"data-prohibitions": "[editContent]",
+					className: "pimaco-label",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+						"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:193:17",
+						"data-prohibitions": "[editContent]",
+						className: "pimaco-label-name",
+						children: p.nome
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+						"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:194:17",
+						"data-prohibitions": "[editContent]",
+						className: "pimaco-label-price",
+						children: formatCurrency(p.preco_venda || p.preco)
+					})]
+				}, `${p.id}-${i}`))
+			}, index))
+		})
+	] });
 }
 //#endregion
 //#region src/pages/Estoque.tsx
@@ -80272,7 +80450,7 @@ function ClienteFormModal({ open, onClose, cliente, onSuccess }) {
 }
 //#endregion
 //#region src/components/ui/sheet.tsx
-var Sheet = Root$3;
+var Sheet = Root$4;
 var SheetPortal = Portal$2;
 var SheetOverlay = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Overlay, {
 	"data-uid": "src/components/ui/sheet.tsx:21:3",
@@ -92108,4 +92286,4 @@ var App = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ThemeProvider, {
 }));
 //#endregion
 
-//# sourceMappingURL=index-B8pw4nWb.js.map
+//# sourceMappingURL=index-DJ3k3uyQ.js.map

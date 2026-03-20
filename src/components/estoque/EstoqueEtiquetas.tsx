@@ -12,6 +12,8 @@ import {
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Checkbox } from '@/components/ui/checkbox'
+import { Switch } from '@/components/ui/switch'
+import { Label } from '@/components/ui/label'
 import { Printer, Search, Loader2 } from 'lucide-react'
 import { formatCurrency } from '@/lib/format'
 import { Product } from '@/types'
@@ -21,6 +23,7 @@ export default function EstoqueEtiquetas() {
   const [search, setSearch] = useState('')
   const [loading, setLoading] = useState(true)
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set())
+  const [useStockQuantity, setUseStockQuantity] = useState(false)
 
   useEffect(() => {
     supabase
@@ -40,41 +43,33 @@ export default function EstoqueEtiquetas() {
   }, [products, search])
 
   const handleSelectAll = (checked: boolean) => {
-    if (checked) {
-      const newSelected = new Set(selectedIds)
-      filteredProducts.forEach((p) => newSelected.add(p.id))
-      setSelectedIds(newSelected)
-    } else {
-      const newSelected = new Set(selectedIds)
-      filteredProducts.forEach((p) => newSelected.delete(p.id))
-      setSelectedIds(newSelected)
-    }
+    const newSelected = new Set(selectedIds)
+    filteredProducts.forEach((p) => (checked ? newSelected.add(p.id) : newSelected.delete(p.id)))
+    setSelectedIds(newSelected)
   }
 
   const handleSelectProduct = (id: string, checked: boolean) => {
     const newSelected = new Set(selectedIds)
-    if (checked) {
-      newSelected.add(id)
-    } else {
-      newSelected.delete(id)
-    }
+    checked ? newSelected.add(id) : newSelected.delete(id)
     setSelectedIds(newSelected)
   }
 
   const isAllVisibleSelected =
     filteredProducts.length > 0 && filteredProducts.every((p) => selectedIds.has(p.id))
 
-  const handlePrint = () => {
-    window.print()
-  }
+  const labelsToPrint = useMemo(() => {
+    return products
+      .filter((p) => selectedIds.has(p.id))
+      .flatMap((p) => Array(useStockQuantity ? Math.max(0, p.estoque || 0) : 1).fill(p))
+  }, [products, selectedIds, useStockQuantity])
 
-  const selectedProductsList = products.filter((p) => selectedIds.has(p.id))
-
-  // Split into chunks of 65 for Pimaco A4251 (5 columns x 13 rows)
-  const chunks = []
-  for (let i = 0; i < selectedProductsList.length; i += 65) {
-    chunks.push(selectedProductsList.slice(i, i + 65))
-  }
+  const chunks = useMemo(
+    () =>
+      Array.from({ length: Math.ceil(labelsToPrint.length / 65) }, (_, i) =>
+        labelsToPrint.slice(i * 65, (i + 1) * 65),
+      ),
+    [labelsToPrint],
+  )
 
   if (loading)
     return (
@@ -85,23 +80,57 @@ export default function EstoqueEtiquetas() {
 
   return (
     <>
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
+        @media print{
+          @page{size:A4;margin:0}
+          body{margin:0;padding:0}
+          body *{display:none!important}
+          .print-only,.print-only *{display:block!important}
+          .print-only{position:absolute;left:0;top:0;width:100%;margin:0;padding:0;background:#fff}
+          .pimaco-a4251-sheet{display:grid!important;grid-template-columns:repeat(5,38.2mm)!important;grid-template-rows:repeat(13,21.2mm)!important;justify-content:space-between!important;padding:10.7mm 4mm!important;width:210mm!important;height:297mm!important;box-sizing:border-box!important;page-break-after:always!important;gap:0!important}
+          .pimaco-label{display:flex!important;flex-direction:column!important;justify-content:center!important;align-items:center!important;width:38.2mm!important;height:21.2mm!important;padding:1.5mm!important;box-sizing:border-box!important;text-align:center!important;overflow:hidden!important}
+          .pimaco-label-name,.pimaco-label-price{display:block!important}
+          .pimaco-label-name{font-size:7.5pt!important;font-weight:600!important;line-height:1.1!important;max-height:16.5pt!important;overflow:hidden!important;word-break:break-word!important}
+          .pimaco-label-price{font-size:9.5pt!important;font-weight:800!important;margin-top:1mm!important}
+        }
+        @media screen{.print-only{display:none}}
+      `,
+        }}
+      />
+
       <div className="no-print space-y-4 h-full flex flex-col min-h-0 animate-fade-in">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 shrink-0">
           <div className="relative w-full sm:w-72">
             <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
             <Input
               placeholder="Buscar produto..."
-              className="pl-9 bg-background"
+              className="pl-9 bg-background h-10"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
             />
           </div>
-          {selectedIds.size > 0 && (
-            <Button onClick={handlePrint} className="w-full sm:w-auto">
-              <Printer className="h-4 w-4 mr-2" />
-              Imprimir Etiquetas ({selectedIds.size})
-            </Button>
-          )}
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 w-full sm:w-auto">
+            {selectedIds.size > 0 && (
+              <div className="flex items-center space-x-2 bg-card border border-border px-3 py-2 rounded-md shadow-sm h-10">
+                <Switch
+                  id="use-stock"
+                  checked={useStockQuantity}
+                  onCheckedChange={setUseStockQuantity}
+                />
+                <Label htmlFor="use-stock" className="text-sm font-medium cursor-pointer">
+                  Usar qtd. estoque
+                </Label>
+              </div>
+            )}
+            {selectedIds.size > 0 && (
+              <Button onClick={() => window.print()} className="w-full sm:w-auto h-10">
+                <Printer className="h-4 w-4 mr-2" />
+                Imprimir Etiquetas ({labelsToPrint.length})
+              </Button>
+            )}
+          </div>
         </div>
 
         <Card className="shadow-sm bg-card border-border flex-1 flex flex-col min-h-0">
@@ -121,7 +150,8 @@ export default function EstoqueEtiquetas() {
                   </TableHead>
                   <TableHead>Código</TableHead>
                   <TableHead>Produto</TableHead>
-                  <TableHead>Preço</TableHead>
+                  <TableHead className="text-center">Estoque</TableHead>
+                  <TableHead className="text-right">Preço</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -136,12 +166,15 @@ export default function EstoqueEtiquetas() {
                     </TableCell>
                     <TableCell className="font-mono text-xs">{p.codigo || '-'}</TableCell>
                     <TableCell className="font-medium">{p.nome}</TableCell>
-                    <TableCell>{formatCurrency(p.preco_venda || p.preco)}</TableCell>
+                    <TableCell className="text-center">{p.estoque || 0}</TableCell>
+                    <TableCell className="text-right">
+                      {formatCurrency(p.preco_venda || p.preco)}
+                    </TableCell>
                   </TableRow>
                 ))}
                 {filteredProducts.length === 0 && (
                   <TableRow>
-                    <TableCell colSpan={4} className="text-center py-8 text-muted-foreground">
+                    <TableCell colSpan={5} className="text-center py-8 text-muted-foreground">
                       Nenhum produto encontrado.
                     </TableCell>
                   </TableRow>
