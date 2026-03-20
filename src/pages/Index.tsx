@@ -71,11 +71,14 @@ export default function Index() {
           <Loader2 className="h-8 w-8 animate-spin text-primary" />
         </div>
       ) : (
-        <div className="flex flex-col gap-3 overflow-y-auto pb-4 px-1 min-h-0">
-          {filteredProducts.map((product) => (
-            <ProductRow key={product.id} product={product} />
-          ))}
-          {filteredProducts.length === 0 && (
+        <div className="flex-1 overflow-y-auto pb-4 min-h-0 px-1 sm:px-0">
+          {filteredProducts.length > 0 ? (
+            <div className="flex flex-col bg-card rounded-xl border border-border shadow-sm overflow-hidden mb-4">
+              {filteredProducts.map((product) => (
+                <ProductRow key={product.id} product={product} />
+              ))}
+            </div>
+          ) : (
             <div className="py-20 text-center text-muted-foreground flex flex-col items-center justify-center bg-muted/20 rounded-2xl border border-dashed border-border mt-4">
               <PackageX className="h-12 w-12 text-muted-foreground/50 mb-3" />
               <p className="text-lg font-medium text-foreground">Nenhum produto encontrado</p>
