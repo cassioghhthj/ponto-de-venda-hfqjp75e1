@@ -18,14 +18,6 @@ import {
   DialogTitle,
   DialogFooter,
 } from '@/components/ui/dialog'
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import {
@@ -39,13 +31,11 @@ import { supabase } from '@/lib/supabase/client'
 import { formatCurrency } from '@/lib/format'
 import { toast } from '@/hooks/use-toast'
 import { useAuth } from '@/hooks/use-auth'
-import { Loader2, DollarSign, Wallet, Plus, Search, FileText, Undo2 } from 'lucide-react'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import * as z from 'zod'
+import { Loader2, DollarSign, Wallet, Plus, Search, FileText, Undo2, Pencil } from 'lucide-react'
 import { PrintableReportPagar } from '@/components/contas-pagar/PrintableReportPagar'
+import { DespesaModal, type DespesaFormData } from '@/components/contas-pagar/DespesaModal'
 
-interface ContaPagar {
+export interface ContaPagar {
   id: string
   descricao: string
   valor: number
@@ -57,14 +47,6 @@ interface ContaPagar {
   metodo_pagamento: string | null
 }
 
-const despesaSchema = z.object({
-  descricao: z.string().min(2, 'Descrição obrigatória'),
-  valor: z.coerce.number().min(0.01, 'Valor deve ser maior que zero'),
-  data_vencimento: z.string().min(1, 'Data é obrigatória'),
-  categoria: z.string().optional(),
-  fornecedor: z.string().optional(),
-})
-
 export default function ContasPagar() {
   const { user } = useAuth()
   const [contas, setContas] = useState<ContaPagar[]>([])
@@ -73,22 +55,12 @@ export default function ContasPagar() {
   const [searchCategoria, setSearchCategoria] = useState('')
 
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [editingConta, setEditingConta] = useState<ContaPagar | null>(null)
 
   const [payingConta, setPayingConta] = useState<ContaPagar | null>(null)
   const [paymentDate, setPaymentDate] = useState(new Date().toISOString().split('T')[0])
   const [paymentMethod, setPaymentMethod] = useState('Dinheiro')
   const [payingSubmitting, setPayingSubmitting] = useState(false)
-
-  const form = useForm<z.infer<typeof despesaSchema>>({
-    resolver: zodResolver(despesaSchema),
-    defaultValues: {
-      descricao: '',
-      valor: 0,
-      data_vencimento: new Date().toISOString().split('T')[0],
-      categoria: '',
-      fornecedor: '',
-    },
-  })
 
   const fetchContas = async () => {
     setLoading(true)
@@ -184,7 +156,7 @@ export default function ContasPagar() {
     fetchContas()
   }
 
-  const onSubmit = async (data: z.infer<typeof despesaSchema>) => {
+  const handleCreateDespesa = async (data: DespesaFormData) => {
     const { error } = await supabase.from('contas_pagar').insert({
       descricao: data.descricao,
       valor: data.valor,
@@ -193,12 +165,33 @@ export default function ContasPagar() {
       fornecedor: data.fornecedor || null,
       status: 'pendente',
     })
-    if (error)
+    if (error) {
       toast({ title: 'Erro', description: 'Erro ao adicionar despesa.', variant: 'destructive' })
-    else {
+    } else {
       toast({ title: 'Sucesso', description: 'Despesa adicionada com sucesso!' })
       setIsModalOpen(false)
-      form.reset()
+      fetchContas()
+    }
+  }
+
+  const handleUpdateDespesa = async (data: DespesaFormData) => {
+    if (!editingConta) return
+    const { error } = await supabase
+      .from('contas_pagar')
+      .update({
+        descricao: data.descricao,
+        valor: data.valor,
+        data_vencimento: new Date(data.data_vencimento).toISOString(),
+        categoria: data.categoria || null,
+        fornecedor: data.fornecedor || null,
+      })
+      .eq('id', editingConta.id)
+
+    if (error) {
+      toast({ title: 'Erro', description: 'Erro ao atualizar despesa.', variant: 'destructive' })
+    } else {
+      toast({ title: 'Sucesso', description: 'Despesa atualizada com êxito!' })
+      setEditingConta(null)
       fetchContas()
     }
   }
@@ -325,7 +318,10 @@ export default function ContasPagar() {
                     <TableCell className="text-sm text-muted-foreground">
                       {conta.metodo_pagamento || '-'}
                     </TableCell>
-                    <TableCell className="text-right space-x-2">
+                    <TableCell className="text-right space-x-2 whitespace-nowrap">
+                      <Button size="sm" variant="ghost" onClick={() => setEditingConta(conta)}>
+                        <Pencil className="h-4 w-4 mr-1" /> Alterar
+                      </Button>
                       {conta.status === 'pendente' ? (
                         <Button
                           size="sm"
@@ -404,94 +400,20 @@ export default function ContasPagar() {
         </DialogContent>
       </Dialog>
 
-      <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-        <DialogContent className="sm:max-w-[425px] bg-card">
-          <DialogHeader>
-            <DialogTitle>Adicionar Nova Despesa</DialogTitle>
-          </DialogHeader>
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 py-4">
-              <FormField
-                control={form.control}
-                name="descricao"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Descrição *</FormLabel>
-                    <FormControl>
-                      <Input {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <div className="grid grid-cols-2 gap-4">
-                <FormField
-                  control={form.control}
-                  name="valor"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Valor *</FormLabel>
-                      <FormControl>
-                        <Input type="number" step="0.01" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="data_vencimento"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Vencimento *</FormLabel>
-                      <FormControl>
-                        <Input type="date" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
-              <div className="grid grid-cols-2 gap-4">
-                <FormField
-                  control={form.control}
-                  name="categoria"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Categoria</FormLabel>
-                      <FormControl>
-                        <Input placeholder="Ex: Energia" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="fornecedor"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Fornecedor</FormLabel>
-                      <FormControl>
-                        <Input placeholder="Ex: Enel" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
-              <DialogFooter className="pt-4">
-                <Button type="button" variant="outline" onClick={() => setIsModalOpen(false)}>
-                  Cancelar
-                </Button>
-                <Button type="submit" disabled={form.formState.isSubmitting}>
-                  Salvar
-                </Button>
-              </DialogFooter>
-            </form>
-          </Form>
-        </DialogContent>
-      </Dialog>
+      <DespesaModal
+        open={isModalOpen}
+        onOpenChange={setIsModalOpen}
+        onSubmit={handleCreateDespesa}
+        title="Adicionar Nova Despesa"
+      />
+
+      <DespesaModal
+        open={!!editingConta}
+        onOpenChange={(open) => !open && setEditingConta(null)}
+        initialData={editingConta}
+        onSubmit={handleUpdateDespesa}
+        title="Alterar Despesa"
+      />
     </div>
   )
 }
