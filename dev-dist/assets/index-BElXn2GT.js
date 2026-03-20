@@ -79804,12 +79804,16 @@ function EstoqueEtiquetas() {
 	}, [products, search]);
 	const handleSelectAll = (checked) => {
 		const newSelected = new Set(selectedIds);
-		filteredProducts.forEach((p) => checked ? newSelected.add(p.id) : newSelected.delete(p.id));
+		filteredProducts.forEach((p) => {
+			if (checked) newSelected.add(p.id);
+			else newSelected.delete(p.id);
+		});
 		setSelectedIds(newSelected);
 	};
 	const handleSelectProduct = (id, checked) => {
 		const newSelected = new Set(selectedIds);
-		checked ? newSelected.add(id) : newSelected.delete(id);
+		if (checked) newSelected.add(id);
+		else newSelected.delete(id);
 		setSelectedIds(newSelected);
 	};
 	const isAllVisibleSelected = filteredProducts.length > 0 && filteredProducts.every((p) => selectedIds.has(p.id));
@@ -79822,18 +79826,18 @@ function EstoqueEtiquetas() {
 	]);
 	const chunks = (0, import_react.useMemo)(() => Array.from({ length: Math.ceil(labelsToPrint.length / 65) }, (_, i) => labelsToPrint.slice(i * 65, (i + 1) * 65)), [labelsToPrint]);
 	if (loading) return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-		"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:76:7",
+		"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:86:7",
 		"data-prohibitions": "[]",
 		className: "flex justify-center py-12 h-full items-center",
 		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(LoaderCircle, {
-			"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:77:9",
+			"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:87:9",
 			"data-prohibitions": "[editContent]",
 			className: "h-8 w-8 animate-spin text-primary"
 		})
 	});
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [
 		/* @__PURE__ */ (0, import_jsx_runtime.jsx)("style", {
-			"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:83:7",
+			"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:93:7",
 			"data-prohibitions": "[editContent]",
 			dangerouslySetInnerHTML: { __html: `
         @media print{
@@ -79852,23 +79856,23 @@ function EstoqueEtiquetas() {
       ` }
 		}),
 		/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-			"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:103:7",
+			"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:113:7",
 			"data-prohibitions": "[editContent]",
 			className: "no-print space-y-4 h-full flex flex-col min-h-0 animate-fade-in",
 			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:104:9",
+				"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:114:9",
 				"data-prohibitions": "[editContent]",
 				className: "flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 shrink-0",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:105:11",
+					"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:115:11",
 					"data-prohibitions": "[]",
 					className: "relative w-full sm:w-72",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Search, {
-						"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:106:13",
+						"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:116:13",
 						"data-prohibitions": "[editContent]",
 						className: "absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground"
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
-						"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:107:13",
+						"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:117:13",
 						"data-prohibitions": "[editContent]",
 						placeholder: "Buscar produto...",
 						className: "pl-9 bg-background h-10",
@@ -79876,34 +79880,34 @@ function EstoqueEtiquetas() {
 						onChange: (e) => setSearch(e.target.value)
 					})]
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:114:11",
+					"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:124:11",
 					"data-prohibitions": "[editContent]",
 					className: "flex flex-col sm:flex-row items-start sm:items-center gap-4 w-full sm:w-auto",
 					children: [selectedIds.size > 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:116:15",
+						"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:126:15",
 						"data-prohibitions": "[]",
 						className: "flex items-center space-x-2 bg-card border border-border px-3 py-2 rounded-md shadow-sm h-10",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Switch, {
-							"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:117:17",
+							"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:127:17",
 							"data-prohibitions": "[editContent]",
 							id: "use-stock",
 							checked: useStockQuantity,
 							onCheckedChange: setUseStockQuantity
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$1, {
-							"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:122:17",
+							"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:132:17",
 							"data-prohibitions": "[]",
 							htmlFor: "use-stock",
 							className: "text-sm font-medium cursor-pointer",
 							children: "Usar qtd. estoque"
 						})]
 					}), selectedIds.size > 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button$1, {
-						"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:128:15",
+						"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:138:15",
 						"data-prohibitions": "[editContent]",
 						onClick: () => window.print(),
 						className: "w-full sm:w-auto h-10",
 						children: [
 							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Printer, {
-								"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:129:17",
+								"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:139:17",
 								"data-prohibitions": "[editContent]",
 								className: "h-4 w-4 mr-2"
 							}),
@@ -79914,40 +79918,40 @@ function EstoqueEtiquetas() {
 					})]
 				})]
 			}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Card, {
-				"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:136:9",
+				"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:146:9",
 				"data-prohibitions": "[editContent]",
 				className: "shadow-sm bg-card border-border flex-1 flex flex-col min-h-0",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardHeader, {
-					"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:137:11",
+					"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:147:11",
 					"data-prohibitions": "[]",
 					className: "py-4 shrink-0 border-b border-border",
 					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardTitle, {
-						"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:138:13",
+						"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:148:13",
 						"data-prohibitions": "[]",
 						className: "text-lg",
 						children: "Seleção de Produtos para Etiquetas"
 					})
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardContent, {
-					"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:140:11",
+					"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:150:11",
 					"data-prohibitions": "[editContent]",
 					className: "p-0 flex-1 overflow-auto",
 					children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Table, {
-						"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:141:13",
+						"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:151:13",
 						"data-prohibitions": "[editContent]",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHeader, {
-							"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:142:15",
+							"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:152:15",
 							"data-prohibitions": "[]",
 							className: "bg-muted/50 sticky top-0 z-10 shadow-sm",
 							children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TableRow, {
-								"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:143:17",
+								"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:153:17",
 								"data-prohibitions": "[]",
 								children: [
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
-										"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:144:19",
+										"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:154:19",
 										"data-prohibitions": "[]",
 										className: "w-[60px] text-center px-4",
 										children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Checkbox, {
-											"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:145:21",
+											"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:155:21",
 											"data-prohibitions": "[editContent]",
 											checked: isAllVisibleSelected,
 											onCheckedChange: handleSelectAll,
@@ -79955,23 +79959,23 @@ function EstoqueEtiquetas() {
 										})
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
-										"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:151:19",
+										"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:161:19",
 										"data-prohibitions": "[]",
 										children: "Código"
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
-										"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:152:19",
+										"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:162:19",
 										"data-prohibitions": "[]",
 										children: "Produto"
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
-										"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:153:19",
+										"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:163:19",
 										"data-prohibitions": "[]",
 										className: "text-center",
 										children: "Estoque"
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
-										"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:154:19",
+										"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:164:19",
 										"data-prohibitions": "[]",
 										className: "text-right",
 										children: "Preço"
@@ -79979,18 +79983,18 @@ function EstoqueEtiquetas() {
 								]
 							})
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TableBody, {
-							"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:157:15",
+							"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:167:15",
 							"data-prohibitions": "[editContent]",
 							children: [filteredProducts.map((p) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TableRow, {
-								"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:159:19",
+								"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:169:19",
 								"data-prohibitions": "[editContent]",
 								children: [
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-										"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:160:21",
+										"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:170:21",
 										"data-prohibitions": "[]",
 										className: "text-center px-4",
 										children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Checkbox, {
-											"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:161:23",
+											"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:171:23",
 											"data-prohibitions": "[editContent]",
 											checked: selectedIds.has(p.id),
 											onCheckedChange: (checked) => handleSelectProduct(p.id, checked),
@@ -79998,35 +80002,35 @@ function EstoqueEtiquetas() {
 										})
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-										"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:167:21",
+										"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:177:21",
 										"data-prohibitions": "[editContent]",
 										className: "font-mono text-xs",
 										children: p.codigo || "-"
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-										"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:168:21",
+										"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:178:21",
 										"data-prohibitions": "[editContent]",
 										className: "font-medium",
 										children: p.nome
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-										"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:169:21",
+										"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:179:21",
 										"data-prohibitions": "[editContent]",
 										className: "text-center",
 										children: p.estoque || 0
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-										"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:170:21",
+										"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:180:21",
 										"data-prohibitions": "[editContent]",
 										className: "text-right",
 										children: formatCurrency(p.preco_venda || p.preco)
 									})
 								]
 							}, p.id)), filteredProducts.length === 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableRow, {
-								"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:176:19",
+								"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:186:19",
 								"data-prohibitions": "[]",
 								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-									"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:177:21",
+									"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:187:21",
 									"data-prohibitions": "[]",
 									colSpan: 5,
 									className: "text-center py-8 text-muted-foreground",
@@ -80039,24 +80043,24 @@ function EstoqueEtiquetas() {
 			})]
 		}),
 		/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-			"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:188:7",
+			"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:198:7",
 			"data-prohibitions": "[editContent]",
 			className: "print-only",
 			children: chunks.map((chunk, index) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-				"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:190:11",
+				"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:200:11",
 				"data-prohibitions": "[editContent]",
 				className: "pimaco-a4251-sheet",
 				children: chunk.map((p, i) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:192:15",
+					"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:202:15",
 					"data-prohibitions": "[editContent]",
 					className: "pimaco-label",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-						"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:193:17",
+						"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:203:17",
 						"data-prohibitions": "[editContent]",
 						className: "pimaco-label-name",
 						children: p.nome
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-						"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:194:17",
+						"data-uid": "src/components/estoque/EstoqueEtiquetas.tsx:204:17",
 						"data-prohibitions": "[editContent]",
 						className: "pimaco-label-price",
 						children: formatCurrency(p.preco_venda || p.preco)
@@ -92286,4 +92290,4 @@ var App = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ThemeProvider, {
 }));
 //#endregion
 
-//# sourceMappingURL=index-DJ3k3uyQ.js.map
+//# sourceMappingURL=index-BElXn2GT.js.map

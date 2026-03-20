@@ -44,13 +44,23 @@ export default function EstoqueEtiquetas() {
 
   const handleSelectAll = (checked: boolean) => {
     const newSelected = new Set(selectedIds)
-    filteredProducts.forEach((p) => (checked ? newSelected.add(p.id) : newSelected.delete(p.id)))
+    filteredProducts.forEach((p) => {
+      if (checked) {
+        newSelected.add(p.id)
+      } else {
+        newSelected.delete(p.id)
+      }
+    })
     setSelectedIds(newSelected)
   }
 
   const handleSelectProduct = (id: string, checked: boolean) => {
     const newSelected = new Set(selectedIds)
-    checked ? newSelected.add(id) : newSelected.delete(id)
+    if (checked) {
+      newSelected.add(id)
+    } else {
+      newSelected.delete(id)
+    }
     setSelectedIds(newSelected)
   }
 
