@@ -33,6 +33,7 @@ export function PrintableReport({ contas, clientName, startDate, endDate }: any)
             <th className="py-2 px-3 font-semibold border-b border-gray-300">Data Venda</th>
             <th className="py-2 px-3 font-semibold border-b border-gray-300">Vencimento</th>
             <th className="py-2 px-3 font-semibold border-b border-gray-300">Status</th>
+            <th className="py-2 px-3 font-semibold border-b border-gray-300">Método</th>
             <th className="py-2 px-3 font-semibold border-b border-gray-300 text-right">Valor</th>
           </tr>
         </thead>
@@ -42,20 +43,19 @@ export function PrintableReport({ contas, clientName, startDate, endDate }: any)
               <tr key={c.id} className="border-b border-gray-200 print:break-inside-avoid">
                 <td className="py-2 px-3">{c.cliente?.nome || 'Sem Cliente'}</td>
                 <td className="py-2 px-3">
-                  {c.venda?.data
-                    ? new Date(c.venda.data).toLocaleDateString('pt-BR')
-                    : new Date(c.data_vencimento).toLocaleDateString('pt-BR')}
+                  {c.venda?.data ? new Date(c.venda.data).toLocaleDateString('pt-BR') : '-'}
                 </td>
                 <td className="py-2 px-3 font-medium">
                   {new Date(c.data_vencimento).toLocaleDateString('pt-BR')}
                 </td>
                 <td className="py-2 px-3 capitalize">{c.status}</td>
+                <td className="py-2 px-3">{c.metodo_pagamento || '-'}</td>
                 <td className="py-2 px-3 text-right font-medium">{formatCurrency(c.valor)}</td>
               </tr>
             ))
           ) : (
             <tr>
-              <td colSpan={5} className="py-6 text-center text-gray-500 italic">
+              <td colSpan={6} className="py-6 text-center text-gray-500 italic">
                 Nenhum registro encontrado para os filtros atuais.
               </td>
             </tr>

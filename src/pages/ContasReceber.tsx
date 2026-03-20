@@ -20,10 +20,18 @@ import {
 } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
 import { supabase } from '@/lib/supabase/client'
 import { formatCurrency } from '@/lib/format'
 import { toast } from '@/hooks/use-toast'
-import { Loader2, DollarSign, Wallet, FileText, Search, Users } from 'lucide-react'
+import { useAuth } from '@/hooks/use-auth'
+import { Loader2, DollarSign, Wallet, FileText, Search, Users, Undo2 } from 'lucide-react'
 import { PrintableReport } from '@/components/contas-receber/PrintableReport'
 
 interface ContaReceber {
@@ -33,11 +41,13 @@ interface ContaReceber {
   data_vencimento: string
   status: string
   data_pagamento: string | null
+  metodo_pagamento: string | null
   venda?: { data: string }
   cliente?: { nome: string }
 }
 
 export default function ContasReceber() {
+  const { user } = useAuth()
   const [contas, setContas] = useState<ContaReceber[]>([])
   const [loading, setLoading] = useState(true)
   const [filter, setFilter] = useState('Todos')
@@ -47,11 +57,12 @@ export default function ContasReceber() {
 
   const [payingConta, setPayingConta] = useState<ContaReceber | null>(null)
   const [paymentDate, setPaymentDate] = useState(new Date().toISOString().split('T')[0])
+  const [paymentMethod, setPaymentMethod] = useState('Dinheiro')
   const [submitting, setSubmitting] = useState(false)
 
   const fetchContas = async () => {
     setLoading(true)
-    const { data, error } = await (supabase as any)
+    const { data, error } = await supabase
       .from('contas_receber')
       .select('*, venda:vendas(data), cliente:clientes(nome)')
       .order('data_vencimento', { ascending: true })
@@ -66,22 +77,83 @@ export default function ContasReceber() {
   }, [])
 
   const handlePay = async () => {
-    if (!payingConta) return
+    if (!payingConta || !user) return
     setSubmitting(true)
     const dateObj = new Date(paymentDate)
     dateObj.setHours(12, 0, 0, 0)
-    const { error } = await (supabase as any)
+
+    const { error } = await supabase
       .from('contas_receber')
-      .update({ status: 'pago', data_pagamento: dateObj.toISOString() })
+      .update({
+        status: 'pago',
+        data_pagamento: dateObj.toISOString(),
+        metodo_pagamento: paymentMethod,
+      })
       .eq('id', payingConta.id)
-    setSubmitting(false)
-    if (error)
+
+    if (error) {
       toast({ title: 'Erro', description: 'Erro ao registrar pagamento.', variant: 'destructive' })
-    else {
-      toast({ title: 'Sucesso', description: 'Pagamento registrado!' })
-      setPayingConta(null)
-      fetchContas()
+      setSubmitting(false)
+      return
     }
+
+    if (paymentMethod === 'Dinheiro') {
+      const { data: caixa } = await supabase
+        .from('caixa')
+        .select('id')
+        .eq('user_id', user.id)
+        .eq('status', 'aberto')
+        .maybeSingle()
+
+      if (caixa) {
+        await supabase.from('movimentacoes_caixa').insert({
+          caixa_id: caixa.id,
+          tipo: 'entrada',
+          valor: payingConta.valor,
+          descricao: `[Auto] Recebimento de conta - ${payingConta.id.split('-')[0]}`,
+        })
+      }
+    }
+
+    setSubmitting(false)
+    toast({ title: 'Sucesso', description: 'Pagamento registrado!' })
+    setPayingConta(null)
+    fetchContas()
+  }
+
+  const handleRevert = async (conta: ContaReceber) => {
+    if (!user || !confirm('Deseja realmente reverter este recebimento?')) return
+
+    const { error } = await supabase
+      .from('contas_receber')
+      .update({ status: 'pendente', data_pagamento: null, metodo_pagamento: null })
+      .eq('id', conta.id)
+
+    if (error) {
+      toast({ title: 'Erro', description: 'Erro ao reverter pagamento.', variant: 'destructive' })
+      return
+    }
+
+    if (conta.metodo_pagamento === 'Dinheiro') {
+      const { data: caixa } = await supabase
+        .from('caixa')
+        .select('id')
+        .eq('user_id', user.id)
+        .eq('status', 'aberto')
+        .maybeSingle()
+
+      if (caixa) {
+        await supabase.from('movimentacoes_caixa').insert({
+          caixa_id: caixa.id,
+          tipo: 'saida',
+          valor: conta.valor,
+          descricao: `[Auto] Estorno de recebimento - ${conta.id.split('-')[0]}`,
+        })
+      }
+    }
+
+    toast({ title: 'Sucesso', description: 'Recebimento revertido!' })
+    fetchContas()
   }
 
   const filteredContas = contas.filter((c) => {
@@ -210,11 +282,11 @@ export default function ContasReceber() {
                 <TableHeader className="sticky top-0 bg-muted/90 z-10 backdrop-blur-md">
                   <TableRow>
                     <TableHead>Cliente</TableHead>
-                    <TableHead>Data Venda</TableHead>
                     <TableHead>Vencimento</TableHead>
                     <TableHead>Valor</TableHead>
                     <TableHead>Status</TableHead>
-                    <TableHead className="text-right">Ação</TableHead>
+                    <TableHead>Método</TableHead>
+                    <TableHead className="text-right">Ações</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -222,11 +294,6 @@ export default function ContasReceber() {
                     <TableRow key={conta.id}>
                       <TableCell className="font-medium text-foreground">
                         {conta.cliente?.nome || '-'}
-                      </TableCell>
-                      <TableCell>
-                        {conta.venda?.data
-                          ? new Date(conta.venda.data).toLocaleDateString('pt-BR')
-                          : '-'}
                       </TableCell>
                       <TableCell>
                         {new Date(conta.data_vencimento).toLocaleDateString('pt-BR')}
@@ -244,17 +311,30 @@ export default function ContasReceber() {
                           {conta.status === 'pago' ? 'Pago' : 'Pendente'}
                         </Badge>
                       </TableCell>
-                      <TableCell className="text-right">
-                        {conta.status === 'pendente' && (
+                      <TableCell className="text-sm text-muted-foreground">
+                        {conta.metodo_pagamento || '-'}
+                      </TableCell>
+                      <TableCell className="text-right space-x-2">
+                        {conta.status === 'pendente' ? (
                           <Button
                             size="sm"
                             variant="outline"
                             onClick={() => {
                               setPayingConta(conta)
                               setPaymentDate(new Date().toISOString().split('T')[0])
+                              setPaymentMethod('Dinheiro')
                             }}
                           >
                             Registrar Pagamento
+                          </Button>
+                        ) : (
+                          <Button
+                            size="sm"
+                            variant="ghost"
+                            className="text-destructive hover:bg-destructive/10"
+                            onClick={() => handleRevert(conta)}
+                          >
+                            <Undo2 className="h-4 w-4 mr-1" /> Reverter
                           </Button>
                         )}
                       </TableCell>
@@ -291,18 +371,11 @@ export default function ContasReceber() {
                 {debtsByCustomer.map((d) => (
                   <TableRow key={d.nome}>
                     <TableCell className="font-medium text-sm">{d.nome}</TableCell>
-                    <TableCell className="text-right font-bold text-orange-600 dark:text-orange-400">
+                    <TableCell className="text-right font-bold text-orange-600">
                       {formatCurrency(d.valor)}
                     </TableCell>
                   </TableRow>
                 ))}
-                {debtsByCustomer.length === 0 && (
-                  <TableRow>
-                    <TableCell colSpan={2} className="text-center text-muted-foreground py-8">
-                      Nenhuma dívida pendente.
-                    </TableCell>
-                  </TableRow>
-                )}
               </TableBody>
             </Table>
           </CardContent>
@@ -326,6 +399,19 @@ export default function ContasReceber() {
                 value={paymentDate}
                 onChange={(e) => setPaymentDate(e.target.value)}
               />
+            </div>
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label className="text-right">Método</Label>
+              <Select value={paymentMethod} onValueChange={setPaymentMethod}>
+                <SelectTrigger className="col-span-3">
+                  <SelectValue placeholder="Selecione..." />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="Dinheiro">Dinheiro</SelectItem>
+                  <SelectItem value="Cartão">Cartão</SelectItem>
+                  <SelectItem value="Pix">Pix</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
           </div>
           <DialogFooter>

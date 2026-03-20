@@ -27,13 +27,22 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
 import { supabase } from '@/lib/supabase/client'
 import { formatCurrency } from '@/lib/format'
 import { toast } from '@/hooks/use-toast'
-import { Loader2, DollarSign, Wallet, Plus, Search } from 'lucide-react'
+import { useAuth } from '@/hooks/use-auth'
+import { Loader2, DollarSign, Wallet, Plus, Search, FileText } from 'lucide-react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
+import { PrintableReportPagar } from '@/components/contas-pagar/PrintableReportPagar'
 
 interface ContaPagar {
   id: string
@@ -44,6 +53,7 @@ interface ContaPagar {
   status: string
   data_pagamento: string | null
   fornecedor: string | null
+  metodo_pagamento: string | null
 }
 
 const despesaSchema = z.object({
@@ -55,12 +65,18 @@ const despesaSchema = z.object({
 })
 
 export default function ContasPagar() {
+  const { user } = useAuth()
   const [contas, setContas] = useState<ContaPagar[]>([])
   const [loading, setLoading] = useState(true)
   const [filter, setFilter] = useState('Todos')
   const [searchCategoria, setSearchCategoria] = useState('')
+
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const [payingId, setPayingId] = useState<string | null>(null)
+
+  const [payingConta, setPayingConta] = useState<ContaPagar | null>(null)
+  const [paymentDate, setPaymentDate] = useState(new Date().toISOString().split('T')[0])
+  const [paymentMethod, setPaymentMethod] = useState('Dinheiro')
+  const [payingSubmitting, setPayingSubmitting] = useState(false)
 
   const form = useForm<z.infer<typeof despesaSchema>>({
     resolver: zodResolver(despesaSchema),
@@ -75,7 +91,7 @@ export default function ContasPagar() {
 
   const fetchContas = async () => {
     setLoading(true)
-    const { data, error } = await (supabase as any)
+    const { data, error } = await supabase
       .from('contas_pagar')
       .select('*')
       .order('data_vencimento', { ascending: true })
@@ -89,23 +105,52 @@ export default function ContasPagar() {
     fetchContas()
   }, [])
 
-  const handlePay = async (id: string) => {
-    setPayingId(id)
-    const { error } = await (supabase as any)
+  const handlePayConfirm = async () => {
+    if (!payingConta || !user) return
+    setPayingSubmitting(true)
+    const dateObj = new Date(paymentDate)
+    dateObj.setHours(12, 0, 0, 0)
+
+    const { error } = await supabase
       .from('contas_pagar')
-      .update({ status: 'pago', data_pagamento: new Date().toISOString() })
-      .eq('id', id)
-    setPayingId(null)
-    if (error)
+      .update({
+        status: 'pago',
+        data_pagamento: dateObj.toISOString(),
+        metodo_pagamento: paymentMethod,
+      })
+      .eq('id', payingConta.id)
+
+    if (error) {
       toast({ title: 'Erro', description: 'Erro ao registrar pagamento.', variant: 'destructive' })
-    else {
-      toast({ title: 'Sucesso', description: 'Pagamento registrado!' })
-      fetchContas()
+      setPayingSubmitting(false)
+      return
     }
+
+    if (paymentMethod === 'Dinheiro') {
+      const { data: caixa } = await supabase
+        .from('caixa')
+        .select('id')
+        .eq('user_id', user.id)
+        .eq('status', 'aberto')
+        .maybeSingle()
+      if (caixa) {
+        await supabase.from('movimentacoes_caixa').insert({
+          caixa_id: caixa.id,
+          tipo: 'saida',
+          valor: payingConta.valor,
+          descricao: `[Auto] Pagamento de conta - ${payingConta.id.split('-')[0]}`,
+        })
+      }
+    }
+
+    setPayingSubmitting(false)
+    toast({ title: 'Sucesso', description: 'Pagamento registrado!' })
+    setPayingConta(null)
+    fetchContas()
   }
 
   const onSubmit = async (data: z.infer<typeof despesaSchema>) => {
-    const { error } = await (supabase as any).from('contas_pagar').insert({
+    const { error } = await supabase.from('contas_pagar').insert({
       descricao: data.descricao,
       valor: data.valor,
       data_vencimento: new Date(data.data_vencimento).toISOString(),
@@ -140,41 +185,37 @@ export default function ContasPagar() {
     .filter((c) => c.status === 'pago')
     .reduce((acc, curr) => acc + Number(curr.valor), 0)
 
-  const isSubmitting = form.formState.isSubmitting
-
   return (
-    <div className="space-y-6 animate-fade-in max-w-6xl mx-auto h-full flex flex-col">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 shrink-0">
-        <Card className="shadow-sm border-red-200 dark:border-red-900 bg-red-50/30 dark:bg-red-950/20">
+    <div className="space-y-6 animate-fade-in max-w-6xl mx-auto h-full flex flex-col print:block print:h-auto print:max-w-none print:m-0 print:p-0 print:space-y-0">
+      <PrintableReportPagar
+        contas={filteredContas}
+        searchCategoria={searchCategoria}
+        filter={filter}
+      />
+
+      <div className="print:hidden grid grid-cols-1 md:grid-cols-2 gap-6 shrink-0">
+        <Card className="shadow-sm border-red-200 bg-red-50/30">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium text-red-800 dark:text-red-400">
-              Total a Pagar
-            </CardTitle>
+            <CardTitle className="text-sm font-medium text-red-800">Total a Pagar</CardTitle>
             <DollarSign className="h-4 w-4 text-red-500" />
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold text-red-900 dark:text-red-300">
-              {formatCurrency(totalAPagar)}
-            </div>
+            <div className="text-3xl font-bold text-red-900">{formatCurrency(totalAPagar)}</div>
           </CardContent>
         </Card>
-        <Card className="shadow-sm border-emerald-200 dark:border-emerald-900 bg-emerald-50/30 dark:bg-emerald-950/20">
+        <Card className="shadow-sm border-emerald-200 bg-emerald-50/30">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium text-emerald-800 dark:text-emerald-400">
-              Total Pago
-            </CardTitle>
+            <CardTitle className="text-sm font-medium text-emerald-800">Total Pago</CardTitle>
             <Wallet className="h-4 w-4 text-emerald-500" />
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold text-emerald-900 dark:text-emerald-300">
-              {formatCurrency(totalPago)}
-            </div>
+            <div className="text-3xl font-bold text-emerald-900">{formatCurrency(totalPago)}</div>
           </CardContent>
         </Card>
       </div>
 
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 shrink-0">
-        <div className="flex items-center gap-4">
+      <div className="print:hidden flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 shrink-0 bg-muted/50 p-4 rounded-xl border border-border">
+        <div className="flex flex-wrap items-center gap-4">
           <Tabs value={filter} onValueChange={setFilter}>
             <TabsList>
               <TabsTrigger value="Todos">Todos</TabsTrigger>
@@ -192,12 +233,21 @@ export default function ContasPagar() {
             />
           </div>
         </div>
-        <Button onClick={() => setIsModalOpen(true)}>
-          <Plus className="h-4 w-4 mr-2" /> Nova Despesa
-        </Button>
+        <div className="flex gap-2 w-full sm:w-auto">
+          <Button
+            variant="outline"
+            className="bg-background flex-1 sm:flex-none"
+            onClick={() => window.print()}
+          >
+            <FileText className="h-4 w-4 mr-2" /> Relatório PDF
+          </Button>
+          <Button onClick={() => setIsModalOpen(true)} className="flex-1 sm:flex-none">
+            <Plus className="h-4 w-4 mr-2" /> Nova Despesa
+          </Button>
+        </div>
       </div>
 
-      <Card className="shadow-sm border-border flex-1 flex flex-col min-h-0 bg-card">
+      <Card className="print:hidden shadow-sm border-border flex-1 flex flex-col min-h-0 bg-card">
         <CardContent className="p-0 flex-1 overflow-auto">
           {loading ? (
             <div className="flex h-40 items-center justify-center">
@@ -208,11 +258,11 @@ export default function ContasPagar() {
               <TableHeader className="sticky top-0 bg-muted/80 z-10 backdrop-blur-md">
                 <TableRow>
                   <TableHead>Descrição</TableHead>
-                  <TableHead>Fornecedor</TableHead>
                   <TableHead>Vencimento</TableHead>
                   <TableHead>Categoria</TableHead>
                   <TableHead>Valor</TableHead>
                   <TableHead>Status</TableHead>
+                  <TableHead>Método</TableHead>
                   <TableHead className="text-right">Ação</TableHead>
                 </TableRow>
               </TableHeader>
@@ -220,7 +270,6 @@ export default function ContasPagar() {
                 {filteredContas.map((conta) => (
                   <TableRow key={conta.id}>
                     <TableCell className="font-medium">{conta.descricao}</TableCell>
-                    <TableCell>{conta.fornecedor || '-'}</TableCell>
                     <TableCell>
                       {new Date(conta.data_vencimento).toLocaleDateString('pt-BR')}
                     </TableCell>
@@ -231,43 +280,82 @@ export default function ContasPagar() {
                         variant={conta.status === 'pago' ? 'default' : 'secondary'}
                         className={
                           conta.status === 'pago'
-                            ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-300'
-                            : 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300'
+                            ? 'bg-emerald-100 text-emerald-800'
+                            : 'bg-red-100 text-red-800'
                         }
                       >
                         {conta.status === 'pago' ? 'Pago' : 'Pendente'}
                       </Badge>
+                    </TableCell>
+                    <TableCell className="text-sm text-muted-foreground">
+                      {conta.metodo_pagamento || '-'}
                     </TableCell>
                     <TableCell className="text-right">
                       {conta.status === 'pendente' && (
                         <Button
                           size="sm"
                           variant="outline"
-                          onClick={() => handlePay(conta.id)}
-                          disabled={payingId === conta.id}
+                          onClick={() => {
+                            setPayingConta(conta)
+                            setPaymentDate(new Date().toISOString().split('T')[0])
+                            setPaymentMethod('Dinheiro')
+                          }}
                         >
-                          {payingId === conta.id ? (
-                            <Loader2 className="h-4 w-4 animate-spin" />
-                          ) : (
-                            'Pagar'
-                          )}
+                          Pagar
                         </Button>
                       )}
                     </TableCell>
                   </TableRow>
                 ))}
-                {filteredContas.length === 0 && (
-                  <TableRow>
-                    <TableCell colSpan={7} className="text-center py-8 text-muted-foreground">
-                      Nenhuma despesa encontrada.
-                    </TableCell>
-                  </TableRow>
-                )}
               </TableBody>
             </Table>
           )}
         </CardContent>
       </Card>
+
+      <Dialog open={!!payingConta} onOpenChange={(open) => !open && setPayingConta(null)}>
+        <DialogContent className="sm:max-w-[425px]">
+          <DialogHeader>
+            <DialogTitle>Registrar Pagamento</DialogTitle>
+          </DialogHeader>
+          <div className="grid gap-4 py-4">
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label className="text-right">Data</Label>
+              <Input
+                type="date"
+                className="col-span-3"
+                value={paymentDate}
+                onChange={(e) => setPaymentDate(e.target.value)}
+              />
+            </div>
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label className="text-right">Método</Label>
+              <Select value={paymentMethod} onValueChange={setPaymentMethod}>
+                <SelectTrigger className="col-span-3">
+                  <SelectValue placeholder="Selecione..." />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="Dinheiro">Dinheiro</SelectItem>
+                  <SelectItem value="Cartão">Cartão</SelectItem>
+                  <SelectItem value="Pix">Pix</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+          <DialogFooter>
+            <Button
+              variant="outline"
+              onClick={() => setPayingConta(null)}
+              disabled={payingSubmitting}
+            >
+              Cancelar
+            </Button>
+            <Button onClick={handlePayConfirm} disabled={payingSubmitting}>
+              {payingSubmitting && <Loader2 className="h-4 w-4 animate-spin mr-2" />} Confirmar
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
 
       <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
         <DialogContent className="sm:max-w-[425px] bg-card">
@@ -346,16 +434,11 @@ export default function ContasPagar() {
                 />
               </div>
               <DialogFooter className="pt-4">
-                <Button
-                  type="button"
-                  variant="outline"
-                  onClick={() => setIsModalOpen(false)}
-                  disabled={isSubmitting}
-                >
+                <Button type="button" variant="outline" onClick={() => setIsModalOpen(false)}>
                   Cancelar
                 </Button>
-                <Button type="submit" disabled={isSubmitting}>
-                  {isSubmitting && <Loader2 className="h-4 w-4 animate-spin mr-2" />} Salvar
+                <Button type="submit" disabled={form.formState.isSubmitting}>
+                  Salvar
                 </Button>
               </DialogFooter>
             </form>

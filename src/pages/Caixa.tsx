@@ -16,6 +16,8 @@ export default function CaixaPage() {
   const [history, setHistory] = useState<CaixaRecord[]>([])
   const [movements, setMovements] = useState<MovimentacaoCaixa[]>([])
   const [sales, setSales] = useState<any[]>([])
+  const [recebimentos, setRecebimentos] = useState<any[]>([])
+  const [pagamentos, setPagamentos] = useState<any[]>([])
 
   const fetchData = useCallback(async () => {
     if (!user) return
@@ -45,6 +47,20 @@ export default function CaixaPage() {
         .gte('data', active.data_abertura)
         .order('data', { ascending: false })
       setSales(vends || [])
+
+      const { data: rec } = await supabase
+        .from('contas_receber')
+        .select('*')
+        .eq('status', 'pago')
+        .gte('data_pagamento', active.data_abertura)
+      setRecebimentos(rec || [])
+
+      const { data: pag } = await supabase
+        .from('contas_pagar')
+        .select('*')
+        .eq('status', 'pago')
+        .gte('data_pagamento', active.data_abertura)
+      setPagamentos(pag || [])
     }
 
     // Fetch history
@@ -146,6 +162,8 @@ export default function CaixaPage() {
               caixa={activeCaixa}
               movements={movements}
               sales={sales}
+              recebimentos={recebimentos}
+              pagamentos={pagamentos}
               onFechar={handleFechar}
               onNovaMov={handleNovaMov}
             />

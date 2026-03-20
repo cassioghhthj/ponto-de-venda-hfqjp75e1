@@ -19788,6 +19788,13 @@ var TriangleAlert = createLucideIcon("triangle-alert", [
 		key: "p32p05"
 	}]
 ]);
+var Undo2 = createLucideIcon("undo-2", [["path", {
+	d: "M9 14 4 9l5-5",
+	key: "102s5s"
+}], ["path", {
+	d: "M4 9h10.5a5.5 5.5 0 0 1 5.5 5.5a5.5 5.5 0 0 1-5.5 5.5H11",
+	key: "f3b9sd"
+}]]);
 var User = createLucideIcon("user", [["path", {
 	d: "M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2",
 	key: "975kel"
@@ -53713,7 +53720,7 @@ var getAttrsOfCartesianLabel = function getAttrsOfCartesianLabel(props) {
 var isPolar = function isPolar(viewBox) {
 	return "cx" in viewBox && isNumber(viewBox.cx);
 };
-function Label$3(_ref4) {
+function Label$4(_ref4) {
 	var _ref4$offset = _ref4.offset, offset = _ref4$offset === void 0 ? 5 : _ref4$offset, restProps = _objectWithoutProperties$12(_ref4, _excluded$12);
 	var props = _objectSpread$27({ offset }, restProps);
 	var viewBox = props.viewBox, position = props.position, value = props.value, children = props.children, content = props.content, _props$className = props.className, className = _props$className === void 0 ? "" : _props$className, textBreakAll = props.textBreakAll;
@@ -53730,7 +53737,7 @@ function Label$3(_ref4) {
 	var positionAttrs = isPolarLabel ? getAttrsOfPolarLabel(props) : getAttrsOfCartesianLabel(props);
 	return /* @__PURE__ */ import_react.createElement(Text, _extends$23({ className: clsx("recharts-label", className) }, attrs, positionAttrs, { breakAll: textBreakAll }), label);
 }
-Label$3.displayName = "Label";
+Label$4.displayName = "Label";
 var parseViewBox = function parseViewBox(props) {
 	var cx = props.cx, cy = props.cy, angle = props.angle, startAngle = props.startAngle, endAngle = props.endAngle, r = props.r, radius = props.radius, innerRadius = props.innerRadius, outerRadius = props.outerRadius, x = props.x, y = props.y, top = props.top, left = props.left, width = props.width, height = props.height, clockWise = props.clockWise, labelViewBox = props.labelViewBox;
 	if (labelViewBox) return labelViewBox;
@@ -53768,32 +53775,32 @@ var parseViewBox = function parseViewBox(props) {
 };
 var parseLabel = function parseLabel(label, viewBox) {
 	if (!label) return null;
-	if (label === true) return /* @__PURE__ */ import_react.createElement(Label$3, {
+	if (label === true) return /* @__PURE__ */ import_react.createElement(Label$4, {
 		key: "label-implicit",
 		viewBox
 	});
-	if (isNumOrStr(label)) return /* @__PURE__ */ import_react.createElement(Label$3, {
+	if (isNumOrStr(label)) return /* @__PURE__ */ import_react.createElement(Label$4, {
 		key: "label-implicit",
 		viewBox,
 		value: label
 	});
 	if (/* @__PURE__ */ (0, import_react.isValidElement)(label)) {
-		if (label.type === Label$3) return /* @__PURE__ */ (0, import_react.cloneElement)(label, {
+		if (label.type === Label$4) return /* @__PURE__ */ (0, import_react.cloneElement)(label, {
 			key: "label-implicit",
 			viewBox
 		});
-		return /* @__PURE__ */ import_react.createElement(Label$3, {
+		return /* @__PURE__ */ import_react.createElement(Label$4, {
 			key: "label-implicit",
 			content: label,
 			viewBox
 		});
 	}
-	if ((0, import_isFunction.default)(label)) return /* @__PURE__ */ import_react.createElement(Label$3, {
+	if ((0, import_isFunction.default)(label)) return /* @__PURE__ */ import_react.createElement(Label$4, {
 		key: "label-implicit",
 		content: label,
 		viewBox
 	});
-	if ((0, import_isObject.default)(label)) return /* @__PURE__ */ import_react.createElement(Label$3, _extends$23({ viewBox }, label, { key: "label-implicit" }));
+	if ((0, import_isObject.default)(label)) return /* @__PURE__ */ import_react.createElement(Label$4, _extends$23({ viewBox }, label, { key: "label-implicit" }));
 	return null;
 };
 var renderCallByParent$1 = function renderCallByParent(parentProps, viewBox) {
@@ -53801,7 +53808,7 @@ var renderCallByParent$1 = function renderCallByParent(parentProps, viewBox) {
 	if (!parentProps || !parentProps.children && checkPropsLabel && !parentProps.label) return null;
 	var children = parentProps.children;
 	var parentViewBox = parseViewBox(parentProps);
-	var explicitChildren = findAllByType(children, Label$3).map(function(child, index) {
+	var explicitChildren = findAllByType(children, Label$4).map(function(child, index) {
 		return /* @__PURE__ */ (0, import_react.cloneElement)(child, {
 			viewBox: viewBox || parentViewBox,
 			key: "label-".concat(index)
@@ -53810,8 +53817,8 @@ var renderCallByParent$1 = function renderCallByParent(parentProps, viewBox) {
 	if (!checkPropsLabel) return explicitChildren;
 	return [parseLabel(parentProps.label, viewBox || parentViewBox)].concat(_toConsumableArray$7(explicitChildren));
 };
-Label$3.parseViewBox = parseViewBox;
-Label$3.renderCallByParent = renderCallByParent$1;
+Label$4.parseViewBox = parseViewBox;
+Label$4.renderCallByParent = renderCallByParent$1;
 //#endregion
 //#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/recharts@2.15.4_react-dom@19.2.4_react@19.2.4__react@19.2.4/node_modules/recharts/es6/component/LabelList.js
 var import_last = /* @__PURE__ */ __toESM((/* @__PURE__ */ __commonJSMin(((exports, module) => {
@@ -53965,11 +53972,11 @@ function LabelList(_ref) {
 	return /* @__PURE__ */ import_react.createElement(Layer, { className: "recharts-label-list" }, data.map(function(entry, index) {
 		var value = (0, import_isNil.default)(dataKey) ? valueAccessor(entry, index) : getValueByDataKey(entry && entry.payload, dataKey);
 		var idProps = (0, import_isNil.default)(id) ? {} : { id: "".concat(id, "-").concat(index) };
-		return /* @__PURE__ */ import_react.createElement(Label$3, _extends$22({}, filterProps(entry, true), others, idProps, {
+		return /* @__PURE__ */ import_react.createElement(Label$4, _extends$22({}, filterProps(entry, true), others, idProps, {
 			parentViewBox: entry.parentViewBox,
 			value,
 			textBreakAll,
-			viewBox: Label$3.parseViewBox((0, import_isNil.default)(clockWise) ? entry : _objectSpread$26(_objectSpread$26({}, entry), {}, { clockWise })),
+			viewBox: Label$4.parseViewBox((0, import_isNil.default)(clockWise) ? entry : _objectSpread$26(_objectSpread$26({}, entry), {}, { clockWise })),
 			key: "label-".concat(index),
 			index
 		}));
@@ -57305,7 +57312,7 @@ var PolarRadiusAxis = /* @__PURE__ */ function(_PureComponent) {
 			value: function render() {
 				var _this$props5 = this.props, ticks = _this$props5.ticks, axisLine = _this$props5.axisLine, tick = _this$props5.tick;
 				if (!ticks || !ticks.length) return null;
-				return /* @__PURE__ */ import_react.createElement(Layer, { className: clsx("recharts-polar-radius-axis", this.props.className) }, axisLine && this.renderAxisLine(), tick && this.renderTicks(), Label$3.renderCallByParent(this.props, this.getViewBox()));
+				return /* @__PURE__ */ import_react.createElement(Layer, { className: clsx("recharts-polar-radius-axis", this.props.className) }, axisLine && this.renderAxisLine(), tick && this.renderTicks(), Label$4.renderCallByParent(this.props, this.getViewBox()));
 			}
 		}
 	], [{
@@ -58407,7 +58414,7 @@ var Pie = /* @__PURE__ */ function(_PureComponent) {
 					ref: function ref(_ref3) {
 						_this5.pieRef = _ref3;
 					}
-				}, this.renderSectors(), label && this.renderLabels(sectors), Label$3.renderCallByParent(this.props, null, false), (!isAnimationActive || isAnimationFinished) && LabelList.renderCallByParent(this.props, sectors, false));
+				}, this.renderSectors(), label && this.renderLabels(sectors), Label$4.renderCallByParent(this.props, null, false), (!isAnimationActive || isAnimationFinished) && LabelList.renderCallByParent(this.props, sectors, false));
 			}
 		}
 	], [
@@ -60966,7 +60973,7 @@ function ReferenceLineImpl(props) {
 		x2,
 		y2
 	});
-	return /* @__PURE__ */ import_react.createElement(Layer, { className: clsx("recharts-reference-line", className) }, renderLine(shape, lineProps), Label$3.renderCallByParent(props, rectWithCoords({
+	return /* @__PURE__ */ import_react.createElement(Layer, { className: clsx("recharts-reference-line", className) }, renderLine(shape, lineProps), Label$4.renderCallByParent(props, rectWithCoords({
 		x1,
 		y1,
 		x2,
@@ -61163,7 +61170,7 @@ var ReferenceDot = /* @__PURE__ */ function(_React$Component) {
 				cx,
 				cy
 			});
-			return /* @__PURE__ */ import_react.createElement(Layer, { className: clsx("recharts-reference-dot", className) }, ReferenceDot.renderDot(shape, dotProps), Label$3.renderCallByParent(this.props, {
+			return /* @__PURE__ */ import_react.createElement(Layer, { className: clsx("recharts-reference-dot", className) }, ReferenceDot.renderDot(shape, dotProps), Label$4.renderCallByParent(this.props, {
 				x: cx - r,
 				y: cy - r,
 				width: 2 * r,
@@ -61363,7 +61370,7 @@ var ReferenceArea = /* @__PURE__ */ function(_React$Component) {
 			var rect = getRect(hasX1, hasX2, hasY1, hasY2, this.props);
 			if (!rect && !shape) return null;
 			var clipPath = ifOverflowMatches(this.props, "hidden") ? "url(#".concat(clipPathId, ")") : void 0;
-			return /* @__PURE__ */ import_react.createElement(Layer, { className: clsx("recharts-reference-area", className) }, ReferenceArea.renderRect(shape, _objectSpread$6(_objectSpread$6({ clipPath }, filterProps(this.props, true)), rect)), Label$3.renderCallByParent(this.props, rect));
+			return /* @__PURE__ */ import_react.createElement(Layer, { className: clsx("recharts-reference-area", className) }, ReferenceArea.renderRect(shape, _objectSpread$6(_objectSpread$6({ clipPath }, filterProps(this.props, true)), rect)), Label$4.renderCallByParent(this.props, rect));
 		}
 	}]);
 }(import_react.Component);
@@ -61971,7 +61978,7 @@ var CartesianAxis = /* @__PURE__ */ function(_Component) {
 					ref: function ref(_ref2) {
 						_this3.layerReference = _ref2;
 					}
-				}, axisLine && this.renderAxisLine(), this.renderTicks(finalTicks, this.state.fontSize, this.state.letterSpacing), Label$3.renderCallByParent(this.props));
+				}, axisLine && this.renderAxisLine(), this.renderTicks(finalTicks, this.state.fontSize, this.state.letterSpacing), Label$4.renderCallByParent(this.props));
 			}
 		}
 	], [{
@@ -67596,7 +67603,7 @@ var Primitive = [
 //#endregion
 //#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/@radix-ui+react-label@2.1.8_@types+react-dom@19.2.3_@types+react@19.2.14__@types+react@_55fa612a976b7bdfbf4dcdd93d861aab/node_modules/@radix-ui/react-label/dist/index.mjs
 var NAME = "Label";
-var Label$2 = import_react.forwardRef((props, forwardedRef) => {
+var Label$3 = import_react.forwardRef((props, forwardedRef) => {
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.label, {
 		...props,
 		ref: forwardedRef,
@@ -67607,19 +67614,1167 @@ var Label$2 = import_react.forwardRef((props, forwardedRef) => {
 		}
 	});
 });
-Label$2.displayName = NAME;
-var Root$2 = Label$2;
+Label$3.displayName = NAME;
+var Root$2 = Label$3;
 //#endregion
 //#region src/components/ui/label.tsx
 var labelVariants = cva("text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70");
-var Label$1 = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root$2, {
+var Label$2 = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root$2, {
 	"data-uid": "src/components/ui/label.tsx:16:3",
 	"data-prohibitions": "[editContent]",
 	ref,
 	className: cn$1(labelVariants(), className),
 	...props
 }));
-Label$1.displayName = Root$2.displayName;
+Label$2.displayName = Root$2.displayName;
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/@radix-ui+number@1.1.1/node_modules/@radix-ui/number/dist/index.mjs
+function clamp(value, [min, max]) {
+	return Math.min(max, Math.max(min, value));
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/@radix-ui+react-use-previous@1.1.1_@types+react@19.2.14_react@19.2.4/node_modules/@radix-ui/react-use-previous/dist/index.mjs
+function usePrevious(value) {
+	const ref = import_react.useRef({
+		value,
+		previous: value
+	});
+	return import_react.useMemo(() => {
+		if (ref.current.value !== value) {
+			ref.current.previous = ref.current.value;
+			ref.current.value = value;
+		}
+		return ref.current.previous;
+	}, [value]);
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/@radix-ui+react-select@2.2.6_@types+react-dom@19.2.3_@types+react@19.2.14__@types+react_53894a32562cb9eeb6aef8b357a4f4e3/node_modules/@radix-ui/react-select/dist/index.mjs
+var OPEN_KEYS = [
+	" ",
+	"Enter",
+	"ArrowUp",
+	"ArrowDown"
+];
+var SELECTION_KEYS = [" ", "Enter"];
+var SELECT_NAME = "Select";
+var [Collection, useCollection, createCollectionScope] = createCollection(SELECT_NAME);
+var [createSelectContext, createSelectScope] = createContextScope(SELECT_NAME, [createCollectionScope, createPopperScope]);
+var usePopperScope$1 = createPopperScope();
+var [SelectProvider, useSelectContext] = createSelectContext(SELECT_NAME);
+var [SelectNativeOptionsProvider, useSelectNativeOptionsContext] = createSelectContext(SELECT_NAME);
+var Select$2 = (props) => {
+	const { __scopeSelect, children, open: openProp, defaultOpen, onOpenChange, value: valueProp, defaultValue, onValueChange, dir, name, autoComplete, disabled, required, form } = props;
+	const popperScope = usePopperScope$1(__scopeSelect);
+	const [trigger, setTrigger] = import_react.useState(null);
+	const [valueNode, setValueNode] = import_react.useState(null);
+	const [valueNodeHasChildren, setValueNodeHasChildren] = import_react.useState(false);
+	const direction = useDirection(dir);
+	const [open, setOpen] = useControllableState({
+		prop: openProp,
+		defaultProp: defaultOpen ?? false,
+		onChange: onOpenChange,
+		caller: SELECT_NAME
+	});
+	const [value, setValue] = useControllableState({
+		prop: valueProp,
+		defaultProp: defaultValue,
+		onChange: onValueChange,
+		caller: SELECT_NAME
+	});
+	const triggerPointerDownPosRef = import_react.useRef(null);
+	const isFormControl = trigger ? form || !!trigger.closest("form") : true;
+	const [nativeOptionsSet, setNativeOptionsSet] = import_react.useState(/* @__PURE__ */ new Set());
+	const nativeSelectKey = Array.from(nativeOptionsSet).map((option) => option.props.value).join(";");
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root2$3, {
+		...popperScope,
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(SelectProvider, {
+			required,
+			scope: __scopeSelect,
+			trigger,
+			onTriggerChange: setTrigger,
+			valueNode,
+			onValueNodeChange: setValueNode,
+			valueNodeHasChildren,
+			onValueNodeHasChildrenChange: setValueNodeHasChildren,
+			contentId: useId(),
+			value,
+			onValueChange: setValue,
+			open,
+			onOpenChange: setOpen,
+			dir: direction,
+			triggerPointerDownPosRef,
+			disabled,
+			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Collection.Provider, {
+				scope: __scopeSelect,
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectNativeOptionsProvider, {
+					scope: props.__scopeSelect,
+					onNativeOptionAdd: import_react.useCallback((option) => {
+						setNativeOptionsSet((prev) => new Set(prev).add(option));
+					}, []),
+					onNativeOptionRemove: import_react.useCallback((option) => {
+						setNativeOptionsSet((prev) => {
+							const optionsSet = new Set(prev);
+							optionsSet.delete(option);
+							return optionsSet;
+						});
+					}, []),
+					children
+				})
+			}), isFormControl ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(SelectBubbleInput, {
+				"aria-hidden": true,
+				required,
+				tabIndex: -1,
+				name,
+				autoComplete,
+				value,
+				onChange: (event) => setValue(event.target.value),
+				disabled,
+				form,
+				children: [value === void 0 ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("option", { value: "" }) : null, Array.from(nativeOptionsSet)]
+			}, nativeSelectKey) : null]
+		})
+	});
+};
+Select$2.displayName = SELECT_NAME;
+var TRIGGER_NAME$1 = "SelectTrigger";
+var SelectTrigger$1 = import_react.forwardRef((props, forwardedRef) => {
+	const { __scopeSelect, disabled = false, ...triggerProps } = props;
+	const popperScope = usePopperScope$1(__scopeSelect);
+	const context = useSelectContext(TRIGGER_NAME$1, __scopeSelect);
+	const isDisabled = context.disabled || disabled;
+	const composedRefs = useComposedRefs(forwardedRef, context.onTriggerChange);
+	const getItems = useCollection(__scopeSelect);
+	const pointerTypeRef = import_react.useRef("touch");
+	const [searchRef, handleTypeaheadSearch, resetTypeahead] = useTypeaheadSearch((search) => {
+		const enabledItems = getItems().filter((item) => !item.disabled);
+		const nextItem = findNextItem(enabledItems, search, enabledItems.find((item) => item.value === context.value));
+		if (nextItem !== void 0) context.onValueChange(nextItem.value);
+	});
+	const handleOpen = (pointerEvent) => {
+		if (!isDisabled) {
+			context.onOpenChange(true);
+			resetTypeahead();
+		}
+		if (pointerEvent) context.triggerPointerDownPosRef.current = {
+			x: Math.round(pointerEvent.pageX),
+			y: Math.round(pointerEvent.pageY)
+		};
+	};
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Anchor, {
+		asChild: true,
+		...popperScope,
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.button, {
+			type: "button",
+			role: "combobox",
+			"aria-controls": context.contentId,
+			"aria-expanded": context.open,
+			"aria-required": context.required,
+			"aria-autocomplete": "none",
+			dir: context.dir,
+			"data-state": context.open ? "open" : "closed",
+			disabled: isDisabled,
+			"data-disabled": isDisabled ? "" : void 0,
+			"data-placeholder": shouldShowPlaceholder(context.value) ? "" : void 0,
+			...triggerProps,
+			ref: composedRefs,
+			onClick: composeEventHandlers(triggerProps.onClick, (event) => {
+				event.currentTarget.focus();
+				if (pointerTypeRef.current !== "mouse") handleOpen(event);
+			}),
+			onPointerDown: composeEventHandlers(triggerProps.onPointerDown, (event) => {
+				pointerTypeRef.current = event.pointerType;
+				const target = event.target;
+				if (target.hasPointerCapture(event.pointerId)) target.releasePointerCapture(event.pointerId);
+				if (event.button === 0 && event.ctrlKey === false && event.pointerType === "mouse") {
+					handleOpen(event);
+					event.preventDefault();
+				}
+			}),
+			onKeyDown: composeEventHandlers(triggerProps.onKeyDown, (event) => {
+				const isTypingAhead = searchRef.current !== "";
+				if (!(event.ctrlKey || event.altKey || event.metaKey) && event.key.length === 1) handleTypeaheadSearch(event.key);
+				if (isTypingAhead && event.key === " ") return;
+				if (OPEN_KEYS.includes(event.key)) {
+					handleOpen();
+					event.preventDefault();
+				}
+			})
+		})
+	});
+});
+SelectTrigger$1.displayName = TRIGGER_NAME$1;
+var VALUE_NAME = "SelectValue";
+var SelectValue$1 = import_react.forwardRef((props, forwardedRef) => {
+	const { __scopeSelect, className, style, children, placeholder = "", ...valueProps } = props;
+	const context = useSelectContext(VALUE_NAME, __scopeSelect);
+	const { onValueNodeHasChildrenChange } = context;
+	const hasChildren = children !== void 0;
+	const composedRefs = useComposedRefs(forwardedRef, context.onValueNodeChange);
+	useLayoutEffect2(() => {
+		onValueNodeHasChildrenChange(hasChildren);
+	}, [onValueNodeHasChildrenChange, hasChildren]);
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.span, {
+		...valueProps,
+		ref: composedRefs,
+		style: { pointerEvents: "none" },
+		children: shouldShowPlaceholder(context.value) ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(import_jsx_runtime.Fragment, { children: placeholder }) : children
+	});
+});
+SelectValue$1.displayName = VALUE_NAME;
+var ICON_NAME = "SelectIcon";
+var SelectIcon = import_react.forwardRef((props, forwardedRef) => {
+	const { __scopeSelect, children, ...iconProps } = props;
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.span, {
+		"aria-hidden": true,
+		...iconProps,
+		ref: forwardedRef,
+		children: children || "▼"
+	});
+});
+SelectIcon.displayName = ICON_NAME;
+var PORTAL_NAME$1 = "SelectPortal";
+var SelectPortal = (props) => {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Portal$3, {
+		asChild: true,
+		...props
+	});
+};
+SelectPortal.displayName = PORTAL_NAME$1;
+var CONTENT_NAME$1 = "SelectContent";
+var SelectContent$1 = import_react.forwardRef((props, forwardedRef) => {
+	const context = useSelectContext(CONTENT_NAME$1, props.__scopeSelect);
+	const [fragment, setFragment] = import_react.useState();
+	useLayoutEffect2(() => {
+		setFragment(new DocumentFragment());
+	}, []);
+	if (!context.open) {
+		const frag = fragment;
+		return frag ? import_react_dom.createPortal(/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectContentProvider, {
+			scope: props.__scopeSelect,
+			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Collection.Slot, {
+				scope: props.__scopeSelect,
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { children: props.children })
+			})
+		}), frag) : null;
+	}
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectContentImpl, {
+		...props,
+		ref: forwardedRef
+	});
+});
+SelectContent$1.displayName = CONTENT_NAME$1;
+var CONTENT_MARGIN = 10;
+var [SelectContentProvider, useSelectContentContext] = createSelectContext(CONTENT_NAME$1);
+var CONTENT_IMPL_NAME = "SelectContentImpl";
+var Slot$1 = /* @__PURE__ */ createSlot$1("SelectContent.RemoveScroll");
+var SelectContentImpl = import_react.forwardRef((props, forwardedRef) => {
+	const { __scopeSelect, position = "item-aligned", onCloseAutoFocus, onEscapeKeyDown, onPointerDownOutside, side, sideOffset, align, alignOffset, arrowPadding, collisionBoundary, collisionPadding, sticky, hideWhenDetached, avoidCollisions, ...contentProps } = props;
+	const context = useSelectContext(CONTENT_NAME$1, __scopeSelect);
+	const [content, setContent] = import_react.useState(null);
+	const [viewport, setViewport] = import_react.useState(null);
+	const composedRefs = useComposedRefs(forwardedRef, (node) => setContent(node));
+	const [selectedItem, setSelectedItem] = import_react.useState(null);
+	const [selectedItemText, setSelectedItemText] = import_react.useState(null);
+	const getItems = useCollection(__scopeSelect);
+	const [isPositioned, setIsPositioned] = import_react.useState(false);
+	const firstValidItemFoundRef = import_react.useRef(false);
+	import_react.useEffect(() => {
+		if (content) return hideOthers(content);
+	}, [content]);
+	useFocusGuards();
+	const focusFirst = import_react.useCallback((candidates) => {
+		const [firstItem, ...restItems] = getItems().map((item) => item.ref.current);
+		const [lastItem] = restItems.slice(-1);
+		const PREVIOUSLY_FOCUSED_ELEMENT = document.activeElement;
+		for (const candidate of candidates) {
+			if (candidate === PREVIOUSLY_FOCUSED_ELEMENT) return;
+			candidate?.scrollIntoView({ block: "nearest" });
+			if (candidate === firstItem && viewport) viewport.scrollTop = 0;
+			if (candidate === lastItem && viewport) viewport.scrollTop = viewport.scrollHeight;
+			candidate?.focus();
+			if (document.activeElement !== PREVIOUSLY_FOCUSED_ELEMENT) return;
+		}
+	}, [getItems, viewport]);
+	const focusSelectedItem = import_react.useCallback(() => focusFirst([selectedItem, content]), [
+		focusFirst,
+		selectedItem,
+		content
+	]);
+	import_react.useEffect(() => {
+		if (isPositioned) focusSelectedItem();
+	}, [isPositioned, focusSelectedItem]);
+	const { onOpenChange, triggerPointerDownPosRef } = context;
+	import_react.useEffect(() => {
+		if (content) {
+			let pointerMoveDelta = {
+				x: 0,
+				y: 0
+			};
+			const handlePointerMove = (event) => {
+				pointerMoveDelta = {
+					x: Math.abs(Math.round(event.pageX) - (triggerPointerDownPosRef.current?.x ?? 0)),
+					y: Math.abs(Math.round(event.pageY) - (triggerPointerDownPosRef.current?.y ?? 0))
+				};
+			};
+			const handlePointerUp = (event) => {
+				if (pointerMoveDelta.x <= 10 && pointerMoveDelta.y <= 10) event.preventDefault();
+				else if (!content.contains(event.target)) onOpenChange(false);
+				document.removeEventListener("pointermove", handlePointerMove);
+				triggerPointerDownPosRef.current = null;
+			};
+			if (triggerPointerDownPosRef.current !== null) {
+				document.addEventListener("pointermove", handlePointerMove);
+				document.addEventListener("pointerup", handlePointerUp, {
+					capture: true,
+					once: true
+				});
+			}
+			return () => {
+				document.removeEventListener("pointermove", handlePointerMove);
+				document.removeEventListener("pointerup", handlePointerUp, { capture: true });
+			};
+		}
+	}, [
+		content,
+		onOpenChange,
+		triggerPointerDownPosRef
+	]);
+	import_react.useEffect(() => {
+		const close = () => onOpenChange(false);
+		window.addEventListener("blur", close);
+		window.addEventListener("resize", close);
+		return () => {
+			window.removeEventListener("blur", close);
+			window.removeEventListener("resize", close);
+		};
+	}, [onOpenChange]);
+	const [searchRef, handleTypeaheadSearch] = useTypeaheadSearch((search) => {
+		const enabledItems = getItems().filter((item) => !item.disabled);
+		const nextItem = findNextItem(enabledItems, search, enabledItems.find((item) => item.ref.current === document.activeElement));
+		if (nextItem) setTimeout(() => nextItem.ref.current.focus());
+	});
+	const itemRefCallback = import_react.useCallback((node, value, disabled) => {
+		const isFirstValidItem = !firstValidItemFoundRef.current && !disabled;
+		if (context.value !== void 0 && context.value === value || isFirstValidItem) {
+			setSelectedItem(node);
+			if (isFirstValidItem) firstValidItemFoundRef.current = true;
+		}
+	}, [context.value]);
+	const handleItemLeave = import_react.useCallback(() => content?.focus(), [content]);
+	const itemTextRefCallback = import_react.useCallback((node, value, disabled) => {
+		const isFirstValidItem = !firstValidItemFoundRef.current && !disabled;
+		if (context.value !== void 0 && context.value === value || isFirstValidItem) setSelectedItemText(node);
+	}, [context.value]);
+	const SelectPosition = position === "popper" ? SelectPopperPosition : SelectItemAlignedPosition;
+	const popperContentProps = SelectPosition === SelectPopperPosition ? {
+		side,
+		sideOffset,
+		align,
+		alignOffset,
+		arrowPadding,
+		collisionBoundary,
+		collisionPadding,
+		sticky,
+		hideWhenDetached,
+		avoidCollisions
+	} : {};
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectContentProvider, {
+		scope: __scopeSelect,
+		content,
+		viewport,
+		onViewportChange: setViewport,
+		itemRefCallback,
+		selectedItem,
+		onItemLeave: handleItemLeave,
+		itemTextRefCallback,
+		focusSelectedItem,
+		selectedItemText,
+		position,
+		isPositioned,
+		searchRef,
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ReactRemoveScroll, {
+			as: Slot$1,
+			allowPinchZoom: true,
+			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(FocusScope, {
+				asChild: true,
+				trapped: context.open,
+				onMountAutoFocus: (event) => {
+					event.preventDefault();
+				},
+				onUnmountAutoFocus: composeEventHandlers(onCloseAutoFocus, (event) => {
+					context.trigger?.focus({ preventScroll: true });
+					event.preventDefault();
+				}),
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DismissableLayer, {
+					asChild: true,
+					disableOutsidePointerEvents: true,
+					onEscapeKeyDown,
+					onPointerDownOutside,
+					onFocusOutside: (event) => event.preventDefault(),
+					onDismiss: () => context.onOpenChange(false),
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectPosition, {
+						role: "listbox",
+						id: context.contentId,
+						"data-state": context.open ? "open" : "closed",
+						dir: context.dir,
+						onContextMenu: (event) => event.preventDefault(),
+						...contentProps,
+						...popperContentProps,
+						onPlaced: () => setIsPositioned(true),
+						ref: composedRefs,
+						style: {
+							display: "flex",
+							flexDirection: "column",
+							outline: "none",
+							...contentProps.style
+						},
+						onKeyDown: composeEventHandlers(contentProps.onKeyDown, (event) => {
+							const isModifierKey = event.ctrlKey || event.altKey || event.metaKey;
+							if (event.key === "Tab") event.preventDefault();
+							if (!isModifierKey && event.key.length === 1) handleTypeaheadSearch(event.key);
+							if ([
+								"ArrowUp",
+								"ArrowDown",
+								"Home",
+								"End"
+							].includes(event.key)) {
+								let candidateNodes = getItems().filter((item) => !item.disabled).map((item) => item.ref.current);
+								if (["ArrowUp", "End"].includes(event.key)) candidateNodes = candidateNodes.slice().reverse();
+								if (["ArrowUp", "ArrowDown"].includes(event.key)) {
+									const currentElement = event.target;
+									const currentIndex = candidateNodes.indexOf(currentElement);
+									candidateNodes = candidateNodes.slice(currentIndex + 1);
+								}
+								setTimeout(() => focusFirst(candidateNodes));
+								event.preventDefault();
+							}
+						})
+					})
+				})
+			})
+		})
+	});
+});
+SelectContentImpl.displayName = CONTENT_IMPL_NAME;
+var ITEM_ALIGNED_POSITION_NAME = "SelectItemAlignedPosition";
+var SelectItemAlignedPosition = import_react.forwardRef((props, forwardedRef) => {
+	const { __scopeSelect, onPlaced, ...popperProps } = props;
+	const context = useSelectContext(CONTENT_NAME$1, __scopeSelect);
+	const contentContext = useSelectContentContext(CONTENT_NAME$1, __scopeSelect);
+	const [contentWrapper, setContentWrapper] = import_react.useState(null);
+	const [content, setContent] = import_react.useState(null);
+	const composedRefs = useComposedRefs(forwardedRef, (node) => setContent(node));
+	const getItems = useCollection(__scopeSelect);
+	const shouldExpandOnScrollRef = import_react.useRef(false);
+	const shouldRepositionRef = import_react.useRef(true);
+	const { viewport, selectedItem, selectedItemText, focusSelectedItem } = contentContext;
+	const position = import_react.useCallback(() => {
+		if (context.trigger && context.valueNode && contentWrapper && content && viewport && selectedItem && selectedItemText) {
+			const triggerRect = context.trigger.getBoundingClientRect();
+			const contentRect = content.getBoundingClientRect();
+			const valueNodeRect = context.valueNode.getBoundingClientRect();
+			const itemTextRect = selectedItemText.getBoundingClientRect();
+			if (context.dir !== "rtl") {
+				const itemTextOffset = itemTextRect.left - contentRect.left;
+				const left = valueNodeRect.left - itemTextOffset;
+				const leftDelta = triggerRect.left - left;
+				const minContentWidth = triggerRect.width + leftDelta;
+				const contentWidth = Math.max(minContentWidth, contentRect.width);
+				const rightEdge = window.innerWidth - CONTENT_MARGIN;
+				const clampedLeft = clamp(left, [CONTENT_MARGIN, Math.max(CONTENT_MARGIN, rightEdge - contentWidth)]);
+				contentWrapper.style.minWidth = minContentWidth + "px";
+				contentWrapper.style.left = clampedLeft + "px";
+			} else {
+				const itemTextOffset = contentRect.right - itemTextRect.right;
+				const right = window.innerWidth - valueNodeRect.right - itemTextOffset;
+				const rightDelta = window.innerWidth - triggerRect.right - right;
+				const minContentWidth = triggerRect.width + rightDelta;
+				const contentWidth = Math.max(minContentWidth, contentRect.width);
+				const leftEdge = window.innerWidth - CONTENT_MARGIN;
+				const clampedRight = clamp(right, [CONTENT_MARGIN, Math.max(CONTENT_MARGIN, leftEdge - contentWidth)]);
+				contentWrapper.style.minWidth = minContentWidth + "px";
+				contentWrapper.style.right = clampedRight + "px";
+			}
+			const items = getItems();
+			const availableHeight = window.innerHeight - CONTENT_MARGIN * 2;
+			const itemsHeight = viewport.scrollHeight;
+			const contentStyles = window.getComputedStyle(content);
+			const contentBorderTopWidth = parseInt(contentStyles.borderTopWidth, 10);
+			const contentPaddingTop = parseInt(contentStyles.paddingTop, 10);
+			const contentBorderBottomWidth = parseInt(contentStyles.borderBottomWidth, 10);
+			const contentPaddingBottom = parseInt(contentStyles.paddingBottom, 10);
+			const fullContentHeight = contentBorderTopWidth + contentPaddingTop + itemsHeight + contentPaddingBottom + contentBorderBottomWidth;
+			const minContentHeight = Math.min(selectedItem.offsetHeight * 5, fullContentHeight);
+			const viewportStyles = window.getComputedStyle(viewport);
+			const viewportPaddingTop = parseInt(viewportStyles.paddingTop, 10);
+			const viewportPaddingBottom = parseInt(viewportStyles.paddingBottom, 10);
+			const topEdgeToTriggerMiddle = triggerRect.top + triggerRect.height / 2 - CONTENT_MARGIN;
+			const triggerMiddleToBottomEdge = availableHeight - topEdgeToTriggerMiddle;
+			const selectedItemHalfHeight = selectedItem.offsetHeight / 2;
+			const itemOffsetMiddle = selectedItem.offsetTop + selectedItemHalfHeight;
+			const contentTopToItemMiddle = contentBorderTopWidth + contentPaddingTop + itemOffsetMiddle;
+			const itemMiddleToContentBottom = fullContentHeight - contentTopToItemMiddle;
+			if (contentTopToItemMiddle <= topEdgeToTriggerMiddle) {
+				const isLastItem = items.length > 0 && selectedItem === items[items.length - 1].ref.current;
+				contentWrapper.style.bottom = "0px";
+				const viewportOffsetBottom = content.clientHeight - viewport.offsetTop - viewport.offsetHeight;
+				const height = contentTopToItemMiddle + Math.max(triggerMiddleToBottomEdge, selectedItemHalfHeight + (isLastItem ? viewportPaddingBottom : 0) + viewportOffsetBottom + contentBorderBottomWidth);
+				contentWrapper.style.height = height + "px";
+			} else {
+				const isFirstItem = items.length > 0 && selectedItem === items[0].ref.current;
+				contentWrapper.style.top = "0px";
+				const height = Math.max(topEdgeToTriggerMiddle, contentBorderTopWidth + viewport.offsetTop + (isFirstItem ? viewportPaddingTop : 0) + selectedItemHalfHeight) + itemMiddleToContentBottom;
+				contentWrapper.style.height = height + "px";
+				viewport.scrollTop = contentTopToItemMiddle - topEdgeToTriggerMiddle + viewport.offsetTop;
+			}
+			contentWrapper.style.margin = `${CONTENT_MARGIN}px 0`;
+			contentWrapper.style.minHeight = minContentHeight + "px";
+			contentWrapper.style.maxHeight = availableHeight + "px";
+			onPlaced?.();
+			requestAnimationFrame(() => shouldExpandOnScrollRef.current = true);
+		}
+	}, [
+		getItems,
+		context.trigger,
+		context.valueNode,
+		contentWrapper,
+		content,
+		viewport,
+		selectedItem,
+		selectedItemText,
+		context.dir,
+		onPlaced
+	]);
+	useLayoutEffect2(() => position(), [position]);
+	const [contentZIndex, setContentZIndex] = import_react.useState();
+	useLayoutEffect2(() => {
+		if (content) setContentZIndex(window.getComputedStyle(content).zIndex);
+	}, [content]);
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectViewportProvider, {
+		scope: __scopeSelect,
+		contentWrapper,
+		shouldExpandOnScrollRef,
+		onScrollButtonChange: import_react.useCallback((node) => {
+			if (node && shouldRepositionRef.current === true) {
+				position();
+				focusSelectedItem?.();
+				shouldRepositionRef.current = false;
+			}
+		}, [position, focusSelectedItem]),
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+			ref: setContentWrapper,
+			style: {
+				display: "flex",
+				flexDirection: "column",
+				position: "fixed",
+				zIndex: contentZIndex
+			},
+			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.div, {
+				...popperProps,
+				ref: composedRefs,
+				style: {
+					boxSizing: "border-box",
+					maxHeight: "100%",
+					...popperProps.style
+				}
+			})
+		})
+	});
+});
+SelectItemAlignedPosition.displayName = ITEM_ALIGNED_POSITION_NAME;
+var POPPER_POSITION_NAME = "SelectPopperPosition";
+var SelectPopperPosition = import_react.forwardRef((props, forwardedRef) => {
+	const { __scopeSelect, align = "start", collisionPadding = CONTENT_MARGIN, ...popperProps } = props;
+	const popperScope = usePopperScope$1(__scopeSelect);
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Content$2, {
+		...popperScope,
+		...popperProps,
+		ref: forwardedRef,
+		align,
+		collisionPadding,
+		style: {
+			boxSizing: "border-box",
+			...popperProps.style,
+			"--radix-select-content-transform-origin": "var(--radix-popper-transform-origin)",
+			"--radix-select-content-available-width": "var(--radix-popper-available-width)",
+			"--radix-select-content-available-height": "var(--radix-popper-available-height)",
+			"--radix-select-trigger-width": "var(--radix-popper-anchor-width)",
+			"--radix-select-trigger-height": "var(--radix-popper-anchor-height)"
+		}
+	});
+});
+SelectPopperPosition.displayName = POPPER_POSITION_NAME;
+var [SelectViewportProvider, useSelectViewportContext] = createSelectContext(CONTENT_NAME$1, {});
+var VIEWPORT_NAME$1 = "SelectViewport";
+var SelectViewport = import_react.forwardRef((props, forwardedRef) => {
+	const { __scopeSelect, nonce, ...viewportProps } = props;
+	const contentContext = useSelectContentContext(VIEWPORT_NAME$1, __scopeSelect);
+	const viewportContext = useSelectViewportContext(VIEWPORT_NAME$1, __scopeSelect);
+	const composedRefs = useComposedRefs(forwardedRef, contentContext.onViewportChange);
+	const prevScrollTopRef = import_react.useRef(0);
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("style", {
+		dangerouslySetInnerHTML: { __html: `[data-radix-select-viewport]{scrollbar-width:none;-ms-overflow-style:none;-webkit-overflow-scrolling:touch;}[data-radix-select-viewport]::-webkit-scrollbar{display:none}` },
+		nonce
+	}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Collection.Slot, {
+		scope: __scopeSelect,
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.div, {
+			"data-radix-select-viewport": "",
+			role: "presentation",
+			...viewportProps,
+			ref: composedRefs,
+			style: {
+				position: "relative",
+				flex: 1,
+				overflow: "hidden auto",
+				...viewportProps.style
+			},
+			onScroll: composeEventHandlers(viewportProps.onScroll, (event) => {
+				const viewport = event.currentTarget;
+				const { contentWrapper, shouldExpandOnScrollRef } = viewportContext;
+				if (shouldExpandOnScrollRef?.current && contentWrapper) {
+					const scrolledBy = Math.abs(prevScrollTopRef.current - viewport.scrollTop);
+					if (scrolledBy > 0) {
+						const availableHeight = window.innerHeight - CONTENT_MARGIN * 2;
+						const cssMinHeight = parseFloat(contentWrapper.style.minHeight);
+						const cssHeight = parseFloat(contentWrapper.style.height);
+						const prevHeight = Math.max(cssMinHeight, cssHeight);
+						if (prevHeight < availableHeight) {
+							const nextHeight = prevHeight + scrolledBy;
+							const clampedNextHeight = Math.min(availableHeight, nextHeight);
+							const heightDiff = nextHeight - clampedNextHeight;
+							contentWrapper.style.height = clampedNextHeight + "px";
+							if (contentWrapper.style.bottom === "0px") {
+								viewport.scrollTop = heightDiff > 0 ? heightDiff : 0;
+								contentWrapper.style.justifyContent = "flex-end";
+							}
+						}
+					}
+				}
+				prevScrollTopRef.current = viewport.scrollTop;
+			})
+		})
+	})] });
+});
+SelectViewport.displayName = VIEWPORT_NAME$1;
+var GROUP_NAME = "SelectGroup";
+var [SelectGroupContextProvider, useSelectGroupContext] = createSelectContext(GROUP_NAME);
+var SelectGroup$1 = import_react.forwardRef((props, forwardedRef) => {
+	const { __scopeSelect, ...groupProps } = props;
+	const groupId = useId();
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectGroupContextProvider, {
+		scope: __scopeSelect,
+		id: groupId,
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.div, {
+			role: "group",
+			"aria-labelledby": groupId,
+			...groupProps,
+			ref: forwardedRef
+		})
+	});
+});
+SelectGroup$1.displayName = GROUP_NAME;
+var LABEL_NAME = "SelectLabel";
+var SelectLabel$1 = import_react.forwardRef((props, forwardedRef) => {
+	const { __scopeSelect, ...labelProps } = props;
+	const groupContext = useSelectGroupContext(LABEL_NAME, __scopeSelect);
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.div, {
+		id: groupContext.id,
+		...labelProps,
+		ref: forwardedRef
+	});
+});
+SelectLabel$1.displayName = LABEL_NAME;
+var ITEM_NAME = "SelectItem";
+var [SelectItemContextProvider, useSelectItemContext] = createSelectContext(ITEM_NAME);
+var SelectItem$1 = import_react.forwardRef((props, forwardedRef) => {
+	const { __scopeSelect, value, disabled = false, textValue: textValueProp, ...itemProps } = props;
+	const context = useSelectContext(ITEM_NAME, __scopeSelect);
+	const contentContext = useSelectContentContext(ITEM_NAME, __scopeSelect);
+	const isSelected = context.value === value;
+	const [textValue, setTextValue] = import_react.useState(textValueProp ?? "");
+	const [isFocused, setIsFocused] = import_react.useState(false);
+	const composedRefs = useComposedRefs(forwardedRef, (node) => contentContext.itemRefCallback?.(node, value, disabled));
+	const textId = useId();
+	const pointerTypeRef = import_react.useRef("touch");
+	const handleSelect = () => {
+		if (!disabled) {
+			context.onValueChange(value);
+			context.onOpenChange(false);
+		}
+	};
+	if (value === "") throw new Error("A <Select.Item /> must have a value prop that is not an empty string. This is because the Select value can be set to an empty string to clear the selection and show the placeholder.");
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectItemContextProvider, {
+		scope: __scopeSelect,
+		value,
+		disabled,
+		textId,
+		isSelected,
+		onItemTextChange: import_react.useCallback((node) => {
+			setTextValue((prevTextValue) => prevTextValue || (node?.textContent ?? "").trim());
+		}, []),
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Collection.ItemSlot, {
+			scope: __scopeSelect,
+			value,
+			disabled,
+			textValue,
+			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.div, {
+				role: "option",
+				"aria-labelledby": textId,
+				"data-highlighted": isFocused ? "" : void 0,
+				"aria-selected": isSelected && isFocused,
+				"data-state": isSelected ? "checked" : "unchecked",
+				"aria-disabled": disabled || void 0,
+				"data-disabled": disabled ? "" : void 0,
+				tabIndex: disabled ? void 0 : -1,
+				...itemProps,
+				ref: composedRefs,
+				onFocus: composeEventHandlers(itemProps.onFocus, () => setIsFocused(true)),
+				onBlur: composeEventHandlers(itemProps.onBlur, () => setIsFocused(false)),
+				onClick: composeEventHandlers(itemProps.onClick, () => {
+					if (pointerTypeRef.current !== "mouse") handleSelect();
+				}),
+				onPointerUp: composeEventHandlers(itemProps.onPointerUp, () => {
+					if (pointerTypeRef.current === "mouse") handleSelect();
+				}),
+				onPointerDown: composeEventHandlers(itemProps.onPointerDown, (event) => {
+					pointerTypeRef.current = event.pointerType;
+				}),
+				onPointerMove: composeEventHandlers(itemProps.onPointerMove, (event) => {
+					pointerTypeRef.current = event.pointerType;
+					if (disabled) contentContext.onItemLeave?.();
+					else if (pointerTypeRef.current === "mouse") event.currentTarget.focus({ preventScroll: true });
+				}),
+				onPointerLeave: composeEventHandlers(itemProps.onPointerLeave, (event) => {
+					if (event.currentTarget === document.activeElement) contentContext.onItemLeave?.();
+				}),
+				onKeyDown: composeEventHandlers(itemProps.onKeyDown, (event) => {
+					if (contentContext.searchRef?.current !== "" && event.key === " ") return;
+					if (SELECTION_KEYS.includes(event.key)) handleSelect();
+					if (event.key === " ") event.preventDefault();
+				})
+			})
+		})
+	});
+});
+SelectItem$1.displayName = ITEM_NAME;
+var ITEM_TEXT_NAME = "SelectItemText";
+var SelectItemText = import_react.forwardRef((props, forwardedRef) => {
+	const { __scopeSelect, className, style, ...itemTextProps } = props;
+	const context = useSelectContext(ITEM_TEXT_NAME, __scopeSelect);
+	const contentContext = useSelectContentContext(ITEM_TEXT_NAME, __scopeSelect);
+	const itemContext = useSelectItemContext(ITEM_TEXT_NAME, __scopeSelect);
+	const nativeOptionsContext = useSelectNativeOptionsContext(ITEM_TEXT_NAME, __scopeSelect);
+	const [itemTextNode, setItemTextNode] = import_react.useState(null);
+	const composedRefs = useComposedRefs(forwardedRef, (node) => setItemTextNode(node), itemContext.onItemTextChange, (node) => contentContext.itemTextRefCallback?.(node, itemContext.value, itemContext.disabled));
+	const textContent = itemTextNode?.textContent;
+	const nativeOption = import_react.useMemo(() => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("option", {
+		value: itemContext.value,
+		disabled: itemContext.disabled,
+		children: textContent
+	}, itemContext.value), [
+		itemContext.disabled,
+		itemContext.value,
+		textContent
+	]);
+	const { onNativeOptionAdd, onNativeOptionRemove } = nativeOptionsContext;
+	useLayoutEffect2(() => {
+		onNativeOptionAdd(nativeOption);
+		return () => onNativeOptionRemove(nativeOption);
+	}, [
+		onNativeOptionAdd,
+		onNativeOptionRemove,
+		nativeOption
+	]);
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.span, {
+		id: itemContext.textId,
+		...itemTextProps,
+		ref: composedRefs
+	}), itemContext.isSelected && context.valueNode && !context.valueNodeHasChildren ? import_react_dom.createPortal(itemTextProps.children, context.valueNode) : null] });
+});
+SelectItemText.displayName = ITEM_TEXT_NAME;
+var ITEM_INDICATOR_NAME = "SelectItemIndicator";
+var SelectItemIndicator = import_react.forwardRef((props, forwardedRef) => {
+	const { __scopeSelect, ...itemIndicatorProps } = props;
+	return useSelectItemContext(ITEM_INDICATOR_NAME, __scopeSelect).isSelected ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.span, {
+		"aria-hidden": true,
+		...itemIndicatorProps,
+		ref: forwardedRef
+	}) : null;
+});
+SelectItemIndicator.displayName = ITEM_INDICATOR_NAME;
+var SCROLL_UP_BUTTON_NAME = "SelectScrollUpButton";
+var SelectScrollUpButton$1 = import_react.forwardRef((props, forwardedRef) => {
+	const contentContext = useSelectContentContext(SCROLL_UP_BUTTON_NAME, props.__scopeSelect);
+	const viewportContext = useSelectViewportContext(SCROLL_UP_BUTTON_NAME, props.__scopeSelect);
+	const [canScrollUp, setCanScrollUp] = import_react.useState(false);
+	const composedRefs = useComposedRefs(forwardedRef, viewportContext.onScrollButtonChange);
+	useLayoutEffect2(() => {
+		if (contentContext.viewport && contentContext.isPositioned) {
+			let handleScroll2 = function() {
+				setCanScrollUp(viewport.scrollTop > 0);
+			};
+			const viewport = contentContext.viewport;
+			handleScroll2();
+			viewport.addEventListener("scroll", handleScroll2);
+			return () => viewport.removeEventListener("scroll", handleScroll2);
+		}
+	}, [contentContext.viewport, contentContext.isPositioned]);
+	return canScrollUp ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectScrollButtonImpl, {
+		...props,
+		ref: composedRefs,
+		onAutoScroll: () => {
+			const { viewport, selectedItem } = contentContext;
+			if (viewport && selectedItem) viewport.scrollTop = viewport.scrollTop - selectedItem.offsetHeight;
+		}
+	}) : null;
+});
+SelectScrollUpButton$1.displayName = SCROLL_UP_BUTTON_NAME;
+var SCROLL_DOWN_BUTTON_NAME = "SelectScrollDownButton";
+var SelectScrollDownButton$1 = import_react.forwardRef((props, forwardedRef) => {
+	const contentContext = useSelectContentContext(SCROLL_DOWN_BUTTON_NAME, props.__scopeSelect);
+	const viewportContext = useSelectViewportContext(SCROLL_DOWN_BUTTON_NAME, props.__scopeSelect);
+	const [canScrollDown, setCanScrollDown] = import_react.useState(false);
+	const composedRefs = useComposedRefs(forwardedRef, viewportContext.onScrollButtonChange);
+	useLayoutEffect2(() => {
+		if (contentContext.viewport && contentContext.isPositioned) {
+			let handleScroll2 = function() {
+				const maxScroll = viewport.scrollHeight - viewport.clientHeight;
+				setCanScrollDown(Math.ceil(viewport.scrollTop) < maxScroll);
+			};
+			const viewport = contentContext.viewport;
+			handleScroll2();
+			viewport.addEventListener("scroll", handleScroll2);
+			return () => viewport.removeEventListener("scroll", handleScroll2);
+		}
+	}, [contentContext.viewport, contentContext.isPositioned]);
+	return canScrollDown ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectScrollButtonImpl, {
+		...props,
+		ref: composedRefs,
+		onAutoScroll: () => {
+			const { viewport, selectedItem } = contentContext;
+			if (viewport && selectedItem) viewport.scrollTop = viewport.scrollTop + selectedItem.offsetHeight;
+		}
+	}) : null;
+});
+SelectScrollDownButton$1.displayName = SCROLL_DOWN_BUTTON_NAME;
+var SelectScrollButtonImpl = import_react.forwardRef((props, forwardedRef) => {
+	const { __scopeSelect, onAutoScroll, ...scrollIndicatorProps } = props;
+	const contentContext = useSelectContentContext("SelectScrollButton", __scopeSelect);
+	const autoScrollTimerRef = import_react.useRef(null);
+	const getItems = useCollection(__scopeSelect);
+	const clearAutoScrollTimer = import_react.useCallback(() => {
+		if (autoScrollTimerRef.current !== null) {
+			window.clearInterval(autoScrollTimerRef.current);
+			autoScrollTimerRef.current = null;
+		}
+	}, []);
+	import_react.useEffect(() => {
+		return () => clearAutoScrollTimer();
+	}, [clearAutoScrollTimer]);
+	useLayoutEffect2(() => {
+		getItems().find((item) => item.ref.current === document.activeElement)?.ref.current?.scrollIntoView({ block: "nearest" });
+	}, [getItems]);
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.div, {
+		"aria-hidden": true,
+		...scrollIndicatorProps,
+		ref: forwardedRef,
+		style: {
+			flexShrink: 0,
+			...scrollIndicatorProps.style
+		},
+		onPointerDown: composeEventHandlers(scrollIndicatorProps.onPointerDown, () => {
+			if (autoScrollTimerRef.current === null) autoScrollTimerRef.current = window.setInterval(onAutoScroll, 50);
+		}),
+		onPointerMove: composeEventHandlers(scrollIndicatorProps.onPointerMove, () => {
+			contentContext.onItemLeave?.();
+			if (autoScrollTimerRef.current === null) autoScrollTimerRef.current = window.setInterval(onAutoScroll, 50);
+		}),
+		onPointerLeave: composeEventHandlers(scrollIndicatorProps.onPointerLeave, () => {
+			clearAutoScrollTimer();
+		})
+	});
+});
+var SEPARATOR_NAME = "SelectSeparator";
+var SelectSeparator$1 = import_react.forwardRef((props, forwardedRef) => {
+	const { __scopeSelect, ...separatorProps } = props;
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.div, {
+		"aria-hidden": true,
+		...separatorProps,
+		ref: forwardedRef
+	});
+});
+SelectSeparator$1.displayName = SEPARATOR_NAME;
+var ARROW_NAME$1 = "SelectArrow";
+var SelectArrow = import_react.forwardRef((props, forwardedRef) => {
+	const { __scopeSelect, ...arrowProps } = props;
+	const popperScope = usePopperScope$1(__scopeSelect);
+	const context = useSelectContext(ARROW_NAME$1, __scopeSelect);
+	const contentContext = useSelectContentContext(ARROW_NAME$1, __scopeSelect);
+	return context.open && contentContext.position === "popper" ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Arrow, {
+		...popperScope,
+		...arrowProps,
+		ref: forwardedRef
+	}) : null;
+});
+SelectArrow.displayName = ARROW_NAME$1;
+var BUBBLE_INPUT_NAME = "SelectBubbleInput";
+var SelectBubbleInput = import_react.forwardRef(({ __scopeSelect, value, ...props }, forwardedRef) => {
+	const ref = import_react.useRef(null);
+	const composedRefs = useComposedRefs(forwardedRef, ref);
+	const prevValue = usePrevious(value);
+	import_react.useEffect(() => {
+		const select = ref.current;
+		if (!select) return;
+		const selectProto = window.HTMLSelectElement.prototype;
+		const setValue = Object.getOwnPropertyDescriptor(selectProto, "value").set;
+		if (prevValue !== value && setValue) {
+			const event = new Event("change", { bubbles: true });
+			setValue.call(select, value);
+			select.dispatchEvent(event);
+		}
+	}, [prevValue, value]);
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.select, {
+		...props,
+		style: {
+			...VISUALLY_HIDDEN_STYLES,
+			...props.style
+		},
+		ref: composedRefs,
+		defaultValue: value
+	});
+});
+SelectBubbleInput.displayName = BUBBLE_INPUT_NAME;
+function shouldShowPlaceholder(value) {
+	return value === "" || value === void 0;
+}
+function useTypeaheadSearch(onSearchChange) {
+	const handleSearchChange = useCallbackRef$1(onSearchChange);
+	const searchRef = import_react.useRef("");
+	const timerRef = import_react.useRef(0);
+	const handleTypeaheadSearch = import_react.useCallback((key) => {
+		const search = searchRef.current + key;
+		handleSearchChange(search);
+		(function updateSearch(value) {
+			searchRef.current = value;
+			window.clearTimeout(timerRef.current);
+			if (value !== "") timerRef.current = window.setTimeout(() => updateSearch(""), 1e3);
+		})(search);
+	}, [handleSearchChange]);
+	const resetTypeahead = import_react.useCallback(() => {
+		searchRef.current = "";
+		window.clearTimeout(timerRef.current);
+	}, []);
+	import_react.useEffect(() => {
+		return () => window.clearTimeout(timerRef.current);
+	}, []);
+	return [
+		searchRef,
+		handleTypeaheadSearch,
+		resetTypeahead
+	];
+}
+function findNextItem(items, search, currentItem) {
+	const normalizedSearch = search.length > 1 && Array.from(search).every((char) => char === search[0]) ? search[0] : search;
+	const currentItemIndex = currentItem ? items.indexOf(currentItem) : -1;
+	let wrappedItems = wrapArray(items, Math.max(currentItemIndex, 0));
+	if (normalizedSearch.length === 1) wrappedItems = wrappedItems.filter((v) => v !== currentItem);
+	const nextItem = wrappedItems.find((item) => item.textValue.toLowerCase().startsWith(normalizedSearch.toLowerCase()));
+	return nextItem !== currentItem ? nextItem : void 0;
+}
+function wrapArray(array, startIndex) {
+	return array.map((_, index) => array[(startIndex + index) % array.length]);
+}
+var Root2$1 = Select$2;
+var Trigger$1 = SelectTrigger$1;
+var Value = SelectValue$1;
+var Icon = SelectIcon;
+var Portal$1 = SelectPortal;
+var Content2$1 = SelectContent$1;
+var Viewport$1 = SelectViewport;
+var Label$1 = SelectLabel$1;
+var Item = SelectItem$1;
+var ItemText = SelectItemText;
+var ItemIndicator = SelectItemIndicator;
+var ScrollUpButton = SelectScrollUpButton$1;
+var ScrollDownButton = SelectScrollDownButton$1;
+var Separator = SelectSeparator$1;
+//#endregion
+//#region src/components/ui/select.tsx
+var Select$1 = Root2$1;
+var SelectValue = Value;
+var SelectTrigger = import_react.forwardRef(({ className, children, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Trigger$1, {
+	"data-uid": "src/components/ui/select.tsx:18:3",
+	"data-prohibitions": "[editContent]",
+	ref,
+	className: cn$1("flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background data-[placeholder]:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1", className),
+	...props,
+	children: [children, /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Icon, {
+		"data-uid": "src/components/ui/select.tsx:27:5",
+		"data-prohibitions": "[]",
+		asChild: true,
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChevronDown, {
+			"data-uid": "src/components/ui/select.tsx:28:7",
+			"data-prohibitions": "[editContent]",
+			className: "h-4 w-4 opacity-50"
+		})
+	})]
+}));
+SelectTrigger.displayName = Trigger$1.displayName;
+var SelectScrollUpButton = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ScrollUpButton, {
+	"data-uid": "src/components/ui/select.tsx:38:3",
+	"data-prohibitions": "[editContent]",
+	ref,
+	className: cn$1("flex cursor-default items-center justify-center py-1", className),
+	...props,
+	children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChevronUp, {
+		"data-uid": "src/components/ui/select.tsx:43:5",
+		"data-prohibitions": "[editContent]",
+		className: "h-4 w-4"
+	})
+}));
+SelectScrollUpButton.displayName = ScrollUpButton.displayName;
+var SelectScrollDownButton = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ScrollDownButton, {
+	"data-uid": "src/components/ui/select.tsx:52:3",
+	"data-prohibitions": "[editContent]",
+	ref,
+	className: cn$1("flex cursor-default items-center justify-center py-1", className),
+	...props,
+	children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChevronDown, {
+		"data-uid": "src/components/ui/select.tsx:57:5",
+		"data-prohibitions": "[editContent]",
+		className: "h-4 w-4"
+	})
+}));
+SelectScrollDownButton.displayName = ScrollDownButton.displayName;
+var SelectContent = import_react.forwardRef(({ className, children, position = "popper", ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Portal$1, {
+	"data-uid": "src/components/ui/select.tsx:66:3",
+	"data-prohibitions": "[editContent]",
+	children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Content2$1, {
+		"data-uid": "src/components/ui/select.tsx:67:5",
+		"data-prohibitions": "[editContent]",
+		ref,
+		className: cn$1("relative z-50 max-h-[--radix-select-content-available-height] min-w-[8rem] overflow-y-auto overflow-x-hidden rounded-md border bg-popover text-popover-foreground shadow-md data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 origin-[--radix-select-content-transform-origin]", position === "popper" && "data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1", className),
+		position,
+		...props,
+		children: [
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectScrollUpButton, {
+				"data-uid": "src/components/ui/select.tsx:78:7",
+				"data-prohibitions": "[editContent]"
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Viewport$1, {
+				"data-uid": "src/components/ui/select.tsx:79:7",
+				"data-prohibitions": "[editContent]",
+				className: cn$1("p-1", position === "popper" && "h-[var(--radix-select-trigger-height)] w-full min-w-[var(--radix-select-trigger-width)]"),
+				children
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectScrollDownButton, {
+				"data-uid": "src/components/ui/select.tsx:88:7",
+				"data-prohibitions": "[editContent]"
+			})
+		]
+	})
+}));
+SelectContent.displayName = Content2$1.displayName;
+var SelectLabel = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$1, {
+	"data-uid": "src/components/ui/select.tsx:98:3",
+	"data-prohibitions": "[editContent]",
+	ref,
+	className: cn$1("py-1.5 pl-8 pr-2 text-sm font-semibold", className),
+	...props
+}));
+SelectLabel.displayName = Label$1.displayName;
+var SelectItem = import_react.forwardRef(({ className, children, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Item, {
+	"data-uid": "src/components/ui/select.tsx:110:3",
+	"data-prohibitions": "[editContent]",
+	ref,
+	className: cn$1("relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50", className),
+	...props,
+	children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+		"data-uid": "src/components/ui/select.tsx:118:5",
+		"data-prohibitions": "[]",
+		className: "absolute left-2 flex h-3.5 w-3.5 items-center justify-center",
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ItemIndicator, {
+			"data-uid": "src/components/ui/select.tsx:119:7",
+			"data-prohibitions": "[]",
+			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Check, {
+				"data-uid": "src/components/ui/select.tsx:120:9",
+				"data-prohibitions": "[editContent]",
+				className: "h-4 w-4"
+			})
+		})
+	}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ItemText, {
+		"data-uid": "src/components/ui/select.tsx:124:5",
+		"data-prohibitions": "[editContent]",
+		children
+	})]
+}));
+SelectItem.displayName = Item.displayName;
+var SelectSeparator = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Separator, {
+	"data-uid": "src/components/ui/select.tsx:133:3",
+	"data-prohibitions": "[editContent]",
+	ref,
+	className: cn$1("-mx-1 my-1 h-px bg-muted", className),
+	...props
+}));
+SelectSeparator.displayName = Separator.displayName;
+//#endregion
+//#region src/hooks/use-auth.tsx
+var AuthContext = (0, import_react.createContext)(void 0);
+var useAuth = () => {
+	const context = (0, import_react.useContext)(AuthContext);
+	if (!context) throw new Error("useAuth must be used within an AuthProvider");
+	return context;
+};
+var AuthProvider = ({ children }) => {
+	const [user, setUser] = (0, import_react.useState)(null);
+	const [session, setSession] = (0, import_react.useState)(null);
+	const [loading, setLoading] = (0, import_react.useState)(true);
+	(0, import_react.useEffect)(() => {
+		const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+			setSession(session);
+			setUser(session?.user ?? null);
+			setLoading(false);
+		});
+		supabase.auth.getSession().then(({ data: { session } }) => {
+			setSession(session);
+			setUser(session?.user ?? null);
+			setLoading(false);
+		});
+		return () => subscription.unsubscribe();
+	}, []);
+	const signUp = async (email, password) => {
+		const { error } = await supabase.auth.signUp({
+			email,
+			password,
+			options: { emailRedirectTo: `${window.location.origin}/` }
+		});
+		return { error };
+	};
+	const signIn = async (email, password) => {
+		const { error } = await supabase.auth.signInWithPassword({
+			email,
+			password
+		});
+		return { error };
+	};
+	const signOut = async () => {
+		const { error } = await supabase.auth.signOut();
+		return { error };
+	};
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AuthContext.Provider, {
+		"data-uid": "src/hooks/use-auth.tsx:65:5",
+		"data-prohibitions": "[editContent]",
+		value: {
+			user,
+			session,
+			signUp,
+			signIn,
+			signOut,
+			loading
+		},
+		children
+	});
+};
 //#endregion
 //#region src/components/contas-receber/PrintableReport.tsx
 function PrintableReport({ contas, clientName, startDate, endDate }) {
@@ -67722,42 +68877,54 @@ function PrintableReport({ contas, clientName, startDate, endDate }) {
 							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("th", {
 								"data-uid": "src/components/contas-receber/PrintableReport.tsx:36:13",
 								"data-prohibitions": "[]",
+								className: "py-2 px-3 font-semibold border-b border-gray-300",
+								children: "Método"
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("th", {
+								"data-uid": "src/components/contas-receber/PrintableReport.tsx:37:13",
+								"data-prohibitions": "[]",
 								className: "py-2 px-3 font-semibold border-b border-gray-300 text-right",
 								children: "Valor"
 							})
 						]
 					})
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("tbody", {
-					"data-uid": "src/components/contas-receber/PrintableReport.tsx:39:9",
+					"data-uid": "src/components/contas-receber/PrintableReport.tsx:40:9",
 					"data-prohibitions": "[editContent]",
 					children: contas.length > 0 ? contas.map((c) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("tr", {
-						"data-uid": "src/components/contas-receber/PrintableReport.tsx:42:15",
+						"data-uid": "src/components/contas-receber/PrintableReport.tsx:43:15",
 						"data-prohibitions": "[editContent]",
 						className: "border-b border-gray-200 print:break-inside-avoid",
 						children: [
 							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("td", {
-								"data-uid": "src/components/contas-receber/PrintableReport.tsx:43:17",
+								"data-uid": "src/components/contas-receber/PrintableReport.tsx:44:17",
 								"data-prohibitions": "[editContent]",
 								className: "py-2 px-3",
 								children: c.cliente?.nome || "Sem Cliente"
 							}),
 							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("td", {
-								"data-uid": "src/components/contas-receber/PrintableReport.tsx:44:17",
+								"data-uid": "src/components/contas-receber/PrintableReport.tsx:45:17",
 								"data-prohibitions": "[editContent]",
 								className: "py-2 px-3",
-								children: c.venda?.data ? new Date(c.venda.data).toLocaleDateString("pt-BR") : new Date(c.data_vencimento).toLocaleDateString("pt-BR")
+								children: c.venda?.data ? new Date(c.venda.data).toLocaleDateString("pt-BR") : "-"
 							}),
 							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("td", {
-								"data-uid": "src/components/contas-receber/PrintableReport.tsx:49:17",
+								"data-uid": "src/components/contas-receber/PrintableReport.tsx:48:17",
 								"data-prohibitions": "[editContent]",
 								className: "py-2 px-3 font-medium",
 								children: new Date(c.data_vencimento).toLocaleDateString("pt-BR")
 							}),
 							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("td", {
-								"data-uid": "src/components/contas-receber/PrintableReport.tsx:52:17",
+								"data-uid": "src/components/contas-receber/PrintableReport.tsx:51:17",
 								"data-prohibitions": "[editContent]",
 								className: "py-2 px-3 capitalize",
 								children: c.status
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("td", {
+								"data-uid": "src/components/contas-receber/PrintableReport.tsx:52:17",
+								"data-prohibitions": "[editContent]",
+								className: "py-2 px-3",
+								children: c.metodo_pagamento || "-"
 							}),
 							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("td", {
 								"data-uid": "src/components/contas-receber/PrintableReport.tsx:53:17",
@@ -67772,7 +68939,7 @@ function PrintableReport({ contas, clientName, startDate, endDate }) {
 						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("td", {
 							"data-uid": "src/components/contas-receber/PrintableReport.tsx:58:15",
 							"data-prohibitions": "[]",
-							colSpan: 5,
+							colSpan: 6,
 							className: "py-6 text-center text-gray-500 italic",
 							children: "Nenhum registro encontrado para os filtros atuais."
 						})
@@ -67806,6 +68973,7 @@ function PrintableReport({ contas, clientName, startDate, endDate }) {
 //#endregion
 //#region src/pages/ContasReceber.tsx
 function ContasReceber() {
+	const { user } = useAuth();
 	const [contas, setContas] = (0, import_react.useState)([]);
 	const [loading, setLoading] = (0, import_react.useState)(true);
 	const [filter, setFilter] = (0, import_react.useState)("Todos");
@@ -67814,6 +68982,7 @@ function ContasReceber() {
 	const [endDate, setEndDate] = (0, import_react.useState)("");
 	const [payingConta, setPayingConta] = (0, import_react.useState)(null);
 	const [paymentDate, setPaymentDate] = (0, import_react.useState)((/* @__PURE__ */ new Date()).toISOString().split("T")[0]);
+	const [paymentMethod, setPaymentMethod] = (0, import_react.useState)("Dinheiro");
 	const [submitting, setSubmitting] = (0, import_react.useState)(false);
 	const fetchContas = async () => {
 		setLoading(true);
@@ -67830,28 +68999,70 @@ function ContasReceber() {
 		fetchContas();
 	}, []);
 	const handlePay = async () => {
-		if (!payingConta) return;
+		if (!payingConta || !user) return;
 		setSubmitting(true);
 		const dateObj = new Date(paymentDate);
 		dateObj.setHours(12, 0, 0, 0);
 		const { error } = await supabase.from("contas_receber").update({
 			status: "pago",
-			data_pagamento: dateObj.toISOString()
+			data_pagamento: dateObj.toISOString(),
+			metodo_pagamento: paymentMethod
 		}).eq("id", payingConta.id);
-		setSubmitting(false);
-		if (error) toast$1({
-			title: "Erro",
-			description: "Erro ao registrar pagamento.",
-			variant: "destructive"
-		});
-		else {
+		if (error) {
 			toast$1({
-				title: "Sucesso",
-				description: "Pagamento registrado!"
+				title: "Erro",
+				description: "Erro ao registrar pagamento.",
+				variant: "destructive"
 			});
-			setPayingConta(null);
-			fetchContas();
+			setSubmitting(false);
+			return;
 		}
+		if (paymentMethod === "Dinheiro") {
+			const { data: caixa } = await supabase.from("caixa").select("id").eq("user_id", user.id).eq("status", "aberto").maybeSingle();
+			if (caixa) await supabase.from("movimentacoes_caixa").insert({
+				caixa_id: caixa.id,
+				tipo: "entrada",
+				valor: payingConta.valor,
+				descricao: `[Auto] Recebimento de conta - ${payingConta.id.split("-")[0]}`
+			});
+		}
+		setSubmitting(false);
+		toast$1({
+			title: "Sucesso",
+			description: "Pagamento registrado!"
+		});
+		setPayingConta(null);
+		fetchContas();
+	};
+	const handleRevert = async (conta) => {
+		if (!user || !confirm("Deseja realmente reverter este recebimento?")) return;
+		const { error } = await supabase.from("contas_receber").update({
+			status: "pendente",
+			data_pagamento: null,
+			metodo_pagamento: null
+		}).eq("id", conta.id);
+		if (error) {
+			toast$1({
+				title: "Erro",
+				description: "Erro ao reverter pagamento.",
+				variant: "destructive"
+			});
+			return;
+		}
+		if (conta.metodo_pagamento === "Dinheiro") {
+			const { data: caixa } = await supabase.from("caixa").select("id").eq("user_id", user.id).eq("status", "aberto").maybeSingle();
+			if (caixa) await supabase.from("movimentacoes_caixa").insert({
+				caixa_id: caixa.id,
+				tipo: "saida",
+				valor: conta.valor,
+				descricao: `[Auto] Estorno de recebimento - ${conta.id.split("-")[0]}`
+			});
+		}
+		toast$1({
+			title: "Sucesso",
+			description: "Recebimento revertido!"
+		});
+		fetchContas();
 	};
 	const filteredContas = contas.filter((c) => {
 		const matchStatus = filter === "Todos" || filter === "Pendentes" && c.status === "pendente" || filter === "Pagos" && c.status === "pago";
@@ -67872,12 +69083,12 @@ function ContasReceber() {
 		})).sort((a, b) => b.valor - a.valor);
 	}, [filteredContas]);
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-		"data-uid": "src/pages/ContasReceber.tsx:119:5",
+		"data-uid": "src/pages/ContasReceber.tsx:191:5",
 		"data-prohibitions": "[editContent]",
 		className: "space-y-6 animate-fade-in max-w-[1400px] mx-auto h-full flex flex-col print:block print:h-auto print:max-w-none print:m-0 print:p-0 print:space-y-0",
 		children: [
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(PrintableReport, {
-				"data-uid": "src/pages/ContasReceber.tsx:120:7",
+				"data-uid": "src/pages/ContasReceber.tsx:192:7",
 				"data-prohibitions": "[editContent]",
 				contas: filteredContas,
 				clientName: clientSearch,
@@ -67885,60 +69096,60 @@ function ContasReceber() {
 				endDate
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				"data-uid": "src/pages/ContasReceber.tsx:127:7",
+				"data-uid": "src/pages/ContasReceber.tsx:199:7",
 				"data-prohibitions": "[editContent]",
 				className: "print:hidden grid grid-cols-1 md:grid-cols-2 gap-6 shrink-0",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Card, {
-					"data-uid": "src/pages/ContasReceber.tsx:128:9",
+					"data-uid": "src/pages/ContasReceber.tsx:200:9",
 					"data-prohibitions": "[editContent]",
 					className: "shadow-sm border-orange-200 bg-orange-50/30",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardHeader, {
-						"data-uid": "src/pages/ContasReceber.tsx:129:11",
+						"data-uid": "src/pages/ContasReceber.tsx:201:11",
 						"data-prohibitions": "[]",
 						className: "flex flex-row items-center justify-between pb-2",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardTitle, {
-							"data-uid": "src/pages/ContasReceber.tsx:130:13",
+							"data-uid": "src/pages/ContasReceber.tsx:202:13",
 							"data-prohibitions": "[]",
 							className: "text-sm font-medium text-orange-800",
 							children: "Total a Receber (Filtrado)"
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DollarSign, {
-							"data-uid": "src/pages/ContasReceber.tsx:133:13",
+							"data-uid": "src/pages/ContasReceber.tsx:205:13",
 							"data-prohibitions": "[editContent]",
 							className: "h-4 w-4 text-orange-500"
 						})]
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardContent, {
-						"data-uid": "src/pages/ContasReceber.tsx:135:11",
+						"data-uid": "src/pages/ContasReceber.tsx:207:11",
 						"data-prohibitions": "[editContent]",
 						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-							"data-uid": "src/pages/ContasReceber.tsx:136:13",
+							"data-uid": "src/pages/ContasReceber.tsx:208:13",
 							"data-prohibitions": "[editContent]",
 							className: "text-3xl font-bold text-orange-900",
 							children: formatCurrency(totalAReceber)
 						})
 					})]
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Card, {
-					"data-uid": "src/pages/ContasReceber.tsx:141:9",
+					"data-uid": "src/pages/ContasReceber.tsx:213:9",
 					"data-prohibitions": "[editContent]",
 					className: "shadow-sm border-emerald-200 bg-emerald-50/30",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardHeader, {
-						"data-uid": "src/pages/ContasReceber.tsx:142:11",
+						"data-uid": "src/pages/ContasReceber.tsx:214:11",
 						"data-prohibitions": "[]",
 						className: "flex flex-row items-center justify-between pb-2",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardTitle, {
-							"data-uid": "src/pages/ContasReceber.tsx:143:13",
+							"data-uid": "src/pages/ContasReceber.tsx:215:13",
 							"data-prohibitions": "[]",
 							className: "text-sm font-medium text-emerald-800",
 							children: "Total Recebido (Filtrado)"
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Wallet, {
-							"data-uid": "src/pages/ContasReceber.tsx:146:13",
+							"data-uid": "src/pages/ContasReceber.tsx:218:13",
 							"data-prohibitions": "[editContent]",
 							className: "h-4 w-4 text-emerald-500"
 						})]
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardContent, {
-						"data-uid": "src/pages/ContasReceber.tsx:148:11",
+						"data-uid": "src/pages/ContasReceber.tsx:220:11",
 						"data-prohibitions": "[editContent]",
 						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-							"data-uid": "src/pages/ContasReceber.tsx:149:13",
+							"data-uid": "src/pages/ContasReceber.tsx:221:13",
 							"data-prohibitions": "[editContent]",
 							className: "text-3xl font-bold text-emerald-900",
 							children: formatCurrency(totalRecebido)
@@ -67947,37 +69158,37 @@ function ContasReceber() {
 				})]
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				"data-uid": "src/pages/ContasReceber.tsx:156:7",
+				"data-uid": "src/pages/ContasReceber.tsx:228:7",
 				"data-prohibitions": "[]",
 				className: "print:hidden flex flex-col md:flex-row justify-between items-start md:items-center gap-4 shrink-0 bg-muted/50 p-4 rounded-xl border border-border",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					"data-uid": "src/pages/ContasReceber.tsx:157:9",
+					"data-uid": "src/pages/ContasReceber.tsx:229:9",
 					"data-prohibitions": "[]",
 					className: "flex flex-wrap gap-4 items-center w-full md:w-auto",
 					children: [
 						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Tabs, {
-							"data-uid": "src/pages/ContasReceber.tsx:158:11",
+							"data-uid": "src/pages/ContasReceber.tsx:230:11",
 							"data-prohibitions": "[]",
 							value: filter,
 							onValueChange: setFilter,
 							children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TabsList, {
-								"data-uid": "src/pages/ContasReceber.tsx:159:13",
+								"data-uid": "src/pages/ContasReceber.tsx:231:13",
 								"data-prohibitions": "[]",
 								children: [
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TabsTrigger, {
-										"data-uid": "src/pages/ContasReceber.tsx:160:15",
+										"data-uid": "src/pages/ContasReceber.tsx:232:15",
 										"data-prohibitions": "[]",
 										value: "Todos",
 										children: "Todos"
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TabsTrigger, {
-										"data-uid": "src/pages/ContasReceber.tsx:161:15",
+										"data-uid": "src/pages/ContasReceber.tsx:233:15",
 										"data-prohibitions": "[]",
 										value: "Pendentes",
 										children: "Pendentes"
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TabsTrigger, {
-										"data-uid": "src/pages/ContasReceber.tsx:162:15",
+										"data-uid": "src/pages/ContasReceber.tsx:234:15",
 										"data-prohibitions": "[]",
 										value: "Pagos",
 										children: "Pagos"
@@ -67986,15 +69197,15 @@ function ContasReceber() {
 							})
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							"data-uid": "src/pages/ContasReceber.tsx:165:11",
+							"data-uid": "src/pages/ContasReceber.tsx:237:11",
 							"data-prohibitions": "[]",
 							className: "relative w-full md:w-64",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Search, {
-								"data-uid": "src/pages/ContasReceber.tsx:166:13",
+								"data-uid": "src/pages/ContasReceber.tsx:238:13",
 								"data-prohibitions": "[editContent]",
 								className: "absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground"
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
-								"data-uid": "src/pages/ContasReceber.tsx:167:13",
+								"data-uid": "src/pages/ContasReceber.tsx:239:13",
 								"data-prohibitions": "[editContent]",
 								placeholder: "Buscar cliente...",
 								className: "pl-9 bg-background h-9",
@@ -68003,12 +69214,12 @@ function ContasReceber() {
 							})]
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							"data-uid": "src/pages/ContasReceber.tsx:174:11",
+							"data-uid": "src/pages/ContasReceber.tsx:246:11",
 							"data-prohibitions": "[]",
 							className: "flex items-center gap-2",
 							children: [
 								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
-									"data-uid": "src/pages/ContasReceber.tsx:175:13",
+									"data-uid": "src/pages/ContasReceber.tsx:247:13",
 									"data-prohibitions": "[editContent]",
 									type: "date",
 									className: "h-9 w-auto text-sm",
@@ -68017,13 +69228,13 @@ function ContasReceber() {
 									title: "Data Inicial"
 								}),
 								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									"data-uid": "src/pages/ContasReceber.tsx:182:13",
+									"data-uid": "src/pages/ContasReceber.tsx:254:13",
 									"data-prohibitions": "[]",
 									className: "text-muted-foreground",
 									children: "até"
 								}),
 								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
-									"data-uid": "src/pages/ContasReceber.tsx:183:13",
+									"data-uid": "src/pages/ContasReceber.tsx:255:13",
 									"data-prohibitions": "[editContent]",
 									type: "date",
 									className: "h-9 w-auto text-sm",
@@ -68035,117 +69246,112 @@ function ContasReceber() {
 						})
 					]
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button$1, {
-					"data-uid": "src/pages/ContasReceber.tsx:192:9",
+					"data-uid": "src/pages/ContasReceber.tsx:264:9",
 					"data-prohibitions": "[]",
 					variant: "outline",
 					className: "shrink-0 w-full md:w-auto bg-background",
 					onClick: () => window.print(),
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FileText, {
-						"data-uid": "src/pages/ContasReceber.tsx:197:11",
+						"data-uid": "src/pages/ContasReceber.tsx:269:11",
 						"data-prohibitions": "[editContent]",
 						className: "h-4 w-4 mr-2"
 					}), " Gerar Relatório PDF"]
 				})]
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				"data-uid": "src/pages/ContasReceber.tsx:201:7",
+				"data-uid": "src/pages/ContasReceber.tsx:273:7",
 				"data-prohibitions": "[editContent]",
 				className: "print:hidden flex-1 min-h-0 grid grid-cols-1 lg:grid-cols-3 gap-6",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Card, {
-					"data-uid": "src/pages/ContasReceber.tsx:202:9",
+					"data-uid": "src/pages/ContasReceber.tsx:274:9",
 					"data-prohibitions": "[editContent]",
 					className: "lg:col-span-2 shadow-sm border-border flex flex-col min-h-0 bg-card",
 					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardContent, {
-						"data-uid": "src/pages/ContasReceber.tsx:203:11",
+						"data-uid": "src/pages/ContasReceber.tsx:275:11",
 						"data-prohibitions": "[editContent]",
 						className: "p-0 flex-1 overflow-auto",
 						children: loading ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-							"data-uid": "src/pages/ContasReceber.tsx:205:15",
+							"data-uid": "src/pages/ContasReceber.tsx:277:15",
 							"data-prohibitions": "[]",
 							className: "flex h-40 items-center justify-center",
 							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(LoaderCircle, {
-								"data-uid": "src/pages/ContasReceber.tsx:206:17",
+								"data-uid": "src/pages/ContasReceber.tsx:278:17",
 								"data-prohibitions": "[editContent]",
 								className: "h-8 w-8 animate-spin text-primary"
 							})
 						}) : /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Table, {
-							"data-uid": "src/pages/ContasReceber.tsx:209:15",
+							"data-uid": "src/pages/ContasReceber.tsx:281:15",
 							"data-prohibitions": "[editContent]",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHeader, {
-								"data-uid": "src/pages/ContasReceber.tsx:210:17",
+								"data-uid": "src/pages/ContasReceber.tsx:282:17",
 								"data-prohibitions": "[]",
 								className: "sticky top-0 bg-muted/90 z-10 backdrop-blur-md",
 								children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TableRow, {
-									"data-uid": "src/pages/ContasReceber.tsx:211:19",
+									"data-uid": "src/pages/ContasReceber.tsx:283:19",
 									"data-prohibitions": "[]",
 									children: [
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
-											"data-uid": "src/pages/ContasReceber.tsx:212:21",
+											"data-uid": "src/pages/ContasReceber.tsx:284:21",
 											"data-prohibitions": "[]",
 											children: "Cliente"
 										}),
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
-											"data-uid": "src/pages/ContasReceber.tsx:213:21",
-											"data-prohibitions": "[]",
-											children: "Data Venda"
-										}),
-										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
-											"data-uid": "src/pages/ContasReceber.tsx:214:21",
+											"data-uid": "src/pages/ContasReceber.tsx:285:21",
 											"data-prohibitions": "[]",
 											children: "Vencimento"
 										}),
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
-											"data-uid": "src/pages/ContasReceber.tsx:215:21",
+											"data-uid": "src/pages/ContasReceber.tsx:286:21",
 											"data-prohibitions": "[]",
 											children: "Valor"
 										}),
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
-											"data-uid": "src/pages/ContasReceber.tsx:216:21",
+											"data-uid": "src/pages/ContasReceber.tsx:287:21",
 											"data-prohibitions": "[]",
 											children: "Status"
 										}),
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
-											"data-uid": "src/pages/ContasReceber.tsx:217:21",
+											"data-uid": "src/pages/ContasReceber.tsx:288:21",
+											"data-prohibitions": "[]",
+											children: "Método"
+										}),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
+											"data-uid": "src/pages/ContasReceber.tsx:289:21",
 											"data-prohibitions": "[]",
 											className: "text-right",
-											children: "Ação"
+											children: "Ações"
 										})
 									]
 								})
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TableBody, {
-								"data-uid": "src/pages/ContasReceber.tsx:220:17",
+								"data-uid": "src/pages/ContasReceber.tsx:292:17",
 								"data-prohibitions": "[editContent]",
 								children: [filteredContas.map((conta) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TableRow, {
-									"data-uid": "src/pages/ContasReceber.tsx:222:21",
+									"data-uid": "src/pages/ContasReceber.tsx:294:21",
 									"data-prohibitions": "[editContent]",
 									children: [
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-											"data-uid": "src/pages/ContasReceber.tsx:223:23",
+											"data-uid": "src/pages/ContasReceber.tsx:295:23",
 											"data-prohibitions": "[editContent]",
 											className: "font-medium text-foreground",
 											children: conta.cliente?.nome || "-"
 										}),
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-											"data-uid": "src/pages/ContasReceber.tsx:226:23",
-											"data-prohibitions": "[editContent]",
-											children: conta.venda?.data ? new Date(conta.venda.data).toLocaleDateString("pt-BR") : "-"
-										}),
-										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-											"data-uid": "src/pages/ContasReceber.tsx:231:23",
+											"data-uid": "src/pages/ContasReceber.tsx:298:23",
 											"data-prohibitions": "[editContent]",
 											children: new Date(conta.data_vencimento).toLocaleDateString("pt-BR")
 										}),
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-											"data-uid": "src/pages/ContasReceber.tsx:234:23",
+											"data-uid": "src/pages/ContasReceber.tsx:301:23",
 											"data-prohibitions": "[editContent]",
 											className: "font-medium",
 											children: formatCurrency(conta.valor)
 										}),
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-											"data-uid": "src/pages/ContasReceber.tsx:235:23",
+											"data-uid": "src/pages/ContasReceber.tsx:302:23",
 											"data-prohibitions": "[editContent]",
 											children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Badge, {
-												"data-uid": "src/pages/ContasReceber.tsx:236:25",
+												"data-uid": "src/pages/ContasReceber.tsx:303:25",
 												"data-prohibitions": "[editContent]",
 												variant: conta.status === "pago" ? "default" : "secondary",
 												className: conta.status === "pago" ? "bg-emerald-100 text-emerald-800 border-0" : "bg-orange-100 text-orange-800 border-0",
@@ -68153,27 +69359,46 @@ function ContasReceber() {
 											})
 										}),
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-											"data-uid": "src/pages/ContasReceber.tsx:247:23",
+											"data-uid": "src/pages/ContasReceber.tsx:314:23",
 											"data-prohibitions": "[editContent]",
-											className: "text-right",
-											children: conta.status === "pendente" && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
-												"data-uid": "src/pages/ContasReceber.tsx:249:27",
+											className: "text-sm text-muted-foreground",
+											children: conta.metodo_pagamento || "-"
+										}),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
+											"data-uid": "src/pages/ContasReceber.tsx:317:23",
+											"data-prohibitions": "[editContent]",
+											className: "text-right space-x-2",
+											children: conta.status === "pendente" ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
+												"data-uid": "src/pages/ContasReceber.tsx:319:27",
 												"data-prohibitions": "[]",
 												size: "sm",
 												variant: "outline",
 												onClick: () => {
 													setPayingConta(conta);
 													setPaymentDate((/* @__PURE__ */ new Date()).toISOString().split("T")[0]);
+													setPaymentMethod("Dinheiro");
 												},
 												children: "Registrar Pagamento"
+											}) : /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button$1, {
+												"data-uid": "src/pages/ContasReceber.tsx:331:27",
+												"data-prohibitions": "[]",
+												size: "sm",
+												variant: "ghost",
+												className: "text-destructive hover:bg-destructive/10",
+												onClick: () => handleRevert(conta),
+												children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Undo2, {
+													"data-uid": "src/pages/ContasReceber.tsx:337:29",
+													"data-prohibitions": "[editContent]",
+													className: "h-4 w-4 mr-1"
+												}), " Reverter"]
 											})
 										})
 									]
 								}, conta.id)), filteredContas.length === 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableRow, {
-									"data-uid": "src/pages/ContasReceber.tsx:264:21",
+									"data-uid": "src/pages/ContasReceber.tsx:344:21",
 									"data-prohibitions": "[]",
 									children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-										"data-uid": "src/pages/ContasReceber.tsx:265:23",
+										"data-uid": "src/pages/ContasReceber.tsx:345:23",
 										"data-prohibitions": "[]",
 										colSpan: 6,
 										className: "text-center py-8 text-muted-foreground",
@@ -68184,116 +69409,106 @@ function ContasReceber() {
 						})
 					})
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Card, {
-					"data-uid": "src/pages/ContasReceber.tsx:276:9",
+					"data-uid": "src/pages/ContasReceber.tsx:356:9",
 					"data-prohibitions": "[editContent]",
 					className: "lg:col-span-1 shadow-sm border-border flex flex-col h-full bg-card max-h-[500px] lg:max-h-none",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardHeader, {
-						"data-uid": "src/pages/ContasReceber.tsx:277:11",
+						"data-uid": "src/pages/ContasReceber.tsx:357:11",
 						"data-prohibitions": "[]",
 						className: "bg-muted/30 border-b border-border py-3",
 						children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardTitle, {
-							"data-uid": "src/pages/ContasReceber.tsx:278:13",
+							"data-uid": "src/pages/ContasReceber.tsx:358:13",
 							"data-prohibitions": "[]",
 							className: "text-base font-semibold flex items-center gap-2",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Users, {
-								"data-uid": "src/pages/ContasReceber.tsx:279:15",
+								"data-uid": "src/pages/ContasReceber.tsx:359:15",
 								"data-prohibitions": "[editContent]",
 								className: "h-4 w-4 text-primary"
 							}), " Resumo de Devedores"]
 						})
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardContent, {
-						"data-uid": "src/pages/ContasReceber.tsx:282:11",
+						"data-uid": "src/pages/ContasReceber.tsx:362:11",
 						"data-prohibitions": "[editContent]",
 						className: "flex-1 overflow-auto p-0",
 						children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Table, {
-							"data-uid": "src/pages/ContasReceber.tsx:283:13",
+							"data-uid": "src/pages/ContasReceber.tsx:363:13",
 							"data-prohibitions": "[editContent]",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHeader, {
-								"data-uid": "src/pages/ContasReceber.tsx:284:15",
+								"data-uid": "src/pages/ContasReceber.tsx:364:15",
 								"data-prohibitions": "[]",
 								className: "sticky top-0 bg-background z-10 shadow-sm",
 								children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TableRow, {
-									"data-uid": "src/pages/ContasReceber.tsx:285:17",
+									"data-uid": "src/pages/ContasReceber.tsx:365:17",
 									"data-prohibitions": "[]",
 									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
-										"data-uid": "src/pages/ContasReceber.tsx:286:19",
+										"data-uid": "src/pages/ContasReceber.tsx:366:19",
 										"data-prohibitions": "[]",
 										children: "Cliente"
 									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
-										"data-uid": "src/pages/ContasReceber.tsx:287:19",
+										"data-uid": "src/pages/ContasReceber.tsx:367:19",
 										"data-prohibitions": "[]",
 										className: "text-right",
 										children: "Total Pendente"
 									})]
 								})
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TableBody, {
-								"data-uid": "src/pages/ContasReceber.tsx:290:15",
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableBody, {
+								"data-uid": "src/pages/ContasReceber.tsx:370:15",
 								"data-prohibitions": "[editContent]",
-								children: [debtsByCustomer.map((d) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TableRow, {
-									"data-uid": "src/pages/ContasReceber.tsx:292:19",
+								children: debtsByCustomer.map((d) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TableRow, {
+									"data-uid": "src/pages/ContasReceber.tsx:372:19",
 									"data-prohibitions": "[editContent]",
 									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-										"data-uid": "src/pages/ContasReceber.tsx:293:21",
+										"data-uid": "src/pages/ContasReceber.tsx:373:21",
 										"data-prohibitions": "[editContent]",
 										className: "font-medium text-sm",
 										children: d.nome
 									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-										"data-uid": "src/pages/ContasReceber.tsx:294:21",
+										"data-uid": "src/pages/ContasReceber.tsx:374:21",
 										"data-prohibitions": "[editContent]",
-										className: "text-right font-bold text-orange-600 dark:text-orange-400",
+										className: "text-right font-bold text-orange-600",
 										children: formatCurrency(d.valor)
 									})]
-								}, d.nome)), debtsByCustomer.length === 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableRow, {
-									"data-uid": "src/pages/ContasReceber.tsx:300:19",
-									"data-prohibitions": "[]",
-									children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-										"data-uid": "src/pages/ContasReceber.tsx:301:21",
-										"data-prohibitions": "[]",
-										colSpan: 2,
-										className: "text-center text-muted-foreground py-8",
-										children: "Nenhuma dívida pendente."
-									})
-								})]
+								}, d.nome))
 							})]
 						})
 					})]
 				})]
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Dialog, {
-				"data-uid": "src/pages/ContasReceber.tsx:312:7",
+				"data-uid": "src/pages/ContasReceber.tsx:385:7",
 				"data-prohibitions": "[editContent]",
 				open: !!payingConta,
 				onOpenChange: (open) => !open && setPayingConta(null),
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogContent, {
-					"data-uid": "src/pages/ContasReceber.tsx:313:9",
+					"data-uid": "src/pages/ContasReceber.tsx:386:9",
 					"data-prohibitions": "[editContent]",
 					className: "sm:max-w-[425px]",
 					children: [
 						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogHeader, {
-							"data-uid": "src/pages/ContasReceber.tsx:314:11",
+							"data-uid": "src/pages/ContasReceber.tsx:387:11",
 							"data-prohibitions": "[]",
 							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogTitle, {
-								"data-uid": "src/pages/ContasReceber.tsx:315:13",
+								"data-uid": "src/pages/ContasReceber.tsx:388:13",
 								"data-prohibitions": "[]",
 								children: "Registrar Pagamento"
 							})
 						}),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-							"data-uid": "src/pages/ContasReceber.tsx:317:11",
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							"data-uid": "src/pages/ContasReceber.tsx:390:11",
 							"data-prohibitions": "[]",
 							className: "grid gap-4 py-4",
-							children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								"data-uid": "src/pages/ContasReceber.tsx:318:13",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								"data-uid": "src/pages/ContasReceber.tsx:391:13",
 								"data-prohibitions": "[]",
 								className: "grid grid-cols-4 items-center gap-4",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$1, {
-									"data-uid": "src/pages/ContasReceber.tsx:319:15",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$2, {
+									"data-uid": "src/pages/ContasReceber.tsx:392:15",
 									"data-prohibitions": "[]",
 									htmlFor: "data",
 									className: "text-right",
 									children: "Data"
 								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
-									"data-uid": "src/pages/ContasReceber.tsx:322:15",
+									"data-uid": "src/pages/ContasReceber.tsx:395:15",
 									"data-prohibitions": "[editContent]",
 									id: "data",
 									type: "date",
@@ -68301,25 +69516,73 @@ function ContasReceber() {
 									value: paymentDate,
 									onChange: (e) => setPaymentDate(e.target.value)
 								})]
-							})
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								"data-uid": "src/pages/ContasReceber.tsx:403:13",
+								"data-prohibitions": "[]",
+								className: "grid grid-cols-4 items-center gap-4",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$2, {
+									"data-uid": "src/pages/ContasReceber.tsx:404:15",
+									"data-prohibitions": "[]",
+									className: "text-right",
+									children: "Método"
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Select$1, {
+									"data-uid": "src/pages/ContasReceber.tsx:405:15",
+									"data-prohibitions": "[]",
+									value: paymentMethod,
+									onValueChange: setPaymentMethod,
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectTrigger, {
+										"data-uid": "src/pages/ContasReceber.tsx:406:17",
+										"data-prohibitions": "[]",
+										className: "col-span-3",
+										children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectValue, {
+											"data-uid": "src/pages/ContasReceber.tsx:407:19",
+											"data-prohibitions": "[editContent]",
+											placeholder: "Selecione..."
+										})
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(SelectContent, {
+										"data-uid": "src/pages/ContasReceber.tsx:409:17",
+										"data-prohibitions": "[]",
+										children: [
+											/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectItem, {
+												"data-uid": "src/pages/ContasReceber.tsx:410:19",
+												"data-prohibitions": "[]",
+												value: "Dinheiro",
+												children: "Dinheiro"
+											}),
+											/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectItem, {
+												"data-uid": "src/pages/ContasReceber.tsx:411:19",
+												"data-prohibitions": "[]",
+												value: "Cartão",
+												children: "Cartão"
+											}),
+											/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectItem, {
+												"data-uid": "src/pages/ContasReceber.tsx:412:19",
+												"data-prohibitions": "[]",
+												value: "Pix",
+												children: "Pix"
+											})
+										]
+									})]
+								})]
+							})]
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogFooter, {
-							"data-uid": "src/pages/ContasReceber.tsx:331:11",
+							"data-uid": "src/pages/ContasReceber.tsx:417:11",
 							"data-prohibitions": "[editContent]",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
-								"data-uid": "src/pages/ContasReceber.tsx:332:13",
+								"data-uid": "src/pages/ContasReceber.tsx:418:13",
 								"data-prohibitions": "[]",
 								variant: "outline",
 								onClick: () => setPayingConta(null),
 								disabled: submitting,
 								children: "Cancelar"
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button$1, {
-								"data-uid": "src/pages/ContasReceber.tsx:335:13",
+								"data-uid": "src/pages/ContasReceber.tsx:421:13",
 								"data-prohibitions": "[editContent]",
 								onClick: handlePay,
 								disabled: submitting,
 								children: [submitting && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(LoaderCircle, {
-									"data-uid": "src/pages/ContasReceber.tsx:336:30",
+									"data-uid": "src/pages/ContasReceber.tsx:422:30",
 									"data-prohibitions": "[editContent]",
 									className: "h-4 w-4 animate-spin mr-2"
 								}), " Confirmar"]
@@ -70250,7 +71513,7 @@ var FormItem = import_react.forwardRef(({ className, ...props }, ref) => {
 FormItem.displayName = "FormItem";
 var FormLabel = import_react.forwardRef(({ className, ...props }, ref) => {
 	const { error, formItemId } = useFormField();
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$1, {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$2, {
 		"data-uid": "src/components/ui/form.tsx:90:5",
 		"data-prohibitions": "[editContent]",
 		ref,
@@ -74150,6 +75413,210 @@ function number(params) {
 	return /* @__PURE__ */ _coercedNumber(ZodNumber, params);
 }
 //#endregion
+//#region src/components/contas-pagar/PrintableReportPagar.tsx
+function PrintableReportPagar({ contas, searchCategoria, filter }) {
+	const total = contas.reduce((acc, c) => acc + Number(c.valor), 0);
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+		"data-uid": "src/components/contas-pagar/PrintableReportPagar.tsx:7:5",
+		"data-prohibitions": "[editContent]",
+		className: "hidden print:block bg-white text-black w-full print:overflow-visible mx-auto max-w-[210mm]",
+		children: [
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				"data-uid": "src/components/contas-pagar/PrintableReportPagar.tsx:8:7",
+				"data-prohibitions": "[editContent]",
+				className: "mb-6 border-b-2 border-black pb-4",
+				children: [
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h1", {
+						"data-uid": "src/components/contas-pagar/PrintableReportPagar.tsx:9:9",
+						"data-prohibitions": "[]",
+						className: "text-2xl font-bold uppercase tracking-tight",
+						children: "CHARME PDV - Relatório de Contas a Pagar"
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
+						"data-uid": "src/components/contas-pagar/PrintableReportPagar.tsx:12:9",
+						"data-prohibitions": "[editContent]",
+						className: "text-sm text-gray-600 mt-1",
+						children: ["Gerado em: ", (/* @__PURE__ */ new Date()).toLocaleString("pt-BR")]
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						"data-uid": "src/components/contas-pagar/PrintableReportPagar.tsx:16:9",
+						"data-prohibitions": "[editContent]",
+						className: "mt-4 grid grid-cols-2 gap-4 text-sm bg-gray-50 p-3 rounded border border-gray-200",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							"data-uid": "src/components/contas-pagar/PrintableReportPagar.tsx:17:11",
+							"data-prohibitions": "[editContent]",
+							children: [
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+									"data-uid": "src/components/contas-pagar/PrintableReportPagar.tsx:18:13",
+									"data-prohibitions": "[]",
+									className: "font-semibold",
+									children: "Filtro de Categoria:"
+								}),
+								" ",
+								searchCategoria || "Todas as categorias"
+							]
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							"data-uid": "src/components/contas-pagar/PrintableReportPagar.tsx:21:11",
+							"data-prohibitions": "[editContent]",
+							children: [
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+									"data-uid": "src/components/contas-pagar/PrintableReportPagar.tsx:22:13",
+									"data-prohibitions": "[]",
+									className: "font-semibold",
+									children: "Status:"
+								}),
+								" ",
+								filter
+							]
+						})]
+					})
+				]
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("table", {
+				"data-uid": "src/components/contas-pagar/PrintableReportPagar.tsx:27:7",
+				"data-prohibitions": "[editContent]",
+				className: "w-full text-left border-collapse mb-8 text-sm",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("thead", {
+					"data-uid": "src/components/contas-pagar/PrintableReportPagar.tsx:28:9",
+					"data-prohibitions": "[]",
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("tr", {
+						"data-uid": "src/components/contas-pagar/PrintableReportPagar.tsx:29:11",
+						"data-prohibitions": "[]",
+						className: "bg-gray-100 border-b-2 border-black",
+						children: [
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("th", {
+								"data-uid": "src/components/contas-pagar/PrintableReportPagar.tsx:30:13",
+								"data-prohibitions": "[]",
+								className: "py-2 px-3 font-semibold border-b border-gray-300",
+								children: "Descrição"
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("th", {
+								"data-uid": "src/components/contas-pagar/PrintableReportPagar.tsx:31:13",
+								"data-prohibitions": "[]",
+								className: "py-2 px-3 font-semibold border-b border-gray-300",
+								children: "Fornecedor"
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("th", {
+								"data-uid": "src/components/contas-pagar/PrintableReportPagar.tsx:32:13",
+								"data-prohibitions": "[]",
+								className: "py-2 px-3 font-semibold border-b border-gray-300",
+								children: "Vencimento"
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("th", {
+								"data-uid": "src/components/contas-pagar/PrintableReportPagar.tsx:33:13",
+								"data-prohibitions": "[]",
+								className: "py-2 px-3 font-semibold border-b border-gray-300",
+								children: "Categoria"
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("th", {
+								"data-uid": "src/components/contas-pagar/PrintableReportPagar.tsx:34:13",
+								"data-prohibitions": "[]",
+								className: "py-2 px-3 font-semibold border-b border-gray-300",
+								children: "Status"
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("th", {
+								"data-uid": "src/components/contas-pagar/PrintableReportPagar.tsx:35:13",
+								"data-prohibitions": "[]",
+								className: "py-2 px-3 font-semibold border-b border-gray-300",
+								children: "Método"
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("th", {
+								"data-uid": "src/components/contas-pagar/PrintableReportPagar.tsx:36:13",
+								"data-prohibitions": "[]",
+								className: "py-2 px-3 font-semibold border-b border-gray-300 text-right",
+								children: "Valor"
+							})
+						]
+					})
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("tbody", {
+					"data-uid": "src/components/contas-pagar/PrintableReportPagar.tsx:39:9",
+					"data-prohibitions": "[editContent]",
+					children: contas.length > 0 ? contas.map((c) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("tr", {
+						"data-uid": "src/components/contas-pagar/PrintableReportPagar.tsx:42:15",
+						"data-prohibitions": "[editContent]",
+						className: "border-b border-gray-200 print:break-inside-avoid",
+						children: [
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("td", {
+								"data-uid": "src/components/contas-pagar/PrintableReportPagar.tsx:43:17",
+								"data-prohibitions": "[editContent]",
+								className: "py-2 px-3",
+								children: c.descricao
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("td", {
+								"data-uid": "src/components/contas-pagar/PrintableReportPagar.tsx:44:17",
+								"data-prohibitions": "[editContent]",
+								className: "py-2 px-3",
+								children: c.fornecedor || "-"
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("td", {
+								"data-uid": "src/components/contas-pagar/PrintableReportPagar.tsx:45:17",
+								"data-prohibitions": "[editContent]",
+								className: "py-2 px-3 font-medium",
+								children: new Date(c.data_vencimento).toLocaleDateString("pt-BR")
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("td", {
+								"data-uid": "src/components/contas-pagar/PrintableReportPagar.tsx:48:17",
+								"data-prohibitions": "[editContent]",
+								className: "py-2 px-3",
+								children: c.categoria || "-"
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("td", {
+								"data-uid": "src/components/contas-pagar/PrintableReportPagar.tsx:49:17",
+								"data-prohibitions": "[editContent]",
+								className: "py-2 px-3 capitalize",
+								children: c.status
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("td", {
+								"data-uid": "src/components/contas-pagar/PrintableReportPagar.tsx:50:17",
+								"data-prohibitions": "[editContent]",
+								className: "py-2 px-3",
+								children: c.metodo_pagamento || "-"
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("td", {
+								"data-uid": "src/components/contas-pagar/PrintableReportPagar.tsx:51:17",
+								"data-prohibitions": "[editContent]",
+								className: "py-2 px-3 text-right font-medium",
+								children: formatCurrency(c.valor)
+							})
+						]
+					}, c.id)) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)("tr", {
+						"data-uid": "src/components/contas-pagar/PrintableReportPagar.tsx:55:13",
+						"data-prohibitions": "[]",
+						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("td", {
+							"data-uid": "src/components/contas-pagar/PrintableReportPagar.tsx:56:15",
+							"data-prohibitions": "[]",
+							colSpan: 7,
+							className: "py-6 text-center text-gray-500 italic",
+							children: "Nenhum registro encontrado para os filtros atuais."
+						})
+					})
+				})]
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+				"data-uid": "src/components/contas-pagar/PrintableReportPagar.tsx:64:7",
+				"data-prohibitions": "[editContent]",
+				className: "flex justify-end border-t-2 border-black pt-4 print:break-inside-avoid",
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					"data-uid": "src/components/contas-pagar/PrintableReportPagar.tsx:65:9",
+					"data-prohibitions": "[editContent]",
+					className: "text-right bg-gray-50 p-4 rounded border border-gray-200 w-64",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+						"data-uid": "src/components/contas-pagar/PrintableReportPagar.tsx:66:11",
+						"data-prohibitions": "[]",
+						className: "text-sm font-semibold text-gray-600 uppercase tracking-wider mb-1",
+						children: "Total do Relatório"
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+						"data-uid": "src/components/contas-pagar/PrintableReportPagar.tsx:69:11",
+						"data-prohibitions": "[editContent]",
+						className: "text-2xl font-bold text-black",
+						children: formatCurrency(total)
+					})]
+				})
+			})
+		]
+	});
+}
+//#endregion
 //#region src/pages/ContasPagar.tsx
 var despesaSchema = object({
 	descricao: string().min(2, "Descrição obrigatória"),
@@ -74159,12 +75626,16 @@ var despesaSchema = object({
 	fornecedor: string().optional()
 });
 function ContasPagar() {
+	const { user } = useAuth();
 	const [contas, setContas] = (0, import_react.useState)([]);
 	const [loading, setLoading] = (0, import_react.useState)(true);
 	const [filter, setFilter] = (0, import_react.useState)("Todos");
 	const [searchCategoria, setSearchCategoria] = (0, import_react.useState)("");
 	const [isModalOpen, setIsModalOpen] = (0, import_react.useState)(false);
-	const [payingId, setPayingId] = (0, import_react.useState)(null);
+	const [payingConta, setPayingConta] = (0, import_react.useState)(null);
+	const [paymentDate, setPaymentDate] = (0, import_react.useState)((/* @__PURE__ */ new Date()).toISOString().split("T")[0]);
+	const [paymentMethod, setPaymentMethod] = (0, import_react.useState)("Dinheiro");
+	const [payingSubmitting, setPayingSubmitting] = (0, import_react.useState)(false);
 	const form = useForm({
 		resolver: a(despesaSchema),
 		defaultValues: {
@@ -74189,25 +75660,41 @@ function ContasPagar() {
 	(0, import_react.useEffect)(() => {
 		fetchContas();
 	}, []);
-	const handlePay = async (id) => {
-		setPayingId(id);
+	const handlePayConfirm = async () => {
+		if (!payingConta || !user) return;
+		setPayingSubmitting(true);
+		const dateObj = new Date(paymentDate);
+		dateObj.setHours(12, 0, 0, 0);
 		const { error } = await supabase.from("contas_pagar").update({
 			status: "pago",
-			data_pagamento: (/* @__PURE__ */ new Date()).toISOString()
-		}).eq("id", id);
-		setPayingId(null);
-		if (error) toast$1({
-			title: "Erro",
-			description: "Erro ao registrar pagamento.",
-			variant: "destructive"
-		});
-		else {
+			data_pagamento: dateObj.toISOString(),
+			metodo_pagamento: paymentMethod
+		}).eq("id", payingConta.id);
+		if (error) {
 			toast$1({
-				title: "Sucesso",
-				description: "Pagamento registrado!"
+				title: "Erro",
+				description: "Erro ao registrar pagamento.",
+				variant: "destructive"
 			});
-			fetchContas();
+			setPayingSubmitting(false);
+			return;
 		}
+		if (paymentMethod === "Dinheiro") {
+			const { data: caixa } = await supabase.from("caixa").select("id").eq("user_id", user.id).eq("status", "aberto").maybeSingle();
+			if (caixa) await supabase.from("movimentacoes_caixa").insert({
+				caixa_id: caixa.id,
+				tipo: "saida",
+				valor: payingConta.valor,
+				descricao: `[Auto] Pagamento de conta - ${payingConta.id.split("-")[0]}`
+			});
+		}
+		setPayingSubmitting(false);
+		toast$1({
+			title: "Sucesso",
+			description: "Pagamento registrado!"
+		});
+		setPayingConta(null);
+		fetchContas();
 	};
 	const onSubmit = async (data) => {
 		const { error } = await supabase.from("contas_pagar").insert({
@@ -74240,105 +75727,111 @@ function ContasPagar() {
 	});
 	const totalAPagar = contas.filter((c) => c.status === "pendente").reduce((acc, curr) => acc + Number(curr.valor), 0);
 	const totalPago = contas.filter((c) => c.status === "pago").reduce((acc, curr) => acc + Number(curr.valor), 0);
-	const isSubmitting = form.formState.isSubmitting;
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-		"data-uid": "src/pages/ContasPagar.tsx:146:5",
+		"data-uid": "src/pages/ContasPagar.tsx:189:5",
 		"data-prohibitions": "[editContent]",
-		className: "space-y-6 animate-fade-in max-w-6xl mx-auto h-full flex flex-col",
+		className: "space-y-6 animate-fade-in max-w-6xl mx-auto h-full flex flex-col print:block print:h-auto print:max-w-none print:m-0 print:p-0 print:space-y-0",
 		children: [
-			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				"data-uid": "src/pages/ContasPagar.tsx:147:7",
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(PrintableReportPagar, {
+				"data-uid": "src/pages/ContasPagar.tsx:190:7",
 				"data-prohibitions": "[editContent]",
-				className: "grid grid-cols-1 md:grid-cols-2 gap-6 shrink-0",
+				contas: filteredContas,
+				searchCategoria,
+				filter
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				"data-uid": "src/pages/ContasPagar.tsx:196:7",
+				"data-prohibitions": "[editContent]",
+				className: "print:hidden grid grid-cols-1 md:grid-cols-2 gap-6 shrink-0",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Card, {
-					"data-uid": "src/pages/ContasPagar.tsx:148:9",
+					"data-uid": "src/pages/ContasPagar.tsx:197:9",
 					"data-prohibitions": "[editContent]",
-					className: "shadow-sm border-red-200 dark:border-red-900 bg-red-50/30 dark:bg-red-950/20",
+					className: "shadow-sm border-red-200 bg-red-50/30",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardHeader, {
-						"data-uid": "src/pages/ContasPagar.tsx:149:11",
+						"data-uid": "src/pages/ContasPagar.tsx:198:11",
 						"data-prohibitions": "[]",
 						className: "flex flex-row items-center justify-between pb-2",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardTitle, {
-							"data-uid": "src/pages/ContasPagar.tsx:150:13",
+							"data-uid": "src/pages/ContasPagar.tsx:199:13",
 							"data-prohibitions": "[]",
-							className: "text-sm font-medium text-red-800 dark:text-red-400",
+							className: "text-sm font-medium text-red-800",
 							children: "Total a Pagar"
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DollarSign, {
-							"data-uid": "src/pages/ContasPagar.tsx:153:13",
+							"data-uid": "src/pages/ContasPagar.tsx:200:13",
 							"data-prohibitions": "[editContent]",
 							className: "h-4 w-4 text-red-500"
 						})]
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardContent, {
-						"data-uid": "src/pages/ContasPagar.tsx:155:11",
+						"data-uid": "src/pages/ContasPagar.tsx:202:11",
 						"data-prohibitions": "[editContent]",
 						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-							"data-uid": "src/pages/ContasPagar.tsx:156:13",
+							"data-uid": "src/pages/ContasPagar.tsx:203:13",
 							"data-prohibitions": "[editContent]",
-							className: "text-3xl font-bold text-red-900 dark:text-red-300",
+							className: "text-3xl font-bold text-red-900",
 							children: formatCurrency(totalAPagar)
 						})
 					})]
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Card, {
-					"data-uid": "src/pages/ContasPagar.tsx:161:9",
+					"data-uid": "src/pages/ContasPagar.tsx:206:9",
 					"data-prohibitions": "[editContent]",
-					className: "shadow-sm border-emerald-200 dark:border-emerald-900 bg-emerald-50/30 dark:bg-emerald-950/20",
+					className: "shadow-sm border-emerald-200 bg-emerald-50/30",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardHeader, {
-						"data-uid": "src/pages/ContasPagar.tsx:162:11",
+						"data-uid": "src/pages/ContasPagar.tsx:207:11",
 						"data-prohibitions": "[]",
 						className: "flex flex-row items-center justify-between pb-2",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardTitle, {
-							"data-uid": "src/pages/ContasPagar.tsx:163:13",
+							"data-uid": "src/pages/ContasPagar.tsx:208:13",
 							"data-prohibitions": "[]",
-							className: "text-sm font-medium text-emerald-800 dark:text-emerald-400",
+							className: "text-sm font-medium text-emerald-800",
 							children: "Total Pago"
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Wallet, {
-							"data-uid": "src/pages/ContasPagar.tsx:166:13",
+							"data-uid": "src/pages/ContasPagar.tsx:209:13",
 							"data-prohibitions": "[editContent]",
 							className: "h-4 w-4 text-emerald-500"
 						})]
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardContent, {
-						"data-uid": "src/pages/ContasPagar.tsx:168:11",
+						"data-uid": "src/pages/ContasPagar.tsx:211:11",
 						"data-prohibitions": "[editContent]",
 						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-							"data-uid": "src/pages/ContasPagar.tsx:169:13",
+							"data-uid": "src/pages/ContasPagar.tsx:212:13",
 							"data-prohibitions": "[editContent]",
-							className: "text-3xl font-bold text-emerald-900 dark:text-emerald-300",
+							className: "text-3xl font-bold text-emerald-900",
 							children: formatCurrency(totalPago)
 						})
 					})]
 				})]
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				"data-uid": "src/pages/ContasPagar.tsx:176:7",
+				"data-uid": "src/pages/ContasPagar.tsx:217:7",
 				"data-prohibitions": "[]",
-				className: "flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 shrink-0",
+				className: "print:hidden flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 shrink-0 bg-muted/50 p-4 rounded-xl border border-border",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					"data-uid": "src/pages/ContasPagar.tsx:177:9",
+					"data-uid": "src/pages/ContasPagar.tsx:218:9",
 					"data-prohibitions": "[]",
-					className: "flex items-center gap-4",
+					className: "flex flex-wrap items-center gap-4",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Tabs, {
-						"data-uid": "src/pages/ContasPagar.tsx:178:11",
+						"data-uid": "src/pages/ContasPagar.tsx:219:11",
 						"data-prohibitions": "[]",
 						value: filter,
 						onValueChange: setFilter,
 						children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TabsList, {
-							"data-uid": "src/pages/ContasPagar.tsx:179:13",
+							"data-uid": "src/pages/ContasPagar.tsx:220:13",
 							"data-prohibitions": "[]",
 							children: [
 								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TabsTrigger, {
-									"data-uid": "src/pages/ContasPagar.tsx:180:15",
+									"data-uid": "src/pages/ContasPagar.tsx:221:15",
 									"data-prohibitions": "[]",
 									value: "Todos",
 									children: "Todos"
 								}),
 								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TabsTrigger, {
-									"data-uid": "src/pages/ContasPagar.tsx:181:15",
+									"data-uid": "src/pages/ContasPagar.tsx:222:15",
 									"data-prohibitions": "[]",
 									value: "Pendentes",
 									children: "Pendentes"
 								}),
 								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TabsTrigger, {
-									"data-uid": "src/pages/ContasPagar.tsx:182:15",
+									"data-uid": "src/pages/ContasPagar.tsx:223:15",
 									"data-prohibitions": "[]",
 									value: "Pagos",
 									children: "Pagos"
@@ -74346,15 +75839,15 @@ function ContasPagar() {
 							]
 						})
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						"data-uid": "src/pages/ContasPagar.tsx:185:11",
+						"data-uid": "src/pages/ContasPagar.tsx:226:11",
 						"data-prohibitions": "[]",
 						className: "relative w-48",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Search, {
-							"data-uid": "src/pages/ContasPagar.tsx:186:13",
+							"data-uid": "src/pages/ContasPagar.tsx:227:13",
 							"data-prohibitions": "[editContent]",
 							className: "absolute left-2.5 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground"
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
-							"data-uid": "src/pages/ContasPagar.tsx:187:13",
+							"data-uid": "src/pages/ContasPagar.tsx:228:13",
 							"data-prohibitions": "[editContent]",
 							placeholder: "Filtrar categoria",
 							className: "pl-8 h-9 bg-background",
@@ -74362,242 +75855,364 @@ function ContasPagar() {
 							onChange: (e) => setSearchCategoria(e.target.value)
 						})]
 					})]
-				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button$1, {
-					"data-uid": "src/pages/ContasPagar.tsx:195:9",
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					"data-uid": "src/pages/ContasPagar.tsx:236:9",
 					"data-prohibitions": "[]",
-					onClick: () => setIsModalOpen(true),
-					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Plus, {
-						"data-uid": "src/pages/ContasPagar.tsx:196:11",
-						"data-prohibitions": "[editContent]",
-						className: "h-4 w-4 mr-2"
-					}), " Nova Despesa"]
+					className: "flex gap-2 w-full sm:w-auto",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button$1, {
+						"data-uid": "src/pages/ContasPagar.tsx:237:11",
+						"data-prohibitions": "[]",
+						variant: "outline",
+						className: "bg-background flex-1 sm:flex-none",
+						onClick: () => window.print(),
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FileText, {
+							"data-uid": "src/pages/ContasPagar.tsx:242:13",
+							"data-prohibitions": "[editContent]",
+							className: "h-4 w-4 mr-2"
+						}), " Relatório PDF"]
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button$1, {
+						"data-uid": "src/pages/ContasPagar.tsx:244:11",
+						"data-prohibitions": "[]",
+						onClick: () => setIsModalOpen(true),
+						className: "flex-1 sm:flex-none",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Plus, {
+							"data-uid": "src/pages/ContasPagar.tsx:245:13",
+							"data-prohibitions": "[editContent]",
+							className: "h-4 w-4 mr-2"
+						}), " Nova Despesa"]
+					})]
 				})]
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Card, {
-				"data-uid": "src/pages/ContasPagar.tsx:200:7",
+				"data-uid": "src/pages/ContasPagar.tsx:250:7",
 				"data-prohibitions": "[editContent]",
-				className: "shadow-sm border-border flex-1 flex flex-col min-h-0 bg-card",
+				className: "print:hidden shadow-sm border-border flex-1 flex flex-col min-h-0 bg-card",
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardContent, {
-					"data-uid": "src/pages/ContasPagar.tsx:201:9",
+					"data-uid": "src/pages/ContasPagar.tsx:251:9",
 					"data-prohibitions": "[editContent]",
 					className: "p-0 flex-1 overflow-auto",
 					children: loading ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-						"data-uid": "src/pages/ContasPagar.tsx:203:13",
+						"data-uid": "src/pages/ContasPagar.tsx:253:13",
 						"data-prohibitions": "[]",
 						className: "flex h-40 items-center justify-center",
 						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(LoaderCircle, {
-							"data-uid": "src/pages/ContasPagar.tsx:204:15",
+							"data-uid": "src/pages/ContasPagar.tsx:254:15",
 							"data-prohibitions": "[editContent]",
 							className: "h-8 w-8 animate-spin text-primary"
 						})
 					}) : /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Table, {
-						"data-uid": "src/pages/ContasPagar.tsx:207:13",
+						"data-uid": "src/pages/ContasPagar.tsx:257:13",
 						"data-prohibitions": "[editContent]",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHeader, {
-							"data-uid": "src/pages/ContasPagar.tsx:208:15",
+							"data-uid": "src/pages/ContasPagar.tsx:258:15",
 							"data-prohibitions": "[]",
 							className: "sticky top-0 bg-muted/80 z-10 backdrop-blur-md",
 							children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TableRow, {
-								"data-uid": "src/pages/ContasPagar.tsx:209:17",
+								"data-uid": "src/pages/ContasPagar.tsx:259:17",
 								"data-prohibitions": "[]",
 								children: [
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
-										"data-uid": "src/pages/ContasPagar.tsx:210:19",
+										"data-uid": "src/pages/ContasPagar.tsx:260:19",
 										"data-prohibitions": "[]",
 										children: "Descrição"
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
-										"data-uid": "src/pages/ContasPagar.tsx:211:19",
-										"data-prohibitions": "[]",
-										children: "Fornecedor"
-									}),
-									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
-										"data-uid": "src/pages/ContasPagar.tsx:212:19",
+										"data-uid": "src/pages/ContasPagar.tsx:261:19",
 										"data-prohibitions": "[]",
 										children: "Vencimento"
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
-										"data-uid": "src/pages/ContasPagar.tsx:213:19",
+										"data-uid": "src/pages/ContasPagar.tsx:262:19",
 										"data-prohibitions": "[]",
 										children: "Categoria"
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
-										"data-uid": "src/pages/ContasPagar.tsx:214:19",
+										"data-uid": "src/pages/ContasPagar.tsx:263:19",
 										"data-prohibitions": "[]",
 										children: "Valor"
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
-										"data-uid": "src/pages/ContasPagar.tsx:215:19",
+										"data-uid": "src/pages/ContasPagar.tsx:264:19",
 										"data-prohibitions": "[]",
 										children: "Status"
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
-										"data-uid": "src/pages/ContasPagar.tsx:216:19",
+										"data-uid": "src/pages/ContasPagar.tsx:265:19",
+										"data-prohibitions": "[]",
+										children: "Método"
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
+										"data-uid": "src/pages/ContasPagar.tsx:266:19",
 										"data-prohibitions": "[]",
 										className: "text-right",
 										children: "Ação"
 									})
 								]
 							})
-						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TableBody, {
-							"data-uid": "src/pages/ContasPagar.tsx:219:15",
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableBody, {
+							"data-uid": "src/pages/ContasPagar.tsx:269:15",
 							"data-prohibitions": "[editContent]",
-							children: [filteredContas.map((conta) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TableRow, {
-								"data-uid": "src/pages/ContasPagar.tsx:221:19",
+							children: filteredContas.map((conta) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TableRow, {
+								"data-uid": "src/pages/ContasPagar.tsx:271:19",
 								"data-prohibitions": "[editContent]",
 								children: [
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-										"data-uid": "src/pages/ContasPagar.tsx:222:21",
+										"data-uid": "src/pages/ContasPagar.tsx:272:21",
 										"data-prohibitions": "[editContent]",
 										className: "font-medium",
 										children: conta.descricao
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-										"data-uid": "src/pages/ContasPagar.tsx:223:21",
-										"data-prohibitions": "[editContent]",
-										children: conta.fornecedor || "-"
-									}),
-									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-										"data-uid": "src/pages/ContasPagar.tsx:224:21",
+										"data-uid": "src/pages/ContasPagar.tsx:273:21",
 										"data-prohibitions": "[editContent]",
 										children: new Date(conta.data_vencimento).toLocaleDateString("pt-BR")
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-										"data-uid": "src/pages/ContasPagar.tsx:227:21",
+										"data-uid": "src/pages/ContasPagar.tsx:276:21",
 										"data-prohibitions": "[editContent]",
 										children: conta.categoria || "-"
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-										"data-uid": "src/pages/ContasPagar.tsx:228:21",
+										"data-uid": "src/pages/ContasPagar.tsx:277:21",
 										"data-prohibitions": "[editContent]",
 										className: "font-semibold",
 										children: formatCurrency(conta.valor)
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-										"data-uid": "src/pages/ContasPagar.tsx:229:21",
+										"data-uid": "src/pages/ContasPagar.tsx:278:21",
 										"data-prohibitions": "[editContent]",
 										children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Badge, {
-											"data-uid": "src/pages/ContasPagar.tsx:230:23",
+											"data-uid": "src/pages/ContasPagar.tsx:279:23",
 											"data-prohibitions": "[editContent]",
 											variant: conta.status === "pago" ? "default" : "secondary",
-											className: conta.status === "pago" ? "bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-300" : "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300",
+											className: conta.status === "pago" ? "bg-emerald-100 text-emerald-800" : "bg-red-100 text-red-800",
 											children: conta.status === "pago" ? "Pago" : "Pendente"
 										})
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-										"data-uid": "src/pages/ContasPagar.tsx:241:21",
+										"data-uid": "src/pages/ContasPagar.tsx:290:21",
+										"data-prohibitions": "[editContent]",
+										className: "text-sm text-muted-foreground",
+										children: conta.metodo_pagamento || "-"
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
+										"data-uid": "src/pages/ContasPagar.tsx:293:21",
 										"data-prohibitions": "[editContent]",
 										className: "text-right",
 										children: conta.status === "pendente" && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
-											"data-uid": "src/pages/ContasPagar.tsx:243:25",
-											"data-prohibitions": "[editContent]",
+											"data-uid": "src/pages/ContasPagar.tsx:295:25",
+											"data-prohibitions": "[]",
 											size: "sm",
 											variant: "outline",
-											onClick: () => handlePay(conta.id),
-											disabled: payingId === conta.id,
-											children: payingId === conta.id ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(LoaderCircle, {
-												"data-uid": "src/pages/ContasPagar.tsx:250:29",
-												"data-prohibitions": "[editContent]",
-												className: "h-4 w-4 animate-spin"
-											}) : "Pagar"
+											onClick: () => {
+												setPayingConta(conta);
+												setPaymentDate((/* @__PURE__ */ new Date()).toISOString().split("T")[0]);
+												setPaymentMethod("Dinheiro");
+											},
+											children: "Pagar"
 										})
 									})
 								]
-							}, conta.id)), filteredContas.length === 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableRow, {
-								"data-uid": "src/pages/ContasPagar.tsx:260:19",
-								"data-prohibitions": "[]",
-								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-									"data-uid": "src/pages/ContasPagar.tsx:261:21",
-									"data-prohibitions": "[]",
-									colSpan: 7,
-									className: "text-center py-8 text-muted-foreground",
-									children: "Nenhuma despesa encontrada."
-								})
-							})]
+							}, conta.id))
 						})]
 					})
 				})
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Dialog, {
-				"data-uid": "src/pages/ContasPagar.tsx:272:7",
+				"data-uid": "src/pages/ContasPagar.tsx:316:7",
 				"data-prohibitions": "[editContent]",
+				open: !!payingConta,
+				onOpenChange: (open) => !open && setPayingConta(null),
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogContent, {
+					"data-uid": "src/pages/ContasPagar.tsx:317:9",
+					"data-prohibitions": "[editContent]",
+					className: "sm:max-w-[425px]",
+					children: [
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogHeader, {
+							"data-uid": "src/pages/ContasPagar.tsx:318:11",
+							"data-prohibitions": "[]",
+							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogTitle, {
+								"data-uid": "src/pages/ContasPagar.tsx:319:13",
+								"data-prohibitions": "[]",
+								children: "Registrar Pagamento"
+							})
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							"data-uid": "src/pages/ContasPagar.tsx:321:11",
+							"data-prohibitions": "[]",
+							className: "grid gap-4 py-4",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								"data-uid": "src/pages/ContasPagar.tsx:322:13",
+								"data-prohibitions": "[]",
+								className: "grid grid-cols-4 items-center gap-4",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label, {
+									"data-uid": "src/pages/ContasPagar.tsx:323:15",
+									"data-prohibitions": "[]",
+									className: "text-right",
+									children: "Data"
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
+									"data-uid": "src/pages/ContasPagar.tsx:324:15",
+									"data-prohibitions": "[editContent]",
+									type: "date",
+									className: "col-span-3",
+									value: paymentDate,
+									onChange: (e) => setPaymentDate(e.target.value)
+								})]
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								"data-uid": "src/pages/ContasPagar.tsx:331:13",
+								"data-prohibitions": "[]",
+								className: "grid grid-cols-4 items-center gap-4",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label, {
+									"data-uid": "src/pages/ContasPagar.tsx:332:15",
+									"data-prohibitions": "[]",
+									className: "text-right",
+									children: "Método"
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Select$1, {
+									"data-uid": "src/pages/ContasPagar.tsx:333:15",
+									"data-prohibitions": "[]",
+									value: paymentMethod,
+									onValueChange: setPaymentMethod,
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectTrigger, {
+										"data-uid": "src/pages/ContasPagar.tsx:334:17",
+										"data-prohibitions": "[]",
+										className: "col-span-3",
+										children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectValue, {
+											"data-uid": "src/pages/ContasPagar.tsx:335:19",
+											"data-prohibitions": "[editContent]",
+											placeholder: "Selecione..."
+										})
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(SelectContent, {
+										"data-uid": "src/pages/ContasPagar.tsx:337:17",
+										"data-prohibitions": "[]",
+										children: [
+											/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectItem, {
+												"data-uid": "src/pages/ContasPagar.tsx:338:19",
+												"data-prohibitions": "[]",
+												value: "Dinheiro",
+												children: "Dinheiro"
+											}),
+											/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectItem, {
+												"data-uid": "src/pages/ContasPagar.tsx:339:19",
+												"data-prohibitions": "[]",
+												value: "Cartão",
+												children: "Cartão"
+											}),
+											/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectItem, {
+												"data-uid": "src/pages/ContasPagar.tsx:340:19",
+												"data-prohibitions": "[]",
+												value: "Pix",
+												children: "Pix"
+											})
+										]
+									})]
+								})]
+							})]
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogFooter, {
+							"data-uid": "src/pages/ContasPagar.tsx:345:11",
+							"data-prohibitions": "[editContent]",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
+								"data-uid": "src/pages/ContasPagar.tsx:346:13",
+								"data-prohibitions": "[]",
+								variant: "outline",
+								onClick: () => setPayingConta(null),
+								disabled: payingSubmitting,
+								children: "Cancelar"
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button$1, {
+								"data-uid": "src/pages/ContasPagar.tsx:353:13",
+								"data-prohibitions": "[editContent]",
+								onClick: handlePayConfirm,
+								disabled: payingSubmitting,
+								children: [payingSubmitting && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(LoaderCircle, {
+									"data-uid": "src/pages/ContasPagar.tsx:354:36",
+									"data-prohibitions": "[editContent]",
+									className: "h-4 w-4 animate-spin mr-2"
+								}), " Confirmar"]
+							})]
+						})
+					]
+				})
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Dialog, {
+				"data-uid": "src/pages/ContasPagar.tsx:360:7",
+				"data-prohibitions": "[]",
 				open: isModalOpen,
 				onOpenChange: setIsModalOpen,
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogContent, {
-					"data-uid": "src/pages/ContasPagar.tsx:273:9",
-					"data-prohibitions": "[editContent]",
+					"data-uid": "src/pages/ContasPagar.tsx:361:9",
+					"data-prohibitions": "[]",
 					className: "sm:max-w-[425px] bg-card",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogHeader, {
-						"data-uid": "src/pages/ContasPagar.tsx:274:11",
+						"data-uid": "src/pages/ContasPagar.tsx:362:11",
 						"data-prohibitions": "[]",
 						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogTitle, {
-							"data-uid": "src/pages/ContasPagar.tsx:275:13",
+							"data-uid": "src/pages/ContasPagar.tsx:363:13",
 							"data-prohibitions": "[]",
 							children: "Adicionar Nova Despesa"
 						})
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Form, {
-						"data-uid": "src/pages/ContasPagar.tsx:277:11",
-						"data-prohibitions": "[editContent]",
+						"data-uid": "src/pages/ContasPagar.tsx:365:11",
+						"data-prohibitions": "[]",
 						...form,
 						children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("form", {
-							"data-uid": "src/pages/ContasPagar.tsx:278:13",
-							"data-prohibitions": "[editContent]",
+							"data-uid": "src/pages/ContasPagar.tsx:366:13",
+							"data-prohibitions": "[]",
 							onSubmit: form.handleSubmit(onSubmit),
 							className: "space-y-4 py-4",
 							children: [
 								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormField, {
-									"data-uid": "src/pages/ContasPagar.tsx:279:15",
+									"data-uid": "src/pages/ContasPagar.tsx:367:15",
 									"data-prohibitions": "[editContent]",
 									control: form.control,
 									name: "descricao",
 									render: ({ field }) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(FormItem, {
-										"data-uid": "src/pages/ContasPagar.tsx:283:19",
+										"data-uid": "src/pages/ContasPagar.tsx:371:19",
 										"data-prohibitions": "[]",
 										children: [
 											/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormLabel, {
-												"data-uid": "src/pages/ContasPagar.tsx:284:21",
+												"data-uid": "src/pages/ContasPagar.tsx:372:21",
 												"data-prohibitions": "[]",
 												children: "Descrição *"
 											}),
 											/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormControl, {
-												"data-uid": "src/pages/ContasPagar.tsx:285:21",
+												"data-uid": "src/pages/ContasPagar.tsx:373:21",
 												"data-prohibitions": "[]",
 												children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
-													"data-uid": "src/pages/ContasPagar.tsx:286:23",
+													"data-uid": "src/pages/ContasPagar.tsx:374:23",
 													"data-prohibitions": "[editContent]",
 													...field
 												})
 											}),
 											/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormMessage, {
-												"data-uid": "src/pages/ContasPagar.tsx:288:21",
+												"data-uid": "src/pages/ContasPagar.tsx:376:21",
 												"data-prohibitions": "[editContent]"
 											})
 										]
 									})
 								}),
 								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-									"data-uid": "src/pages/ContasPagar.tsx:292:15",
+									"data-uid": "src/pages/ContasPagar.tsx:380:15",
 									"data-prohibitions": "[]",
 									className: "grid grid-cols-2 gap-4",
 									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormField, {
-										"data-uid": "src/pages/ContasPagar.tsx:293:17",
+										"data-uid": "src/pages/ContasPagar.tsx:381:17",
 										"data-prohibitions": "[editContent]",
 										control: form.control,
 										name: "valor",
 										render: ({ field }) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(FormItem, {
-											"data-uid": "src/pages/ContasPagar.tsx:297:21",
+											"data-uid": "src/pages/ContasPagar.tsx:385:21",
 											"data-prohibitions": "[]",
 											children: [
 												/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormLabel, {
-													"data-uid": "src/pages/ContasPagar.tsx:298:23",
+													"data-uid": "src/pages/ContasPagar.tsx:386:23",
 													"data-prohibitions": "[]",
 													children: "Valor *"
 												}),
 												/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormControl, {
-													"data-uid": "src/pages/ContasPagar.tsx:299:23",
+													"data-uid": "src/pages/ContasPagar.tsx:387:23",
 													"data-prohibitions": "[]",
 													children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
-														"data-uid": "src/pages/ContasPagar.tsx:300:25",
+														"data-uid": "src/pages/ContasPagar.tsx:388:25",
 														"data-prohibitions": "[editContent]",
 														type: "number",
 														step: "0.01",
@@ -74605,37 +76220,37 @@ function ContasPagar() {
 													})
 												}),
 												/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormMessage, {
-													"data-uid": "src/pages/ContasPagar.tsx:302:23",
+													"data-uid": "src/pages/ContasPagar.tsx:390:23",
 													"data-prohibitions": "[editContent]"
 												})
 											]
 										})
 									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormField, {
-										"data-uid": "src/pages/ContasPagar.tsx:306:17",
+										"data-uid": "src/pages/ContasPagar.tsx:394:17",
 										"data-prohibitions": "[editContent]",
 										control: form.control,
 										name: "data_vencimento",
 										render: ({ field }) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(FormItem, {
-											"data-uid": "src/pages/ContasPagar.tsx:310:21",
+											"data-uid": "src/pages/ContasPagar.tsx:398:21",
 											"data-prohibitions": "[]",
 											children: [
 												/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormLabel, {
-													"data-uid": "src/pages/ContasPagar.tsx:311:23",
+													"data-uid": "src/pages/ContasPagar.tsx:399:23",
 													"data-prohibitions": "[]",
 													children: "Vencimento *"
 												}),
 												/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormControl, {
-													"data-uid": "src/pages/ContasPagar.tsx:312:23",
+													"data-uid": "src/pages/ContasPagar.tsx:400:23",
 													"data-prohibitions": "[]",
 													children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
-														"data-uid": "src/pages/ContasPagar.tsx:313:25",
+														"data-uid": "src/pages/ContasPagar.tsx:401:25",
 														"data-prohibitions": "[editContent]",
 														type: "date",
 														...field
 													})
 												}),
 												/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormMessage, {
-													"data-uid": "src/pages/ContasPagar.tsx:315:23",
+													"data-uid": "src/pages/ContasPagar.tsx:403:23",
 													"data-prohibitions": "[editContent]"
 												})
 											]
@@ -74643,65 +76258,65 @@ function ContasPagar() {
 									})]
 								}),
 								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-									"data-uid": "src/pages/ContasPagar.tsx:320:15",
+									"data-uid": "src/pages/ContasPagar.tsx:408:15",
 									"data-prohibitions": "[]",
 									className: "grid grid-cols-2 gap-4",
 									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormField, {
-										"data-uid": "src/pages/ContasPagar.tsx:321:17",
+										"data-uid": "src/pages/ContasPagar.tsx:409:17",
 										"data-prohibitions": "[editContent]",
 										control: form.control,
 										name: "categoria",
 										render: ({ field }) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(FormItem, {
-											"data-uid": "src/pages/ContasPagar.tsx:325:21",
+											"data-uid": "src/pages/ContasPagar.tsx:413:21",
 											"data-prohibitions": "[]",
 											children: [
 												/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormLabel, {
-													"data-uid": "src/pages/ContasPagar.tsx:326:23",
+													"data-uid": "src/pages/ContasPagar.tsx:414:23",
 													"data-prohibitions": "[]",
 													children: "Categoria"
 												}),
 												/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormControl, {
-													"data-uid": "src/pages/ContasPagar.tsx:327:23",
+													"data-uid": "src/pages/ContasPagar.tsx:415:23",
 													"data-prohibitions": "[]",
 													children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
-														"data-uid": "src/pages/ContasPagar.tsx:328:25",
+														"data-uid": "src/pages/ContasPagar.tsx:416:25",
 														"data-prohibitions": "[editContent]",
 														placeholder: "Ex: Energia",
 														...field
 													})
 												}),
 												/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormMessage, {
-													"data-uid": "src/pages/ContasPagar.tsx:330:23",
+													"data-uid": "src/pages/ContasPagar.tsx:418:23",
 													"data-prohibitions": "[editContent]"
 												})
 											]
 										})
 									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormField, {
-										"data-uid": "src/pages/ContasPagar.tsx:334:17",
+										"data-uid": "src/pages/ContasPagar.tsx:422:17",
 										"data-prohibitions": "[editContent]",
 										control: form.control,
 										name: "fornecedor",
 										render: ({ field }) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(FormItem, {
-											"data-uid": "src/pages/ContasPagar.tsx:338:21",
+											"data-uid": "src/pages/ContasPagar.tsx:426:21",
 											"data-prohibitions": "[]",
 											children: [
 												/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormLabel, {
-													"data-uid": "src/pages/ContasPagar.tsx:339:23",
+													"data-uid": "src/pages/ContasPagar.tsx:427:23",
 													"data-prohibitions": "[]",
 													children: "Fornecedor"
 												}),
 												/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormControl, {
-													"data-uid": "src/pages/ContasPagar.tsx:340:23",
+													"data-uid": "src/pages/ContasPagar.tsx:428:23",
 													"data-prohibitions": "[]",
 													children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
-														"data-uid": "src/pages/ContasPagar.tsx:341:25",
+														"data-uid": "src/pages/ContasPagar.tsx:429:25",
 														"data-prohibitions": "[editContent]",
 														placeholder: "Ex: Enel",
 														...field
 													})
 												}),
 												/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormMessage, {
-													"data-uid": "src/pages/ContasPagar.tsx:343:23",
+													"data-uid": "src/pages/ContasPagar.tsx:431:23",
 													"data-prohibitions": "[editContent]"
 												})
 											]
@@ -74709,27 +76324,22 @@ function ContasPagar() {
 									})]
 								}),
 								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogFooter, {
-									"data-uid": "src/pages/ContasPagar.tsx:348:15",
-									"data-prohibitions": "[editContent]",
+									"data-uid": "src/pages/ContasPagar.tsx:436:15",
+									"data-prohibitions": "[]",
 									className: "pt-4",
 									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
-										"data-uid": "src/pages/ContasPagar.tsx:349:17",
+										"data-uid": "src/pages/ContasPagar.tsx:437:17",
 										"data-prohibitions": "[]",
 										type: "button",
 										variant: "outline",
 										onClick: () => setIsModalOpen(false),
-										disabled: isSubmitting,
 										children: "Cancelar"
-									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button$1, {
-										"data-uid": "src/pages/ContasPagar.tsx:357:17",
-										"data-prohibitions": "[editContent]",
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
+										"data-uid": "src/pages/ContasPagar.tsx:440:17",
+										"data-prohibitions": "[]",
 										type: "submit",
-										disabled: isSubmitting,
-										children: [isSubmitting && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(LoaderCircle, {
-											"data-uid": "src/pages/ContasPagar.tsx:358:36",
-											"data-prohibitions": "[editContent]",
-											className: "h-4 w-4 animate-spin mr-2"
-										}), " Salvar"]
+										disabled: form.formState.isSubmitting,
+										children: "Salvar"
 									})]
 								})
 							]
@@ -74741,1156 +76351,8 @@ function ContasPagar() {
 	});
 }
 //#endregion
-//#region src/hooks/use-auth.tsx
-var AuthContext = (0, import_react.createContext)(void 0);
-var useAuth = () => {
-	const context = (0, import_react.useContext)(AuthContext);
-	if (!context) throw new Error("useAuth must be used within an AuthProvider");
-	return context;
-};
-var AuthProvider = ({ children }) => {
-	const [user, setUser] = (0, import_react.useState)(null);
-	const [session, setSession] = (0, import_react.useState)(null);
-	const [loading, setLoading] = (0, import_react.useState)(true);
-	(0, import_react.useEffect)(() => {
-		const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-			setSession(session);
-			setUser(session?.user ?? null);
-			setLoading(false);
-		});
-		supabase.auth.getSession().then(({ data: { session } }) => {
-			setSession(session);
-			setUser(session?.user ?? null);
-			setLoading(false);
-		});
-		return () => subscription.unsubscribe();
-	}, []);
-	const signUp = async (email, password) => {
-		const { error } = await supabase.auth.signUp({
-			email,
-			password,
-			options: { emailRedirectTo: `${window.location.origin}/` }
-		});
-		return { error };
-	};
-	const signIn = async (email, password) => {
-		const { error } = await supabase.auth.signInWithPassword({
-			email,
-			password
-		});
-		return { error };
-	};
-	const signOut = async () => {
-		const { error } = await supabase.auth.signOut();
-		return { error };
-	};
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AuthContext.Provider, {
-		"data-uid": "src/hooks/use-auth.tsx:65:5",
-		"data-prohibitions": "[editContent]",
-		value: {
-			user,
-			session,
-			signUp,
-			signIn,
-			signOut,
-			loading
-		},
-		children
-	});
-};
-//#endregion
-//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/@radix-ui+number@1.1.1/node_modules/@radix-ui/number/dist/index.mjs
-function clamp(value, [min, max]) {
-	return Math.min(max, Math.max(min, value));
-}
-//#endregion
-//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/@radix-ui+react-use-previous@1.1.1_@types+react@19.2.14_react@19.2.4/node_modules/@radix-ui/react-use-previous/dist/index.mjs
-function usePrevious(value) {
-	const ref = import_react.useRef({
-		value,
-		previous: value
-	});
-	return import_react.useMemo(() => {
-		if (ref.current.value !== value) {
-			ref.current.previous = ref.current.value;
-			ref.current.value = value;
-		}
-		return ref.current.previous;
-	}, [value]);
-}
-//#endregion
-//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/@radix-ui+react-select@2.2.6_@types+react-dom@19.2.3_@types+react@19.2.14__@types+react_53894a32562cb9eeb6aef8b357a4f4e3/node_modules/@radix-ui/react-select/dist/index.mjs
-var OPEN_KEYS = [
-	" ",
-	"Enter",
-	"ArrowUp",
-	"ArrowDown"
-];
-var SELECTION_KEYS = [" ", "Enter"];
-var SELECT_NAME = "Select";
-var [Collection, useCollection, createCollectionScope] = createCollection(SELECT_NAME);
-var [createSelectContext, createSelectScope] = createContextScope(SELECT_NAME, [createCollectionScope, createPopperScope]);
-var usePopperScope$1 = createPopperScope();
-var [SelectProvider, useSelectContext] = createSelectContext(SELECT_NAME);
-var [SelectNativeOptionsProvider, useSelectNativeOptionsContext] = createSelectContext(SELECT_NAME);
-var Select$2 = (props) => {
-	const { __scopeSelect, children, open: openProp, defaultOpen, onOpenChange, value: valueProp, defaultValue, onValueChange, dir, name, autoComplete, disabled, required, form } = props;
-	const popperScope = usePopperScope$1(__scopeSelect);
-	const [trigger, setTrigger] = import_react.useState(null);
-	const [valueNode, setValueNode] = import_react.useState(null);
-	const [valueNodeHasChildren, setValueNodeHasChildren] = import_react.useState(false);
-	const direction = useDirection(dir);
-	const [open, setOpen] = useControllableState({
-		prop: openProp,
-		defaultProp: defaultOpen ?? false,
-		onChange: onOpenChange,
-		caller: SELECT_NAME
-	});
-	const [value, setValue] = useControllableState({
-		prop: valueProp,
-		defaultProp: defaultValue,
-		onChange: onValueChange,
-		caller: SELECT_NAME
-	});
-	const triggerPointerDownPosRef = import_react.useRef(null);
-	const isFormControl = trigger ? form || !!trigger.closest("form") : true;
-	const [nativeOptionsSet, setNativeOptionsSet] = import_react.useState(/* @__PURE__ */ new Set());
-	const nativeSelectKey = Array.from(nativeOptionsSet).map((option) => option.props.value).join(";");
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root2$3, {
-		...popperScope,
-		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(SelectProvider, {
-			required,
-			scope: __scopeSelect,
-			trigger,
-			onTriggerChange: setTrigger,
-			valueNode,
-			onValueNodeChange: setValueNode,
-			valueNodeHasChildren,
-			onValueNodeHasChildrenChange: setValueNodeHasChildren,
-			contentId: useId(),
-			value,
-			onValueChange: setValue,
-			open,
-			onOpenChange: setOpen,
-			dir: direction,
-			triggerPointerDownPosRef,
-			disabled,
-			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Collection.Provider, {
-				scope: __scopeSelect,
-				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectNativeOptionsProvider, {
-					scope: props.__scopeSelect,
-					onNativeOptionAdd: import_react.useCallback((option) => {
-						setNativeOptionsSet((prev) => new Set(prev).add(option));
-					}, []),
-					onNativeOptionRemove: import_react.useCallback((option) => {
-						setNativeOptionsSet((prev) => {
-							const optionsSet = new Set(prev);
-							optionsSet.delete(option);
-							return optionsSet;
-						});
-					}, []),
-					children
-				})
-			}), isFormControl ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(SelectBubbleInput, {
-				"aria-hidden": true,
-				required,
-				tabIndex: -1,
-				name,
-				autoComplete,
-				value,
-				onChange: (event) => setValue(event.target.value),
-				disabled,
-				form,
-				children: [value === void 0 ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("option", { value: "" }) : null, Array.from(nativeOptionsSet)]
-			}, nativeSelectKey) : null]
-		})
-	});
-};
-Select$2.displayName = SELECT_NAME;
-var TRIGGER_NAME$1 = "SelectTrigger";
-var SelectTrigger$1 = import_react.forwardRef((props, forwardedRef) => {
-	const { __scopeSelect, disabled = false, ...triggerProps } = props;
-	const popperScope = usePopperScope$1(__scopeSelect);
-	const context = useSelectContext(TRIGGER_NAME$1, __scopeSelect);
-	const isDisabled = context.disabled || disabled;
-	const composedRefs = useComposedRefs(forwardedRef, context.onTriggerChange);
-	const getItems = useCollection(__scopeSelect);
-	const pointerTypeRef = import_react.useRef("touch");
-	const [searchRef, handleTypeaheadSearch, resetTypeahead] = useTypeaheadSearch((search) => {
-		const enabledItems = getItems().filter((item) => !item.disabled);
-		const nextItem = findNextItem(enabledItems, search, enabledItems.find((item) => item.value === context.value));
-		if (nextItem !== void 0) context.onValueChange(nextItem.value);
-	});
-	const handleOpen = (pointerEvent) => {
-		if (!isDisabled) {
-			context.onOpenChange(true);
-			resetTypeahead();
-		}
-		if (pointerEvent) context.triggerPointerDownPosRef.current = {
-			x: Math.round(pointerEvent.pageX),
-			y: Math.round(pointerEvent.pageY)
-		};
-	};
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Anchor, {
-		asChild: true,
-		...popperScope,
-		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.button, {
-			type: "button",
-			role: "combobox",
-			"aria-controls": context.contentId,
-			"aria-expanded": context.open,
-			"aria-required": context.required,
-			"aria-autocomplete": "none",
-			dir: context.dir,
-			"data-state": context.open ? "open" : "closed",
-			disabled: isDisabled,
-			"data-disabled": isDisabled ? "" : void 0,
-			"data-placeholder": shouldShowPlaceholder(context.value) ? "" : void 0,
-			...triggerProps,
-			ref: composedRefs,
-			onClick: composeEventHandlers(triggerProps.onClick, (event) => {
-				event.currentTarget.focus();
-				if (pointerTypeRef.current !== "mouse") handleOpen(event);
-			}),
-			onPointerDown: composeEventHandlers(triggerProps.onPointerDown, (event) => {
-				pointerTypeRef.current = event.pointerType;
-				const target = event.target;
-				if (target.hasPointerCapture(event.pointerId)) target.releasePointerCapture(event.pointerId);
-				if (event.button === 0 && event.ctrlKey === false && event.pointerType === "mouse") {
-					handleOpen(event);
-					event.preventDefault();
-				}
-			}),
-			onKeyDown: composeEventHandlers(triggerProps.onKeyDown, (event) => {
-				const isTypingAhead = searchRef.current !== "";
-				if (!(event.ctrlKey || event.altKey || event.metaKey) && event.key.length === 1) handleTypeaheadSearch(event.key);
-				if (isTypingAhead && event.key === " ") return;
-				if (OPEN_KEYS.includes(event.key)) {
-					handleOpen();
-					event.preventDefault();
-				}
-			})
-		})
-	});
-});
-SelectTrigger$1.displayName = TRIGGER_NAME$1;
-var VALUE_NAME = "SelectValue";
-var SelectValue$1 = import_react.forwardRef((props, forwardedRef) => {
-	const { __scopeSelect, className, style, children, placeholder = "", ...valueProps } = props;
-	const context = useSelectContext(VALUE_NAME, __scopeSelect);
-	const { onValueNodeHasChildrenChange } = context;
-	const hasChildren = children !== void 0;
-	const composedRefs = useComposedRefs(forwardedRef, context.onValueNodeChange);
-	useLayoutEffect2(() => {
-		onValueNodeHasChildrenChange(hasChildren);
-	}, [onValueNodeHasChildrenChange, hasChildren]);
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.span, {
-		...valueProps,
-		ref: composedRefs,
-		style: { pointerEvents: "none" },
-		children: shouldShowPlaceholder(context.value) ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(import_jsx_runtime.Fragment, { children: placeholder }) : children
-	});
-});
-SelectValue$1.displayName = VALUE_NAME;
-var ICON_NAME = "SelectIcon";
-var SelectIcon = import_react.forwardRef((props, forwardedRef) => {
-	const { __scopeSelect, children, ...iconProps } = props;
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.span, {
-		"aria-hidden": true,
-		...iconProps,
-		ref: forwardedRef,
-		children: children || "▼"
-	});
-});
-SelectIcon.displayName = ICON_NAME;
-var PORTAL_NAME$1 = "SelectPortal";
-var SelectPortal = (props) => {
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Portal$3, {
-		asChild: true,
-		...props
-	});
-};
-SelectPortal.displayName = PORTAL_NAME$1;
-var CONTENT_NAME$1 = "SelectContent";
-var SelectContent$1 = import_react.forwardRef((props, forwardedRef) => {
-	const context = useSelectContext(CONTENT_NAME$1, props.__scopeSelect);
-	const [fragment, setFragment] = import_react.useState();
-	useLayoutEffect2(() => {
-		setFragment(new DocumentFragment());
-	}, []);
-	if (!context.open) {
-		const frag = fragment;
-		return frag ? import_react_dom.createPortal(/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectContentProvider, {
-			scope: props.__scopeSelect,
-			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Collection.Slot, {
-				scope: props.__scopeSelect,
-				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { children: props.children })
-			})
-		}), frag) : null;
-	}
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectContentImpl, {
-		...props,
-		ref: forwardedRef
-	});
-});
-SelectContent$1.displayName = CONTENT_NAME$1;
-var CONTENT_MARGIN = 10;
-var [SelectContentProvider, useSelectContentContext] = createSelectContext(CONTENT_NAME$1);
-var CONTENT_IMPL_NAME = "SelectContentImpl";
-var Slot$1 = /* @__PURE__ */ createSlot$1("SelectContent.RemoveScroll");
-var SelectContentImpl = import_react.forwardRef((props, forwardedRef) => {
-	const { __scopeSelect, position = "item-aligned", onCloseAutoFocus, onEscapeKeyDown, onPointerDownOutside, side, sideOffset, align, alignOffset, arrowPadding, collisionBoundary, collisionPadding, sticky, hideWhenDetached, avoidCollisions, ...contentProps } = props;
-	const context = useSelectContext(CONTENT_NAME$1, __scopeSelect);
-	const [content, setContent] = import_react.useState(null);
-	const [viewport, setViewport] = import_react.useState(null);
-	const composedRefs = useComposedRefs(forwardedRef, (node) => setContent(node));
-	const [selectedItem, setSelectedItem] = import_react.useState(null);
-	const [selectedItemText, setSelectedItemText] = import_react.useState(null);
-	const getItems = useCollection(__scopeSelect);
-	const [isPositioned, setIsPositioned] = import_react.useState(false);
-	const firstValidItemFoundRef = import_react.useRef(false);
-	import_react.useEffect(() => {
-		if (content) return hideOthers(content);
-	}, [content]);
-	useFocusGuards();
-	const focusFirst = import_react.useCallback((candidates) => {
-		const [firstItem, ...restItems] = getItems().map((item) => item.ref.current);
-		const [lastItem] = restItems.slice(-1);
-		const PREVIOUSLY_FOCUSED_ELEMENT = document.activeElement;
-		for (const candidate of candidates) {
-			if (candidate === PREVIOUSLY_FOCUSED_ELEMENT) return;
-			candidate?.scrollIntoView({ block: "nearest" });
-			if (candidate === firstItem && viewport) viewport.scrollTop = 0;
-			if (candidate === lastItem && viewport) viewport.scrollTop = viewport.scrollHeight;
-			candidate?.focus();
-			if (document.activeElement !== PREVIOUSLY_FOCUSED_ELEMENT) return;
-		}
-	}, [getItems, viewport]);
-	const focusSelectedItem = import_react.useCallback(() => focusFirst([selectedItem, content]), [
-		focusFirst,
-		selectedItem,
-		content
-	]);
-	import_react.useEffect(() => {
-		if (isPositioned) focusSelectedItem();
-	}, [isPositioned, focusSelectedItem]);
-	const { onOpenChange, triggerPointerDownPosRef } = context;
-	import_react.useEffect(() => {
-		if (content) {
-			let pointerMoveDelta = {
-				x: 0,
-				y: 0
-			};
-			const handlePointerMove = (event) => {
-				pointerMoveDelta = {
-					x: Math.abs(Math.round(event.pageX) - (triggerPointerDownPosRef.current?.x ?? 0)),
-					y: Math.abs(Math.round(event.pageY) - (triggerPointerDownPosRef.current?.y ?? 0))
-				};
-			};
-			const handlePointerUp = (event) => {
-				if (pointerMoveDelta.x <= 10 && pointerMoveDelta.y <= 10) event.preventDefault();
-				else if (!content.contains(event.target)) onOpenChange(false);
-				document.removeEventListener("pointermove", handlePointerMove);
-				triggerPointerDownPosRef.current = null;
-			};
-			if (triggerPointerDownPosRef.current !== null) {
-				document.addEventListener("pointermove", handlePointerMove);
-				document.addEventListener("pointerup", handlePointerUp, {
-					capture: true,
-					once: true
-				});
-			}
-			return () => {
-				document.removeEventListener("pointermove", handlePointerMove);
-				document.removeEventListener("pointerup", handlePointerUp, { capture: true });
-			};
-		}
-	}, [
-		content,
-		onOpenChange,
-		triggerPointerDownPosRef
-	]);
-	import_react.useEffect(() => {
-		const close = () => onOpenChange(false);
-		window.addEventListener("blur", close);
-		window.addEventListener("resize", close);
-		return () => {
-			window.removeEventListener("blur", close);
-			window.removeEventListener("resize", close);
-		};
-	}, [onOpenChange]);
-	const [searchRef, handleTypeaheadSearch] = useTypeaheadSearch((search) => {
-		const enabledItems = getItems().filter((item) => !item.disabled);
-		const nextItem = findNextItem(enabledItems, search, enabledItems.find((item) => item.ref.current === document.activeElement));
-		if (nextItem) setTimeout(() => nextItem.ref.current.focus());
-	});
-	const itemRefCallback = import_react.useCallback((node, value, disabled) => {
-		const isFirstValidItem = !firstValidItemFoundRef.current && !disabled;
-		if (context.value !== void 0 && context.value === value || isFirstValidItem) {
-			setSelectedItem(node);
-			if (isFirstValidItem) firstValidItemFoundRef.current = true;
-		}
-	}, [context.value]);
-	const handleItemLeave = import_react.useCallback(() => content?.focus(), [content]);
-	const itemTextRefCallback = import_react.useCallback((node, value, disabled) => {
-		const isFirstValidItem = !firstValidItemFoundRef.current && !disabled;
-		if (context.value !== void 0 && context.value === value || isFirstValidItem) setSelectedItemText(node);
-	}, [context.value]);
-	const SelectPosition = position === "popper" ? SelectPopperPosition : SelectItemAlignedPosition;
-	const popperContentProps = SelectPosition === SelectPopperPosition ? {
-		side,
-		sideOffset,
-		align,
-		alignOffset,
-		arrowPadding,
-		collisionBoundary,
-		collisionPadding,
-		sticky,
-		hideWhenDetached,
-		avoidCollisions
-	} : {};
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectContentProvider, {
-		scope: __scopeSelect,
-		content,
-		viewport,
-		onViewportChange: setViewport,
-		itemRefCallback,
-		selectedItem,
-		onItemLeave: handleItemLeave,
-		itemTextRefCallback,
-		focusSelectedItem,
-		selectedItemText,
-		position,
-		isPositioned,
-		searchRef,
-		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ReactRemoveScroll, {
-			as: Slot$1,
-			allowPinchZoom: true,
-			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(FocusScope, {
-				asChild: true,
-				trapped: context.open,
-				onMountAutoFocus: (event) => {
-					event.preventDefault();
-				},
-				onUnmountAutoFocus: composeEventHandlers(onCloseAutoFocus, (event) => {
-					context.trigger?.focus({ preventScroll: true });
-					event.preventDefault();
-				}),
-				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DismissableLayer, {
-					asChild: true,
-					disableOutsidePointerEvents: true,
-					onEscapeKeyDown,
-					onPointerDownOutside,
-					onFocusOutside: (event) => event.preventDefault(),
-					onDismiss: () => context.onOpenChange(false),
-					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectPosition, {
-						role: "listbox",
-						id: context.contentId,
-						"data-state": context.open ? "open" : "closed",
-						dir: context.dir,
-						onContextMenu: (event) => event.preventDefault(),
-						...contentProps,
-						...popperContentProps,
-						onPlaced: () => setIsPositioned(true),
-						ref: composedRefs,
-						style: {
-							display: "flex",
-							flexDirection: "column",
-							outline: "none",
-							...contentProps.style
-						},
-						onKeyDown: composeEventHandlers(contentProps.onKeyDown, (event) => {
-							const isModifierKey = event.ctrlKey || event.altKey || event.metaKey;
-							if (event.key === "Tab") event.preventDefault();
-							if (!isModifierKey && event.key.length === 1) handleTypeaheadSearch(event.key);
-							if ([
-								"ArrowUp",
-								"ArrowDown",
-								"Home",
-								"End"
-							].includes(event.key)) {
-								let candidateNodes = getItems().filter((item) => !item.disabled).map((item) => item.ref.current);
-								if (["ArrowUp", "End"].includes(event.key)) candidateNodes = candidateNodes.slice().reverse();
-								if (["ArrowUp", "ArrowDown"].includes(event.key)) {
-									const currentElement = event.target;
-									const currentIndex = candidateNodes.indexOf(currentElement);
-									candidateNodes = candidateNodes.slice(currentIndex + 1);
-								}
-								setTimeout(() => focusFirst(candidateNodes));
-								event.preventDefault();
-							}
-						})
-					})
-				})
-			})
-		})
-	});
-});
-SelectContentImpl.displayName = CONTENT_IMPL_NAME;
-var ITEM_ALIGNED_POSITION_NAME = "SelectItemAlignedPosition";
-var SelectItemAlignedPosition = import_react.forwardRef((props, forwardedRef) => {
-	const { __scopeSelect, onPlaced, ...popperProps } = props;
-	const context = useSelectContext(CONTENT_NAME$1, __scopeSelect);
-	const contentContext = useSelectContentContext(CONTENT_NAME$1, __scopeSelect);
-	const [contentWrapper, setContentWrapper] = import_react.useState(null);
-	const [content, setContent] = import_react.useState(null);
-	const composedRefs = useComposedRefs(forwardedRef, (node) => setContent(node));
-	const getItems = useCollection(__scopeSelect);
-	const shouldExpandOnScrollRef = import_react.useRef(false);
-	const shouldRepositionRef = import_react.useRef(true);
-	const { viewport, selectedItem, selectedItemText, focusSelectedItem } = contentContext;
-	const position = import_react.useCallback(() => {
-		if (context.trigger && context.valueNode && contentWrapper && content && viewport && selectedItem && selectedItemText) {
-			const triggerRect = context.trigger.getBoundingClientRect();
-			const contentRect = content.getBoundingClientRect();
-			const valueNodeRect = context.valueNode.getBoundingClientRect();
-			const itemTextRect = selectedItemText.getBoundingClientRect();
-			if (context.dir !== "rtl") {
-				const itemTextOffset = itemTextRect.left - contentRect.left;
-				const left = valueNodeRect.left - itemTextOffset;
-				const leftDelta = triggerRect.left - left;
-				const minContentWidth = triggerRect.width + leftDelta;
-				const contentWidth = Math.max(minContentWidth, contentRect.width);
-				const rightEdge = window.innerWidth - CONTENT_MARGIN;
-				const clampedLeft = clamp(left, [CONTENT_MARGIN, Math.max(CONTENT_MARGIN, rightEdge - contentWidth)]);
-				contentWrapper.style.minWidth = minContentWidth + "px";
-				contentWrapper.style.left = clampedLeft + "px";
-			} else {
-				const itemTextOffset = contentRect.right - itemTextRect.right;
-				const right = window.innerWidth - valueNodeRect.right - itemTextOffset;
-				const rightDelta = window.innerWidth - triggerRect.right - right;
-				const minContentWidth = triggerRect.width + rightDelta;
-				const contentWidth = Math.max(minContentWidth, contentRect.width);
-				const leftEdge = window.innerWidth - CONTENT_MARGIN;
-				const clampedRight = clamp(right, [CONTENT_MARGIN, Math.max(CONTENT_MARGIN, leftEdge - contentWidth)]);
-				contentWrapper.style.minWidth = minContentWidth + "px";
-				contentWrapper.style.right = clampedRight + "px";
-			}
-			const items = getItems();
-			const availableHeight = window.innerHeight - CONTENT_MARGIN * 2;
-			const itemsHeight = viewport.scrollHeight;
-			const contentStyles = window.getComputedStyle(content);
-			const contentBorderTopWidth = parseInt(contentStyles.borderTopWidth, 10);
-			const contentPaddingTop = parseInt(contentStyles.paddingTop, 10);
-			const contentBorderBottomWidth = parseInt(contentStyles.borderBottomWidth, 10);
-			const contentPaddingBottom = parseInt(contentStyles.paddingBottom, 10);
-			const fullContentHeight = contentBorderTopWidth + contentPaddingTop + itemsHeight + contentPaddingBottom + contentBorderBottomWidth;
-			const minContentHeight = Math.min(selectedItem.offsetHeight * 5, fullContentHeight);
-			const viewportStyles = window.getComputedStyle(viewport);
-			const viewportPaddingTop = parseInt(viewportStyles.paddingTop, 10);
-			const viewportPaddingBottom = parseInt(viewportStyles.paddingBottom, 10);
-			const topEdgeToTriggerMiddle = triggerRect.top + triggerRect.height / 2 - CONTENT_MARGIN;
-			const triggerMiddleToBottomEdge = availableHeight - topEdgeToTriggerMiddle;
-			const selectedItemHalfHeight = selectedItem.offsetHeight / 2;
-			const itemOffsetMiddle = selectedItem.offsetTop + selectedItemHalfHeight;
-			const contentTopToItemMiddle = contentBorderTopWidth + contentPaddingTop + itemOffsetMiddle;
-			const itemMiddleToContentBottom = fullContentHeight - contentTopToItemMiddle;
-			if (contentTopToItemMiddle <= topEdgeToTriggerMiddle) {
-				const isLastItem = items.length > 0 && selectedItem === items[items.length - 1].ref.current;
-				contentWrapper.style.bottom = "0px";
-				const viewportOffsetBottom = content.clientHeight - viewport.offsetTop - viewport.offsetHeight;
-				const height = contentTopToItemMiddle + Math.max(triggerMiddleToBottomEdge, selectedItemHalfHeight + (isLastItem ? viewportPaddingBottom : 0) + viewportOffsetBottom + contentBorderBottomWidth);
-				contentWrapper.style.height = height + "px";
-			} else {
-				const isFirstItem = items.length > 0 && selectedItem === items[0].ref.current;
-				contentWrapper.style.top = "0px";
-				const height = Math.max(topEdgeToTriggerMiddle, contentBorderTopWidth + viewport.offsetTop + (isFirstItem ? viewportPaddingTop : 0) + selectedItemHalfHeight) + itemMiddleToContentBottom;
-				contentWrapper.style.height = height + "px";
-				viewport.scrollTop = contentTopToItemMiddle - topEdgeToTriggerMiddle + viewport.offsetTop;
-			}
-			contentWrapper.style.margin = `${CONTENT_MARGIN}px 0`;
-			contentWrapper.style.minHeight = minContentHeight + "px";
-			contentWrapper.style.maxHeight = availableHeight + "px";
-			onPlaced?.();
-			requestAnimationFrame(() => shouldExpandOnScrollRef.current = true);
-		}
-	}, [
-		getItems,
-		context.trigger,
-		context.valueNode,
-		contentWrapper,
-		content,
-		viewport,
-		selectedItem,
-		selectedItemText,
-		context.dir,
-		onPlaced
-	]);
-	useLayoutEffect2(() => position(), [position]);
-	const [contentZIndex, setContentZIndex] = import_react.useState();
-	useLayoutEffect2(() => {
-		if (content) setContentZIndex(window.getComputedStyle(content).zIndex);
-	}, [content]);
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectViewportProvider, {
-		scope: __scopeSelect,
-		contentWrapper,
-		shouldExpandOnScrollRef,
-		onScrollButtonChange: import_react.useCallback((node) => {
-			if (node && shouldRepositionRef.current === true) {
-				position();
-				focusSelectedItem?.();
-				shouldRepositionRef.current = false;
-			}
-		}, [position, focusSelectedItem]),
-		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-			ref: setContentWrapper,
-			style: {
-				display: "flex",
-				flexDirection: "column",
-				position: "fixed",
-				zIndex: contentZIndex
-			},
-			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.div, {
-				...popperProps,
-				ref: composedRefs,
-				style: {
-					boxSizing: "border-box",
-					maxHeight: "100%",
-					...popperProps.style
-				}
-			})
-		})
-	});
-});
-SelectItemAlignedPosition.displayName = ITEM_ALIGNED_POSITION_NAME;
-var POPPER_POSITION_NAME = "SelectPopperPosition";
-var SelectPopperPosition = import_react.forwardRef((props, forwardedRef) => {
-	const { __scopeSelect, align = "start", collisionPadding = CONTENT_MARGIN, ...popperProps } = props;
-	const popperScope = usePopperScope$1(__scopeSelect);
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Content$2, {
-		...popperScope,
-		...popperProps,
-		ref: forwardedRef,
-		align,
-		collisionPadding,
-		style: {
-			boxSizing: "border-box",
-			...popperProps.style,
-			"--radix-select-content-transform-origin": "var(--radix-popper-transform-origin)",
-			"--radix-select-content-available-width": "var(--radix-popper-available-width)",
-			"--radix-select-content-available-height": "var(--radix-popper-available-height)",
-			"--radix-select-trigger-width": "var(--radix-popper-anchor-width)",
-			"--radix-select-trigger-height": "var(--radix-popper-anchor-height)"
-		}
-	});
-});
-SelectPopperPosition.displayName = POPPER_POSITION_NAME;
-var [SelectViewportProvider, useSelectViewportContext] = createSelectContext(CONTENT_NAME$1, {});
-var VIEWPORT_NAME$1 = "SelectViewport";
-var SelectViewport = import_react.forwardRef((props, forwardedRef) => {
-	const { __scopeSelect, nonce, ...viewportProps } = props;
-	const contentContext = useSelectContentContext(VIEWPORT_NAME$1, __scopeSelect);
-	const viewportContext = useSelectViewportContext(VIEWPORT_NAME$1, __scopeSelect);
-	const composedRefs = useComposedRefs(forwardedRef, contentContext.onViewportChange);
-	const prevScrollTopRef = import_react.useRef(0);
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("style", {
-		dangerouslySetInnerHTML: { __html: `[data-radix-select-viewport]{scrollbar-width:none;-ms-overflow-style:none;-webkit-overflow-scrolling:touch;}[data-radix-select-viewport]::-webkit-scrollbar{display:none}` },
-		nonce
-	}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Collection.Slot, {
-		scope: __scopeSelect,
-		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.div, {
-			"data-radix-select-viewport": "",
-			role: "presentation",
-			...viewportProps,
-			ref: composedRefs,
-			style: {
-				position: "relative",
-				flex: 1,
-				overflow: "hidden auto",
-				...viewportProps.style
-			},
-			onScroll: composeEventHandlers(viewportProps.onScroll, (event) => {
-				const viewport = event.currentTarget;
-				const { contentWrapper, shouldExpandOnScrollRef } = viewportContext;
-				if (shouldExpandOnScrollRef?.current && contentWrapper) {
-					const scrolledBy = Math.abs(prevScrollTopRef.current - viewport.scrollTop);
-					if (scrolledBy > 0) {
-						const availableHeight = window.innerHeight - CONTENT_MARGIN * 2;
-						const cssMinHeight = parseFloat(contentWrapper.style.minHeight);
-						const cssHeight = parseFloat(contentWrapper.style.height);
-						const prevHeight = Math.max(cssMinHeight, cssHeight);
-						if (prevHeight < availableHeight) {
-							const nextHeight = prevHeight + scrolledBy;
-							const clampedNextHeight = Math.min(availableHeight, nextHeight);
-							const heightDiff = nextHeight - clampedNextHeight;
-							contentWrapper.style.height = clampedNextHeight + "px";
-							if (contentWrapper.style.bottom === "0px") {
-								viewport.scrollTop = heightDiff > 0 ? heightDiff : 0;
-								contentWrapper.style.justifyContent = "flex-end";
-							}
-						}
-					}
-				}
-				prevScrollTopRef.current = viewport.scrollTop;
-			})
-		})
-	})] });
-});
-SelectViewport.displayName = VIEWPORT_NAME$1;
-var GROUP_NAME = "SelectGroup";
-var [SelectGroupContextProvider, useSelectGroupContext] = createSelectContext(GROUP_NAME);
-var SelectGroup$1 = import_react.forwardRef((props, forwardedRef) => {
-	const { __scopeSelect, ...groupProps } = props;
-	const groupId = useId();
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectGroupContextProvider, {
-		scope: __scopeSelect,
-		id: groupId,
-		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.div, {
-			role: "group",
-			"aria-labelledby": groupId,
-			...groupProps,
-			ref: forwardedRef
-		})
-	});
-});
-SelectGroup$1.displayName = GROUP_NAME;
-var LABEL_NAME = "SelectLabel";
-var SelectLabel$1 = import_react.forwardRef((props, forwardedRef) => {
-	const { __scopeSelect, ...labelProps } = props;
-	const groupContext = useSelectGroupContext(LABEL_NAME, __scopeSelect);
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.div, {
-		id: groupContext.id,
-		...labelProps,
-		ref: forwardedRef
-	});
-});
-SelectLabel$1.displayName = LABEL_NAME;
-var ITEM_NAME = "SelectItem";
-var [SelectItemContextProvider, useSelectItemContext] = createSelectContext(ITEM_NAME);
-var SelectItem$1 = import_react.forwardRef((props, forwardedRef) => {
-	const { __scopeSelect, value, disabled = false, textValue: textValueProp, ...itemProps } = props;
-	const context = useSelectContext(ITEM_NAME, __scopeSelect);
-	const contentContext = useSelectContentContext(ITEM_NAME, __scopeSelect);
-	const isSelected = context.value === value;
-	const [textValue, setTextValue] = import_react.useState(textValueProp ?? "");
-	const [isFocused, setIsFocused] = import_react.useState(false);
-	const composedRefs = useComposedRefs(forwardedRef, (node) => contentContext.itemRefCallback?.(node, value, disabled));
-	const textId = useId();
-	const pointerTypeRef = import_react.useRef("touch");
-	const handleSelect = () => {
-		if (!disabled) {
-			context.onValueChange(value);
-			context.onOpenChange(false);
-		}
-	};
-	if (value === "") throw new Error("A <Select.Item /> must have a value prop that is not an empty string. This is because the Select value can be set to an empty string to clear the selection and show the placeholder.");
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectItemContextProvider, {
-		scope: __scopeSelect,
-		value,
-		disabled,
-		textId,
-		isSelected,
-		onItemTextChange: import_react.useCallback((node) => {
-			setTextValue((prevTextValue) => prevTextValue || (node?.textContent ?? "").trim());
-		}, []),
-		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Collection.ItemSlot, {
-			scope: __scopeSelect,
-			value,
-			disabled,
-			textValue,
-			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.div, {
-				role: "option",
-				"aria-labelledby": textId,
-				"data-highlighted": isFocused ? "" : void 0,
-				"aria-selected": isSelected && isFocused,
-				"data-state": isSelected ? "checked" : "unchecked",
-				"aria-disabled": disabled || void 0,
-				"data-disabled": disabled ? "" : void 0,
-				tabIndex: disabled ? void 0 : -1,
-				...itemProps,
-				ref: composedRefs,
-				onFocus: composeEventHandlers(itemProps.onFocus, () => setIsFocused(true)),
-				onBlur: composeEventHandlers(itemProps.onBlur, () => setIsFocused(false)),
-				onClick: composeEventHandlers(itemProps.onClick, () => {
-					if (pointerTypeRef.current !== "mouse") handleSelect();
-				}),
-				onPointerUp: composeEventHandlers(itemProps.onPointerUp, () => {
-					if (pointerTypeRef.current === "mouse") handleSelect();
-				}),
-				onPointerDown: composeEventHandlers(itemProps.onPointerDown, (event) => {
-					pointerTypeRef.current = event.pointerType;
-				}),
-				onPointerMove: composeEventHandlers(itemProps.onPointerMove, (event) => {
-					pointerTypeRef.current = event.pointerType;
-					if (disabled) contentContext.onItemLeave?.();
-					else if (pointerTypeRef.current === "mouse") event.currentTarget.focus({ preventScroll: true });
-				}),
-				onPointerLeave: composeEventHandlers(itemProps.onPointerLeave, (event) => {
-					if (event.currentTarget === document.activeElement) contentContext.onItemLeave?.();
-				}),
-				onKeyDown: composeEventHandlers(itemProps.onKeyDown, (event) => {
-					if (contentContext.searchRef?.current !== "" && event.key === " ") return;
-					if (SELECTION_KEYS.includes(event.key)) handleSelect();
-					if (event.key === " ") event.preventDefault();
-				})
-			})
-		})
-	});
-});
-SelectItem$1.displayName = ITEM_NAME;
-var ITEM_TEXT_NAME = "SelectItemText";
-var SelectItemText = import_react.forwardRef((props, forwardedRef) => {
-	const { __scopeSelect, className, style, ...itemTextProps } = props;
-	const context = useSelectContext(ITEM_TEXT_NAME, __scopeSelect);
-	const contentContext = useSelectContentContext(ITEM_TEXT_NAME, __scopeSelect);
-	const itemContext = useSelectItemContext(ITEM_TEXT_NAME, __scopeSelect);
-	const nativeOptionsContext = useSelectNativeOptionsContext(ITEM_TEXT_NAME, __scopeSelect);
-	const [itemTextNode, setItemTextNode] = import_react.useState(null);
-	const composedRefs = useComposedRefs(forwardedRef, (node) => setItemTextNode(node), itemContext.onItemTextChange, (node) => contentContext.itemTextRefCallback?.(node, itemContext.value, itemContext.disabled));
-	const textContent = itemTextNode?.textContent;
-	const nativeOption = import_react.useMemo(() => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("option", {
-		value: itemContext.value,
-		disabled: itemContext.disabled,
-		children: textContent
-	}, itemContext.value), [
-		itemContext.disabled,
-		itemContext.value,
-		textContent
-	]);
-	const { onNativeOptionAdd, onNativeOptionRemove } = nativeOptionsContext;
-	useLayoutEffect2(() => {
-		onNativeOptionAdd(nativeOption);
-		return () => onNativeOptionRemove(nativeOption);
-	}, [
-		onNativeOptionAdd,
-		onNativeOptionRemove,
-		nativeOption
-	]);
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.span, {
-		id: itemContext.textId,
-		...itemTextProps,
-		ref: composedRefs
-	}), itemContext.isSelected && context.valueNode && !context.valueNodeHasChildren ? import_react_dom.createPortal(itemTextProps.children, context.valueNode) : null] });
-});
-SelectItemText.displayName = ITEM_TEXT_NAME;
-var ITEM_INDICATOR_NAME = "SelectItemIndicator";
-var SelectItemIndicator = import_react.forwardRef((props, forwardedRef) => {
-	const { __scopeSelect, ...itemIndicatorProps } = props;
-	return useSelectItemContext(ITEM_INDICATOR_NAME, __scopeSelect).isSelected ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.span, {
-		"aria-hidden": true,
-		...itemIndicatorProps,
-		ref: forwardedRef
-	}) : null;
-});
-SelectItemIndicator.displayName = ITEM_INDICATOR_NAME;
-var SCROLL_UP_BUTTON_NAME = "SelectScrollUpButton";
-var SelectScrollUpButton$1 = import_react.forwardRef((props, forwardedRef) => {
-	const contentContext = useSelectContentContext(SCROLL_UP_BUTTON_NAME, props.__scopeSelect);
-	const viewportContext = useSelectViewportContext(SCROLL_UP_BUTTON_NAME, props.__scopeSelect);
-	const [canScrollUp, setCanScrollUp] = import_react.useState(false);
-	const composedRefs = useComposedRefs(forwardedRef, viewportContext.onScrollButtonChange);
-	useLayoutEffect2(() => {
-		if (contentContext.viewport && contentContext.isPositioned) {
-			let handleScroll2 = function() {
-				setCanScrollUp(viewport.scrollTop > 0);
-			};
-			const viewport = contentContext.viewport;
-			handleScroll2();
-			viewport.addEventListener("scroll", handleScroll2);
-			return () => viewport.removeEventListener("scroll", handleScroll2);
-		}
-	}, [contentContext.viewport, contentContext.isPositioned]);
-	return canScrollUp ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectScrollButtonImpl, {
-		...props,
-		ref: composedRefs,
-		onAutoScroll: () => {
-			const { viewport, selectedItem } = contentContext;
-			if (viewport && selectedItem) viewport.scrollTop = viewport.scrollTop - selectedItem.offsetHeight;
-		}
-	}) : null;
-});
-SelectScrollUpButton$1.displayName = SCROLL_UP_BUTTON_NAME;
-var SCROLL_DOWN_BUTTON_NAME = "SelectScrollDownButton";
-var SelectScrollDownButton$1 = import_react.forwardRef((props, forwardedRef) => {
-	const contentContext = useSelectContentContext(SCROLL_DOWN_BUTTON_NAME, props.__scopeSelect);
-	const viewportContext = useSelectViewportContext(SCROLL_DOWN_BUTTON_NAME, props.__scopeSelect);
-	const [canScrollDown, setCanScrollDown] = import_react.useState(false);
-	const composedRefs = useComposedRefs(forwardedRef, viewportContext.onScrollButtonChange);
-	useLayoutEffect2(() => {
-		if (contentContext.viewport && contentContext.isPositioned) {
-			let handleScroll2 = function() {
-				const maxScroll = viewport.scrollHeight - viewport.clientHeight;
-				setCanScrollDown(Math.ceil(viewport.scrollTop) < maxScroll);
-			};
-			const viewport = contentContext.viewport;
-			handleScroll2();
-			viewport.addEventListener("scroll", handleScroll2);
-			return () => viewport.removeEventListener("scroll", handleScroll2);
-		}
-	}, [contentContext.viewport, contentContext.isPositioned]);
-	return canScrollDown ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectScrollButtonImpl, {
-		...props,
-		ref: composedRefs,
-		onAutoScroll: () => {
-			const { viewport, selectedItem } = contentContext;
-			if (viewport && selectedItem) viewport.scrollTop = viewport.scrollTop + selectedItem.offsetHeight;
-		}
-	}) : null;
-});
-SelectScrollDownButton$1.displayName = SCROLL_DOWN_BUTTON_NAME;
-var SelectScrollButtonImpl = import_react.forwardRef((props, forwardedRef) => {
-	const { __scopeSelect, onAutoScroll, ...scrollIndicatorProps } = props;
-	const contentContext = useSelectContentContext("SelectScrollButton", __scopeSelect);
-	const autoScrollTimerRef = import_react.useRef(null);
-	const getItems = useCollection(__scopeSelect);
-	const clearAutoScrollTimer = import_react.useCallback(() => {
-		if (autoScrollTimerRef.current !== null) {
-			window.clearInterval(autoScrollTimerRef.current);
-			autoScrollTimerRef.current = null;
-		}
-	}, []);
-	import_react.useEffect(() => {
-		return () => clearAutoScrollTimer();
-	}, [clearAutoScrollTimer]);
-	useLayoutEffect2(() => {
-		getItems().find((item) => item.ref.current === document.activeElement)?.ref.current?.scrollIntoView({ block: "nearest" });
-	}, [getItems]);
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.div, {
-		"aria-hidden": true,
-		...scrollIndicatorProps,
-		ref: forwardedRef,
-		style: {
-			flexShrink: 0,
-			...scrollIndicatorProps.style
-		},
-		onPointerDown: composeEventHandlers(scrollIndicatorProps.onPointerDown, () => {
-			if (autoScrollTimerRef.current === null) autoScrollTimerRef.current = window.setInterval(onAutoScroll, 50);
-		}),
-		onPointerMove: composeEventHandlers(scrollIndicatorProps.onPointerMove, () => {
-			contentContext.onItemLeave?.();
-			if (autoScrollTimerRef.current === null) autoScrollTimerRef.current = window.setInterval(onAutoScroll, 50);
-		}),
-		onPointerLeave: composeEventHandlers(scrollIndicatorProps.onPointerLeave, () => {
-			clearAutoScrollTimer();
-		})
-	});
-});
-var SEPARATOR_NAME = "SelectSeparator";
-var SelectSeparator$1 = import_react.forwardRef((props, forwardedRef) => {
-	const { __scopeSelect, ...separatorProps } = props;
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.div, {
-		"aria-hidden": true,
-		...separatorProps,
-		ref: forwardedRef
-	});
-});
-SelectSeparator$1.displayName = SEPARATOR_NAME;
-var ARROW_NAME$1 = "SelectArrow";
-var SelectArrow = import_react.forwardRef((props, forwardedRef) => {
-	const { __scopeSelect, ...arrowProps } = props;
-	const popperScope = usePopperScope$1(__scopeSelect);
-	const context = useSelectContext(ARROW_NAME$1, __scopeSelect);
-	const contentContext = useSelectContentContext(ARROW_NAME$1, __scopeSelect);
-	return context.open && contentContext.position === "popper" ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Arrow, {
-		...popperScope,
-		...arrowProps,
-		ref: forwardedRef
-	}) : null;
-});
-SelectArrow.displayName = ARROW_NAME$1;
-var BUBBLE_INPUT_NAME = "SelectBubbleInput";
-var SelectBubbleInput = import_react.forwardRef(({ __scopeSelect, value, ...props }, forwardedRef) => {
-	const ref = import_react.useRef(null);
-	const composedRefs = useComposedRefs(forwardedRef, ref);
-	const prevValue = usePrevious(value);
-	import_react.useEffect(() => {
-		const select = ref.current;
-		if (!select) return;
-		const selectProto = window.HTMLSelectElement.prototype;
-		const setValue = Object.getOwnPropertyDescriptor(selectProto, "value").set;
-		if (prevValue !== value && setValue) {
-			const event = new Event("change", { bubbles: true });
-			setValue.call(select, value);
-			select.dispatchEvent(event);
-		}
-	}, [prevValue, value]);
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.select, {
-		...props,
-		style: {
-			...VISUALLY_HIDDEN_STYLES,
-			...props.style
-		},
-		ref: composedRefs,
-		defaultValue: value
-	});
-});
-SelectBubbleInput.displayName = BUBBLE_INPUT_NAME;
-function shouldShowPlaceholder(value) {
-	return value === "" || value === void 0;
-}
-function useTypeaheadSearch(onSearchChange) {
-	const handleSearchChange = useCallbackRef$1(onSearchChange);
-	const searchRef = import_react.useRef("");
-	const timerRef = import_react.useRef(0);
-	const handleTypeaheadSearch = import_react.useCallback((key) => {
-		const search = searchRef.current + key;
-		handleSearchChange(search);
-		(function updateSearch(value) {
-			searchRef.current = value;
-			window.clearTimeout(timerRef.current);
-			if (value !== "") timerRef.current = window.setTimeout(() => updateSearch(""), 1e3);
-		})(search);
-	}, [handleSearchChange]);
-	const resetTypeahead = import_react.useCallback(() => {
-		searchRef.current = "";
-		window.clearTimeout(timerRef.current);
-	}, []);
-	import_react.useEffect(() => {
-		return () => window.clearTimeout(timerRef.current);
-	}, []);
-	return [
-		searchRef,
-		handleTypeaheadSearch,
-		resetTypeahead
-	];
-}
-function findNextItem(items, search, currentItem) {
-	const normalizedSearch = search.length > 1 && Array.from(search).every((char) => char === search[0]) ? search[0] : search;
-	const currentItemIndex = currentItem ? items.indexOf(currentItem) : -1;
-	let wrappedItems = wrapArray(items, Math.max(currentItemIndex, 0));
-	if (normalizedSearch.length === 1) wrappedItems = wrappedItems.filter((v) => v !== currentItem);
-	const nextItem = wrappedItems.find((item) => item.textValue.toLowerCase().startsWith(normalizedSearch.toLowerCase()));
-	return nextItem !== currentItem ? nextItem : void 0;
-}
-function wrapArray(array, startIndex) {
-	return array.map((_, index) => array[(startIndex + index) % array.length]);
-}
-var Root2$1 = Select$2;
-var Trigger$1 = SelectTrigger$1;
-var Value = SelectValue$1;
-var Icon = SelectIcon;
-var Portal$1 = SelectPortal;
-var Content2$1 = SelectContent$1;
-var Viewport$1 = SelectViewport;
-var Label = SelectLabel$1;
-var Item = SelectItem$1;
-var ItemText = SelectItemText;
-var ItemIndicator = SelectItemIndicator;
-var ScrollUpButton = SelectScrollUpButton$1;
-var ScrollDownButton = SelectScrollDownButton$1;
-var Separator = SelectSeparator$1;
-//#endregion
-//#region src/components/ui/select.tsx
-var Select$1 = Root2$1;
-var SelectValue = Value;
-var SelectTrigger = import_react.forwardRef(({ className, children, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Trigger$1, {
-	"data-uid": "src/components/ui/select.tsx:18:3",
-	"data-prohibitions": "[editContent]",
-	ref,
-	className: cn$1("flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background data-[placeholder]:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1", className),
-	...props,
-	children: [children, /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Icon, {
-		"data-uid": "src/components/ui/select.tsx:27:5",
-		"data-prohibitions": "[]",
-		asChild: true,
-		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChevronDown, {
-			"data-uid": "src/components/ui/select.tsx:28:7",
-			"data-prohibitions": "[editContent]",
-			className: "h-4 w-4 opacity-50"
-		})
-	})]
-}));
-SelectTrigger.displayName = Trigger$1.displayName;
-var SelectScrollUpButton = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ScrollUpButton, {
-	"data-uid": "src/components/ui/select.tsx:38:3",
-	"data-prohibitions": "[editContent]",
-	ref,
-	className: cn$1("flex cursor-default items-center justify-center py-1", className),
-	...props,
-	children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChevronUp, {
-		"data-uid": "src/components/ui/select.tsx:43:5",
-		"data-prohibitions": "[editContent]",
-		className: "h-4 w-4"
-	})
-}));
-SelectScrollUpButton.displayName = ScrollUpButton.displayName;
-var SelectScrollDownButton = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ScrollDownButton, {
-	"data-uid": "src/components/ui/select.tsx:52:3",
-	"data-prohibitions": "[editContent]",
-	ref,
-	className: cn$1("flex cursor-default items-center justify-center py-1", className),
-	...props,
-	children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChevronDown, {
-		"data-uid": "src/components/ui/select.tsx:57:5",
-		"data-prohibitions": "[editContent]",
-		className: "h-4 w-4"
-	})
-}));
-SelectScrollDownButton.displayName = ScrollDownButton.displayName;
-var SelectContent = import_react.forwardRef(({ className, children, position = "popper", ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Portal$1, {
-	"data-uid": "src/components/ui/select.tsx:66:3",
-	"data-prohibitions": "[editContent]",
-	children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Content2$1, {
-		"data-uid": "src/components/ui/select.tsx:67:5",
-		"data-prohibitions": "[editContent]",
-		ref,
-		className: cn$1("relative z-50 max-h-[--radix-select-content-available-height] min-w-[8rem] overflow-y-auto overflow-x-hidden rounded-md border bg-popover text-popover-foreground shadow-md data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 origin-[--radix-select-content-transform-origin]", position === "popper" && "data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1", className),
-		position,
-		...props,
-		children: [
-			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectScrollUpButton, {
-				"data-uid": "src/components/ui/select.tsx:78:7",
-				"data-prohibitions": "[editContent]"
-			}),
-			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Viewport$1, {
-				"data-uid": "src/components/ui/select.tsx:79:7",
-				"data-prohibitions": "[editContent]",
-				className: cn$1("p-1", position === "popper" && "h-[var(--radix-select-trigger-height)] w-full min-w-[var(--radix-select-trigger-width)]"),
-				children
-			}),
-			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectScrollDownButton, {
-				"data-uid": "src/components/ui/select.tsx:88:7",
-				"data-prohibitions": "[editContent]"
-			})
-		]
-	})
-}));
-SelectContent.displayName = Content2$1.displayName;
-var SelectLabel = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label, {
-	"data-uid": "src/components/ui/select.tsx:98:3",
-	"data-prohibitions": "[editContent]",
-	ref,
-	className: cn$1("py-1.5 pl-8 pr-2 text-sm font-semibold", className),
-	...props
-}));
-SelectLabel.displayName = Label.displayName;
-var SelectItem = import_react.forwardRef(({ className, children, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Item, {
-	"data-uid": "src/components/ui/select.tsx:110:3",
-	"data-prohibitions": "[editContent]",
-	ref,
-	className: cn$1("relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50", className),
-	...props,
-	children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-		"data-uid": "src/components/ui/select.tsx:118:5",
-		"data-prohibitions": "[]",
-		className: "absolute left-2 flex h-3.5 w-3.5 items-center justify-center",
-		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ItemIndicator, {
-			"data-uid": "src/components/ui/select.tsx:119:7",
-			"data-prohibitions": "[]",
-			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Check, {
-				"data-uid": "src/components/ui/select.tsx:120:9",
-				"data-prohibitions": "[editContent]",
-				className: "h-4 w-4"
-			})
-		})
-	}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ItemText, {
-		"data-uid": "src/components/ui/select.tsx:124:5",
-		"data-prohibitions": "[editContent]",
-		children
-	})]
-}));
-SelectItem.displayName = Item.displayName;
-var SelectSeparator = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Separator, {
-	"data-uid": "src/components/ui/select.tsx:133:3",
-	"data-prohibitions": "[editContent]",
-	ref,
-	className: cn$1("-mx-1 my-1 h-px bg-muted", className),
-	...props
-}));
-SelectSeparator.displayName = Separator.displayName;
-//#endregion
 //#region src/components/caixa/CaixaAberto.tsx
-function CaixaAberto({ caixa, movements, sales, onFechar, onNovaMov }) {
+function CaixaAberto({ caixa, movements, sales, recebimentos, pagamentos, onFechar, onNovaMov }) {
 	const [movOpen, setMovOpen] = (0, import_react.useState)(false);
 	const [closeOpen, setCloseOpen] = (0, import_react.useState)(false);
 	const [form, setForm] = (0, import_react.useState)({
@@ -75899,21 +76361,43 @@ function CaixaAberto({ caixa, movements, sales, onFechar, onNovaMov }) {
 		descricao: ""
 	});
 	const totals = (0, import_react.useMemo)(() => {
+		const autoPrefix = "[Auto]";
 		const vDinheiro = sales.filter((s) => s.metodo_pagamento === "Dinheiro").reduce((acc, s) => acc + Number(s.total), 0);
-		const vTotal = sales.reduce((acc, s) => acc + Number(s.total), 0);
-		const e = movements.filter((m) => m.tipo === "entrada").reduce((acc, m) => acc + Number(m.valor), 0);
-		const s = movements.filter((m) => m.tipo === "saida").reduce((acc, m) => acc + Number(m.valor), 0);
+		const vCartao = sales.filter((s) => s.metodo_pagamento === "Cartão").reduce((acc, s) => acc + Number(s.total), 0);
+		const vPix = sales.filter((s) => s.metodo_pagamento === "Pix").reduce((acc, s) => acc + Number(s.total), 0);
+		const vTotal = vDinheiro + vCartao + vPix;
+		const rDinheiro = recebimentos.filter((r) => r.metodo_pagamento === "Dinheiro").reduce((a, b) => a + Number(b.valor), 0);
+		const rCartao = recebimentos.filter((r) => r.metodo_pagamento === "Cartão").reduce((a, b) => a + Number(b.valor), 0);
+		const rPix = recebimentos.filter((r) => r.metodo_pagamento === "Pix").reduce((a, b) => a + Number(b.valor), 0);
+		const pDinheiro = pagamentos.filter((p) => p.metodo_pagamento === "Dinheiro").reduce((a, b) => a + Number(b.valor), 0);
+		const pCartao = pagamentos.filter((p) => p.metodo_pagamento === "Cartão").reduce((a, b) => a + Number(b.valor), 0);
+		const pPix = pagamentos.filter((p) => p.metodo_pagamento === "Pix").reduce((a, b) => a + Number(b.valor), 0);
+		const manualMovements = movements.filter((m) => !m.descricao.startsWith(autoPrefix));
+		const supManuais = manualMovements.filter((m) => m.tipo === "entrada").reduce((acc, m) => acc + Number(m.valor), 0);
+		const sangManuais = manualMovements.filter((m) => m.tipo === "saida").reduce((acc, m) => acc + Number(m.valor), 0);
+		const saldoInicial = Number(caixa.saldo_inicial);
 		return {
-			vendasTotal: vTotal,
-			vendasDinheiro: vDinheiro,
-			entradas: e,
-			saidas: s,
-			atual: Number(caixa.saldo_inicial) + vDinheiro + e - s
+			vTotal,
+			vDinheiro,
+			vCartao,
+			vPix,
+			rDinheiro,
+			rCartao,
+			rPix,
+			pDinheiro,
+			pCartao,
+			pPix,
+			supManuais,
+			sangManuais,
+			atual: saldoInicial + vDinheiro + rDinheiro + supManuais - pDinheiro - sangManuais,
+			saldoInicial
 		};
 	}, [
 		caixa,
 		movements,
-		sales
+		sales,
+		recebimentos,
+		pagamentos
 	]);
 	const handleMov = async () => {
 		if (!form.valor || !form.descricao) return;
@@ -75926,140 +76410,140 @@ function CaixaAberto({ caixa, movements, sales, onFechar, onNovaMov }) {
 		});
 	};
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-		"data-uid": "src/components/caixa/CaixaAberto.tsx:71:5",
+		"data-uid": "src/components/caixa/CaixaAberto.tsx:133:5",
 		"data-prohibitions": "[editContent]",
 		className: "space-y-6",
 		children: [
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				"data-uid": "src/components/caixa/CaixaAberto.tsx:72:7",
+				"data-uid": "src/components/caixa/CaixaAberto.tsx:134:7",
 				"data-prohibitions": "[editContent]",
-				className: "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4",
+				className: "print:hidden grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4",
 				children: [
 					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Card, {
-						"data-uid": "src/components/caixa/CaixaAberto.tsx:73:9",
+						"data-uid": "src/components/caixa/CaixaAberto.tsx:135:9",
 						"data-prohibitions": "[editContent]",
 						className: "border-border",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardHeader, {
-							"data-uid": "src/components/caixa/CaixaAberto.tsx:74:11",
+							"data-uid": "src/components/caixa/CaixaAberto.tsx:136:11",
 							"data-prohibitions": "[]",
 							className: "pb-2 flex flex-row items-center justify-between",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardTitle, {
-								"data-uid": "src/components/caixa/CaixaAberto.tsx:75:13",
+								"data-uid": "src/components/caixa/CaixaAberto.tsx:137:13",
 								"data-prohibitions": "[]",
 								className: "text-sm font-medium text-muted-foreground",
 								children: "Saldo Inicial"
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Wallet, {
-								"data-uid": "src/components/caixa/CaixaAberto.tsx:78:13",
+								"data-uid": "src/components/caixa/CaixaAberto.tsx:140:13",
 								"data-prohibitions": "[editContent]",
 								className: "h-4 w-4 text-muted-foreground"
 							})]
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardContent, {
-							"data-uid": "src/components/caixa/CaixaAberto.tsx:80:11",
+							"data-uid": "src/components/caixa/CaixaAberto.tsx:142:11",
 							"data-prohibitions": "[editContent]",
 							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-								"data-uid": "src/components/caixa/CaixaAberto.tsx:81:13",
+								"data-uid": "src/components/caixa/CaixaAberto.tsx:143:13",
 								"data-prohibitions": "[editContent]",
 								className: "text-2xl font-bold text-foreground",
-								children: formatCurrency(Number(caixa.saldo_inicial))
+								children: formatCurrency(totals.saldoInicial)
 							})
 						})]
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Card, {
-						"data-uid": "src/components/caixa/CaixaAberto.tsx:86:9",
+						"data-uid": "src/components/caixa/CaixaAberto.tsx:148:9",
 						"data-prohibitions": "[editContent]",
-						className: "border-blue-200 dark:border-blue-900 bg-blue-50/30 dark:bg-blue-950/20",
+						className: "border-blue-200 bg-blue-50/30",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardHeader, {
-							"data-uid": "src/components/caixa/CaixaAberto.tsx:87:11",
+							"data-uid": "src/components/caixa/CaixaAberto.tsx:149:11",
 							"data-prohibitions": "[]",
 							className: "pb-2 flex flex-row items-center justify-between",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardTitle, {
-								"data-uid": "src/components/caixa/CaixaAberto.tsx:88:13",
+								"data-uid": "src/components/caixa/CaixaAberto.tsx:150:13",
 								"data-prohibitions": "[]",
-								className: "text-sm font-medium text-blue-700 dark:text-blue-400",
+								className: "text-sm font-medium text-blue-700",
 								children: "Vendas (Sessão)"
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TrendingUp, {
-								"data-uid": "src/components/caixa/CaixaAberto.tsx:91:13",
+								"data-uid": "src/components/caixa/CaixaAberto.tsx:151:13",
 								"data-prohibitions": "[editContent]",
 								className: "h-4 w-4 text-blue-500"
 							})]
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardContent, {
-							"data-uid": "src/components/caixa/CaixaAberto.tsx:93:11",
+							"data-uid": "src/components/caixa/CaixaAberto.tsx:153:11",
 							"data-prohibitions": "[editContent]",
 							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-								"data-uid": "src/components/caixa/CaixaAberto.tsx:94:13",
+								"data-uid": "src/components/caixa/CaixaAberto.tsx:154:13",
 								"data-prohibitions": "[editContent]",
-								className: "text-2xl font-bold text-blue-900 dark:text-blue-300",
-								children: formatCurrency(totals.vendasTotal)
+								className: "text-2xl font-bold text-blue-900",
+								children: formatCurrency(totals.vTotal)
 							})
 						})]
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Card, {
-						"data-uid": "src/components/caixa/CaixaAberto.tsx:99:9",
+						"data-uid": "src/components/caixa/CaixaAberto.tsx:157:9",
 						"data-prohibitions": "[editContent]",
 						className: "border-border",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardHeader, {
-							"data-uid": "src/components/caixa/CaixaAberto.tsx:100:11",
+							"data-uid": "src/components/caixa/CaixaAberto.tsx:158:11",
 							"data-prohibitions": "[]",
 							className: "pb-2 flex flex-row items-center justify-between",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardTitle, {
-								"data-uid": "src/components/caixa/CaixaAberto.tsx:101:13",
+								"data-uid": "src/components/caixa/CaixaAberto.tsx:159:13",
 								"data-prohibitions": "[]",
 								className: "text-sm font-medium text-muted-foreground",
 								children: "Movimentações Manuais"
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowDownRight, {
-								"data-uid": "src/components/caixa/CaixaAberto.tsx:104:13",
+								"data-uid": "src/components/caixa/CaixaAberto.tsx:162:13",
 								"data-prohibitions": "[editContent]",
 								className: "h-4 w-4 text-orange-500"
 							})]
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardContent, {
-							"data-uid": "src/components/caixa/CaixaAberto.tsx:106:11",
+							"data-uid": "src/components/caixa/CaixaAberto.tsx:164:11",
 							"data-prohibitions": "[editContent]",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								"data-uid": "src/components/caixa/CaixaAberto.tsx:107:13",
+								"data-uid": "src/components/caixa/CaixaAberto.tsx:165:13",
 								"data-prohibitions": "[editContent]",
-								className: "text-sm text-emerald-600 dark:text-emerald-400 font-medium",
+								className: "text-sm text-emerald-600 font-medium",
 								children: [
 									"+",
-									formatCurrency(totals.entradas),
-									" (Entradas)"
+									formatCurrency(totals.supManuais),
+									" (Suprimentos)"
 								]
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								"data-uid": "src/components/caixa/CaixaAberto.tsx:110:13",
+								"data-uid": "src/components/caixa/CaixaAberto.tsx:168:13",
 								"data-prohibitions": "[editContent]",
 								className: "text-sm text-destructive font-medium",
 								children: [
 									"-",
-									formatCurrency(totals.saidas),
-									" (Saídas)"
+									formatCurrency(totals.sangManuais),
+									" (Sangrias)"
 								]
 							})]
 						})]
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Card, {
-						"data-uid": "src/components/caixa/CaixaAberto.tsx:115:9",
+						"data-uid": "src/components/caixa/CaixaAberto.tsx:173:9",
 						"data-prohibitions": "[editContent]",
-						className: "border-emerald-200 dark:border-emerald-900 bg-emerald-50 dark:bg-emerald-950/30 shadow-sm",
+						className: "border-emerald-200 bg-emerald-50 shadow-sm",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardHeader, {
-							"data-uid": "src/components/caixa/CaixaAberto.tsx:116:11",
+							"data-uid": "src/components/caixa/CaixaAberto.tsx:174:11",
 							"data-prohibitions": "[]",
 							className: "pb-2 flex flex-row items-center justify-between",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardTitle, {
-								"data-uid": "src/components/caixa/CaixaAberto.tsx:117:13",
+								"data-uid": "src/components/caixa/CaixaAberto.tsx:175:13",
 								"data-prohibitions": "[]",
-								className: "text-sm font-bold text-emerald-800 dark:text-emerald-400",
+								className: "text-sm font-bold text-emerald-800",
 								children: "Saldo Atual (Gaveta)"
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SquareCheckBig, {
-								"data-uid": "src/components/caixa/CaixaAberto.tsx:120:13",
+								"data-uid": "src/components/caixa/CaixaAberto.tsx:178:13",
 								"data-prohibitions": "[editContent]",
 								className: "h-4 w-4 text-emerald-600"
 							})]
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardContent, {
-							"data-uid": "src/components/caixa/CaixaAberto.tsx:122:11",
+							"data-uid": "src/components/caixa/CaixaAberto.tsx:180:11",
 							"data-prohibitions": "[editContent]",
 							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-								"data-uid": "src/components/caixa/CaixaAberto.tsx:123:13",
+								"data-uid": "src/components/caixa/CaixaAberto.tsx:181:13",
 								"data-prohibitions": "[editContent]",
-								className: "text-3xl font-black text-emerald-900 dark:text-emerald-300",
+								className: "text-3xl font-black text-emerald-900",
 								children: formatCurrency(totals.atual)
 							})
 						})]
@@ -76067,21 +76551,21 @@ function CaixaAberto({ caixa, movements, sales, onFechar, onNovaMov }) {
 				]
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				"data-uid": "src/components/caixa/CaixaAberto.tsx:130:7",
+				"data-uid": "src/components/caixa/CaixaAberto.tsx:188:7",
 				"data-prohibitions": "[]",
-				className: "flex flex-col sm:flex-row gap-4",
+				className: "print:hidden flex flex-col sm:flex-row gap-4",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button$1, {
-					"data-uid": "src/components/caixa/CaixaAberto.tsx:131:9",
+					"data-uid": "src/components/caixa/CaixaAberto.tsx:189:9",
 					"data-prohibitions": "[]",
 					onClick: () => setMovOpen(true),
 					variant: "outline",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Plus, {
-						"data-uid": "src/components/caixa/CaixaAberto.tsx:132:11",
+						"data-uid": "src/components/caixa/CaixaAberto.tsx:190:11",
 						"data-prohibitions": "[editContent]",
 						className: "mr-2 h-4 w-4"
 					}), " Nova Movimentação"]
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
-					"data-uid": "src/components/caixa/CaixaAberto.tsx:134:9",
+					"data-uid": "src/components/caixa/CaixaAberto.tsx:192:9",
 					"data-prohibitions": "[]",
 					onClick: () => setCloseOpen(true),
 					variant: "destructive",
@@ -76089,15 +76573,16 @@ function CaixaAberto({ caixa, movements, sales, onFechar, onNovaMov }) {
 				})]
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Tabs, {
-				"data-uid": "src/components/caixa/CaixaAberto.tsx:139:7",
+				"data-uid": "src/components/caixa/CaixaAberto.tsx:197:7",
 				"data-prohibitions": "[editContent]",
 				defaultValue: "vendas",
+				className: "print:hidden",
 				children: [
 					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TabsList, {
-						"data-uid": "src/components/caixa/CaixaAberto.tsx:140:9",
+						"data-uid": "src/components/caixa/CaixaAberto.tsx:198:9",
 						"data-prohibitions": "[editContent]",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TabsTrigger, {
-							"data-uid": "src/components/caixa/CaixaAberto.tsx:141:11",
+							"data-uid": "src/components/caixa/CaixaAberto.tsx:199:11",
 							"data-prohibitions": "[editContent]",
 							value: "vendas",
 							children: [
@@ -76106,49 +76591,49 @@ function CaixaAberto({ caixa, movements, sales, onFechar, onNovaMov }) {
 								")"
 							]
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TabsTrigger, {
-							"data-uid": "src/components/caixa/CaixaAberto.tsx:142:11",
+							"data-uid": "src/components/caixa/CaixaAberto.tsx:200:11",
 							"data-prohibitions": "[editContent]",
 							value: "movimentacoes",
 							children: [
-								"Movimentações (",
+								"Todas Movimentações (",
 								movements.length,
 								")"
 							]
 						})]
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TabsContent, {
-						"data-uid": "src/components/caixa/CaixaAberto.tsx:144:9",
+						"data-uid": "src/components/caixa/CaixaAberto.tsx:202:9",
 						"data-prohibitions": "[editContent]",
 						value: "vendas",
 						className: "mt-4 border border-border rounded-lg bg-card overflow-hidden",
 						children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Table, {
-							"data-uid": "src/components/caixa/CaixaAberto.tsx:148:11",
+							"data-uid": "src/components/caixa/CaixaAberto.tsx:206:11",
 							"data-prohibitions": "[editContent]",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHeader, {
-								"data-uid": "src/components/caixa/CaixaAberto.tsx:149:13",
+								"data-uid": "src/components/caixa/CaixaAberto.tsx:207:13",
 								"data-prohibitions": "[]",
 								className: "bg-muted/50",
 								children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TableRow, {
-									"data-uid": "src/components/caixa/CaixaAberto.tsx:150:15",
+									"data-uid": "src/components/caixa/CaixaAberto.tsx:208:15",
 									"data-prohibitions": "[]",
 									children: [
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
-											"data-uid": "src/components/caixa/CaixaAberto.tsx:151:17",
+											"data-uid": "src/components/caixa/CaixaAberto.tsx:209:17",
 											"data-prohibitions": "[]",
 											children: "Hora"
 										}),
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
-											"data-uid": "src/components/caixa/CaixaAberto.tsx:152:17",
+											"data-uid": "src/components/caixa/CaixaAberto.tsx:210:17",
 											"data-prohibitions": "[]",
-											children: "ID Venda"
+											children: "ID"
 										}),
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
-											"data-uid": "src/components/caixa/CaixaAberto.tsx:153:17",
+											"data-uid": "src/components/caixa/CaixaAberto.tsx:211:17",
 											"data-prohibitions": "[]",
 											children: "Método"
 										}),
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
-											"data-uid": "src/components/caixa/CaixaAberto.tsx:154:17",
+											"data-uid": "src/components/caixa/CaixaAberto.tsx:212:17",
 											"data-prohibitions": "[]",
 											className: "text-right",
 											children: "Valor"
@@ -76156,175 +76641,487 @@ function CaixaAberto({ caixa, movements, sales, onFechar, onNovaMov }) {
 									]
 								})
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TableBody, {
-								"data-uid": "src/components/caixa/CaixaAberto.tsx:157:13",
+								"data-uid": "src/components/caixa/CaixaAberto.tsx:215:13",
 								"data-prohibitions": "[editContent]",
 								children: [sales.map((s) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TableRow, {
-									"data-uid": "src/components/caixa/CaixaAberto.tsx:159:17",
+									"data-uid": "src/components/caixa/CaixaAberto.tsx:217:17",
 									"data-prohibitions": "[editContent]",
 									children: [
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-											"data-uid": "src/components/caixa/CaixaAberto.tsx:160:19",
+											"data-uid": "src/components/caixa/CaixaAberto.tsx:218:19",
 											"data-prohibitions": "[editContent]",
 											children: new Date(s.data).toLocaleTimeString("pt-BR")
 										}),
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-											"data-uid": "src/components/caixa/CaixaAberto.tsx:161:19",
+											"data-uid": "src/components/caixa/CaixaAberto.tsx:219:19",
 											"data-prohibitions": "[editContent]",
 											className: "font-mono text-xs text-muted-foreground",
 											children: s.id.split("-")[0]
 										}),
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-											"data-uid": "src/components/caixa/CaixaAberto.tsx:164:19",
+											"data-uid": "src/components/caixa/CaixaAberto.tsx:222:19",
 											"data-prohibitions": "[editContent]",
 											children: s.metodo_pagamento
 										}),
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-											"data-uid": "src/components/caixa/CaixaAberto.tsx:165:19",
+											"data-uid": "src/components/caixa/CaixaAberto.tsx:223:19",
 											"data-prohibitions": "[editContent]",
 											className: "text-right font-semibold",
 											children: formatCurrency(s.total)
 										})
 									]
 								}, s.id)), sales.length === 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableRow, {
-									"data-uid": "src/components/caixa/CaixaAberto.tsx:171:17",
+									"data-uid": "src/components/caixa/CaixaAberto.tsx:229:17",
 									"data-prohibitions": "[]",
 									children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-										"data-uid": "src/components/caixa/CaixaAberto.tsx:172:19",
+										"data-uid": "src/components/caixa/CaixaAberto.tsx:230:19",
 										"data-prohibitions": "[]",
 										colSpan: 4,
 										className: "text-center py-6 text-muted-foreground",
-										children: "Nenhuma venda registrada nesta sessão."
+										children: "Nenhuma venda registrada."
 									})
 								})]
 							})]
 						})
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TabsContent, {
-						"data-uid": "src/components/caixa/CaixaAberto.tsx:180:9",
+						"data-uid": "src/components/caixa/CaixaAberto.tsx:238:9",
 						"data-prohibitions": "[editContent]",
 						value: "movimentacoes",
 						className: "mt-4 border border-border rounded-lg bg-card overflow-hidden",
 						children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Table, {
-							"data-uid": "src/components/caixa/CaixaAberto.tsx:184:11",
+							"data-uid": "src/components/caixa/CaixaAberto.tsx:242:11",
 							"data-prohibitions": "[editContent]",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHeader, {
-								"data-uid": "src/components/caixa/CaixaAberto.tsx:185:13",
+								"data-uid": "src/components/caixa/CaixaAberto.tsx:243:13",
 								"data-prohibitions": "[]",
 								className: "bg-muted/50",
 								children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TableRow, {
-									"data-uid": "src/components/caixa/CaixaAberto.tsx:186:15",
+									"data-uid": "src/components/caixa/CaixaAberto.tsx:244:15",
 									"data-prohibitions": "[]",
 									children: [
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
-											"data-uid": "src/components/caixa/CaixaAberto.tsx:187:17",
+											"data-uid": "src/components/caixa/CaixaAberto.tsx:245:17",
 											"data-prohibitions": "[]",
 											children: "Hora"
 										}),
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
-											"data-uid": "src/components/caixa/CaixaAberto.tsx:188:17",
+											"data-uid": "src/components/caixa/CaixaAberto.tsx:246:17",
 											"data-prohibitions": "[]",
 											children: "Tipo"
 										}),
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
-											"data-uid": "src/components/caixa/CaixaAberto.tsx:189:17",
+											"data-uid": "src/components/caixa/CaixaAberto.tsx:247:17",
 											"data-prohibitions": "[]",
 											children: "Descrição"
 										}),
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
-											"data-uid": "src/components/caixa/CaixaAberto.tsx:190:17",
+											"data-uid": "src/components/caixa/CaixaAberto.tsx:248:17",
 											"data-prohibitions": "[]",
 											className: "text-right",
 											children: "Valor"
 										})
 									]
 								})
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TableBody, {
-								"data-uid": "src/components/caixa/CaixaAberto.tsx:193:13",
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableBody, {
+								"data-uid": "src/components/caixa/CaixaAberto.tsx:251:13",
 								"data-prohibitions": "[editContent]",
-								children: [movements.map((m) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TableRow, {
-									"data-uid": "src/components/caixa/CaixaAberto.tsx:195:17",
+								children: movements.map((m) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TableRow, {
+									"data-uid": "src/components/caixa/CaixaAberto.tsx:253:17",
 									"data-prohibitions": "[editContent]",
 									children: [
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-											"data-uid": "src/components/caixa/CaixaAberto.tsx:196:19",
+											"data-uid": "src/components/caixa/CaixaAberto.tsx:254:19",
 											"data-prohibitions": "[editContent]",
 											children: new Date(m.data).toLocaleTimeString("pt-BR")
 										}),
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-											"data-uid": "src/components/caixa/CaixaAberto.tsx:197:19",
+											"data-uid": "src/components/caixa/CaixaAberto.tsx:255:19",
 											"data-prohibitions": "[editContent]",
 											children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Badge, {
-												"data-uid": "src/components/caixa/CaixaAberto.tsx:198:21",
+												"data-uid": "src/components/caixa/CaixaAberto.tsx:256:21",
 												"data-prohibitions": "[editContent]",
 												variant: m.tipo === "entrada" ? "default" : "destructive",
-												className: m.tipo === "entrada" ? "bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-300 hover:bg-emerald-200" : "",
+												className: m.tipo === "entrada" ? "bg-emerald-100 text-emerald-800" : "",
 												children: m.tipo === "entrada" ? "Entrada" : "Saída"
 											})
 										}),
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-											"data-uid": "src/components/caixa/CaixaAberto.tsx:209:19",
+											"data-uid": "src/components/caixa/CaixaAberto.tsx:263:19",
 											"data-prohibitions": "[editContent]",
 											children: m.descricao
 										}),
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-											"data-uid": "src/components/caixa/CaixaAberto.tsx:210:19",
+											"data-uid": "src/components/caixa/CaixaAberto.tsx:264:19",
 											"data-prohibitions": "[editContent]",
 											className: "text-right font-semibold",
 											children: formatCurrency(m.valor)
 										})
 									]
-								}, m.id)), movements.length === 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableRow, {
-									"data-uid": "src/components/caixa/CaixaAberto.tsx:216:17",
-									"data-prohibitions": "[]",
-									children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-										"data-uid": "src/components/caixa/CaixaAberto.tsx:217:19",
-										"data-prohibitions": "[]",
-										colSpan: 4,
-										className: "text-center py-6 text-muted-foreground",
-										children: "Nenhuma movimentação manual registrada."
-									})
-								})]
+								}, m.id))
 							})]
 						})
 					})
 				]
 			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				"data-uid": "src/components/caixa/CaixaAberto.tsx:275:7",
+				"data-prohibitions": "[editContent]",
+				className: "hidden print:block bg-white text-black w-full max-w-[80mm] mx-auto text-sm",
+				children: [
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						"data-uid": "src/components/caixa/CaixaAberto.tsx:276:9",
+						"data-prohibitions": "[]",
+						className: "text-center font-bold text-lg mb-2 border-b-2 border-black pb-2",
+						children: [
+							"FECHAMENTO DE CAIXA",
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("br", {
+								"data-uid": "src/components/caixa/CaixaAberto.tsx:278:11",
+								"data-prohibitions": "[editContent]"
+							}),
+							"CHARME PDV"
+						]
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						"data-uid": "src/components/caixa/CaixaAberto.tsx:281:9",
+						"data-prohibitions": "[editContent]",
+						className: "mb-4",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
+							"data-uid": "src/components/caixa/CaixaAberto.tsx:282:11",
+							"data-prohibitions": "[editContent]",
+							children: [
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("strong", {
+									"data-uid": "src/components/caixa/CaixaAberto.tsx:283:13",
+									"data-prohibitions": "[]",
+									children: "Abertura:"
+								}),
+								" ",
+								new Date(caixa.data_abertura).toLocaleString("pt-BR")
+							]
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
+							"data-uid": "src/components/caixa/CaixaAberto.tsx:285:11",
+							"data-prohibitions": "[editContent]",
+							children: [
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("strong", {
+									"data-uid": "src/components/caixa/CaixaAberto.tsx:286:13",
+									"data-prohibitions": "[]",
+									children: "Operador:"
+								}),
+								" ",
+								caixa.user_id.split("-")[0]
+							]
+						})]
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+						"data-uid": "src/components/caixa/CaixaAberto.tsx:290:9",
+						"data-prohibitions": "[]",
+						className: "border-t border-black pt-2 mb-2 font-bold",
+						children: "SALDO INICIAL"
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						"data-uid": "src/components/caixa/CaixaAberto.tsx:291:9",
+						"data-prohibitions": "[editContent]",
+						className: "flex justify-between mb-4",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+							"data-uid": "src/components/caixa/CaixaAberto.tsx:292:11",
+							"data-prohibitions": "[]",
+							children: "Troco em Gaveta:"
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+							"data-uid": "src/components/caixa/CaixaAberto.tsx:293:11",
+							"data-prohibitions": "[editContent]",
+							children: formatCurrency(totals.saldoInicial)
+						})]
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+						"data-uid": "src/components/caixa/CaixaAberto.tsx:296:9",
+						"data-prohibitions": "[]",
+						className: "border-t border-black pt-2 mb-2 font-bold",
+						children: "ENTRADAS (DINHEIRO)"
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						"data-uid": "src/components/caixa/CaixaAberto.tsx:297:9",
+						"data-prohibitions": "[editContent]",
+						className: "flex justify-between",
+						children: [
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+								"data-uid": "src/components/caixa/CaixaAberto.tsx:298:11",
+								"data-prohibitions": "[]",
+								children: "Vendas:"
+							}),
+							" ",
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+								"data-uid": "src/components/caixa/CaixaAberto.tsx:298:32",
+								"data-prohibitions": "[editContent]",
+								children: formatCurrency(totals.vDinheiro)
+							})
+						]
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						"data-uid": "src/components/caixa/CaixaAberto.tsx:300:9",
+						"data-prohibitions": "[editContent]",
+						className: "flex justify-between",
+						children: [
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+								"data-uid": "src/components/caixa/CaixaAberto.tsx:301:11",
+								"data-prohibitions": "[]",
+								children: "Recebimentos:"
+							}),
+							" ",
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+								"data-uid": "src/components/caixa/CaixaAberto.tsx:301:38",
+								"data-prohibitions": "[editContent]",
+								children: formatCurrency(totals.rDinheiro)
+							})
+						]
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						"data-uid": "src/components/caixa/CaixaAberto.tsx:303:9",
+						"data-prohibitions": "[editContent]",
+						className: "flex justify-between mb-4",
+						children: [
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+								"data-uid": "src/components/caixa/CaixaAberto.tsx:304:11",
+								"data-prohibitions": "[]",
+								children: "Suprimentos (Manual):"
+							}),
+							" ",
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+								"data-uid": "src/components/caixa/CaixaAberto.tsx:304:46",
+								"data-prohibitions": "[editContent]",
+								children: formatCurrency(totals.supManuais)
+							})
+						]
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+						"data-uid": "src/components/caixa/CaixaAberto.tsx:307:9",
+						"data-prohibitions": "[]",
+						className: "border-t border-black pt-2 mb-2 font-bold",
+						children: "SAÍDAS (DINHEIRO)"
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						"data-uid": "src/components/caixa/CaixaAberto.tsx:308:9",
+						"data-prohibitions": "[editContent]",
+						className: "flex justify-between",
+						children: [
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+								"data-uid": "src/components/caixa/CaixaAberto.tsx:309:11",
+								"data-prohibitions": "[]",
+								children: "Pagamentos:"
+							}),
+							" ",
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+								"data-uid": "src/components/caixa/CaixaAberto.tsx:309:36",
+								"data-prohibitions": "[editContent]",
+								children: formatCurrency(totals.pDinheiro)
+							})
+						]
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						"data-uid": "src/components/caixa/CaixaAberto.tsx:311:9",
+						"data-prohibitions": "[editContent]",
+						className: "flex justify-between mb-4",
+						children: [
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+								"data-uid": "src/components/caixa/CaixaAberto.tsx:312:11",
+								"data-prohibitions": "[]",
+								children: "Sangrias (Manual):"
+							}),
+							" ",
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+								"data-uid": "src/components/caixa/CaixaAberto.tsx:312:43",
+								"data-prohibitions": "[editContent]",
+								children: formatCurrency(totals.sangManuais)
+							})
+						]
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						"data-uid": "src/components/caixa/CaixaAberto.tsx:315:9",
+						"data-prohibitions": "[editContent]",
+						className: "border-t-2 border-black pt-2 mb-4 font-bold text-lg flex justify-between",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+							"data-uid": "src/components/caixa/CaixaAberto.tsx:316:11",
+							"data-prohibitions": "[]",
+							children: "TOTAL NA GAVETA:"
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+							"data-uid": "src/components/caixa/CaixaAberto.tsx:317:11",
+							"data-prohibitions": "[editContent]",
+							children: formatCurrency(totals.atual)
+						})]
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+						"data-uid": "src/components/caixa/CaixaAberto.tsx:320:9",
+						"data-prohibitions": "[]",
+						className: "border-t border-dashed border-gray-400 pt-2 mb-2 font-bold text-xs text-gray-600",
+						children: "OUTROS MÉTODOS (NÃO FÍSICO)"
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						"data-uid": "src/components/caixa/CaixaAberto.tsx:323:9",
+						"data-prohibitions": "[editContent]",
+						className: "flex justify-between text-xs text-gray-600",
+						children: [
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+								"data-uid": "src/components/caixa/CaixaAberto.tsx:324:11",
+								"data-prohibitions": "[]",
+								children: "Vendas (Cartão):"
+							}),
+							" ",
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+								"data-uid": "src/components/caixa/CaixaAberto.tsx:324:41",
+								"data-prohibitions": "[editContent]",
+								children: formatCurrency(totals.vCartao)
+							})
+						]
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						"data-uid": "src/components/caixa/CaixaAberto.tsx:326:9",
+						"data-prohibitions": "[editContent]",
+						className: "flex justify-between text-xs text-gray-600",
+						children: [
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+								"data-uid": "src/components/caixa/CaixaAberto.tsx:327:11",
+								"data-prohibitions": "[]",
+								children: "Vendas (Pix):"
+							}),
+							" ",
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+								"data-uid": "src/components/caixa/CaixaAberto.tsx:327:38",
+								"data-prohibitions": "[editContent]",
+								children: formatCurrency(totals.vPix)
+							})
+						]
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						"data-uid": "src/components/caixa/CaixaAberto.tsx:329:9",
+						"data-prohibitions": "[editContent]",
+						className: "flex justify-between text-xs text-gray-600",
+						children: [
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+								"data-uid": "src/components/caixa/CaixaAberto.tsx:330:11",
+								"data-prohibitions": "[]",
+								children: "Receb. (Cartão):"
+							}),
+							" ",
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+								"data-uid": "src/components/caixa/CaixaAberto.tsx:330:41",
+								"data-prohibitions": "[editContent]",
+								children: formatCurrency(totals.rCartao)
+							})
+						]
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						"data-uid": "src/components/caixa/CaixaAberto.tsx:332:9",
+						"data-prohibitions": "[editContent]",
+						className: "flex justify-between text-xs text-gray-600",
+						children: [
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+								"data-uid": "src/components/caixa/CaixaAberto.tsx:333:11",
+								"data-prohibitions": "[]",
+								children: "Receb. (Pix):"
+							}),
+							" ",
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+								"data-uid": "src/components/caixa/CaixaAberto.tsx:333:38",
+								"data-prohibitions": "[editContent]",
+								children: formatCurrency(totals.rPix)
+							})
+						]
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						"data-uid": "src/components/caixa/CaixaAberto.tsx:335:9",
+						"data-prohibitions": "[editContent]",
+						className: "flex justify-between text-xs text-gray-600",
+						children: [
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+								"data-uid": "src/components/caixa/CaixaAberto.tsx:336:11",
+								"data-prohibitions": "[]",
+								children: "Pagtos. (Cartão):"
+							}),
+							" ",
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+								"data-uid": "src/components/caixa/CaixaAberto.tsx:336:42",
+								"data-prohibitions": "[editContent]",
+								children: formatCurrency(totals.pCartao)
+							})
+						]
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						"data-uid": "src/components/caixa/CaixaAberto.tsx:338:9",
+						"data-prohibitions": "[editContent]",
+						className: "flex justify-between text-xs text-gray-600 mb-4",
+						children: [
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+								"data-uid": "src/components/caixa/CaixaAberto.tsx:339:11",
+								"data-prohibitions": "[]",
+								children: "Pagtos. (Pix):"
+							}),
+							" ",
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+								"data-uid": "src/components/caixa/CaixaAberto.tsx:339:39",
+								"data-prohibitions": "[editContent]",
+								children: formatCurrency(totals.pPix)
+							})
+						]
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						"data-uid": "src/components/caixa/CaixaAberto.tsx:342:9",
+						"data-prohibitions": "[]",
+						className: "text-center text-xs mt-6 border-t border-black pt-2",
+						children: [
+							"Assinatura do Operador",
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("br", {
+								"data-uid": "src/components/caixa/CaixaAberto.tsx:344:11",
+								"data-prohibitions": "[editContent]"
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("br", {
+								"data-uid": "src/components/caixa/CaixaAberto.tsx:345:11",
+								"data-prohibitions": "[editContent]"
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("br", {
+								"data-uid": "src/components/caixa/CaixaAberto.tsx:346:11",
+								"data-prohibitions": "[editContent]"
+							}),
+							"_______________________________"
+						]
+					})
+				]
+			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Dialog, {
-				"data-uid": "src/components/caixa/CaixaAberto.tsx:227:7",
+				"data-uid": "src/components/caixa/CaixaAberto.tsx:351:7",
 				"data-prohibitions": "[]",
 				open: movOpen,
 				onOpenChange: setMovOpen,
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogContent, {
-					"data-uid": "src/components/caixa/CaixaAberto.tsx:228:9",
+					"data-uid": "src/components/caixa/CaixaAberto.tsx:352:9",
 					"data-prohibitions": "[]",
+					className: "print:hidden",
 					children: [
 						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogHeader, {
-							"data-uid": "src/components/caixa/CaixaAberto.tsx:229:11",
+							"data-uid": "src/components/caixa/CaixaAberto.tsx:353:11",
 							"data-prohibitions": "[]",
 							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogTitle, {
-								"data-uid": "src/components/caixa/CaixaAberto.tsx:230:13",
+								"data-uid": "src/components/caixa/CaixaAberto.tsx:354:13",
 								"data-prohibitions": "[]",
 								children: "Registrar Movimentação de Caixa"
 							})
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							"data-uid": "src/components/caixa/CaixaAberto.tsx:232:11",
+							"data-uid": "src/components/caixa/CaixaAberto.tsx:356:11",
 							"data-prohibitions": "[]",
 							className: "space-y-4 py-4",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								"data-uid": "src/components/caixa/CaixaAberto.tsx:233:13",
+								"data-uid": "src/components/caixa/CaixaAberto.tsx:357:13",
 								"data-prohibitions": "[]",
 								className: "grid grid-cols-2 gap-4",
 								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-									"data-uid": "src/components/caixa/CaixaAberto.tsx:234:15",
+									"data-uid": "src/components/caixa/CaixaAberto.tsx:358:15",
 									"data-prohibitions": "[]",
 									className: "space-y-2",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$1, {
-										"data-uid": "src/components/caixa/CaixaAberto.tsx:235:17",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$2, {
+										"data-uid": "src/components/caixa/CaixaAberto.tsx:359:17",
 										"data-prohibitions": "[]",
 										children: "Tipo"
 									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Select$1, {
-										"data-uid": "src/components/caixa/CaixaAberto.tsx:236:17",
+										"data-uid": "src/components/caixa/CaixaAberto.tsx:360:17",
 										"data-prohibitions": "[]",
 										value: form.tipo,
 										onValueChange: (v) => setForm({
@@ -76332,22 +77129,22 @@ function CaixaAberto({ caixa, movements, sales, onFechar, onNovaMov }) {
 											tipo: v
 										}),
 										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectTrigger, {
-											"data-uid": "src/components/caixa/CaixaAberto.tsx:237:19",
+											"data-uid": "src/components/caixa/CaixaAberto.tsx:361:19",
 											"data-prohibitions": "[]",
 											children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectValue, {
-												"data-uid": "src/components/caixa/CaixaAberto.tsx:238:21",
+												"data-uid": "src/components/caixa/CaixaAberto.tsx:362:21",
 												"data-prohibitions": "[editContent]"
 											})
 										}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(SelectContent, {
-											"data-uid": "src/components/caixa/CaixaAberto.tsx:240:19",
+											"data-uid": "src/components/caixa/CaixaAberto.tsx:364:19",
 											"data-prohibitions": "[]",
 											children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectItem, {
-												"data-uid": "src/components/caixa/CaixaAberto.tsx:241:21",
+												"data-uid": "src/components/caixa/CaixaAberto.tsx:365:21",
 												"data-prohibitions": "[]",
 												value: "entrada",
 												children: "Entrada (Suprimento)"
 											}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectItem, {
-												"data-uid": "src/components/caixa/CaixaAberto.tsx:242:21",
+												"data-uid": "src/components/caixa/CaixaAberto.tsx:366:21",
 												"data-prohibitions": "[]",
 												value: "saida",
 												children: "Saída (Sangria)"
@@ -76355,15 +77152,15 @@ function CaixaAberto({ caixa, movements, sales, onFechar, onNovaMov }) {
 										})]
 									})]
 								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-									"data-uid": "src/components/caixa/CaixaAberto.tsx:246:15",
+									"data-uid": "src/components/caixa/CaixaAberto.tsx:370:15",
 									"data-prohibitions": "[]",
 									className: "space-y-2",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$1, {
-										"data-uid": "src/components/caixa/CaixaAberto.tsx:247:17",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$2, {
+										"data-uid": "src/components/caixa/CaixaAberto.tsx:371:17",
 										"data-prohibitions": "[]",
 										children: "Valor"
 									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
-										"data-uid": "src/components/caixa/CaixaAberto.tsx:248:17",
+										"data-uid": "src/components/caixa/CaixaAberto.tsx:372:17",
 										"data-prohibitions": "[editContent]",
 										type: "number",
 										step: "0.01",
@@ -76375,36 +77172,36 @@ function CaixaAberto({ caixa, movements, sales, onFechar, onNovaMov }) {
 									})]
 								})]
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								"data-uid": "src/components/caixa/CaixaAberto.tsx:256:13",
+								"data-uid": "src/components/caixa/CaixaAberto.tsx:380:13",
 								"data-prohibitions": "[]",
 								className: "space-y-2",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$1, {
-									"data-uid": "src/components/caixa/CaixaAberto.tsx:257:15",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$2, {
+									"data-uid": "src/components/caixa/CaixaAberto.tsx:381:15",
 									"data-prohibitions": "[]",
 									children: "Descrição"
 								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
-									"data-uid": "src/components/caixa/CaixaAberto.tsx:258:15",
+									"data-uid": "src/components/caixa/CaixaAberto.tsx:382:15",
 									"data-prohibitions": "[editContent]",
 									value: form.descricao,
 									onChange: (e) => setForm({
 										...form,
 										descricao: e.target.value
 									}),
-									placeholder: "Ex: Reforço de troco, Pagamento de água"
+									placeholder: "Ex: Reforço de troco"
 								})]
 							})]
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogFooter, {
-							"data-uid": "src/components/caixa/CaixaAberto.tsx:265:11",
+							"data-uid": "src/components/caixa/CaixaAberto.tsx:389:11",
 							"data-prohibitions": "[]",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
-								"data-uid": "src/components/caixa/CaixaAberto.tsx:266:13",
+								"data-uid": "src/components/caixa/CaixaAberto.tsx:390:13",
 								"data-prohibitions": "[]",
 								variant: "outline",
 								onClick: () => setMovOpen(false),
 								children: "Cancelar"
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
-								"data-uid": "src/components/caixa/CaixaAberto.tsx:269:13",
+								"data-uid": "src/components/caixa/CaixaAberto.tsx:393:13",
 								"data-prohibitions": "[]",
 								onClick: handleMov,
 								children: "Registrar"
@@ -76414,59 +77211,213 @@ function CaixaAberto({ caixa, movements, sales, onFechar, onNovaMov }) {
 				})
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Dialog, {
-				"data-uid": "src/components/caixa/CaixaAberto.tsx:274:7",
+				"data-uid": "src/components/caixa/CaixaAberto.tsx:398:7",
 				"data-prohibitions": "[editContent]",
 				open: closeOpen,
 				onOpenChange: setCloseOpen,
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogContent, {
-					"data-uid": "src/components/caixa/CaixaAberto.tsx:275:9",
+					"data-uid": "src/components/caixa/CaixaAberto.tsx:399:9",
 					"data-prohibitions": "[editContent]",
+					className: "max-w-2xl print:hidden",
 					children: [
 						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogHeader, {
-							"data-uid": "src/components/caixa/CaixaAberto.tsx:276:11",
+							"data-uid": "src/components/caixa/CaixaAberto.tsx:400:11",
 							"data-prohibitions": "[]",
 							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogTitle, {
-								"data-uid": "src/components/caixa/CaixaAberto.tsx:277:13",
+								"data-uid": "src/components/caixa/CaixaAberto.tsx:401:13",
 								"data-prohibitions": "[]",
-								children: "Confirmar Fechamento de Caixa"
+								children: "Fechamento de Caixa - CHARME PDV"
 							})
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							"data-uid": "src/components/caixa/CaixaAberto.tsx:279:11",
+							"data-uid": "src/components/caixa/CaixaAberto.tsx:403:11",
 							"data-prohibitions": "[editContent]",
-							className: "py-6 text-center space-y-2",
-							children: [
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-									"data-uid": "src/components/caixa/CaixaAberto.tsx:280:13",
-									"data-prohibitions": "[]",
-									className: "text-muted-foreground",
-									children: "O saldo atual calculado para gaveta é de:"
-								}),
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-									"data-uid": "src/components/caixa/CaixaAberto.tsx:281:13",
+							className: "grid grid-cols-2 gap-6 py-4",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								"data-uid": "src/components/caixa/CaixaAberto.tsx:404:13",
+								"data-prohibitions": "[editContent]",
+								className: "space-y-4 border-r pr-6",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									"data-uid": "src/components/caixa/CaixaAberto.tsx:405:15",
 									"data-prohibitions": "[editContent]",
-									className: "text-4xl font-bold text-emerald-600",
-									children: formatCurrency(totals.atual)
-								}),
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-									"data-uid": "src/components/caixa/CaixaAberto.tsx:282:13",
-									"data-prohibitions": "[]",
-									className: "text-sm text-muted-foreground mt-4",
-									children: "Confira se os valores físicos em gaveta batem com o saldo acima antes de confirmar o fechamento."
-								})
-							]
+									children: [
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", {
+											"data-uid": "src/components/caixa/CaixaAberto.tsx:406:17",
+											"data-prohibitions": "[]",
+											className: "font-semibold text-sm text-muted-foreground mb-2",
+											children: "Entradas (Dinheiro)"
+										}),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+											"data-uid": "src/components/caixa/CaixaAberto.tsx:409:17",
+											"data-prohibitions": "[editContent]",
+											className: "flex justify-between text-sm",
+											children: [
+												/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+													"data-uid": "src/components/caixa/CaixaAberto.tsx:410:19",
+													"data-prohibitions": "[]",
+													children: "Saldo Inicial:"
+												}),
+												" ",
+												/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+													"data-uid": "src/components/caixa/CaixaAberto.tsx:410:47",
+													"data-prohibitions": "[editContent]",
+													children: formatCurrency(totals.saldoInicial)
+												})
+											]
+										}),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+											"data-uid": "src/components/caixa/CaixaAberto.tsx:412:17",
+											"data-prohibitions": "[editContent]",
+											className: "flex justify-between text-sm",
+											children: [
+												/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+													"data-uid": "src/components/caixa/CaixaAberto.tsx:413:19",
+													"data-prohibitions": "[]",
+													children: "Vendas:"
+												}),
+												" ",
+												/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+													"data-uid": "src/components/caixa/CaixaAberto.tsx:413:40",
+													"data-prohibitions": "[editContent]",
+													children: formatCurrency(totals.vDinheiro)
+												})
+											]
+										}),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+											"data-uid": "src/components/caixa/CaixaAberto.tsx:415:17",
+											"data-prohibitions": "[editContent]",
+											className: "flex justify-between text-sm",
+											children: [
+												/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+													"data-uid": "src/components/caixa/CaixaAberto.tsx:416:19",
+													"data-prohibitions": "[]",
+													children: "Recebimentos:"
+												}),
+												" ",
+												/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+													"data-uid": "src/components/caixa/CaixaAberto.tsx:416:46",
+													"data-prohibitions": "[editContent]",
+													children: formatCurrency(totals.rDinheiro)
+												})
+											]
+										}),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+											"data-uid": "src/components/caixa/CaixaAberto.tsx:418:17",
+											"data-prohibitions": "[editContent]",
+											className: "flex justify-between text-sm",
+											children: [
+												/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+													"data-uid": "src/components/caixa/CaixaAberto.tsx:419:19",
+													"data-prohibitions": "[]",
+													children: "Suprimentos:"
+												}),
+												" ",
+												/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+													"data-uid": "src/components/caixa/CaixaAberto.tsx:419:45",
+													"data-prohibitions": "[editContent]",
+													children: formatCurrency(totals.supManuais)
+												})
+											]
+										})
+									]
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									"data-uid": "src/components/caixa/CaixaAberto.tsx:422:15",
+									"data-prohibitions": "[editContent]",
+									children: [
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", {
+											"data-uid": "src/components/caixa/CaixaAberto.tsx:423:17",
+											"data-prohibitions": "[]",
+											className: "font-semibold text-sm text-muted-foreground mb-2",
+											children: "Saídas (Dinheiro)"
+										}),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+											"data-uid": "src/components/caixa/CaixaAberto.tsx:426:17",
+											"data-prohibitions": "[editContent]",
+											className: "flex justify-between text-sm",
+											children: [
+												/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+													"data-uid": "src/components/caixa/CaixaAberto.tsx:427:19",
+													"data-prohibitions": "[]",
+													children: "Pagamentos:"
+												}),
+												" ",
+												/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+													"data-uid": "src/components/caixa/CaixaAberto.tsx:427:44",
+													"data-prohibitions": "[editContent]",
+													children: formatCurrency(totals.pDinheiro)
+												})
+											]
+										}),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+											"data-uid": "src/components/caixa/CaixaAberto.tsx:429:17",
+											"data-prohibitions": "[editContent]",
+											className: "flex justify-between text-sm",
+											children: [
+												/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+													"data-uid": "src/components/caixa/CaixaAberto.tsx:430:19",
+													"data-prohibitions": "[]",
+													children: "Sangrias:"
+												}),
+												" ",
+												/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+													"data-uid": "src/components/caixa/CaixaAberto.tsx:430:42",
+													"data-prohibitions": "[editContent]",
+													children: formatCurrency(totals.sangManuais)
+												})
+											]
+										})
+									]
+								})]
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								"data-uid": "src/components/caixa/CaixaAberto.tsx:434:13",
+								"data-prohibitions": "[editContent]",
+								className: "flex flex-col justify-center text-center space-y-4",
+								children: [
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+										"data-uid": "src/components/caixa/CaixaAberto.tsx:435:15",
+										"data-prohibitions": "[]",
+										className: "text-muted-foreground font-medium",
+										children: "Total Calculado na Gaveta"
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+										"data-uid": "src/components/caixa/CaixaAberto.tsx:436:15",
+										"data-prohibitions": "[editContent]",
+										className: "text-5xl font-black text-emerald-600",
+										children: formatCurrency(totals.atual)
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+										"data-uid": "src/components/caixa/CaixaAberto.tsx:437:15",
+										"data-prohibitions": "[]",
+										className: "text-xs text-muted-foreground",
+										children: "Confira o valor físico antes de confirmar."
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button$1, {
+										"data-uid": "src/components/caixa/CaixaAberto.tsx:440:15",
+										"data-prohibitions": "[]",
+										variant: "outline",
+										onClick: () => window.print(),
+										className: "mt-4",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Printer, {
+											"data-uid": "src/components/caixa/CaixaAberto.tsx:441:17",
+											"data-prohibitions": "[editContent]",
+											className: "mr-2 h-4 w-4"
+										}), " Imprimir Resumo"]
+									})
+								]
+							})]
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogFooter, {
-							"data-uid": "src/components/caixa/CaixaAberto.tsx:287:11",
+							"data-uid": "src/components/caixa/CaixaAberto.tsx:445:11",
 							"data-prohibitions": "[]",
+							className: "border-t pt-4",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
-								"data-uid": "src/components/caixa/CaixaAberto.tsx:288:13",
+								"data-uid": "src/components/caixa/CaixaAberto.tsx:446:13",
 								"data-prohibitions": "[]",
 								variant: "outline",
 								onClick: () => setCloseOpen(false),
 								children: "Cancelar"
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
-								"data-uid": "src/components/caixa/CaixaAberto.tsx:291:13",
+								"data-uid": "src/components/caixa/CaixaAberto.tsx:449:13",
 								"data-prohibitions": "[]",
 								variant: "destructive",
 								onClick: () => onFechar(totals.atual),
@@ -76563,7 +77514,7 @@ function CaixaFechado({ onAbrir }) {
 							"data-uid": "src/components/caixa/CaixaFechado.tsx:50:13",
 							"data-prohibitions": "[]",
 							className: "space-y-2 text-left",
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$1, {
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$2, {
 								"data-uid": "src/components/caixa/CaixaFechado.tsx:51:15",
 								"data-prohibitions": "[]",
 								children: "Saldo Inicial (Troco em Gaveta)"
@@ -76715,6 +77666,8 @@ function CaixaPage() {
 	const [history, setHistory] = (0, import_react.useState)([]);
 	const [movements, setMovements] = (0, import_react.useState)([]);
 	const [sales, setSales] = (0, import_react.useState)([]);
+	const [recebimentos, setRecebimentos] = (0, import_react.useState)([]);
+	const [pagamentos, setPagamentos] = (0, import_react.useState)([]);
 	const fetchData = (0, import_react.useCallback)(async () => {
 		if (!user) return;
 		setLoading(true);
@@ -76725,6 +77678,10 @@ function CaixaPage() {
 			setMovements(movs || []);
 			const { data: vends } = await supabase.from("vendas").select("*").eq("user_id", user.id).gte("data", active.data_abertura).order("data", { ascending: false });
 			setSales(vends || []);
+			const { data: rec } = await supabase.from("contas_receber").select("*").eq("status", "pago").gte("data_pagamento", active.data_abertura);
+			setRecebimentos(rec || []);
+			const { data: pag } = await supabase.from("contas_pagar").select("*").eq("status", "pago").gte("data_pagamento", active.data_abertura);
+			setPagamentos(pag || []);
 		}
 		const { data: hist } = await supabase.from("caixa").select("*").eq("user_id", user.id).eq("status", "fechado").order("data_fechamento", { ascending: false });
 		setHistory(hist || []);
@@ -76793,77 +77750,79 @@ function CaixaPage() {
 		}
 	};
 	if (loading) return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-		"data-uid": "src/pages/Caixa.tsx:125:7",
+		"data-uid": "src/pages/Caixa.tsx:141:7",
 		"data-prohibitions": "[]",
 		className: "flex justify-center items-center h-full",
 		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(LoaderCircle, {
-			"data-uid": "src/pages/Caixa.tsx:126:9",
+			"data-uid": "src/pages/Caixa.tsx:142:9",
 			"data-prohibitions": "[editContent]",
 			className: "h-8 w-8 animate-spin text-primary"
 		})
 	});
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-		"data-uid": "src/pages/Caixa.tsx:132:5",
+		"data-uid": "src/pages/Caixa.tsx:148:5",
 		"data-prohibitions": "[editContent]",
 		className: "space-y-6 animate-fade-in max-w-6xl mx-auto h-full flex flex-col",
 		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-			"data-uid": "src/pages/Caixa.tsx:133:7",
+			"data-uid": "src/pages/Caixa.tsx:149:7",
 			"data-prohibitions": "[]",
 			className: "flex justify-between items-center shrink-0",
 			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
-				"data-uid": "src/pages/Caixa.tsx:134:9",
+				"data-uid": "src/pages/Caixa.tsx:150:9",
 				"data-prohibitions": "[]",
 				className: "text-2xl font-bold tracking-tight",
 				children: "Fluxo de Caixa"
 			})
 		}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Tabs, {
-			"data-uid": "src/pages/Caixa.tsx:137:7",
+			"data-uid": "src/pages/Caixa.tsx:153:7",
 			"data-prohibitions": "[editContent]",
 			defaultValue: "atual",
 			className: "flex-1 flex flex-col min-h-0",
 			children: [
 				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TabsList, {
-					"data-uid": "src/pages/Caixa.tsx:138:9",
+					"data-uid": "src/pages/Caixa.tsx:154:9",
 					"data-prohibitions": "[]",
 					className: "shrink-0 w-fit",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TabsTrigger, {
-						"data-uid": "src/pages/Caixa.tsx:139:11",
+						"data-uid": "src/pages/Caixa.tsx:155:11",
 						"data-prohibitions": "[]",
 						value: "atual",
 						children: "Caixa Atual"
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TabsTrigger, {
-						"data-uid": "src/pages/Caixa.tsx:140:11",
+						"data-uid": "src/pages/Caixa.tsx:156:11",
 						"data-prohibitions": "[]",
 						value: "historico",
 						children: "Histórico"
 					})]
 				}),
 				/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TabsContent, {
-					"data-uid": "src/pages/Caixa.tsx:143:9",
+					"data-uid": "src/pages/Caixa.tsx:159:9",
 					"data-prohibitions": "[editContent]",
 					value: "atual",
 					className: "flex-1 overflow-auto mt-4 focus-visible:outline-none",
 					children: activeCaixa ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CaixaAberto, {
-						"data-uid": "src/pages/Caixa.tsx:145:13",
+						"data-uid": "src/pages/Caixa.tsx:161:13",
 						"data-prohibitions": "[editContent]",
 						caixa: activeCaixa,
 						movements,
 						sales,
+						recebimentos,
+						pagamentos,
 						onFechar: handleFechar,
 						onNovaMov: handleNovaMov
 					}) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CaixaFechado, {
-						"data-uid": "src/pages/Caixa.tsx:153:13",
+						"data-uid": "src/pages/Caixa.tsx:171:13",
 						"data-prohibitions": "[editContent]",
 						onAbrir: handleAbrir
 					})
 				}),
 				/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TabsContent, {
-					"data-uid": "src/pages/Caixa.tsx:157:9",
+					"data-uid": "src/pages/Caixa.tsx:175:9",
 					"data-prohibitions": "[]",
 					value: "historico",
 					className: "flex-1 overflow-auto mt-4 focus-visible:outline-none",
 					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(HistoricoCaixa, {
-						"data-uid": "src/pages/Caixa.tsx:161:11",
+						"data-uid": "src/pages/Caixa.tsx:179:11",
 						"data-prohibitions": "[editContent]",
 						history
 					})
@@ -77522,7 +78481,7 @@ function CategoriaFormModal({ open, onClose, onSuccess }) {
 					"data-uid": "src/components/estoque/CategoriaFormModal.tsx:59:11",
 					"data-prohibitions": "[]",
 					className: "space-y-2",
-					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$1, {
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$2, {
 						"data-uid": "src/components/estoque/CategoriaFormModal.tsx:60:13",
 						"data-prohibitions": "[]",
 						htmlFor: "nome",
@@ -77908,7 +78867,7 @@ function EstoqueAtual() {
 									"data-uid": "src/components/estoque/EstoqueAtual.tsx:239:17",
 									"data-prohibitions": "[]",
 									className: "space-y-2",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$1, {
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$2, {
 										"data-uid": "src/components/estoque/EstoqueAtual.tsx:240:19",
 										"data-prohibitions": "[]",
 										children: "Tipo de Ajuste"
@@ -77948,7 +78907,7 @@ function EstoqueAtual() {
 									"data-uid": "src/components/estoque/EstoqueAtual.tsx:255:17",
 									"data-prohibitions": "[]",
 									className: "space-y-2",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$1, {
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$2, {
 										"data-uid": "src/components/estoque/EstoqueAtual.tsx:256:19",
 										"data-prohibitions": "[]",
 										children: "Quantidade"
@@ -89430,7 +90389,7 @@ function CustomerSelect({ onSelect }) {
 		"data-uid": "src/components/pdv/CustomerSelect.tsx:43:7",
 		"data-prohibitions": "[editContent]",
 		className: "space-y-2",
-		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$1, {
+		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$2, {
 			"data-uid": "src/components/pdv/CustomerSelect.tsx:44:9",
 			"data-prohibitions": "[]",
 			className: "text-muted-foreground uppercase text-xs font-bold tracking-wider",
@@ -89483,7 +90442,7 @@ function CustomerSelect({ onSelect }) {
 				"data-uid": "src/components/pdv/CustomerSelect.tsx:70:7",
 				"data-prohibitions": "[]",
 				className: "flex items-center justify-between",
-				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$1, {
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$2, {
 					"data-uid": "src/components/pdv/CustomerSelect.tsx:71:9",
 					"data-prohibitions": "[]",
 					className: "text-muted-foreground uppercase text-xs font-bold tracking-wider",
@@ -89819,7 +90778,7 @@ function CheckoutModal({ open, onOpenChange }) {
 								"data-uid": "src/components/pdv/CheckoutModal.tsx:223:15",
 								"data-prohibitions": "[]",
 								className: "space-y-2 pb-4 border-b border-border/50",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Label$1, {
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Label$2, {
 									"data-uid": "src/components/pdv/CheckoutModal.tsx:224:17",
 									"data-prohibitions": "[]",
 									htmlFor: "discount",
@@ -89866,7 +90825,7 @@ function CheckoutModal({ open, onOpenChange }) {
 									"data-uid": "src/components/pdv/CheckoutModal.tsx:244:19",
 									"data-prohibitions": "[]",
 									className: "space-y-2",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$1, {
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$2, {
 										"data-uid": "src/components/pdv/CheckoutModal.tsx:245:21",
 										"data-prohibitions": "[]",
 										children: "Valor Recebido (R$)"
@@ -90256,7 +91215,7 @@ function Login() {
 							"data-uid": "src/pages/Login.tsx:51:13",
 							"data-prohibitions": "[]",
 							className: "space-y-2",
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$1, {
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$2, {
 								"data-uid": "src/pages/Login.tsx:52:15",
 								"data-prohibitions": "[]",
 								htmlFor: "email",
@@ -90282,7 +91241,7 @@ function Login() {
 								"data-uid": "src/pages/Login.tsx:66:15",
 								"data-prohibitions": "[]",
 								className: "flex items-center justify-between",
-								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$1, {
+								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$2, {
 									"data-uid": "src/pages/Login.tsx:67:17",
 									"data-prohibitions": "[]",
 									htmlFor: "password",
@@ -90536,4 +91495,4 @@ var App = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ThemeProvider, {
 }));
 //#endregion
 
-//# sourceMappingURL=index-DEhRLmOI.js.map
+//# sourceMappingURL=index-BoyxC61H.js.map
