@@ -19385,6 +19385,17 @@ var LogOut = createLucideIcon("log-out", [
 		key: "1uf3rs"
 	}]
 ]);
+var Mail = createLucideIcon("mail", [["path", {
+	d: "m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7",
+	key: "132q7q"
+}], ["rect", {
+	x: "2",
+	y: "4",
+	width: "20",
+	height: "16",
+	rx: "2",
+	key: "izxlao"
+}]]);
 var Menu = createLucideIcon("menu", [
 	["path", {
 		d: "M4 5h16",
@@ -92088,136 +92099,156 @@ function Login() {
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 		"data-uid": "src/pages/Login.tsx:36:5",
 		"data-prohibitions": "[editContent]",
-		className: "min-h-screen flex items-center justify-center bg-slate-100 p-4 font-sans",
+		className: "min-h-screen flex items-center justify-center bg-slate-100 dark:bg-slate-900 p-4 font-sans",
 		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Card, {
 			"data-uid": "src/pages/Login.tsx:37:7",
 			"data-prohibitions": "[editContent]",
-			className: "w-full max-w-md shadow-xl border-slate-200",
-			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardHeader, {
-				"data-uid": "src/pages/Login.tsx:38:9",
-				"data-prohibitions": "[]",
-				className: "text-center space-y-2 pb-6 pt-8",
-				children: [
-					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-						"data-uid": "src/pages/Login.tsx:39:11",
-						"data-prohibitions": "[]",
-						className: "mx-auto bg-primary/10 w-16 h-16 flex items-center justify-center rounded-2xl mb-2",
-						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Store, {
-							"data-uid": "src/pages/Login.tsx:40:13",
-							"data-prohibitions": "[editContent]",
-							className: "h-8 w-8 text-primary"
-						})
-					}),
-					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardTitle, {
-						"data-uid": "src/pages/Login.tsx:42:11",
-						"data-prohibitions": "[]",
-						className: "text-3xl font-bold tracking-tight text-slate-900",
-						children: "CHARME PDV"
-					}),
-					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardDescription, {
-						"data-uid": "src/pages/Login.tsx:45:11",
-						"data-prohibitions": "[]",
-						className: "text-base",
-						children: "Acesse o sistema com suas credenciais"
-					})
-				]
-			}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardContent, {
-				"data-uid": "src/pages/Login.tsx:49:9",
-				"data-prohibitions": "[editContent]",
-				className: "pb-8",
-				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("form", {
-					"data-uid": "src/pages/Login.tsx:50:11",
-					"data-prohibitions": "[editContent]",
-					onSubmit: handleLogin,
-					className: "space-y-5",
+			className: "w-full max-w-md shadow-2xl border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden",
+			children: [
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+					"data-uid": "src/pages/Login.tsx:38:9",
+					"data-prohibitions": "[]",
+					className: "bg-primary h-2 w-full"
+				}),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardHeader, {
+					"data-uid": "src/pages/Login.tsx:39:9",
+					"data-prohibitions": "[]",
+					className: "text-center space-y-3 pb-6 pt-8",
 					children: [
-						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							"data-uid": "src/pages/Login.tsx:51:13",
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+							"data-uid": "src/pages/Login.tsx:40:11",
 							"data-prohibitions": "[]",
-							className: "space-y-2",
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$1, {
-								"data-uid": "src/pages/Login.tsx:52:15",
-								"data-prohibitions": "[]",
-								htmlFor: "email",
-								className: "text-slate-700",
-								children: "E-mail"
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
-								"data-uid": "src/pages/Login.tsx:55:15",
+							className: "mx-auto bg-primary/10 dark:bg-primary/20 w-20 h-20 flex items-center justify-center rounded-full mb-2 ring-8 ring-primary/5",
+							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Store, {
+								"data-uid": "src/pages/Login.tsx:41:13",
 								"data-prohibitions": "[editContent]",
-								id: "email",
-								type: "email",
-								value: email,
-								onChange: (e) => setEmail(e.target.value),
-								required: true,
-								placeholder: "admin@nexus.com",
-								className: "h-12 bg-slate-50"
-							})]
+								className: "h-10 w-10 text-primary"
+							})
 						}),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							"data-uid": "src/pages/Login.tsx:65:13",
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardTitle, {
+							"data-uid": "src/pages/Login.tsx:43:11",
 							"data-prohibitions": "[]",
-							className: "space-y-2",
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-								"data-uid": "src/pages/Login.tsx:66:15",
-								"data-prohibitions": "[]",
-								className: "flex items-center justify-between",
-								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$1, {
-									"data-uid": "src/pages/Login.tsx:67:17",
-									"data-prohibitions": "[]",
-									htmlFor: "password",
-									className: "text-slate-700",
-									children: "Senha"
-								})
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
-								"data-uid": "src/pages/Login.tsx:71:15",
-								"data-prohibitions": "[editContent]",
-								id: "password",
-								type: "password",
-								value: password,
-								onChange: (e) => setPassword(e.target.value),
-								required: true,
-								placeholder: "••••••••",
-								className: "h-12 bg-slate-50"
-							})]
+							className: "text-3xl font-bold tracking-tight text-slate-900 dark:text-white",
+							children: "CHARME PDV"
 						}),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
-							"data-uid": "src/pages/Login.tsx:81:13",
-							"data-prohibitions": "[editContent]",
-							type: "submit",
-							className: "w-full h-12 text-base font-bold mt-2",
-							disabled: loading,
-							children: loading ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(LoaderCircle, {
-								"data-uid": "src/pages/Login.tsx:88:19",
-								"data-prohibitions": "[editContent]",
-								className: "mr-2 h-5 w-5 animate-spin"
-							}), " Entrando..."] }) : "Entrar no Sistema"
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardDescription, {
+							"data-uid": "src/pages/Login.tsx:46:11",
+							"data-prohibitions": "[]",
+							className: "text-base",
+							children: "Acesse o seu painel de controle"
 						})
 					]
-				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-					"data-uid": "src/pages/Login.tsx:96:11",
-					"data-prohibitions": "[]",
-					className: "mt-8 text-center text-sm text-slate-500",
-					children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
-						"data-uid": "src/pages/Login.tsx:97:13",
-						"data-prohibitions": "[]",
+				}),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardContent, {
+					"data-uid": "src/pages/Login.tsx:48:9",
+					"data-prohibitions": "[editContent]",
+					className: "pb-8 px-6 sm:px-8",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("form", {
+						"data-uid": "src/pages/Login.tsx:49:11",
+						"data-prohibitions": "[editContent]",
+						onSubmit: handleLogin,
+						className: "space-y-6",
 						children: [
-							"Utilize ",
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("strong", {
-								"data-uid": "src/pages/Login.tsx:98:23",
+							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								"data-uid": "src/pages/Login.tsx:50:13",
 								"data-prohibitions": "[]",
-								children: "admin@nexus.com"
+								className: "space-y-2",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$1, {
+									"data-uid": "src/pages/Login.tsx:51:15",
+									"data-prohibitions": "[]",
+									htmlFor: "email",
+									className: "text-slate-700 dark:text-slate-300 font-semibold",
+									children: "E-mail de Acesso"
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									"data-uid": "src/pages/Login.tsx:54:15",
+									"data-prohibitions": "[]",
+									className: "relative",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Mail, {
+										"data-uid": "src/pages/Login.tsx:55:17",
+										"data-prohibitions": "[editContent]",
+										className: "absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400"
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
+										"data-uid": "src/pages/Login.tsx:56:17",
+										"data-prohibitions": "[editContent]",
+										id: "email",
+										type: "email",
+										value: email,
+										onChange: (e) => setEmail(e.target.value),
+										required: true,
+										placeholder: "contato.lojacharmeluiziana@gmail.com",
+										className: "pl-10 h-12 bg-slate-50 dark:bg-slate-950 border-slate-200 dark:border-slate-800 focus-visible:ring-primary"
+									})]
+								})]
 							}),
-							" / ",
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("strong", {
-								"data-uid": "src/pages/Login.tsx:98:58",
+							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								"data-uid": "src/pages/Login.tsx:67:13",
 								"data-prohibitions": "[]",
-								children: "senha123"
+								className: "space-y-2",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+									"data-uid": "src/pages/Login.tsx:68:15",
+									"data-prohibitions": "[]",
+									className: "flex items-center justify-between",
+									children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$1, {
+										"data-uid": "src/pages/Login.tsx:69:17",
+										"data-prohibitions": "[]",
+										htmlFor: "password",
+										className: "text-slate-700 dark:text-slate-300 font-semibold",
+										children: "Senha"
+									})
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									"data-uid": "src/pages/Login.tsx:76:15",
+									"data-prohibitions": "[]",
+									className: "relative",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(LockKeyhole, {
+										"data-uid": "src/pages/Login.tsx:77:17",
+										"data-prohibitions": "[editContent]",
+										className: "absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400"
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
+										"data-uid": "src/pages/Login.tsx:78:17",
+										"data-prohibitions": "[editContent]",
+										id: "password",
+										type: "password",
+										value: password,
+										onChange: (e) => setPassword(e.target.value),
+										required: true,
+										placeholder: "••••••••",
+										className: "pl-10 h-12 bg-slate-50 dark:bg-slate-950 border-slate-200 dark:border-slate-800 focus-visible:ring-primary"
+									})]
+								})]
 							}),
-							" para testes."
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
+								"data-uid": "src/pages/Login.tsx:89:13",
+								"data-prohibitions": "[editContent]",
+								type: "submit",
+								className: "w-full h-12 text-base font-bold mt-4 shadow-md hover:shadow-lg transition-all",
+								disabled: loading,
+								children: loading ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(LoaderCircle, {
+									"data-uid": "src/pages/Login.tsx:96:19",
+									"data-prohibitions": "[editContent]",
+									className: "mr-2 h-5 w-5 animate-spin"
+								}), " Entrando..."] }) : "Entrar no Sistema"
+							})
 						]
-					})
-				})]
-			})]
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+						"data-uid": "src/pages/Login.tsx:104:11",
+						"data-prohibitions": "[]",
+						className: "mt-8 text-center text-sm text-slate-500 dark:text-slate-400 border-t border-slate-100 dark:border-slate-800 pt-6",
+						children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
+							"data-uid": "src/pages/Login.tsx:105:13",
+							"data-prohibitions": "[]",
+							children: [
+								"Acesso exclusivo para administradores e operadores da ",
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("strong", {
+									"data-uid": "src/pages/Login.tsx:106:69",
+									"data-prohibitions": "[]",
+									children: "Loja Charme"
+								}),
+								"."
+							]
+						})
+					})]
+				})
+			]
 		})
 	});
 }
@@ -92415,4 +92446,4 @@ var App = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ThemeProvider, {
 }));
 //#endregion
 
-//# sourceMappingURL=index-DpUjisod.js.map
+//# sourceMappingURL=index-CzdMOUuw.js.map
