@@ -1167,6 +1167,10 @@ video {
   min-height: 0px;
 }
 
+.min-h-\[300px\]{
+  min-height: 300px;
+}
+
 .min-h-\[80px\]{
   min-height: 80px;
 }
@@ -2031,6 +2035,14 @@ video {
 
 .bg-background{
   background-color: hsl(var(--background));
+}
+
+.bg-background\/80{
+  background-color: hsl(var(--background) / 0.8);
+}
+
+.bg-black\/5{
+  background-color: rgb(0 0 0 / 0.05);
 }
 
 .bg-black\/80{
@@ -2993,6 +3005,11 @@ video {
 
 .backdrop-blur-md{
   --tw-backdrop-blur: blur(12px);
+  backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
+}
+
+.backdrop-blur-sm{
+  --tw-backdrop-blur: blur(4px);
   backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
 }
 
@@ -4593,6 +4610,10 @@ video {
 
   .sm\:w-auto{
     width: auto;
+  }
+
+  .sm\:max-w-\[400px\]{
+    max-width: 400px;
   }
 
   .sm\:max-w-\[425px\]{

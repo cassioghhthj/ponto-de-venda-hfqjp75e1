@@ -19187,6 +19187,15 @@ var Calendar$1 = createLucideIcon("calendar", [
 		key: "8toen8"
 	}]
 ]);
+var Camera = createLucideIcon("camera", [["path", {
+	d: "M13.997 4a2 2 0 0 1 1.76 1.05l.486.9A2 2 0 0 0 18.003 7H20a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h1.997a2 2 0 0 0 1.759-1.048l.489-.904A2 2 0 0 1 10.004 4z",
+	key: "18u6gg"
+}], ["circle", {
+	cx: "12",
+	cy: "13",
+	r: "3",
+	key: "1vg3eu"
+}]]);
 var ChartPie = createLucideIcon("chart-pie", [["path", {
 	d: "M21 12c.552 0 1.005-.449.95-.998a10 10 0 0 0-8.953-8.951c-.55-.055-.998.398-.998.95v8a1 1 0 0 0 1 1z",
 	key: "pzmjnu"
@@ -39158,12 +39167,1478 @@ var supabase = createClient("https://bvdtfpcvadyzjcnypbbi.supabase.co", "eyJhbGc
 	autoRefreshToken: true
 } });
 //#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/@radix-ui+react-focus-scope@1.1.7_@types+react-dom@19.2.3_@types+react@19.2.14__@types+_f62f3af4ca2ba305a7aecf04c8534604/node_modules/@radix-ui/react-focus-scope/dist/index.mjs
+var AUTOFOCUS_ON_MOUNT = "focusScope.autoFocusOnMount";
+var AUTOFOCUS_ON_UNMOUNT = "focusScope.autoFocusOnUnmount";
+var EVENT_OPTIONS = {
+	bubbles: false,
+	cancelable: true
+};
+var FOCUS_SCOPE_NAME = "FocusScope";
+var FocusScope = import_react.forwardRef((props, forwardedRef) => {
+	const { loop = false, trapped = false, onMountAutoFocus: onMountAutoFocusProp, onUnmountAutoFocus: onUnmountAutoFocusProp, ...scopeProps } = props;
+	const [container, setContainer] = import_react.useState(null);
+	const onMountAutoFocus = useCallbackRef$1(onMountAutoFocusProp);
+	const onUnmountAutoFocus = useCallbackRef$1(onUnmountAutoFocusProp);
+	const lastFocusedElementRef = import_react.useRef(null);
+	const composedRefs = useComposedRefs(forwardedRef, (node) => setContainer(node));
+	const focusScope = import_react.useRef({
+		paused: false,
+		pause() {
+			this.paused = true;
+		},
+		resume() {
+			this.paused = false;
+		}
+	}).current;
+	import_react.useEffect(() => {
+		if (trapped) {
+			let handleFocusIn2 = function(event) {
+				if (focusScope.paused || !container) return;
+				const target = event.target;
+				if (container.contains(target)) lastFocusedElementRef.current = target;
+				else focus(lastFocusedElementRef.current, { select: true });
+			}, handleFocusOut2 = function(event) {
+				if (focusScope.paused || !container) return;
+				const relatedTarget = event.relatedTarget;
+				if (relatedTarget === null) return;
+				if (!container.contains(relatedTarget)) focus(lastFocusedElementRef.current, { select: true });
+			}, handleMutations2 = function(mutations) {
+				if (document.activeElement !== document.body) return;
+				for (const mutation of mutations) if (mutation.removedNodes.length > 0) focus(container);
+			};
+			document.addEventListener("focusin", handleFocusIn2);
+			document.addEventListener("focusout", handleFocusOut2);
+			const mutationObserver = new MutationObserver(handleMutations2);
+			if (container) mutationObserver.observe(container, {
+				childList: true,
+				subtree: true
+			});
+			return () => {
+				document.removeEventListener("focusin", handleFocusIn2);
+				document.removeEventListener("focusout", handleFocusOut2);
+				mutationObserver.disconnect();
+			};
+		}
+	}, [
+		trapped,
+		container,
+		focusScope.paused
+	]);
+	import_react.useEffect(() => {
+		if (container) {
+			focusScopesStack.add(focusScope);
+			const previouslyFocusedElement = document.activeElement;
+			if (!container.contains(previouslyFocusedElement)) {
+				const mountEvent = new CustomEvent(AUTOFOCUS_ON_MOUNT, EVENT_OPTIONS);
+				container.addEventListener(AUTOFOCUS_ON_MOUNT, onMountAutoFocus);
+				container.dispatchEvent(mountEvent);
+				if (!mountEvent.defaultPrevented) {
+					focusFirst(removeLinks(getTabbableCandidates(container)), { select: true });
+					if (document.activeElement === previouslyFocusedElement) focus(container);
+				}
+			}
+			return () => {
+				container.removeEventListener(AUTOFOCUS_ON_MOUNT, onMountAutoFocus);
+				setTimeout(() => {
+					const unmountEvent = new CustomEvent(AUTOFOCUS_ON_UNMOUNT, EVENT_OPTIONS);
+					container.addEventListener(AUTOFOCUS_ON_UNMOUNT, onUnmountAutoFocus);
+					container.dispatchEvent(unmountEvent);
+					if (!unmountEvent.defaultPrevented) focus(previouslyFocusedElement ?? document.body, { select: true });
+					container.removeEventListener(AUTOFOCUS_ON_UNMOUNT, onUnmountAutoFocus);
+					focusScopesStack.remove(focusScope);
+				}, 0);
+			};
+		}
+	}, [
+		container,
+		onMountAutoFocus,
+		onUnmountAutoFocus,
+		focusScope
+	]);
+	const handleKeyDown = import_react.useCallback((event) => {
+		if (!loop && !trapped) return;
+		if (focusScope.paused) return;
+		const isTabKey = event.key === "Tab" && !event.altKey && !event.ctrlKey && !event.metaKey;
+		const focusedElement = document.activeElement;
+		if (isTabKey && focusedElement) {
+			const container2 = event.currentTarget;
+			const [first, last] = getTabbableEdges(container2);
+			if (!(first && last)) {
+				if (focusedElement === container2) event.preventDefault();
+			} else if (!event.shiftKey && focusedElement === last) {
+				event.preventDefault();
+				if (loop) focus(first, { select: true });
+			} else if (event.shiftKey && focusedElement === first) {
+				event.preventDefault();
+				if (loop) focus(last, { select: true });
+			}
+		}
+	}, [
+		loop,
+		trapped,
+		focusScope.paused
+	]);
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.div, {
+		tabIndex: -1,
+		...scopeProps,
+		ref: composedRefs,
+		onKeyDown: handleKeyDown
+	});
+});
+FocusScope.displayName = FOCUS_SCOPE_NAME;
+function focusFirst(candidates, { select = false } = {}) {
+	const previouslyFocusedElement = document.activeElement;
+	for (const candidate of candidates) {
+		focus(candidate, { select });
+		if (document.activeElement !== previouslyFocusedElement) return;
+	}
+}
+function getTabbableEdges(container) {
+	const candidates = getTabbableCandidates(container);
+	return [findVisible(candidates, container), findVisible(candidates.reverse(), container)];
+}
+function getTabbableCandidates(container) {
+	const nodes = [];
+	const walker = document.createTreeWalker(container, NodeFilter.SHOW_ELEMENT, { acceptNode: (node) => {
+		const isHiddenInput = node.tagName === "INPUT" && node.type === "hidden";
+		if (node.disabled || node.hidden || isHiddenInput) return NodeFilter.FILTER_SKIP;
+		return node.tabIndex >= 0 ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_SKIP;
+	} });
+	while (walker.nextNode()) nodes.push(walker.currentNode);
+	return nodes;
+}
+function findVisible(elements, container) {
+	for (const element of elements) if (!isHidden(element, { upTo: container })) return element;
+}
+function isHidden(node, { upTo }) {
+	if (getComputedStyle(node).visibility === "hidden") return true;
+	while (node) {
+		if (upTo !== void 0 && node === upTo) return false;
+		if (getComputedStyle(node).display === "none") return true;
+		node = node.parentElement;
+	}
+	return false;
+}
+function isSelectableInput(element) {
+	return element instanceof HTMLInputElement && "select" in element;
+}
+function focus(element, { select = false } = {}) {
+	if (element && element.focus) {
+		const previouslyFocusedElement = document.activeElement;
+		element.focus({ preventScroll: true });
+		if (element !== previouslyFocusedElement && isSelectableInput(element) && select) element.select();
+	}
+}
+var focusScopesStack = createFocusScopesStack();
+function createFocusScopesStack() {
+	let stack = [];
+	return {
+		add(focusScope) {
+			const activeFocusScope = stack[0];
+			if (focusScope !== activeFocusScope) activeFocusScope?.pause();
+			stack = arrayRemove(stack, focusScope);
+			stack.unshift(focusScope);
+		},
+		remove(focusScope) {
+			stack = arrayRemove(stack, focusScope);
+			stack[0]?.resume();
+		}
+	};
+}
+function arrayRemove(array, item) {
+	const updatedArray = [...array];
+	const index = updatedArray.indexOf(item);
+	if (index !== -1) updatedArray.splice(index, 1);
+	return updatedArray;
+}
+function removeLinks(items) {
+	return items.filter((item) => item.tagName !== "A");
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/@radix-ui+react-focus-guards@1.1.3_@types+react@19.2.14_react@19.2.4/node_modules/@radix-ui/react-focus-guards/dist/index.mjs
+var count = 0;
+function useFocusGuards() {
+	import_react.useEffect(() => {
+		const edgeGuards = document.querySelectorAll("[data-radix-focus-guard]");
+		document.body.insertAdjacentElement("afterbegin", edgeGuards[0] ?? createFocusGuard());
+		document.body.insertAdjacentElement("beforeend", edgeGuards[1] ?? createFocusGuard());
+		count++;
+		return () => {
+			if (count === 1) document.querySelectorAll("[data-radix-focus-guard]").forEach((node) => node.remove());
+			count--;
+		};
+	}, []);
+}
+function createFocusGuard() {
+	const element = document.createElement("span");
+	element.setAttribute("data-radix-focus-guard", "");
+	element.tabIndex = 0;
+	element.style.outline = "none";
+	element.style.opacity = "0";
+	element.style.position = "fixed";
+	element.style.pointerEvents = "none";
+	return element;
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-remove-scroll-bar@2.3.8_@types+react@19.2.14_react@19.2.4/node_modules/react-remove-scroll-bar/dist/es2015/constants.js
+var zeroRightClassName = "right-scroll-bar-position";
+var fullWidthClassName = "width-before-scroll-bar";
+var noScrollbarsClassName = "with-scroll-bars-hidden";
+/**
+* Name of a CSS variable containing the amount of "hidden" scrollbar
+* ! might be undefined ! use will fallback!
+*/
+var removedBarSizeVariable = "--removed-body-scroll-bar-size";
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/use-callback-ref@1.3.3_@types+react@19.2.14_react@19.2.4/node_modules/use-callback-ref/dist/es2015/assignRef.js
+/**
+* Assigns a value for a given ref, no matter of the ref format
+* @param {RefObject} ref - a callback function or ref object
+* @param value - a new value
+*
+* @see https://github.com/theKashey/use-callback-ref#assignref
+* @example
+* const refObject = useRef();
+* const refFn = (ref) => {....}
+*
+* assignRef(refObject, "refValue");
+* assignRef(refFn, "refValue");
+*/
+function assignRef(ref, value) {
+	if (typeof ref === "function") ref(value);
+	else if (ref) ref.current = value;
+	return ref;
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/use-callback-ref@1.3.3_@types+react@19.2.14_react@19.2.4/node_modules/use-callback-ref/dist/es2015/useRef.js
+/**
+* creates a MutableRef with ref change callback
+* @param initialValue - initial ref value
+* @param {Function} callback - a callback to run when value changes
+*
+* @example
+* const ref = useCallbackRef(0, (newValue, oldValue) => console.log(oldValue, '->', newValue);
+* ref.current = 1;
+* // prints 0 -> 1
+*
+* @see https://reactjs.org/docs/hooks-reference.html#useref
+* @see https://github.com/theKashey/use-callback-ref#usecallbackref---to-replace-reactuseref
+* @returns {MutableRefObject}
+*/
+function useCallbackRef(initialValue, callback) {
+	var ref = (0, import_react.useState)(function() {
+		return {
+			value: initialValue,
+			callback,
+			facade: {
+				get current() {
+					return ref.value;
+				},
+				set current(value) {
+					var last = ref.value;
+					if (last !== value) {
+						ref.value = value;
+						ref.callback(value, last);
+					}
+				}
+			}
+		};
+	})[0];
+	ref.callback = callback;
+	return ref.facade;
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/use-callback-ref@1.3.3_@types+react@19.2.14_react@19.2.4/node_modules/use-callback-ref/dist/es2015/useMergeRef.js
+var useIsomorphicLayoutEffect$1 = typeof window !== "undefined" ? import_react.useLayoutEffect : import_react.useEffect;
+var currentValues = /* @__PURE__ */ new WeakMap();
+/**
+* Merges two or more refs together providing a single interface to set their value
+* @param {RefObject|Ref} refs
+* @returns {MutableRefObject} - a new ref, which translates all changes to {refs}
+*
+* @see {@link mergeRefs} a version without buit-in memoization
+* @see https://github.com/theKashey/use-callback-ref#usemergerefs
+* @example
+* const Component = React.forwardRef((props, ref) => {
+*   const ownRef = useRef();
+*   const domRef = useMergeRefs([ref, ownRef]); // 👈 merge together
+*   return <div ref={domRef}>...</div>
+* }
+*/
+function useMergeRefs(refs, defaultValue) {
+	var callbackRef = useCallbackRef(defaultValue || null, function(newValue) {
+		return refs.forEach(function(ref) {
+			return assignRef(ref, newValue);
+		});
+	});
+	useIsomorphicLayoutEffect$1(function() {
+		var oldValue = currentValues.get(callbackRef);
+		if (oldValue) {
+			var prevRefs_1 = new Set(oldValue);
+			var nextRefs_1 = new Set(refs);
+			var current_1 = callbackRef.current;
+			prevRefs_1.forEach(function(ref) {
+				if (!nextRefs_1.has(ref)) assignRef(ref, null);
+			});
+			nextRefs_1.forEach(function(ref) {
+				if (!prevRefs_1.has(ref)) assignRef(ref, current_1);
+			});
+		}
+		currentValues.set(callbackRef, refs);
+	}, [refs]);
+	return callbackRef;
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/use-sidecar@1.1.3_@types+react@19.2.14_react@19.2.4/node_modules/use-sidecar/dist/es2015/medium.js
+function ItoI(a) {
+	return a;
+}
+function innerCreateMedium(defaults, middleware) {
+	if (middleware === void 0) middleware = ItoI;
+	var buffer = [];
+	var assigned = false;
+	return {
+		read: function() {
+			if (assigned) throw new Error("Sidecar: could not `read` from an `assigned` medium. `read` could be used only with `useMedium`.");
+			if (buffer.length) return buffer[buffer.length - 1];
+			return defaults;
+		},
+		useMedium: function(data) {
+			var item = middleware(data, assigned);
+			buffer.push(item);
+			return function() {
+				buffer = buffer.filter(function(x) {
+					return x !== item;
+				});
+			};
+		},
+		assignSyncMedium: function(cb) {
+			assigned = true;
+			while (buffer.length) {
+				var cbs = buffer;
+				buffer = [];
+				cbs.forEach(cb);
+			}
+			buffer = {
+				push: function(x) {
+					return cb(x);
+				},
+				filter: function() {
+					return buffer;
+				}
+			};
+		},
+		assignMedium: function(cb) {
+			assigned = true;
+			var pendingQueue = [];
+			if (buffer.length) {
+				var cbs = buffer;
+				buffer = [];
+				cbs.forEach(cb);
+				pendingQueue = buffer;
+			}
+			var executeQueue = function() {
+				var cbs = pendingQueue;
+				pendingQueue = [];
+				cbs.forEach(cb);
+			};
+			var cycle = function() {
+				return Promise.resolve().then(executeQueue);
+			};
+			cycle();
+			buffer = {
+				push: function(x) {
+					pendingQueue.push(x);
+					cycle();
+				},
+				filter: function(filter) {
+					pendingQueue = pendingQueue.filter(filter);
+					return buffer;
+				}
+			};
+		}
+	};
+}
+function createSidecarMedium(options) {
+	if (options === void 0) options = {};
+	var medium = innerCreateMedium(null);
+	medium.options = __assign({
+		async: true,
+		ssr: false
+	}, options);
+	return medium;
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/use-sidecar@1.1.3_@types+react@19.2.14_react@19.2.4/node_modules/use-sidecar/dist/es2015/exports.js
+var SideCar = function(_a) {
+	var sideCar = _a.sideCar, rest = __rest(_a, ["sideCar"]);
+	if (!sideCar) throw new Error("Sidecar: please provide `sideCar` property to import the right car");
+	var Target = sideCar.read();
+	if (!Target) throw new Error("Sidecar medium not found");
+	return import_react.createElement(Target, __assign({}, rest));
+};
+SideCar.isSideCarExport = true;
+function exportSidecar(medium, exported) {
+	medium.useMedium(exported);
+	return SideCar;
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-remove-scroll@2.7.2_@types+react@19.2.14_react@19.2.4/node_modules/react-remove-scroll/dist/es2015/medium.js
+var effectCar = createSidecarMedium();
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-remove-scroll@2.7.2_@types+react@19.2.14_react@19.2.4/node_modules/react-remove-scroll/dist/es2015/UI.js
+var nothing = function() {};
+/**
+* Removes scrollbar from the page and contain the scroll within the Lock
+*/
+var RemoveScroll = import_react.forwardRef(function(props, parentRef) {
+	var ref = import_react.useRef(null);
+	var _a = import_react.useState({
+		onScrollCapture: nothing,
+		onWheelCapture: nothing,
+		onTouchMoveCapture: nothing
+	}), callbacks = _a[0], setCallbacks = _a[1];
+	var forwardProps = props.forwardProps, children = props.children, className = props.className, removeScrollBar = props.removeScrollBar, enabled = props.enabled, shards = props.shards, sideCar = props.sideCar, noRelative = props.noRelative, noIsolation = props.noIsolation, inert = props.inert, allowPinchZoom = props.allowPinchZoom, _b = props.as, Container = _b === void 0 ? "div" : _b, gapMode = props.gapMode, rest = __rest(props, [
+		"forwardProps",
+		"children",
+		"className",
+		"removeScrollBar",
+		"enabled",
+		"shards",
+		"sideCar",
+		"noRelative",
+		"noIsolation",
+		"inert",
+		"allowPinchZoom",
+		"as",
+		"gapMode"
+	]);
+	var SideCar = sideCar;
+	var containerRef = useMergeRefs([ref, parentRef]);
+	var containerProps = __assign(__assign({}, rest), callbacks);
+	return import_react.createElement(import_react.Fragment, null, enabled && import_react.createElement(SideCar, {
+		sideCar: effectCar,
+		removeScrollBar,
+		shards,
+		noRelative,
+		noIsolation,
+		inert,
+		setCallbacks,
+		allowPinchZoom: !!allowPinchZoom,
+		lockRef: ref,
+		gapMode
+	}), forwardProps ? import_react.cloneElement(import_react.Children.only(children), __assign(__assign({}, containerProps), { ref: containerRef })) : import_react.createElement(Container, __assign({}, containerProps, {
+		className,
+		ref: containerRef
+	}), children));
+});
+RemoveScroll.defaultProps = {
+	enabled: true,
+	removeScrollBar: true,
+	inert: false
+};
+RemoveScroll.classNames = {
+	fullWidth: fullWidthClassName,
+	zeroRight: zeroRightClassName
+};
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/get-nonce@1.0.1/node_modules/get-nonce/dist/es2015/index.js
+var currentNonce;
+var getNonce = function() {
+	if (currentNonce) return currentNonce;
+	if (typeof __webpack_nonce__ !== "undefined") return __webpack_nonce__;
+};
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-style-singleton@2.2.3_@types+react@19.2.14_react@19.2.4/node_modules/react-style-singleton/dist/es2015/singleton.js
+function makeStyleTag() {
+	if (!document) return null;
+	var tag = document.createElement("style");
+	tag.type = "text/css";
+	var nonce = getNonce();
+	if (nonce) tag.setAttribute("nonce", nonce);
+	return tag;
+}
+function injectStyles(tag, css) {
+	if (tag.styleSheet) tag.styleSheet.cssText = css;
+	else tag.appendChild(document.createTextNode(css));
+}
+function insertStyleTag(tag) {
+	(document.head || document.getElementsByTagName("head")[0]).appendChild(tag);
+}
+var stylesheetSingleton = function() {
+	var counter = 0;
+	var stylesheet = null;
+	return {
+		add: function(style) {
+			if (counter == 0) {
+				if (stylesheet = makeStyleTag()) {
+					injectStyles(stylesheet, style);
+					insertStyleTag(stylesheet);
+				}
+			}
+			counter++;
+		},
+		remove: function() {
+			counter--;
+			if (!counter && stylesheet) {
+				stylesheet.parentNode && stylesheet.parentNode.removeChild(stylesheet);
+				stylesheet = null;
+			}
+		}
+	};
+};
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-style-singleton@2.2.3_@types+react@19.2.14_react@19.2.4/node_modules/react-style-singleton/dist/es2015/hook.js
+/**
+* creates a hook to control style singleton
+* @see {@link styleSingleton} for a safer component version
+* @example
+* ```tsx
+* const useStyle = styleHookSingleton();
+* ///
+* useStyle('body { overflow: hidden}');
+*/
+var styleHookSingleton = function() {
+	var sheet = stylesheetSingleton();
+	return function(styles, isDynamic) {
+		import_react.useEffect(function() {
+			sheet.add(styles);
+			return function() {
+				sheet.remove();
+			};
+		}, [styles && isDynamic]);
+	};
+};
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-style-singleton@2.2.3_@types+react@19.2.14_react@19.2.4/node_modules/react-style-singleton/dist/es2015/component.js
+/**
+* create a Component to add styles on demand
+* - styles are added when first instance is mounted
+* - styles are removed when the last instance is unmounted
+* - changing styles in runtime does nothing unless dynamic is set. But with multiple components that can lead to the undefined behavior
+*/
+var styleSingleton = function() {
+	var useStyle = styleHookSingleton();
+	var Sheet = function(_a) {
+		var styles = _a.styles, dynamic = _a.dynamic;
+		useStyle(styles, dynamic);
+		return null;
+	};
+	return Sheet;
+};
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-remove-scroll-bar@2.3.8_@types+react@19.2.14_react@19.2.4/node_modules/react-remove-scroll-bar/dist/es2015/utils.js
+var zeroGap = {
+	left: 0,
+	top: 0,
+	right: 0,
+	gap: 0
+};
+var parse$2 = function(x) {
+	return parseInt(x || "", 10) || 0;
+};
+var getOffset$1 = function(gapMode) {
+	var cs = window.getComputedStyle(document.body);
+	var left = cs[gapMode === "padding" ? "paddingLeft" : "marginLeft"];
+	var top = cs[gapMode === "padding" ? "paddingTop" : "marginTop"];
+	var right = cs[gapMode === "padding" ? "paddingRight" : "marginRight"];
+	return [
+		parse$2(left),
+		parse$2(top),
+		parse$2(right)
+	];
+};
+var getGapWidth = function(gapMode) {
+	if (gapMode === void 0) gapMode = "margin";
+	if (typeof window === "undefined") return zeroGap;
+	var offsets = getOffset$1(gapMode);
+	var documentWidth = document.documentElement.clientWidth;
+	var windowWidth = window.innerWidth;
+	return {
+		left: offsets[0],
+		top: offsets[1],
+		right: offsets[2],
+		gap: Math.max(0, windowWidth - documentWidth + offsets[2] - offsets[0])
+	};
+};
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-remove-scroll-bar@2.3.8_@types+react@19.2.14_react@19.2.4/node_modules/react-remove-scroll-bar/dist/es2015/component.js
+var Style = styleSingleton();
+var lockAttribute = "data-scroll-locked";
+var getStyles = function(_a, allowRelative, gapMode, important) {
+	var left = _a.left, top = _a.top, right = _a.right, gap = _a.gap;
+	if (gapMode === void 0) gapMode = "margin";
+	return "\n  .".concat(noScrollbarsClassName, " {\n   overflow: hidden ").concat(important, ";\n   padding-right: ").concat(gap, "px ").concat(important, ";\n  }\n  body[").concat(lockAttribute, "] {\n    overflow: hidden ").concat(important, ";\n    overscroll-behavior: contain;\n    ").concat([
+		allowRelative && "position: relative ".concat(important, ";"),
+		gapMode === "margin" && "\n    padding-left: ".concat(left, "px;\n    padding-top: ").concat(top, "px;\n    padding-right: ").concat(right, "px;\n    margin-left:0;\n    margin-top:0;\n    margin-right: ").concat(gap, "px ").concat(important, ";\n    "),
+		gapMode === "padding" && "padding-right: ".concat(gap, "px ").concat(important, ";")
+	].filter(Boolean).join(""), "\n  }\n  \n  .").concat(zeroRightClassName, " {\n    right: ").concat(gap, "px ").concat(important, ";\n  }\n  \n  .").concat(fullWidthClassName, " {\n    margin-right: ").concat(gap, "px ").concat(important, ";\n  }\n  \n  .").concat(zeroRightClassName, " .").concat(zeroRightClassName, " {\n    right: 0 ").concat(important, ";\n  }\n  \n  .").concat(fullWidthClassName, " .").concat(fullWidthClassName, " {\n    margin-right: 0 ").concat(important, ";\n  }\n  \n  body[").concat(lockAttribute, "] {\n    ").concat(removedBarSizeVariable, ": ").concat(gap, "px;\n  }\n");
+};
+var getCurrentUseCounter = function() {
+	var counter = parseInt(document.body.getAttribute("data-scroll-locked") || "0", 10);
+	return isFinite(counter) ? counter : 0;
+};
+var useLockAttribute = function() {
+	import_react.useEffect(function() {
+		document.body.setAttribute(lockAttribute, (getCurrentUseCounter() + 1).toString());
+		return function() {
+			var newCounter = getCurrentUseCounter() - 1;
+			if (newCounter <= 0) document.body.removeAttribute(lockAttribute);
+			else document.body.setAttribute(lockAttribute, newCounter.toString());
+		};
+	}, []);
+};
+/**
+* Removes page scrollbar and blocks page scroll when mounted
+*/
+var RemoveScrollBar = function(_a) {
+	var noRelative = _a.noRelative, noImportant = _a.noImportant, _b = _a.gapMode, gapMode = _b === void 0 ? "margin" : _b;
+	useLockAttribute();
+	var gap = import_react.useMemo(function() {
+		return getGapWidth(gapMode);
+	}, [gapMode]);
+	return import_react.createElement(Style, { styles: getStyles(gap, !noRelative, gapMode, !noImportant ? "!important" : "") });
+};
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-remove-scroll@2.7.2_@types+react@19.2.14_react@19.2.4/node_modules/react-remove-scroll/dist/es2015/aggresiveCapture.js
+var passiveSupported = false;
+if (typeof window !== "undefined") try {
+	var options = Object.defineProperty({}, "passive", { get: function() {
+		passiveSupported = true;
+		return true;
+	} });
+	window.addEventListener("test", options, options);
+	window.removeEventListener("test", options, options);
+} catch (err) {
+	passiveSupported = false;
+}
+var nonPassive = passiveSupported ? { passive: false } : false;
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-remove-scroll@2.7.2_@types+react@19.2.14_react@19.2.4/node_modules/react-remove-scroll/dist/es2015/handleScroll.js
+var alwaysContainsScroll = function(node) {
+	return node.tagName === "TEXTAREA";
+};
+var elementCanBeScrolled = function(node, overflow) {
+	if (!(node instanceof Element)) return false;
+	var styles = window.getComputedStyle(node);
+	return styles[overflow] !== "hidden" && !(styles.overflowY === styles.overflowX && !alwaysContainsScroll(node) && styles[overflow] === "visible");
+};
+var elementCouldBeVScrolled = function(node) {
+	return elementCanBeScrolled(node, "overflowY");
+};
+var elementCouldBeHScrolled = function(node) {
+	return elementCanBeScrolled(node, "overflowX");
+};
+var locationCouldBeScrolled = function(axis, node) {
+	var ownerDocument = node.ownerDocument;
+	var current = node;
+	do {
+		if (typeof ShadowRoot !== "undefined" && current instanceof ShadowRoot) current = current.host;
+		if (elementCouldBeScrolled(axis, current)) {
+			var _a = getScrollVariables(axis, current);
+			if (_a[1] > _a[2]) return true;
+		}
+		current = current.parentNode;
+	} while (current && current !== ownerDocument.body);
+	return false;
+};
+var getVScrollVariables = function(_a) {
+	return [
+		_a.scrollTop,
+		_a.scrollHeight,
+		_a.clientHeight
+	];
+};
+var getHScrollVariables = function(_a) {
+	return [
+		_a.scrollLeft,
+		_a.scrollWidth,
+		_a.clientWidth
+	];
+};
+var elementCouldBeScrolled = function(axis, node) {
+	return axis === "v" ? elementCouldBeVScrolled(node) : elementCouldBeHScrolled(node);
+};
+var getScrollVariables = function(axis, node) {
+	return axis === "v" ? getVScrollVariables(node) : getHScrollVariables(node);
+};
+var getDirectionFactor = function(axis, direction) {
+	/**
+	* If the element's direction is rtl (right-to-left), then scrollLeft is 0 when the scrollbar is at its rightmost position,
+	* and then increasingly negative as you scroll towards the end of the content.
+	* @see https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollLeft
+	*/
+	return axis === "h" && direction === "rtl" ? -1 : 1;
+};
+var handleScroll = function(axis, endTarget, event, sourceDelta, noOverscroll) {
+	var directionFactor = getDirectionFactor(axis, window.getComputedStyle(endTarget).direction);
+	var delta = directionFactor * sourceDelta;
+	var target = event.target;
+	var targetInLock = endTarget.contains(target);
+	var shouldCancelScroll = false;
+	var isDeltaPositive = delta > 0;
+	var availableScroll = 0;
+	var availableScrollTop = 0;
+	do {
+		if (!target) break;
+		var _a = getScrollVariables(axis, target), position = _a[0];
+		var elementScroll = _a[1] - _a[2] - directionFactor * position;
+		if (position || elementScroll) {
+			if (elementCouldBeScrolled(axis, target)) {
+				availableScroll += elementScroll;
+				availableScrollTop += position;
+			}
+		}
+		var parent_1 = target.parentNode;
+		target = parent_1 && parent_1.nodeType === Node.DOCUMENT_FRAGMENT_NODE ? parent_1.host : parent_1;
+	} while (!targetInLock && target !== document.body || targetInLock && (endTarget.contains(target) || endTarget === target));
+	if (isDeltaPositive && (noOverscroll && Math.abs(availableScroll) < 1 || !noOverscroll && delta > availableScroll)) shouldCancelScroll = true;
+	else if (!isDeltaPositive && (noOverscroll && Math.abs(availableScrollTop) < 1 || !noOverscroll && -delta > availableScrollTop)) shouldCancelScroll = true;
+	return shouldCancelScroll;
+};
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-remove-scroll@2.7.2_@types+react@19.2.14_react@19.2.4/node_modules/react-remove-scroll/dist/es2015/SideEffect.js
+var getTouchXY = function(event) {
+	return "changedTouches" in event ? [event.changedTouches[0].clientX, event.changedTouches[0].clientY] : [0, 0];
+};
+var getDeltaXY = function(event) {
+	return [event.deltaX, event.deltaY];
+};
+var extractRef = function(ref) {
+	return ref && "current" in ref ? ref.current : ref;
+};
+var deltaCompare = function(x, y) {
+	return x[0] === y[0] && x[1] === y[1];
+};
+var generateStyle = function(id) {
+	return "\n  .block-interactivity-".concat(id, " {pointer-events: none;}\n  .allow-interactivity-").concat(id, " {pointer-events: all;}\n");
+};
+var idCounter$1 = 0;
+var lockStack = [];
+function RemoveScrollSideCar(props) {
+	var shouldPreventQueue = import_react.useRef([]);
+	var touchStartRef = import_react.useRef([0, 0]);
+	var activeAxis = import_react.useRef();
+	var id = import_react.useState(idCounter$1++)[0];
+	var Style = import_react.useState(styleSingleton)[0];
+	var lastProps = import_react.useRef(props);
+	import_react.useEffect(function() {
+		lastProps.current = props;
+	}, [props]);
+	import_react.useEffect(function() {
+		if (props.inert) {
+			document.body.classList.add("block-interactivity-".concat(id));
+			var allow_1 = __spreadArray([props.lockRef.current], (props.shards || []).map(extractRef), true).filter(Boolean);
+			allow_1.forEach(function(el) {
+				return el.classList.add("allow-interactivity-".concat(id));
+			});
+			return function() {
+				document.body.classList.remove("block-interactivity-".concat(id));
+				allow_1.forEach(function(el) {
+					return el.classList.remove("allow-interactivity-".concat(id));
+				});
+			};
+		}
+	}, [
+		props.inert,
+		props.lockRef.current,
+		props.shards
+	]);
+	var shouldCancelEvent = import_react.useCallback(function(event, parent) {
+		if ("touches" in event && event.touches.length === 2 || event.type === "wheel" && event.ctrlKey) return !lastProps.current.allowPinchZoom;
+		var touch = getTouchXY(event);
+		var touchStart = touchStartRef.current;
+		var deltaX = "deltaX" in event ? event.deltaX : touchStart[0] - touch[0];
+		var deltaY = "deltaY" in event ? event.deltaY : touchStart[1] - touch[1];
+		var currentAxis;
+		var target = event.target;
+		var moveDirection = Math.abs(deltaX) > Math.abs(deltaY) ? "h" : "v";
+		if ("touches" in event && moveDirection === "h" && target.type === "range") return false;
+		var selection = window.getSelection();
+		var anchorNode = selection && selection.anchorNode;
+		if (anchorNode ? anchorNode === target || anchorNode.contains(target) : false) return false;
+		var canBeScrolledInMainDirection = locationCouldBeScrolled(moveDirection, target);
+		if (!canBeScrolledInMainDirection) return true;
+		if (canBeScrolledInMainDirection) currentAxis = moveDirection;
+		else {
+			currentAxis = moveDirection === "v" ? "h" : "v";
+			canBeScrolledInMainDirection = locationCouldBeScrolled(moveDirection, target);
+		}
+		if (!canBeScrolledInMainDirection) return false;
+		if (!activeAxis.current && "changedTouches" in event && (deltaX || deltaY)) activeAxis.current = currentAxis;
+		if (!currentAxis) return true;
+		var cancelingAxis = activeAxis.current || currentAxis;
+		return handleScroll(cancelingAxis, parent, event, cancelingAxis === "h" ? deltaX : deltaY, true);
+	}, []);
+	var shouldPrevent = import_react.useCallback(function(_event) {
+		var event = _event;
+		if (!lockStack.length || lockStack[lockStack.length - 1] !== Style) return;
+		var delta = "deltaY" in event ? getDeltaXY(event) : getTouchXY(event);
+		var sourceEvent = shouldPreventQueue.current.filter(function(e) {
+			return e.name === event.type && (e.target === event.target || event.target === e.shadowParent) && deltaCompare(e.delta, delta);
+		})[0];
+		if (sourceEvent && sourceEvent.should) {
+			if (event.cancelable) event.preventDefault();
+			return;
+		}
+		if (!sourceEvent) {
+			var shardNodes = (lastProps.current.shards || []).map(extractRef).filter(Boolean).filter(function(node) {
+				return node.contains(event.target);
+			});
+			if (shardNodes.length > 0 ? shouldCancelEvent(event, shardNodes[0]) : !lastProps.current.noIsolation) {
+				if (event.cancelable) event.preventDefault();
+			}
+		}
+	}, []);
+	var shouldCancel = import_react.useCallback(function(name, delta, target, should) {
+		var event = {
+			name,
+			delta,
+			target,
+			should,
+			shadowParent: getOutermostShadowParent(target)
+		};
+		shouldPreventQueue.current.push(event);
+		setTimeout(function() {
+			shouldPreventQueue.current = shouldPreventQueue.current.filter(function(e) {
+				return e !== event;
+			});
+		}, 1);
+	}, []);
+	var scrollTouchStart = import_react.useCallback(function(event) {
+		touchStartRef.current = getTouchXY(event);
+		activeAxis.current = void 0;
+	}, []);
+	var scrollWheel = import_react.useCallback(function(event) {
+		shouldCancel(event.type, getDeltaXY(event), event.target, shouldCancelEvent(event, props.lockRef.current));
+	}, []);
+	var scrollTouchMove = import_react.useCallback(function(event) {
+		shouldCancel(event.type, getTouchXY(event), event.target, shouldCancelEvent(event, props.lockRef.current));
+	}, []);
+	import_react.useEffect(function() {
+		lockStack.push(Style);
+		props.setCallbacks({
+			onScrollCapture: scrollWheel,
+			onWheelCapture: scrollWheel,
+			onTouchMoveCapture: scrollTouchMove
+		});
+		document.addEventListener("wheel", shouldPrevent, nonPassive);
+		document.addEventListener("touchmove", shouldPrevent, nonPassive);
+		document.addEventListener("touchstart", scrollTouchStart, nonPassive);
+		return function() {
+			lockStack = lockStack.filter(function(inst) {
+				return inst !== Style;
+			});
+			document.removeEventListener("wheel", shouldPrevent, nonPassive);
+			document.removeEventListener("touchmove", shouldPrevent, nonPassive);
+			document.removeEventListener("touchstart", scrollTouchStart, nonPassive);
+		};
+	}, []);
+	var removeScrollBar = props.removeScrollBar, inert = props.inert;
+	return import_react.createElement(import_react.Fragment, null, inert ? import_react.createElement(Style, { styles: generateStyle(id) }) : null, removeScrollBar ? import_react.createElement(RemoveScrollBar, {
+		noRelative: props.noRelative,
+		gapMode: props.gapMode
+	}) : null);
+}
+function getOutermostShadowParent(node) {
+	var shadowParent = null;
+	while (node !== null) {
+		if (node instanceof ShadowRoot) {
+			shadowParent = node.host;
+			node = node.host;
+		}
+		node = node.parentNode;
+	}
+	return shadowParent;
+}
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-remove-scroll@2.7.2_@types+react@19.2.14_react@19.2.4/node_modules/react-remove-scroll/dist/es2015/sidecar.js
+var sidecar_default = exportSidecar(effectCar, RemoveScrollSideCar);
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-remove-scroll@2.7.2_@types+react@19.2.14_react@19.2.4/node_modules/react-remove-scroll/dist/es2015/Combination.js
+var ReactRemoveScroll = import_react.forwardRef(function(props, ref) {
+	return import_react.createElement(RemoveScroll, __assign({}, props, {
+		ref,
+		sideCar: sidecar_default
+	}));
+});
+ReactRemoveScroll.classNames = RemoveScroll.classNames;
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/aria-hidden@1.2.6/node_modules/aria-hidden/dist/es2015/index.js
+var getDefaultParent = function(originalTarget) {
+	if (typeof document === "undefined") return null;
+	return (Array.isArray(originalTarget) ? originalTarget[0] : originalTarget).ownerDocument.body;
+};
+var counterMap = /* @__PURE__ */ new WeakMap();
+var uncontrolledNodes = /* @__PURE__ */ new WeakMap();
+var markerMap = {};
+var lockCount = 0;
+var unwrapHost = function(node) {
+	return node && (node.host || unwrapHost(node.parentNode));
+};
+var correctTargets = function(parent, targets) {
+	return targets.map(function(target) {
+		if (parent.contains(target)) return target;
+		var correctedTarget = unwrapHost(target);
+		if (correctedTarget && parent.contains(correctedTarget)) return correctedTarget;
+		console.error("aria-hidden", target, "in not contained inside", parent, ". Doing nothing");
+		return null;
+	}).filter(function(x) {
+		return Boolean(x);
+	});
+};
+/**
+* Marks everything except given node(or nodes) as aria-hidden
+* @param {Element | Element[]} originalTarget - elements to keep on the page
+* @param [parentNode] - top element, defaults to document.body
+* @param {String} [markerName] - a special attribute to mark every node
+* @param {String} [controlAttribute] - html Attribute to control
+* @return {Undo} undo command
+*/
+var applyAttributeToOthers = function(originalTarget, parentNode, markerName, controlAttribute) {
+	var targets = correctTargets(parentNode, Array.isArray(originalTarget) ? originalTarget : [originalTarget]);
+	if (!markerMap[markerName]) markerMap[markerName] = /* @__PURE__ */ new WeakMap();
+	var markerCounter = markerMap[markerName];
+	var hiddenNodes = [];
+	var elementsToKeep = /* @__PURE__ */ new Set();
+	var elementsToStop = new Set(targets);
+	var keep = function(el) {
+		if (!el || elementsToKeep.has(el)) return;
+		elementsToKeep.add(el);
+		keep(el.parentNode);
+	};
+	targets.forEach(keep);
+	var deep = function(parent) {
+		if (!parent || elementsToStop.has(parent)) return;
+		Array.prototype.forEach.call(parent.children, function(node) {
+			if (elementsToKeep.has(node)) deep(node);
+			else try {
+				var attr = node.getAttribute(controlAttribute);
+				var alreadyHidden = attr !== null && attr !== "false";
+				var counterValue = (counterMap.get(node) || 0) + 1;
+				var markerValue = (markerCounter.get(node) || 0) + 1;
+				counterMap.set(node, counterValue);
+				markerCounter.set(node, markerValue);
+				hiddenNodes.push(node);
+				if (counterValue === 1 && alreadyHidden) uncontrolledNodes.set(node, true);
+				if (markerValue === 1) node.setAttribute(markerName, "true");
+				if (!alreadyHidden) node.setAttribute(controlAttribute, "true");
+			} catch (e) {
+				console.error("aria-hidden: cannot operate on ", node, e);
+			}
+		});
+	};
+	deep(parentNode);
+	elementsToKeep.clear();
+	lockCount++;
+	return function() {
+		hiddenNodes.forEach(function(node) {
+			var counterValue = counterMap.get(node) - 1;
+			var markerValue = markerCounter.get(node) - 1;
+			counterMap.set(node, counterValue);
+			markerCounter.set(node, markerValue);
+			if (!counterValue) {
+				if (!uncontrolledNodes.has(node)) node.removeAttribute(controlAttribute);
+				uncontrolledNodes.delete(node);
+			}
+			if (!markerValue) node.removeAttribute(markerName);
+		});
+		lockCount--;
+		if (!lockCount) {
+			counterMap = /* @__PURE__ */ new WeakMap();
+			counterMap = /* @__PURE__ */ new WeakMap();
+			uncontrolledNodes = /* @__PURE__ */ new WeakMap();
+			markerMap = {};
+		}
+	};
+};
+/**
+* Marks everything except given node(or nodes) as aria-hidden
+* @param {Element | Element[]} originalTarget - elements to keep on the page
+* @param [parentNode] - top element, defaults to document.body
+* @param {String} [markerName] - a special attribute to mark every node
+* @return {Undo} undo command
+*/
+var hideOthers = function(originalTarget, parentNode, markerName) {
+	if (markerName === void 0) markerName = "data-aria-hidden";
+	var targets = Array.from(Array.isArray(originalTarget) ? originalTarget : [originalTarget]);
+	var activeParentNode = parentNode || getDefaultParent(originalTarget);
+	if (!activeParentNode) return function() {
+		return null;
+	};
+	targets.push.apply(targets, Array.from(activeParentNode.querySelectorAll("[aria-live], script")));
+	return applyAttributeToOthers(targets, activeParentNode, markerName, "aria-hidden");
+};
+//#endregion
+//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/@radix-ui+react-dialog@1.1.15_@types+react-dom@19.2.3_@types+react@19.2.14__@types+reac_779045218dc2799d336e7197abef9d38/node_modules/@radix-ui/react-dialog/dist/index.mjs
+var DIALOG_NAME = "Dialog";
+var [createDialogContext, createDialogScope] = createContextScope(DIALOG_NAME);
+var [DialogProvider, useDialogContext] = createDialogContext(DIALOG_NAME);
+var Dialog$1 = (props) => {
+	const { __scopeDialog, children, open: openProp, defaultOpen, onOpenChange, modal = true } = props;
+	const triggerRef = import_react.useRef(null);
+	const contentRef = import_react.useRef(null);
+	const [open, setOpen] = useControllableState({
+		prop: openProp,
+		defaultProp: defaultOpen ?? false,
+		onChange: onOpenChange,
+		caller: DIALOG_NAME
+	});
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogProvider, {
+		scope: __scopeDialog,
+		triggerRef,
+		contentRef,
+		contentId: useId(),
+		titleId: useId(),
+		descriptionId: useId(),
+		open,
+		onOpenChange: setOpen,
+		onOpenToggle: import_react.useCallback(() => setOpen((prevOpen) => !prevOpen), [setOpen]),
+		modal,
+		children
+	});
+};
+Dialog$1.displayName = DIALOG_NAME;
+var TRIGGER_NAME$3 = "DialogTrigger";
+var DialogTrigger$1 = import_react.forwardRef((props, forwardedRef) => {
+	const { __scopeDialog, ...triggerProps } = props;
+	const context = useDialogContext(TRIGGER_NAME$3, __scopeDialog);
+	const composedTriggerRef = useComposedRefs(forwardedRef, context.triggerRef);
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.button, {
+		type: "button",
+		"aria-haspopup": "dialog",
+		"aria-expanded": context.open,
+		"aria-controls": context.contentId,
+		"data-state": getState$3(context.open),
+		...triggerProps,
+		ref: composedTriggerRef,
+		onClick: composeEventHandlers(props.onClick, context.onOpenToggle)
+	});
+});
+DialogTrigger$1.displayName = TRIGGER_NAME$3;
+var PORTAL_NAME$2 = "DialogPortal";
+var [PortalProvider$1, usePortalContext$1] = createDialogContext(PORTAL_NAME$2, { forceMount: void 0 });
+var DialogPortal$1 = (props) => {
+	const { __scopeDialog, forceMount, children, container } = props;
+	const context = useDialogContext(PORTAL_NAME$2, __scopeDialog);
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(PortalProvider$1, {
+		scope: __scopeDialog,
+		forceMount,
+		children: import_react.Children.map(children, (child) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Presence, {
+			present: forceMount || context.open,
+			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Portal$3, {
+				asChild: true,
+				container,
+				children: child
+			})
+		}))
+	});
+};
+DialogPortal$1.displayName = PORTAL_NAME$2;
+var OVERLAY_NAME = "DialogOverlay";
+var DialogOverlay$1 = import_react.forwardRef((props, forwardedRef) => {
+	const portalContext = usePortalContext$1(OVERLAY_NAME, props.__scopeDialog);
+	const { forceMount = portalContext.forceMount, ...overlayProps } = props;
+	const context = useDialogContext(OVERLAY_NAME, props.__scopeDialog);
+	return context.modal ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Presence, {
+		present: forceMount || context.open,
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogOverlayImpl, {
+			...overlayProps,
+			ref: forwardedRef
+		})
+	}) : null;
+});
+DialogOverlay$1.displayName = OVERLAY_NAME;
+var Slot$2 = /* @__PURE__ */ createSlot$1("DialogOverlay.RemoveScroll");
+var DialogOverlayImpl = import_react.forwardRef((props, forwardedRef) => {
+	const { __scopeDialog, ...overlayProps } = props;
+	const context = useDialogContext(OVERLAY_NAME, __scopeDialog);
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ReactRemoveScroll, {
+		as: Slot$2,
+		allowPinchZoom: true,
+		shards: [context.contentRef],
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.div, {
+			"data-state": getState$3(context.open),
+			...overlayProps,
+			ref: forwardedRef,
+			style: {
+				pointerEvents: "auto",
+				...overlayProps.style
+			}
+		})
+	});
+});
+var CONTENT_NAME$2 = "DialogContent";
+var DialogContent$1 = import_react.forwardRef((props, forwardedRef) => {
+	const portalContext = usePortalContext$1(CONTENT_NAME$2, props.__scopeDialog);
+	const { forceMount = portalContext.forceMount, ...contentProps } = props;
+	const context = useDialogContext(CONTENT_NAME$2, props.__scopeDialog);
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Presence, {
+		present: forceMount || context.open,
+		children: context.modal ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogContentModal, {
+			...contentProps,
+			ref: forwardedRef
+		}) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogContentNonModal, {
+			...contentProps,
+			ref: forwardedRef
+		})
+	});
+});
+DialogContent$1.displayName = CONTENT_NAME$2;
+var DialogContentModal = import_react.forwardRef((props, forwardedRef) => {
+	const context = useDialogContext(CONTENT_NAME$2, props.__scopeDialog);
+	const contentRef = import_react.useRef(null);
+	const composedRefs = useComposedRefs(forwardedRef, context.contentRef, contentRef);
+	import_react.useEffect(() => {
+		const content = contentRef.current;
+		if (content) return hideOthers(content);
+	}, []);
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogContentImpl, {
+		...props,
+		ref: composedRefs,
+		trapFocus: context.open,
+		disableOutsidePointerEvents: true,
+		onCloseAutoFocus: composeEventHandlers(props.onCloseAutoFocus, (event) => {
+			event.preventDefault();
+			context.triggerRef.current?.focus();
+		}),
+		onPointerDownOutside: composeEventHandlers(props.onPointerDownOutside, (event) => {
+			const originalEvent = event.detail.originalEvent;
+			const ctrlLeftClick = originalEvent.button === 0 && originalEvent.ctrlKey === true;
+			if (originalEvent.button === 2 || ctrlLeftClick) event.preventDefault();
+		}),
+		onFocusOutside: composeEventHandlers(props.onFocusOutside, (event) => event.preventDefault())
+	});
+});
+var DialogContentNonModal = import_react.forwardRef((props, forwardedRef) => {
+	const context = useDialogContext(CONTENT_NAME$2, props.__scopeDialog);
+	const hasInteractedOutsideRef = import_react.useRef(false);
+	const hasPointerDownOutsideRef = import_react.useRef(false);
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogContentImpl, {
+		...props,
+		ref: forwardedRef,
+		trapFocus: false,
+		disableOutsidePointerEvents: false,
+		onCloseAutoFocus: (event) => {
+			props.onCloseAutoFocus?.(event);
+			if (!event.defaultPrevented) {
+				if (!hasInteractedOutsideRef.current) context.triggerRef.current?.focus();
+				event.preventDefault();
+			}
+			hasInteractedOutsideRef.current = false;
+			hasPointerDownOutsideRef.current = false;
+		},
+		onInteractOutside: (event) => {
+			props.onInteractOutside?.(event);
+			if (!event.defaultPrevented) {
+				hasInteractedOutsideRef.current = true;
+				if (event.detail.originalEvent.type === "pointerdown") hasPointerDownOutsideRef.current = true;
+			}
+			const target = event.target;
+			if (context.triggerRef.current?.contains(target)) event.preventDefault();
+			if (event.detail.originalEvent.type === "focusin" && hasPointerDownOutsideRef.current) event.preventDefault();
+		}
+	});
+});
+var DialogContentImpl = import_react.forwardRef((props, forwardedRef) => {
+	const { __scopeDialog, trapFocus, onOpenAutoFocus, onCloseAutoFocus, ...contentProps } = props;
+	const context = useDialogContext(CONTENT_NAME$2, __scopeDialog);
+	const contentRef = import_react.useRef(null);
+	const composedRefs = useComposedRefs(forwardedRef, contentRef);
+	useFocusGuards();
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FocusScope, {
+		asChild: true,
+		loop: true,
+		trapped: trapFocus,
+		onMountAutoFocus: onOpenAutoFocus,
+		onUnmountAutoFocus: onCloseAutoFocus,
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DismissableLayer, {
+			role: "dialog",
+			id: context.contentId,
+			"aria-describedby": context.descriptionId,
+			"aria-labelledby": context.titleId,
+			"data-state": getState$3(context.open),
+			...contentProps,
+			ref: composedRefs,
+			onDismiss: () => context.onOpenChange(false)
+		})
+	}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TitleWarning, { titleId: context.titleId }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DescriptionWarning, {
+		contentRef,
+		descriptionId: context.descriptionId
+	})] })] });
+});
+var TITLE_NAME = "DialogTitle";
+var DialogTitle$1 = import_react.forwardRef((props, forwardedRef) => {
+	const { __scopeDialog, ...titleProps } = props;
+	const context = useDialogContext(TITLE_NAME, __scopeDialog);
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.h2, {
+		id: context.titleId,
+		...titleProps,
+		ref: forwardedRef
+	});
+});
+DialogTitle$1.displayName = TITLE_NAME;
+var DESCRIPTION_NAME = "DialogDescription";
+var DialogDescription$1 = import_react.forwardRef((props, forwardedRef) => {
+	const { __scopeDialog, ...descriptionProps } = props;
+	const context = useDialogContext(DESCRIPTION_NAME, __scopeDialog);
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.p, {
+		id: context.descriptionId,
+		...descriptionProps,
+		ref: forwardedRef
+	});
+});
+DialogDescription$1.displayName = DESCRIPTION_NAME;
+var CLOSE_NAME$1 = "DialogClose";
+var DialogClose$1 = import_react.forwardRef((props, forwardedRef) => {
+	const { __scopeDialog, ...closeProps } = props;
+	const context = useDialogContext(CLOSE_NAME$1, __scopeDialog);
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.button, {
+		type: "button",
+		...closeProps,
+		ref: forwardedRef,
+		onClick: composeEventHandlers(props.onClick, () => context.onOpenChange(false))
+	});
+});
+DialogClose$1.displayName = CLOSE_NAME$1;
+function getState$3(open) {
+	return open ? "open" : "closed";
+}
+var TITLE_WARNING_NAME = "DialogTitleWarning";
+var [WarningProvider, useWarningContext] = createContext2(TITLE_WARNING_NAME, {
+	contentName: CONTENT_NAME$2,
+	titleName: TITLE_NAME,
+	docsSlug: "dialog"
+});
+var TitleWarning = ({ titleId }) => {
+	const titleWarningContext = useWarningContext(TITLE_WARNING_NAME);
+	const MESSAGE = `\`${titleWarningContext.contentName}\` requires a \`${titleWarningContext.titleName}\` for the component to be accessible for screen reader users.
+
+If you want to hide the \`${titleWarningContext.titleName}\`, you can wrap it with our VisuallyHidden component.
+
+For more information, see https://radix-ui.com/primitives/docs/components/${titleWarningContext.docsSlug}`;
+	import_react.useEffect(() => {
+		if (titleId) {
+			if (!document.getElementById(titleId)) console.error(MESSAGE);
+		}
+	}, [MESSAGE, titleId]);
+	return null;
+};
+var DESCRIPTION_WARNING_NAME = "DialogDescriptionWarning";
+var DescriptionWarning = ({ contentRef, descriptionId }) => {
+	const MESSAGE = `Warning: Missing \`Description\` or \`aria-describedby={undefined}\` for {${useWarningContext(DESCRIPTION_WARNING_NAME).contentName}}.`;
+	import_react.useEffect(() => {
+		const describedById = contentRef.current?.getAttribute("aria-describedby");
+		if (descriptionId && describedById) {
+			if (!document.getElementById(descriptionId)) console.warn(MESSAGE);
+		}
+	}, [
+		MESSAGE,
+		contentRef,
+		descriptionId
+	]);
+	return null;
+};
+var Root$4 = Dialog$1;
+var Portal$2 = DialogPortal$1;
+var Overlay = DialogOverlay$1;
+var Content = DialogContent$1;
+var Title = DialogTitle$1;
+var Description = DialogDescription$1;
+var Close = DialogClose$1;
+//#endregion
+//#region src/components/ui/dialog.tsx
+var Dialog = Root$4;
+var DialogPortal = Portal$2;
+var DialogOverlay = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Overlay, {
+	"data-uid": "src/components/ui/dialog.tsx:20:3",
+	"data-prohibitions": "[editContent]",
+	ref,
+	className: cn$1("fixed inset-0 z-50 bg-black/80 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0", className),
+	...props
+}));
+DialogOverlay.displayName = Overlay.displayName;
+var DialogContent = import_react.forwardRef(({ className, children, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogPortal, {
+	"data-uid": "src/components/ui/dialog.tsx:35:3",
+	"data-prohibitions": "[editContent]",
+	children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogOverlay, {
+		"data-uid": "src/components/ui/dialog.tsx:36:5",
+		"data-prohibitions": "[editContent]"
+	}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Content, {
+		"data-uid": "src/components/ui/dialog.tsx:37:5",
+		"data-prohibitions": "[editContent]",
+		ref,
+		className: cn$1("fixed left-[50%] top-[50%] z-50 grid w-full max-w-lg translate-x-[-50%] translate-y-[-50%] gap-4 border bg-background p-6 shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] sm:rounded-lg overflow-y-auto max-h-screen", className),
+		...props,
+		children: [children, /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Close, {
+			"data-uid": "src/components/ui/dialog.tsx:46:7",
+			"data-prohibitions": "[]",
+			className: "absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground",
+			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(X, {
+				"data-uid": "src/components/ui/dialog.tsx:47:9",
+				"data-prohibitions": "[editContent]",
+				className: "h-4 w-4"
+			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+				"data-uid": "src/components/ui/dialog.tsx:48:9",
+				"data-prohibitions": "[]",
+				className: "sr-only",
+				children: "Close"
+			})]
+		})]
+	})]
+}));
+DialogContent.displayName = Content.displayName;
+var DialogHeader = ({ className, ...props }) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+	"data-uid": "src/components/ui/dialog.tsx:56:3",
+	"data-prohibitions": "[editContent]",
+	className: cn$1("flex flex-col space-y-1.5 text-center sm:text-left", className),
+	...props
+});
+DialogHeader.displayName = "DialogHeader";
+var DialogFooter = ({ className, ...props }) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+	"data-uid": "src/components/ui/dialog.tsx:61:3",
+	"data-prohibitions": "[editContent]",
+	className: cn$1("flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2", className),
+	...props
+});
+DialogFooter.displayName = "DialogFooter";
+var DialogTitle = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Title, {
+	"data-uid": "src/components/ui/dialog.tsx:72:3",
+	"data-prohibitions": "[editContent]",
+	ref,
+	className: cn$1("text-lg font-semibold leading-none tracking-tight", className),
+	...props
+}));
+DialogTitle.displayName = Title.displayName;
+var DialogDescription = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Description, {
+	"data-uid": "src/components/ui/dialog.tsx:84:3",
+	"data-prohibitions": "[editContent]",
+	ref,
+	className: cn$1("text-sm text-muted-foreground", className),
+	...props
+}));
+DialogDescription.displayName = Description.displayName;
+//#endregion
+//#region src/components/pdv/BarcodeScannerModal.tsx
+function BarcodeScannerModal({ open, onClose, onScan }) {
+	const [loading, setLoading] = (0, import_react.useState)(true);
+	const scannerRef = (0, import_react.useRef)(null);
+	(0, import_react.useEffect)(() => {
+		if (!open) {
+			if (scannerRef.current) {
+				scannerRef.current.stop().catch(console.error);
+				scannerRef.current = null;
+			}
+			return;
+		}
+		let isMounted = true;
+		const startScanner = async () => {
+			try {
+				if (!window.Html5Qrcode) await new Promise((resolve, reject) => {
+					const script = document.createElement("script");
+					script.src = "https://unpkg.com/html5-qrcode";
+					script.async = true;
+					script.onload = resolve;
+					script.onerror = reject;
+					document.body.appendChild(script);
+				});
+				if (!isMounted) return;
+				setLoading(false);
+				const html5QrCode = new window.Html5Qrcode("reader");
+				scannerRef.current = html5QrCode;
+				await html5QrCode.start({ facingMode: "environment" }, {
+					fps: 10,
+					qrbox: {
+						width: 250,
+						height: 150
+					}
+				}, (decodedText) => {
+					if (isMounted) html5QrCode.stop().then(() => {
+						scannerRef.current = null;
+						onScan(decodedText);
+						onClose();
+					}).catch(console.error);
+				}, () => {});
+			} catch (err) {
+				console.error(err);
+				if (isMounted) {
+					toast$1({
+						title: "Erro na câmera",
+						description: "Não foi possível acessar a câmera do dispositivo. Verifique as permissões.",
+						variant: "destructive"
+					});
+					onClose();
+				}
+			}
+		};
+		setTimeout(() => {
+			if (isMounted) startScanner();
+		}, 100);
+		return () => {
+			isMounted = false;
+			if (scannerRef.current) try {
+				scannerRef.current.stop().catch(() => {});
+				scannerRef.current = null;
+			} catch (e) {}
+		};
+	}, [
+		open,
+		onClose,
+		onScan
+	]);
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Dialog, {
+		"data-uid": "src/components/pdv/BarcodeScannerModal.tsx:107:5",
+		"data-prohibitions": "[editContent]",
+		open,
+		onOpenChange: (o) => !o && onClose(),
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogContent, {
+			"data-uid": "src/components/pdv/BarcodeScannerModal.tsx:108:7",
+			"data-prohibitions": "[editContent]",
+			className: "sm:max-w-[400px]",
+			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogHeader, {
+				"data-uid": "src/components/pdv/BarcodeScannerModal.tsx:109:9",
+				"data-prohibitions": "[]",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogTitle, {
+					"data-uid": "src/components/pdv/BarcodeScannerModal.tsx:110:11",
+					"data-prohibitions": "[]",
+					children: "Escanear Código"
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogDescription, {
+					"data-uid": "src/components/pdv/BarcodeScannerModal.tsx:111:11",
+					"data-prohibitions": "[]",
+					children: "Aponte a câmera para o código de barras do produto."
+				})]
+			}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				"data-uid": "src/components/pdv/BarcodeScannerModal.tsx:113:9",
+				"data-prohibitions": "[editContent]",
+				className: "flex flex-col items-center justify-center min-h-[300px] bg-black/5 rounded-md overflow-hidden relative",
+				children: [loading && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+					"data-uid": "src/components/pdv/BarcodeScannerModal.tsx:115:13",
+					"data-prohibitions": "[]",
+					className: "absolute inset-0 flex items-center justify-center z-10 bg-background/80 backdrop-blur-sm",
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(LoaderCircle, {
+						"data-uid": "src/components/pdv/BarcodeScannerModal.tsx:116:15",
+						"data-prohibitions": "[editContent]",
+						className: "h-8 w-8 animate-spin text-primary"
+					})
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+					"data-uid": "src/components/pdv/BarcodeScannerModal.tsx:119:11",
+					"data-prohibitions": "[]",
+					id: "reader",
+					className: "w-full h-full min-h-[300px]"
+				})]
+			})]
+		})
+	});
+}
+//#endregion
 //#region src/pages/Index.tsx
 function Index() {
 	const [products, setProducts] = (0, import_react.useState)([]);
 	const [search, setSearch] = (0, import_react.useState)("");
 	const [category, setCategory] = (0, import_react.useState)("Todos");
 	const [loading, setLoading] = (0, import_react.useState)(true);
+	const [scannerOpen, setScannerOpen] = (0, import_react.useState)(false);
 	const { addItem } = useCart();
 	const inputRef = (0, import_react.useRef)(null);
 	(0, import_react.useEffect)(() => {
@@ -39195,99 +40670,144 @@ function Index() {
 			}
 		}
 	};
+	const handleScan = (code) => {
+		const exactMatch = products.find((p) => p.codigo === code && p.estoque > 0);
+		if (exactMatch) addItem(exactMatch);
+		else {
+			const outOfStock = products.find((p) => p.codigo === code);
+			if (outOfStock) toast$1({
+				title: "Sem Estoque",
+				description: `O produto ${outOfStock.nome} está sem estoque.`,
+				variant: "destructive"
+			});
+			else toast$1({
+				title: "Não Encontrado",
+				description: `Nenhum produto com o código ${code} foi encontrado.`,
+				variant: "destructive"
+			});
+		}
+	};
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-		"data-uid": "src/pages/Index.tsx:59:5",
+		"data-uid": "src/pages/Index.tsx:85:5",
 		"data-prohibitions": "[editContent]",
 		className: "h-full flex flex-col animate-fade-in w-full max-w-4xl mx-auto",
-		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-			"data-uid": "src/pages/Index.tsx:60:7",
-			"data-prohibitions": "[editContent]",
-			className: "flex flex-col sm:flex-row gap-4 justify-between items-start sm:items-center mb-6 shrink-0",
-			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				"data-uid": "src/pages/Index.tsx:61:9",
-				"data-prohibitions": "[]",
-				className: "relative w-full sm:max-w-md",
-				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Search, {
-					"data-uid": "src/pages/Index.tsx:62:11",
-					"data-prohibitions": "[editContent]",
-					className: "absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground"
-				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
-					"data-uid": "src/pages/Index.tsx:63:11",
-					"data-prohibitions": "[editContent]",
-					ref: inputRef,
-					placeholder: "Buscar por nome ou código...",
-					className: "pl-10 h-12 text-base shadow-sm border-border bg-background rounded-xl",
-					value: search,
-					onChange: (e) => setSearch(e.target.value),
-					onKeyDown: handleKeyDown,
-					autoFocus: true
-				})]
-			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Tabs, {
-				"data-uid": "src/pages/Index.tsx:74:9",
+		children: [
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				"data-uid": "src/pages/Index.tsx:86:7",
 				"data-prohibitions": "[editContent]",
-				defaultValue: "Todos",
-				className: "w-full sm:w-auto overflow-x-auto pb-1 sm:pb-0",
-				onValueChange: setCategory,
-				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TabsList, {
-					"data-uid": "src/pages/Index.tsx:79:11",
-					"data-prohibitions": "[editContent]",
-					className: "h-12 p-1 bg-muted/50 border border-border rounded-xl",
-					children: categories.map((cat) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TabsTrigger, {
-						"data-uid": "src/pages/Index.tsx:81:15",
-						"data-prohibitions": "[editContent]",
-						value: cat,
-						className: "px-5 py-2 rounded-lg font-medium capitalize",
-						children: cat
-					}, cat))
-				})
-			})]
-		}), loading ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-			"data-uid": "src/pages/Index.tsx:94:9",
-			"data-prohibitions": "[]",
-			className: "flex-1 flex items-center justify-center",
-			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(LoaderCircle, {
-				"data-uid": "src/pages/Index.tsx:95:11",
-				"data-prohibitions": "[editContent]",
-				className: "h-8 w-8 animate-spin text-primary"
-			})
-		}) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-			"data-uid": "src/pages/Index.tsx:98:9",
-			"data-prohibitions": "[editContent]",
-			className: "flex-1 overflow-y-auto pb-4 min-h-0 px-1 sm:px-0",
-			children: filteredProducts.length > 0 ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-				"data-uid": "src/pages/Index.tsx:100:13",
-				"data-prohibitions": "[editContent]",
-				className: "flex flex-col bg-card rounded-xl border border-border shadow-sm overflow-hidden mb-4",
-				children: filteredProducts.map((product) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ProductRow, {
-					"data-uid": "src/pages/Index.tsx:102:17",
-					"data-prohibitions": "[editContent]",
-					product
-				}, product.id))
-			}) : /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				"data-uid": "src/pages/Index.tsx:106:13",
-				"data-prohibitions": "[]",
-				className: "py-20 text-center text-muted-foreground flex flex-col items-center justify-center bg-muted/20 rounded-2xl border border-dashed border-border mt-4",
-				children: [
-					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(PackageX, {
-						"data-uid": "src/pages/Index.tsx:107:15",
-						"data-prohibitions": "[editContent]",
-						className: "h-12 w-12 text-muted-foreground/50 mb-3"
-					}),
-					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-						"data-uid": "src/pages/Index.tsx:108:15",
+				className: "flex flex-col sm:flex-row gap-4 justify-between items-start sm:items-center mb-6 shrink-0",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					"data-uid": "src/pages/Index.tsx:87:9",
+					"data-prohibitions": "[]",
+					className: "flex w-full sm:max-w-md gap-2",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						"data-uid": "src/pages/Index.tsx:88:11",
 						"data-prohibitions": "[]",
-						className: "text-lg font-medium text-foreground",
-						children: "Nenhum produto encontrado"
-					}),
-					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-						"data-uid": "src/pages/Index.tsx:109:15",
+						className: "relative flex-1",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Search, {
+							"data-uid": "src/pages/Index.tsx:89:13",
+							"data-prohibitions": "[editContent]",
+							className: "absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground"
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
+							"data-uid": "src/pages/Index.tsx:90:13",
+							"data-prohibitions": "[editContent]",
+							ref: inputRef,
+							placeholder: "Buscar por nome ou código...",
+							className: "pl-10 h-12 text-base shadow-sm border-border bg-background rounded-xl",
+							value: search,
+							onChange: (e) => setSearch(e.target.value),
+							onKeyDown: handleKeyDown,
+							autoFocus: true
+						})]
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
+						"data-uid": "src/pages/Index.tsx:100:11",
 						"data-prohibitions": "[]",
-						className: "text-sm",
-						children: "Tente ajustar a sua busca ou filtros."
+						variant: "outline",
+						size: "icon",
+						className: "h-12 w-12 shrink-0 rounded-xl bg-background",
+						onClick: () => setScannerOpen(true),
+						title: "Escanear Código de Barras",
+						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Camera, {
+							"data-uid": "src/pages/Index.tsx:107:13",
+							"data-prohibitions": "[editContent]",
+							className: "h-5 w-5"
+						})
+					})]
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Tabs, {
+					"data-uid": "src/pages/Index.tsx:111:9",
+					"data-prohibitions": "[editContent]",
+					defaultValue: "Todos",
+					className: "w-full sm:w-auto overflow-x-auto pb-1 sm:pb-0",
+					onValueChange: setCategory,
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TabsList, {
+						"data-uid": "src/pages/Index.tsx:116:11",
+						"data-prohibitions": "[editContent]",
+						className: "h-12 p-1 bg-muted/50 border border-border rounded-xl",
+						children: categories.map((cat) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TabsTrigger, {
+							"data-uid": "src/pages/Index.tsx:118:15",
+							"data-prohibitions": "[editContent]",
+							value: cat,
+							className: "px-5 py-2 rounded-lg font-medium capitalize",
+							children: cat
+						}, cat))
 					})
-				]
+				})]
+			}),
+			loading ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+				"data-uid": "src/pages/Index.tsx:131:9",
+				"data-prohibitions": "[]",
+				className: "flex-1 flex items-center justify-center",
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(LoaderCircle, {
+					"data-uid": "src/pages/Index.tsx:132:11",
+					"data-prohibitions": "[editContent]",
+					className: "h-8 w-8 animate-spin text-primary"
+				})
+			}) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+				"data-uid": "src/pages/Index.tsx:135:9",
+				"data-prohibitions": "[editContent]",
+				className: "flex-1 overflow-y-auto pb-4 min-h-0 px-1 sm:px-0",
+				children: filteredProducts.length > 0 ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+					"data-uid": "src/pages/Index.tsx:137:13",
+					"data-prohibitions": "[editContent]",
+					className: "flex flex-col bg-card rounded-xl border border-border shadow-sm overflow-hidden mb-4",
+					children: filteredProducts.map((product) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ProductRow, {
+						"data-uid": "src/pages/Index.tsx:139:17",
+						"data-prohibitions": "[editContent]",
+						product
+					}, product.id))
+				}) : /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					"data-uid": "src/pages/Index.tsx:143:13",
+					"data-prohibitions": "[]",
+					className: "py-20 text-center text-muted-foreground flex flex-col items-center justify-center bg-muted/20 rounded-2xl border border-dashed border-border mt-4",
+					children: [
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(PackageX, {
+							"data-uid": "src/pages/Index.tsx:144:15",
+							"data-prohibitions": "[editContent]",
+							className: "h-12 w-12 text-muted-foreground/50 mb-3"
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+							"data-uid": "src/pages/Index.tsx:145:15",
+							"data-prohibitions": "[]",
+							className: "text-lg font-medium text-foreground",
+							children: "Nenhum produto encontrado"
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+							"data-uid": "src/pages/Index.tsx:146:15",
+							"data-prohibitions": "[]",
+							className: "text-sm",
+							children: "Tente ajustar a sua busca ou filtros."
+						})
+					]
+				})
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(BarcodeScannerModal, {
+				"data-uid": "src/pages/Index.tsx:152:7",
+				"data-prohibitions": "[editContent]",
+				open: scannerOpen,
+				onClose: () => setScannerOpen(false),
+				onScan: handleScan
 			})
-		})]
+		]
 	});
 }
 //#endregion
@@ -40882,9 +42402,9 @@ var isNullish = function isNullish(value) {
 var isNumOrStr = function isNumOrStr(value) {
 	return isNumber(value) || (0, import_isString.default)(value);
 };
-var idCounter$1 = 0;
+var idCounter = 0;
 var uniqueId = function uniqueId(prefix) {
-	var id = ++idCounter$1;
+	var id = ++idCounter;
 	return "".concat(prefix || "").concat(id);
 };
 /**
@@ -47060,7 +48580,7 @@ var getStringSize = function getStringSize(text) {
 		};
 	}
 };
-var getOffset$1 = function getOffset(rect) {
+var getOffset = function getOffset(rect) {
 	return {
 		top: rect.top + window.scrollY - document.documentElement.clientTop,
 		left: rect.left + window.scrollX - document.documentElement.clientLeft
@@ -65187,7 +66707,7 @@ var generateCategoricalChart = function generateCategoricalChart(_ref6) {
 					if (!this.container) return null;
 					var element = this.container;
 					var boundingRect = element.getBoundingClientRect();
-					var containerOffset = getOffset$1(boundingRect);
+					var containerOffset = getOffset(boundingRect);
 					var e = {
 						chartX: Math.round(event.pageX - containerOffset.left),
 						chartY: Math.round(event.pageY - containerOffset.top)
@@ -66258,1359 +67778,6 @@ function Dashboard() {
 		]
 	});
 }
-//#endregion
-//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/@radix-ui+react-focus-scope@1.1.7_@types+react-dom@19.2.3_@types+react@19.2.14__@types+_f62f3af4ca2ba305a7aecf04c8534604/node_modules/@radix-ui/react-focus-scope/dist/index.mjs
-var AUTOFOCUS_ON_MOUNT = "focusScope.autoFocusOnMount";
-var AUTOFOCUS_ON_UNMOUNT = "focusScope.autoFocusOnUnmount";
-var EVENT_OPTIONS = {
-	bubbles: false,
-	cancelable: true
-};
-var FOCUS_SCOPE_NAME = "FocusScope";
-var FocusScope = import_react.forwardRef((props, forwardedRef) => {
-	const { loop = false, trapped = false, onMountAutoFocus: onMountAutoFocusProp, onUnmountAutoFocus: onUnmountAutoFocusProp, ...scopeProps } = props;
-	const [container, setContainer] = import_react.useState(null);
-	const onMountAutoFocus = useCallbackRef$1(onMountAutoFocusProp);
-	const onUnmountAutoFocus = useCallbackRef$1(onUnmountAutoFocusProp);
-	const lastFocusedElementRef = import_react.useRef(null);
-	const composedRefs = useComposedRefs(forwardedRef, (node) => setContainer(node));
-	const focusScope = import_react.useRef({
-		paused: false,
-		pause() {
-			this.paused = true;
-		},
-		resume() {
-			this.paused = false;
-		}
-	}).current;
-	import_react.useEffect(() => {
-		if (trapped) {
-			let handleFocusIn2 = function(event) {
-				if (focusScope.paused || !container) return;
-				const target = event.target;
-				if (container.contains(target)) lastFocusedElementRef.current = target;
-				else focus(lastFocusedElementRef.current, { select: true });
-			}, handleFocusOut2 = function(event) {
-				if (focusScope.paused || !container) return;
-				const relatedTarget = event.relatedTarget;
-				if (relatedTarget === null) return;
-				if (!container.contains(relatedTarget)) focus(lastFocusedElementRef.current, { select: true });
-			}, handleMutations2 = function(mutations) {
-				if (document.activeElement !== document.body) return;
-				for (const mutation of mutations) if (mutation.removedNodes.length > 0) focus(container);
-			};
-			document.addEventListener("focusin", handleFocusIn2);
-			document.addEventListener("focusout", handleFocusOut2);
-			const mutationObserver = new MutationObserver(handleMutations2);
-			if (container) mutationObserver.observe(container, {
-				childList: true,
-				subtree: true
-			});
-			return () => {
-				document.removeEventListener("focusin", handleFocusIn2);
-				document.removeEventListener("focusout", handleFocusOut2);
-				mutationObserver.disconnect();
-			};
-		}
-	}, [
-		trapped,
-		container,
-		focusScope.paused
-	]);
-	import_react.useEffect(() => {
-		if (container) {
-			focusScopesStack.add(focusScope);
-			const previouslyFocusedElement = document.activeElement;
-			if (!container.contains(previouslyFocusedElement)) {
-				const mountEvent = new CustomEvent(AUTOFOCUS_ON_MOUNT, EVENT_OPTIONS);
-				container.addEventListener(AUTOFOCUS_ON_MOUNT, onMountAutoFocus);
-				container.dispatchEvent(mountEvent);
-				if (!mountEvent.defaultPrevented) {
-					focusFirst(removeLinks(getTabbableCandidates(container)), { select: true });
-					if (document.activeElement === previouslyFocusedElement) focus(container);
-				}
-			}
-			return () => {
-				container.removeEventListener(AUTOFOCUS_ON_MOUNT, onMountAutoFocus);
-				setTimeout(() => {
-					const unmountEvent = new CustomEvent(AUTOFOCUS_ON_UNMOUNT, EVENT_OPTIONS);
-					container.addEventListener(AUTOFOCUS_ON_UNMOUNT, onUnmountAutoFocus);
-					container.dispatchEvent(unmountEvent);
-					if (!unmountEvent.defaultPrevented) focus(previouslyFocusedElement ?? document.body, { select: true });
-					container.removeEventListener(AUTOFOCUS_ON_UNMOUNT, onUnmountAutoFocus);
-					focusScopesStack.remove(focusScope);
-				}, 0);
-			};
-		}
-	}, [
-		container,
-		onMountAutoFocus,
-		onUnmountAutoFocus,
-		focusScope
-	]);
-	const handleKeyDown = import_react.useCallback((event) => {
-		if (!loop && !trapped) return;
-		if (focusScope.paused) return;
-		const isTabKey = event.key === "Tab" && !event.altKey && !event.ctrlKey && !event.metaKey;
-		const focusedElement = document.activeElement;
-		if (isTabKey && focusedElement) {
-			const container2 = event.currentTarget;
-			const [first, last] = getTabbableEdges(container2);
-			if (!(first && last)) {
-				if (focusedElement === container2) event.preventDefault();
-			} else if (!event.shiftKey && focusedElement === last) {
-				event.preventDefault();
-				if (loop) focus(first, { select: true });
-			} else if (event.shiftKey && focusedElement === first) {
-				event.preventDefault();
-				if (loop) focus(last, { select: true });
-			}
-		}
-	}, [
-		loop,
-		trapped,
-		focusScope.paused
-	]);
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.div, {
-		tabIndex: -1,
-		...scopeProps,
-		ref: composedRefs,
-		onKeyDown: handleKeyDown
-	});
-});
-FocusScope.displayName = FOCUS_SCOPE_NAME;
-function focusFirst(candidates, { select = false } = {}) {
-	const previouslyFocusedElement = document.activeElement;
-	for (const candidate of candidates) {
-		focus(candidate, { select });
-		if (document.activeElement !== previouslyFocusedElement) return;
-	}
-}
-function getTabbableEdges(container) {
-	const candidates = getTabbableCandidates(container);
-	return [findVisible(candidates, container), findVisible(candidates.reverse(), container)];
-}
-function getTabbableCandidates(container) {
-	const nodes = [];
-	const walker = document.createTreeWalker(container, NodeFilter.SHOW_ELEMENT, { acceptNode: (node) => {
-		const isHiddenInput = node.tagName === "INPUT" && node.type === "hidden";
-		if (node.disabled || node.hidden || isHiddenInput) return NodeFilter.FILTER_SKIP;
-		return node.tabIndex >= 0 ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_SKIP;
-	} });
-	while (walker.nextNode()) nodes.push(walker.currentNode);
-	return nodes;
-}
-function findVisible(elements, container) {
-	for (const element of elements) if (!isHidden(element, { upTo: container })) return element;
-}
-function isHidden(node, { upTo }) {
-	if (getComputedStyle(node).visibility === "hidden") return true;
-	while (node) {
-		if (upTo !== void 0 && node === upTo) return false;
-		if (getComputedStyle(node).display === "none") return true;
-		node = node.parentElement;
-	}
-	return false;
-}
-function isSelectableInput(element) {
-	return element instanceof HTMLInputElement && "select" in element;
-}
-function focus(element, { select = false } = {}) {
-	if (element && element.focus) {
-		const previouslyFocusedElement = document.activeElement;
-		element.focus({ preventScroll: true });
-		if (element !== previouslyFocusedElement && isSelectableInput(element) && select) element.select();
-	}
-}
-var focusScopesStack = createFocusScopesStack();
-function createFocusScopesStack() {
-	let stack = [];
-	return {
-		add(focusScope) {
-			const activeFocusScope = stack[0];
-			if (focusScope !== activeFocusScope) activeFocusScope?.pause();
-			stack = arrayRemove(stack, focusScope);
-			stack.unshift(focusScope);
-		},
-		remove(focusScope) {
-			stack = arrayRemove(stack, focusScope);
-			stack[0]?.resume();
-		}
-	};
-}
-function arrayRemove(array, item) {
-	const updatedArray = [...array];
-	const index = updatedArray.indexOf(item);
-	if (index !== -1) updatedArray.splice(index, 1);
-	return updatedArray;
-}
-function removeLinks(items) {
-	return items.filter((item) => item.tagName !== "A");
-}
-//#endregion
-//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/@radix-ui+react-focus-guards@1.1.3_@types+react@19.2.14_react@19.2.4/node_modules/@radix-ui/react-focus-guards/dist/index.mjs
-var count = 0;
-function useFocusGuards() {
-	import_react.useEffect(() => {
-		const edgeGuards = document.querySelectorAll("[data-radix-focus-guard]");
-		document.body.insertAdjacentElement("afterbegin", edgeGuards[0] ?? createFocusGuard());
-		document.body.insertAdjacentElement("beforeend", edgeGuards[1] ?? createFocusGuard());
-		count++;
-		return () => {
-			if (count === 1) document.querySelectorAll("[data-radix-focus-guard]").forEach((node) => node.remove());
-			count--;
-		};
-	}, []);
-}
-function createFocusGuard() {
-	const element = document.createElement("span");
-	element.setAttribute("data-radix-focus-guard", "");
-	element.tabIndex = 0;
-	element.style.outline = "none";
-	element.style.opacity = "0";
-	element.style.position = "fixed";
-	element.style.pointerEvents = "none";
-	return element;
-}
-//#endregion
-//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-remove-scroll-bar@2.3.8_@types+react@19.2.14_react@19.2.4/node_modules/react-remove-scroll-bar/dist/es2015/constants.js
-var zeroRightClassName = "right-scroll-bar-position";
-var fullWidthClassName = "width-before-scroll-bar";
-var noScrollbarsClassName = "with-scroll-bars-hidden";
-/**
-* Name of a CSS variable containing the amount of "hidden" scrollbar
-* ! might be undefined ! use will fallback!
-*/
-var removedBarSizeVariable = "--removed-body-scroll-bar-size";
-//#endregion
-//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/use-callback-ref@1.3.3_@types+react@19.2.14_react@19.2.4/node_modules/use-callback-ref/dist/es2015/assignRef.js
-/**
-* Assigns a value for a given ref, no matter of the ref format
-* @param {RefObject} ref - a callback function or ref object
-* @param value - a new value
-*
-* @see https://github.com/theKashey/use-callback-ref#assignref
-* @example
-* const refObject = useRef();
-* const refFn = (ref) => {....}
-*
-* assignRef(refObject, "refValue");
-* assignRef(refFn, "refValue");
-*/
-function assignRef(ref, value) {
-	if (typeof ref === "function") ref(value);
-	else if (ref) ref.current = value;
-	return ref;
-}
-//#endregion
-//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/use-callback-ref@1.3.3_@types+react@19.2.14_react@19.2.4/node_modules/use-callback-ref/dist/es2015/useRef.js
-/**
-* creates a MutableRef with ref change callback
-* @param initialValue - initial ref value
-* @param {Function} callback - a callback to run when value changes
-*
-* @example
-* const ref = useCallbackRef(0, (newValue, oldValue) => console.log(oldValue, '->', newValue);
-* ref.current = 1;
-* // prints 0 -> 1
-*
-* @see https://reactjs.org/docs/hooks-reference.html#useref
-* @see https://github.com/theKashey/use-callback-ref#usecallbackref---to-replace-reactuseref
-* @returns {MutableRefObject}
-*/
-function useCallbackRef(initialValue, callback) {
-	var ref = (0, import_react.useState)(function() {
-		return {
-			value: initialValue,
-			callback,
-			facade: {
-				get current() {
-					return ref.value;
-				},
-				set current(value) {
-					var last = ref.value;
-					if (last !== value) {
-						ref.value = value;
-						ref.callback(value, last);
-					}
-				}
-			}
-		};
-	})[0];
-	ref.callback = callback;
-	return ref.facade;
-}
-//#endregion
-//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/use-callback-ref@1.3.3_@types+react@19.2.14_react@19.2.4/node_modules/use-callback-ref/dist/es2015/useMergeRef.js
-var useIsomorphicLayoutEffect$1 = typeof window !== "undefined" ? import_react.useLayoutEffect : import_react.useEffect;
-var currentValues = /* @__PURE__ */ new WeakMap();
-/**
-* Merges two or more refs together providing a single interface to set their value
-* @param {RefObject|Ref} refs
-* @returns {MutableRefObject} - a new ref, which translates all changes to {refs}
-*
-* @see {@link mergeRefs} a version without buit-in memoization
-* @see https://github.com/theKashey/use-callback-ref#usemergerefs
-* @example
-* const Component = React.forwardRef((props, ref) => {
-*   const ownRef = useRef();
-*   const domRef = useMergeRefs([ref, ownRef]); // 👈 merge together
-*   return <div ref={domRef}>...</div>
-* }
-*/
-function useMergeRefs(refs, defaultValue) {
-	var callbackRef = useCallbackRef(defaultValue || null, function(newValue) {
-		return refs.forEach(function(ref) {
-			return assignRef(ref, newValue);
-		});
-	});
-	useIsomorphicLayoutEffect$1(function() {
-		var oldValue = currentValues.get(callbackRef);
-		if (oldValue) {
-			var prevRefs_1 = new Set(oldValue);
-			var nextRefs_1 = new Set(refs);
-			var current_1 = callbackRef.current;
-			prevRefs_1.forEach(function(ref) {
-				if (!nextRefs_1.has(ref)) assignRef(ref, null);
-			});
-			nextRefs_1.forEach(function(ref) {
-				if (!prevRefs_1.has(ref)) assignRef(ref, current_1);
-			});
-		}
-		currentValues.set(callbackRef, refs);
-	}, [refs]);
-	return callbackRef;
-}
-//#endregion
-//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/use-sidecar@1.1.3_@types+react@19.2.14_react@19.2.4/node_modules/use-sidecar/dist/es2015/medium.js
-function ItoI(a) {
-	return a;
-}
-function innerCreateMedium(defaults, middleware) {
-	if (middleware === void 0) middleware = ItoI;
-	var buffer = [];
-	var assigned = false;
-	return {
-		read: function() {
-			if (assigned) throw new Error("Sidecar: could not `read` from an `assigned` medium. `read` could be used only with `useMedium`.");
-			if (buffer.length) return buffer[buffer.length - 1];
-			return defaults;
-		},
-		useMedium: function(data) {
-			var item = middleware(data, assigned);
-			buffer.push(item);
-			return function() {
-				buffer = buffer.filter(function(x) {
-					return x !== item;
-				});
-			};
-		},
-		assignSyncMedium: function(cb) {
-			assigned = true;
-			while (buffer.length) {
-				var cbs = buffer;
-				buffer = [];
-				cbs.forEach(cb);
-			}
-			buffer = {
-				push: function(x) {
-					return cb(x);
-				},
-				filter: function() {
-					return buffer;
-				}
-			};
-		},
-		assignMedium: function(cb) {
-			assigned = true;
-			var pendingQueue = [];
-			if (buffer.length) {
-				var cbs = buffer;
-				buffer = [];
-				cbs.forEach(cb);
-				pendingQueue = buffer;
-			}
-			var executeQueue = function() {
-				var cbs = pendingQueue;
-				pendingQueue = [];
-				cbs.forEach(cb);
-			};
-			var cycle = function() {
-				return Promise.resolve().then(executeQueue);
-			};
-			cycle();
-			buffer = {
-				push: function(x) {
-					pendingQueue.push(x);
-					cycle();
-				},
-				filter: function(filter) {
-					pendingQueue = pendingQueue.filter(filter);
-					return buffer;
-				}
-			};
-		}
-	};
-}
-function createSidecarMedium(options) {
-	if (options === void 0) options = {};
-	var medium = innerCreateMedium(null);
-	medium.options = __assign({
-		async: true,
-		ssr: false
-	}, options);
-	return medium;
-}
-//#endregion
-//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/use-sidecar@1.1.3_@types+react@19.2.14_react@19.2.4/node_modules/use-sidecar/dist/es2015/exports.js
-var SideCar = function(_a) {
-	var sideCar = _a.sideCar, rest = __rest(_a, ["sideCar"]);
-	if (!sideCar) throw new Error("Sidecar: please provide `sideCar` property to import the right car");
-	var Target = sideCar.read();
-	if (!Target) throw new Error("Sidecar medium not found");
-	return import_react.createElement(Target, __assign({}, rest));
-};
-SideCar.isSideCarExport = true;
-function exportSidecar(medium, exported) {
-	medium.useMedium(exported);
-	return SideCar;
-}
-//#endregion
-//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-remove-scroll@2.7.2_@types+react@19.2.14_react@19.2.4/node_modules/react-remove-scroll/dist/es2015/medium.js
-var effectCar = createSidecarMedium();
-//#endregion
-//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-remove-scroll@2.7.2_@types+react@19.2.14_react@19.2.4/node_modules/react-remove-scroll/dist/es2015/UI.js
-var nothing = function() {};
-/**
-* Removes scrollbar from the page and contain the scroll within the Lock
-*/
-var RemoveScroll = import_react.forwardRef(function(props, parentRef) {
-	var ref = import_react.useRef(null);
-	var _a = import_react.useState({
-		onScrollCapture: nothing,
-		onWheelCapture: nothing,
-		onTouchMoveCapture: nothing
-	}), callbacks = _a[0], setCallbacks = _a[1];
-	var forwardProps = props.forwardProps, children = props.children, className = props.className, removeScrollBar = props.removeScrollBar, enabled = props.enabled, shards = props.shards, sideCar = props.sideCar, noRelative = props.noRelative, noIsolation = props.noIsolation, inert = props.inert, allowPinchZoom = props.allowPinchZoom, _b = props.as, Container = _b === void 0 ? "div" : _b, gapMode = props.gapMode, rest = __rest(props, [
-		"forwardProps",
-		"children",
-		"className",
-		"removeScrollBar",
-		"enabled",
-		"shards",
-		"sideCar",
-		"noRelative",
-		"noIsolation",
-		"inert",
-		"allowPinchZoom",
-		"as",
-		"gapMode"
-	]);
-	var SideCar = sideCar;
-	var containerRef = useMergeRefs([ref, parentRef]);
-	var containerProps = __assign(__assign({}, rest), callbacks);
-	return import_react.createElement(import_react.Fragment, null, enabled && import_react.createElement(SideCar, {
-		sideCar: effectCar,
-		removeScrollBar,
-		shards,
-		noRelative,
-		noIsolation,
-		inert,
-		setCallbacks,
-		allowPinchZoom: !!allowPinchZoom,
-		lockRef: ref,
-		gapMode
-	}), forwardProps ? import_react.cloneElement(import_react.Children.only(children), __assign(__assign({}, containerProps), { ref: containerRef })) : import_react.createElement(Container, __assign({}, containerProps, {
-		className,
-		ref: containerRef
-	}), children));
-});
-RemoveScroll.defaultProps = {
-	enabled: true,
-	removeScrollBar: true,
-	inert: false
-};
-RemoveScroll.classNames = {
-	fullWidth: fullWidthClassName,
-	zeroRight: zeroRightClassName
-};
-//#endregion
-//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/get-nonce@1.0.1/node_modules/get-nonce/dist/es2015/index.js
-var currentNonce;
-var getNonce = function() {
-	if (currentNonce) return currentNonce;
-	if (typeof __webpack_nonce__ !== "undefined") return __webpack_nonce__;
-};
-//#endregion
-//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-style-singleton@2.2.3_@types+react@19.2.14_react@19.2.4/node_modules/react-style-singleton/dist/es2015/singleton.js
-function makeStyleTag() {
-	if (!document) return null;
-	var tag = document.createElement("style");
-	tag.type = "text/css";
-	var nonce = getNonce();
-	if (nonce) tag.setAttribute("nonce", nonce);
-	return tag;
-}
-function injectStyles(tag, css) {
-	if (tag.styleSheet) tag.styleSheet.cssText = css;
-	else tag.appendChild(document.createTextNode(css));
-}
-function insertStyleTag(tag) {
-	(document.head || document.getElementsByTagName("head")[0]).appendChild(tag);
-}
-var stylesheetSingleton = function() {
-	var counter = 0;
-	var stylesheet = null;
-	return {
-		add: function(style) {
-			if (counter == 0) {
-				if (stylesheet = makeStyleTag()) {
-					injectStyles(stylesheet, style);
-					insertStyleTag(stylesheet);
-				}
-			}
-			counter++;
-		},
-		remove: function() {
-			counter--;
-			if (!counter && stylesheet) {
-				stylesheet.parentNode && stylesheet.parentNode.removeChild(stylesheet);
-				stylesheet = null;
-			}
-		}
-	};
-};
-//#endregion
-//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-style-singleton@2.2.3_@types+react@19.2.14_react@19.2.4/node_modules/react-style-singleton/dist/es2015/hook.js
-/**
-* creates a hook to control style singleton
-* @see {@link styleSingleton} for a safer component version
-* @example
-* ```tsx
-* const useStyle = styleHookSingleton();
-* ///
-* useStyle('body { overflow: hidden}');
-*/
-var styleHookSingleton = function() {
-	var sheet = stylesheetSingleton();
-	return function(styles, isDynamic) {
-		import_react.useEffect(function() {
-			sheet.add(styles);
-			return function() {
-				sheet.remove();
-			};
-		}, [styles && isDynamic]);
-	};
-};
-//#endregion
-//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-style-singleton@2.2.3_@types+react@19.2.14_react@19.2.4/node_modules/react-style-singleton/dist/es2015/component.js
-/**
-* create a Component to add styles on demand
-* - styles are added when first instance is mounted
-* - styles are removed when the last instance is unmounted
-* - changing styles in runtime does nothing unless dynamic is set. But with multiple components that can lead to the undefined behavior
-*/
-var styleSingleton = function() {
-	var useStyle = styleHookSingleton();
-	var Sheet = function(_a) {
-		var styles = _a.styles, dynamic = _a.dynamic;
-		useStyle(styles, dynamic);
-		return null;
-	};
-	return Sheet;
-};
-//#endregion
-//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-remove-scroll-bar@2.3.8_@types+react@19.2.14_react@19.2.4/node_modules/react-remove-scroll-bar/dist/es2015/utils.js
-var zeroGap = {
-	left: 0,
-	top: 0,
-	right: 0,
-	gap: 0
-};
-var parse$2 = function(x) {
-	return parseInt(x || "", 10) || 0;
-};
-var getOffset = function(gapMode) {
-	var cs = window.getComputedStyle(document.body);
-	var left = cs[gapMode === "padding" ? "paddingLeft" : "marginLeft"];
-	var top = cs[gapMode === "padding" ? "paddingTop" : "marginTop"];
-	var right = cs[gapMode === "padding" ? "paddingRight" : "marginRight"];
-	return [
-		parse$2(left),
-		parse$2(top),
-		parse$2(right)
-	];
-};
-var getGapWidth = function(gapMode) {
-	if (gapMode === void 0) gapMode = "margin";
-	if (typeof window === "undefined") return zeroGap;
-	var offsets = getOffset(gapMode);
-	var documentWidth = document.documentElement.clientWidth;
-	var windowWidth = window.innerWidth;
-	return {
-		left: offsets[0],
-		top: offsets[1],
-		right: offsets[2],
-		gap: Math.max(0, windowWidth - documentWidth + offsets[2] - offsets[0])
-	};
-};
-//#endregion
-//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-remove-scroll-bar@2.3.8_@types+react@19.2.14_react@19.2.4/node_modules/react-remove-scroll-bar/dist/es2015/component.js
-var Style = styleSingleton();
-var lockAttribute = "data-scroll-locked";
-var getStyles = function(_a, allowRelative, gapMode, important) {
-	var left = _a.left, top = _a.top, right = _a.right, gap = _a.gap;
-	if (gapMode === void 0) gapMode = "margin";
-	return "\n  .".concat(noScrollbarsClassName, " {\n   overflow: hidden ").concat(important, ";\n   padding-right: ").concat(gap, "px ").concat(important, ";\n  }\n  body[").concat(lockAttribute, "] {\n    overflow: hidden ").concat(important, ";\n    overscroll-behavior: contain;\n    ").concat([
-		allowRelative && "position: relative ".concat(important, ";"),
-		gapMode === "margin" && "\n    padding-left: ".concat(left, "px;\n    padding-top: ").concat(top, "px;\n    padding-right: ").concat(right, "px;\n    margin-left:0;\n    margin-top:0;\n    margin-right: ").concat(gap, "px ").concat(important, ";\n    "),
-		gapMode === "padding" && "padding-right: ".concat(gap, "px ").concat(important, ";")
-	].filter(Boolean).join(""), "\n  }\n  \n  .").concat(zeroRightClassName, " {\n    right: ").concat(gap, "px ").concat(important, ";\n  }\n  \n  .").concat(fullWidthClassName, " {\n    margin-right: ").concat(gap, "px ").concat(important, ";\n  }\n  \n  .").concat(zeroRightClassName, " .").concat(zeroRightClassName, " {\n    right: 0 ").concat(important, ";\n  }\n  \n  .").concat(fullWidthClassName, " .").concat(fullWidthClassName, " {\n    margin-right: 0 ").concat(important, ";\n  }\n  \n  body[").concat(lockAttribute, "] {\n    ").concat(removedBarSizeVariable, ": ").concat(gap, "px;\n  }\n");
-};
-var getCurrentUseCounter = function() {
-	var counter = parseInt(document.body.getAttribute("data-scroll-locked") || "0", 10);
-	return isFinite(counter) ? counter : 0;
-};
-var useLockAttribute = function() {
-	import_react.useEffect(function() {
-		document.body.setAttribute(lockAttribute, (getCurrentUseCounter() + 1).toString());
-		return function() {
-			var newCounter = getCurrentUseCounter() - 1;
-			if (newCounter <= 0) document.body.removeAttribute(lockAttribute);
-			else document.body.setAttribute(lockAttribute, newCounter.toString());
-		};
-	}, []);
-};
-/**
-* Removes page scrollbar and blocks page scroll when mounted
-*/
-var RemoveScrollBar = function(_a) {
-	var noRelative = _a.noRelative, noImportant = _a.noImportant, _b = _a.gapMode, gapMode = _b === void 0 ? "margin" : _b;
-	useLockAttribute();
-	var gap = import_react.useMemo(function() {
-		return getGapWidth(gapMode);
-	}, [gapMode]);
-	return import_react.createElement(Style, { styles: getStyles(gap, !noRelative, gapMode, !noImportant ? "!important" : "") });
-};
-//#endregion
-//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-remove-scroll@2.7.2_@types+react@19.2.14_react@19.2.4/node_modules/react-remove-scroll/dist/es2015/aggresiveCapture.js
-var passiveSupported = false;
-if (typeof window !== "undefined") try {
-	var options = Object.defineProperty({}, "passive", { get: function() {
-		passiveSupported = true;
-		return true;
-	} });
-	window.addEventListener("test", options, options);
-	window.removeEventListener("test", options, options);
-} catch (err) {
-	passiveSupported = false;
-}
-var nonPassive = passiveSupported ? { passive: false } : false;
-//#endregion
-//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-remove-scroll@2.7.2_@types+react@19.2.14_react@19.2.4/node_modules/react-remove-scroll/dist/es2015/handleScroll.js
-var alwaysContainsScroll = function(node) {
-	return node.tagName === "TEXTAREA";
-};
-var elementCanBeScrolled = function(node, overflow) {
-	if (!(node instanceof Element)) return false;
-	var styles = window.getComputedStyle(node);
-	return styles[overflow] !== "hidden" && !(styles.overflowY === styles.overflowX && !alwaysContainsScroll(node) && styles[overflow] === "visible");
-};
-var elementCouldBeVScrolled = function(node) {
-	return elementCanBeScrolled(node, "overflowY");
-};
-var elementCouldBeHScrolled = function(node) {
-	return elementCanBeScrolled(node, "overflowX");
-};
-var locationCouldBeScrolled = function(axis, node) {
-	var ownerDocument = node.ownerDocument;
-	var current = node;
-	do {
-		if (typeof ShadowRoot !== "undefined" && current instanceof ShadowRoot) current = current.host;
-		if (elementCouldBeScrolled(axis, current)) {
-			var _a = getScrollVariables(axis, current);
-			if (_a[1] > _a[2]) return true;
-		}
-		current = current.parentNode;
-	} while (current && current !== ownerDocument.body);
-	return false;
-};
-var getVScrollVariables = function(_a) {
-	return [
-		_a.scrollTop,
-		_a.scrollHeight,
-		_a.clientHeight
-	];
-};
-var getHScrollVariables = function(_a) {
-	return [
-		_a.scrollLeft,
-		_a.scrollWidth,
-		_a.clientWidth
-	];
-};
-var elementCouldBeScrolled = function(axis, node) {
-	return axis === "v" ? elementCouldBeVScrolled(node) : elementCouldBeHScrolled(node);
-};
-var getScrollVariables = function(axis, node) {
-	return axis === "v" ? getVScrollVariables(node) : getHScrollVariables(node);
-};
-var getDirectionFactor = function(axis, direction) {
-	/**
-	* If the element's direction is rtl (right-to-left), then scrollLeft is 0 when the scrollbar is at its rightmost position,
-	* and then increasingly negative as you scroll towards the end of the content.
-	* @see https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollLeft
-	*/
-	return axis === "h" && direction === "rtl" ? -1 : 1;
-};
-var handleScroll = function(axis, endTarget, event, sourceDelta, noOverscroll) {
-	var directionFactor = getDirectionFactor(axis, window.getComputedStyle(endTarget).direction);
-	var delta = directionFactor * sourceDelta;
-	var target = event.target;
-	var targetInLock = endTarget.contains(target);
-	var shouldCancelScroll = false;
-	var isDeltaPositive = delta > 0;
-	var availableScroll = 0;
-	var availableScrollTop = 0;
-	do {
-		if (!target) break;
-		var _a = getScrollVariables(axis, target), position = _a[0];
-		var elementScroll = _a[1] - _a[2] - directionFactor * position;
-		if (position || elementScroll) {
-			if (elementCouldBeScrolled(axis, target)) {
-				availableScroll += elementScroll;
-				availableScrollTop += position;
-			}
-		}
-		var parent_1 = target.parentNode;
-		target = parent_1 && parent_1.nodeType === Node.DOCUMENT_FRAGMENT_NODE ? parent_1.host : parent_1;
-	} while (!targetInLock && target !== document.body || targetInLock && (endTarget.contains(target) || endTarget === target));
-	if (isDeltaPositive && (noOverscroll && Math.abs(availableScroll) < 1 || !noOverscroll && delta > availableScroll)) shouldCancelScroll = true;
-	else if (!isDeltaPositive && (noOverscroll && Math.abs(availableScrollTop) < 1 || !noOverscroll && -delta > availableScrollTop)) shouldCancelScroll = true;
-	return shouldCancelScroll;
-};
-//#endregion
-//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-remove-scroll@2.7.2_@types+react@19.2.14_react@19.2.4/node_modules/react-remove-scroll/dist/es2015/SideEffect.js
-var getTouchXY = function(event) {
-	return "changedTouches" in event ? [event.changedTouches[0].clientX, event.changedTouches[0].clientY] : [0, 0];
-};
-var getDeltaXY = function(event) {
-	return [event.deltaX, event.deltaY];
-};
-var extractRef = function(ref) {
-	return ref && "current" in ref ? ref.current : ref;
-};
-var deltaCompare = function(x, y) {
-	return x[0] === y[0] && x[1] === y[1];
-};
-var generateStyle = function(id) {
-	return "\n  .block-interactivity-".concat(id, " {pointer-events: none;}\n  .allow-interactivity-").concat(id, " {pointer-events: all;}\n");
-};
-var idCounter = 0;
-var lockStack = [];
-function RemoveScrollSideCar(props) {
-	var shouldPreventQueue = import_react.useRef([]);
-	var touchStartRef = import_react.useRef([0, 0]);
-	var activeAxis = import_react.useRef();
-	var id = import_react.useState(idCounter++)[0];
-	var Style = import_react.useState(styleSingleton)[0];
-	var lastProps = import_react.useRef(props);
-	import_react.useEffect(function() {
-		lastProps.current = props;
-	}, [props]);
-	import_react.useEffect(function() {
-		if (props.inert) {
-			document.body.classList.add("block-interactivity-".concat(id));
-			var allow_1 = __spreadArray([props.lockRef.current], (props.shards || []).map(extractRef), true).filter(Boolean);
-			allow_1.forEach(function(el) {
-				return el.classList.add("allow-interactivity-".concat(id));
-			});
-			return function() {
-				document.body.classList.remove("block-interactivity-".concat(id));
-				allow_1.forEach(function(el) {
-					return el.classList.remove("allow-interactivity-".concat(id));
-				});
-			};
-		}
-	}, [
-		props.inert,
-		props.lockRef.current,
-		props.shards
-	]);
-	var shouldCancelEvent = import_react.useCallback(function(event, parent) {
-		if ("touches" in event && event.touches.length === 2 || event.type === "wheel" && event.ctrlKey) return !lastProps.current.allowPinchZoom;
-		var touch = getTouchXY(event);
-		var touchStart = touchStartRef.current;
-		var deltaX = "deltaX" in event ? event.deltaX : touchStart[0] - touch[0];
-		var deltaY = "deltaY" in event ? event.deltaY : touchStart[1] - touch[1];
-		var currentAxis;
-		var target = event.target;
-		var moveDirection = Math.abs(deltaX) > Math.abs(deltaY) ? "h" : "v";
-		if ("touches" in event && moveDirection === "h" && target.type === "range") return false;
-		var selection = window.getSelection();
-		var anchorNode = selection && selection.anchorNode;
-		if (anchorNode ? anchorNode === target || anchorNode.contains(target) : false) return false;
-		var canBeScrolledInMainDirection = locationCouldBeScrolled(moveDirection, target);
-		if (!canBeScrolledInMainDirection) return true;
-		if (canBeScrolledInMainDirection) currentAxis = moveDirection;
-		else {
-			currentAxis = moveDirection === "v" ? "h" : "v";
-			canBeScrolledInMainDirection = locationCouldBeScrolled(moveDirection, target);
-		}
-		if (!canBeScrolledInMainDirection) return false;
-		if (!activeAxis.current && "changedTouches" in event && (deltaX || deltaY)) activeAxis.current = currentAxis;
-		if (!currentAxis) return true;
-		var cancelingAxis = activeAxis.current || currentAxis;
-		return handleScroll(cancelingAxis, parent, event, cancelingAxis === "h" ? deltaX : deltaY, true);
-	}, []);
-	var shouldPrevent = import_react.useCallback(function(_event) {
-		var event = _event;
-		if (!lockStack.length || lockStack[lockStack.length - 1] !== Style) return;
-		var delta = "deltaY" in event ? getDeltaXY(event) : getTouchXY(event);
-		var sourceEvent = shouldPreventQueue.current.filter(function(e) {
-			return e.name === event.type && (e.target === event.target || event.target === e.shadowParent) && deltaCompare(e.delta, delta);
-		})[0];
-		if (sourceEvent && sourceEvent.should) {
-			if (event.cancelable) event.preventDefault();
-			return;
-		}
-		if (!sourceEvent) {
-			var shardNodes = (lastProps.current.shards || []).map(extractRef).filter(Boolean).filter(function(node) {
-				return node.contains(event.target);
-			});
-			if (shardNodes.length > 0 ? shouldCancelEvent(event, shardNodes[0]) : !lastProps.current.noIsolation) {
-				if (event.cancelable) event.preventDefault();
-			}
-		}
-	}, []);
-	var shouldCancel = import_react.useCallback(function(name, delta, target, should) {
-		var event = {
-			name,
-			delta,
-			target,
-			should,
-			shadowParent: getOutermostShadowParent(target)
-		};
-		shouldPreventQueue.current.push(event);
-		setTimeout(function() {
-			shouldPreventQueue.current = shouldPreventQueue.current.filter(function(e) {
-				return e !== event;
-			});
-		}, 1);
-	}, []);
-	var scrollTouchStart = import_react.useCallback(function(event) {
-		touchStartRef.current = getTouchXY(event);
-		activeAxis.current = void 0;
-	}, []);
-	var scrollWheel = import_react.useCallback(function(event) {
-		shouldCancel(event.type, getDeltaXY(event), event.target, shouldCancelEvent(event, props.lockRef.current));
-	}, []);
-	var scrollTouchMove = import_react.useCallback(function(event) {
-		shouldCancel(event.type, getTouchXY(event), event.target, shouldCancelEvent(event, props.lockRef.current));
-	}, []);
-	import_react.useEffect(function() {
-		lockStack.push(Style);
-		props.setCallbacks({
-			onScrollCapture: scrollWheel,
-			onWheelCapture: scrollWheel,
-			onTouchMoveCapture: scrollTouchMove
-		});
-		document.addEventListener("wheel", shouldPrevent, nonPassive);
-		document.addEventListener("touchmove", shouldPrevent, nonPassive);
-		document.addEventListener("touchstart", scrollTouchStart, nonPassive);
-		return function() {
-			lockStack = lockStack.filter(function(inst) {
-				return inst !== Style;
-			});
-			document.removeEventListener("wheel", shouldPrevent, nonPassive);
-			document.removeEventListener("touchmove", shouldPrevent, nonPassive);
-			document.removeEventListener("touchstart", scrollTouchStart, nonPassive);
-		};
-	}, []);
-	var removeScrollBar = props.removeScrollBar, inert = props.inert;
-	return import_react.createElement(import_react.Fragment, null, inert ? import_react.createElement(Style, { styles: generateStyle(id) }) : null, removeScrollBar ? import_react.createElement(RemoveScrollBar, {
-		noRelative: props.noRelative,
-		gapMode: props.gapMode
-	}) : null);
-}
-function getOutermostShadowParent(node) {
-	var shadowParent = null;
-	while (node !== null) {
-		if (node instanceof ShadowRoot) {
-			shadowParent = node.host;
-			node = node.host;
-		}
-		node = node.parentNode;
-	}
-	return shadowParent;
-}
-//#endregion
-//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-remove-scroll@2.7.2_@types+react@19.2.14_react@19.2.4/node_modules/react-remove-scroll/dist/es2015/sidecar.js
-var sidecar_default = exportSidecar(effectCar, RemoveScrollSideCar);
-//#endregion
-//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/react-remove-scroll@2.7.2_@types+react@19.2.14_react@19.2.4/node_modules/react-remove-scroll/dist/es2015/Combination.js
-var ReactRemoveScroll = import_react.forwardRef(function(props, ref) {
-	return import_react.createElement(RemoveScroll, __assign({}, props, {
-		ref,
-		sideCar: sidecar_default
-	}));
-});
-ReactRemoveScroll.classNames = RemoveScroll.classNames;
-//#endregion
-//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/aria-hidden@1.2.6/node_modules/aria-hidden/dist/es2015/index.js
-var getDefaultParent = function(originalTarget) {
-	if (typeof document === "undefined") return null;
-	return (Array.isArray(originalTarget) ? originalTarget[0] : originalTarget).ownerDocument.body;
-};
-var counterMap = /* @__PURE__ */ new WeakMap();
-var uncontrolledNodes = /* @__PURE__ */ new WeakMap();
-var markerMap = {};
-var lockCount = 0;
-var unwrapHost = function(node) {
-	return node && (node.host || unwrapHost(node.parentNode));
-};
-var correctTargets = function(parent, targets) {
-	return targets.map(function(target) {
-		if (parent.contains(target)) return target;
-		var correctedTarget = unwrapHost(target);
-		if (correctedTarget && parent.contains(correctedTarget)) return correctedTarget;
-		console.error("aria-hidden", target, "in not contained inside", parent, ". Doing nothing");
-		return null;
-	}).filter(function(x) {
-		return Boolean(x);
-	});
-};
-/**
-* Marks everything except given node(or nodes) as aria-hidden
-* @param {Element | Element[]} originalTarget - elements to keep on the page
-* @param [parentNode] - top element, defaults to document.body
-* @param {String} [markerName] - a special attribute to mark every node
-* @param {String} [controlAttribute] - html Attribute to control
-* @return {Undo} undo command
-*/
-var applyAttributeToOthers = function(originalTarget, parentNode, markerName, controlAttribute) {
-	var targets = correctTargets(parentNode, Array.isArray(originalTarget) ? originalTarget : [originalTarget]);
-	if (!markerMap[markerName]) markerMap[markerName] = /* @__PURE__ */ new WeakMap();
-	var markerCounter = markerMap[markerName];
-	var hiddenNodes = [];
-	var elementsToKeep = /* @__PURE__ */ new Set();
-	var elementsToStop = new Set(targets);
-	var keep = function(el) {
-		if (!el || elementsToKeep.has(el)) return;
-		elementsToKeep.add(el);
-		keep(el.parentNode);
-	};
-	targets.forEach(keep);
-	var deep = function(parent) {
-		if (!parent || elementsToStop.has(parent)) return;
-		Array.prototype.forEach.call(parent.children, function(node) {
-			if (elementsToKeep.has(node)) deep(node);
-			else try {
-				var attr = node.getAttribute(controlAttribute);
-				var alreadyHidden = attr !== null && attr !== "false";
-				var counterValue = (counterMap.get(node) || 0) + 1;
-				var markerValue = (markerCounter.get(node) || 0) + 1;
-				counterMap.set(node, counterValue);
-				markerCounter.set(node, markerValue);
-				hiddenNodes.push(node);
-				if (counterValue === 1 && alreadyHidden) uncontrolledNodes.set(node, true);
-				if (markerValue === 1) node.setAttribute(markerName, "true");
-				if (!alreadyHidden) node.setAttribute(controlAttribute, "true");
-			} catch (e) {
-				console.error("aria-hidden: cannot operate on ", node, e);
-			}
-		});
-	};
-	deep(parentNode);
-	elementsToKeep.clear();
-	lockCount++;
-	return function() {
-		hiddenNodes.forEach(function(node) {
-			var counterValue = counterMap.get(node) - 1;
-			var markerValue = markerCounter.get(node) - 1;
-			counterMap.set(node, counterValue);
-			markerCounter.set(node, markerValue);
-			if (!counterValue) {
-				if (!uncontrolledNodes.has(node)) node.removeAttribute(controlAttribute);
-				uncontrolledNodes.delete(node);
-			}
-			if (!markerValue) node.removeAttribute(markerName);
-		});
-		lockCount--;
-		if (!lockCount) {
-			counterMap = /* @__PURE__ */ new WeakMap();
-			counterMap = /* @__PURE__ */ new WeakMap();
-			uncontrolledNodes = /* @__PURE__ */ new WeakMap();
-			markerMap = {};
-		}
-	};
-};
-/**
-* Marks everything except given node(or nodes) as aria-hidden
-* @param {Element | Element[]} originalTarget - elements to keep on the page
-* @param [parentNode] - top element, defaults to document.body
-* @param {String} [markerName] - a special attribute to mark every node
-* @return {Undo} undo command
-*/
-var hideOthers = function(originalTarget, parentNode, markerName) {
-	if (markerName === void 0) markerName = "data-aria-hidden";
-	var targets = Array.from(Array.isArray(originalTarget) ? originalTarget : [originalTarget]);
-	var activeParentNode = parentNode || getDefaultParent(originalTarget);
-	if (!activeParentNode) return function() {
-		return null;
-	};
-	targets.push.apply(targets, Array.from(activeParentNode.querySelectorAll("[aria-live], script")));
-	return applyAttributeToOthers(targets, activeParentNode, markerName, "aria-hidden");
-};
-//#endregion
-//#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/@radix-ui+react-dialog@1.1.15_@types+react-dom@19.2.3_@types+react@19.2.14__@types+reac_779045218dc2799d336e7197abef9d38/node_modules/@radix-ui/react-dialog/dist/index.mjs
-var DIALOG_NAME = "Dialog";
-var [createDialogContext, createDialogScope] = createContextScope(DIALOG_NAME);
-var [DialogProvider, useDialogContext] = createDialogContext(DIALOG_NAME);
-var Dialog$1 = (props) => {
-	const { __scopeDialog, children, open: openProp, defaultOpen, onOpenChange, modal = true } = props;
-	const triggerRef = import_react.useRef(null);
-	const contentRef = import_react.useRef(null);
-	const [open, setOpen] = useControllableState({
-		prop: openProp,
-		defaultProp: defaultOpen ?? false,
-		onChange: onOpenChange,
-		caller: DIALOG_NAME
-	});
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogProvider, {
-		scope: __scopeDialog,
-		triggerRef,
-		contentRef,
-		contentId: useId(),
-		titleId: useId(),
-		descriptionId: useId(),
-		open,
-		onOpenChange: setOpen,
-		onOpenToggle: import_react.useCallback(() => setOpen((prevOpen) => !prevOpen), [setOpen]),
-		modal,
-		children
-	});
-};
-Dialog$1.displayName = DIALOG_NAME;
-var TRIGGER_NAME$3 = "DialogTrigger";
-var DialogTrigger$1 = import_react.forwardRef((props, forwardedRef) => {
-	const { __scopeDialog, ...triggerProps } = props;
-	const context = useDialogContext(TRIGGER_NAME$3, __scopeDialog);
-	const composedTriggerRef = useComposedRefs(forwardedRef, context.triggerRef);
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.button, {
-		type: "button",
-		"aria-haspopup": "dialog",
-		"aria-expanded": context.open,
-		"aria-controls": context.contentId,
-		"data-state": getState$3(context.open),
-		...triggerProps,
-		ref: composedTriggerRef,
-		onClick: composeEventHandlers(props.onClick, context.onOpenToggle)
-	});
-});
-DialogTrigger$1.displayName = TRIGGER_NAME$3;
-var PORTAL_NAME$2 = "DialogPortal";
-var [PortalProvider$1, usePortalContext$1] = createDialogContext(PORTAL_NAME$2, { forceMount: void 0 });
-var DialogPortal$1 = (props) => {
-	const { __scopeDialog, forceMount, children, container } = props;
-	const context = useDialogContext(PORTAL_NAME$2, __scopeDialog);
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(PortalProvider$1, {
-		scope: __scopeDialog,
-		forceMount,
-		children: import_react.Children.map(children, (child) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Presence, {
-			present: forceMount || context.open,
-			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Portal$3, {
-				asChild: true,
-				container,
-				children: child
-			})
-		}))
-	});
-};
-DialogPortal$1.displayName = PORTAL_NAME$2;
-var OVERLAY_NAME = "DialogOverlay";
-var DialogOverlay$1 = import_react.forwardRef((props, forwardedRef) => {
-	const portalContext = usePortalContext$1(OVERLAY_NAME, props.__scopeDialog);
-	const { forceMount = portalContext.forceMount, ...overlayProps } = props;
-	const context = useDialogContext(OVERLAY_NAME, props.__scopeDialog);
-	return context.modal ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Presence, {
-		present: forceMount || context.open,
-		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogOverlayImpl, {
-			...overlayProps,
-			ref: forwardedRef
-		})
-	}) : null;
-});
-DialogOverlay$1.displayName = OVERLAY_NAME;
-var Slot$2 = /* @__PURE__ */ createSlot$1("DialogOverlay.RemoveScroll");
-var DialogOverlayImpl = import_react.forwardRef((props, forwardedRef) => {
-	const { __scopeDialog, ...overlayProps } = props;
-	const context = useDialogContext(OVERLAY_NAME, __scopeDialog);
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ReactRemoveScroll, {
-		as: Slot$2,
-		allowPinchZoom: true,
-		shards: [context.contentRef],
-		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.div, {
-			"data-state": getState$3(context.open),
-			...overlayProps,
-			ref: forwardedRef,
-			style: {
-				pointerEvents: "auto",
-				...overlayProps.style
-			}
-		})
-	});
-});
-var CONTENT_NAME$2 = "DialogContent";
-var DialogContent$1 = import_react.forwardRef((props, forwardedRef) => {
-	const portalContext = usePortalContext$1(CONTENT_NAME$2, props.__scopeDialog);
-	const { forceMount = portalContext.forceMount, ...contentProps } = props;
-	const context = useDialogContext(CONTENT_NAME$2, props.__scopeDialog);
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Presence, {
-		present: forceMount || context.open,
-		children: context.modal ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogContentModal, {
-			...contentProps,
-			ref: forwardedRef
-		}) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogContentNonModal, {
-			...contentProps,
-			ref: forwardedRef
-		})
-	});
-});
-DialogContent$1.displayName = CONTENT_NAME$2;
-var DialogContentModal = import_react.forwardRef((props, forwardedRef) => {
-	const context = useDialogContext(CONTENT_NAME$2, props.__scopeDialog);
-	const contentRef = import_react.useRef(null);
-	const composedRefs = useComposedRefs(forwardedRef, context.contentRef, contentRef);
-	import_react.useEffect(() => {
-		const content = contentRef.current;
-		if (content) return hideOthers(content);
-	}, []);
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogContentImpl, {
-		...props,
-		ref: composedRefs,
-		trapFocus: context.open,
-		disableOutsidePointerEvents: true,
-		onCloseAutoFocus: composeEventHandlers(props.onCloseAutoFocus, (event) => {
-			event.preventDefault();
-			context.triggerRef.current?.focus();
-		}),
-		onPointerDownOutside: composeEventHandlers(props.onPointerDownOutside, (event) => {
-			const originalEvent = event.detail.originalEvent;
-			const ctrlLeftClick = originalEvent.button === 0 && originalEvent.ctrlKey === true;
-			if (originalEvent.button === 2 || ctrlLeftClick) event.preventDefault();
-		}),
-		onFocusOutside: composeEventHandlers(props.onFocusOutside, (event) => event.preventDefault())
-	});
-});
-var DialogContentNonModal = import_react.forwardRef((props, forwardedRef) => {
-	const context = useDialogContext(CONTENT_NAME$2, props.__scopeDialog);
-	const hasInteractedOutsideRef = import_react.useRef(false);
-	const hasPointerDownOutsideRef = import_react.useRef(false);
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogContentImpl, {
-		...props,
-		ref: forwardedRef,
-		trapFocus: false,
-		disableOutsidePointerEvents: false,
-		onCloseAutoFocus: (event) => {
-			props.onCloseAutoFocus?.(event);
-			if (!event.defaultPrevented) {
-				if (!hasInteractedOutsideRef.current) context.triggerRef.current?.focus();
-				event.preventDefault();
-			}
-			hasInteractedOutsideRef.current = false;
-			hasPointerDownOutsideRef.current = false;
-		},
-		onInteractOutside: (event) => {
-			props.onInteractOutside?.(event);
-			if (!event.defaultPrevented) {
-				hasInteractedOutsideRef.current = true;
-				if (event.detail.originalEvent.type === "pointerdown") hasPointerDownOutsideRef.current = true;
-			}
-			const target = event.target;
-			if (context.triggerRef.current?.contains(target)) event.preventDefault();
-			if (event.detail.originalEvent.type === "focusin" && hasPointerDownOutsideRef.current) event.preventDefault();
-		}
-	});
-});
-var DialogContentImpl = import_react.forwardRef((props, forwardedRef) => {
-	const { __scopeDialog, trapFocus, onOpenAutoFocus, onCloseAutoFocus, ...contentProps } = props;
-	const context = useDialogContext(CONTENT_NAME$2, __scopeDialog);
-	const contentRef = import_react.useRef(null);
-	const composedRefs = useComposedRefs(forwardedRef, contentRef);
-	useFocusGuards();
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FocusScope, {
-		asChild: true,
-		loop: true,
-		trapped: trapFocus,
-		onMountAutoFocus: onOpenAutoFocus,
-		onUnmountAutoFocus: onCloseAutoFocus,
-		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DismissableLayer, {
-			role: "dialog",
-			id: context.contentId,
-			"aria-describedby": context.descriptionId,
-			"aria-labelledby": context.titleId,
-			"data-state": getState$3(context.open),
-			...contentProps,
-			ref: composedRefs,
-			onDismiss: () => context.onOpenChange(false)
-		})
-	}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TitleWarning, { titleId: context.titleId }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DescriptionWarning, {
-		contentRef,
-		descriptionId: context.descriptionId
-	})] })] });
-});
-var TITLE_NAME = "DialogTitle";
-var DialogTitle$1 = import_react.forwardRef((props, forwardedRef) => {
-	const { __scopeDialog, ...titleProps } = props;
-	const context = useDialogContext(TITLE_NAME, __scopeDialog);
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.h2, {
-		id: context.titleId,
-		...titleProps,
-		ref: forwardedRef
-	});
-});
-DialogTitle$1.displayName = TITLE_NAME;
-var DESCRIPTION_NAME = "DialogDescription";
-var DialogDescription$1 = import_react.forwardRef((props, forwardedRef) => {
-	const { __scopeDialog, ...descriptionProps } = props;
-	const context = useDialogContext(DESCRIPTION_NAME, __scopeDialog);
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.p, {
-		id: context.descriptionId,
-		...descriptionProps,
-		ref: forwardedRef
-	});
-});
-DialogDescription$1.displayName = DESCRIPTION_NAME;
-var CLOSE_NAME$1 = "DialogClose";
-var DialogClose$1 = import_react.forwardRef((props, forwardedRef) => {
-	const { __scopeDialog, ...closeProps } = props;
-	const context = useDialogContext(CLOSE_NAME$1, __scopeDialog);
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.button, {
-		type: "button",
-		...closeProps,
-		ref: forwardedRef,
-		onClick: composeEventHandlers(props.onClick, () => context.onOpenChange(false))
-	});
-});
-DialogClose$1.displayName = CLOSE_NAME$1;
-function getState$3(open) {
-	return open ? "open" : "closed";
-}
-var TITLE_WARNING_NAME = "DialogTitleWarning";
-var [WarningProvider, useWarningContext] = createContext2(TITLE_WARNING_NAME, {
-	contentName: CONTENT_NAME$2,
-	titleName: TITLE_NAME,
-	docsSlug: "dialog"
-});
-var TitleWarning = ({ titleId }) => {
-	const titleWarningContext = useWarningContext(TITLE_WARNING_NAME);
-	const MESSAGE = `\`${titleWarningContext.contentName}\` requires a \`${titleWarningContext.titleName}\` for the component to be accessible for screen reader users.
-
-If you want to hide the \`${titleWarningContext.titleName}\`, you can wrap it with our VisuallyHidden component.
-
-For more information, see https://radix-ui.com/primitives/docs/components/${titleWarningContext.docsSlug}`;
-	import_react.useEffect(() => {
-		if (titleId) {
-			if (!document.getElementById(titleId)) console.error(MESSAGE);
-		}
-	}, [MESSAGE, titleId]);
-	return null;
-};
-var DESCRIPTION_WARNING_NAME = "DialogDescriptionWarning";
-var DescriptionWarning = ({ contentRef, descriptionId }) => {
-	const MESSAGE = `Warning: Missing \`Description\` or \`aria-describedby={undefined}\` for {${useWarningContext(DESCRIPTION_WARNING_NAME).contentName}}.`;
-	import_react.useEffect(() => {
-		const describedById = contentRef.current?.getAttribute("aria-describedby");
-		if (descriptionId && describedById) {
-			if (!document.getElementById(descriptionId)) console.warn(MESSAGE);
-		}
-	}, [
-		MESSAGE,
-		contentRef,
-		descriptionId
-	]);
-	return null;
-};
-var Root$4 = Dialog$1;
-var Portal$2 = DialogPortal$1;
-var Overlay = DialogOverlay$1;
-var Content = DialogContent$1;
-var Title = DialogTitle$1;
-var Description = DialogDescription$1;
-var Close = DialogClose$1;
-//#endregion
-//#region src/components/ui/dialog.tsx
-var Dialog = Root$4;
-var DialogPortal = Portal$2;
-var DialogOverlay = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Overlay, {
-	"data-uid": "src/components/ui/dialog.tsx:20:3",
-	"data-prohibitions": "[editContent]",
-	ref,
-	className: cn$1("fixed inset-0 z-50 bg-black/80 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0", className),
-	...props
-}));
-DialogOverlay.displayName = Overlay.displayName;
-var DialogContent = import_react.forwardRef(({ className, children, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogPortal, {
-	"data-uid": "src/components/ui/dialog.tsx:35:3",
-	"data-prohibitions": "[editContent]",
-	children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogOverlay, {
-		"data-uid": "src/components/ui/dialog.tsx:36:5",
-		"data-prohibitions": "[editContent]"
-	}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Content, {
-		"data-uid": "src/components/ui/dialog.tsx:37:5",
-		"data-prohibitions": "[editContent]",
-		ref,
-		className: cn$1("fixed left-[50%] top-[50%] z-50 grid w-full max-w-lg translate-x-[-50%] translate-y-[-50%] gap-4 border bg-background p-6 shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] sm:rounded-lg overflow-y-auto max-h-screen", className),
-		...props,
-		children: [children, /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Close, {
-			"data-uid": "src/components/ui/dialog.tsx:46:7",
-			"data-prohibitions": "[]",
-			className: "absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground",
-			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(X, {
-				"data-uid": "src/components/ui/dialog.tsx:47:9",
-				"data-prohibitions": "[editContent]",
-				className: "h-4 w-4"
-			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-				"data-uid": "src/components/ui/dialog.tsx:48:9",
-				"data-prohibitions": "[]",
-				className: "sr-only",
-				children: "Close"
-			})]
-		})]
-	})]
-}));
-DialogContent.displayName = Content.displayName;
-var DialogHeader = ({ className, ...props }) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-	"data-uid": "src/components/ui/dialog.tsx:56:3",
-	"data-prohibitions": "[editContent]",
-	className: cn$1("flex flex-col space-y-1.5 text-center sm:text-left", className),
-	...props
-});
-DialogHeader.displayName = "DialogHeader";
-var DialogFooter = ({ className, ...props }) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-	"data-uid": "src/components/ui/dialog.tsx:61:3",
-	"data-prohibitions": "[editContent]",
-	className: cn$1("flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2", className),
-	...props
-});
-DialogFooter.displayName = "DialogFooter";
-var DialogTitle = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Title, {
-	"data-uid": "src/components/ui/dialog.tsx:72:3",
-	"data-prohibitions": "[editContent]",
-	ref,
-	className: cn$1("text-lg font-semibold leading-none tracking-tight", className),
-	...props
-}));
-DialogTitle.displayName = Title.displayName;
-var DialogDescription = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Description, {
-	"data-uid": "src/components/ui/dialog.tsx:84:3",
-	"data-prohibitions": "[editContent]",
-	ref,
-	className: cn$1("text-sm text-muted-foreground", className),
-	...props
-}));
-DialogDescription.displayName = Description.displayName;
 //#endregion
 //#region ../../cache/modules/ponto-de-venda-636f6/node_modules/.pnpm/@radix-ui+react-primitive@2.1.4_@types+react-dom@19.2.3_@types+react@19.2.14__@types+re_0243fb2db8a1fb85ca77b8d9e5c2d650/node_modules/@radix-ui/react-primitive/dist/index.mjs
 var Primitive = [
@@ -93420,4 +93587,4 @@ var App = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ThemeProvider, {
 }));
 //#endregion
 
-//# sourceMappingURL=index-DoU28h1-.js.map
+//# sourceMappingURL=index-C78QVMhA.js.map
