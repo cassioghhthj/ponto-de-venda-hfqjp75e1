@@ -40588,41 +40588,41 @@ function BarcodeScannerModal({ open, onClose, onScan }) {
 		onScan
 	]);
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Dialog, {
-		"data-uid": "src/components/pdv/BarcodeScannerModal.tsx:107:5",
+		"data-uid": "src/components/pdv/BarcodeScannerModal.tsx:111:5",
 		"data-prohibitions": "[editContent]",
 		open,
 		onOpenChange: (o) => !o && onClose(),
 		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogContent, {
-			"data-uid": "src/components/pdv/BarcodeScannerModal.tsx:108:7",
+			"data-uid": "src/components/pdv/BarcodeScannerModal.tsx:112:7",
 			"data-prohibitions": "[editContent]",
 			className: "sm:max-w-[400px]",
 			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogHeader, {
-				"data-uid": "src/components/pdv/BarcodeScannerModal.tsx:109:9",
+				"data-uid": "src/components/pdv/BarcodeScannerModal.tsx:113:9",
 				"data-prohibitions": "[]",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogTitle, {
-					"data-uid": "src/components/pdv/BarcodeScannerModal.tsx:110:11",
+					"data-uid": "src/components/pdv/BarcodeScannerModal.tsx:114:11",
 					"data-prohibitions": "[]",
 					children: "Escanear Código"
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogDescription, {
-					"data-uid": "src/components/pdv/BarcodeScannerModal.tsx:111:11",
+					"data-uid": "src/components/pdv/BarcodeScannerModal.tsx:115:11",
 					"data-prohibitions": "[]",
 					children: "Aponte a câmera para o código de barras do produto."
 				})]
 			}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				"data-uid": "src/components/pdv/BarcodeScannerModal.tsx:113:9",
+				"data-uid": "src/components/pdv/BarcodeScannerModal.tsx:117:9",
 				"data-prohibitions": "[editContent]",
 				className: "flex flex-col items-center justify-center min-h-[300px] bg-black/5 rounded-md overflow-hidden relative",
 				children: [loading && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-					"data-uid": "src/components/pdv/BarcodeScannerModal.tsx:115:13",
+					"data-uid": "src/components/pdv/BarcodeScannerModal.tsx:119:13",
 					"data-prohibitions": "[]",
 					className: "absolute inset-0 flex items-center justify-center z-10 bg-background/80 backdrop-blur-sm",
 					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(LoaderCircle, {
-						"data-uid": "src/components/pdv/BarcodeScannerModal.tsx:116:15",
+						"data-uid": "src/components/pdv/BarcodeScannerModal.tsx:120:15",
 						"data-prohibitions": "[editContent]",
 						className: "h-8 w-8 animate-spin text-primary"
 					})
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-					"data-uid": "src/components/pdv/BarcodeScannerModal.tsx:119:11",
+					"data-uid": "src/components/pdv/BarcodeScannerModal.tsx:123:11",
 					"data-prohibitions": "[]",
 					id: "reader",
 					className: "w-full h-full min-h-[300px]"
@@ -93587,4 +93587,4 @@ var App = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ThemeProvider, {
 }));
 //#endregion
 
-//# sourceMappingURL=index-C78QVMhA.js.map
+//# sourceMappingURL=index-SqGingyE.js.map

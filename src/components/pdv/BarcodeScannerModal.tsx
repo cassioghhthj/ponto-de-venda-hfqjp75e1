@@ -96,9 +96,13 @@ export function BarcodeScannerModal({ open, onClose, onScan }: Props) {
       isMounted = false
       if (scannerRef.current) {
         try {
-          scannerRef.current.stop().catch(() => {})
+          scannerRef.current.stop().catch(() => {
+            /* ignore */
+          })
           scannerRef.current = null
-        } catch (e) {}
+        } catch (e) {
+          // Ignore cleanup errors
+        }
       }
     }
   }, [open, onClose, onScan])
