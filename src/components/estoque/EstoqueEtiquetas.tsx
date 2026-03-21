@@ -1,4 +1,5 @@
 import { useState, useEffect, useMemo } from 'react'
+import { createPortal } from 'react-dom'
 import { supabase } from '@/lib/supabase/client'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import {
@@ -14,13 +15,22 @@ import { Input } from '@/components/ui/input'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Switch } from '@/components/ui/switch'
 import { Label } from '@/components/ui/label'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
 import { Printer, Search, Loader2 } from 'lucide-react'
 import { formatCurrency } from '@/lib/format'
 import { Product } from '@/types'
 
 export default function EstoqueEtiquetas() {
   const [products, setProducts] = useState<Product[]>([])
+  const [categories, setCategories] = useState<string[]>([])
   const [search, setSearch] = useState('')
+  const [categoryFilter, setCategoryFilter] = useState('Todas')
   const [loading, setLoading] = useState(true)
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set())
   const [useStockQuantity, setUseStockQuantity] = useState(false)
@@ -32,15 +42,21 @@ export default function EstoqueEtiquetas() {
       .order('nome')
       .then(({ data }) => {
         setProducts(data || [])
+        const uniqueCategories = Array.from(
+          new Set((data || []).map((p) => p.categoria).filter(Boolean)),
+        ) as string[]
+        setCategories(['Todas', ...uniqueCategories])
         setLoading(false)
       })
   }, [])
 
   const filteredProducts = useMemo(() => {
     return products.filter(
-      (p) => p.nome.toLowerCase().includes(search.toLowerCase()) || p.codigo?.includes(search),
+      (p) =>
+        (p.nome.toLowerCase().includes(search.toLowerCase()) || p.codigo?.includes(search)) &&
+        (categoryFilter === 'Todas' || p.categoria === categoryFilter),
     )
-  }, [products, search])
+  }, [products, search, categoryFilter])
 
   const handleSelectAll = (checked: boolean) => {
     const newSelected = new Set(selectedIds)
@@ -81,6 +97,38 @@ export default function EstoqueEtiquetas() {
     [labelsToPrint],
   )
 
+  const printContent = useMemo(() => {
+    if (labelsToPrint.length === 0) return null
+    return (
+      <div className="print-only">
+        {chunks.map((chunk, index) => (
+          <div key={index} className="pimaco-a4251-sheet">
+            {chunk.map((p, i) => (
+              <div key={`${p.id}-${i}`} className="pimaco-label">
+                {p.codigo ? (
+                  <img
+                    src={`https://bwipjs-api.metafloor.com/?bcid=code128&text=${encodeURIComponent(
+                      p.codigo,
+                    )}&scale=1&height=5&includetext=false`}
+                    className="barcode-img"
+                    alt={p.codigo}
+                    crossOrigin="anonymous"
+                  />
+                ) : (
+                  <div className="no-barcode">Sem Cód.</div>
+                )}
+                <span className="pimaco-label-name">{p.nome}</span>
+                <span className="pimaco-label-price">
+                  {formatCurrency(p.preco_venda || p.preco)}
+                </span>
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
+    )
+  }, [chunks, labelsToPrint.length])
+
   if (loading)
     return (
       <div className="flex justify-center py-12 h-full items-center">
@@ -93,35 +141,120 @@ export default function EstoqueEtiquetas() {
       <style
         dangerouslySetInnerHTML={{
           __html: `
-        @media print{
-          @page{size:A4;margin:0}
-          body{margin:0;padding:0}
-          body *{display:none!important}
-          .print-only,.print-only *{display:block!important}
-          .print-only{position:absolute;left:0;top:0;width:100%;margin:0;padding:0;background:#fff}
-          .pimaco-a4251-sheet{display:grid!important;grid-template-columns:repeat(5,38.2mm)!important;grid-template-rows:repeat(13,21.2mm)!important;justify-content:space-between!important;padding:10.7mm 4mm!important;width:210mm!important;height:297mm!important;box-sizing:border-box!important;page-break-after:always!important;gap:0!important}
-          .pimaco-label{display:flex!important;flex-direction:column!important;justify-content:center!important;align-items:center!important;width:38.2mm!important;height:21.2mm!important;padding:1.5mm!important;box-sizing:border-box!important;text-align:center!important;overflow:hidden!important}
-          .pimaco-label-name,.pimaco-label-price{display:block!important}
-          .pimaco-label-name{font-size:7.5pt!important;font-weight:600!important;line-height:1.1!important;max-height:16.5pt!important;overflow:hidden!important;word-break:break-word!important}
-          .pimaco-label-price{font-size:9.5pt!important;font-weight:800!important;margin-top:1mm!important}
+        @media print {
+          @page { size: A4; margin: 0; }
+          body, html { margin: 0; padding: 0; background: #fff; }
+          #root { display: none !important; }
+          .print-only { display: block !important; width: 210mm; margin: 0 auto; background: #fff; }
+          
+          .pimaco-a4251-sheet {
+            display: grid !important;
+            grid-template-columns: repeat(5, 38.2mm) !important;
+            grid-template-rows: repeat(13, 21.2mm) !important;
+            justify-content: space-between !important;
+            padding: 10.7mm 4mm !important;
+            width: 210mm !important;
+            height: 297mm !important;
+            box-sizing: border-box !important;
+            page-break-after: always !important;
+            break-after: page !important;
+            gap: 0 !important;
+          }
+          
+          .pimaco-label {
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: center !important;
+            align-items: center !important;
+            width: 38.2mm !important;
+            height: 21.2mm !important;
+            padding: 1mm !important;
+            box-sizing: border-box !important;
+            text-align: center !important;
+            overflow: hidden !important;
+            background: #fff !important;
+          }
+          
+          .barcode-img {
+            max-width: 90% !important;
+            height: 8mm !important;
+            object-fit: contain !important;
+            margin-bottom: 0.5mm !important;
+          }
+          
+          .no-barcode {
+            font-size: 6pt !important;
+            color: #666 !important;
+            margin-bottom: 0.5mm !important;
+            height: 8mm !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+          }
+          
+          .pimaco-label-name {
+            font-size: 6.5pt !important;
+            font-weight: 600 !important;
+            line-height: 1.1 !important;
+            max-height: 14pt !important;
+            overflow: hidden !important;
+            text-overflow: ellipsis !important;
+            white-space: nowrap !important;
+            width: 100% !important;
+            display: block !important;
+          }
+          
+          .pimaco-label-price {
+            font-size: 8.5pt !important;
+            font-weight: 800 !important;
+            margin-top: 0.5mm !important;
+            display: block !important;
+          }
         }
-        @media screen{.print-only{display:none}}
+        @media screen {
+          .print-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+          }
+        }
       `,
         }}
       />
 
       <div className="no-print space-y-4 h-full flex flex-col min-h-0 animate-fade-in">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 shrink-0">
-          <div className="relative w-full sm:w-72">
-            <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-            <Input
-              placeholder="Buscar produto..."
-              className="pl-9 bg-background h-10"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-            />
-          </div>
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 w-full sm:w-auto">
+            <div className="relative w-full sm:w-72">
+              <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+              <Input
+                placeholder="Buscar produto..."
+                className="pl-9 bg-background h-10"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+              />
+            </div>
+            <Select value={categoryFilter} onValueChange={setCategoryFilter}>
+              <SelectTrigger className="w-full sm:w-48 bg-background h-10">
+                <SelectValue placeholder="Categoria" />
+              </SelectTrigger>
+              <SelectContent>
+                {categories.map((cat) => (
+                  <SelectItem key={cat} value={cat}>
+                    {cat}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 w-full sm:w-auto ml-auto">
             {selectedIds.size > 0 && (
               <div className="flex items-center space-x-2 bg-card border border-border px-3 py-2 rounded-md shadow-sm h-10">
                 <Switch
@@ -160,6 +293,7 @@ export default function EstoqueEtiquetas() {
                   </TableHead>
                   <TableHead>Código</TableHead>
                   <TableHead>Produto</TableHead>
+                  <TableHead>Categoria</TableHead>
                   <TableHead className="text-center">Estoque</TableHead>
                   <TableHead className="text-right">Preço</TableHead>
                 </TableRow>
@@ -176,6 +310,7 @@ export default function EstoqueEtiquetas() {
                     </TableCell>
                     <TableCell className="font-mono text-xs">{p.codigo || '-'}</TableCell>
                     <TableCell className="font-medium">{p.nome}</TableCell>
+                    <TableCell>{p.categoria || '-'}</TableCell>
                     <TableCell className="text-center">{p.estoque || 0}</TableCell>
                     <TableCell className="text-right">
                       {formatCurrency(p.preco_venda || p.preco)}
@@ -184,7 +319,7 @@ export default function EstoqueEtiquetas() {
                 ))}
                 {filteredProducts.length === 0 && (
                   <TableRow>
-                    <TableCell colSpan={5} className="text-center py-8 text-muted-foreground">
+                    <TableCell colSpan={6} className="text-center py-8 text-muted-foreground">
                       Nenhum produto encontrado.
                     </TableCell>
                   </TableRow>
@@ -195,20 +330,7 @@ export default function EstoqueEtiquetas() {
         </Card>
       </div>
 
-      <div className="print-only">
-        {chunks.map((chunk, index) => (
-          <div key={index} className="pimaco-a4251-sheet">
-            {chunk.map((p, i) => (
-              <div key={`${p.id}-${i}`} className="pimaco-label">
-                <span className="pimaco-label-name">{p.nome}</span>
-                <span className="pimaco-label-price">
-                  {formatCurrency(p.preco_venda || p.preco)}
-                </span>
-              </div>
-            ))}
-          </div>
-        ))}
-      </div>
+      {printContent && createPortal(printContent, document.body)}
     </>
   )
 }

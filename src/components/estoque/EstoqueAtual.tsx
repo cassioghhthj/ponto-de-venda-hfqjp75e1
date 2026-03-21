@@ -62,7 +62,6 @@ export default function EstoqueAtual() {
     if (catRes.data) {
       setCategories(['Todas', ...catRes.data.map((c) => c.nome)])
     } else {
-      // Fallback if no table data yet
       setCategories([
         'Todas',
         ...(Array.from(
@@ -167,6 +166,7 @@ export default function EstoqueAtual() {
               <TableRow>
                 <TableHead>Código</TableHead>
                 <TableHead>Nome</TableHead>
+                <TableHead>Categoria</TableHead>
                 <TableHead>Tam.</TableHead>
                 <TableHead>Preço Venda</TableHead>
                 <TableHead className="text-center">Estoque Atual</TableHead>
@@ -178,6 +178,7 @@ export default function EstoqueAtual() {
                 <TableRow key={p.id}>
                   <TableCell className="font-mono text-xs">{p.codigo || '-'}</TableCell>
                   <TableCell className="font-medium">{p.nome}</TableCell>
+                  <TableCell>{p.categoria || '-'}</TableCell>
                   <TableCell>{p.tamanho || '-'}</TableCell>
                   <TableCell>{formatCurrency(p.preco_venda || p.preco)}</TableCell>
                   <TableCell className="text-center">
@@ -215,7 +216,7 @@ export default function EstoqueAtual() {
               ))}
               {filteredProducts.length === 0 && (
                 <TableRow>
-                  <TableCell colSpan={6} className="text-center py-8 text-muted-foreground">
+                  <TableCell colSpan={7} className="text-center py-8 text-muted-foreground">
                     Nenhum produto encontrado.
                   </TableCell>
                 </TableRow>
