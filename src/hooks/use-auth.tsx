@@ -2,9 +2,18 @@ import { createContext, useContext, useEffect, useState, ReactNode } from 'react
 import { User, Session } from '@supabase/supabase-js'
 import { supabase } from '@/lib/supabase/client'
 
+export interface UserProfile {
+  id: string
+  email: string | null
+  nome: string | null
+  role: string | null
+  permissions: Record<string, boolean> | null
+}
+
 interface AuthContextType {
   user: User | null
   session: Session | null
+  userProfile: UserProfile | null
   signUp: (email: string, password: string) => Promise<{ error: any }>
   signIn: (email: string, password: string) => Promise<{ error: any }>
   signOut: () => Promise<{ error: any }>
@@ -22,7 +31,15 @@ export const useAuth = () => {
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null)
   const [session, setSession] = useState<Session | null>(null)
+  const [userProfile, setUserProfile] = useState<UserProfile | null>(null)
   const [loading, setLoading] = useState(true)
+
+  const fetchProfile = async (userId: string) => {
+    const { data } = await supabase.from('users').select('*').eq('id', userId).single()
+    if (data) {
+      setUserProfile(data as UserProfile)
+    }
+  }
 
   useEffect(() => {
     const {
@@ -30,13 +47,22 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     } = supabase.auth.onAuthStateChange((event, session) => {
       setSession(session)
       setUser(session?.user ?? null)
-      setLoading(false)
+      if (session?.user) {
+        fetchProfile(session.user.id).then(() => setLoading(false))
+      } else {
+        setUserProfile(null)
+        setLoading(false)
+      }
     })
 
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session)
       setUser(session?.user ?? null)
-      setLoading(false)
+      if (session?.user) {
+        fetchProfile(session.user.id).then(() => setLoading(false))
+      } else {
+        setLoading(false)
+      }
     })
 
     return () => subscription.unsubscribe()
@@ -62,7 +88,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   }
 
   return (
-    <AuthContext.Provider value={{ user, session, signUp, signIn, signOut, loading }}>
+    <AuthContext.Provider value={{ user, session, userProfile, signUp, signIn, signOut, loading }}>
       {children}
     </AuthContext.Provider>
   )

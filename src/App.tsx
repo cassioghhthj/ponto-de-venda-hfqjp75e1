@@ -11,6 +11,7 @@ import CaixaPage from './pages/Caixa'
 import Estoque from './pages/Estoque'
 import Clientes from './pages/Clientes'
 import Relatorios from './pages/Relatorios'
+import Usuarios from './pages/Usuarios'
 import NotFound from './pages/NotFound'
 import Layout from './components/Layout'
 import Login from './pages/Login'
@@ -41,6 +42,7 @@ const App = () => (
                     <Route path="/contas-pagar" element={<ContasPagar />} />
                     <Route path="/estoque" element={<Estoque />} />
                     <Route path="/relatorios" element={<Relatorios />} />
+                    <Route path="/usuarios" element={<Usuarios />} />
                   </Route>
                 </Route>
 

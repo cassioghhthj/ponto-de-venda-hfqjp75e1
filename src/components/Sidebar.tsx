@@ -12,6 +12,7 @@ import {
   PieChart,
   ChevronLeft,
   Menu,
+  ShieldCheck,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { useAuth } from '@/hooks/use-auth'
@@ -22,20 +23,29 @@ import { Sheet, SheetContent, SheetTitle } from '@/components/ui/sheet'
 
 export function AppSidebar() {
   const location = useLocation()
-  const { signOut, user } = useAuth()
+  const { signOut, user, userProfile } = useAuth()
   const { collapsed, toggle, mobileOpen, setMobileOpen } = useSidebar()
   const isMobile = useIsMobile()
 
-  const links = [
-    { to: '/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
-    { to: '/', icon: ShoppingCart, label: 'Vendas (PDV)' },
-    { to: '/estoque', icon: Package, label: 'Produtos e Estoque' },
-    { to: '/clientes', icon: Users, label: 'Clientes' },
-    { to: '/contas-receber', icon: ReceiptText, label: 'Contas a Receber' },
-    { to: '/contas-pagar', icon: CreditCard, label: 'Contas a Pagar' },
-    { to: '/caixa', icon: Calculator, label: 'Caixa' },
-    { to: '/relatorios', icon: PieChart, label: 'Relatórios' },
+  const allLinks = [
+    { to: '/dashboard', icon: LayoutDashboard, label: 'Dashboard', id: 'dashboard' },
+    { to: '/', icon: ShoppingCart, label: 'Vendas (PDV)', id: 'pdv' },
+    { to: '/estoque', icon: Package, label: 'Produtos e Estoque', id: 'estoque' },
+    { to: '/clientes', icon: Users, label: 'Clientes', id: 'clientes' },
+    { to: '/contas-receber', icon: ReceiptText, label: 'Contas a Receber', id: 'contas_receber' },
+    { to: '/contas-pagar', icon: CreditCard, label: 'Contas a Pagar', id: 'contas_pagar' },
+    { to: '/caixa', icon: Calculator, label: 'Caixa', id: 'caixa' },
+    { to: '/relatorios', icon: PieChart, label: 'Relatórios', id: 'relatorios' },
+    { to: '/usuarios', icon: ShieldCheck, label: 'Usuários e Acessos', id: 'usuarios' },
   ]
+
+  // Filtra as opções de menu de acordo com as permissões do usuário
+  const links = allLinks.filter((link) => {
+    if (userProfile?.role === 'admin') return true
+    if (link.id === 'usuarios') return false // Somente admin
+    const perms = userProfile?.permissions || {}
+    return perms[link.id as keyof typeof perms]
+  })
 
   const SidebarContent = () => (
     <>
@@ -83,10 +93,13 @@ export function AppSidebar() {
         {(!collapsed || isMobile) && (
           <>
             <div className="text-xs font-semibold text-sidebar-foreground/60 mb-1">
-              Operador Caixa
+              {userProfile?.role === 'admin' ? 'Administrador' : 'Operador'}
             </div>
-            <div className="text-sm font-bold mb-4 truncate" title={user?.email || ''}>
-              {user?.email || 'Usuário'}
+            <div
+              className="text-sm font-bold mb-4 truncate"
+              title={userProfile?.nome || user?.email || ''}
+            >
+              {userProfile?.nome || user?.email || 'Usuário'}
             </div>
           </>
         )}
