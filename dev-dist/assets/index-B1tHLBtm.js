@@ -19480,6 +19480,10 @@ var Package = createLucideIcon("package", [
 		key: "1c824w"
 	}]
 ]);
+var Pen = createLucideIcon("pen", [["path", {
+	d: "M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z",
+	key: "1a8usu"
+}]]);
 var Pencil = createLucideIcon("pencil", [["path", {
 	d: "M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z",
 	key: "1a8usu"
@@ -78806,9 +78810,27 @@ function ImportProductsModal({ open, onClose, onSuccess }) {
 //#endregion
 //#region src/components/estoque/CategoriaFormModal.tsx
 function CategoriaFormModal({ open, onClose, onSuccess }) {
+	const [categories, setCategories] = (0, import_react.useState)([]);
 	const [nome, setNome] = (0, import_react.useState)("");
 	const [loading, setLoading] = (0, import_react.useState)(false);
-	const handleSubmit = async (e) => {
+	const [fetching, setFetching] = (0, import_react.useState)(false);
+	const [editingId, setEditingId] = (0, import_react.useState)(null);
+	const [editValue, setEditValue] = (0, import_react.useState)("");
+	const [actionLoadingId, setActionLoadingId] = (0, import_react.useState)(null);
+	const fetchCategories = async () => {
+		setFetching(true);
+		const { data } = await supabase.from("categorias").select("*").order("nome");
+		if (data) setCategories(data);
+		setFetching(false);
+	};
+	(0, import_react.useEffect)(() => {
+		if (open) {
+			fetchCategories();
+			setNome("");
+			setEditingId(null);
+		}
+	}, [open]);
+	const handleAdd = async (e) => {
 		e.preventDefault();
 		if (!nome.trim()) return;
 		setLoading(true);
@@ -78829,74 +78851,238 @@ function CategoriaFormModal({ open, onClose, onSuccess }) {
 				description: "Categoria criada com sucesso."
 			});
 			setNome("");
+			fetchCategories();
 			onSuccess();
-			onClose();
 		}
 		setLoading(false);
 	};
+	const handleUpdate = async (id, oldName) => {
+		if (!editValue.trim() || editValue.trim() === oldName) {
+			setEditingId(null);
+			return;
+		}
+		setActionLoadingId(id);
+		const newName = editValue.trim();
+		const { error } = await supabase.from("categorias").update({ nome: newName }).eq("id", id);
+		if (error) if (error.code === "23505") toast$1({
+			title: "Atenção",
+			description: "Já existe uma categoria com este nome.",
+			variant: "destructive"
+		});
+		else toast$1({
+			title: "Erro",
+			description: "Erro ao atualizar categoria.",
+			variant: "destructive"
+		});
+		else {
+			await supabase.from("produtos").update({ categoria: newName }).eq("categoria", oldName);
+			toast$1({
+				title: "Sucesso",
+				description: "Categoria atualizada."
+			});
+			setEditingId(null);
+			fetchCategories();
+			onSuccess();
+		}
+		setActionLoadingId(null);
+	};
+	const handleDelete = async (id, name) => {
+		if (!window.confirm(`Deseja realmente excluir a categoria "${name}"? Os produtos vinculados ficarão sem categoria.`)) return;
+		setActionLoadingId(id);
+		const { error } = await supabase.from("categorias").delete().eq("id", id);
+		if (error) toast$1({
+			title: "Erro",
+			description: "Erro ao excluir categoria.",
+			variant: "destructive"
+		});
+		else {
+			await supabase.from("produtos").update({ categoria: null }).eq("categoria", name);
+			toast$1({
+				title: "Sucesso",
+				description: "Categoria excluída."
+			});
+			fetchCategories();
+			onSuccess();
+		}
+		setActionLoadingId(null);
+	};
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Dialog, {
-		"data-uid": "src/components/estoque/CategoriaFormModal.tsx:53:5",
+		"data-uid": "src/components/estoque/CategoriaFormModal.tsx:132:5",
 		"data-prohibitions": "[editContent]",
 		open,
 		onOpenChange: (o) => !o && onClose(),
 		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogContent, {
-			"data-uid": "src/components/estoque/CategoriaFormModal.tsx:54:7",
+			"data-uid": "src/components/estoque/CategoriaFormModal.tsx:133:7",
 			"data-prohibitions": "[editContent]",
-			className: "sm:max-w-[400px]",
+			className: "sm:max-w-[500px]",
 			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogHeader, {
-				"data-uid": "src/components/estoque/CategoriaFormModal.tsx:55:9",
+				"data-uid": "src/components/estoque/CategoriaFormModal.tsx:134:9",
 				"data-prohibitions": "[]",
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogTitle, {
-					"data-uid": "src/components/estoque/CategoriaFormModal.tsx:56:11",
+					"data-uid": "src/components/estoque/CategoriaFormModal.tsx:135:11",
 					"data-prohibitions": "[]",
-					children: "Nova Categoria"
+					children: "Gerenciar Categorias"
 				})
-			}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("form", {
-				"data-uid": "src/components/estoque/CategoriaFormModal.tsx:58:9",
+			}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				"data-uid": "src/components/estoque/CategoriaFormModal.tsx:138:9",
 				"data-prohibitions": "[editContent]",
-				onSubmit: handleSubmit,
-				className: "space-y-4 pt-4",
-				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					"data-uid": "src/components/estoque/CategoriaFormModal.tsx:59:11",
-					"data-prohibitions": "[]",
-					className: "space-y-2",
-					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$1, {
-						"data-uid": "src/components/estoque/CategoriaFormModal.tsx:60:13",
-						"data-prohibitions": "[]",
-						htmlFor: "nome",
-						children: "Nome da Categoria *"
-					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
-						"data-uid": "src/components/estoque/CategoriaFormModal.tsx:61:13",
+				className: "space-y-6 pt-4",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("form", {
+					"data-uid": "src/components/estoque/CategoriaFormModal.tsx:139:11",
+					"data-prohibitions": "[editContent]",
+					onSubmit: handleAdd,
+					className: "flex gap-2 items-center",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
+						"data-uid": "src/components/estoque/CategoriaFormModal.tsx:140:13",
 						"data-prohibitions": "[editContent]",
-						id: "nome",
 						value: nome,
 						onChange: (e) => setNome(e.target.value),
-						placeholder: "Ex: Bebidas",
-						required: true,
-						autoFocus: true
-					})]
-				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogFooter, {
-					"data-uid": "src/components/estoque/CategoriaFormModal.tsx:70:11",
-					"data-prohibitions": "[editContent]",
-					className: "pt-4",
-					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
-						"data-uid": "src/components/estoque/CategoriaFormModal.tsx:71:13",
-						"data-prohibitions": "[]",
-						type: "button",
-						variant: "outline",
-						onClick: onClose,
+						placeholder: "Nome da nova categoria...",
 						disabled: loading,
-						children: "Cancelar"
+						className: "flex-1"
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button$1, {
-						"data-uid": "src/components/estoque/CategoriaFormModal.tsx:74:13",
+						"data-uid": "src/components/estoque/CategoriaFormModal.tsx:147:13",
 						"data-prohibitions": "[editContent]",
 						type: "submit",
 						disabled: loading || !nome.trim(),
-						children: [loading && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(LoaderCircle, {
-							"data-uid": "src/components/estoque/CategoriaFormModal.tsx:75:27",
+						children: [loading ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(LoaderCircle, {
+							"data-uid": "src/components/estoque/CategoriaFormModal.tsx:149:17",
 							"data-prohibitions": "[editContent]",
-							className: "mr-2 h-4 w-4 animate-spin"
-						}), "Salvar"]
+							className: "h-4 w-4 animate-spin"
+						}) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Plus, {
+							"data-uid": "src/components/estoque/CategoriaFormModal.tsx:151:17",
+							"data-prohibitions": "[editContent]",
+							className: "h-4 w-4"
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+							"data-uid": "src/components/estoque/CategoriaFormModal.tsx:153:15",
+							"data-prohibitions": "[]",
+							className: "ml-2 hidden sm:inline",
+							children: "Adicionar"
+						})]
+					})]
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					"data-uid": "src/components/estoque/CategoriaFormModal.tsx:157:11",
+					"data-prohibitions": "[editContent]",
+					className: "border rounded-md",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+						"data-uid": "src/components/estoque/CategoriaFormModal.tsx:158:13",
+						"data-prohibitions": "[]",
+						className: "bg-muted/50 px-4 py-2 text-sm font-medium border-b",
+						children: "Categorias Cadastradas"
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+						"data-uid": "src/components/estoque/CategoriaFormModal.tsx:161:13",
+						"data-prohibitions": "[editContent]",
+						className: "max-h-[300px] overflow-y-auto p-2 space-y-2",
+						children: fetching ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+							"data-uid": "src/components/estoque/CategoriaFormModal.tsx:163:17",
+							"data-prohibitions": "[]",
+							className: "flex justify-center p-4",
+							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(LoaderCircle, {
+								"data-uid": "src/components/estoque/CategoriaFormModal.tsx:164:19",
+								"data-prohibitions": "[editContent]",
+								className: "h-6 w-6 animate-spin text-muted-foreground"
+							})
+						}) : categories.length === 0 ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+							"data-uid": "src/components/estoque/CategoriaFormModal.tsx:167:17",
+							"data-prohibitions": "[]",
+							className: "text-center p-4 text-sm text-muted-foreground",
+							children: "Nenhuma categoria cadastrada."
+						}) : categories.map((c) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+							"data-uid": "src/components/estoque/CategoriaFormModal.tsx:172:19",
+							"data-prohibitions": "[editContent]",
+							className: "flex items-center justify-between p-2 hover:bg-accent/50 rounded-md transition-colors border border-transparent hover:border-border group",
+							children: editingId === c.id ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								"data-uid": "src/components/estoque/CategoriaFormModal.tsx:177:23",
+								"data-prohibitions": "[editContent]",
+								className: "flex items-center gap-2 flex-1",
+								children: [
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
+										"data-uid": "src/components/estoque/CategoriaFormModal.tsx:178:25",
+										"data-prohibitions": "[editContent]",
+										autoFocus: true,
+										value: editValue,
+										onChange: (e) => setEditValue(e.target.value),
+										className: "h-8 text-sm",
+										onKeyDown: (e) => e.key === "Enter" && handleUpdate(c.id, c.nome)
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
+										"data-uid": "src/components/estoque/CategoriaFormModal.tsx:185:25",
+										"data-prohibitions": "[editContent]",
+										size: "icon",
+										variant: "ghost",
+										className: "h-8 w-8 text-green-600 hover:text-green-700 hover:bg-green-100",
+										onClick: () => handleUpdate(c.id, c.nome),
+										disabled: actionLoadingId === c.id,
+										children: actionLoadingId === c.id ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(LoaderCircle, {
+											"data-uid": "src/components/estoque/CategoriaFormModal.tsx:193:29",
+											"data-prohibitions": "[editContent]",
+											className: "h-4 w-4 animate-spin"
+										}) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Check, {
+											"data-uid": "src/components/estoque/CategoriaFormModal.tsx:195:29",
+											"data-prohibitions": "[editContent]",
+											className: "h-4 w-4"
+										})
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
+										"data-uid": "src/components/estoque/CategoriaFormModal.tsx:198:25",
+										"data-prohibitions": "[]",
+										size: "icon",
+										variant: "ghost",
+										className: "h-8 w-8 text-muted-foreground",
+										onClick: () => setEditingId(null),
+										disabled: actionLoadingId === c.id,
+										children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(X, {
+											"data-uid": "src/components/estoque/CategoriaFormModal.tsx:205:27",
+											"data-prohibitions": "[editContent]",
+											className: "h-4 w-4"
+										})
+									})
+								]
+							}) : /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+								"data-uid": "src/components/estoque/CategoriaFormModal.tsx:210:25",
+								"data-prohibitions": "[editContent]",
+								className: "text-sm font-medium",
+								children: c.nome
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								"data-uid": "src/components/estoque/CategoriaFormModal.tsx:211:25",
+								"data-prohibitions": "[editContent]",
+								className: "flex items-center gap-1 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
+									"data-uid": "src/components/estoque/CategoriaFormModal.tsx:212:27",
+									"data-prohibitions": "[]",
+									size: "icon",
+									variant: "ghost",
+									className: "h-8 w-8",
+									onClick: () => {
+										setEditingId(c.id);
+										setEditValue(c.nome);
+									},
+									disabled: !!actionLoadingId,
+									children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Pen, {
+										"data-uid": "src/components/estoque/CategoriaFormModal.tsx:222:29",
+										"data-prohibitions": "[editContent]",
+										className: "h-4 w-4 text-blue-600"
+									})
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
+									"data-uid": "src/components/estoque/CategoriaFormModal.tsx:224:27",
+									"data-prohibitions": "[editContent]",
+									size: "icon",
+									variant: "ghost",
+									className: "h-8 w-8",
+									onClick: () => handleDelete(c.id, c.nome),
+									disabled: !!actionLoadingId,
+									children: actionLoadingId === c.id ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(LoaderCircle, {
+										"data-uid": "src/components/estoque/CategoriaFormModal.tsx:232:31",
+										"data-prohibitions": "[editContent]",
+										className: "h-4 w-4 animate-spin"
+									}) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Trash2, {
+										"data-uid": "src/components/estoque/CategoriaFormModal.tsx:234:31",
+										"data-prohibitions": "[editContent]",
+										className: "h-4 w-4 text-destructive"
+									})
+								})]
+							})] })
+						}, c.id))
 					})]
 				})]
 			})]
@@ -79025,7 +79211,7 @@ function EstoqueAtual() {
 								"data-uid": "src/components/estoque/EstoqueAtual.tsx:142:13",
 								"data-prohibitions": "[editContent]",
 								className: "h-4 w-4 mr-2"
-							}), " Nova Categoria"]
+							}), " Categorias"]
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button$1, {
 							"data-uid": "src/components/estoque/EstoqueAtual.tsx:144:11",
@@ -93069,4 +93255,4 @@ var App = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ThemeProvider, {
 }));
 //#endregion
 
-//# sourceMappingURL=index-nYKXIC-4.js.map
+//# sourceMappingURL=index-B1tHLBtm.js.map

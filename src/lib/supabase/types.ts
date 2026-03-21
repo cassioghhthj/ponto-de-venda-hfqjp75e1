@@ -348,18 +348,21 @@ export type Database = {
           email: string | null
           id: string
           nome: string | null
+          permissions: Json | null
           role: string | null
         }
         Insert: {
           email?: string | null
           id: string
           nome?: string | null
+          permissions?: Json | null
           role?: string | null
         }
         Update: {
           email?: string | null
           id?: string
           nome?: string | null
+          permissions?: Json | null
           role?: string | null
         }
         Relationships: []
@@ -640,6 +643,7 @@ export const Constants = {
 //   email: text (nullable)
 //   nome: text (nullable)
 //   role: text (nullable, default: 'operador'::text)
+//   permissions: jsonb (nullable, default: '{}'::jsonb)
 // Table: vendas
 //   id: uuid (not null, default: gen_random_uuid())
 //   user_id: uuid (nullable)

@@ -139,7 +139,7 @@ export default function EstoqueAtual() {
             onClick={() => setCatModalOpen(true)}
             className="flex-1 sm:flex-none"
           >
-            <Tags className="h-4 w-4 mr-2" /> Nova Categoria
+            <Tags className="h-4 w-4 mr-2" /> Categorias
           </Button>
           <Button
             variant="outline"
