@@ -673,6 +673,10 @@ video {
   right: -3rem;
 }
 
+.-right-2{
+  right: -0.5rem;
+}
+
 .-right-4{
   right: -1rem;
 }
@@ -681,8 +685,16 @@ video {
   top: -3rem;
 }
 
+.-top-2{
+  top: -0.5rem;
+}
+
 .bottom-0{
   bottom: 0px;
+}
+
+.bottom-6{
+  bottom: 1.5rem;
 }
 
 .left-0{
@@ -727,6 +739,10 @@ video {
 
 .right-4{
   right: 1rem;
+}
+
+.right-6{
+  right: 1.5rem;
 }
 
 .top-0{
@@ -781,6 +797,10 @@ video {
   z-index: 20;
 }
 
+.z-40{
+  z-index: 40;
+}
+
 .z-50{
   z-index: 50;
 }
@@ -829,6 +849,10 @@ video {
 .my-1{
   margin-top: 0.25rem;
   margin-bottom: 0.25rem;
+}
+
+.-ml-2{
+  margin-left: -0.5rem;
 }
 
 .-ml-4{
@@ -1059,6 +1083,10 @@ video {
   height: 300px;
 }
 
+.h-\[90vh\]{
+  height: 90vh;
+}
+
 .h-\[var\(--radix-navigation-menu-viewport-height\)\]{
   height: var(--radix-navigation-menu-viewport-height);
 }
@@ -1153,6 +1181,10 @@ video {
 
 .w-12{
   width: 3rem;
+}
+
+.w-14{
+  width: 3.5rem;
 }
 
 .w-16{
@@ -1475,6 +1507,23 @@ video {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
+@keyframes bounce{
+
+  0%, 100%{
+    transform: translateY(-25%);
+    animation-timing-function: cubic-bezier(0.8,0,1,1);
+  }
+
+  50%{
+    transform: none;
+    animation-timing-function: cubic-bezier(0,0,0.2,1);
+  }
+}
+
+.animate-bounce{
+  animation: bounce 1s infinite;
+}
+
 @keyframes pulse{
 
   50%{
@@ -1766,6 +1815,11 @@ video {
   border-top-right-radius: 10px;
 }
 
+.rounded-t-xl{
+  border-top-left-radius: 0.75rem;
+  border-top-right-radius: 0.75rem;
+}
+
 .rounded-tl-sm{
   border-top-left-radius: calc(var(--radius) - 4px);
 }
@@ -1807,6 +1861,10 @@ video {
   border-right-width: 1px;
 }
 
+.border-r-0{
+  border-right-width: 0px;
+}
+
 .border-t{
   border-top-width: 1px;
 }
@@ -1821,6 +1879,10 @@ video {
 
 .border-\[--color-border\]{
   border-color: var(--color-border);
+}
+
+.border-background{
+  border-color: hsl(var(--background));
 }
 
 .border-black{
@@ -2757,6 +2819,12 @@ video {
   mix-blend-mode: multiply;
 }
 
+.shadow-2xl{
+  --tw-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+  --tw-shadow-colored: 0 25px 50px -12px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
 .shadow-\[0_-4px_10px_rgba\(0\2c 0\2c 0\2c 0\.02\)\]{
   --tw-shadow: 0 -4px 10px rgba(0,0,0,0.02);
   --tw-shadow-colored: 0 -4px 10px var(--tw-shadow-color);
@@ -3220,6 +3288,10 @@ video {
 
 .last\:border-0:last-child{
   border-width: 0px;
+}
+
+.hover\:animate-none:hover{
+  animation: none;
 }
 
 .hover\:bg-accent:hover{
@@ -4335,6 +4407,10 @@ video {
     height: 3rem;
   }
 
+  .sm\:h-14{
+    height: 3.5rem;
+  }
+
   .sm\:h-6{
     height: 1.5rem;
   }
@@ -4425,12 +4501,22 @@ video {
     margin-left: calc(0.5rem * calc(1 - var(--tw-space-x-reverse)));
   }
 
+  .sm\:space-y-4 > :not([hidden]) ~ :not([hidden]){
+    --tw-space-y-reverse: 0;
+    margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
+    margin-bottom: calc(1rem * var(--tw-space-y-reverse));
+  }
+
   .sm\:rounded-2xl{
     border-radius: 1rem;
   }
 
   .sm\:rounded-lg{
     border-radius: var(--radius);
+  }
+
+  .sm\:p-5{
+    padding: 1.25rem;
   }
 
   .sm\:p-6{
@@ -4440,6 +4526,11 @@ video {
   .sm\:px-0{
     padding-left: 0px;
     padding-right: 0px;
+  }
+
+  .sm\:px-6{
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
   }
 
   .sm\:pb-0{
@@ -4458,6 +4549,11 @@ video {
     text-align: center;
   }
 
+  .sm\:text-2xl{
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+
   .sm\:text-base{
     font-size: 1rem;
     line-height: 1.5rem;
@@ -4465,6 +4561,11 @@ video {
 
   .sm\:text-lg{
     font-size: 1.125rem;
+    line-height: 1.75rem;
+  }
+
+  .sm\:text-xl{
+    font-size: 1.25rem;
     line-height: 1.75rem;
   }
 
@@ -4485,6 +4586,10 @@ video {
 
   .md\:flex{
     display: flex;
+  }
+
+  .md\:hidden{
+    display: none;
   }
 
   .md\:w-64{
@@ -4678,6 +4783,10 @@ video {
 
 .\[\&\>button\]\:hidden>button{
   display: none;
+}
+
+.\[\&\>button\]\:text-sidebar-foreground>button{
+  color: hsl(var(--sidebar-foreground));
 }
 
 .\[\&\>span\:last-child\]\:truncate>span:last-child{

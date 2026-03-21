@@ -90015,9 +90015,12 @@ var NotFound = () => {
 var SidebarContext = (0, import_react.createContext)(void 0);
 function SidebarProvider({ children }) {
 	const [collapsed, setCollapsed] = (0, import_react.useState)(false);
+	const [mobileOpen, setMobileOpen] = (0, import_react.useState)(false);
 	const value = {
 		collapsed,
-		toggle: () => setCollapsed((prev) => !prev)
+		toggle: () => setCollapsed((prev) => !prev),
+		mobileOpen,
+		setMobileOpen
 	};
 	return import_react.createElement(SidebarContext.Provider, { value }, children);
 }
@@ -90027,11 +90030,28 @@ function useSidebar() {
 	return context;
 }
 //#endregion
+//#region src/hooks/use-mobile.tsx
+var MOBILE_BREAKPOINT = 768;
+function useIsMobile() {
+	const [isMobile, setIsMobile] = import_react.useState(void 0);
+	import_react.useEffect(() => {
+		const mql = window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT - 1}px)`);
+		const onChange = () => {
+			setIsMobile(window.innerWidth < MOBILE_BREAKPOINT);
+		};
+		mql.addEventListener("change", onChange);
+		setIsMobile(window.innerWidth < MOBILE_BREAKPOINT);
+		return () => mql.removeEventListener("change", onChange);
+	}, []);
+	return !!isMobile;
+}
+//#endregion
 //#region src/components/Sidebar.tsx
 function AppSidebar() {
 	const location = useLocation();
 	const { signOut, user } = useAuth();
-	const { collapsed, toggle } = useSidebar();
+	const { collapsed, toggle, mobileOpen, setMobileOpen } = useSidebar();
+	const isMobile = useIsMobile();
 	const links = [
 		{
 			to: "/dashboard",
@@ -90074,99 +90094,124 @@ function AppSidebar() {
 			label: "Relatórios"
 		}
 	];
+	const SidebarContent = () => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [
+		/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+			"data-uid": "src/components/Sidebar.tsx:42:7",
+			"data-prohibitions": "[editContent]",
+			className: cn$1("h-16 flex items-center border-b border-sidebar-border bg-sidebar overflow-hidden shrink-0", collapsed && !isMobile ? "px-0 justify-center" : "px-6"),
+			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Store, {
+				"data-uid": "src/components/Sidebar.tsx:48:9",
+				"data-prohibitions": "[editContent]",
+				className: cn$1("h-6 w-6 text-primary shrink-0", (!collapsed || isMobile) && "mr-3")
+			}), (!collapsed || isMobile) && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+				"data-uid": "src/components/Sidebar.tsx:52:11",
+				"data-prohibitions": "[]",
+				className: "font-bold text-lg tracking-wider truncate",
+				children: "CHARME PDV"
+			})]
+		}),
+		/* @__PURE__ */ (0, import_jsx_runtime.jsx)("nav", {
+			"data-uid": "src/components/Sidebar.tsx:56:7",
+			"data-prohibitions": "[editContent]",
+			className: "flex-1 py-6 px-3 space-y-1 overflow-y-auto overflow-x-hidden min-h-0",
+			children: links.map((link) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Link, {
+				"data-uid": "src/components/Sidebar.tsx:58:11",
+				"data-prohibitions": "[editContent]",
+				to: link.to,
+				onClick: () => isMobile && setMobileOpen(false),
+				title: collapsed && !isMobile ? link.label : void 0,
+				className: cn$1("flex items-center gap-3 py-3 rounded-lg text-sm font-medium transition-colors", collapsed && !isMobile ? "justify-center px-0" : "px-4", location.pathname === link.to ? "bg-sidebar-primary text-sidebar-primary-foreground shadow-sm" : "hover:bg-sidebar-accent hover:text-sidebar-accent-foreground text-sidebar-foreground/80"),
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(link.icon, {
+					"data-uid": "src/components/Sidebar.tsx:71:13",
+					"data-prohibitions": "[editContent]",
+					className: "h-5 w-5 shrink-0"
+				}), (!collapsed || isMobile) && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+					"data-uid": "src/components/Sidebar.tsx:72:42",
+					"data-prohibitions": "[editContent]",
+					className: "truncate",
+					children: link.label
+				})]
+			}, link.label))
+		}),
+		/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+			"data-uid": "src/components/Sidebar.tsx:77:7",
+			"data-prohibitions": "[editContent]",
+			className: cn$1("p-4 border-t border-sidebar-border m-3 rounded-lg bg-sidebar-accent/50 shrink-0 overflow-hidden transition-all", collapsed && !isMobile ? "p-2 flex flex-col items-center gap-2" : ""),
+			children: [(!collapsed || isMobile) && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+				"data-uid": "src/components/Sidebar.tsx:85:13",
+				"data-prohibitions": "[]",
+				className: "text-xs font-semibold text-sidebar-foreground/60 mb-1",
+				children: "Operador Caixa"
+			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+				"data-uid": "src/components/Sidebar.tsx:88:13",
+				"data-prohibitions": "[editContent]",
+				className: "text-sm font-bold mb-4 truncate",
+				title: user?.email || "",
+				children: user?.email || "Usuário"
+			})] }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button$1, {
+				"data-uid": "src/components/Sidebar.tsx:93:9",
+				"data-prohibitions": "[editContent]",
+				variant: "destructive",
+				className: cn$1("bg-destructive/10 text-destructive hover:bg-destructive hover:text-destructive-foreground border-0", collapsed && !isMobile ? "h-10 w-10 p-0 rounded-full" : "w-full text-xs h-9"),
+				onClick: signOut,
+				title: collapsed && !isMobile ? "Sair" : void 0,
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(LogOut, {
+					"data-uid": "src/components/Sidebar.tsx:102:11",
+					"data-prohibitions": "[editContent]",
+					className: cn$1(collapsed && !isMobile ? "h-5 w-5" : "h-4 w-4 mr-2")
+				}), (!collapsed || isMobile) && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+					"data-uid": "src/components/Sidebar.tsx:103:40",
+					"data-prohibitions": "[]",
+					children: "Encerrar Sessão"
+				})]
+			})]
+		})
+	] });
+	if (isMobile) return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Sheet, {
+		"data-uid": "src/components/Sidebar.tsx:111:7",
+		"data-prohibitions": "[]",
+		open: mobileOpen,
+		onOpenChange: setMobileOpen,
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(SheetContent, {
+			"data-uid": "src/components/Sidebar.tsx:112:9",
+			"data-prohibitions": "[]",
+			side: "left",
+			className: "p-0 w-72 bg-sidebar border-r-0 flex flex-col [&>button]:text-sidebar-foreground",
+			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SheetTitle, {
+				"data-uid": "src/components/Sidebar.tsx:116:11",
+				"data-prohibitions": "[]",
+				className: "sr-only",
+				children: "Navegação Principal"
+			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SidebarContent, {
+				"data-uid": "src/components/Sidebar.tsx:117:11",
+				"data-prohibitions": "[editContent]"
+			})]
+		})
+	});
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-		"data-uid": "src/components/Sidebar.tsx:38:5",
+		"data-uid": "src/components/Sidebar.tsx:124:5",
 		"data-prohibitions": "[editContent]",
 		className: cn$1("bg-sidebar border-r border-sidebar-border text-sidebar-foreground flex flex-col shrink-0 h-full transition-all duration-300 relative print:hidden", collapsed ? "w-20" : "w-64"),
-		children: [
-			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
-				"data-uid": "src/components/Sidebar.tsx:44:7",
+		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
+			"data-uid": "src/components/Sidebar.tsx:130:7",
+			"data-prohibitions": "[editContent]",
+			variant: "ghost",
+			size: "icon",
+			className: "absolute -right-4 top-4 bg-background border border-border shadow-sm rounded-full h-8 w-8 z-50 hidden sm:flex",
+			onClick: toggle,
+			children: collapsed ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Menu, {
+				"data-uid": "src/components/Sidebar.tsx:136:22",
 				"data-prohibitions": "[editContent]",
-				variant: "ghost",
-				size: "icon",
-				className: "absolute -right-4 top-4 bg-background border border-border shadow-sm rounded-full h-8 w-8 z-50 hidden sm:flex",
-				onClick: toggle,
-				children: collapsed ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Menu, {
-					"data-uid": "src/components/Sidebar.tsx:50:22",
-					"data-prohibitions": "[editContent]",
-					className: "h-4 w-4"
-				}) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChevronLeft, {
-					"data-uid": "src/components/Sidebar.tsx:50:53",
-					"data-prohibitions": "[editContent]",
-					className: "h-4 w-4"
-				})
-			}),
-			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				"data-uid": "src/components/Sidebar.tsx:53:7",
+				className: "h-4 w-4"
+			}) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChevronLeft, {
+				"data-uid": "src/components/Sidebar.tsx:136:53",
 				"data-prohibitions": "[editContent]",
-				className: cn$1("h-16 flex items-center border-b border-sidebar-border bg-sidebar overflow-hidden", collapsed ? "px-0 justify-center" : "px-6"),
-				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Store, {
-					"data-uid": "src/components/Sidebar.tsx:59:9",
-					"data-prohibitions": "[editContent]",
-					className: cn$1("h-6 w-6 text-primary shrink-0", !collapsed && "mr-3")
-				}), !collapsed && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-					"data-uid": "src/components/Sidebar.tsx:61:11",
-					"data-prohibitions": "[]",
-					className: "font-bold text-lg tracking-wider truncate",
-					children: "CHARME PDV"
-				})]
-			}),
-			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("nav", {
-				"data-uid": "src/components/Sidebar.tsx:65:7",
-				"data-prohibitions": "[editContent]",
-				className: "flex-1 py-6 px-3 space-y-1 overflow-y-auto overflow-x-hidden",
-				children: links.map((link) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Link, {
-					"data-uid": "src/components/Sidebar.tsx:67:11",
-					"data-prohibitions": "[editContent]",
-					to: link.to,
-					title: collapsed ? link.label : void 0,
-					className: cn$1("flex items-center gap-3 py-3 rounded-lg text-sm font-medium transition-colors", collapsed ? "justify-center px-0" : "px-4", location.pathname === link.to ? "bg-sidebar-primary text-sidebar-primary-foreground shadow-sm" : "hover:bg-sidebar-accent hover:text-sidebar-accent-foreground text-sidebar-foreground/80"),
-					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(link.icon, {
-						"data-uid": "src/components/Sidebar.tsx:79:13",
-						"data-prohibitions": "[editContent]",
-						className: "h-5 w-5 shrink-0"
-					}), !collapsed && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-						"data-uid": "src/components/Sidebar.tsx:80:28",
-						"data-prohibitions": "[editContent]",
-						className: "truncate",
-						children: link.label
-					})]
-				}, link.label))
-			}),
-			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				"data-uid": "src/components/Sidebar.tsx:85:7",
-				"data-prohibitions": "[editContent]",
-				className: cn$1("p-4 border-t border-sidebar-border m-3 rounded-lg bg-sidebar-accent/50 shrink-0 overflow-hidden transition-all", collapsed ? "p-2 flex flex-col items-center gap-2" : ""),
-				children: [!collapsed && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-					"data-uid": "src/components/Sidebar.tsx:93:13",
-					"data-prohibitions": "[]",
-					className: "text-xs font-semibold text-sidebar-foreground/60 mb-1",
-					children: "Operador Caixa"
-				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-					"data-uid": "src/components/Sidebar.tsx:96:13",
-					"data-prohibitions": "[editContent]",
-					className: "text-sm font-bold mb-4 truncate",
-					title: user?.email || "",
-					children: user?.email || "Usuário"
-				})] }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button$1, {
-					"data-uid": "src/components/Sidebar.tsx:101:9",
-					"data-prohibitions": "[editContent]",
-					variant: "destructive",
-					className: cn$1("bg-destructive/10 text-destructive hover:bg-destructive hover:text-destructive-foreground border-0", collapsed ? "h-10 w-10 p-0 rounded-full" : "w-full text-xs h-9"),
-					onClick: signOut,
-					title: collapsed ? "Sair" : void 0,
-					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(LogOut, {
-						"data-uid": "src/components/Sidebar.tsx:110:11",
-						"data-prohibitions": "[editContent]",
-						className: cn$1(collapsed ? "h-5 w-5" : "h-4 w-4 mr-2")
-					}), !collapsed && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-						"data-uid": "src/components/Sidebar.tsx:111:26",
-						"data-prohibitions": "[]",
-						children: "Encerrar Sessão"
-					})]
-				})]
+				className: "h-4 w-4"
 			})
-		]
+		}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SidebarContent, {
+			"data-uid": "src/components/Sidebar.tsx:139:7",
+			"data-prohibitions": "[editContent]"
+		})]
 	});
 }
 //#endregion
@@ -90174,49 +90219,63 @@ function AppSidebar() {
 function Header() {
 	const location = useLocation();
 	const { theme, setTheme } = useTheme();
+	const { setMobileOpen } = useSidebar();
 	const getTitle = () => {
 		switch (location.pathname) {
-			case "/": return "CAIXA LIVRE - VENDA";
-			case "/dashboard": return "DASHBOARD GERENCIAL";
+			case "/": return "CAIXA LIVRE";
+			case "/dashboard": return "DASHBOARD";
 			case "/caixa": return "FLUXO DE CAIXA";
 			case "/clientes": return "CLIENTES";
-			case "/contas-receber": return "CONTAS A RECEBER";
-			case "/contas-pagar": return "CONTAS A PAGAR";
-			case "/estoque": return "PRODUTOS E ESTOQUE";
+			case "/contas-receber": return "RECEBER";
+			case "/contas-pagar": return "PAGAR";
+			case "/estoque": return "ESTOQUE";
 			case "/relatorios": return "RELATÓRIOS";
 			default: return "SISTEMA";
 		}
 	};
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("header", {
-		"data-uid": "src/components/Header.tsx:35:5",
+		"data-uid": "src/components/Header.tsx:37:5",
 		"data-prohibitions": "[editContent]",
-		className: "h-16 bg-background border-b border-border flex items-center justify-between px-6 shrink-0 shadow-sm z-10 relative print:hidden",
+		className: "h-16 bg-background border-b border-border flex items-center justify-between px-4 sm:px-6 shrink-0 shadow-sm z-10 relative print:hidden",
 		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-			"data-uid": "src/components/Header.tsx:36:7",
+			"data-uid": "src/components/Header.tsx:38:7",
 			"data-prohibitions": "[editContent]",
-			className: "flex items-center gap-4",
+			className: "flex items-center gap-3 sm:gap-4",
 			children: [
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
+					"data-uid": "src/components/Header.tsx:39:9",
+					"data-prohibitions": "[]",
+					variant: "ghost",
+					size: "icon",
+					className: "md:hidden -ml-2 text-foreground",
+					onClick: () => setMobileOpen(true),
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Menu, {
+						"data-uid": "src/components/Header.tsx:45:11",
+						"data-prohibitions": "[editContent]",
+						className: "h-6 w-6"
+					})
+				}),
 				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h1", {
-					"data-uid": "src/components/Header.tsx:37:9",
+					"data-uid": "src/components/Header.tsx:47:9",
 					"data-prohibitions": "[editContent]",
-					className: "text-lg font-bold text-foreground tracking-tight",
+					className: "text-base sm:text-lg font-bold text-foreground tracking-tight line-clamp-1",
 					children: getTitle()
 				}),
 				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-					"data-uid": "src/components/Header.tsx:38:9",
+					"data-uid": "src/components/Header.tsx:50:9",
 					"data-prohibitions": "[]",
 					className: "h-6 w-[2px] bg-border hidden sm:block"
 				}),
 				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					"data-uid": "src/components/Header.tsx:39:9",
+					"data-uid": "src/components/Header.tsx:51:9",
 					"data-prohibitions": "[]",
 					className: "hidden sm:flex items-center gap-2 bg-muted px-3 py-1 rounded-full border border-border",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-						"data-uid": "src/components/Header.tsx:40:11",
+						"data-uid": "src/components/Header.tsx:52:11",
 						"data-prohibitions": "[]",
 						className: "w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-						"data-uid": "src/components/Header.tsx:41:11",
+						"data-uid": "src/components/Header.tsx:53:11",
 						"data-prohibitions": "[]",
 						className: "text-xs font-semibold text-emerald-700 dark:text-emerald-400",
 						children: "SAT Disponível"
@@ -90224,36 +90283,36 @@ function Header() {
 				})
 			]
 		}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-			"data-uid": "src/components/Header.tsx:47:7",
+			"data-uid": "src/components/Header.tsx:59:7",
 			"data-prohibitions": "[]",
-			className: "flex items-center gap-4",
+			className: "flex items-center gap-2 sm:gap-4",
 			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				"data-uid": "src/components/Header.tsx:48:9",
+				"data-uid": "src/components/Header.tsx:60:9",
 				"data-prohibitions": "[]",
-				className: "relative w-72 hidden md:block",
+				className: "relative w-full max-w-[200px] sm:w-72 hidden md:block",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Search, {
-					"data-uid": "src/components/Header.tsx:49:11",
+					"data-uid": "src/components/Header.tsx:61:11",
 					"data-prohibitions": "[editContent]",
 					className: "absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground"
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
-					"data-uid": "src/components/Header.tsx:50:11",
+					"data-uid": "src/components/Header.tsx:62:11",
 					"data-prohibitions": "[editContent]",
-					placeholder: "Buscar produto em todo o sistema...",
+					placeholder: "Buscar no sistema...",
 					className: "pl-9 bg-muted border-border h-9"
 				})]
 			}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button$1, {
-				"data-uid": "src/components/Header.tsx:55:9",
+				"data-uid": "src/components/Header.tsx:64:9",
 				"data-prohibitions": "[]",
 				variant: "ghost",
 				size: "icon",
 				onClick: () => setTheme(theme === "dark" ? "light" : "dark"),
-				className: "text-foreground",
+				className: "text-foreground shrink-0",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Sun, {
-					"data-uid": "src/components/Header.tsx:61:11",
+					"data-uid": "src/components/Header.tsx:70:11",
 					"data-prohibitions": "[editContent]",
 					className: "h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0"
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Moon, {
-					"data-uid": "src/components/Header.tsx:62:11",
+					"data-uid": "src/components/Header.tsx:71:11",
 					"data-prohibitions": "[editContent]",
 					className: "absolute h-5 w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100"
 				})]
@@ -91672,6 +91731,8 @@ function CartSidebar() {
 	const { items, subtotal, discount, total, updateQuantity, removeItem, clearCart } = useCart();
 	const { user } = useAuth();
 	const [isCheckoutOpen, setCheckoutOpen] = (0, import_react.useState)(false);
+	const isMobile = useIsMobile();
+	const [mobileOpen, setMobileOpen] = (0, import_react.useState)(false);
 	const handleCheckoutClick = async () => {
 		if (!user) return;
 		const { data } = await supabase.from("caixa").select("id").eq("user_id", user.id).eq("status", "aberto");
@@ -91685,144 +91746,162 @@ function CartSidebar() {
 		}
 		setCheckoutOpen(true);
 	};
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-		"data-uid": "src/components/pdv/CartSidebar.tsx:37:5",
+	const cartItemCount = items.reduce((acc, i) => acc + i.quantity, 0);
+	const SidebarContent = () => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+		"data-uid": "src/components/pdv/CartSidebar.tsx:44:5",
 		"data-prohibitions": "[editContent]",
-		className: "w-80 bg-background border-l border-border shadow-xl flex flex-col h-full shrink-0 z-20 transition-all duration-300 print:hidden",
+		className: "flex flex-col h-full bg-background print:hidden",
 		children: [
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				"data-uid": "src/components/pdv/CartSidebar.tsx:38:7",
-				"data-prohibitions": "[]",
-				className: "p-4 border-b border-border bg-muted/30 flex items-center justify-between",
+				"data-uid": "src/components/pdv/CartSidebar.tsx:45:7",
+				"data-prohibitions": "[editContent]",
+				className: "p-4 border-b border-border bg-muted/30 flex items-center justify-between shrink-0",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("h2", {
-					"data-uid": "src/components/pdv/CartSidebar.tsx:39:9",
+					"data-uid": "src/components/pdv/CartSidebar.tsx:46:9",
 					"data-prohibitions": "[]",
 					className: "font-bold flex items-center gap-2 text-lg text-foreground",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ShoppingCart, {
-						"data-uid": "src/components/pdv/CartSidebar.tsx:40:11",
+						"data-uid": "src/components/pdv/CartSidebar.tsx:47:11",
 						"data-prohibitions": "[editContent]",
 						className: "h-5 w-5 text-primary"
 					}), " Carrinho"]
-				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
-					"data-uid": "src/components/pdv/CartSidebar.tsx:42:9",
-					"data-prohibitions": "[]",
-					variant: "ghost",
-					size: "sm",
-					onClick: clearCart,
-					className: "text-destructive text-xs h-8 hover:text-destructive hover:bg-destructive/10",
-					children: "Limpar"
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					"data-uid": "src/components/pdv/CartSidebar.tsx:49:9",
+					"data-prohibitions": "[editContent]",
+					className: "flex items-center gap-2",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
+						"data-uid": "src/components/pdv/CartSidebar.tsx:50:11",
+						"data-prohibitions": "[]",
+						variant: "ghost",
+						size: "sm",
+						onClick: clearCart,
+						className: "text-destructive text-xs h-8 hover:text-destructive hover:bg-destructive/10",
+						children: "Limpar"
+					}), isMobile && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
+						"data-uid": "src/components/pdv/CartSidebar.tsx:59:13",
+						"data-prohibitions": "[]",
+						variant: "ghost",
+						size: "icon",
+						className: "h-8 w-8 ml-1",
+						onClick: () => setMobileOpen(false),
+						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(X, {
+							"data-uid": "src/components/pdv/CartSidebar.tsx:65:15",
+							"data-prohibitions": "[editContent]",
+							className: "h-5 w-5"
+						})
+					})]
 				})]
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ScrollArea, {
-				"data-uid": "src/components/pdv/CartSidebar.tsx:51:7",
+				"data-uid": "src/components/pdv/CartSidebar.tsx:70:7",
 				"data-prohibitions": "[editContent]",
-				className: "flex-1 p-4",
+				className: "flex-1 p-4 min-h-0",
 				children: items.length === 0 ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					"data-uid": "src/components/pdv/CartSidebar.tsx:53:11",
+					"data-uid": "src/components/pdv/CartSidebar.tsx:72:11",
 					"data-prohibitions": "[]",
 					className: "h-full flex flex-col items-center justify-center text-muted-foreground mt-20 gap-3",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ShoppingCart, {
-						"data-uid": "src/components/pdv/CartSidebar.tsx:54:13",
+						"data-uid": "src/components/pdv/CartSidebar.tsx:73:13",
 						"data-prohibitions": "[editContent]",
 						className: "h-12 w-12 opacity-20"
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-						"data-uid": "src/components/pdv/CartSidebar.tsx:55:13",
+						"data-uid": "src/components/pdv/CartSidebar.tsx:74:13",
 						"data-prohibitions": "[]",
 						className: "font-medium",
 						children: "O carrinho está vazio"
 					})]
 				}) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-					"data-uid": "src/components/pdv/CartSidebar.tsx:58:11",
+					"data-uid": "src/components/pdv/CartSidebar.tsx:77:11",
 					"data-prohibitions": "[editContent]",
-					className: "space-y-4",
+					className: "space-y-4 pb-10",
 					children: items.map((item) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						"data-uid": "src/components/pdv/CartSidebar.tsx:60:15",
+						"data-uid": "src/components/pdv/CartSidebar.tsx:79:15",
 						"data-prohibitions": "[editContent]",
 						className: "flex gap-3 border-b border-border pb-4 last:border-0",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-							"data-uid": "src/components/pdv/CartSidebar.tsx:61:17",
+							"data-uid": "src/components/pdv/CartSidebar.tsx:80:17",
 							"data-prohibitions": "[]",
 							className: "h-16 w-16 bg-muted/50 rounded-md p-1.5 shrink-0 flex items-center justify-center border border-border",
 							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
-								"data-uid": "src/components/pdv/CartSidebar.tsx:62:19",
+								"data-uid": "src/components/pdv/CartSidebar.tsx:81:19",
 								"data-prohibitions": "[editContent]",
 								src: item.imagem_url || `https://img.usecurling.com/p/100/100?q=${encodeURIComponent(item.nome)}`,
 								alt: item.nome,
 								className: "h-full w-full object-contain mix-blend-multiply dark:mix-blend-normal"
 							})
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							"data-uid": "src/components/pdv/CartSidebar.tsx:71:17",
+							"data-uid": "src/components/pdv/CartSidebar.tsx:90:17",
 							"data-prohibitions": "[editContent]",
 							className: "flex-1 min-w-0",
 							children: [
 								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", {
-									"data-uid": "src/components/pdv/CartSidebar.tsx:72:19",
+									"data-uid": "src/components/pdv/CartSidebar.tsx:91:19",
 									"data-prohibitions": "[editContent]",
 									className: "text-sm font-semibold line-clamp-2 leading-tight mb-1 text-foreground",
 									children: item.nome
 								}),
 								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-									"data-uid": "src/components/pdv/CartSidebar.tsx:75:19",
+									"data-uid": "src/components/pdv/CartSidebar.tsx:94:19",
 									"data-prohibitions": "[editContent]",
 									className: "flex items-center gap-2 mb-2",
 									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-										"data-uid": "src/components/pdv/CartSidebar.tsx:76:21",
+										"data-uid": "src/components/pdv/CartSidebar.tsx:95:21",
 										"data-prohibitions": "[editContent]",
 										className: "text-primary font-bold text-sm",
 										children: formatCurrency(item.preco)
 									}), item.tamanho && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-										"data-uid": "src/components/pdv/CartSidebar.tsx:80:23",
+										"data-uid": "src/components/pdv/CartSidebar.tsx:99:23",
 										"data-prohibitions": "[editContent]",
 										className: "text-xs bg-muted px-1.5 rounded text-muted-foreground",
 										children: item.tamanho
 									})]
 								}),
 								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-									"data-uid": "src/components/pdv/CartSidebar.tsx:85:19",
+									"data-uid": "src/components/pdv/CartSidebar.tsx:104:19",
 									"data-prohibitions": "[editContent]",
 									className: "flex items-center gap-1.5",
 									children: [
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
-											"data-uid": "src/components/pdv/CartSidebar.tsx:86:21",
+											"data-uid": "src/components/pdv/CartSidebar.tsx:105:21",
 											"data-prohibitions": "[]",
 											size: "icon",
 											variant: "outline",
 											className: "h-7 w-7 rounded-full",
 											onClick: () => updateQuantity(item.id, -1),
 											children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Minus, {
-												"data-uid": "src/components/pdv/CartSidebar.tsx:92:23",
+												"data-uid": "src/components/pdv/CartSidebar.tsx:111:23",
 												"data-prohibitions": "[editContent]",
 												className: "h-3 w-3"
 											})
 										}),
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-											"data-uid": "src/components/pdv/CartSidebar.tsx:94:21",
+											"data-uid": "src/components/pdv/CartSidebar.tsx:113:21",
 											"data-prohibitions": "[editContent]",
 											className: "text-sm w-6 text-center font-semibold text-foreground",
 											children: item.quantity
 										}),
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
-											"data-uid": "src/components/pdv/CartSidebar.tsx:97:21",
+											"data-uid": "src/components/pdv/CartSidebar.tsx:116:21",
 											"data-prohibitions": "[]",
 											size: "icon",
 											variant: "outline",
 											className: "h-7 w-7 rounded-full",
 											onClick: () => updateQuantity(item.id, 1),
 											children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Plus, {
-												"data-uid": "src/components/pdv/CartSidebar.tsx:103:23",
+												"data-uid": "src/components/pdv/CartSidebar.tsx:122:23",
 												"data-prohibitions": "[editContent]",
 												className: "h-3 w-3"
 											})
 										}),
 										/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
-											"data-uid": "src/components/pdv/CartSidebar.tsx:105:21",
+											"data-uid": "src/components/pdv/CartSidebar.tsx:124:21",
 											"data-prohibitions": "[]",
 											size: "icon",
 											variant: "ghost",
 											className: "h-7 w-7 ml-auto text-muted-foreground hover:text-destructive hover:bg-destructive/10 rounded-full",
 											onClick: () => removeItem(item.id),
 											children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Trash2, {
-												"data-uid": "src/components/pdv/CartSidebar.tsx:111:23",
+												"data-uid": "src/components/pdv/CartSidebar.tsx:130:23",
 												"data-prohibitions": "[editContent]",
 												className: "h-4 w-4"
 											})
@@ -91835,73 +91914,119 @@ function CartSidebar() {
 				})
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				"data-uid": "src/components/pdv/CartSidebar.tsx:120:7",
+				"data-uid": "src/components/pdv/CartSidebar.tsx:139:7",
 				"data-prohibitions": "[editContent]",
-				className: "p-5 bg-card border-t border-border space-y-4 shadow-[0_-4px_10px_rgba(0,0,0,0.02)] dark:shadow-none",
+				className: "p-4 sm:p-5 bg-card border-t border-border space-y-3 sm:space-y-4 shadow-[0_-4px_10px_rgba(0,0,0,0.02)] dark:shadow-none shrink-0",
 				children: [
 					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						"data-uid": "src/components/pdv/CartSidebar.tsx:121:9",
+						"data-uid": "src/components/pdv/CartSidebar.tsx:140:9",
 						"data-prohibitions": "[editContent]",
 						className: "flex justify-between text-sm text-muted-foreground",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-							"data-uid": "src/components/pdv/CartSidebar.tsx:122:11",
+							"data-uid": "src/components/pdv/CartSidebar.tsx:141:11",
 							"data-prohibitions": "[]",
 							children: "Subtotal"
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-							"data-uid": "src/components/pdv/CartSidebar.tsx:123:11",
+							"data-uid": "src/components/pdv/CartSidebar.tsx:142:11",
 							"data-prohibitions": "[editContent]",
 							className: "font-medium text-foreground",
 							children: formatCurrency(subtotal)
 						})]
 					}),
 					discount > 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						"data-uid": "src/components/pdv/CartSidebar.tsx:126:11",
+						"data-uid": "src/components/pdv/CartSidebar.tsx:145:11",
 						"data-prohibitions": "[editContent]",
 						className: "flex justify-between text-sm text-emerald-600 font-medium",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-							"data-uid": "src/components/pdv/CartSidebar.tsx:127:13",
+							"data-uid": "src/components/pdv/CartSidebar.tsx:146:13",
 							"data-prohibitions": "[]",
 							children: "Desconto"
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-							"data-uid": "src/components/pdv/CartSidebar.tsx:128:13",
+							"data-uid": "src/components/pdv/CartSidebar.tsx:147:13",
 							"data-prohibitions": "[editContent]",
 							children: ["-", formatCurrency(discount)]
 						})]
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						"data-uid": "src/components/pdv/CartSidebar.tsx:131:9",
+						"data-uid": "src/components/pdv/CartSidebar.tsx:150:9",
 						"data-prohibitions": "[editContent]",
-						className: "flex justify-between text-xl font-bold items-center border-t pt-2 border-border/50",
+						className: "flex justify-between text-lg sm:text-xl font-bold items-center border-t pt-2 border-border/50",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-							"data-uid": "src/components/pdv/CartSidebar.tsx:132:11",
+							"data-uid": "src/components/pdv/CartSidebar.tsx:151:11",
 							"data-prohibitions": "[]",
 							className: "text-foreground",
 							children: "Total"
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-							"data-uid": "src/components/pdv/CartSidebar.tsx:133:11",
+							"data-uid": "src/components/pdv/CartSidebar.tsx:152:11",
 							"data-prohibitions": "[editContent]",
-							className: "text-primary text-2xl",
+							className: "text-primary text-xl sm:text-2xl",
 							children: formatCurrency(total)
 						})]
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button$1, {
-						"data-uid": "src/components/pdv/CartSidebar.tsx:135:9",
+						"data-uid": "src/components/pdv/CartSidebar.tsx:154:9",
 						"data-prohibitions": "[]",
-						className: "w-full h-14 text-lg font-bold shadow-sm",
+						className: "w-full h-12 sm:h-14 text-base sm:text-lg font-bold shadow-sm",
 						disabled: items.length === 0,
 						onClick: handleCheckoutClick,
 						children: "Finalizar Venda"
 					})
 				]
-			}),
-			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CheckoutModal, {
-				"data-uid": "src/components/pdv/CartSidebar.tsx:143:7",
-				"data-prohibitions": "[editContent]",
-				open: isCheckoutOpen,
-				onOpenChange: setCheckoutOpen
 			})
 		]
 	});
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [isMobile ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button$1, {
+		"data-uid": "src/components/pdv/CartSidebar.tsx:169:11",
+		"data-prohibitions": "[editContent]",
+		className: cn$1("fixed bottom-6 right-6 h-14 w-14 rounded-full shadow-2xl z-40 transition-transform duration-300", cartItemCount > 0 ? "animate-bounce hover:animate-none" : ""),
+		onClick: () => setMobileOpen(true),
+		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ShoppingCart, {
+			"data-uid": "src/components/pdv/CartSidebar.tsx:176:13",
+			"data-prohibitions": "[editContent]",
+			className: "h-6 w-6"
+		}), cartItemCount > 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+			"data-uid": "src/components/pdv/CartSidebar.tsx:178:15",
+			"data-prohibitions": "[editContent]",
+			className: "absolute -top-2 -right-2 bg-destructive text-destructive-foreground h-6 w-6 rounded-full flex items-center justify-center text-xs font-bold border-2 border-background",
+			children: cartItemCount
+		})]
+	}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Sheet, {
+		"data-uid": "src/components/pdv/CartSidebar.tsx:183:11",
+		"data-prohibitions": "[]",
+		open: mobileOpen,
+		onOpenChange: setMobileOpen,
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(SheetContent, {
+			"data-uid": "src/components/pdv/CartSidebar.tsx:184:13",
+			"data-prohibitions": "[]",
+			side: "bottom",
+			className: "h-[90vh] p-0 flex flex-col rounded-t-xl [&>button]:hidden",
+			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SheetTitle, {
+				"data-uid": "src/components/pdv/CartSidebar.tsx:188:15",
+				"data-prohibitions": "[]",
+				className: "sr-only",
+				children: "Carrinho de Compras"
+			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SidebarContent, {
+				"data-uid": "src/components/pdv/CartSidebar.tsx:189:15",
+				"data-prohibitions": "[editContent]"
+			})]
+		})
+	})] }) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+		"data-uid": "src/components/pdv/CartSidebar.tsx:194:9",
+		"data-prohibitions": "[]",
+		className: "w-80 bg-background border-l border-border shadow-xl flex flex-col h-full shrink-0 z-20 transition-all duration-300 print:hidden",
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SidebarContent, {
+			"data-uid": "src/components/pdv/CartSidebar.tsx:195:11",
+			"data-prohibitions": "[editContent]"
+		})
+	}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CheckoutModal, {
+		"data-uid": "src/components/pdv/CartSidebar.tsx:198:7",
+		"data-prohibitions": "[editContent]",
+		open: isCheckoutOpen,
+		onOpenChange: (open) => {
+			setCheckoutOpen(open);
+			if (!open && isMobile && items.length === 0) setMobileOpen(false);
+		}
+	})] });
 }
 //#endregion
 //#region src/components/Layout.tsx
@@ -92290,4 +92415,4 @@ var App = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ThemeProvider, {
 }));
 //#endregion
 
-//# sourceMappingURL=index-BElXn2GT.js.map
+//# sourceMappingURL=index-DpUjisod.js.map
