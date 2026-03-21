@@ -1,5 +1,6 @@
 {
   "_versions": {
-    "send-whatsapp-receipt": 2
+    "send-whatsapp-receipt": 2,
+    "manage-users": 1
   }
 }
