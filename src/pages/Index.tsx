@@ -1,16 +1,19 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Input } from '@/components/ui/input'
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { ProductRow } from '@/components/pdv/ProductRow'
 import { Search, Loader2, PackageX } from 'lucide-react'
 import { supabase } from '@/lib/supabase/client'
 import { Product } from '@/types'
+import { useCart } from '@/context/CartContext'
 
 export default function Index() {
   const [products, setProducts] = useState<Product[]>([])
   const [search, setSearch] = useState('')
   const [category, setCategory] = useState('Todos')
   const [loading, setLoading] = useState(true)
+  const { addItem } = useCart()
+  const inputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -33,16 +36,37 @@ export default function Index() {
     return matchesSearch && matchesCategory && p.estoque > 0
   })
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      const currentValue = (e.target as HTMLInputElement).value.trim()
+      if (!currentValue) return
+
+      const exactMatch = products.find((p) => p.codigo === currentValue && p.estoque > 0)
+      if (exactMatch) {
+        e.preventDefault()
+        addItem(exactMatch)
+        setSearch('')
+
+        // Ensure focus remains on input for the next scan
+        setTimeout(() => {
+          inputRef.current?.focus()
+        }, 10)
+      }
+    }
+  }
+
   return (
     <div className="h-full flex flex-col animate-fade-in w-full max-w-4xl mx-auto">
       <div className="flex flex-col sm:flex-row gap-4 justify-between items-start sm:items-center mb-6 shrink-0">
         <div className="relative w-full sm:max-w-md">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
           <Input
+            ref={inputRef}
             placeholder="Buscar por nome ou código..."
             className="pl-10 h-12 text-base shadow-sm border-border bg-background rounded-xl"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
+            onKeyDown={handleKeyDown}
             autoFocus
           />
         </div>

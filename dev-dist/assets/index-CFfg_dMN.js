@@ -39164,6 +39164,8 @@ function Index() {
 	const [search, setSearch] = (0, import_react.useState)("");
 	const [category, setCategory] = (0, import_react.useState)("Todos");
 	const [loading, setLoading] = (0, import_react.useState)(true);
+	const { addItem } = useCart();
+	const inputRef = (0, import_react.useRef)(null);
 	(0, import_react.useEffect)(() => {
 		const fetchProducts = async () => {
 			const { data } = await supabase.from("produtos").select("*").order("nome");
@@ -39178,43 +39180,60 @@ function Index() {
 		const matchesCategory = category === "Todos" || p.categoria === category;
 		return matchesSearch && matchesCategory && p.estoque > 0;
 	});
+	const handleKeyDown = (e) => {
+		if (e.key === "Enter") {
+			const currentValue = e.target.value.trim();
+			if (!currentValue) return;
+			const exactMatch = products.find((p) => p.codigo === currentValue && p.estoque > 0);
+			if (exactMatch) {
+				e.preventDefault();
+				addItem(exactMatch);
+				setSearch("");
+				setTimeout(() => {
+					inputRef.current?.focus();
+				}, 10);
+			}
+		}
+	};
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-		"data-uid": "src/pages/Index.tsx:37:5",
+		"data-uid": "src/pages/Index.tsx:59:5",
 		"data-prohibitions": "[editContent]",
 		className: "h-full flex flex-col animate-fade-in w-full max-w-4xl mx-auto",
 		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-			"data-uid": "src/pages/Index.tsx:38:7",
+			"data-uid": "src/pages/Index.tsx:60:7",
 			"data-prohibitions": "[editContent]",
 			className: "flex flex-col sm:flex-row gap-4 justify-between items-start sm:items-center mb-6 shrink-0",
 			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				"data-uid": "src/pages/Index.tsx:39:9",
+				"data-uid": "src/pages/Index.tsx:61:9",
 				"data-prohibitions": "[]",
 				className: "relative w-full sm:max-w-md",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Search, {
-					"data-uid": "src/pages/Index.tsx:40:11",
+					"data-uid": "src/pages/Index.tsx:62:11",
 					"data-prohibitions": "[editContent]",
 					className: "absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground"
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
-					"data-uid": "src/pages/Index.tsx:41:11",
+					"data-uid": "src/pages/Index.tsx:63:11",
 					"data-prohibitions": "[editContent]",
+					ref: inputRef,
 					placeholder: "Buscar por nome ou código...",
 					className: "pl-10 h-12 text-base shadow-sm border-border bg-background rounded-xl",
 					value: search,
 					onChange: (e) => setSearch(e.target.value),
+					onKeyDown: handleKeyDown,
 					autoFocus: true
 				})]
 			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Tabs, {
-				"data-uid": "src/pages/Index.tsx:50:9",
+				"data-uid": "src/pages/Index.tsx:74:9",
 				"data-prohibitions": "[editContent]",
 				defaultValue: "Todos",
 				className: "w-full sm:w-auto overflow-x-auto pb-1 sm:pb-0",
 				onValueChange: setCategory,
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TabsList, {
-					"data-uid": "src/pages/Index.tsx:55:11",
+					"data-uid": "src/pages/Index.tsx:79:11",
 					"data-prohibitions": "[editContent]",
 					className: "h-12 p-1 bg-muted/50 border border-border rounded-xl",
 					children: categories.map((cat) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TabsTrigger, {
-						"data-uid": "src/pages/Index.tsx:57:15",
+						"data-uid": "src/pages/Index.tsx:81:15",
 						"data-prohibitions": "[editContent]",
 						value: cat,
 						className: "px-5 py-2 rounded-lg font-medium capitalize",
@@ -39223,45 +39242,45 @@ function Index() {
 				})
 			})]
 		}), loading ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-			"data-uid": "src/pages/Index.tsx:70:9",
+			"data-uid": "src/pages/Index.tsx:94:9",
 			"data-prohibitions": "[]",
 			className: "flex-1 flex items-center justify-center",
 			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(LoaderCircle, {
-				"data-uid": "src/pages/Index.tsx:71:11",
+				"data-uid": "src/pages/Index.tsx:95:11",
 				"data-prohibitions": "[editContent]",
 				className: "h-8 w-8 animate-spin text-primary"
 			})
 		}) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-			"data-uid": "src/pages/Index.tsx:74:9",
+			"data-uid": "src/pages/Index.tsx:98:9",
 			"data-prohibitions": "[editContent]",
 			className: "flex-1 overflow-y-auto pb-4 min-h-0 px-1 sm:px-0",
 			children: filteredProducts.length > 0 ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-				"data-uid": "src/pages/Index.tsx:76:13",
+				"data-uid": "src/pages/Index.tsx:100:13",
 				"data-prohibitions": "[editContent]",
 				className: "flex flex-col bg-card rounded-xl border border-border shadow-sm overflow-hidden mb-4",
 				children: filteredProducts.map((product) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ProductRow, {
-					"data-uid": "src/pages/Index.tsx:78:17",
+					"data-uid": "src/pages/Index.tsx:102:17",
 					"data-prohibitions": "[editContent]",
 					product
 				}, product.id))
 			}) : /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				"data-uid": "src/pages/Index.tsx:82:13",
+				"data-uid": "src/pages/Index.tsx:106:13",
 				"data-prohibitions": "[]",
 				className: "py-20 text-center text-muted-foreground flex flex-col items-center justify-center bg-muted/20 rounded-2xl border border-dashed border-border mt-4",
 				children: [
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(PackageX, {
-						"data-uid": "src/pages/Index.tsx:83:15",
+						"data-uid": "src/pages/Index.tsx:107:15",
 						"data-prohibitions": "[editContent]",
 						className: "h-12 w-12 text-muted-foreground/50 mb-3"
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-						"data-uid": "src/pages/Index.tsx:84:15",
+						"data-uid": "src/pages/Index.tsx:108:15",
 						"data-prohibitions": "[]",
 						className: "text-lg font-medium text-foreground",
 						children: "Nenhum produto encontrado"
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-						"data-uid": "src/pages/Index.tsx:85:15",
+						"data-uid": "src/pages/Index.tsx:109:15",
 						"data-prohibitions": "[]",
 						className: "text-sm",
 						children: "Tente ajustar a sua busca ou filtros."
@@ -93255,4 +93274,4 @@ var App = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ThemeProvider, {
 }));
 //#endregion
 
-//# sourceMappingURL=index-B1tHLBtm.js.map
+//# sourceMappingURL=index-CFfg_dMN.js.map
