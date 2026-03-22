@@ -1,6 +1,5 @@
-import { useState, useEffect, useMemo } from 'react'
+import { useState, useMemo } from 'react'
 import { createPortal } from 'react-dom'
-import { supabase } from '@/lib/supabase/client'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import {
   Table,
@@ -26,29 +25,17 @@ import { Printer, Search, Loader2 } from 'lucide-react'
 import { formatCurrency } from '@/lib/format'
 import { Product } from '@/types'
 
-export default function EstoqueEtiquetas() {
-  const [products, setProducts] = useState<Product[]>([])
-  const [categories, setCategories] = useState<string[]>([])
+interface EstoqueEtiquetasProps {
+  products: Product[]
+  categories: string[]
+  loading: boolean
+}
+
+export default function EstoqueEtiquetas({ products, categories, loading }: EstoqueEtiquetasProps) {
   const [search, setSearch] = useState('')
   const [categoryFilter, setCategoryFilter] = useState('Todas')
-  const [loading, setLoading] = useState(true)
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set())
   const [useStockQuantity, setUseStockQuantity] = useState(false)
-
-  useEffect(() => {
-    supabase
-      .from('produtos')
-      .select('*')
-      .order('nome')
-      .then(({ data }) => {
-        setProducts(data || [])
-        const uniqueCategories = Array.from(
-          new Set((data || []).map((p) => p.categoria).filter(Boolean)),
-        ) as string[]
-        setCategories(['Todas', ...uniqueCategories])
-        setLoading(false)
-      })
-  }, [])
 
   const filteredProducts = useMemo(() => {
     return products.filter(

@@ -10,6 +10,7 @@ export interface Product {
   imagem_url: string
   estoque: number
   estoque_minimo: number
+  created_at?: string
 }
 
 export interface CartItem extends Product {

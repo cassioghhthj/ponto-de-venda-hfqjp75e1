@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useAuth } from '@/hooks/use-auth'
 import { supabase } from '@/lib/supabase/client'
 import { Product } from '@/types'
@@ -36,11 +36,20 @@ import { ImportProductsModal } from './ImportProductsModal'
 import { CategoriaFormModal } from './CategoriaFormModal'
 import { formatCurrency } from '@/lib/format'
 
-export default function EstoqueAtual() {
+interface EstoqueAtualProps {
+  products: Product[]
+  categories: string[]
+  loading: boolean
+  fetchData: () => void
+}
+
+export default function EstoqueAtual({
+  products,
+  categories,
+  loading,
+  fetchData,
+}: EstoqueAtualProps) {
   const { user } = useAuth()
-  const [products, setProducts] = useState<Product[]>([])
-  const [categories, setCategories] = useState<string[]>([])
-  const [loading, setLoading] = useState(true)
   const [categoryFilter, setCategoryFilter] = useState('Todas')
 
   const [adjustProduct, setAdjustProduct] = useState<Product | null>(null)
@@ -51,30 +60,6 @@ export default function EstoqueAtual() {
   const [importOpen, setImportOpen] = useState(false)
   const [catModalOpen, setCatModalOpen] = useState(false)
   const [editingProduct, setEditingProduct] = useState<Product | null>(null)
-
-  const fetchData = async () => {
-    setLoading(true)
-    const [prodRes, catRes] = await Promise.all([
-      supabase.from('produtos').select('*').order('nome'),
-      supabase.from('categorias').select('nome').order('nome'),
-    ])
-    if (prodRes.data) setProducts(prodRes.data as Product[])
-    if (catRes.data) {
-      setCategories(['Todas', ...catRes.data.map((c) => c.nome)])
-    } else {
-      setCategories([
-        'Todas',
-        ...(Array.from(
-          new Set((prodRes.data || []).map((p) => p.categoria).filter(Boolean)),
-        ) as string[]),
-      ])
-    }
-    setLoading(false)
-  }
-
-  useEffect(() => {
-    fetchData()
-  }, [])
 
   const filteredProducts = products.filter(
     (p) => categoryFilter === 'Todas' || p.categoria === categoryFilter,
